@@ -18,13 +18,13 @@ class sign_up_controller extends CI_Controller {
 	{
 		//server-side validations
 		//$this->load->library('form_validation');
-		$this->form_validation->set_rules('firstname','FirstName','trim|required|alpha|min_length[6]|max_length[12]');
-		$this->form_validation->set_rules('lastname','LastName','trim|required|alpha|min_length[6]|max_length[12]');
-		$this->form_validation->set_rules('email','Email','trim|required|valid_email');
-		$this->form_validation->set_rules('phone_number','Phone Number','trim|required');
-		$this->form_validation->set_rules('new_password','New Password','trim|required');
-		$this->form_validation->set_rules('birthdate','Birth Date','required');
-		//$this->form_validation->set_rules('gender','Gender','required');
+		$this->form_validation->set_rules('firstname','FirstName','trim|required|alpha|max_length[12]|xss_clean');
+		$this->form_validation->set_rules('lastname','LastName','trim|required|alpha|max_length[12]|xss_clean');
+		$this->form_validation->set_rules('email','Email','trim|required|valid_email|xss_clean');
+		$this->form_validation->set_rules('phone_number','Phone Number','trim|required|xss_clean');
+		$this->form_validation->set_rules('new_password','New Password','trim|required|xss_clean');
+		$this->form_validation->set_rules('birthdate','Birth Date','required|xss_clean');
+		 //$this->form_validation->set_rules('gender','Gender','required');
 
 		if ($this->form_validation->run() == FALSE)
 		{
@@ -45,11 +45,9 @@ class sign_up_controller extends CI_Controller {
 		//sending form data to model
 		$this->load->model('sign_up_model');
 		$this->sign_up_model->sign_up($data);
-		echo "Data inserted successfully in database...";
-		$email = $this->input->post('email');
-		
-		
-		
+		$email = $this->input->post('email');	
+		$this->session->set_flashdata('success', 'Sign Up Successfully. We will get back to you shortly');
+		redirect(base_url());
 		}
 				
 		
