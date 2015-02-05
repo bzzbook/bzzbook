@@ -1,0 +1,80 @@
+@charset "utf-8";
+html { }
+body { font-size: 17px; width:100%; height:100%; margin:0; padding:0; font-family: 'Roboto', sans-serif; color:#737373; overflow-x:hidden; font-weight:400;  background:url(../images/body_bg.png) repeat 0 0 !important; }
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video { margin:0; padding:0; border:0; outline:0; font-size:100%; vertical-align:baseline; background:transparent; }
+a img { border:none; }
+a { cursor:pointer; text-decoration:none; outline:none; }
+@-moz-document url-prefix() { 
+  *{ -webkit-transition:all 0.5s ease; -moz-transition:all 0.5s ease; -o-transition:all 0.5s ease; transition:all 0.5s ease; }
+}
+
+/* ============ Optionals ============ */
+.fleft { float:left; }
+.fright { float:right; }
+.clear { clear:both; }
+
+input[type="button"], input[type="submit"] { cursor: pointer; }
+input:focus, textarea:focus, input[type="text"]:focus { outline: 0; }
+input:-moz-placeholder, textarea:-moz-placeholder {color: #bebebe;}
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {color: #bebebe;}
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {color: #bebebe;}
+a:hover, a:active, a:focus, input:focus, button:focus { outline: 0;  text-decoration: none; }
+
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900);
+
+/* ============ Main Styles ============ */
+header{ border-top:6px solid #fbc436; text-align:center; padding:25px 0;}
+.midbody{ background:url(../images/landing_bg.png) repeat-x center 0; background-size:cover; padding:50px 0 25px 0;}
+.midbody h2{ font-size:71px; color:#fff; text-transform:uppercase; text-shadow: 0 5px 3px #cdab2d; text-align:center;}
+.midbody h2 em{ color:#000; font-style:normal; font-weight:700; position:relative; padding-right:70px;}
+.midbody h2 em:after{ background:url(../images/buzz_icon.png) no-repeat 0 0; content:""; width:57px; height:88px; position:absolute; top:-18px; margin-left:-7px;}
+.midbody h2 span{ font-size:46px; color:#4c4c4c;}	
+.midbody h3{ font-size:46px; color:#fff; font-weight:500; text-transform:uppercase; text-shadow: 0 5px 3px #cdab2d; text-align:center; padding-bottom:30px;}	
+.midbody h3 span{ font-size:39px; text-transform:capitalize; font-weight:400;}	
+.midbody h3 em{ font-style:normal; font-size:39px; text-transform:capitalize; font-weight:400; color:#000;}	
+	
+.midbody .lp_video{background:url(../images/lp_video_bg.png) no-repeat 0 0; background-size:100% auto; position:relative; padding:20px; margin-bottom:20px}	
+.midbody .lp_video video{ width:100%; height:auto;	}
+.midbody .leftCol p{ color:#434343;}	
+.midbody .leftCol figure{ padding:25px 0 0 0;}	
+
+.rightCol .signupToday{ background:#fff url(../images/shadow.png) no-repeat center bottom; padding:24px 20px; position:relative; overflow:hidden;}
+.rightCol .signupToday:before{ width:40px; height:40px; content:""; background:#000; position:absolute; top:-20px; left:-20px; 
+    transform: rotate(45deg) ;
+    -webkit-transform: rotate(45deg) ;
+    -moz-transform: rotate(45deg) ;
+    -o-transform: rotate(45deg) ;
+    -ms-transform: rotate(45deg) ;
+}
+.rightCol .signupToday:after{ width:40px; height:40px; content:""; background:#000; position:absolute; top:-20px; right:-20px; 
+    transform: rotate(45deg) ;
+    -webkit-transform: rotate(45deg) ;
+    -moz-transform: rotate(45deg) ;
+    -o-transform: rotate(45deg) ;
+    -ms-transform: rotate(45deg) ;
+}
+.rightCol{ z-index:1;}
+.rightCol:after{ background:url(../images/lp_form_shadow.png) no-repeat center 0; content:""; width:645px; height:50px; position:absolute; bottom:-10px; z-index:-2; left:-46px;}
+.rightCol .signupToday h5{ background:url(../images/lp_signup_icon.png) no-repeat 0 0; font-size:47px; color:#343536; padding:10px 0 10px 80px; font-weight:400; border-bottom:1px solid #f1f4f5; padding-bottom:20px; margin-bottom:20px; }
+.rightCol .signupToday .field{ padding-bottom:20px;}
+.rightCol .signupToday .field .form-control{background:#fafcfd; border:1px solid #e3e3e3; box-shadow:none; height:48px; font-size:16px; color:#a8a8a8; font-weight:300;}
+.rightCol .signupToday .field label{ display:block; font-size:20px; color:#616161; font-weight:400; padding-bottom:10px;}	
+.rightCol .signupToday .dob .field{ padding-left:0;}
+.rightCol .signupToday .dob #dpYears{ position:relative;}
+.rightCol .signupToday .dob span.add-on{ position:absolute; right:10px; top:16px; font-size:20px; cursor:pointer;  }
+.rightCol .signupToday .rdbtns{ display:flex; padding:0 15px 15px; }	
+.rightCol .signupToday .rdbtns label{ padding-left:0; font-size:16px; color:#a8a8a8; font-weight:300;}	
+.rightCol .signupToday p{ font-size:12px; color:#a8a8a8; font-weight:300; padding:0 15px 15px; }
+.rightCol .signupToday .sbButtons{ margin:15px;}	
+.rightCol .signupToday .sbButtons input{ background:#86b726; -webkit-border-radius:4px; border-radius:4px; height:62px; line-height:62px; border:none; color:#fff; font-size:20px; padding:0 20px;}
+
+footer{ color:#acacac; font-size:20px; color:#acacac; text-align:center; padding:20px; font-weight:300;}
+
+.datepicker{-webkit-transition:none; -moz-transition:none; -o-transition:none; transition:none; top:inherit !important; width:95%; margin:0 2.5%; }
+.rightCol .signupToday .dob .datepicker .datepicker-years span.year{ width:70px ; height:70px ; line-height:70px ;}
+	
+	
+	
+	
+	
+	

@@ -1,0 +1,115 @@
+@media only screen and (min-width:768px) and (max-width:1200px){	
+	.container{ width:96%;}
+	.midbody .coloumn3 aside .pendingRequest .disc a{ display:block; margin-bottom:10px; text-align:center;}
+	.midbody .coloumn3 aside .companies ul li{ display:block;}
+	.midbody .coloumn3 aside .companies figure{ padding-bottom:10px;}
+	.midbody .coloumn3 aside .companies ul li .content{ padding:0;}
+	.midbody .coloumn3 aside .companies ul li figure{ height:125px;}
+	.midbody .coloumn3 aside .companies ul li figure img{ width:100%; height:100%;}
+
+	}
+@media (min-width:1200px) {
+	.midbody .coloumn3 aside .pendingRequest .disc .dcBtn{ display:flex; }
+	}	
+@media only screen and (min-width:768px) and (max-width:1150px){
+	.midbody .coloumn2 .updateStatus ul li:first-child{ display:none;}
+	}	
+@media only screen and (min-width:768px) and (max-width:1050px){
+	.midbody .coloumn2 .updateStatus ul{ display:block;}
+	.midbody .coloumn2 .updateStatus ul li{ display:block; float:none;}
+	.midbody .coloumn1 .profile .img{ display:none;}
+	}
+@media (max-width:1140px) {
+	.aboutBzz .block1 h3{ font-size:46px;}
+	}
+@media (max-width:1050px) {	
+	.howWorks div.step img, .howWorks div.step+div img{ width:100%;}
+	footer.home figure img{ width:90%;}
+	footer.home{ background-size:cover;}
+
+	}
+@media (max-width:990px) {
+	.mainNav nav .viewAs{ display:flex; width:100%; padding:10px 20px; background:#fcc434;}
+	.mainNav nav .viewAs select{ width:inherit;}
+	.mainNav nav .viewAs p{ color:#fff; white-space:nowrap;}
+	.mainNav nav .viewAs select{ background:#fafafa;}
+	.midbody .leftCol figure img{ width:100%;}
+	}	
+@media (max-width:960px) {
+	.midbody .coloumn3 aside .pendingRequest ul li{ display:block; text-align:center;}
+	.midbody .coloumn3 aside .pendingRequest figure{ display:block; width:100%; height:125px; margin-bottom:10px;}
+	.midbody .coloumn3 aside .pendingRequest figure img{ width:100%; height:100%;}
+	.midbody .coloumn3 aside .pendingRequest .disc a + a{ margin:0;}
+	.midbody .coloumn3 aside .pendingRequest .disc{ padding:0;}
+	}
+@media (max-width:767px) {
+	.navbar-header{ display:block; padding:0 15px;}
+	.mainNav .navbar-brand{ color:#fff;}
+	.mainNav .navbar-toggle{  padding:0; margin-top:12px;}
+	.mainNav .navbar-toggle .icon-bar{ background:#fff; width:35px; height:5px;}
+	.mainNav .navbar-collapse{ background:#f9f9f9;}
+	.mainNav .navbar-collapse ul li a{ color:#767676; padding:0 40px;}
+	.mainNav .navbar-collapse ul li a:hover{ background:#fcc434; color:#fff;}
+	.container{ width:100%; padding-left:0; padding-right:0;}
+	.midbody .coloumn1 .myPhotos ul li{ width:28%;}
+	
+	
+	.midbody .coloumn1 .sideNav ul{ display:table;}
+	.midbody .coloumn1 .sideNav ul li{ width:29%; float:left; margin:0 2% 10px; text-align:center; padding:10px 0; border:1px solid #e6e6e6;}
+	.midbody .coloumn1 .sideNav ul li a:before { background: none repeat scroll 0 0 #f9f9f9;  content: "";  height: 30px;  position: absolute;  width: 98%;  z-index: -1; right:1px;}
+	.midbody .coloumn1 .sideNav ul li a{ padding:40px 0 10px; z-index:1; position:relative;}
+	.midbody .coloumn1 .sideNav ul li:nth-child(1) a{background-position: center 10px;}
+	.midbody .coloumn1 .sideNav ul li:nth-child(2) a{ background-position:center -25px;}
+	.midbody .coloumn1 .sideNav ul li:nth-child(3) a{ background-position:center -55px;}
+	.midbody .coloumn1 .sideNav ul li:nth-child(4) a{ background-position:center -87px;}
+	.midbody .coloumn1 .sideNav ul li:nth-child(5) a{ background-position:center -118px;}
+	.midbody .coloumn1 .sideNav ul li:nth-child(6) a{ background-position:center -151px;}
+	.midbody .coloumn1 .sideNav ul li:nth-child(7) a{ background-position:center -184px;}
+	
+	.midbody .ad{ text-align:center;}
+	.midbody .ad img{padding:30px 0; width:30%;}
+	.midbody .coloumn2{ padding:0 20px;}
+	.midbody .coloumn2 .updateStatus{ border-top:1px solid #ececec;}
+	.midbody .coloumn3 aside .pendingRequest ul{ display:flex;}
+	.midbody .coloumn3 aside .pendingRequest ul li{ margin:0 10px;}
+	.midbody .coloumn3 aside .pendingRequest .disc a + a{ margin-left:10px;}
+	
+	header.home figure{ text-align:center;}
+	.howWorks .step{ padding-top:40px; padding-bottom:40px;}
+	.midbody .leftCol figure{ text-align:center;}
+	.midbody .leftCol figure img{ width:70%;}
+	}	
+@media (max-width:600px) {
+	.midbody .coloumn1 .sideNav ul li{ width:45%;}
+	.midbody .coloumn1 .sideNav ul li a{ font-size:12px;}
+	.midbody .ad img{ width:70%;}
+	.midbody .coloumn3 aside .pendingRequest .disc a { display:block;}
+	.midbody .coloumn3 aside .pendingRequest .disc a + a{ margin:10px 0 0 0;}
+	.midbody .coloumn3 aside .pendingRequest figure img{ width:150px; height:150px;}
+	footer.home h3{ font-size:26px; padding-bottom:45px;}
+	footer.home h3 span{ font-size:24px;}
+	footer.home{ padding-bottom:40px;}
+	.banner .title h2{ font-size:50px;}
+	.banner .title h3{ font-size:32px;}
+	.banner .title h4{ font-size:26px;}
+	.rightCol .signupToday .dob .datepicker .datepicker-years span.year{ width:50px ; height:50px ; line-height:50px ;}
+	}
+@media (max-width:500px) {	
+	.banner .signupToday .rgButtons{ display:block; text-align:center;}
+	.banner .signupToday .rgButtons .button{ width:100%; margin:0 0 15px 0;}
+	}
+		
+@media (max-width:470px) {	
+	.howWorks div img{ width:100%;}
+	.howWorks h3, .whyBzz h3{ font-size:44px;}
+	header .userLogin .field{ float:none; width:100%;}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
