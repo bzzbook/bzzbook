@@ -33,7 +33,7 @@ header{ border-top:6px solid #fbc436; text-align:center; padding:25px 0;}
 .midbody h3 span{ font-size:39px; text-transform:capitalize; font-weight:400;}	
 .midbody h3 em{ font-style:normal; font-size:39px; text-transform:capitalize; font-weight:400; color:#000;}	
 	
-.midbody .lp_video{background:url(../images/lp_video_bg.png) no-repeat 0 0; background-size:100% auto; position:relative; padding:20px; margin-bottom:20px}	
+.midbody .lp_video{background:url(../images/lp_video_bg.png) no-repeat 0 0; background-size:100% auto; position:relative; padding: 20px 19px 20px 20px; margin-bottom:20px}	
 .midbody .lp_video video{ width:100%; height:auto;	}
 .midbody .leftCol p{ color:#434343;}	
 .midbody .leftCol figure{ padding:25px 0 0 0;}	

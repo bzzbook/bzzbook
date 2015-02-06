@@ -17,7 +17,7 @@ class sign_up_model extends CI_Model {
 	   }
 	   public function sign_in($email,$pwd)
 	   {
-		 /* $this->db->select('email,new_password');
+		  $this->db->select('email,new_password');
 		  $this->db->from('sign_up');
 		  $this->db->where('email',$email);
 		  $this->db->where('new_password',md5($pwd));
@@ -28,14 +28,14 @@ class sign_up_model extends CI_Model {
 			  return $query->result();
 		  }else{
 			  return false;
-		  } */
-		  
+		  } 
+		 /* 
 		  if($email == 'siva@gmail.com' && $pwd =='sivaprasad' )
 		  {
 			  return true;
 		  }else{
 			  return false;
-		  }
+		  } */
 		   
 	   }
 	   		

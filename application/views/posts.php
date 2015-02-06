@@ -19,6 +19,11 @@
     <![endif]-->
 </head>
 <body>
+
+<?php foreach($udata as $u){ ?>
+<?php echo $u->email; ?>
+<?php echo $u->new_password; ?>
+<?php } ?>
 <header>
   <section class="container">
    <figure class="col-lg-3 col-md-3 col-sm-4 col-xs-12 animate-plus" data-animations="pulse"  data-animation-when-visible="true"  data-animation-reset-offscreen="true"><a href="#"><img src="<?php echo base_url(); ?>images/logo.png" alt=""></a></figure>
@@ -289,6 +294,7 @@
   </ul>
   <p>Bzzbook &copy; 2015 English (US)</p>
 </footer>
+
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
 <script src="<?php echo base_url(); ?>js/jquery-1.11.1.min.js"></script> 
 <!-- Include all compiled plugins (below), or include individual files as needed --> 
