@@ -46,30 +46,26 @@
 			}?>
             
         </span>
-        <?php
-  			
-  		    echo validation_errors();
- 			
-		?>
+        <?php echo validation_errors(); ?>
         <form name="sign_up_form" id="sign_up" method="post" action="<?php echo base_url(); ?>index.php/sign_up_controller/sign_up">
           <div class="field col-md-6">
-            <input type="text" class="form-control" data-rule-required="true" data-msg-required="pleas enter your first name"     
+            <input type="text" class="form-control" data-rule-required="true" data-msg-required="please enter your first name"     
             name="firstname" placeholder="First Name" >
           </div>
           <div class="field col-md-6">
-            <input type="text" class="form-control" data-rule-required="true"  data-msg-required="pleas enter your last name" 
+            <input type="text" class="form-control" data-rule-required="true"  data-msg-required="please enter your last name" 
             name="lastname" placeholder="Last Name" >
           </div>
           <div class="field col-md-12">
-            <input type="text" class="form-control"  data-rule-required="true" data-msg-required="pleas enter your email" 
-            data-rule-email="true" data-msg-email="Please enter a valid email address" name="email" placeholder="E-mail" >
+            <input type="text" class="form-control"  data-rule-required="true" data-msg-required="please enter your email" 
+            data-rule-email="true" data-msg-email="please enter a valid email address" name="email" placeholder="E-mail" >
           </div>
           <div class="field col-md-12">
-            <input type="tel" class="form-control" data-rule-required="true" data-msg-required="pleas enter your phone number" 
+            <input type="tel" class="form-control" data-rule-required="true" data-msg-required="please enter your phone number" 
             name="phone_number" placeholder="Phone Number" >
           </div>
           <div class="field col-md-12">
-            <input type="password" class="form-control" data-rule-required="true" data-msg-required="pleas enter your password" 
+            <input type="password" class="form-control" data-rule-required="true" data-msg-required="please enter your password" 
             name="new_password" placeholder="New Password" >
           </div>
           <div class="field col-md-12 dob">

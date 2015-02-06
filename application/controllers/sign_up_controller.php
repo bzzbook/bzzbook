@@ -69,8 +69,52 @@ class sign_up_controller extends CI_Controller {
 		echo "email sent successfully";
 			
 	}
-}
+	
+	public function sign_in()
+	{
+		$this->load->view('sign_in');
+	
+	}
+	public function db_check_login()
+	{
+		$this->form_validation->set_rules('email','Email','trim|required|valid_email|xss_clean');
+		$this->form_validation->set_rules('password','Password','trim|required|xss_clean');
+		
+		if($this->form_validation->run() == false)
+		 {
+		    $this->load->view('sign_in');
+		  
+		}else{
+		  $email = $this->input->post('email');
+		  $pwd = $this->input->post('password');
+		  $this->load->model('sign_up_model');
+		  $result =  $this->sign_up_model->sign_in($email,$pwd);
+		echo $result;
+		/* if($result)
+  			 {
+    			 $sess_array = array();
+     		   	foreach($result as $row)
+     			{
+       				$sess_array = array(
+         'id' => $row->id,
+         'username' => $row->username
+       );
+       $this->session->set_userdata('logged_in', $sess_array);
+     }
+     return TRUE;
+   }
+   else
+   {
+     $this->form_validation->set_message('check_database', 'Invalid username or password');
+     return false;
+   }
+ }
+		*/ 
+		$this->load->view('posts');
+		}
+	}
 
+}
 /* End of file welcome.php */
 /* Location: ./application/controllers/welcome.php */
 ?>
