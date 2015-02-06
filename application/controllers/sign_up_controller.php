@@ -6,6 +6,7 @@ class sign_up_controller extends CI_Controller {
         parent::__construct();
 		$this->load->library('form_validation');
 		$this->load->library('email');
+		$this->load->library('session');
 
     }
 
@@ -23,7 +24,7 @@ class sign_up_controller extends CI_Controller {
 		$this->form_validation->set_rules('lastname','LastName','trim|required|alpha|max_length[12]|xss_clean');
 		$this->form_validation->set_rules('email','Email','trim|required|valid_email|xss_clean');
 		$this->form_validation->set_rules('phone_number','Phone Number','trim|required|xss_clean');
-		$this->form_validation->set_rules('new_password','New Password','trim|required|xss_clean');
+		$this->form_validation->set_rules('new_password','New Password','trim|required|xss_clean|md5');
 		$this->form_validation->set_rules('birthdate','Birth Date','required|xss_clean');
 		 //$this->form_validation->set_rules('gender','Gender','required');
 
