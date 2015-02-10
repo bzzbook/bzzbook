@@ -1,7 +1,4 @@
 <!DOCTYPE html>
-<?php
-$session_data = $this->session->userdata('logged_in');
-?>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -22,7 +19,6 @@ $session_data = $this->session->userdata('logged_in');
     <![endif]-->
 </head>
 <body>
- <?php echo validation_errors(); ?>
 <header>
   <section class="container">
    <figure class="col-lg-3 col-md-3 col-sm-4 col-xs-12 animate-plus" data-animations="pulse"  data-animation-when-visible="true"  data-animation-reset-offscreen="true"><a href="#"><img src="<?php echo base_url(); ?>images/logo.png" alt=""></a></figure>
@@ -43,7 +39,7 @@ $session_data = $this->session->userdata('logged_in');
     <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
       <div class="curentUser">
         <div class="userImg"><img src="<?php echo base_url(); ?>images/user.png" alt=""></div>
-        <a href="#" role="button"  class="dropdown-toggle userName" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Logged in as:<span><?php echo  $session_data['email']; ?></span></a>
+        <a href="#" role="button"  class="dropdown-toggle userName" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Logged in as:<span>John Smith</span></a>
         <ul  role="menu" class="dropdown-menu">
           <li><a href="<?php echo base_url(); ?>index.php/sign_in_controller/sign_out" tabindex="-1" role="menuitem">Logout</a></li>
         </ul>
@@ -91,7 +87,7 @@ $session_data = $this->session->userdata('logged_in');
       <aside>
         <div class="profile">
           <div class="img"><img src="<?php echo base_url(); ?>images/user.png" alt=""></div>
-          <div class="details">Jhon Smith....<a href="<?php base_url(); ?>profile_controller">Edit Profile</a><span>Sr. UI Developer at Company</span></div>
+          <div class="details">Jhon Smith....<a href="#">Edit Profile</a><span>Sr. UI Developer at Company</span></div>
           <div class="clear"></div>
         </div>
         <div class="sideNav">
@@ -155,7 +151,11 @@ $session_data = $this->session->userdata('logged_in');
           <figure><img src="<?php echo base_url(); ?>images/post_writer.png" alt=""></figure>
           <div class="content">
             <h3 class="pw">James Smith<span>2hr</span></h3>
-            <p>It has been a privilege working with Jhon Smithat PayPal. His keen eye for detail, problem solving skills and excellent communication were an asset to the entire engineering team. He has been excellent at ensuring projects roll out not only on time...<a href="#">more</a></p>
+            <p><?php foreach($result as $res) {
+            echo $res->posted_by;
+			echo $res->post_content;
+			}?>
+            It has been a privilege working with Jhon Smithat PayPal. His keen eye for detail, problem solving skills and excellent communication were an asset to the entire engineering team. He has been excellent at ensuring projects roll out not only on time...<a href="#">more</a></p>
             <div class="links"> <a href="#">Like<span>&nbsp;(15)</span></a> <a href="#">Comment</a> <a href="#">Share</a> <a href="#">Save As Favorite</a> </div>
             <div class="clear"></div>
           </div>
@@ -313,6 +313,5 @@ $session_data = $this->session->userdata('logged_in');
 <script type="text/javascript">
    $('#email_invite').validate();
 	</script>
-
 </body>
 </html>

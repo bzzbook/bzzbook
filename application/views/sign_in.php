@@ -24,7 +24,20 @@
     <figure class="col-lg-3 col-md-3 col-sm-4 col-xs-12 animate-plus" data-animations="pulse"  data-animation-when-visible="true"  data-animation-reset-offscreen="true"><a href="#"><img src="<?php echo base_url(); ?>images/logo.png" alt=""></a></figure>
     <section  class="col-lg-7 col-md-7 col-sm-7 col-xs-12 pull-right">
       <div class="userLogin">
-     
+<?php
+if (isset($logout_message)) {
+echo "<div class='message'>";
+echo $logout_message;
+echo "</div>";
+}
+?>
+<?php
+if (isset($message_display)) {
+echo "<div class='message'>";
+echo $message_display;
+echo "</div>";
+}
+?>
         <form action="<?php echo base_url(); ?>index.php/sign_in_controller/db_check_login" method="post">
           <div class="field">
             <label>Email</label>
@@ -113,6 +126,11 @@
 <script src="<?php echo base_url(); ?>js/animate-plus.min.js"></script> 
 <script src="<?php echo base_url(); ?>js/custom.js"></script>
 <script src="<?php echo base_url(); ?>js/jquery.validate.min.js"></script>
-<script src="<?php echo base_url(); ?>js/additional-methods.js"></script> 
+<script src="<?php echo base_url(); ?>js/additional-methods.js"></script>
+<script type="text/javascript">
+$(function(){
+  $(".message").delay('slow').fadeOut();
+});
+</script>
 </body>
 </html>

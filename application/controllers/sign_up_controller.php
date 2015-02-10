@@ -26,8 +26,7 @@ class sign_up_controller extends CI_Controller {
 		$this->form_validation->set_rules('phone_number','Phone Number','trim|required|xss_clean');
 		$this->form_validation->set_rules('new_password','New Password','trim|required|xss_clean|md5');
 		$this->form_validation->set_rules('birthdate','Birth Date','required|xss_clean');
-		 //$this->form_validation->set_rules('gender','Gender','required');
-
+		$this->form_validation->set_rules('gender','Gender','required');
 		if ($this->form_validation->run() == FALSE)
 		{
 			$this->load->view('landing');
@@ -42,7 +41,7 @@ class sign_up_controller extends CI_Controller {
 		$data['phone_number'] = $this->input->post('phone_number');
 		$data['new_password'] = $this->input->post('new_password');
 		$data['birthdate'] = $this->input->post('birthdate');
-		$data['gender'] = $this->input->post('inlineRadioOptions');
+		$data['gender'] = $this->input->post('gender');
 		
 		//sending form data to model
 		$this->load->model('sign_up_model');

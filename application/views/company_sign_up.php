@@ -12,7 +12,6 @@
 <link href="<?php echo base_url(); ?>css/landing.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>css/responsive.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>css/datepicker.css" rel="stylesheet">
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -22,7 +21,7 @@
 </head>
 <body>
 <header>
-  <figure class=" animate-plus" data-animations="pulse"  data-animation-when-visible="true"  data-animation-reset-offscreen="true"><a href="#"><img src="<?php echo base_url(); ?>images/lp+logo.png" alt=""></a></figure>
+  <figure class=" animate-plus" data-animations="pulse"  data-animation-when-visible="true" data-animation-reset-offscreen="true"><a href="#"><img src="<?php echo base_url(); ?>images/lp+logo.png" alt=""></a></figure>
 </header>
 <section class="midbody">
   <div class="container">
@@ -31,102 +30,101 @@
     <div class="col-md-12 col-sm-12 col-xs-12 rightCol pull-right">
       <div class="signupToday">
         <h5>Company Sign Up..</h5>
-        <form>
+        <?php echo validation_errors(); ?>
+        <?php if($this->session->flashdata('comp_success')){ 
+				echo $this->session->flashdata('comp_success');
+			}?>
+        <form method="post" name="comp_sign_up" id="comp_sign_up" 
+        action="<?php echo base_url(); ?>index.php/company_controller/comp_sign_up" autocomplete="on">
           <div class="field col-md-6">
-            <input type="text" class="form-control" placeholder="Company Name">
+            <input type="text" name="company_name" class="form-control" placeholder="Company Name" 
+             data-rule-required="true"  data-msg-required="please enter your company name">
           </div>
           <div class="field col-md-6">
-          <select name="industry" class="form-control">
-                 <option value="none" selected="selected">Industry</option>
+          <select name="industry" class="form-control" data-rule-required="true" 
+          data-msg-required="please enter your industry name">
+                 <option value="">Industry</option>
 				 <?php foreach($industry as $industries):?>
                  <option value="<?php echo $industries->lookup_value ?>"><?php echo $industries->lookup_value ?></option>
                  <?php endforeach;?> 
                  </select>  
          </div> 
+          <div class="field col-md-6 dob">
+            <div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2012-02-12" id="dpYears" 
+                class="input-group-bt date">
+              <input type="text" readonly name="established_year" value="" size="16" class="form-control" 
+              placeholder="Established Since" data-rule-required="true" 
+              data-msg-required="please enter established Year">
+              <span aria-hidden="true" class="add-on glyphicon glyphicon-calendar"></span> 
+              </div>
+          </div>
          <div class="field col-md-6">
-          <select name="industry" class="form-control">
-                 <option value="none" selected="selected">Established Year</option>
-				 <?php foreach($industry as $industries):?>
-                 <option value="<?php echo $industries->lookup_value ?>"><?php echo $industries->lookup_value ?></option>
-                 <?php endforeach;?> 
-                 </select>  
-         </div>
-         <div class="field col-md-6">
-             <select id="select23"  class="form-control">
-                     <option selected="selected">Collegues</option>
+             <select name="collegues" class="form-control" data-rule-required="true" 
+              data-msg-required="please select collegues ">
+                     <option value="">Collegues</option>
                      <option value="10">1 - 10</option>
                      <option value="25">10 - 25</option>
                      <option value="50">25 - 50</option>
                      <option value="100">50 - 100</option>
-                     <option value="100">100+</option>
+                     <option value="125">100+</option>
              </select>
          </div> 
           <div class="field col-md-6">
-            <input type="email" class="form-control" placeholder="E-mail">
+            <input type="email" name="email" class="form-control" placeholder="E-mail" data-rule-required="true" 
+            data-msg-required="please enter your E-mail"  data-rule-email="true" 
+            data-msg-email="please enter a valid email address">
           </div>
            <div class="field col-md-6">
-            <input type="text" class="form-control" placeholder="User Name">
+            <input type="text" name="user_name" class="form-control" placeholder="User Name" data-rule-required="true" 
+            data-msg-required="please enter your user name">
           </div>
           <div class="field col-md-6">
-            <input type="password" class="form-control" placeholder="Password">
+            <input type="password" name="password" id="password" class="form-control" placeholder="Password"  
+            data-rule-required="true" 
+            data-msg-required="please enter your password">
           </div>
           <div class="field col-md-6">
-            <input type="password" class="form-control" placeholder="Re-enter Password">
+            <input type="password"  name="conf_password" class="form-control" placeholder="Re-enter Password"  
+            data-rule-required="true" 				 	
+            data-msg-required="please Re-enter password" data-rule-equalto="#password" 
+            data-msg-equalto="Re-entered password should match with password">
           </div>
-           <div class="field col-md-6">
-         <input type="text" id="country" class="form-control"  placeholder="Country" name="country">
+          <div class="field col-md-6">
+           <select class="form-control" onchange="print_state('state',this.selectedIndex);" id="country" name ="country">
+			<option vbalue="">Select Country</option>
+			</select> 
          </div> 
           <div class="field col-md-6">
-          <select name="state" class="form-control" required="required">
-                 <option value="" selected="selected">State</option>
-                 <?php foreach($records as $record):?>
-                 <option value="<?php echo $record->lookup_value ?>"><?php echo $record->lookup_value ?></option>
-                 <?php endforeach;?> 
-                 </select>  
-          </div>
-          <div class="field col-md-6">
-          <input type="text" class="form-control" placeholder="City">
-          </div>
-          <div class="field col-md-6">
-          <input type="text" class="form-control" placeholder="Postal Code"/>
-          </div>
-          <div class="field col-md-6">
-          <select name="position" class="form-control">
-                <option value="none" selected="selected">Job Type</option>
-				<?php foreach($jobtype as $job):?>
-                <option value="<?php echo $job->lookup_value ?>"><?php echo $job->lookup_value ?></option>
-                <?php endforeach;?> 
-                </select> 
-          </div>  
-          <div class="field col-md-6">
-          <select name="industry" class="form-control">
-                 <option value="none" selected="selected">Industry</option>
-				 <?php foreach($industry as $industries):?>
-                 <option value="<?php echo $industries->lookup_value ?>"><?php echo $industries->lookup_value ?></option>
-                 <?php endforeach;?> 
-                 </select>  
+           <select name="state" id="state" class="form-control" data-rule-required="true" 
+           data-msg-required="please enter state">
+           <option value="">Select State</option>
+           </select>
          </div> 
+          <div class="field col-md-6">
+          <input type="text" name="city" class="form-control" placeholder="City" data-rule-required="true" 
+          data-msg-required="please enter city">
+          </div>
+          <div class="field col-md-6">
+          <input type="text"  name="postal_code" class="form-control" placeholder="Postal Code" data-rule-required="true" 
+          data-msg-required="please enter postal code"/>
+          </div>
+        
+         <div class="field col-md-12">                       
+             <textarea class="form-control" name="about_company" placeholder="About Company.."
+             data-rule-required="true" data-msg-required="please enter about company"></textarea>
+         </div>
+         
          <div class="field col-md-6">
-             <input type="text" name="companyname" class="form-control" placeholder="Company Name" /> 
-         </div>
-         <div class="field col-md-6">                       
-             <textarea class="form-control" name="aboutme" placeholder="About You.."></textarea>
-         </div>
-         <div class="filed col-md-6">
-       
-         <input type="checkbox" class="form-control" name="agree" value="agree" />
-         
-          <div>By joining Bzzbook, you agree to Bzzbook&#39;s 
+         <input type="checkbox" name="agree" value="agree" data-rule-required="true" 
+             data-msg-required="please accept terms & conditions"/> By joining Bzzbook, you agree to Bzzbook&#39;s 
                 User Agreement, Privacy Policy and Cookie Policy.
-              
-           </div>
-         
            </div>
            <br/>
+             <div class="field col-md-12">
           <div class="sbButtons">
             <input type="submit" value="Sign Up Now">
           </div>
-         
+         </div>
         </form>
       </div>
     </div>
@@ -140,15 +138,17 @@
 <script src="<?php echo base_url(); ?>js/bootstrap.min.js"></script> 
 <script src="<?php echo base_url(); ?>js/animate-plus.min.js"></script> 
 <script src="<?php echo base_url(); ?>js/bootstrap-datepicker.js"></script> 
-<script src="<?php echo base_url(); ?>js/contryscript.js"></script>
-
-    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<script src="<?php echo base_url(); ?>js/jquery.validate.min.js"></script>
+<script src="<?php echo base_url(); ?>js/additional-methods.js"></script> 
+<script src ="<?php echo base_url(); ?>js/countries.js"></script>
 <script type="text/javascript">
 		$( document ).ready(function() {
 			$('#dpYears').datepicker();
 		});
 	</script>
-
+<script language="javascript">print_country("country");</script>  
+<script type="text/javascript">
+   $('#comp_sign_up').validate();
+</script>
 </body>
 </html>

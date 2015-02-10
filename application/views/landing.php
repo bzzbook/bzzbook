@@ -43,6 +43,8 @@
         <span style="color:#F00; padding:0 0 0 16px">
         	<?php if($this->session->flashdata('success')){ 
 				echo $this->session->flashdata('success');
+			}else if($this->session->flashdata('logout')){
+				echo $this->session->flashdata('logout');
 			}?>
             
         </span>
@@ -78,10 +80,10 @@
           <p>Why do I need to provide my birthday?</p>
           <div class="filed rdbtns">
             <label class="checkbox-inline">
-              <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="male" checked="checked">
+              <input type="radio" name="gender" id="inlineRadio2" value="male" checked="checked">
               Male </label>
             <label class="checkbox-inline">
-              <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="female" >
+              <input type="radio" name="gender" id="inlineRadio3" value="female" >
               Female </label>
           </div>
           <p>Lorem ipsum dolor sit amet, at choro omnium partiendo qui, nec nulla voluptua ex, te homero dissentiunt usu. Et vis latine epicuri voluptaria, <a href="#">posse veniam legimus eu ius</a>. Odio albucius ne vis, nec ad scaevola philosophia. Vide nominavi</p>

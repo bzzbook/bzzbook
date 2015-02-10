@@ -54,9 +54,9 @@
         <p>Begin today with a better way to connect with friends, colleagues, and customers. Make Bzzbook your one stop shop for all your social media needs. Sign up today and be a part of the future of social media. </p>
         <div class="rgButtons">
           <div class="button"> <span>Are you a person?</span> 
-          <a href="<?php echo base_url(); ?>index.php/customer_controller/customer_sign_up">Sign Up Now</a> </div>
+          <a href="<?php echo base_url(); ?>index.php/customer_controller/sign_up">Sign Up Now</a> </div>
           <div class="button"> <span>Are you a Business?</span> 
-          <a href="<?php echo base_url(); ?>index.php/customer_controller/company_sign_up">Sign Up Now</a> </div>
+          <a href="<?php echo base_url(); ?>index.php/company_controller/sign_up">Sign Up Now</a> </div>
         </div>
         <div class="fb"><img src="file:///E|/code/Bzzbook-html/images/test_fb.png" alt=""></div>
       </div>
