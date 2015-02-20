@@ -21,7 +21,7 @@
 </head>
 <body>
 <header>
-  <figure class=" animate-plus" data-animations="pulse"  data-animation-when-visible="true"  data-animation-reset-offscreen="true"><a href="#"><img src="<?php echo base_url(); ?>images/lp+logo.png" alt=""></a></figure>
+  <figure class=" animate-plus" data-animations="pulse"  data-animation-when-visible="true"  data-animation-reset-offscreen="true"><a href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>images/lp+logo.png" alt=""></a></figure>
 </header>
 <section class="midbody">
   <div class="container">
@@ -49,7 +49,7 @@
             
         </span>
         <?php echo validation_errors(); ?>
-        <form name="sign_up_form" id="sign_up" method="post" action="<?php echo base_url(); ?>index.php/sign_up_controller/sign_up">
+        <form name="sign_up_form" id="sign_up" method="post" action="<?php echo base_url(); ?>sign_up/sign_up">
           <div class="field col-md-6">
             <input type="text" class="form-control" data-rule-required="true" data-msg-required="please enter your first name"     
             name="firstname" placeholder="First Name" >

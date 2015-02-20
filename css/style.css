@@ -260,5 +260,16 @@ footer.home h3 em{ color:#fdc70f; font-style:normal;}
 .pfSettings .radio label{ font-weight:300;}
 
 
+.aboutme h2{ background:url(../images/about.png) no-repeat 0 center; padding:0 0 0 30px; height:42px; line-height:42px; font-size:18px;}
+.aboutme .nav-tabs{ border:none;}
+.aboutme .nav-tabs li{ float:none; list-style:none; height:50px; line-height:50px; border-bottom:1px solid #eeeeee;}
+.aboutme .nav-tabs li a{ border:none !important; background:none !important; color:#737373; font-weight:300; }
+.aboutme .nav-tabs li.active a{ font-weight:500;}
+.aboutme .tab-pane{ padding:15px 0;}
+.aboutme .tab-pane h4{ color:#fbc436; padding-bottom:8px;}
+.aboutme .tab-pane p{ color:#737373; font-size:14px; padding-bottom:25px; font-weight:300;}
+.aboutme .tab-content{ border-left:1px solid #eeeeee; min-height:200px;}
 
+
+.aboutme .nav-tabs li.active:before { border-left: 3px solid #fbc436;  content: "";   height: 47px;   left: 0;  position: absolute;}
 

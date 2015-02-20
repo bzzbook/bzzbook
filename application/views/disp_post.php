@@ -21,7 +21,7 @@
 <body>
 <header>
   <section class="container">
-   <figure class="col-lg-3 col-md-3 col-sm-4 col-xs-12 animate-plus" data-animations="pulse"  data-animation-when-visible="true"  data-animation-reset-offscreen="true"><a href="#"><img src="<?php echo base_url(); ?>images/logo.png" alt=""></a></figure>
+   <figure class="col-lg-3 col-md-3 col-sm-4 col-xs-12 animate-plus" data-animations="pulse"  data-animation-when-visible="true"  data-animation-reset-offscreen="true"><a href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>images/logo.png" alt=""></a></figure>
     <div class="col-lg-6 col-md-6 col-sm-4 col-xs-12 search">
       <div class="input-group"> <span class="input-group-btn">
         <input type="button" value="" role="button"  class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" id="drop2">
@@ -41,7 +41,7 @@
         <div class="userImg"><img src="<?php echo base_url(); ?>images/user.png" alt=""></div>
         <a href="#" role="button"  class="dropdown-toggle userName" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Logged in as:<span>John Smith</span></a>
         <ul  role="menu" class="dropdown-menu">
-          <li><a href="<?php echo base_url(); ?>index.php/sign_in_controller/sign_out" tabindex="-1" role="menuitem">Logout</a></li>
+          <li><a href="<?php echo base_url(); ?>signg_in/sign_out" tabindex="-1" role="menuitem">Logout</a></li>
         </ul>
       </div>
     </div>
@@ -121,7 +121,7 @@
           <h3>Invite someone to join!</h3>
           <p>Invite your friends to Bzzbook!</p>
           <?php $attributes = array('class' => 'email', 'id' => 'email_invite', 'name' => 'invite_email'); ?>
-          <?php echo form_open('customer_controller/send_invite',$attributes) ?>
+          <?php echo form_open('customer/send_invite',$attributes) ?>
           <input type="text" class="form-control" placeholder="Email Address"  name="email" placeholder="E-mail"  
           data-rule-required="true" data-msg-required="please enter your email"  
           data-rule-email="true" data-msg-email="please enter a valid email address">
@@ -140,7 +140,7 @@
           <li><a href="#">Create Photo/Video Album</a></li>
         </ul>
         <?php $attr = array('name' => 'post_form', 'id' =>'my_form') ?>
-        <?php echo form_open('sign_in_controller/send_post',$attr) ?>
+        <?php echo form_open('signg_in/send_post',$attr) ?>
         <textarea cols="" rows="" name="posts" class="form-control" placeholder="What's Buzzing?"></textarea>
         <div class="updateControls"> <a href="javascript:{}" onclick="document.getElementById('my_form').submit(); return false;">Post</a> <a href="#">Public</a> </div>
         <?php echo form_close(); ?>

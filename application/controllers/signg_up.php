@@ -1,19 +1,17 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class sign_up_controller extends CI_Controller {
+class signg_up extends CI_Controller {
 	 
 	  public function __construct() {
         parent::__construct();
-		$this->load->library('form_validation');
-		$this->load->library('email');
-		$this->load->library('session');
 
     }
 
-	public function index()
-	{
-		$this->load->view('landing');
-	}
+
+    public function index()
+    {
+	  $this->load->view('sign_up');
+    }
 	
 	public function sign_up()
 	{
@@ -44,8 +42,8 @@ class sign_up_controller extends CI_Controller {
 		$data['gender'] = $this->input->post('gender');
 		
 		//sending form data to model
-		$this->load->model('sign_up_model');
-		$this->sign_up_model->sign_up($data);	
+		$this->load->model('sign_up');
+		$this->sign_up->sign_up($data);	
 		$this->session->set_flashdata('success', 'Sign Up Successfully. We will get back to you shortly');
 		redirect(base_url());
 		$email = $this->input->post('email');

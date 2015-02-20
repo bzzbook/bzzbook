@@ -21,7 +21,7 @@
 </head>
 <body>
 <header>
-  <figure class=" animate-plus" data-animations="pulse"  data-animation-when-visible="true" data-animation-reset-offscreen="true"><a href="#"><img src="<?php echo base_url(); ?>images/lp+logo.png" alt=""></a></figure>
+  <figure class=" animate-plus" data-animations="pulse"  data-animation-when-visible="true" data-animation-reset-offscreen="true"><a href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>images/lp+logo.png" alt=""></a></figure>
 </header>
 <section class="midbody">
   <div class="container">
@@ -35,7 +35,7 @@
 				echo $this->session->flashdata('comp_success');
 			}?>
         <form method="post" name="comp_sign_up" id="comp_sign_up" 
-        action="<?php echo base_url(); ?>index.php/company_controller/comp_sign_up" autocomplete="on">
+        action="<?php echo base_url(); ?>company/comp_sign_up" autocomplete="on">
           <div class="field col-md-6">
             <input type="text" name="company_name" class="form-control" placeholder="Company Name" 
              data-rule-required="true"  data-msg-required="please enter your company name">
@@ -123,6 +123,11 @@
              <div class="field col-md-12">
           <div class="sbButtons">
             <input type="submit" value="Sign Up Now">
+          </div>
+          <div class="sbButtons">
+          <a href="javascript:window.history.go(-1);">
+            <input type="button" value="Back">
+            </a>
           </div>
          </div>
         </form>

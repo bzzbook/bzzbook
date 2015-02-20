@@ -22,10 +22,9 @@ $session_data = $this->session->userdata('logged_in');
     <![endif]-->
 </head>
 <body>
- <?php echo validation_errors(); ?>
 <header>
   <section class="container">
-   <figure class="col-lg-3 col-md-3 col-sm-4 col-xs-12 animate-plus" data-animations="pulse"  data-animation-when-visible="true"  data-animation-reset-offscreen="true"><a href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>images/logo.png" alt=""></a></figure>
+    <figure class="col-lg-3 col-md-3 col-sm-4 col-xs-12 animate-plus" data-animations="pulse"  data-animation-when-visible="true"  data-animation-reset-offscreen="true"><a href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>images/logo.png" alt=""></a></figure>
     <div class="col-lg-6 col-md-6 col-sm-4 col-xs-12 search">
       <div class="input-group"> <span class="input-group-btn">
         <input type="button" value="" role="button"  class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" id="drop2">
@@ -74,7 +73,7 @@ $session_data = $this->session->userdata('logged_in');
               <option>Jhon Smith</option>
               </optgroup>
               <optgroup label="Your Companies">
-              <option data-to-profile-type="Company"> Ayatas technologies </option>
+              <option data-to-profile-type="Company">Ayatas technologies</option>
               </optgroup>
             </select>
           </div>
@@ -123,8 +122,7 @@ $session_data = $this->session->userdata('logged_in');
         </div>
         <div class="joinMailList">
           <h3>Invite someone to join!</h3>
-          <p>Invite your friends to Bzzbook!</p>
-          <?php $attributes = array('class' => 'email', 'id' => 'email_invite', 'name' => 'invite_email'); ?>
+         <?php $attributes = array('class' => 'email', 'id' => 'email_invite', 'name' => 'invite_email'); ?>
           <?php echo form_open('customer/send_invite',$attributes) ?>
           <input type="text" class="form-control" placeholder="Email Address"  name="email" placeholder="E-mail"  
           data-rule-required="true" data-msg-required="please enter your email"  
@@ -135,100 +133,203 @@ $session_data = $this->session->userdata('logged_in');
       </aside>
       <div class="ad"><img src="<?php echo base_url(); ?>images/ad1.png"></div>
     </section>
-    <section class="col-lg-6 col-md-6 col-sm-5 col-xs-12 coloumn2">
-      <div class="updateStatus">
-        <ul>
-          <li><img src="<?php echo base_url(); ?>images/user.png" alt=""></li>
-          <li><a href="#">Create a Post</a></li>
-          <li><a href="#">Upload Photos/Video</a></li>
-          <li><a href="#">Create Photo/Video Album</a></li>
-        </ul>
-        <?php $attr = array('name' => 'post_form', 'id' =>'my_form') ?>
-        <?php echo form_open('signg_in/send_post',$attr) ?>
-        <textarea cols="" rows="" name="posts" class="form-control" placeholder="What's Buzzing?"></textarea>
-        <div class="updateControls"> <a href="javascript:{}" onclick="document.getElementById('my_form').submit(); return false;">Post</a> <a href="#">Public</a> </div>
-        <?php echo form_close(); ?>
-        <div class="clear"></div>
-      </div>
+    <section class="col-lg-6 col-md-6 col-sm-5 col-xs-12 coloumn2 pfSettings">
+      <h2>My Settings</h2>
       <div class="posts">
-        <article>
-          <figure><img src="<?php echo base_url(); ?>images/post_writer.png" alt=""></figure>
-          <div class="content">
-            <h3 class="pw">James Smith<span>2hr</span></h3>
-            <p>It has been a privilege working with Jhon Smithat PayPal. His keen eye for detail, problem solving skills and excellent communication were an asset to the entire engineering team. He has been excellent at ensuring projects roll out not only on time...<a href="#">more</a></p>
-            <div class="links"> <a href="#">Like<span>&nbsp;(15)</span></a> <a href="#">Comment</a> <a href="#">Share</a> <a href="#">Save As Favorite</a> </div>
-            <div class="clear"></div>
+        <div role="tabpanel"> 
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#post_board" aria-controls="profile" role="tab" data-toggle="tab">Post Board</a></li>
+            <li role="presentation"><a href="#about_me" aria-controls="messages" role="tab" data-toggle="tab">About Me</a></li>
+            <li role="presentation"><a href="#business_details" aria-controls="settings" role="tab" data-toggle="tab">Business Details</a></li>
+            <li role="presentation"><a href="#privacy" aria-controls="messages" role="tab" data-toggle="tab">Privacy</a></li>
+            <li role="presentation"><a href="#notifications" aria-controls="settings" role="tab" data-toggle="tab">Notification</a></li>
+          </ul>
+          
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="post_board">
+              <figure class="pfpic"><span>Profile Pic</span><img src="<?php echo base_url(); ?>images/pf_pic.png" alt=""></figure>
+              <div class="upload">
+                  <span class="btn btn-success fileinput-button"> <span>Change Picture</span> 
+                  <!-- The file input field used as target for the file upload widget -->
+                  <input id="fileupload" type="file" name="files[]" multiple>
+                  </span>
+              </div>
+              <h4>Location Info</h4>
+              <div class="filed col-md-6">
+                <input type="text" class="form-control" placeholder="City">
+              </div>
+              <div class="filed col-md-6">
+                <select class="form-control">
+                  <option>test1</option>
+                  <option>test2</option>
+                  <option>test3</option>
+                  <option>test4</option>
+                </select>
+              </div>
+              <div class="filed col-md-6">
+                <input type="text" class="form-control" placeholder="Zip Code">
+              </div>
+              <h4 class="clear">Username Info</h4>
+              <div class="filed col-md-6">
+                <input type="text" class="form-control" placeholder="Username">
+              </div>
+              <div class="filed col-md-6">
+                <input type="text" class="form-control" placeholder="First Name">
+              </div>
+              <div class="filed col-md-6">
+                <input type="text" class="form-control" placeholder="Last Name">
+              </div>
+              <div class="filed col-md-6">
+                <input type="text" class="form-control" placeholder="Email">
+              </div>
+              <h4 class="clear">Password Info</h4>
+              <div class="filed col-md-6">
+                <input type="text" class="form-control" placeholder="Password">
+              </div>
+              <div class="clear"></div>
+              <div class="filed col-md-6">
+                <input type="text" class="form-control" placeholder="New Password">
+              </div>
+              <div class="filed col-md-6">
+                <input type="text" class="form-control" placeholder="Confirm">
+              </div>
+              <h4 class="clear">Job Info</h4>
+              <div class="filed col-md-6">
+                <input type="text" class="form-control" placeholder="Job Title">
+              </div>
+              <div class="filed col-md-6">
+                <select class="form-control">
+                  <option>Industry</option>
+                  <option>test2</option>
+                  <option>test3</option>
+                  <option>test4</option>
+                </select>
+              </div>
+              <div class="filed col-md-6">
+                <input type="text" class="form-control" placeholder="Other Industry">
+              </div>
+              <div class="filed col-md-6">
+                <input type="text" class="form-control" placeholder="Company Name">
+              </div>
+              <div class="filed col-md-6">
+                <input type="submit" class="fmbtn" value="Upload Settings">
+              </div>
+              <div class="clear"></div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="about_me">
+            	 <h4 class="clear">About Me Info</h4>
+              <div class="filed col-md-12">
+                <textarea cols="" rows="" class="form-control"></textarea>
+                <input type="submit" class="smbtn" value="Save">
+              </div>
+              <div class="filed col-md-12">
+                <textarea cols="" rows="" class="form-control"></textarea>
+                <input type="submit" class="smbtn" value="Save">
+              </div>
+              <div class="filed col-md-12">
+                <textarea cols="" rows="" class="form-control"></textarea>
+                <input type="submit" class="smbtn" value="Save">
+              </div>
+               <h4 class="clear">Educational Background</h4>
+              <div class="filed col-md-12">
+                <input type="submit" class="add" value="add education">
+              </div>
+              <h4 class="clear">Contact Details</h4>
+              <div class="filed col-md-6">
+                <input type="text" class="form-control" placeholder="Email">
+              </div>
+              <div class="filed col-md-6">
+                <input type="text" class="form-control" placeholder="Phone">
+              </div>
+              <div class="filed col-md-6">
+                <input type="text" class="form-control" placeholder="Office">
+              </div>
+              <div class="filed col-md-6">
+                <input type="text" class="form-control" placeholder="Fax">
+                <input type="submit" class="smbtn" value="Save">
+              </div>
+              <div class="filed col-md-6">
+                <input type="submit" class="fmbtn" value="Upload Settings">
+              </div>
+              <div class="clear"></div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="business_details">
+            	 <h4 class="clear">Professional Experience</h4>
+              <div class="filed col-md-12">
+                <input type="submit" class="add" value="add experience">
+              </div>
+               <h4 class="clear">Organizations</h4>
+              <div class="filed col-md-12">
+                <input type="submit" class="add" value="add Organizations">
+              </div>
+               <h4 class="clear">Groups</h4>
+              <div class="filed col-md-12">
+                <input type="submit" class="add" value="add Groups">
+              </div>
+              <div class="clear"></div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="privacy">
+             	<h4 class="clear">Visibility Settings</h4>
+              <div class="radio">
+                <label for="notifications">Make my profile visible to non friends:</label>
+                <div class="pull-right">
+                <label class="radio-inline">
+                  <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                  Yes </label>
+                <label class="radio-inline">
+                  <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                  No </label>
+                  </div>
+              </div>
+              <div class="radio">
+                <label for="notifications">Make my comments visible to non friends:</label>
+                <div class="pull-right">
+                <label class="radio-inline">
+                  <input type="radio" name="inlineRadioOptions1" id="inlineRadio1" value="option1">
+                  Yes </label>
+                <label class="radio-inline">
+                  <input type="radio" name="inlineRadioOptions1" id="inlineRadio2" value="option2">
+                  No </label>
+                  </div>
+              </div>
+              <div class="radio">
+                <label for="notifications">Show my companies that I follow to non friends:</label>
+                <div class="pull-right">
+                <label class="radio-inline">
+                  <input type="radio" name="inlineRadioOptions2" id="inlineRadio1" value="option1">
+                  Yes </label>
+                <label class="radio-inline">
+                  <input type="radio" name="inlineRadioOptions2" id="inlineRadio2" value="option2">
+                  No </label>
+                  </div>
+              </div>
+             <div class="filed col-md-12">
+                <input type="submit" value="Upload Settings" class="fmbtn">
+              </div>
+              <div class="clear"></div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="notifications">
+             <h4 class="clear">Notification Settings</h4>
+              <div class="radio">
+                <label for="notifications">Send Notifications To My email:</label>
+                <div class="pull-right">
+                <label class="radio-inline">
+                  <input type="radio" name="inlineRadioOptions3" id="inlineRadio1" value="option1">
+                  Yes </label>
+                <label class="radio-inline">
+                  <input type="radio" name="inlineRadioOptions3" id="inlineRadio2" value="option2">
+                  No </label>
+                  </div>
+                <div class="filed col-md-12">
+                <input type="submit" class="fmbtn" value="Upload Settings">
+              </div>
+              <div class="clear"></div>
+              </div>
+            </div>
           </div>
-          <div class="postComment">
-            <div class="img"><img src="<?php echo base_url(); ?>images/user.png" alt=""></div>
-            <textarea cols="" rows="" class="form-control" placeholder="Write a Comment..."></textarea>
-          </div>
-        </article>
-        <article>
-          <figure><img src="<?php echo base_url(); ?>images/post_writer.png" alt=""></figure>
-          <div class="content">
-            <h3 class="pw">James Smith<span>2hr</span></h3>
-            <p>It has been a privilege working with Jhon Smithat PayPal. His keen eye for detail, problem solving skills and excellent communication were an asset to the entire engineering team. He has been excellent at ensuring projects roll out not only on time...<a href="#">more</a></p>
-            <div class="links"> <a href="#">Like<span>&nbsp;(15)</span></a> <a href="#">Comment</a> <a href="#">Share</a> <a href="#">Save As Favorite</a></div>
-            <div class="clear"></div>
-          </div>
-          <div class="postComment">
-            <div class="img"><img src="<?php echo base_url(); ?>images/user.png" alt=""></div>
-            <textarea cols="" rows="" class="form-control" placeholder="Write a Comment..."></textarea>
-          </div>
-        </article>
-        <article>
-          <figure><img src="<?php echo base_url(); ?>images/post_writer.png" alt=""></figure>
-          <div class="content">
-            <h3 class="pw">James Smith<span>2hr</span></h3>
-            <p>It has been a privilege working with Jhon Smithat PayPal. His keen eye for detail, problem solving skills and excellent communication were an asset to the entire engineering team. He has been excellent at ensuring projects roll out not only on time...<a href="#">more</a></p>
-            <div class="links"> <a href="#">Like<span>&nbsp;(15)</span></a> <a href="#">Comment</a> <a href="#">Share</a> <a href="#">Save As Favorite</a></div>
-            <div class="clear"></div>
-          </div>
-          <div class="postComment">
-            <div class="img"><img src="<?php echo base_url(); ?>images/user.png" alt=""></div>
-            <textarea cols="" rows="" class="form-control" placeholder="Write a Comment..."></textarea>
-          </div>
-        </article>
-        <article>
-          <figure><img src="<?php echo base_url(); ?>images/post_writer.png" alt=""></figure>
-          <div class="content">
-            <h3 class="pw">James Smith<span>2hr</span></h3>
-            <p>It has been a privilege working with Jhon Smithat PayPal. His keen eye for detail, problem solving skills and excellent communication were an asset to the entire engineering team. He has been excellent at ensuring projects roll out not only on time...<a href="#">more</a></p>
-            <div class="links"> <a href="#">Like<span>&nbsp;(15)</span></a> <a href="#">Comment</a> <a href="#">Share</a> <a href="#">Save As Favorite</a></div>
-            <div class="clear"></div>
-          </div>
-          <div class="postComment">
-            <div class="img"><img src="<?php echo base_url(); ?>images/user.png" alt=""></div>
-            <textarea cols="" rows="" class="form-control" placeholder="Write a Comment..."></textarea>
-          </div>
-        </article>
-        <article>
-          <figure><img src="<?php echo base_url(); ?>images/post_writer.png" alt=""></figure>
-          <div class="content">
-            <h3 class="pw">James Smith<span>2hr</span></h3>
-            <p>It has been a privilege working with Jhon Smithat PayPal. His keen eye for detail, problem solving skills and excellent communication were an asset to the entire engineering team. He has been excellent at ensuring projects roll out not only on time...<a href="#">more</a></p>
-            <div class="links"> <a href="#">Like<span>&nbsp;(15)</span></a> <a href="#">Comment</a> <a href="#">Share</a> <a href="#">Save As Favorite</a></div>
-            <div class="clear"></div>
-          </div>
-          <div class="postComment">
-            <div class="img"><img src="<?php echo base_url(); ?>images/user.png" alt=""></div>
-            <textarea cols="" rows="" class="form-control" placeholder="Write a Comment..."></textarea>
-          </div>
-        </article>
-        <article>
-          <figure><img src="<?php echo base_url(); ?>images/post_writer.png" alt=""></figure>
-          <div class="content">
-            <h3 class="pw">James Smith<span>2hr</span></h3>
-            <p>It has been a privilege working with Jhon Smithat PayPal. His keen eye for detail, problem solving skills and excellent communication were an asset to the entire engineering team. He has been excellent at ensuring projects roll out not only on time...<a href="#">more</a></p>
-            <div class="links"> <a href="#">Like<span>&nbsp;(15)</span></a> <a href="#">Comment</a> <a href="#">Share</a> <a href="#">Save As Favorite</a></div>
-            <div class="clear"></div>
-          </div>
-          <div class="postComment">
-            <div class="img"><img src="<?php echo base_url(); ?>images/user.png" alt=""></div>
-            <textarea cols="" rows="" class="form-control" placeholder="Write a Comment..."></textarea>
-          </div>
-        </article>
+        </div>
       </div>
     </section>
     <section class="col-lg-3 col-md-3 col-sm-3 col-xs-12 coloumn3">
@@ -241,7 +342,7 @@ $session_data = $this->session->userdata('logged_in');
               <div class="disc">
                 <h4>Nicholos smith</h4>
                 <div class="dcBtn"><a href="#">Confirm</a><a href="#">Deny</a> </div>
-                </div>
+              </div>
             </li>
             <li>
               <figure><img src="<?php echo base_url(); ?>images/f2.jpg" alt=""></figure>
@@ -301,7 +402,6 @@ $session_data = $this->session->userdata('logged_in');
   </ul>
   <p>Bzzbook &copy; 2015 English (US)</p>
 </footer>
-
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
 <script src="<?php echo base_url(); ?>js/jquery-1.11.1.min.js"></script> 
 <!-- Include all compiled plugins (below), or include individual files as needed --> 
@@ -313,6 +413,5 @@ $session_data = $this->session->userdata('logged_in');
 <script type="text/javascript">
    $('#email_invite').validate();
 	</script>
-
 </body>
 </html>

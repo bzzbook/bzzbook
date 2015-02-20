@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class sign_in_model extends CI_Model {
+class sign_inm extends CI_Model {
 
 	function __construct()
    { 
@@ -8,6 +8,9 @@ class sign_in_model extends CI_Model {
 		
   		
     } 
+	public function index()
+	{
+	}
 
 	   public function sign_in($data)
 	   {
@@ -38,27 +41,5 @@ class sign_in_model extends CI_Model {
 		} else {
 		return false;
 		}
-}
-		  /* $query = $this->db->get('sign_up',array('email'=>$email,'new_password'=>$pwd));
-		  return $query->result();	
-		  $query = $this->db->query("select email,new_password from sign_up where email=$email and new_password=$pwd");
-		  $row = $query->row();
-          echo $row->email;
-		  echo $row->new_password;
-              $query->free_result(); 
-		  
-		  
-		  if($query -> num_rows() == 1)
-		  {
-			  //return $query->result();
-			   $row = $query->row_array(); 
-   				echo $row['email'];
-  				echo $row['new_password'];
-   				
-		  }else{
-			  $this->load->view('posts'); 
-		  }  */
-		 
-	   		
-}
+}	}
 ?>

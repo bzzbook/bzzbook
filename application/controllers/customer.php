@@ -1,25 +1,22 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class customer_controller extends CI_Controller {
+class customer extends CI_Controller {
 	 
 	  public function __construct() {
         parent::__construct();
-
-$this->load->model('customer_model');
-			
-    }
-
-public function index()
-{
-	  $this->load->view('sign_up');
-}
 	
+    }
+	public function index()
+	{
+		$this->load->view('sign_in_v');
+	}
+
 	
 	public function sign_up()
 	{ 
-	$this->load->model('lookup_model');
-	$data['industry'] = $this->lookup_model->get_lookup_industry();
-    $data['jobtype'] = $this->lookup_model->get_lookup_jobtype();
+	$this->load->model('lookup');
+	$data['industry'] = $this->lookup->get_lookup_industry();
+    $data['jobtype'] = $this->lookup->get_lookup_jobtype();
 	$this->load->view('customer_sign_up',$data);
     }
    
@@ -68,10 +65,10 @@ public function index()
 		$data['about'] = $this->input->post('aboutme');
 		$data['terms_conditions'] = $this->input->post('agree');
 		
-		$this->load->model('customer_model');
-		$this->customer_model->sign_up($data);	
+		$this->load->model('person');
+		$this->person->sign_up($data);	
 		$this->session->set_flashdata('cust_success', 'Sign Up Successfully. We will get back to you shortly');
-		$this->load->view('sign_in');
+		$this->load->view('sign_in_v');
 		}
    }
    
@@ -87,16 +84,15 @@ public function index()
 		$this->email->message('hai this is message');
 		$this->email->send();
 		echo $email;
-		echo "email sent successfully";
-	  }else
-	  {
+		redirect('/profiles');
+	  }else{
 		  echo"wrong submission";
 	  }
 	  
   }
   public function view_post()
 	  {
-		$data['result'] = $this->customer_model->view_post(); 
+		$data['result'] = $this->customer->view_post(); 
 		$this->load->view('disp_post',$data); 
 	  }
   

@@ -21,7 +21,7 @@
 <body>
 <header class="home">
   <section class="container">
-    <figure class="col-lg-3 col-md-3 col-sm-4 col-xs-12 animate-plus" data-animations="pulse"  data-animation-when-visible="true"  data-animation-reset-offscreen="true"><a href="#"><img src="<?php echo base_url(); ?>images/logo.png" alt=""></a></figure>
+    <figure class="col-lg-3 col-md-3 col-sm-4 col-xs-12 animate-plus" data-animations="pulse"  data-animation-when-visible="true"  data-animation-reset-offscreen="true"><a href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>images/logo.png" alt=""></a></figure>
     <section  class="col-lg-7 col-md-7 col-sm-7 col-xs-12 pull-right">
       <div class="userLogin">
 <?php
@@ -38,15 +38,15 @@ echo $message_display;
 echo "</div>";
 }
 ?>
-        <form action="<?php echo base_url(); ?>index.php/sign_in_controller/db_check_login" method="post">
+        <form action="<?php echo base_url(); ?>signg_in/db_check_login" method="post">
           <div class="field">
             <label>Email</label>
-            <input type="text" class="form-control" data-rule-required="true" data-msg-required=" please enter your email"  		       			 data-rule-email="true" data-msg-email="please enter a vallid email" placeholder="Enter email Here" name="email" >
+            <input type="text" class="form-control" data-rule-required="true" data-msg-required=" please enter your email"  data-rule-email="true" data-msg-email="please enter a vallid email" placeholder="Enter email Here" name="email" >
             <?php echo form_error('email'); ?>
           </div>
           <div class="field">
             <label>Password</label>
-            <input type="password" class="form-control" data-rule-required="true" data-msg-required="please enter password"  			    			   placeholder="Password" name="password">
+            <input type="password" class="form-control" data-rule-required="true" data-msg-required="please enter password"  placeholder="Password" name="password">
             <?php echo form_error('password'); ?>
           </div>
           <div class="submit">
@@ -72,8 +72,8 @@ echo "</div>";
         <h2>Sign Up Today <span>&amp; See what all the <em>Bzz</em> is about!</span></h2>
         <p>Begin today with a better way to connect with friends, colleagues, and customers. Make Bzzbook your one stop shop for all your social media needs. Sign up today and be a part of the future of social media. </p>
         <div class="rgButtons">
-          <div class="button"> <span>Are you a person?</span> <a href="#">Sign Up Now</a> </div>
-          <div class="button"> <span>Are you a Business?</span> <a href="#">Sign Up Now</a> </div>
+          <div class="button"> <span>Are you a person?</span> <a href="<?php echo base_url(); ?>customer/sign_up">Sign Up Now</a> </div>
+          <div class="button"> <span>Are you a Business?</span> <a href="<?php echo base_url(); ?>company/sign_up">Sign Up Now</a> </div>
         </div>
         <div class="fb"><img src="<?php echo base_url(); ?>images/test_fb.png" alt=""></div>
       </div>

@@ -28,7 +28,7 @@
 </head>
 <body>
 <header>
-  <figure class=" animate-plus" data-animations="pulse"  data-animation-when-visible="true"  data-animation-reset-offscreen="true"><a href="#"><img src="<?php echo base_url(); ?>images/lp+logo.png" alt=""></a></figure>
+  <figure class=" animate-plus" data-animations="pulse"  data-animation-when-visible="true"  data-animation-reset-offscreen="true"><a href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>images/lp+logo.png" alt=""></a></figure>
 </header>
 <section class="midbody">
   <div class="container">
@@ -41,7 +41,7 @@
          <?php if($this->session->flashdata('cust_success')){ 
 				echo $this->session->flashdata('cust_success');
 			}?>
-        <form id="cust_sign_up" method="post" action="<?php echo base_url(); ?>index.php/customer_controller/cust_sign_up">
+        <form id="cust_sign_up" method="post" action="<?php echo base_url(); ?>customer/cust_sign_up">
           <div class="field col-md-6">
             <input type="text" name="firstname" class="form-control" placeholder="First Name"  data-rule-required="true" 
             data-msg-required="please enter your first name">
@@ -148,6 +148,11 @@
            <div class="col-md-12">
           <div class="sbButtons">
             <input type="submit" value="Sign Up Now">
+          </div> 
+          <div class="sbButtons">
+           <a href="javascript:window.history.go(-1);">
+            <input type="button" value="Back">
+            </a>
           </div>
           </div>
         </form>

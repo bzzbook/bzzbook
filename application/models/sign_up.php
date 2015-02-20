@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class sign_up_model extends CI_Model {
+class sign_up extends CI_Model {
 
 	function __construct()
    { 
@@ -9,7 +9,7 @@ class sign_up_model extends CI_Model {
     } 
 
 	   
-	   public function sign_up($data)
+	   public function signg_up($data)
 	   {
 		    $this->load->database("bzzbook"); 
 		    $this->db->insert('sign_up', $data);
