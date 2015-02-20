@@ -22,7 +22,7 @@ class sign_inm extends CI_Model {
 			$this->db->limit(1);
 			$query = $this->db->get();
 			if ($query->num_rows() == 1) {
-				return true;
+				 return $query->result();;
 				} else {
 				return false;
 				}

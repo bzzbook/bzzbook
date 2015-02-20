@@ -1,3 +1,4 @@
+<?php error_reporting(0);?>
 <!DOCTYPE html>
 <?php
 $session_data = $this->session->userdata('logged_in');
@@ -136,7 +137,7 @@ $session_data = $this->session->userdata('logged_in');
       <div class="ad"><img src="<?php echo base_url(); ?>images/ad1.png"></div>
     </section>
     <section class="col-lg-6 col-md-6 col-sm-5 col-xs-12 coloumn2">
-      <div class="updateStatus">
+      <div class="updateStatus" id="updateStatus">
         <ul>
           <li><img src="<?php echo base_url(); ?>images/user.png" alt=""></li>
           <li><a href="#">Create a Post</a></li>
@@ -144,14 +145,120 @@ $session_data = $this->session->userdata('logged_in');
           <li><a href="#">Create Photo/Video Album</a></li>
         </ul>
         <?php $attr = array('name' => 'post_form', 'id' =>'my_form') ?>
-        <?php echo form_open('signg_in/send_post',$attr) ?>
+        <?php 
+		echo form_open('signg_in/send_post',$attr) ?>
         <textarea cols="" rows="" name="posts" class="form-control" placeholder="What's Buzzing?"></textarea>
         <div class="updateControls"> <a href="javascript:{}" onclick="document.getElementById('my_form').submit(); return false;">Post</a> <a href="#">Public</a> </div>
         <?php echo form_close(); ?>
         <div class="clear"></div>
       </div>
-      <div class="posts">
-        <article>
+     <div class="posts">
+      
+      <!-- code added by 23-02-2015-->
+      <?php 
+	  
+	  $products = $this->customer->All_Posts();
+	  foreach( $products as $row):
+	  $hrs=$row->post_date;
+	  $currt_hrs=date('Y-m-d H:i:s');
+      $timestamp1 = strtotime($hrs);
+      $timestamp2 = strtotime($currt_hrs);
+      $hour = abs($timestamp2 - $timestamp1)/(60*60);
+      $hr_final=round($hour);
+	  
+	  
+	  
+	  $seconds = $timestamp1 - time();
+
+      $days = floor($seconds / 86400);
+      $seconds %= 86400;
+
+      $hours = floor($seconds / 3600);
+      $seconds %= 3600;
+
+      $minutes = floor($seconds / 60);
+      $seconds %= 60;
+	  
+	  $posted_id=$row->posted_by;
+	  $get_profiledata = $this->customer->profiledata($posted_id);
+	  
+	  $user_id=$this->session->userdata['logged_in']['account_id'];
+	  
+	  
+	  
+	  ?>
+	
+	   <article>
+          <figure><img src="<?php echo base_url(); ?>images/post_writer.png" alt=""></figure>
+          <div class="content" id="content">
+            <h3 class="pw"><?php echo ucfirst($get_profiledata[0]->firstname)."&nbsp;".ucfirst($get_profiledata[0]->lastname);?><span>
+			<?php if($hr_final<24){?><?php echo $hr_final;?>hr<?php }else{
+				echo  str_replace("-"," ",$days)."days ago";
+			}?></span></h3>
+            <p id="msg<?php echo $row->id;?>"><?php
+		     $str_leng=strlen($row->post_content);
+			 if($str_leng>50){
+				echo  $str_des=substr($row->post_content,0,50)."...";?><a href="#" onclick="myfunc('<?php echo $row->id;?>')">more</a><?php 
+			 }else{
+				echo  $str_des=substr($row->post_content,0,50);
+			 }
+			?></p>
+             <p id="des<?php echo $row->id;?>" style="display:none;"><?php echo $row->post_content;?></p>
+            <div class="links">
+            <?php   $get_likedetails = $this->customer->likedata($row->id);
+			        //print_r($get_likedetails[0]);
+					$account_id=$get_likedetails[0]->account_id;
+					$like=$get_likedetails[0]->like;
+			//echo count($get_likedetails);
+			//$query->num_rows()
+			
+			?>
+            
+            
+             
+        <div id="like_ajax<?php echo $row->id;?>">
+            <?php if($account_id == $user_id && $like=='yes'){?>
+				<a href="javascript:void(0);" onclick="likefun('<?php echo $row->id;?>','<?php echo $row->posted_by;?>','unlike')"  id="link_like<?php echo $row->id;?>" style="padding-right:0px;">Unlike
+            <?php    
+			}else{?>
+				<a href="javascript:void(0);" onclick="likefun('<?php echo $row->id;?>','<?php echo $row->posted_by;?>','like')"  id="link_like<?php echo $row->id;?>" style="padding-right:0px;">Like
+			<?php }?></a><span>&nbsp;(<?php echo count($get_likedetails); ?>)</span>&nbsp;&nbsp;<a href="#">Comment</a> <a href="#">Share</a> <a href="#">Save As Favorite</a>
+            </div>
+           
+          </div>
+           
+           
+           
+           
+           
+          <div class="clear">
+          </div>
+          </div>
+          <div class="postComment">
+            <div class="img"><img src="<?php echo base_url(); ?>images/user.png" alt=""></div>
+            <textarea cols="" rows="" class="form-control" placeholder="Write a Comment..."></textarea>
+          </div>
+        </article>
+       
+	 
+	  
+	 <?php  endforeach;
+	  
+	  ?>
+      
+      
+      
+      
+     
+      
+      
+      <!-- code ends here by 23-02-2015-->
+      
+      
+      
+      
+      
+        <!--<article>
           <figure><img src="<?php echo base_url(); ?>images/post_writer.png" alt=""></figure>
           <div class="content">
             <h3 class="pw">James Smith<span>2hr</span></h3>
@@ -228,7 +335,7 @@ $session_data = $this->session->userdata('logged_in');
             <div class="img"><img src="<?php echo base_url(); ?>images/user.png" alt=""></div>
             <textarea cols="" rows="" class="form-control" placeholder="Write a Comment..."></textarea>
           </div>
-        </article>
+        </article>-->
       </div>
     </section>
     <section class="col-lg-3 col-md-3 col-sm-3 col-xs-12 coloumn3">
@@ -313,6 +420,36 @@ $session_data = $this->session->userdata('logged_in');
 <script type="text/javascript">
    $('#email_invite').validate();
 	</script>
+<script>
+function myfunc(cid){
+	$('#des'+cid).show();
+	$('#msg'+cid).hide();
 
+}
+function likefun(pid,uid,status){
+	alert(status);
+	var posted_by=pid;
+	var account_id=uid;
+	url="<?php echo base_url();?>signg_in/insertlinks/"+pid+"/"+uid;
+	  $.ajax({
+        type: "POST",
+        url: url,
+        data: { posted_by: pid, account_id : uid} ,
+        success: function(html)
+        {   
+			
+         if(status == 'like')
+		 	//$("#like_ajax"+pid).html("Unlike");
+			$("#link_like"+pid).html("Unlike");
+		else
+			//$("#like_ajax"+pid).html("Like");
+			$("#link_like"+pid).html("Like");
+        }
+       });
+	
+}
+</script>
 </body>
 </html>
+
+
