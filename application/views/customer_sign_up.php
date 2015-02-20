@@ -36,7 +36,7 @@
     <h3>Bussiness <span>with the future of</span> <em>social media!</em></h3>
     <div class="col-md-12 col-sm-12 col-xs-12 rightCol pull-right">
       <div class="signupToday">
-        <h5>Customer Sign Up..</h5>
+        <h5>Person Sign Up..</h5>
          <?php echo validation_errors(); ?>
          <?php if($this->session->flashdata('cust_success')){ 
 				echo $this->session->flashdata('cust_success');
