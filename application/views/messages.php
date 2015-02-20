@@ -29,10 +29,10 @@ $session_data = $this->session->userdata('logged_in');
       <div class="input-group"> <span class="input-group-btn">
         <input type="button" value="" role="button"  class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" id="drop2">
         <ul aria-labelledby="drop2" role="menu" class="dropdown-menu">
-          <li><a href="<?php echo base_url(); ?>h#" tabindex="-1" role="menuitem">Jobs</a></li>
-          <li><a href="<?php echo base_url(); ?>h#" tabindex="-1" role="menuitem">Companies</a></li>
-          <li><a href="<?php echo base_url(); ?>h#" tabindex="-1" role="menuitem">Events</a></li>
-          <li><a href="<?php echo base_url(); ?>h#" tabindex="-1" role="menuitem">Members</a></li>
+          <li><a href="file:///E|/code/html-about/h#" tabindex="-1" role="menuitem">Jobs</a></li>
+          <li><a href="file:///E|/code/html-about/h#" tabindex="-1" role="menuitem">Companies</a></li>
+          <li><a href="file:///E|/code/html-about/h#" tabindex="-1" role="menuitem">Events</a></li>
+          <li><a href="file:///E|/code/html-about/h#" tabindex="-1" role="menuitem">Members</a></li>
         </ul>
         </span>
         <input type="search" placeholder="Search Here......" class="form-control">
