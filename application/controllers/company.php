@@ -55,10 +55,10 @@ class company extends CI_Controller {
 		$data['about'] = $this->input->post('about_company');
 		$data['terms_conditions'] = $this->input->post('agree');
 		
-		$this->load->model('company');
-		$this->company->sign_up($data);	
+		$this->load->model('orgnisation');
+		$this->orgnisation->sign_up($data);	
 		$this->session->set_flashdata('comp_success', 'Sign Up Successfully. We will get back to you shortly');
-		$this->load->view('sign_in');
+		$this->load->view('sign_in_v');
 		}
 	}
 }

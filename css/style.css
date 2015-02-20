@@ -273,3 +273,39 @@ footer.home h3 em{ color:#fdc70f; font-style:normal;}
 
 .aboutme .nav-tabs li.active:before { border-left: 3px solid #fbc436;  content: "";   height: 47px;   left: 0;  position: absolute;}
 
+
+
+/*====NEW Pages====*/
+
+.messageSt h2{ background:url(../images/sideNav.png) no-repeat 0 8px; padding:0 0 0 35px; height:42px; line-height:42px; font-size:18px;}
+.messageSt .nav-tabs{ background:#fbc436; border-bottom:3px solid #1c1c1c; margin-bottom:15px;}
+.messageSt .nav-tabs li a{ font-size:14px; color:#fff; border-radius:0; border:none;}
+.messageSt .nav-tabs > li.active > a, .pfSettings .nav-tabs > li.active > a:hover, .pfSettings .nav-tabs > li.active > a:focus{ background:#000; border:none; color:#fff;}
+.messageSt .nav > li > a:hover, .pfSettings .nav > li > a:focus{ background:#000;}
+.messageSt .pfpic{ text-align:center; float:none !important; padding:20px 0;}
+.messageSt .pfpic span{ display:block;}
+.messageSt .tab-pane{ padding:0 10px;}
+.messageSt .tab-pane h4{ font-size:15px; color:#353535; font-weight:500; padding-bottom:10px; border-bottom:1px solid #d8d8d8; line-height:32px; }
+.messageSt .tab-pane .form-control{  border: 1px solid #e3e3e3;  box-shadow: none;  color: #a8a8a8;  font-size: 12px;  font-weight: 300;   height:32px; margin-bottom:26px; border-radius:3px; }
+.messageSt .tab-pane .fmbtn{ border-radius:2px; border:none; background:#609b34; color:#fff; font-size:12px; font-weight:700; height:34px; padding:0 10px; margin-bottom:20px;}
+
+.messageSt .upload{ text-align:center; margin-bottom:15px;} 
+.fileinput-button { position: relative; overflow: hidden; }
+.fileinput-button input { position: absolute; top: 0; right: 0; margin: 0; opacity: 0; -ms-filter: 'alpha(opacity=0)'; font-size: 200px; direction: ltr; cursor: pointer; }
+/* Fixes for IE < 8 */
+@media screen\9 {.fileinput-button input { filter: alpha(opacity=0); font-size: 100%; height: 100%; }}
+.messageSt .smbtn{ background:#609b34; border:none; margin-bottom:20px; font-size:15px; color:#fff; font-weight:500; padding:3px 8px; -webkit-border-radius:3px; border-radius:3px; float:right;}
+.messageSt .tab-pane textarea{height:70px !important; margin-bottom:20px !important;}
+.messageSt .add{ background:#2f2f2f; border:none; margin-bottom:20px; font-size:15px; color:#fff; font-weight:500; padding:3px 8px; -webkit-border-radius:3px; border-radius:3px; float:right;}
+.messageSt .radio label{ font-weight:300;}
+
+.messageSt .messages{ clear:both; }
+.messageSt .messages input{ float:left; margin-top:12px; margin-left:5px    }
+.messageSt .messages span{  display:block; font-size:14px;  padding:0 10px; float:left; line-height:36px;  }
+.messageSt .messages span.sub{ width:30%; cursor: pointer;}
+.messageSt .messages span.sub.unread{font-weight:bold; }
+.messageSt .form-group{ margin-bottom:0px; }
+.messageSt #compose{ padding-bottom:20px; }
+
+
+.groupsSt h2{ background:url(../images/sideNav.png) no-repeat 0 8px; padding:0 0 0 35px; height:42px; line-height:42px; font-size:18px;}

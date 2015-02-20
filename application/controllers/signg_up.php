@@ -22,7 +22,7 @@ class signg_up extends CI_Controller {
 		$this->form_validation->set_rules('lastname','LastName','trim|required|alpha|max_length[12]|xss_clean');
 		$this->form_validation->set_rules('email','Email','trim|required|valid_email|xss_clean');
 		$this->form_validation->set_rules('phone_number','Phone Number','trim|required|xss_clean');
-		$this->form_validation->set_rules('new_password','New Password','trim|required|xss_clean|md5');
+		$this->form_validation->set_rules('new_password','New Password','trim|required|xss_clean');
 		$this->form_validation->set_rules('birthdate','Birth Date','required|xss_clean');
 		$this->form_validation->set_rules('gender','Gender','required');
 		if ($this->form_validation->run() == FALSE)
@@ -43,7 +43,7 @@ class signg_up extends CI_Controller {
 		
 		//sending form data to model
 		$this->load->model('sign_up');
-		$this->sign_up->sign_up($data);	
+		$this->sign_up->store($data);	
 		$this->session->set_flashdata('success', 'Sign Up Successfully. We will get back to you shortly');
 		redirect(base_url());
 		$email = $this->input->post('email');

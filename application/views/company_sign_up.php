@@ -40,8 +40,8 @@
             <input type="text" name="company_name" class="form-control" placeholder="Company Name" 
              data-rule-required="true"  data-msg-required="please enter your company name">
           </div>
-          <div class="field col-md-6">
-          <select name="industry" class="form-control" data-rule-required="true" 
+         <div class="field col-md-6">
+          <select name="industry" class="form-control"  data-rule-required="true" 
           data-msg-required="please enter your industry name">
                  <option value="">Industry</option>
 				 <?php foreach($industry as $industries):?>
@@ -52,7 +52,7 @@
           <div class="field col-md-6 dob">
             <div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2012-02-12" id="dpYears" 
                 class="input-group-bt date">
-              <input type="text" readonly name="established_year" value="" size="16" class="form-control" 
+              <input type="text" name="established_year" size="16" class="form-control" 
               placeholder="Established Since" data-rule-required="true" 
               data-msg-required="please enter established Year">
               <span aria-hidden="true" class="add-on glyphicon glyphicon-calendar"></span> 
@@ -60,7 +60,7 @@
           </div>
          <div class="field col-md-6">
              <select name="collegues" class="form-control" data-rule-required="true" 
-              data-msg-required="please select collegues ">
+              data-msg-required="please select collegues">
                      <option value="">Collegues</option>
                      <option value="10">1 - 10</option>
                      <option value="25">10 - 25</option>

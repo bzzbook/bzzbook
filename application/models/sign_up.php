@@ -9,7 +9,7 @@ class sign_up extends CI_Model {
     } 
 
 	   
-	   public function signg_up($data)
+	   public function store($data)
 	   {
 		    $this->load->database("bzzbook"); 
 		    $this->db->insert('sign_up', $data);

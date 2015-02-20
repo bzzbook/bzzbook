@@ -49,7 +49,7 @@
             
         </span>
         <?php echo validation_errors(); ?>
-        <form name="sign_up_form" id="sign_up" method="post" action="<?php echo base_url(); ?>sign_up/sign_up">
+        <form name="sign_up_form" id="sign_up" method="post" action="<?php echo base_url(); ?>signg_up/sign_up">
           <div class="field col-md-6">
             <input type="text" class="form-control" data-rule-required="true" data-msg-required="please enter your first name"     
             name="firstname" placeholder="First Name" >
