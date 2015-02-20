@@ -52,7 +52,7 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array('database','form_validation','email');
+$autoload['libraries'] = array('database','form_validation','email','session');
 
 
 /*
@@ -109,7 +109,7 @@ $autoload['language'] = array();
 |
 */
 
-$autoload['model'] = array('sign_up_model');
+$autoload['model'] = array('sign_up');
 
 
 /* End of file autoload.php */
