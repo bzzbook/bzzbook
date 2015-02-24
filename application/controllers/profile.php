@@ -8,8 +8,14 @@ class profile extends CI_Controller {
     }
 
 public function index()
-{    
- $this->load->view('posts');
+{  
+ $is_logged = $this->session->userdata('logged_in');	
+	if($is_logged)
+		{
+			 $this->load->view('posts');
+		}else{
+		redirect(base_url());
+		}  
 }
 
 public function profile_set()

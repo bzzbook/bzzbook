@@ -30,11 +30,24 @@ class signg_in extends CI_Controller {
 				    );
 		$this->load->model('sign_inm');
 	    $result = $this->sign_inm->sign_in($data);
+		
+		
+		
 	    if($result == TRUE){
-		$sess_array = array(
+	    /*	$sess_array = array(
 		   					'email' => $this->input->post('email'),
 		   					'password' => $this->input->post('password')
+							
 						   );
+						 */
+						 
+		$sess_array = array(
+		   					'email' =>$result[0]->email,
+						    'password' =>$result[0]->new_password,
+							'account_id' =>$result[0]->account_id
+							
+						   );
+		
         $this->session->set_userdata('logged_in',$sess_array);
 		print_r($this->session->userdata);
 		$result = $this->sign_inm->read_user_information($sess_array);
@@ -42,7 +55,10 @@ class signg_in extends CI_Controller {
 			$data = array(
 						'email' =>$result[0]->email,
 						'password' =>$result[0]->new_password
+						
 					     );
+					
+						 
 						//$this->load->view('posts', $data);
 						redirect('/profiles');
 		}
@@ -71,9 +87,28 @@ class signg_in extends CI_Controller {
 	 $session_data = $this->session->userdata('logged_in');
 	 $data['posted_by'] = $session_data['account_id'];
 	 $data['post_content'] = $this->input->post('posts');
+	 
 	 $this->customer->post_buzz($data);
-	 echo"post saved successfully..."; 
-	 redirect(site_url('customer_controller/view_post'));
+	 echo "post saved successfully..."; 
+	 redirect('profiles');
+	 // redirect(site_url('customer_controller/view_post'));
+	 // redirect(site_url('customer/view_post'));
    }
+   function insertlinks($pid,$uid){
+	   $data=array(
+	       'post_id'=>$pid,
+	       'account_id'=>$uid,
+		   'like'=>'yes'
+	   );
+	 $res=$this->customer->insertlinks($data);
+	 if($res){
+		 
+		 echo "success";
+	 }
+	  
+	   
+   }
+  
+   
  }
 ?>

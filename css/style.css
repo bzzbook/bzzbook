@@ -300,11 +300,8 @@ footer.home h3 em{ color:#fdc70f; font-style:normal;}
 .messageSt .radio label{ font-weight:300;}
 
 .messageSt .messages{ clear:both; }
-<<<<<<< HEAD
-.messageSt .messages input{ float:left; margin-top:12px; margin-left:5px    }
-=======
-.messageSt .messages input{ float:left;  width: 30px; height:30px;  }
->>>>>>> 99bfc888eae51cb35862c1a4c81070434dcd0d73
+
+.messageSt .messages input{ float:left; margin-top:12px; margin-left:5px  }
 .messageSt .messages span{  display:block; font-size:14px;  padding:0 10px; float:left; line-height:36px;  }
 .messageSt .messages span.sub{ width:30%; cursor: pointer;}
 .messageSt .messages span.sub.unread{font-weight:bold; }

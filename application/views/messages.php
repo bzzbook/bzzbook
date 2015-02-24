@@ -29,10 +29,10 @@ $session_data = $this->session->userdata('logged_in');
       <div class="input-group"> <span class="input-group-btn">
         <input type="button" value="" role="button"  class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" id="drop2">
         <ul aria-labelledby="drop2" role="menu" class="dropdown-menu">
-          <li><a href="<?php echo base_url(); ?>h#" tabindex="-1" role="menuitem">Jobs</a></li>
-          <li><a href="<?php echo base_url(); ?>h#" tabindex="-1" role="menuitem">Companies</a></li>
-          <li><a href="<?php echo base_url(); ?>h#" tabindex="-1" role="menuitem">Events</a></li>
-          <li><a href="<?php echo base_url(); ?>h#" tabindex="-1" role="menuitem">Members</a></li>
+          <li><a href="file:///E|/code/html-about/h#" tabindex="-1" role="menuitem">Jobs</a></li>
+          <li><a href="file:///E|/code/html-about/h#" tabindex="-1" role="menuitem">Companies</a></li>
+          <li><a href="file:///E|/code/html-about/h#" tabindex="-1" role="menuitem">Events</a></li>
+          <li><a href="file:///E|/code/html-about/h#" tabindex="-1" role="menuitem">Members</a></li>
         </ul>
         </span>
         <input type="search" placeholder="Search Here......" class="form-control">
@@ -44,11 +44,7 @@ $session_data = $this->session->userdata('logged_in');
         <div class="userImg"><img src="<?php echo base_url(); ?>images/user.png" alt=""></div>
         <a href="#" role="button"  class="dropdown-toggle userName" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Logged in as:<span><?php echo  $session_data['email']; ?></span></a>
         <ul  role="menu" class="dropdown-menu">
-<<<<<<< HEAD
-          <li><a href="<?php echo base_url(); ?>signg_in/sign_out" tabindex="-1" role="menuitem">Logout</a></li>
-=======
-          <li><a href="#" tabindex="-1" role="menuitem">Logout</a></li>
->>>>>>> 99bfc888eae51cb35862c1a4c81070434dcd0d73
+          <li><a href="<?php echo base_url(); ?>signg_in/sign_out" tabindex="-1" role="menuitem">Logout</a></li> 
         </ul>
       </div>
     </div>
