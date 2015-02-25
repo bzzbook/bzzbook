@@ -24,7 +24,7 @@ $session_data = $this->session->userdata('logged_in');
 <body>
 <header>
   <section class="container">
-    <figure class="col-lg-3 col-md-3 col-sm-4 col-xs-12 animate-plus" data-animations="pulse"  data-animation-when-visible="true"  data-animation-reset-offscreen="true"><a href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>images/logo.png" alt=""></a></figure>
+    <figure class="col-lg-3 col-md-3 col-sm-4 col-xs-12 animate-plus" data-animations="pulse"  data-animation-when-visible="true"  data-animation-reset-offscreen="true"><img src="<?php echo base_url(); ?>images/logo.png" alt=""></figure>
     <div class="col-lg-6 col-md-6 col-sm-4 col-xs-12 search">
       <div class="input-group"> <span class="input-group-btn">
         <input type="button" value="" role="button"  class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" id="drop2">
@@ -147,101 +147,143 @@ $session_data = $this->session->userdata('logged_in');
           </ul>
           
           <!-- Tab panes -->
-          <div class="tab-content">
+          <div class="tab-content">  
+		  <?php foreach($result as $r) { ?>
             <div role="tabpanel" class="tab-pane active" id="post_board">
               <figure class="pfpic"><span>Profile Pic</span><img src="<?php echo base_url(); ?>images/pf_pic.png" alt=""></figure>
+            <form name="profile" method="POST" action="<?php echo base_url(); ?>customer/pf" >
               <div class="upload">
                   <span class="btn btn-success fileinput-button"> <span>Change Picture</span> 
                   <!-- The file input field used as target for the file upload widget -->
                   <input id="fileupload" type="file" name="files[]" multiple>
                   </span>
               </div>
-              <h4>Location Info</h4>
+            
+              <h4>Location Info</h4>             
+              <div class="field col-md-6">
+           	<select class="form-control" name="country"  onchange="print_state('state',this.selectedIndex);"  id="country">
+			<option value=""></option>
+			</select> 
+         	</div> 
+          	<div class="field col-md-6">
+           <select name="state" id="state" class="form-control">
+           <option value=""></option>
+           </select>
+         	</div>
+             <div class="filed col-md-6">
+                <input type="text" class="form-control" placeholder="City" value="<?php echo $r->city ?>" name="city" >
+              </div> 
               <div class="filed col-md-6">
-                <input type="text" class="form-control" placeholder="City">
-              </div>
-              <div class="filed col-md-6">
-                <select class="form-control">
-                  <option>test1</option>
-                  <option>test2</option>
-                  <option>test3</option>
-                  <option>test4</option>
-                </select>
-              </div>
-              <div class="filed col-md-6">
-                <input type="text" class="form-control" placeholder="Zip Code">
+                <input type="text" class="form-control" placeholder="Zip Code" value="<?php echo $r->postal_code ?>" name="postal_code">
               </div>
               <h4 class="clear">Username Info</h4>
               <div class="filed col-md-6">
-                <input type="text" class="form-control" placeholder="Username">
+                <input type="text" class="form-control" placeholder="Username" value="<?php echo $r->user_name ?>" name="user_name" readonly >
               </div>
               <div class="filed col-md-6">
-                <input type="text" class="form-control" placeholder="First Name">
+                <input type="text" class="form-control" placeholder="First Name" value="<?php echo $r->first_name ?>" name="firstname" >
               </div>
               <div class="filed col-md-6">
-                <input type="text" class="form-control" placeholder="Last Name">
+                <input type="text" class="form-control" placeholder="Last Name" value="<?php echo $r->last_name ?>" name="lastname" >
               </div>
               <div class="filed col-md-6">
-                <input type="text" class="form-control" placeholder="Email">
+                <input type="text" class="form-control" placeholder="Email" value="<?php echo $r->email ?>" name="email" >
               </div>
               <h4 class="clear">Password Info</h4>
               <div class="filed col-md-6">
-                <input type="text" class="form-control" placeholder="Password">
+                <input type="password" class="form-control" placeholder="Password" id="pwd" onBlur="pwdchange()">
               </div>
               <div class="clear"></div>
               <div class="filed col-md-6">
-                <input type="text" class="form-control" placeholder="New Password">
+                <input type="password" class="form-control" placeholder="New Password" id="npwd">
               </div>
               <div class="filed col-md-6">
-                <input type="text" class="form-control" placeholder="Confirm">
+                <input type="password" class="form-control" placeholder="Confirm" id="cnpwd">
               </div>
               <h4 class="clear">Job Info</h4>
               <div class="filed col-md-6">
-                <input type="text" class="form-control" placeholder="Job Title">
+                <input type="text" class="form-control" placeholder="Job Title" value="<?php echo $r->job_type ?>" name="position" >
               </div>
               <div class="filed col-md-6">
-                <select class="form-control">
-                  <option>Industry</option>
-                  <option>test2</option>
-                  <option>test3</option>
-                  <option>test4</option>
+                <select class="form-control" name="">
+                   <?php foreach($industry as $industries):?>
+                 <option value="<?php echo $industries->lookup_value;?>"
+				 <?php if($r->industry == $industries->lookup_value){
+					 echo "selected=selected";
+				 }?>><?php echo $industries->lookup_value ?></option>
+                 <?php endforeach;?> 
                 </select>
               </div>
               <div class="filed col-md-6">
-                <input type="text" class="form-control" placeholder="Other Industry">
+                <input type="text" class="form-control" placeholder="Other Industry" value="" name="industry" >
               </div>
               <div class="filed col-md-6">
-                <input type="text" class="form-control" placeholder="Company Name">
+                <input type="text" class="form-control" placeholder="Company Name" value="<?php echo $r->company_name ?>" name="companyname" >
               </div>
               <div class="filed col-md-6">
-                <input type="submit" class="fmbtn" value="Upload Settings">
+                <input type="submit" class="fmbtn" value="Update Settings">
               </div>
               <div class="clear"></div>
             </div>
+            </form>
+            
             <div role="tabpanel" class="tab-pane" id="about_me">
             	 <h4 class="clear">About Me Info</h4>
-              <div class="filed col-md-12">
-                <textarea cols="" rows="" class="form-control"></textarea>
+                <form action="" name="formabout_me">
+                	 <div class="filed col-md-12">
+                <textarea cols="" rows="" class="form-control" name="about_me_info" ><?php echo $r->about ?></textarea>
                 <input type="submit" class="smbtn" value="Save">
               </div>
               <div class="filed col-md-12">
-                <textarea cols="" rows="" class="form-control"></textarea>
+                <textarea cols="" rows="" class="form-control" name="about_me_intrests"><?php echo $r->intrests?></textarea>
                 <input type="submit" class="smbtn" value="Save">
               </div>
               <div class="filed col-md-12">
-                <textarea cols="" rows="" class="form-control"></textarea>
+                <textarea cols="" rows="" class="form-control" name="about_me_skills"><?php echo $r->skills;?></textarea>
                 <input type="submit" class="smbtn" value="Save">
               </div>
                <h4 class="clear">Educational Background</h4>
+               <div class="posts">
+        
+        <div class="groupMainBlock">
+        	<?php 
+				if(sizeof($education_details)>0):
+				foreach($education_details as $edudetails):
+			?>
+            <div class="EduProperty" id="edu_total_row<?php echo $edudetails->educationinfo_id ?>">
+                <div class="EduBlock">
+                <h3>Field Of Study</h3>
+                <p><?php echo $edudetails->field_of_study;?></p>
+                </div>
+                <div class="EduBlock">
+                <h3>Years Attended</h3>
+                <p><?php echo explode('-',$edudetails->attended_from)[0];?> - <?php echo explode('-',$edudetails->attended_upto)[0];?></p>
+                </div>
+                <div class="EduBlock">
+                <h3>Certificate</h3>
+                <p><?php echo $edudetails->degree_certificate;?></p>
+                </div>
+                 <div class="EduBlock pull-right">
+                <a class="link glyphicon glyphicon-pencil" href="#"></a>
+                <a class="link glyphicon glyphicon-remove" id="edu_row<?php echo $edudetails->educationinfo_id;?>" href="#"></a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            
+            <?php endforeach;?>
+            <?php endif;?>
+        </div>
+</div>
               <div class="filed col-md-12">
-                <input type="submit" class="add" value="add education">
+                <input type="button" class="add" data-toggle="modal" data-target="#eduModal" value="Add Education"/>
               </div>
+         
               <h4 class="clear">Contact Details</h4>
               <div class="filed col-md-6">
-                <input type="text" class="form-control" placeholder="Email">
+                <input type="text" class="form-control" placeholder="Email" value="<?php echo $r->email ?>" >
               </div>
               <div class="filed col-md-6">
-                <input type="text" class="form-control" placeholder="Phone">
+                <input type="text" class="form-control" placeholder="Phone" value="<?php echo $r->phone_number ?>">
               </div>
               <div class="filed col-md-6">
                 <input type="text" class="form-control" placeholder="Office">
@@ -251,15 +293,141 @@ $session_data = $this->session->userdata('logged_in');
                 <input type="submit" class="smbtn" value="Save">
               </div>
               <div class="filed col-md-6">
-                <input type="submit" class="fmbtn" value="Upload Settings">
+                <input type="submit" class="fmbtn" value="Update">
               </div>
+                </form>
+                 <!------------------- Education Modal --------------------->    
+          <div class="filed col-md-12 col-lg-12">
+               <div class="modal fade" id="eduModal" tabindex="-1" role="dialog" aria-labelledby="eduModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3 class="modal-title" id="myModalLabel">Add Education Background</h3>
+                  </div>
+                  <form action="" name="education_form" id="education_form">
+                  <div class="modal-body">
+                  <div class="row">
+                  	 <div class="form-group col-md-4">
+                        	<label class="control-label">Field of Study:</label>
+			                <input type="text" class="form-control" placeholder="" value="" name="field_of_study" >
+            		  </div>
+                      <div class="form-group col-md-4">
+                        	<label>College / Institution:</label>
+			                <input type="text" class="form-control" placeholder="" value="" name="college_institution" >
+            		  </div>
+                      <div class="form-group col-md-4">
+                        	<label>Degree / Certificate:</label>
+			                <input type="text" class="form-control" placeholder="" value="" name="degree_certificate" >
+            		  </div>
+                      </div>
+                      <div class="row">
+                      &nbsp;&nbsp;&nbsp;&nbsp;<label>Years Attended:</label><br />
+                      	<div class="form-group col-md-3">  	
+                            <select name="year_attended_from" class="form-control">
+                            	<option value="0">YYYY</option>
+                                <?php for($i=1950;$i<=date(Y);$i++){?>
+                                	<option value="<?php echo $i;?>"><?php echo $i;?></option>
+                                <?php }?>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">  	
+                            <select name="month_attended_from" class="form-control">
+                            	<option value="0">MM</option>
+                                <?php for($i=1;$i<=12;$i++){?>
+                                	<option value="<?php echo $i;?>"><?php echo $i;?></option>
+                                <?php }?>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2" style="text-align:center;">
+                        	To
+                        </div>
+                        <div class="form-group col-md-3">  	
+                            <select name="year_attended_to" class="form-control">
+                            	<option value="0">YYYY</option>
+                                <?php for($i=1950;$i<=date(Y);$i++){?>
+                                	<option value="<?php echo $i;?>"><?php echo $i;?></option>
+                                <?php }?>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">  	
+                            <select name="month_attended_to" class="form-control">
+                            	<option value="0">MM</option>
+                                <?php for($i=1;$i<=12;$i++){?>
+                                	<option value="<?php echo $i;?>"><?php echo $i;?></option>
+                                <?php }?>
+                            </select>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="form-group col-md-12">
+                        	<label>Specialized Studies:</label>
+	                        <textarea name="special_studies" class="form-control"></textarea>	
+                        </div>
+                      </div>
+                      
+                      <div class="clear"></div>
+                 
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Add Educational Background</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  
+                  </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            </div>
+<!-------------------------- Education Modal end --------------->
               <div class="clear"></div>
             </div>
             <div role="tabpanel" class="tab-pane" id="business_details">
             	 <h4 class="clear">Professional Experience</h4>
               <div class="filed col-md-12">
-                <input type="submit" class="add" value="add experience">
+                <!-- Button trigger modal -->
+                <input type="button" class="add" data-toggle="modal" data-target="#myModal" value="add experience"/>
+
               </div>
+<!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Professional Experience</h4>
+                  </div>
+                  <div class="modal-body">
+                   <label>Job Title</label>
+                    <input type="text" class="form-control" placeholder="Job Title" />
+                     <div class="field col-md-12 dob">
+                        <label>From Date</label>
+                        <div data-date-viewmode="years" data-date-format="dd-mm-yyyy" data-date="12-02-2012" id="dpYears" 
+                        class="input-group-bt date">
+                          <input type="text" readonly name="birthdate" value="12-02-2012" size="16" class="form-control">
+                          <span aria-hidden="true" class="add-on glyphicon glyphicon-calendar"></span> </div>
+                      </div>
+                       <div class="field col-md-12 dob">
+                        <label>To Date</label>
+                        <div data-date-viewmode="years" data-date-format="dd-mm-yyyy" data-date="12-02-2012" id="dpYears" 
+                        class="input-group-bt date">
+                          <input type="text" readonly name="birthdate" value="12-02-2012" size="16" class="form-control">
+                          <span aria-hidden="true" class="add-on glyphicon glyphicon-calendar"></span> </div>
+                      </div>
+                      <div class="field col-md-12">                       
+                         <textarea class="form-control" name="about_job" placeholder="Joib Description......"  data-rule-required="true" 
+                         data-msg-required="please enter about you"></textarea>
+                     </div>
+                         <div class="field col-md-6">
+                     <input type="checkbox" name="agree" value="agree">current job?</div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
                <h4 class="clear">Organizations</h4>
               <div class="filed col-md-12">
                 <input type="submit" class="add" value="add Organizations">
@@ -272,62 +440,86 @@ $session_data = $this->session->userdata('logged_in');
             </div>
             <div role="tabpanel" class="tab-pane" id="privacy">
              	<h4 class="clear">Visibility Settings</h4>
+                <form method="post" name="privacy_form" id="privacy_form" >
               <div class="radio">
                 <label for="notifications">Make my profile visible to non friends:</label>
                 <div class="pull-right">
                 <label class="radio-inline">
-                  <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                	<?php
+						if($r->profile_visible == 'yes')
+							$profileyes_check = "checked";
+						else
+							$profileno_check = "checked";
+					?>
+                  <input type="radio" id="inlineRadio1" value="yes" name="profile_visible" <?php echo @$profileyes_check?>>
                   Yes </label>
                 <label class="radio-inline">
-                  <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                  <input type="radio" id="inlineRadio2" value="no" name="profile_visible" <?php echo @$profileno_check?>>
                   No </label>
                   </div>
               </div>
               <div class="radio">
+              <?php
+						if($r->comments_visible == 'yes')
+							$commentsyes_check = "checked";
+						else
+							$commentsno_check = "checked";
+					?>
                 <label for="notifications">Make my comments visible to non friends:</label>
                 <div class="pull-right">
                 <label class="radio-inline">
-                  <input type="radio" name="inlineRadioOptions1" id="inlineRadio1" value="option1">
+                  <input type="radio" id="inlineRadio1" value="yes" name="comments_visible" <?php echo @$commentsyes_check?>>
                   Yes </label>
                 <label class="radio-inline">
-                  <input type="radio" name="inlineRadioOptions1" id="inlineRadio2" value="option2">
+                  <input type="radio" id="inlineRadio2" value="no" name="comments_visible" <?php echo @$commentsno_check?>>
                   No </label>
                   </div>
               </div>
               <div class="radio">
+              <?php
+			  
+						if($r->companies_visible == 'yes')
+							$companiesyes_check = "checked";
+						else
+							$companiesno_check = "checked";
+					?>
                 <label for="notifications">Show my companies that I follow to non friends:</label>
                 <div class="pull-right">
                 <label class="radio-inline">
-                  <input type="radio" name="inlineRadioOptions2" id="inlineRadio1" value="option1">
+                  <input type="radio" value="yes" name="companies_visible" <?php echo @$companiesyes_check?>>
                   Yes </label>
                 <label class="radio-inline">
-                  <input type="radio" name="inlineRadioOptions2" id="inlineRadio2" value="option2">
+                  <input type="radio" value="no" name="companies_visible" <?php echo @$companiesno_check?>>
                   No </label>
                   </div>
               </div>
              <div class="filed col-md-12">
-                <input type="submit" value="Upload Settings" class="fmbtn">
+                <input type="submit" value="Update" class="fmbtn">
               </div>
+              </form>
               <div class="clear"></div>
             </div>
             <div role="tabpanel" class="tab-pane" id="notifications">
              <h4 class="clear">Notification Settings</h4>
+             <form method="post" name="privacy_form" id="emailnotification" >
               <div class="radio">
                 <label for="notifications">Send Notifications To My email:</label>
                 <div class="pull-right">
                 <label class="radio-inline">
-                  <input type="radio" name="inlineRadioOptions3" id="inlineRadio1" value="option1">
+                  <input type="radio" name="email_notofication" id="inlineRadio1" value="yes">
                   Yes </label>
                 <label class="radio-inline">
-                  <input type="radio" name="inlineRadioOptions3" id="inlineRadio2" value="option2">
+                  <input type="radio" name="email_notofication" id="inlineRadio2" value="no">
                   No </label>
                   </div>
                 <div class="filed col-md-12">
                 <input type="submit" class="fmbtn" value="Upload Settings">
               </div>
+              </form>
               <div class="clear"></div>
               </div>
             </div>
+            <?php } ?>
           </div>
         </div>
       </div>
@@ -409,9 +601,88 @@ $session_data = $this->session->userdata('logged_in');
 <script src="<?php echo base_url(); ?>js/animate-plus.min.js"></script> 
 <script src="<?php echo base_url(); ?>js/custom.js"></script>
 <script src="<?php echo base_url(); ?>js/jquery.validate.min.js"></script>
-<script src="<?php echo base_url(); ?>js/additional-methods.js"></script> 
+<script src="<?php echo base_url(); ?>js/additional-methods.js"></script>
+<script src="<?php echo base_url(); ?>js/countries.js"></script>
+<script language="javascript">print_country("country","<?php echo $r->country ?>");</script> 
 <script type="text/javascript">
    $('#email_invite').validate();
+	</script>
+<script>
+$(function(){
+		$("form[name=formabout_me]").submit(function(event){
+			   url="<?php echo base_url();?>customer/updateabout/";
+				 $.ajax({
+        			type: "POST",
+			        url: url,
+			        data: { form_data: $(this).serialize()} ,
+        			success: function(html)
+			        {   
+            			if(html == true)
+							alert("Information Updated");
+						else
+							alert("Something went wrong Please try after sometime");
+			        }
+			       });			
+				event.preventDefault();
+			});
+			$("#privacy_form").submit(function( event ){
+					 url="<?php echo base_url();?>customer/updateprivacy/";
+					$.post( url, { formdata: $(this).serialize() })
+					.done(function( data ) {
+					   	if(data == true)
+							alert("Information Updated");
+						else
+							alert("Something Went wrong please try again after sometime");
+					  });
+					event.preventDefault();
+			});
+			$("#emailnotification").submit(function( event ){
+				url="<?php echo base_url();?>customer/updateemailnotification/";
+				$.post( url, { formdata: $(this).serialize() })
+					.done(function( data ) {
+					   	if(data == true)
+							alert("Information Updated");
+						else
+							alert("Something Went wrong please try again after sometime");
+					  });
+					event.preventDefault();
+			});
+			$("#education_form").submit(function( event){
+					url="<?php echo base_url();?>customer/manageducation/";
+					$.post( url, { formdata: $(this).serialize() })
+					.done(function( data ) {
+					   	if(data == false)
+							alert("Please Enter Valid Details");
+						else
+							$(".groupMainBlock").html($(".groupMainBlock").html()+data);
+					  });
+					event.preventDefault();
+				});
+});
+function pwdchange(){
+var pass=$('#pwd').val();
+
+   url="<?php echo base_url();?>signg_in/checkpass/"+pass;
+   $.ajax({
+        type: "POST",
+        url: url,
+        data: { pass: pass} ,
+        success: function(html)
+        {   
+            if(html=='failure'){
+				alert("Please enter valid password");
+			}
+        }
+       });
+}
+</script>
+<script type="text/javascript">
+		$( document ).ready(function() {
+			$("#country").val("<?php echo $r->country; ?>");
+			print_state('state',$("#country option:selected").index());
+			$("#state").val("<?php echo $r->state?>");
+			/*$('#dpYears').datepicker();*/
+		});
 	</script>
 </body>
 </html>

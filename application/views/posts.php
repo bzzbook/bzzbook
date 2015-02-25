@@ -1,4 +1,4 @@
-<?php error_reporting(0);?>
+
 <!DOCTYPE html>
 <?php
 $session_data = $this->session->userdata('logged_in');
@@ -157,7 +157,7 @@ $session_data = $this->session->userdata('logged_in');
       <!-- code added by 23-02-2015-->
       <?php 
 	  
-	  $products = $this->customer->All_Posts();
+	  $products = $this->customermodel->All_Posts();
 	  foreach( $products as $row):
 	  $hrs=$row->post_date;
 	  $currt_hrs=date('Y-m-d H:i:s');
@@ -180,12 +180,10 @@ $session_data = $this->session->userdata('logged_in');
       $seconds %= 60;
 	  
 	  $posted_id=$row->posted_by;
-	  $get_profiledata = $this->customer->profiledata($posted_id);
+	  $get_profiledata = $this->customermodel->profiledata($posted_id);
 	  
 	  $user_id=$this->session->userdata['logged_in']['account_id'];
-	  
-	  
-	  
+	  	  
 	  ?>
 	
 	   <article>
@@ -205,15 +203,17 @@ $session_data = $this->session->userdata('logged_in');
 			?></p>
              <p id="des<?php echo $row->id;?>" style="display:none;"><?php echo $row->post_content;?></p>
             <div class="links">
-            <?php   $get_likedetails = $this->customer->likedata($row->id);
+            <?php   $get_likedetails = $this->customermodel->likedata($row->id);
+					if(sizeof($get_likedetails)>0):
 			       	$account_id=$get_likedetails[0]->account_id;
 					$like=$get_likedetails[0]->like;
+					endif;
 			?>
             
             
              
         <div id="like_ajax<?php echo $row->id;?>">
-            <?php if($account_id == $user_id && $like=='yes'){?>
+            <?php if(@$account_id == $user_id && $like=='yes'){?>
 				<a href="javascript:void(0);" onclick="likefun('<?php echo $row->id;?>','<?php echo $row->posted_by;?>','unlike')"  id="link_like<?php echo $row->id;?>" style="padding-right:0px;">Unlike
             <?php    
 			}else{?>
@@ -234,7 +234,7 @@ $session_data = $this->session->userdata('logged_in');
           <!-- display all comments -->
           <div id="res_comments<?php echo $row->id;?>">
             <?php   
-			       $comments_details = $this->customer->comments_data($row->id);
+			       $comments_details = $this->customermodel->comments_data($row->id);
 			       for($i=0;$i<count($comments_details);$i++){
 				   // foreach($comments_details as $row_comment):
 			       if($i<=4){?>
@@ -257,7 +257,7 @@ $session_data = $this->session->userdata('logged_in');
              
            <div id="res_comments_viewmore<?php echo $row->id;?>" style="display:none;">
             <?php   
-			       $comments_details = $this->customer->comments_data($row->id);
+			       $comments_details = $this->customermodel->comments_data($row->id);
 			       foreach($comments_details as $row_comment):
 			?>
                     <div class="postComment">
@@ -459,14 +459,15 @@ $session_data = $this->session->userdata('logged_in');
 <script type="text/javascript">
    $('#email_invite').validate();
 	</script>
-<script>
+<script type="text/javascript">
 function myfunc(cid){
 	$('#des'+cid).show();
 	$('#msg'+cid).hide();
 
 }
 function likefun(pid,uid,status){
-	//alert(status);
+	
+	alert(status);
 	var posted_by=pid;
 	var account_id=uid;
 	url="<?php echo base_url();?>signg_in/insertlinks/"+pid+"/"+uid;

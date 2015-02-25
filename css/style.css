@@ -310,3 +310,11 @@ footer.home h3 em{ color:#fdc70f; font-style:normal;}
 
 
 .groupsSt h2{ background:url(../images/sideNav.png) no-repeat 0 8px; padding:0 0 0 35px; height:42px; line-height:42px; font-size:18px;}
+.EduProperty{ padding:10px; background:#f9f9f9; border-top:1px solid #ccc;   }
+.EduProperty .EduBlock{ float:left; padding:0 10px 0 10px; width:33%;}
+.EduProperty .EduBlock+.EduBlock{ width:22%;}
+.EduProperty .EduBlock+.EduBlock+.EduBlock{ width:25%;}
+.EduProperty .EduBlock+.EduBlock+.EduBlock+.EduBlock{ width:18%;}
+.EduProperty .EduBlock h3{ font-size:12px; font-weight:bold; color:#9e9d9d;  }
+.EduProperty .EduBlock p{ color:#696969; }
+.EduProperty .EduBlock a{ line-height:30px; display:block; float:left; color:#000; margin-left:20px; }

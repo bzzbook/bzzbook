@@ -136,6 +136,7 @@ $session_data = $this->session->userdata('logged_in');
     </section>
     <section class="col-lg-6 col-md-6 col-sm-5 col-xs-12 coloumn2 aboutme">
       <h2>About Me</h2>
+      <?php foreach($result as $info):?>
       <div class="posts">
       <div class="col-md-5">
         <ul class="nav-tabs" role="tablist" id="myTab">
@@ -147,9 +148,9 @@ $session_data = $this->session->userdata('logged_in');
         <div class="tab-content col-md-7">
         <div role="tabpanel" class="tab-pane active" id="About">
         <h4>Overview</h4>
-        <p>THis is Ramesh Kuppili , Web Developer webdevelopement, softwrare, testing, designing </p>
+        <p><?php echo $info->about?></p>
         <h4>Interest</h4>
-        <p>webdevelopement, softwrare, testing, designing webdevelopement, softwrare, testing, designing </p>
+        <p><?php echo $info->intrests;?> </p>
         </div>
         <div role="tabpanel" class="tab-pane" id="Educational">
         <h4>Institution:</h4>
@@ -165,17 +166,18 @@ $session_data = $this->session->userdata('logged_in');
         </div>
         <div role="tabpanel" class="tab-pane" id="Contact">
          <h4>Email:</h4>
-        <p>sprasad96@gmail.com</p>
+        <p><?php echo $info->email;?></p>
          <h4>Phone:</h4>
-        <p>9090909090</p>
+        <p><?php echo $info->phone_number;?></p>
          <h4>Office:</h4>
-        <p>software developement, testingg</p>
+        <p><?php echo $info->company_name;?></p>
          <h4>Fax:</h4>
         <p>9696969696</p>
         </div>
         </div>
         <div class="clear"></div>
       </div>
+      <?php endforeach;?>
     </section>
     <section class="col-lg-3 col-md-3 col-sm-3 col-xs-12 coloumn3">
       <aside>
