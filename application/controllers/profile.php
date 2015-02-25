@@ -54,7 +54,9 @@ public function post()
 	
 }
 public function message()
-  {      $is_logged = $this->session->userdata('logged_in');	
+  {      
+  
+        $is_logged = $this->session->userdata('logged_in');	
 		if($is_logged)
 		{
 			 $this->load->view('messages');

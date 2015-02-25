@@ -15,14 +15,15 @@ class sign_inm extends CI_Model {
 	   public function sign_in($data)
 	   {
 		    $this->load->database("sign_up");
-		    $condition = "email =" . "'" . $data['email'] . "' AND " . "new_password =" . "'" . $data['password'] . "'";
+		    $condition = "email =" . "'" . $data['email'] . "' AND " . "new_password =" . "'" . md5($data['password']) . "'";
+		  
 			$this->db->select('*');
 			$this->db->from('sign_up');
 			$this->db->where($condition);
 			$this->db->limit(1);
 			$query = $this->db->get();
 			if ($query->num_rows() == 1) {
-				 return $query->result();;
+				 return $query->result();
 				} else {
 				return false;
 				}

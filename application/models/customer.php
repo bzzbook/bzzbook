@@ -84,12 +84,20 @@ class Customer extends CI_Model {
 		return $query->result();
 		
    }
-   
-   public function write_comment(){
-	   $write_comment=$this->input->post('write_comment');
-	   
+   public function write_comments($data){
+	    $this->db->insert('tbl_likes',$data);
    }
-    
+   public function comments_data($pid){
+	   $condition = "post_id =" . "'" . $pid . "' and comment != ''";
+		$this->db->select('*');
+		$this->db->from('tbl_likes');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		//return $query->num_rows();
+		return $query->result(); 
+   }
+   
+  
 	   
 	  
 	

@@ -206,12 +206,8 @@ $session_data = $this->session->userdata('logged_in');
              <p id="des<?php echo $row->id;?>" style="display:none;"><?php echo $row->post_content;?></p>
             <div class="links">
             <?php   $get_likedetails = $this->customer->likedata($row->id);
-			        //print_r($get_likedetails[0]);
-					$account_id=$get_likedetails[0]->account_id;
+			       	$account_id=$get_likedetails[0]->account_id;
 					$like=$get_likedetails[0]->like;
-			//echo count($get_likedetails);
-			//$query->num_rows()
-			
 			?>
             
             
@@ -222,7 +218,7 @@ $session_data = $this->session->userdata('logged_in');
             <?php    
 			}else{?>
 				<a href="javascript:void(0);" onclick="likefun('<?php echo $row->id;?>','<?php echo $row->posted_by;?>','like')"  id="link_like<?php echo $row->id;?>" style="padding-right:0px;">Like
-			<?php }?></a><span>&nbsp;(<?php echo count($get_likedetails); ?>)</span>&nbsp;&nbsp;<a href="#">Comment</a> <a href="#">Share</a> <a href="#">Save As Favorite</a>
+			<?php }?></a><span>(<?php echo count($get_likedetails); ?>)</span>&nbsp;&nbsp;<a href="#">Comment</a> <a href="#">Share</a> <a href="#">Save As Favorite</a>
             </div>
            
           </div>
@@ -234,13 +230,63 @@ $session_data = $this->session->userdata('logged_in');
           <div class="clear">
           </div>
           </div>
+          
+          <!-- display all comments -->
+          <div id="res_comments<?php echo $row->id;?>">
+            <?php   
+			       $comments_details = $this->customer->comments_data($row->id);
+			       for($i=0;$i<count($comments_details);$i++){
+				   // foreach($comments_details as $row_comment):
+			       if($i<=4){?>
+                    <div class="postComment">
+                    <div class="img"><img src="<?php echo base_url(); ?>images/user.png" alt=""></div>
+                    <?php  echo $comments_details[$i]->comment;
+			         ?>
+                   
+                   </div>
+			<?php 
+				   }
+				   }
+				   
+				   // endforeach;
+		    ?>
+            <?php if(count($comments_details)>4){ ?>
+            <a href="#" onclick="view_comments('<?php echo $row->id;?>')" style="font-size:12px;">View More</a>
+            <?php } ?>
+          </div>
+             
+           <div id="res_comments_viewmore<?php echo $row->id;?>" style="display:none;">
+            <?php   
+			       $comments_details = $this->customer->comments_data($row->id);
+			       foreach($comments_details as $row_comment):
+			?>
+                    <div class="postComment">
+                    <div class="img"><img src="<?php echo base_url(); ?>images/user.png" alt=""></div>
+            
+                    <?php echo $row_comment->comment;
+			         ?>
+                   
+                   </div>
+			<?php 
+				  endforeach;
+		    ?>
+          </div>  
+             
+          <!-- display comments code ends here -->
+          
+          
           <div class="postComment">
             <div class="img"><img src="<?php echo base_url(); ?>images/user.png" alt=""></div>
-            <!--<textarea cols="" rows="" class="form-control" placeholder="Write a Comment..." onkeyup="enter_comment();"></textarea>-->
-            <form action="<?php echo base_url();?>customer/write_comment" method="post">
-            <input type="text" class="form-control" placeholder="Write a Comment..." nam="write_comment">
-            </form>
+           <form action="<?php echo base_url();?>signg_in/write_comment" method="post" style="width:100% !important;">
+               <input type="text" class="form-control comment" placeholder="Write a Comment..." name="write_comment" id="write_comment">
+               <input type="hidden" name="post_id" value="<?php echo $row->id;?>">
+               <input type="hidden" name="posted_by" value="<?php echo $row->posted_by;?>">
+           </form>
           </div>
+          
+          
+          
+          
         </article>
        
 	 
@@ -249,18 +295,8 @@ $session_data = $this->session->userdata('logged_in');
 	  
 	  ?>
       
-      
-      
-      
-     
-      
-      
       <!-- code ends here by 23-02-2015-->
-      
-      
-      
-      
-      
+     
         <!--<article>
           <figure><img src="<?php echo base_url(); ?>images/post_writer.png" alt=""></figure>
           <div class="content">
@@ -430,7 +466,7 @@ function myfunc(cid){
 
 }
 function likefun(pid,uid,status){
-	alert(status);
+	//alert(status);
 	var posted_by=pid;
 	var account_id=uid;
 	url="<?php echo base_url();?>signg_in/insertlinks/"+pid+"/"+uid;
@@ -444,15 +480,16 @@ function likefun(pid,uid,status){
          if(status == 'like')
 		 	//$("#like_ajax"+pid).html("Unlike");
 			$("#link_like"+pid).html("Unlike");
-		else
+		  else
 			//$("#like_ajax"+pid).html("Like");
 			$("#link_like"+pid).html("Like");
         }
        });
 	
 }
-function enter_comment(){
-	
+function view_comments(id){
+	$('#res_comments'+id).hide();
+	$('#res_comments_viewmore'+id).show();
 }
 </script>
 </body>

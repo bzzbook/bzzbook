@@ -28,6 +28,8 @@ class signg_in extends CI_Controller {
 					'email' => $this->input->post('email'),
 					'password' => $this->input->post('password')
 				    );
+					
+						
 		$this->load->model('sign_inm');
 	    $result = $this->sign_inm->sign_in($data);
 		
@@ -108,6 +110,21 @@ class signg_in extends CI_Controller {
 	  
 	   
    }
+   
+   
+    public function write_comment(){
+		
+	   $data=array(
+	   'comment'=>$this->input->post('write_comment'),
+	   'post_id'=>$this->input->post('post_id'),
+	   'account_id'=>$this->input->post('posted_by')
+	   );
+	  
+	   $res=$this->customer->write_comments($data);
+	   redirect('profiles');
+	   
+   }
+    
   
    
  }

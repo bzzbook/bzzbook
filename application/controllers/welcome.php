@@ -19,7 +19,13 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
+		$is_logged = $this->session->userdata('logged_in');
+		if($is_logged)
+		{	
+		$this->load->view('posts');
+		}else{
 		$this->load->view('landing');
+		}
 	}
 }
 

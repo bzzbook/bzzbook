@@ -37,7 +37,7 @@ class signg_up extends CI_Controller {
 		$data['lastname'] = $this->input->post('lastname');
 		$data['email'] = $this->input->post('email');
 		$data['phone_number'] = $this->input->post('phone_number');
-		$data['new_password'] = $this->input->post('new_password');
+		$data['new_password'] = md5($this->input->post('new_password'));
 		$data['birthdate'] = $this->input->post('birthdate');
 		$data['gender'] = $this->input->post('gender');
 		
