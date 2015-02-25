@@ -311,7 +311,7 @@ $session_data = $this->session->userdata('logged_in');
 <script src="<?php echo base_url(); ?>js/jquery.validate.min.js"></script>
 <script src="<?php echo base_url(); ?>js/additional-methods.js"></script> 
 <script type="text/javascript">
-   $('#email_invite').validate();
+$('#email_invite').validate();
 	</script>
 
 </body>

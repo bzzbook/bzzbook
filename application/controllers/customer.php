@@ -96,6 +96,58 @@ class customer extends CI_Controller {
 		$this->load->view('disp_post',$data); 
 	  }
   
+  
+  public function pf()
+  {
+	  echo"hai";
+	  exit;
+	  /*$data =array();
+	    $id="1";
+	    $data['first_name'] = $this->input->post('firstname');
+		$data['last_name'] = $this->input->post('lastname');
+		$data['email'] = $this->input->post('email');
+		$data['phone_number'] = $this->input->post('phone_number');
+		$data['user_name'] = $this->input->post('user_name');
+		$data['password'] = $this->input->post('password');
+		$data['con_password'] = $this->input->post('conf_password');
+		$data['country'] = $this->input->post('country');
+		$data['state'] = $this->input->post('state');
+		$data['city'] = $this->input->post('city');
+		$data['postal_code'] = $this->input->post('postal_code');
+		$data['dob'] = $this->input->post('dob');
+		$data['gender'] = $this->input->post('gender');
+		$data['job_type'] = $this->input->post('position');
+		$data['industry'] = $this->input->post('industry');
+		$data['company_name'] = $this->input->post('companyname');
+		$data="test";
+		$this->load->model('person');
+		$this->person->postboard_update($data);
+		$this->load->view('posts'); */
+  }
+  
+  public function upload_pic()
+  {
+	    $config['upload_path'] = './uploads/';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$config['max_size']	= '100';
+		$config['max_width']  = '1024';
+		$config['max_height']  = '768';
+
+		$this->load->library('upload', $config);
+
+		if ( ! $this->upload->do_upload())
+		{
+			$error = array('error' => $this->upload->display_errors());
+
+			$this->load->view('upload_form', $error);
+		}
+		else
+		{
+			$data = array('upload_data' => $this->upload->data());
+
+			$this->load->view('upload_success', $data);
+		}
+  }
 }
 
 ?>

@@ -14,6 +14,7 @@ $session_data = $this->session->userdata('logged_in');
 <link href="<?php echo base_url(); ?>css/animate.min.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>css/style.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>css/responsive.css" rel="stylesheet">
+<link href="<?php echo base_url(); ?>css/datepicker.css" rel="stylesheet">
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -24,7 +25,7 @@ $session_data = $this->session->userdata('logged_in');
 <body>
 <header>
   <section class="container">
-    <figure class="col-lg-3 col-md-3 col-sm-4 col-xs-12 animate-plus" data-animations="pulse"  data-animation-when-visible="true"  data-animation-reset-offscreen="true"><a href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>images/logo.png" alt=""></a></figure>
+    <figure class="col-lg-3 col-md-3 col-sm-4 col-xs-12 animate-plus" data-animations="pulse"  data-animation-when-visible="true"  data-animation-reset-offscreen="true"><img src="<?php echo base_url(); ?>images/logo.png" alt=""></figure>
     <div class="col-lg-6 col-md-6 col-sm-4 col-xs-12 search">
       <div class="input-group"> <span class="input-group-btn">
         <input type="button" value="" role="button"  class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" id="drop2">
@@ -147,81 +148,90 @@ $session_data = $this->session->userdata('logged_in');
           </ul>
           
           <!-- Tab panes -->
-          <div class="tab-content">
+          <div class="tab-content">  
+		  <?php foreach($result as $r) { ?>
             <div role="tabpanel" class="tab-pane active" id="post_board">
               <figure class="pfpic"><span>Profile Pic</span><img src="<?php echo base_url(); ?>images/pf_pic.png" alt=""></figure>
+            <form name="profile_pic" method="POST" action="<?php echo base_url(); ?>customer/upload_pic" >
               <div class="upload">
                   <span class="btn btn-success fileinput-button"> <span>Change Picture</span> 
                   <!-- The file input field used as target for the file upload widget -->
                   <input id="fileupload" type="file" name="files[]" multiple>
                   </span>
               </div>
-              <h4>Location Info</h4>
+              </form>
+            <form name="profile" method="POST" action="<?php echo base_url(); ?>customer/pf" >
+              <h4>Location Info</h4>             
+              <div class="field col-md-6">
+           	<select class="form-control" name="country"  onchange="print_state('state',this.selectedIndex);"  id="country">
+			<option value=""></option>
+			</select> 
+         	</div> 
+          	<div class="field col-md-6">
+           <select name="state" id="state" class="form-control">
+           <option value=""></option>
+           </select>
+         	</div>
+             <div class="filed col-md-6">
+                <input type="text" class="form-control" placeholder="City" value="<?php echo $r->city ?>" >
+              </div> 
               <div class="filed col-md-6">
-                <input type="text" class="form-control" placeholder="City">
-              </div>
-              <div class="filed col-md-6">
-                <select class="form-control">
-                  <option>test1</option>
-                  <option>test2</option>
-                  <option>test3</option>
-                  <option>test4</option>
-                </select>
-              </div>
-              <div class="filed col-md-6">
-                <input type="text" class="form-control" placeholder="Zip Code">
+                <input type="text" class="form-control" placeholder="Zip Code" value="<?php echo $r->postal_code ?>">
               </div>
               <h4 class="clear">Username Info</h4>
               <div class="filed col-md-6">
-                <input type="text" class="form-control" placeholder="Username">
+                <input type="text" class="form-control" placeholder="Username" value="<?php echo $r->user_name ?>" >
               </div>
               <div class="filed col-md-6">
-                <input type="text" class="form-control" placeholder="First Name">
+                <input type="text" class="form-control" placeholder="First Name" value="<?php echo $r->first_name ?>" >
               </div>
               <div class="filed col-md-6">
-                <input type="text" class="form-control" placeholder="Last Name">
+                <input type="text" class="form-control" placeholder="Last Name" value="<?php echo $r->last_name ?>" >
               </div>
               <div class="filed col-md-6">
-                <input type="text" class="form-control" placeholder="Email">
+                <input type="text" class="form-control" placeholder="Email" value="<?php echo $r->email ?>" >
               </div>
               <h4 class="clear">Password Info</h4>
               <div class="filed col-md-6">
-                <input type="text" class="form-control" placeholder="Password">
+                <input type="password" class="form-control" placeholder="Password" id="pwd" onBlur="pwdchange()">
               </div>
               <div class="clear"></div>
               <div class="filed col-md-6">
-                <input type="text" class="form-control" placeholder="New Password">
+                <input type="password" class="form-control" placeholder="New Password" id="npwd">
               </div>
               <div class="filed col-md-6">
-                <input type="text" class="form-control" placeholder="Confirm">
+                <input type="password" class="form-control" placeholder="Confirm" id="cnpwd">
               </div>
               <h4 class="clear">Job Info</h4>
               <div class="filed col-md-6">
-                <input type="text" class="form-control" placeholder="Job Title">
+                <input type="text" class="form-control" placeholder="Job Title" value="<?php echo $r->job_type ?>" >
               </div>
               <div class="filed col-md-6">
                 <select class="form-control">
-                  <option>Industry</option>
-                  <option>test2</option>
-                  <option>test3</option>
-                  <option>test4</option>
+                   <?php foreach($industry as $industries):?>
+                 <option value="<?php echo $industries->lookup_value;?>"
+				 <?php if($r->industry == $industries->lookup_value){
+					 echo "selected=selected";
+				 }?>><?php echo $industries->lookup_value ?></option>
+                 <?php endforeach;?> 
                 </select>
               </div>
               <div class="filed col-md-6">
-                <input type="text" class="form-control" placeholder="Other Industry">
+                <input type="text" class="form-control" placeholder="Other Industry" value="" >
               </div>
               <div class="filed col-md-6">
-                <input type="text" class="form-control" placeholder="Company Name">
+                <input type="text" class="form-control" placeholder="Company Name" value="<?php echo $r->company_name ?>" >
               </div>
               <div class="filed col-md-6">
                 <input type="submit" class="fmbtn" value="Upload Settings">
               </div>
               <div class="clear"></div>
             </div>
+            </form>
             <div role="tabpanel" class="tab-pane" id="about_me">
             	 <h4 class="clear">About Me Info</h4>
               <div class="filed col-md-12">
-                <textarea cols="" rows="" class="form-control"></textarea>
+                <textarea cols="" rows="" class="form-control" ><?php echo $r->about ?></textarea>
                 <input type="submit" class="smbtn" value="Save">
               </div>
               <div class="filed col-md-12">
@@ -238,10 +248,10 @@ $session_data = $this->session->userdata('logged_in');
               </div>
               <h4 class="clear">Contact Details</h4>
               <div class="filed col-md-6">
-                <input type="text" class="form-control" placeholder="Email">
+                <input type="text" class="form-control" placeholder="Email" value="<?php echo $r->email ?>" >
               </div>
               <div class="filed col-md-6">
-                <input type="text" class="form-control" placeholder="Phone">
+                <input type="text" class="form-control" placeholder="Phone" value="<?php echo $r->phone_number ?>">
               </div>
               <div class="filed col-md-6">
                 <input type="text" class="form-control" placeholder="Office">
@@ -258,8 +268,48 @@ $session_data = $this->session->userdata('logged_in');
             <div role="tabpanel" class="tab-pane" id="business_details">
             	 <h4 class="clear">Professional Experience</h4>
               <div class="filed col-md-12">
-                <input type="submit" class="add" value="add experience">
+                <!-- Button trigger modal -->
+                <input type="button" class="add" data-toggle="modal" data-target="#myModal" value="add experience"/>
+
               </div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Professional Experience</h4>
+      </div>
+      <div class="modal-body">
+       <label>Job Title</label>
+        <input type="text" class="form-control" placeholder="Job Title" />
+         <div class="field col-md-12 dob">
+            <label>From Date</label>
+            <div data-date-viewmode="years" data-date-format="dd-mm-yyyy" data-date="12-02-2012" id="dpYears" 
+            class="input-group-bt date">
+              <input type="text" readonly name="birthdate" value="12-02-2012" size="16" class="form-control">
+              <span aria-hidden="true" class="add-on glyphicon glyphicon-calendar"></span> </div>
+          </div>
+           <div class="field col-md-12 dob">
+            <label>To Date</label>
+            <div data-date-viewmode="years" data-date-format="dd-mm-yyyy" data-date="12-02-2012" id="dpYears" class="input-group-bt date">
+              <input type="text" readonly name="birthdate" value="12-02-2012" size="16" class="form-control">
+              <span aria-hidden="true" class="add-on glyphicon glyphicon-calendar"></span> </div>
+          </div>
+          <div class="field col-md-12">                       
+             <textarea class="form-control" name="about_job" placeholder="Joib Description......"  data-rule-required="true" 
+             data-msg-required="please enter about you"></textarea>
+         </div>
+             <div class="field col-md-6">
+         <input type="checkbox" name="agree" value="agree">current job?</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
                <h4 class="clear">Organizations</h4>
               <div class="filed col-md-12">
                 <input type="submit" class="add" value="add Organizations">
@@ -328,6 +378,7 @@ $session_data = $this->session->userdata('logged_in');
               <div class="clear"></div>
               </div>
             </div>
+            <?php } ?>
           </div>
         </div>
       </div>
@@ -408,10 +459,37 @@ $session_data = $this->session->userdata('logged_in');
 <script src="<?php echo base_url(); ?>js/bootstrap.min.js"></script> 
 <script src="<?php echo base_url(); ?>js/animate-plus.min.js"></script> 
 <script src="<?php echo base_url(); ?>js/custom.js"></script>
+<script src="<?php echo base_url(); ?>js/bootstrap-datepicker.js"></script> 
 <script src="<?php echo base_url(); ?>js/jquery.validate.min.js"></script>
-<script src="<?php echo base_url(); ?>js/additional-methods.js"></script> 
+<script src="<?php echo base_url(); ?>js/additional-methods.js"></script>
+<script src="<?php echo base_url(); ?>js/countries.js"></script>
+<script language="javascript">print_country("country");</script> 
 <script type="text/javascript">
    $('#email_invite').validate();
+	</script>
+<script>
+function pwdchange(){
+var pass=$('#pwd').val();
+
+   url="<?php echo base_url();?>signg_in/checkpass/"+pass;
+   $.ajax({
+        type: "POST",
+        url: url,
+        data: { pass: pass} ,
+        success: function(html)
+        {   
+            if(html=='failure'){
+				alert("Please enter valid password");
+			}
+        }
+       });
+ 
+}
+</script>
+<script type="text/javascript">
+		$( document ).ready(function() {
+			$('.date').datepicker();
+		});
 	</script>
 </body>
 </html>
