@@ -26,6 +26,15 @@ class person extends CI_Model {
 		  $query =  $this->db->get('posts');
 	       return $query->result();
 	   }
+	   
+	   public function postboard_update($data)
+	{
+		/*$id="1";
+		$this->db->where('cust_id', $id);
+		$this->db->update('cust_sign_up', $data);
+		*/
+		
+	}
 	   		
 }
 ?>

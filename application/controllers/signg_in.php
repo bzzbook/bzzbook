@@ -125,6 +125,23 @@ class signg_in extends CI_Controller {
 	   
    }
     
+   
+   function checkpass($pass){
+	   $user_id=$this->session->userdata['logged_in']['account_id'];
+	     $condition = "new_password =" . "'" . $pass . "' and account_id=$user_id";
+		$this->db->select('*');
+		$this->db->from('sign_up');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		
+
+		if ($query->num_rows() == 1) {
+			echo "success";
+		} else {
+		    echo "failure";
+		}
+	   
+   }
   
    
  }
