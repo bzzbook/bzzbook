@@ -90,7 +90,7 @@ class signg_in extends CI_Controller {
 	 $data['posted_by'] = $session_data['account_id'];
 	 $data['post_content'] = $this->input->post('posts');
 	 
-	 $this->customer->post_buzz($data);
+	 $this->customer_m->post_buzz($data);
 	 echo "post saved successfully..."; 
 	 redirect('profiles');
 	 // redirect(site_url('customer_controller/view_post'));
@@ -102,7 +102,7 @@ class signg_in extends CI_Controller {
 	       'account_id'=>$uid,
 		   'like'=>'yes'
 	   );
-	 $res=$this->customer->insertlinks($data);
+	 $res=$this->customer_m->insertlinks($data);
 	 if($res){
 		 
 		 echo "success";
@@ -120,7 +120,7 @@ class signg_in extends CI_Controller {
 	   'account_id'=>$this->input->post('posted_by')
 	   );
 	  
-	   $res=$this->customer->write_comments($data);
+	   $res=$this->customer_m->write_comments($data);
 	   redirect('profiles');
 	   
    }

@@ -92,7 +92,7 @@ class customer extends CI_Controller {
   }
   public function view_post()
 	  {
-		$data['result'] = $this->customer->view_post(); 
+		$data['result'] = $this->customer_m->view_post(); 
 		$this->load->view('disp_post',$data); 
 	  }
   
@@ -129,23 +129,24 @@ class customer extends CI_Controller {
   {
 	    $config['upload_path'] = './uploads/';
 		$config['allowed_types'] = 'gif|jpg|png';
-		$config['max_size']	= '100';
-		$config['max_width']  = '1024';
-		$config['max_height']  = '768';
+		$config['max_size']	= '';
+		$config['max_width']  = '';
+		$config['max_height']  = '';
 
 		$this->load->library('upload', $config);
-
-		if ( ! $this->upload->do_upload())
+	    $this->upload->initialize($config);
+		
+		if ( ! $this->upload->do_upload('profile_pic'))
 		{
 			$error = array('error' => $this->upload->display_errors());
 
-			$this->load->view('upload_form', $error);
+			$this->load->view('uploadform', $error);
 		}
 		else
 		{
 			$data = array('upload_data' => $this->upload->data());
 
-			$this->load->view('upload_success', $data);
+			$this->load->view('uploadform', $data);
 		}
   }
 }

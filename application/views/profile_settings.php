@@ -152,14 +152,16 @@ $session_data = $this->session->userdata('logged_in');
 		  <?php foreach($result as $r) { ?>
             <div role="tabpanel" class="tab-pane active" id="post_board">
               <figure class="pfpic"><span>Profile Pic</span><img src="<?php echo base_url(); ?>images/pf_pic.png" alt=""></figure>
-            <form name="profile_pic" method="POST" action="<?php echo base_url(); ?>customer/upload_pic" >
+               <?php $attr = array('id' => 'profile', 'name' => 'profile_pic'); ?>
+              <?php echo form_open_multipart('',$attr);?>
               <div class="upload">
                   <span class="btn btn-success fileinput-button"> <span>Change Picture</span> 
                   <!-- The file input field used as target for the file upload widget -->
-                  <input id="fileupload" type="file" name="files[]" multiple>
+                  <input id="fileupload" type="file" name="profile_pic" >
                   </span>
+                  <input type="submit" value="submit" class="smbtn"/>
               </div>
-              </form>
+             <?php echo form_close(); ?>
             <form name="profile" method="POST" action="<?php echo base_url(); ?>customer/pf" >
               <h4>Location Info</h4>             
               <div class="field col-md-6">
@@ -463,6 +465,7 @@ $session_data = $this->session->userdata('logged_in');
 <script src="<?php echo base_url(); ?>js/jquery.validate.min.js"></script>
 <script src="<?php echo base_url(); ?>js/additional-methods.js"></script>
 <script src="<?php echo base_url(); ?>js/countries.js"></script>
+<script src="<?php echo base_url()?>js/ajaxfileupload.js"></script>
 <script language="javascript">print_country("country");</script> 
 <script type="text/javascript">
    $('#email_invite').validate();
@@ -491,5 +494,32 @@ var pass=$('#pwd').val();
 			$('.date').datepicker();
 		});
 	</script>
+<script>
+$(function() {
+	$('#profile').submit(function(e) {
+		e.preventDefault();
+		$.ajaxFileUpload({
+			url 			:'./uploads/', 
+			secureuri		:false,
+			fileElementId	:'fileupload', 
+			dataType		: 'json',
+			data			: {
+				'title'				: $('#title').val()
+			},
+			success	: function (data, status)
+			{
+				if(data.status != 'error')
+				{
+					$('#files').html('<p>Reloading files...</p>');
+					refresh_files();
+					$('#title').val('');
+				}
+				alert(data.msg);
+			}
+		});
+		return false;
+	});
+});
+</script>
 </body>
 </html>

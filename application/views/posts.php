@@ -157,7 +157,7 @@ $session_data = $this->session->userdata('logged_in');
       <!-- code added by 23-02-2015-->
       <?php 
 	  
-	  $products = $this->customer->All_Posts();
+	  $products = $this->customer_m->All_Posts();
 	  foreach( $products as $row):
 	  $hrs=$row->post_date;
 	  $currt_hrs=date('Y-m-d H:i:s');
@@ -180,7 +180,7 @@ $session_data = $this->session->userdata('logged_in');
       $seconds %= 60;
 	  
 	  $posted_id=$row->posted_by;
-	  $get_profiledata = $this->customer->profiledata($posted_id);
+	  $get_profiledata = $this->customer_m->profiledata($posted_id);
 	  
 	  $user_id=$this->session->userdata['logged_in']['account_id'];
 	  
@@ -205,7 +205,7 @@ $session_data = $this->session->userdata('logged_in');
 			?></p>
              <p id="des<?php echo $row->id;?>" style="display:none;"><?php echo $row->post_content;?></p>
             <div class="links">
-            <?php   $get_likedetails = $this->customer->likedata($row->id);
+            <?php   $get_likedetails = $this->customer_m->likedata($row->id);
 			       	$account_id=$get_likedetails[0]->account_id;
 					$like=$get_likedetails[0]->like;
 			?>
@@ -234,7 +234,7 @@ $session_data = $this->session->userdata('logged_in');
           <!-- display all comments -->
           <div id="res_comments<?php echo $row->id;?>">
             <?php   
-			       $comments_details = $this->customer->comments_data($row->id);
+			       $comments_details = $this->customer_m->comments_data($row->id);
 			       for($i=0;$i<count($comments_details);$i++){
 				   // foreach($comments_details as $row_comment):
 			       if($i<=4){?>
@@ -257,7 +257,7 @@ $session_data = $this->session->userdata('logged_in');
              
            <div id="res_comments_viewmore<?php echo $row->id;?>" style="display:none;">
             <?php   
-			       $comments_details = $this->customer->comments_data($row->id);
+			       $comments_details = $this->customer_m->comments_data($row->id);
 			       foreach($comments_details as $row_comment):
 			?>
                     <div class="postComment">
