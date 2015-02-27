@@ -28,13 +28,11 @@ class person extends CI_Model {
 	   }
 	   
 	   public function postboard_update($data)
-	{
-		/*$id="1";
+		{
+		$id=$this->session->userdata('logged_in')['account_id'];
 		$this->db->where('cust_id', $id);
 		$this->db->update('cust_sign_up', $data);
-		*/
-		
-	}
+		}
 	   		
 }
 ?>

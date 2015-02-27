@@ -27,7 +27,7 @@ class profiles extends CI_Controller {
 		$is_logged = $this->session->userdata('logged_in');
 		if($is_logged)
 		{	
-		$this->load->view('posts');
+			$this->load->view('posts');
 		}else{
 		redirect(base_url());
 		}

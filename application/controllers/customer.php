@@ -99,10 +99,8 @@ class customer extends CI_Controller {
   
   public function pf()
   {
-	  echo"hai";
-	  exit;
-	  /*$data =array();
-	    $id="1";
+	  
+	  $data =array();
 	    $data['first_name'] = $this->input->post('firstname');
 		$data['last_name'] = $this->input->post('lastname');
 		$data['email'] = $this->input->post('email');
@@ -119,10 +117,35 @@ class customer extends CI_Controller {
 		$data['job_type'] = $this->input->post('position');
 		$data['industry'] = $this->input->post('industry');
 		$data['company_name'] = $this->input->post('companyname');
-		$data="test";
 		$this->load->model('person');
 		$this->person->postboard_update($data);
-		$this->load->view('posts'); */
+		redirect('/profile/profile_set');
+  }
+  public function updateabout()
+  {
+		parse_str($_POST['form_data'], $aboutformdata);
+	   echo  $this->customermodel->updateAboutInfo($aboutformdata);
+  }
+  public function updateprivacy()
+  {
+	  	parse_str($_POST['formdata'],$privacyformdata);
+		echo $this->customermodel->updatePrivacyInfo($privacyformdata);
+  }
+  public function updateemailnotification()
+  {
+	  	parse_str($_POST['formdata'],$privacyformdata);
+		echo $this->customermodel->updateEmailInfo($privacyformdata);
+  }
+  public function manageducation()
+  {
+	  parse_str($_POST['formdata'],$education_info);
+	  $returninfo = $this->customermodel->manageeducationdata($education_info);
+	  if($returninfo != false):
+	  	$education_info['inserted_id'] = $returninfo;
+	  	echo $this->load->view('education_field',$education_info);
+	 else:
+	 	return false;
+	 endif;
   }
   
   public function upload_pic()

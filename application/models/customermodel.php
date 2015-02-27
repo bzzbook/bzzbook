@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class customer_m extends CI_Model {
+class Customermodel extends CI_Model {
 
 	function __construct()
     { 
@@ -17,7 +17,7 @@ class customer_m extends CI_Model {
 	   $this->db->from('posts');
 	   $this->db->order_by("id","desc");
 	   $query = $this->db->get();
-   	   if ($query->num_rows() > 1) {
+   	   if ($query->num_rows() > 0) {
 	   		return  $query->result();
 		
 	   } 
@@ -96,7 +96,62 @@ class customer_m extends CI_Model {
 		//return $query->num_rows();
 		return $query->result(); 
    }
-	
-
-}
+   public function updateAboutInfo($data)
+   {
+	//	$updated_data=array('');  
+	$updateddata = array(
+		'about'=>$data['about_me_info'],
+		'intrests'=>$data['about_me_intrests'],
+		'skills'=>$data['about_me_skills']
+	);
+	$this->db->where('cust_id',$this->session->userdata('logged_in')['account_id']);
+	if($this->db->update('cust_sign_up',$updateddata))
+	return true;
+	else
+	return false;	
+   }
+   
+   public function updatePrivacyInfo($data)
+   {
+		$updatedata = array(
+		'profile_visible'=>$data['profile_visible'],
+		'comments_visible'=>$data['comments_visible'],
+		'companies_visible'=>$data['companies_visible']
+		);
+		$this->db->where('cust_id',$this->session->userdata('logged_in')['account_id']);
+		if($this->db->update('cust_sign_up',$updatedata))
+			return true;
+		else
+			return false;	
+   }
+   
+   public function updateEmailInfo($data)
+   {
+	  $updatedata = array(
+		'email_notification'=>$data['email_notofication'],
+	  ); 
+	  $this->db->where('cust_id',$this->session->userdata('logged_in')['account_id']);
+	  if($this->db->update('cust_sign_up',$updatedata))
+			return true;
+		else
+			return false;
+   }
+   
+   public function manageeducationdata($data)
+   {
+	   	$educationInfo = array('field_of_study'=>$data['field_of_study'],
+		'college_institution'=>$data['college_institution'],
+		'degree_certificate'=>$data['degree_certificate'],
+		'attended_from'=>$data['year_attended_from'].'-'.$data['month_attended_from'],
+		'attended_upto'=>$data['year_attended_to'].'-'.$data['month_attended_to'],
+		'specialised_studies'=>$data['special_studies'],
+		'cust_id'=>$this->session->userdata('logged_in')['account_id']
+		);
+		if($this->db->insert('education_info', $educationInfo))
+			return $this->db->insert_id();
+		else
+			return false;
+   }
+   
+ }
 ?>
