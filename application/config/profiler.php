@@ -7,11 +7,11 @@
 | data are displayed when the Profiler is enabled.
 | Please see the user guide for info:
 |
-|	http://codeigniter.com/user_guide/general/profiling.html
+|	http://codeigniter.com/user_guide/general/Profiling.html
 |
 */
 
 
 
-/* End of file profiler.php */
-/* Location: ./application/config/profiler.php */
+/* End of file Profiler.php */
+/* Location: ./application/config/Profiler.php */

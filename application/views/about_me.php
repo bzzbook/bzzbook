@@ -1,55 +1,4 @@
-<!DOCTYPE html>
-<?php
-$session_data = $this->session->userdata('logged_in');
-?>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>BzzBook CREATE A BUZZ WITH YOUR BZZINESS</title>
-
-<!-- Bootstrap -->
-<link href="<?php echo base_url(); ?>css/bootstrap.min.css" rel="stylesheet">
-<link href="<?php echo base_url(); ?>css/animate.min.css" rel="stylesheet">
-<link href="<?php echo base_url(); ?>css/style.css" rel="stylesheet">
-<link href="<?php echo base_url(); ?>css/responsive.css" rel="stylesheet">
-<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-      <script src="js/html5shiv.min.js"></script>
-      <script src="js/respond.min.js"></script>
-    <![endif]-->
-</head>
-<body>
-<header>
-  <section class="container">
-    <figure class="col-lg-3 col-md-3 col-sm-4 col-xs-12 animate-plus" data-animations="pulse"  data-animation-when-visible="true"  data-animation-reset-offscreen="true"><a href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>images/logo.png" alt=""></a></figure>
-    <div class="col-lg-6 col-md-6 col-sm-4 col-xs-12 search">
-      <div class="input-group"> <span class="input-group-btn">
-        <input type="button" value="" role="button"  class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" id="drop2">
-        <ul aria-labelledby="drop2" role="menu" class="dropdown-menu">
-          <li><a href="file:///E|/code/html-about/h#" tabindex="-1" role="menuitem">Jobs</a></li>
-          <li><a href="file:///E|/code/html-about/h#" tabindex="-1" role="menuitem">Companies</a></li>
-          <li><a href="file:///E|/code/html-about/h#" tabindex="-1" role="menuitem">Events</a></li>
-          <li><a href="file:///E|/code/html-about/h#" tabindex="-1" role="menuitem">Members</a></li>
-        </ul>
-        </span>
-        <input type="search" placeholder="Search Here......" class="form-control">
-        <div class="find"><a href="#">Find</a></div>
-      </div>
-    </div>
-    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
-      <div class="curentUser">
-        <div class="userImg"><img src="<?php echo base_url(); ?>images/user.png" alt=""></div>
-        <a href="#" role="button"  class="dropdown-toggle userName" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Logged in as:<span><?php echo  $session_data['email']; ?></span></a>
-        <ul  role="menu" class="dropdown-menu">
-          <li><a href="<?php echo base_url(); ?>signg_in/sign_out" tabindex="-1" role="menuitem">Logout</a></li>
-        </ul>
-      </div>
-    </div>
-  </section>
-</header>
+<?php $this->load->view('header.php');?>
 <section class="mainNav">
   <div class="container">
     <nav class="navbar navbar-static" id="navbar-example">
@@ -69,7 +18,7 @@ $session_data = $this->session->userdata('logged_in');
           <div class="pull-right viewAs">
             <p>Viewing as:</p>
             <select class="form-control" >
-              <optgroup label="Your Personal Profile">
+              <optgroup label="Your Personal profile">
               <option>Jhon Smith</option>
               </optgroup>
               <optgroup label="Your Companies">
@@ -95,11 +44,11 @@ $session_data = $this->session->userdata('logged_in');
         </div>
         <div class="sideNav">
           <ul>
-            <li><a href="<?php echo base_url(); ?>profile/message">Messages <span>5</span></a></li>
+           <li><a href="<?php echo base_url(); ?>profile/message">Messages <span>5</span></a></li>
             <li><a href="#">Buzzers ! <span>20</span></a></li>
-            <li><a href="#">My Groups</a></li>
-            <li><a href="#">My Jobs</a></li>
-            <li><a href="#">My Events</a></li>
+            <li><a href="<?php echo base_url(); ?>profile/groups">My Groups</a></li>
+            <li><a href="<?php echo base_url(); ?>profile/jobs">My Jobs</a></li>
+            <li><a href="<?php echo base_url(); ?>profile/events">My Events</a></li>
             <li><a href="#">My Companies</a></li>
             <li><a href="#">Photos &amp; Videos</a></li>
             <li><a href="#">Favorites</a></li>
@@ -136,46 +85,50 @@ $session_data = $this->session->userdata('logged_in');
     </section>
     <section class="col-lg-6 col-md-6 col-sm-5 col-xs-12 coloumn2 aboutme">
       <h2>About Me</h2>
+      <?php foreach($result as $info):?>
       <div class="posts">
       <div class="col-md-5">
         <ul class="nav-tabs" role="tablist" id="myTab">
         <li role="presentation" class="active"><a href="#About" aria-controls="home" role="tab" data-toggle="tab">About</a></li>
-        <li role="presentation"><a href="#Educational" aria-controls="profile" role="tab" data-toggle="tab">Educational Background </a></li>
+        <li role="presentation"><a href="#educational" aria-controls="profile" role="tab" data-toggle="tab">Educational Background </a></li>
         <li role="presentation"><a href="#Contact" aria-controls="messages" role="tab" data-toggle="tab">Contact Details </a></li>
         </ul>
       </div>  
         <div class="tab-content col-md-7">
         <div role="tabpanel" class="tab-pane active" id="About">
         <h4>Overview</h4>
-        <p>THis is Ramesh Kuppili , Web Developer webdevelopement, softwrare, testing, designing </p>
+        <p><?php echo $info->about?></p>
         <h4>Interest</h4>
-        <p>webdevelopement, softwrare, testing, designing webdevelopement, softwrare, testing, designing </p>
+        <p><?php echo $info->intrests;?> </p>
         </div>
-        <div role="tabpanel" class="tab-pane" id="Educational">
+        <?php foreach($education_details as $edu): ?>
+        <div role="tabpanel" class="tab-pane" id="educational">
         <h4>Institution:</h4>
-        <p>andhra university</p>
+        <p><?php echo $edu->college_institution; ?></p>
         <h4>Field of Study:</h4>
-        <p>Computer science</p>
+        <p><?php echo $edu->field_of_study; ?></p>
         <h4>Degree/Certificate:</h4>
-        <p>Degree</p>
+        <p><?php echo $edu->degree_certificate; ?></p>
         <h4>Years Attended:</h4>
-        <p>May 1953 - July 1956 </p>
+        <p><?php echo $edu->attended_from; ?> To <?php echo $edu->attended_upto; ?> </p>
         <h4>Specialized Studies:</h4>
-        <p>software developement, testingg</p>
+        <p><?php echo $edu->specialised_studies; ?></p>
         </div>
+        <?php endforeach;?>
         <div role="tabpanel" class="tab-pane" id="Contact">
          <h4>Email:</h4>
-        <p>sprasad96@gmail.com</p>
+        <p><?php echo $info->email;?></p>
          <h4>Phone:</h4>
-        <p>9090909090</p>
+        <p><?php echo $info->phone_number;?></p>
          <h4>Office:</h4>
-        <p>software developement, testingg</p>
+        <p><?php echo $info->company_name;?></p>
          <h4>Fax:</h4>
         <p>9696969696</p>
         </div>
         </div>
         <div class="clear"></div>
       </div>
+      <?php endforeach;?>
     </section>
     <section class="col-lg-3 col-md-3 col-sm-3 col-xs-12 coloumn3">
       <aside>
@@ -239,24 +192,5 @@ $session_data = $this->session->userdata('logged_in');
     </section>
   </div>
 </section>
-<footer class="post">
-  <ul>
-    <li><a hrte>ABOUT US</a></li>
-    <li><a href="#">PRIVACY POLICY</a></li>
-    <li><a href="#">TERMS OF USE</a></li>
-  </ul>
-  <p>Bzzbook &copy; 2015 English (US)</p>
-</footer>
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
-<script src="<?php echo base_url(); ?>js/jquery-1.11.1.min.js"></script> 
-<!-- Include all compiled plugins (below), or include individual files as needed --> 
-<script src="<?php echo base_url(); ?>js/bootstrap.min.js"></script> 
-<script src="<?php echo base_url(); ?>js/animate-plus.min.js"></script> 
-<script src="<?php echo base_url(); ?>js/custom.js"></script>
-<script src="<?php echo base_url(); ?>js/jquery.validate.min.js"></script>
-<script src="<?php echo base_url(); ?>js/additional-methods.js"></script> 
-<script type="text/javascript">
-   $('#email_invite').validate();
-	</script>
-</body>
-</html>
+<?php $this->load->view('footer.php');
+?>

@@ -308,5 +308,53 @@ footer.home h3 em{ color:#fdc70f; font-style:normal;}
 .messageSt .form-group{ margin-bottom:0px; }
 .messageSt #compose{ padding-bottom:20px; }
 
+.groupsSt h2{ background:url(../images/sideNav.png) no-repeat 0 8px; padding:0 0 0 35px; height:42px; line-height:42px; font-size:18px;  }
+.groupsSt .tabBar{ padding:20px 0; background:#fbc436; border-bottom:2px solid #000; }
+.groupsSt .tabBar span{ display:inline-block;  line-height:30px; padding-right:10px; color:#fff;   }
+.groupsSt .form-group{ margin-bottom:0px; }
+.groupsSt .form-group div .col-md-6 select{ margin:20px 0; }
+.groupsSt .tabBar .black{ background:#000; border:0px;  }
+.groupProperty{ padding:10px; background:#f9f9f9; border-top:1px solid #ccc;   }
+.groupProperty .groupBlock{ float:left; padding:0 20px 0 10px;  }
+.groupProperty .groupBlock h3{ font-size:12px; font-weight:bold; color:#9e9d9d;  }
+.groupProperty .groupBlock p{ color:#696969; }
+.groupProperty .groupBlock a{ line-height:30px; display:block; float:left; color:#000; margin-left:20px; }
 
-.groupsSt h2{ background:url(../images/sideNav.png) no-repeat 0 8px; padding:0 0 0 35px; height:42px; line-height:42px; font-size:18px;}
+/* Form Fields */
+
+.FormFields{ padding-top:20px; }
+.FormFields textarea{ width:100%; height:150px; }
+.FormFields span{ display:block; }
+.groupEditBlock{ padding:20px 0; }
+.smallBtn{ line-height:18px; font-size:12px; padding:10px 12px !important;  }
+.form-group .buttons{ padding-top:75px; }
+.black{ background:#000; border:0px;}
+.black:hover{background:#000; }
+.jobsSt h2{ background:url(../images/sideNav.png) no-repeat 0 -87px; padding:0 0 0 35px; height:42px; line-height:42px; font-size:18px;  }
+
+.jobProperty{ padding:10px; background:#f9f9f9; border-top:1px solid #ccc;   }
+.jobProperty .jobBlock{ float:left; padding:0 20px 0 10px; width:30%;}
+.jobProperty .jobBlock+.jobBlock{ width:30%;}
+.jobProperty .jobBlock+.jobBlock+.jobBlock{ width:20%;}
+.jobProperty .jobBlock+.jobBlock+.jobBlock+.jobBlock{ width:20%;}
+.jobProperty .jobBlock h3{ font-size:12px; font-weight:bold; color:#9e9d9d;  }
+.jobProperty .jobBlock p{ color:#696969; }
+.jobProperty .jobBlock a{ line-height:30px; display:block; float:left; color:#000; margin-left:20px; }
+
+.EventProperty{ padding:10px; background:#f9f9f9; border-top:1px solid #ccc;   }
+.EventProperty .EventBlock{ float:left; padding:0 20px 0 10px; width:30%;}
+.EventProperty .EventBlock+.EventBlock{ width:30%;}
+.EventProperty .EventBlock+.EventBlock+.EventBlock{ width:20%;}
+.EventProperty .EventBlock+.jobBlock+.jobBlock+.jobBlock{ width:20%;}
+.EventProperty .EventBlock h3{ font-size:12px; font-weight:bold; color:#9e9d9d;  }
+.EventProperty .EventBlock p{ color:#696969; }
+.EventProperty .EventBlock a{ line-height:30px; display:block; float:left; color:#000; margin-left:20px; }
+
+.EduProperty{ padding:10px; background:#f9f9f9; border-top:1px solid #ccc;   }
+.EduProperty .EduBlock{ float:left; padding:0 10px 0 10px; width:33%;}
+.EduProperty .EduBlock+.EduBlock{ width:22%;}
+.EduProperty .EduBlock+.EduBlock+.EduBlock{ width:25%;}
+.EduProperty .EduBlock+.EduBlock+.EduBlock+.EduBlock{ width:18%;}
+.EduProperty .EduBlock h3{ font-size:12px; font-weight:bold; color:#9e9d9d;  }
+.EduProperty .EduBlock p{ color:#696969; }
+.EduProperty .EduBlock a{ line-height:30px; display:block; float:left; color:#000; margin-left:20px; }

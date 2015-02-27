@@ -264,9 +264,9 @@ function print_country(country_id){
 	option_str.options[0] = new Option('Select Country','');
 	option_str.selectedIndex = 0;
 	for (var i=0; i<country_arr.length; i++) {
-		option_str.options[option_str.length] = new Option(country_arr[i],country_arr[i]);
+			option_str.options[option_str.length] = new Option(country_arr[i],country_arr[i]);
+		}
 	}
-}
 
 function print_state(state_id, state_index){
 	var option_str = document.getElementById(state_id);

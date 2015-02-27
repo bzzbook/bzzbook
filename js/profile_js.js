@@ -1,51 +1,7 @@
-<footer class="post">
-  <ul>
-    <li><a hrte>ABOUT US</a></li>
-    <li><a href="#">PRIVACY POLICY</a></li>
-    <li><a href="#">TERMS OF USE</a></li>
-  </ul>
-  <p>Bzzbook &copy; 2015 English (US)</p>
-</footer>
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
-<script src="<?php echo base_url(); ?>js/jquery-1.11.1.min.js"></script> 
-<!-- Include all compiled plugins (below), or include individual files as needed --> 
-<script src="<?php echo base_url(); ?>js/bootstrap.min.js"></script> 
-<script src="<?php echo base_url(); ?>js/animate-plus.min.js"></script> 
-<script src="<?php echo base_url(); ?>js/custom.js"></script>
-<script src="<?php echo base_url(); ?>js/jquery.validate.min.js"></script>
-<script src="<?php echo base_url(); ?>js/additional-methods.js"></script>
-<script src="<?php echo base_url(); ?>js/countries.js"></script>
-<script language="javascript">print_country("country");</script> 
-<script type="text/javascript">
-   $('#email_invite').validate();
-   $('#profile').validate();
-	</script>
-<script>
+// JavaScript Document
 $(function(){
-	education_edit();
-	profile_edit();
-	organization_edit();
-	group_edit();
-	
 		$("form[name=formabout_me]").submit(function(event){
 			   url="<?php echo base_url();?>customer/updateabout/";
-				 $.ajax({
-        			type: "POST",
-			        url: url,
-			        data: { form_data: $(this).serialize()} ,
-        			success: function(html)
-			        {   
-            			if(html == true)
-							alert("Information Updated");
-						else
-							alert("Something went wrong Please try after sometime");
-			        }
-			       });			
-				event.preventDefault();
-			});
-			
-				$("form[name=postboard]").submit(function(event){
-			   url="<?php echo base_url();?>customer/postborad_update/";
 				 $.ajax({
         			type: "POST",
 			        url: url,
@@ -90,13 +46,8 @@ $(function(){
 					   	if(data == false)
 							alert("Please Enter Valid Details");
 						else
-						{
 							$(".groupMainBlock").html(data);
-							$('#education_form').trigger("reset");
 							$('#eduModal').modal('toggle');
-							education_edit();
-						}
-						
 					  });
 					event.preventDefault();
 				});
@@ -108,9 +59,7 @@ $(function(){
 							alert("Please Enter Valid Details");
 						else
 							$(".groupMainBlock1").html(data);
-							$('#profession_form').trigger("reset");
 							$('#profModal').modal('toggle');
-							profile_edit();
 					  });
 				event.preventDefault();});	
 				$("#organization_form").submit(function( event){
@@ -121,9 +70,7 @@ $(function(){
 							alert("Please Enter Valid Details");
 						else
 							$(".groupMainBlock2").html(data);
-							$('#organization_form').trigger("reset");
 							$('#orgModal').modal('toggle');
-							organization_edit();
 					  });
 				event.preventDefault();
 				});	
@@ -135,14 +82,10 @@ $(function(){
 						alert("Please Enter Valid Details");
 						else
 						$(".groupMainBlock3").html(data);
-						$('#group_form').trigger("reset");
 						$('#grpModal').modal('toggle');
-						group_edit();
 					});
 					event.preventDefault();
 				});
-				function education_edit()
-				{
 				$(".edu_edit").click(function(){
 						education_id = $(this).attr("id").substr(14);
 						$("input[name=edu_form_id]").val(education_id)
@@ -165,9 +108,7 @@ $(function(){
 						});
 						return false;
 				});
-				}
-				function profile_edit()
-				{
+				
 					$(".prof_edit").click(function(){
 						profession_id = $(this).attr("id").substr(15);
 						$("input[name=prof_form_id]").val(profession_id)
@@ -183,60 +124,14 @@ $(function(){
 							$("select[name=year_attended_to]").val(end_date[0]);
 							$("select[name=month_attended_to]").val(end_date[1]);
 							$("textarea[name=job_description]").val(info.job_description);
-							$("input[name=current]").attr("checked","checked");
+							$("input[type=checkbox]").val(info.current);
 							$("input[name=prof_action]").val("update")
 							$('#profModal').modal('toggle');
 						});
 						return false;
 				});
-				}
-				function organization_edit()
-				{
-					$(".org_edit").click(function(){
-						organization_id = $(this).attr("id").substr(14);
-						$("input[name=org_form_id]").val(organization_id)
-						url="<?php echo base_url(); ?>profile/orgEdit/";
-						$.post( url, { organization_id: organization_id})
-						.done(function( data ) {
-							info = JSON.parse(data);
-							$("input[name=org_name]").val(info.org_name);
-							$("input[name=position]").val(info.position);
-							$("textarea[name=org_description]").val(info.org_desc);
-							start_date = info.start_date.split('-')
-							$("select[name=year_attended_from]").val(start_date[0]);
-							$("select[name=month_attended_from]").val(start_date[1]);
-							end_date = info.end_date.split('-')
-							$("select[name=year_attended_to]").val(end_date[0]);
-							$("select[name=month_attended_to]").val(end_date[1]);
-						    $("select[name=emp_status]").val(info.emp_status);	
-							$("input[name=org_action]").val("update")
-							$('#orgModal').modal('toggle');
-						});
-						return false;
-				});
-				}
-				function group_edit()
-				{
-					$(".grp_edit").click(function(){
-						group_id = $(this).attr("id").substr(14);
-						$("input[name=grp_form_id]").val(group_id)
-						url="<?php echo base_url(); ?>profile/grpEdit/";
-						$.post( url, { group_id: group_id})
-						.done(function( data ) {
-							info = JSON.parse(data);
-							$("input[name=group_name]").val(info.grp_name);
-							$("input[name=group_type]").val(info.grp_type);
-							$("input[name=website_url]").val(info.web_url);
-							$("input[name=city]").val(info.city);
-							$("select[name=state]").val(info.state);
-							$("input[name=postal_code]").val(info.postal_code);
-							$("textarea[name=additional_info]").val(info.additional_info);
-							$("input[name=grp_action]").val("update")
-							$('#grpModal').modal('toggle');
-						});
-						return false;
-				});
-				}
+				
+				
 });
 function pwdchange(){
 var pass=$('#pwd').val();
@@ -254,48 +149,3 @@ var pass=$('#pwd').val();
         }
        });
 }
-</script>
-<!-- <script type="text/javascript">
-		$( document ).ready(function() {
-			$("#country").val("<?php// echo $r->country; ?>");
-			print_state('state',$("#country option:selected").index());
-			$("#state").val("<?php//echo $r->state?>");
-			/*$('#dpYears').datepicker();*/
-		});
-	</script> -->
-    <script type="text/javascript">
-function myfunc(cid){
-	$('#des'+cid).show();
-	$('#msg'+cid).hide();
-
-}
-function likefun(pid,uid,status){
-	
-	alert(status);
-	var posted_by=pid;
-	var account_id=uid;
-	url="<?php echo base_url();?>signg_in/insertlinks/"+pid+"/"+uid;
-	  $.ajax({
-        type: "POST",
-        url: url,
-        data: { posted_by: pid, account_id : uid} ,
-        success: function(html)
-        {   
-			
-         if(status == 'like')
-		 	//$("#like_ajax"+pid).html("Unlike");
-			$("#link_like"+pid).html("Unlike");
-		  else
-			//$("#like_ajax"+pid).html("Like");
-			$("#link_like"+pid).html("Like");
-        }
-       });
-	
-}
-function view_comments(id){
-	$('#res_comments'+id).hide();
-	$('#res_comments_viewmore'+id).show();
-}
-</script>
-</body>
-</html>

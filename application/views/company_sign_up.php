@@ -91,7 +91,7 @@
           </div>
           <div class="field col-md-6">
            <select class="form-control" onchange="print_state('state',this.selectedIndex);" id="country" name ="country">
-			<option vbalue="">Select Country</option>
+			<option value="">Select Country</option>
 			</select> 
          </div> 
           <div class="field col-md-6">

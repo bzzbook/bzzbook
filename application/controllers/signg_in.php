@@ -17,8 +17,8 @@ class signg_in extends CI_Controller {
 	
 	public function db_check_login()
 	{
-					$this->form_validation->set_rules('email','Email','trim|required|valid_email|xss_clean');
-					$this->form_validation->set_rules('password','Password','trim|required|xss_clean');
+		$this->form_validation->set_rules('email','Email','trim|required|valid_email|xss_clean');
+		$this->form_validation->set_rules('password','Password','trim|required|xss_clean');
 		
 	if($this->form_validation->run() == FALSE)
 		 {
@@ -30,8 +30,8 @@ class signg_in extends CI_Controller {
 				    );
 					
 						
-		$this->load->model('sign_inm');
-	    $result = $this->sign_inm->sign_in($data);
+				$this->load->model('sign_inm');
+			    $result = $this->sign_inm->sign_in($data);
 		
 		
 		
@@ -45,8 +45,8 @@ class signg_in extends CI_Controller {
 						 
 		$sess_array = array(
 		   					'email' =>$result[0]->email,
-						    'password' =>$result[0]->new_password,
-							'account_id' =>$result[0]->account_id
+						    'password' =>$result[0]->password,
+							'account_id' =>$result[0]->cust_id
 							
 						   );
 		
@@ -56,7 +56,7 @@ class signg_in extends CI_Controller {
 		if($result != false){
 			$data = array(
 						'email' =>$result[0]->email,
-						'password' =>$result[0]->new_password
+						'password' =>$result[0]->password
 						
 					     );
 					
@@ -85,12 +85,12 @@ class signg_in extends CI_Controller {
   public function send_post()
   {
 	 
-	 $this->load->model('customer_m');
+	 $this->load->model('customermodel');
 	 $session_data = $this->session->userdata('logged_in');
 	 $data['posted_by'] = $session_data['account_id'];
 	 $data['post_content'] = $this->input->post('posts');
 	 
-	 $this->customer_m->post_buzz($data);
+	 $this->customermodel->post_buzz($data);
 	 echo "post saved successfully..."; 
 	 redirect('profiles');
 	 // redirect(site_url('customer_controller/view_post'));
@@ -102,7 +102,7 @@ class signg_in extends CI_Controller {
 	       'account_id'=>$uid,
 		   'like'=>'yes'
 	   );
-	 $res=$this->customer_m->insertlinks($data);
+	 $res=$this->customermodel->insertlinks($data);
 	 if($res){
 		 
 		 echo "success";
@@ -119,18 +119,17 @@ class signg_in extends CI_Controller {
 	   'post_id'=>$this->input->post('post_id'),
 	   'account_id'=>$this->input->post('posted_by')
 	   );
-	  
-	   $res=$this->customer_m->write_comments($data);
+	   $res=$this->customermodel->write_comments($data);
 	   redirect('profiles');
 	   
    }
     
    
    function checkpass($pass){
-	   $user_id=$this->session->userdata['logged_in']['account_id'];
-	     $condition = "new_password =" . "'" . $pass . "' and account_id=$user_id";
+	    $user_id = $this->session->userdata('logged_in')['account_id'];
+	    $condition = "password =" . "'" . md5($pass) . "'"." and cust_id=$user_id";
 		$this->db->select('*');
-		$this->db->from('sign_up');
+		$this->db->from('cust_sign_up');
 		$this->db->where($condition);
 		$query = $this->db->get();
 		
