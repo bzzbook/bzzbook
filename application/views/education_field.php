@@ -1,5 +1,5 @@
 <?php 
-	$education_details = $this->customermodel->geteducationDetails();
+	$education_details = $this->profile_set->geteducationDetails();
 ?>
         	<?php 
 				if(sizeof($education_details)>0):

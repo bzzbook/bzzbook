@@ -29,6 +29,7 @@ class Profile_set extends CI_Model {
 		$this->db->select('*');
 		$this->db->from('education_info');
 		$this->db->where($condition);
+		$this->db->order_by("attended_upto", "desc");
 		$query = $this->db->get();
 		if ($query->num_rows() > 0) {
 			return $query->result();
@@ -43,6 +44,7 @@ class Profile_set extends CI_Model {
 		$this->db->select('*');
 		$this->db->from('profession_info');
 		$this->db->where($condition);
+		$this->db->order_by("end_date", "desc");
 		$query = $this->db->get();
 		if ($query->num_rows() > 0) {
 			return $query->result();
@@ -58,6 +60,7 @@ class Profile_set extends CI_Model {
 		$this->db->select('*');
 		$this->db->from('organization_info');
 		$this->db->where($condition);
+		$this->db->order_by("end_date", "desc"); 
 		$query = $this->db->get();
 		if ($query->num_rows() > 0) {
 			return $query->result();
@@ -73,6 +76,7 @@ class Profile_set extends CI_Model {
 		$this->db->select('*');
 		$this->db->from('group_info');
 		$this->db->where($condition);
+		$this->db->order_by("grpinfo_id", "desc");
 		$query = $this->db->get();
 		if ($query->num_rows() > 0) {
 			return $query->result();

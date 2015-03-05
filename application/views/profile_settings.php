@@ -101,6 +101,7 @@
             <div role="tabpanel" class="tab-pane active" id="post_board">
               <figure class="pfpic"><span>Profile Pic</span><img src="<?php echo base_url(); ?>images/pf_pic.png" alt=""></figure>
          <form name="postboard" id="postboard" method="POST" action="">
+            <form name="profile" method="POST" action="<?php echo base_url(); ?>customer/pf" >
               <div class="upload">
                   <span class="btn btn-success fileinput-button"> <span>Change Picture</span> 
                   <!-- The file input field used as target for the file upload widget -->
@@ -351,6 +352,9 @@
             
             <div class="filed col-md-12 col-lg-12">
                <div class="modal fade" id="profModal" tabindex="-1" role="dialog" aria-labelledby="profModalLabel" aria-hidden="true">
+
+<!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -537,6 +541,10 @@
                   </div>
                   </form>
                 </div>
+
+               <h4 class="clear">Organizations</h4>
+              <div class="filed col-md-12">
+                <input type="submit" class="add" value="add Organizations">
               </div>
             </div>
             </div>

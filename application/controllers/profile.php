@@ -29,11 +29,19 @@ public function profile_set()
 }
 
 public function about_me()
-{      
-	$this->load->model('profile_set');
+{
 	$data['result'] = $this->profile_set->save_settings();
-	$data['education_details'] = $this->customermodel->geteducationDetails();
+	$data['education_details'] = $this->profile_set->geteducationDetails();
 	$this->load->view('about_me',$data);
+}
+
+
+public function business_details()
+{
+	$data['profession_details'] = $this->profile_set->getprofessionDetails();
+	$data['organization_details'] = $this->profile_set->getorganizationDetails();
+	$data['group_details'] = $this->profile_set->getgroupDetails();
+	$this->load->view('business_details',$data);
 }
 
 public function post()

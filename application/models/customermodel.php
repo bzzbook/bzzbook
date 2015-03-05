@@ -137,31 +137,6 @@ class Customermodel extends CI_Model {
 			return false;
    }
    
-   public function managepostboarddata($data)
-   {
-	   $postboard_info = array(
-	    'first_name'=>$data['firstname'],
-		'last_name'=>$data['lastname'],
-	    'city'=>$data['city'],
-		'postal_code'=>$data['postal_code'],
-		'user_name'=>$data['user_name'],
-		'password'=>md5($data['password']),
-		'con_password'=>md5($data['con_password']),
-		'email'=>$data['email'],
-		'job_type'=>$data['position'],
-		'industry'=>$data['industry'],
-		'company_name'=>$data['companyname'],
-		);
-		$this->db->where('cust_id',$this->session->userdata('logged_in')['account_id']);
-			if($this->db->update('cust_sign_up', $postboard_info)):
-				return true;
-			else:
-				return false;
-			endif;
-	   
-   }
-   
-   
    public function manageeducationdata($data)
    {
 	   	$educationInfo = array('field_of_study'=>$data['field_of_study'],
@@ -172,138 +147,11 @@ class Customermodel extends CI_Model {
 		'specialised_studies'=>$data['special_studies'],
 		'cust_id'=>$this->session->userdata('logged_in')['account_id']
 		);
-		if($data['edu_action'] == "add"):
-			if($this->db->insert('education_info', $educationInfo))
-				return $this->db->insert_id();
-			else
-				return false;
-		else:
-		    $this->db->where('educationinfo_id',$data['edu_form_id']);
-			if($this->db->update('education_info', $educationInfo)):
-				return $data['edu_form_id'];
-			else:
-				return false;
-			endif;
-		endif;
+		if($this->db->insert('education_info', $educationInfo))
+			return $this->db->insert_id();
+		else
+			return false;
    }
    
-  public function manageprofessiondata($data)
-  {
-	   $professionInfo = array(
-	    'job_title' =>$data['job_title'],
-   	    'start_date'=>$data['year_attended_from'].'-'.$data['month_attended_from'],
-		'end_date'=>$data['year_attended_to'].'-'.$data['month_attended_to'],
-	    'job_description'=>$data['job_description'],
-		'current_job'=>$data['current'],
-		'cust_id'=>$this->session->userdata('logged_in')['account_id']
-		);
-			if($data['prof_action'] == "add"):
-			if($this->db->insert('profession_info', $professionInfo))
-				return $this->db->insert_id();
-			else
-				return false;
-		else:
-		    $this->db->where('professioninfo_id',$data['prof_form_id']);
-			if($this->db->update('profession_info', $professionInfo)):
-				return $data['prof_form_id'];
-			else:
-				return false;
-			endif;
-		endif;
-  }
-  
-  public function manageorganizationdata($data)
-  {
-	  $organizationInfo = array(
-	    'org_name' =>$data['org_name'],
-		'position' =>$data['position'],
-		'org_desc' =>$data['org_description'],
-   	    'start_date'=>$data['year_attended_from'].'-'.$data['month_attended_from'],
-		'end_date'=>$data['year_attended_to'].'-'.$data['month_attended_to'],
-		'emp_status'=>$data['emp_status'],
-		'cust_id'=>$this->session->userdata('logged_in')['account_id']
-		);
-		if($data['org_action'] == "add"):
-			if($this->db->insert('organization_info', $organizationInfo))
-				return $this->db->insert_id();
-			else
-				return false;
-		else:
-		    $this->db->where('orginfo_id',$data['org_form_id']);
-			if($this->db->update('organization_info', $organizationInfo)):
-				return $data['org_form_id'];
-			else:
-				return false;
-			endif;
-		endif;
-  }
-  public function managegroupdata($data)
-  {
-	  $groupInfo = array(
-	  'grp_name' =>$data['group_name'],
-	  'grp_type' =>$data['group_type'],
-	  'web_url' =>$data['website_url'],
-	  'city' =>$data['city'],
-	  'state'=>$data['state'],
-	  'postal_code' =>$data['postal_code'],
-	  'additional_info' =>$data['additional_info'],
-	  'cust_id' =>$this->session->userdata('logged_in')['account_id']
-	  );
-	  if($data['grp_action'] == "add"):
-			if($this->db->insert('group_info', $groupInfo))
-				return $this->db->insert_id();
-			else
-				return false;
-		else:
-		    $this->db->where('grpinfo_id',$data['edu_form_id']);
-			if($this->db->update('group_info', $groupInfo)):
-				return $data['grp_form_id'];
-			else:
-				return false;
-			endif;
-		endif;
-  }
-  
-  public function geteducationDetails()
-  {
-	  $this->db->order_by("attended_upto", "desc"); 
-	  $query = $this->db->get_where('education_info',array('cust_id' => $this->session->userdata('logged_in')['account_id']));
-			if ($query->num_rows() > 0) {
-				 return $query->result();
-				} else {
-				return false;
-				}
-			}
-			
-   public function getprofessionDetails()
-  {	  $this->db->order_by("end_date", "desc");
-	  $query = $this->db->get_where('profession_info',array('cust_id' => $this->session->userdata('logged_in')['account_id']));
-			if ($query->num_rows() > 0) {
-				 return $query->result();
-				} else {
-				return false;
-				}
-			}
-			
-	 public function getorganizationDetails()
-  {
-	  $this->db->order_by("end_date", "desc");
-	  $query = $this->db->get_where('organization_info',array('cust_id' => $this->session->userdata('logged_in')['account_id']));
-			if ($query->num_rows() > 0) {
-				 return $query->result();
-				} else {
-				return false;
-				}
-			}	
-			
-	 public function getgroupDetails()
-  {
-	  $query = $this->db->get_where('group_info',array('cust_id' => $this->session->userdata('logged_in')['account_id']));
-			if ($query->num_rows() > 0) {
-				 return $query->result();
-				} else {
-				return false;
-				}
-			}	
  }
 ?>
