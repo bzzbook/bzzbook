@@ -1,4 +1,59 @@
+<<<<<<< HEAD
 <?php $this->load->view('header');?>
+=======
+<!DOCTYPE html>
+<?php
+$session_data = $this->session->userdata('logged_in');
+?>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BzzBook CREATE A BUZZ WITH YOUR BZZINESS</title>
+
+<!-- Bootstrap -->
+<link href="<?php echo base_url(); ?>css/bootstrap.min.css" rel="stylesheet">
+<link href="<?php echo base_url(); ?>css/animate.min.css" rel="stylesheet">
+<link href="<?php echo base_url(); ?>css/style.css" rel="stylesheet">
+<link href="<?php echo base_url(); ?>css/responsive.css" rel="stylesheet">
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<header>
+  <section class="container">
+    <figure class="col-lg-3 col-md-3 col-sm-4 col-xs-12 animate-plus" data-animations="pulse"  data-animation-when-visible="true"  data-animation-reset-offscreen="true"><img src="<?php echo base_url(); ?>images/logo.png" alt=""></figure>
+    <div class="col-lg-6 col-md-6 col-sm-4 col-xs-12 search">
+      <div class="input-group"> <span class="input-group-btn">
+        <input type="button" value="" role="button"  class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" id="drop2">
+        <ul aria-labelledby="drop2" role="menu" class="dropdown-menu">
+          <li><a href="file:///E|/code/Bzzbook-html/h#" tabindex="-1" role="menuitem">Jobs</a></li>
+          <li><a href="file:///E|/code/Bzzbook-html/h#" tabindex="-1" role="menuitem">Companies</a></li>
+          <li><a href="file:///E|/code/Bzzbook-html/h#" tabindex="-1" role="menuitem">Events</a></li>
+          <li><a href="file:///E|/code/Bzzbook-html/h#" tabindex="-1" role="menuitem">Members</a></li>
+        </ul>
+        </span>
+        <input type="search" placeholder="Search Here......" class="form-control">
+        <div class="find"><a href="#">Find</a></div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+      <div class="curentUser">
+        <div class="userImg"><img src="<?php echo base_url(); ?>images/user.png" alt=""></div>
+        <a href="#" role="button"  class="dropdown-toggle userName" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Logged in as:<span><?php echo  $session_data['email']; ?></span></a>
+        <ul  role="menu" class="dropdown-menu">
+          <li><a href="<?php echo base_url(); ?>signg_in/sign_out" tabindex="-1" role="menuitem">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</header>
+>>>>>>> 3b42fa150446cb57f00e4eba5e1cd896d2772ee1
 <section class="mainNav">
   <div class="container">
     <nav class="navbar navbar-static" id="navbar-example">
@@ -100,7 +155,11 @@
 		  <?php foreach($result as $r) { ?>
             <div role="tabpanel" class="tab-pane active" id="post_board">
               <figure class="pfpic"><span>Profile Pic</span><img src="<?php echo base_url(); ?>images/pf_pic.png" alt=""></figure>
+<<<<<<< HEAD
          <form name="postboard" id="postboard" method="POST" action="">
+=======
+            <form name="profile" method="POST" action="<?php echo base_url(); ?>customer/pf" >
+>>>>>>> 3b42fa150446cb57f00e4eba5e1cd896d2772ee1
               <div class="upload">
                   <span class="btn btn-success fileinput-button"> <span>Change Picture</span> 
                   <!-- The file input field used as target for the file upload widget -->
@@ -343,6 +402,7 @@
               <div class="filed col-md-12">
                 <input type="submit" class="add" data-toggle="modal" data-target="#grpModal"  value="add Groups">
               </div>
+<<<<<<< HEAD
               <div class="clear"></div>
             </div>
             
@@ -351,6 +411,10 @@
             
             <div class="filed col-md-12 col-lg-12">
                <div class="modal fade" id="profModal" tabindex="-1" role="dialog" aria-labelledby="profModalLabel" aria-hidden="true">
+=======
+<!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+>>>>>>> 3b42fa150446cb57f00e4eba5e1cd896d2772ee1
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -434,6 +498,7 @@
                 </div>
               </div>
             </div>
+<<<<<<< HEAD
             </div>
             
             
@@ -537,6 +602,11 @@
                   </div>
                   </form>
                 </div>
+=======
+               <h4 class="clear">Organizations</h4>
+              <div class="filed col-md-12">
+                <input type="submit" class="add" value="add Organizations">
+>>>>>>> 3b42fa150446cb57f00e4eba5e1cd896d2772ee1
               </div>
             </div>
             </div>
@@ -784,4 +854,107 @@
     </section>
   </div>
 </section>
+<<<<<<< HEAD
 <?php $this->load->view('footer');?>
+=======
+<footer class="post">
+  <ul>
+    <li><a hrte>ABOUT US</a></li>
+    <li><a href="#">PRIVACY POLICY</a></li>
+    <li><a href="#">TERMS OF USE</a></li>
+  </ul>
+  <p>Bzzbook &copy; 2015 English (US)</p>
+</footer>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+<script src="<?php echo base_url(); ?>js/jquery-1.11.1.min.js"></script> 
+<!-- Include all compiled plugins (below), or include individual files as needed --> 
+<script src="<?php echo base_url(); ?>js/bootstrap.min.js"></script> 
+<script src="<?php echo base_url(); ?>js/animate-plus.min.js"></script> 
+<script src="<?php echo base_url(); ?>js/custom.js"></script>
+<script src="<?php echo base_url(); ?>js/jquery.validate.min.js"></script>
+<script src="<?php echo base_url(); ?>js/additional-methods.js"></script>
+<script src="<?php echo base_url(); ?>js/countries.js"></script>
+<script language="javascript">print_country("country","<?php echo $r->country ?>");</script> 
+<script type="text/javascript">
+   $('#email_invite').validate();
+	</script>
+<script>
+$(function(){
+		$("form[name=formabout_me]").submit(function(event){
+			   url="<?php echo base_url();?>customer/updateabout/";
+				 $.ajax({
+        			type: "POST",
+			        url: url,
+			        data: { form_data: $(this).serialize()} ,
+        			success: function(html)
+			        {   
+            			if(html == true)
+							alert("Information Updated");
+						else
+							alert("Something went wrong Please try after sometime");
+			        }
+			       });			
+				event.preventDefault();
+			});
+			$("#privacy_form").submit(function( event ){
+					 url="<?php echo base_url();?>customer/updateprivacy/";
+					$.post( url, { formdata: $(this).serialize() })
+					.done(function( data ) {
+					   	if(data == true)
+							alert("Information Updated");
+						else
+							alert("Something Went wrong please try again after sometime");
+					  });
+					event.preventDefault();
+			});
+			$("#emailnotification").submit(function( event ){
+				url="<?php echo base_url();?>customer/updateemailnotification/";
+				$.post( url, { formdata: $(this).serialize() })
+					.done(function( data ) {
+					   	if(data == true)
+							alert("Information Updated");
+						else
+							alert("Something Went wrong please try again after sometime");
+					  });
+					event.preventDefault();
+			});
+			$("#education_form").submit(function( event){
+					url="<?php echo base_url();?>customer/manageducation/";
+					$.post( url, { formdata: $(this).serialize() })
+					.done(function( data ) {
+					   	if(data == false)
+							alert("Please Enter Valid Details");
+						else
+							$(".groupMainBlock").html($(".groupMainBlock").html()+data);
+					  });
+					event.preventDefault();
+				});
+});
+function pwdchange(){
+var pass=$('#pwd').val();
+
+   url="<?php echo base_url();?>signg_in/checkpass/"+pass;
+   $.ajax({
+        type: "POST",
+        url: url,
+        data: { pass: pass} ,
+        success: function(html)
+        {   
+            if(html=='failure'){
+				alert("Please enter valid password");
+			}
+        }
+       });
+}
+</script>
+<script type="text/javascript">
+		$( document ).ready(function() {
+			$("#country").val("<?php echo $r->country; ?>");
+			print_state('state',$("#country option:selected").index());
+			$("#state").val("<?php echo $r->state?>");
+			/*$('#dpYears').datepicker();*/
+		});
+	</script>
+</body>
+</html>
+>>>>>>> 3b42fa150446cb57f00e4eba5e1cd896d2772ee1

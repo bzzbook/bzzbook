@@ -119,7 +119,11 @@ class signg_in extends CI_Controller {
 	   'post_id'=>$this->input->post('post_id'),
 	   'account_id'=>$this->input->post('posted_by')
 	   );
+<<<<<<< HEAD
 	   $res=$this->customermodel->write_comments($data);
+=======
+	   $res=$this->customer->write_comments($data);
+>>>>>>> 3b42fa150446cb57f00e4eba5e1cd896d2772ee1
 	   redirect('profiles');
 	   
    }
