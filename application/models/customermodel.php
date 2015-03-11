@@ -152,6 +152,77 @@ class Customermodel extends CI_Model {
 		else
 			return false;
    }
+    public function manageprofessiondata($data)
+   {
+	   	$professionInfo = array(
+		'job_title'=>$data['job_title'],
+		'start_date'=>$data['year_attended_from'].'-'.$data['month_attended_from'],
+		'end_date'=>$data['year_attended_to'].'-'.$data['month_attended_to'],
+		'job_description'=>$data['job_description'],
+		'current_job'=>$data['current'],
+		'cust_id'=>$this->session->userdata('logged_in')['account_id']
+		);
+		if($this->db->insert('profession_info', $professionInfo))
+			return $this->db->insert_id();
+		else
+			return false;
+   }
+    public function manageorganizationdata($data)
+   {
+	   	$organizationInfo = array(
+		'org_name'=>$data['org_name'],
+		'position'=>$data['position'],
+		'emp_status'=>$data['emp_status'],
+		'start_date'=>$data['year_attended_from'].'-'.$data['month_attended_from'],
+		'end_date'=>$data['year_attended_to'].'-'.$data['month_attended_to'],
+		'org_desc'=>$data['org_description'],
+		'cust_id'=>$this->session->userdata('logged_in')['account_id']
+		);
+		if($this->db->insert('organization_info', $organizationInfo))
+			return $this->db->insert_id();
+		else
+			return false;
+   }
+    public function managegroupdata($data)
+   {
+	   	$groupInfo = array(
+		'grp_name'=>$data['group_name'],
+		'grp_type'=>$data['group_type'],
+		'web_url'=>$data['website_url'],
+		'state'=>$data['state'],
+		'postal_code'=>$data['postal_code'],
+		'additional_info'=>$data['additional_info'],
+		'city'=>$data['city'],
+		'cust_id'=>$this->session->userdata('logged_in')['account_id']
+		);
+		if($this->db->insert('group_info',$groupInfo))
+			return $this->db->insert_id();
+		else
+			return false;
+   }
    
+    public function managepostboarddata($data)
+   {
+	   	$postboardInfo = array(
+		'first_name'=>$data['firstname'],
+		'last_name'=>$data['lastname'],
+		'email'=>$data['email'],
+		'password'=>md5($data['password']),
+		'con_password'=>md5($data['con_password']),
+		'country'=>$data['country'],
+		'state'=>$data['state'],
+		'city'=>$data['city'],
+		'postal_code'=>$data['postal_code'],
+		'job_type'=>$data['position'],
+		'industry'=>$data['industry'],
+		'company_name'=>$data['companyname'],);
+		//'other_industry'=>$data['oth_industry'],
+		$this->db->where('cust_id',$this->session->userdata('logged_in')['account_id']);
+		if($this->db->update('cust_sign_up',$postboardInfo))
+			return true;
+		else
+			return false;	
+   }
+ 
  }
 ?>

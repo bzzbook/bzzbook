@@ -15,7 +15,7 @@ public function index()
 	  $this->load->view('posts');	
 }
 
-public function profile_set()
+public function profile_setting()
 {
 	$this->load->model('profile_set');
 	$this->load->model('lookup');
@@ -31,16 +31,16 @@ public function profile_set()
 public function about_me()
 {
 	$data['result'] = $this->profile_set->save_settings();
-	$data['education_details'] = $this->profile_set->geteducationDetails();
+	$data['education_details'] = $this->profile_set->geteducationList();
 	$this->load->view('about_me',$data);
 }
 
 
 public function business_details()
 {
-	$data['profession_details'] = $this->profile_set->getprofessionDetails();
-	$data['organization_details'] = $this->profile_set->getorganizationDetails();
-	$data['group_details'] = $this->profile_set->getgroupDetails();
+	$data['profession_details'] = $this->profile_set->getprofessionList();
+	$data['organization_details'] = $this->profile_set->getorganizationList();
+	$data['group_details'] = $this->profile_set->getgroupList();
 	$this->load->view('business_details',$data);
 }
 
@@ -72,28 +72,28 @@ public function groups()
   {
 	 
 	  $this->profile_set->delEduDetails($id);
-      redirect("/profile/profile_set");
+      redirect("/profile/profile_setting");
   }
    
    public function profDelete($id)
   {
 	 
 	  $this->profile_set->delProfDetails($id);
-      redirect("/profile/profile_set");
+      redirect("/profile/profile_setting");
   }
    
    public function orgDelete($id)
   {
 	  
 	  $this->profile_set->delOrgDetails($id);
-      redirect("/profile/profile_set");
+      redirect("/profile/profile_setting");
   }
    
    public function grpDelete($id)
   {
 	 
 	  $this->profile_set->delGrpDetails($id);
-      redirect("/profile/profile_set");
+      redirect("/profile/profile_setting");
   }
   
   
@@ -159,6 +159,66 @@ public function groups()
 	
   }
   
+ 
+	 function do_upload()
+	{
+		$config['upload_path'] = './uploads/profile/';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$config['create_thumb'] = TRUE;
+		$config['max_size']	= '';
+		$config['max_width']  = '';
+		$config['max_height']  = '';
+
+		$this->load->library('upload', $config);
+
+		if ( ! $this->upload->do_upload())
+		{
+			$error = array('error' => $this->upload->display_errors());
+
+			//$this->load->view('uploadform', $error);
+		}
+		else
+		{
+			$data = $this->upload->data();
+	  	  // print_r($data);
+		    $path = $data['full_path'];
+		    $config['image_library'] = 'gd2';
+			$config['source_image'] = $path;
+			$config['create_thumb'] = TRUE;
+			$config['maintain_ratio'] = TRUE;
+			$config['new_image'] = './uploads/thumbs/';
+			$config['thumb_marker'] = '_thumb';
+			$config['width'] = 91;
+			$config['height'] = 91;
+
+			$this->load->library('image_lib', $config);
+			$this->image_lib->initialize($config);
+			$this->image_lib->resize();
+			$img_thumb = $data['raw_name'].'_thumb'.$data['file_ext'];
+
+			//creating new image
+			$path = $data['full_path'];
+			$config_fav['source_image'] = $path;
+		    $config_fav['image_library'] = 'gd2';
+			$config_fav['maintain_ratio'] = TRUE;
+			$config_fav['create_thumb'] = TRUE;
+			$config_fav['new_image'] = './uploads/favorite/';
+			$config_fav['thumb_marker'] = '_fav';
+			$config_fav['width'] = 62;
+			$config_fav['height'] = 62;
+
+			$this->load->library('image_lib', $config_fav);
+			$this->image_lib->initialize($config_fav);
+			$this->image_lib->resize();
+			$img_fav = $data['raw_name'].'_fav'.$data['file_ext'];
+			
+			
+			// image insertion into db
+            $file_id = $this->profile_set->insert_profile_pic($data['file_name'],$img_thumb,$img_fav);
+			redirect('/profile/profile_setting');
+		}
+	} 
+ 
 }
 
 ?>

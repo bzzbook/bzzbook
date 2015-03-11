@@ -39,7 +39,12 @@
     <section class="col-lg-3 col-md-3 col-sm-4 col-xs-12 coloumn1">
       <aside>
         <div class="profile">
-          <div class="img"><img src="<?php echo base_url(); ?>images/user.png" alt=""></div>
+          <?php $data = $this->profile_set->get_profile_pic(); 	?>
+          <div class="img">
+          <?php	foreach($data as $image){ ?>
+          <img src="<?php echo base_url();?>uploads/thumbs/<?php echo $image->thumbnail; ?>" alt="">
+          <?php } ?>
+          </div>
           <div class="details">Jhon Smith....<a href="#">Edit Profile</a><span>Sr. UI Developer at Company</span></div>
           <div class="clear"></div>
         </div>

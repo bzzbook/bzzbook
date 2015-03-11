@@ -12,7 +12,7 @@
             <li> <a  href="<?php echo base_url(); ?>profile/about_me">About Me</a></li>
             <li> <a  href="#">My Friends</a></li>
             <li> <a  href="#">My Photos</a></li>
-            <li> <a  href="#">My Business Details</a></li>
+            <li> <a  href="<?php echo base_url(); ?>profile/business_details">My Business Details</a></li>
             <li> <a  href="#">My Companies</a></li>
           </ul>
           <div class="pull-right viewAs">
@@ -35,16 +35,22 @@
 </section>
 <section class="midbody container">
   <div class="row">
-    <section class="col-lg-3 col-md-3 col-sm-4 col-xs-12 coloumn1">
+  
+  <section class="col-lg-3 col-md-3 col-sm-4 col-xs-12 coloumn1">
       <aside>
         <div class="profile">
-          <div class="img"><img src="<?php echo base_url(); ?>images/user.png" alt=""></div>
-          <div class="details">Jhon Smith....<a href="<?php echo base_url(); ?>profile/profile_set">Edit Profile</a><span>Sr. UI Developer at Company</span></div>
+          <?php $data = $this->profile_set->get_profile_pic(); 	?>
+          <div class="img">
+          <?php	foreach($data as $image){ ?>
+          <img src="<?php echo base_url();?>uploads/thumbs/<?php echo $image->thumbnail; ?>" alt="">
+          <?php } ?>
+          </div>
+          <div class="details">Jhon Smith....<a href="#">Edit Profile</a><span>Sr. UI Developer at Company</span></div>
           <div class="clear"></div>
         </div>
         <div class="sideNav">
           <ul>
-            <li><a href="<?php echo base_url(); ?>profile/message">Messages <span>5</span></a></li>
+           <li><a href="<?php echo base_url(); ?>profile/message">Messages <span>5</span></a></li>
             <li><a href="#">Buzzers ! <span>20</span></a></li>
             <li><a href="<?php echo base_url(); ?>profile/groups">My Groups</a></li>
             <li><a href="<?php echo base_url(); ?>profile/jobs">My Jobs</a></li>
@@ -57,7 +63,7 @@
         <div class="myPhotos">
           <h3>Favorites Board!</h3>
           <ul>
-            <li><a href="#"><img src="<?php echo base_url(); ?>images/p1.png" alt=""></a></li>
+            <!--<li><a href="#"><img src="<?php echo base_url(); ?>images/p1.png" alt=""></a></li>
             <li><a href="#"><img src="<?php echo base_url(); ?>images/p2.png" alt=""></a></li>
             <li><a href="#"><img src="<?php echo base_url(); ?>images/p1.png" alt=""></a></li>
             <li><a href="#"><img src="<?php echo base_url(); ?>images/p2.png" alt=""></a></li>
@@ -65,13 +71,19 @@
             <li><a href="#"><img src="<?php echo base_url(); ?>images/p2.png" alt=""></a></li>
             <li><a href="#"><img src="<?php echo base_url(); ?>images/p1.png" alt=""></a></li>
             <li><a href="#"><img src="<?php echo base_url(); ?>images/p2.png" alt=""></a></li>
-            <li><a href="#"><img src="<?php echo base_url(); ?>images/p1.png" alt=""></a></li>
+            <li><a href="#"><img src="<?php echo base_url(); ?>images/p1.png" alt=""></a></li> -->
+            <?php $data = $this->profile_set->get_all_profile_pics(); 	?>
+          <?php	foreach($data as $image){ ?>
+         <li> <a href="#"><img src="<?php echo base_url();?>uploads/favorite/<?php echo $image->favorite; ?>" alt=""></a></li>
+          <?php } ?>
+         
           </ul>
           <div class="clear"></div>
         </div>
         <div class="joinMailList">
           <h3>Invite someone to join!</h3>
-         <?php $attributes = array('class' => 'email', 'id' => 'email_invite', 'name' => 'invite_email'); ?>
+          <p>Invite your friends to Bzzbook!</p>
+          <?php $attributes = array('class' => 'email', 'id' => 'email_invite', 'name' => 'invite_email'); ?>
           <?php echo form_open('customer/send_invite',$attributes) ?>
           <input type="text" class="form-control" placeholder="Email Address"  name="email" placeholder="E-mail"  
           data-rule-required="true" data-msg-required="please enter your email"  
@@ -82,6 +94,8 @@
       </aside>
       <div class="ad"><img src="<?php echo base_url(); ?>images/ad1.png"></div>
     </section>
+    
+    
     <section class="col-lg-6 col-md-6 col-sm-5 col-xs-12 coloumn2 pfSettings">
       <h2>My Settings</h2>
       <div class="posts">
@@ -96,21 +110,28 @@
           </ul>
           
           <!-- Tab panes -->
-          <div class="tab-content">  
-		  <?php foreach($result as $r) { ?>
+          <div class="tab-content">
+           <?php foreach($result as $r) { ?>
             <div role="tabpanel" class="tab-pane active" id="post_board">
-              <figure class="pfpic"><span>Profile Pic</span><img src="<?php echo base_url(); ?>images/pf_pic.png" alt=""></figure>
-         <form name="postboard" id="postboard" method="POST" action="">
-            <form name="profile" method="POST" action="<?php echo base_url(); ?>customer/pf" >
-              <div class="upload">
-                  <span class="btn btn-success fileinput-button"> <span>Change Picture</span> 
-                  <!-- The file input field used as target for the file upload widget -->
-                  <input id="fileupload" type="file" name="files[]" multiple>
-                  </span>
-              </div>
-            
-              <h4>Location Info</h4>             
-              <div class="field col-md-6">
+             <?php $data = $this->profile_set->get_profile_pic(); 	?>
+			<?php	foreach($data as $image){
+			?>
+            <!-- <?php //echo base_url(); ?>images/pf_pic.png -->
+              <figure class="pfpic"><span>Profile Pic</span><img src="<?php echo base_url();?>uploads/profile/<?php echo $image->filename; ?>" alt="" height="159" width="146"></figure>
+               <?php $attr = array('id' => 'upload_file', 'name' => 'upload_file'); ?> 
+              <?php echo form_open_multipart('profile/do_upload',$attr);?>
+              <?php } ?>
+           <div class="upload"> <span class="btn btn-success fileinput-button"> <span>Change Picture</span> 
+                <!-- The file input field used as target for the file upload widget -->
+             <input type="file" name="userfile" id="userfile" size="20" required/>
+                 
+                </span> 
+               <!-- <input type="hidden" value="" name="status" id="status"/> -->
+                 <input type="submit" class="btn btn-success" value="upload"></div>
+                 </form>
+                 <h4>Location Info</h4>
+               <form name="postboard" id="postboard" method="POST" action="">
+             <div class="field col-md-6">
            	<select class="form-control" name="country"  onchange="print_state('state',this.selectedIndex);"  id="country">
 			<option value=""></option>
 			</select> 
@@ -123,15 +144,16 @@
              <div class="filed col-md-6">
                 <input type="text" class="form-control" placeholder="City" value="<?php echo $r->city ?>" name="city" >
               </div> 
+              
               <div class="filed col-md-6">
-                <input type="text" class="form-control" placeholder="Zip Code" value="<?php echo $r->postal_code ?>" name="postal_code">
+                 <input type="text" class="form-control" placeholder="Zip Code" value="<?php echo $r->postal_code ?>" name="postal_code">
               </div>
               <h4 class="clear">Username Info</h4>
               <div class="filed col-md-6">
-                <input type="text" class="form-control" placeholder="Username" value="<?php echo $r->user_name ?>" name="user_name" readonly >
+                 <input type="text" class="form-control" placeholder="Username" value="<?php echo $r->user_name ?>" name="user_name" readonly >
               </div>
               <div class="filed col-md-6">
-                <input type="text" class="form-control" placeholder="First Name" value="<?php echo $r->first_name ?>" name="firstname" >
+                 <input type="text" class="form-control" placeholder="First Name" value="<?php echo $r->first_name ?>" name="firstname" >
               </div>
               <div class="filed col-md-6">
                 <input type="text" class="form-control" placeholder="Last Name" value="<?php echo $r->last_name ?>" name="lastname" >
@@ -141,18 +163,18 @@
               </div>
               <h4 class="clear">Password Info</h4>
               <div class="filed col-md-6">
-                <input type="password" class="form-control" placeholder="Password" id="pwd" onBlur="pwdchange()" name="password">
+                 <input type="password" class="form-control" placeholder="Password" id="pwd" onBlur="pwdchange()" name="password">
               </div>
               <div class="clear"></div>
               <div class="filed col-md-6">
-                <input type="password" class="form-control" placeholder="New Password" id="npwd"  name="password">
+                  <input type="password" class="form-control" placeholder="New Password" id="npwd"  name="password">
               </div>
               <div class="filed col-md-6">
-                <input type="password" class="form-control" placeholder="Confirm Password" id="cnpwd"  name="con_password">
+               <input type="password" class="form-control" placeholder="Confirm Password" id="cnpwd"  name="con_password">
               </div>
               <h4 class="clear">Job Info</h4>
               <div class="filed col-md-6">
-                <input type="text" class="form-control" placeholder="Job Title" value="<?php echo $r->job_type ?>" name="position" >
+                  <input type="text" class="form-control" placeholder="Job Title" value="<?php echo $r->job_type ?>" name="position" >
               </div>
               <div class="filed col-md-6">
                 <select class="form-control" name="industry">
@@ -165,21 +187,20 @@
                 </select>
               </div>
               <div class="filed col-md-6">
-                <input type="text" class="form-control" placeholder="Other Industry" value="" name="oth_industry" >
+               <input type="text" class="form-control" placeholder="Other Industry" value="" name="oth_industry" >
               </div>
               <div class="filed col-md-6">
                 <input type="text" class="form-control" placeholder="Company Name" value="<?php echo $r->company_name ?>" name="companyname" >
               </div>
               <div class="filed col-md-6">
-                <input type="submit" class="fmbtn" value="Update Settings">
+               <input type="submit" class="fmbtn" value="Update Settings">
               </div>
               <div class="clear"></div>
+              </form>
             </div>
-            </form>
-            
             <div role="tabpanel" class="tab-pane" id="about_me">
-            	 <h4 class="clear">About Me Info</h4>
-                <form action="" name="formabout_me">
+              <h4 class="clear">About Me Info</h4>
+             <form action="" name="formabout_me">
                 	 <div class="filed col-md-12">
                 <textarea cols="" rows="" class="form-control" name="about_me_info" ><?php echo $r->about ?></textarea>
                 <input type="submit" class="smbtn" value="Save">
@@ -192,19 +213,18 @@
                 <textarea cols="" rows="" class="form-control" name="about_me_skills"><?php echo $r->skills;?></textarea>
                 <input type="submit" class="smbtn" value="Save">
               </div>
-               <h4 class="clear">Educational Background</h4>
-               <div class="posts">
-        
-        <div class="groupMainBlock">
-        	<?php  $this->load->view('education_field');?>
-        </div>
-</div>
+              </form>
+              <h4 class="clear">Educational Background</h4>
+              <div class="posts">
+        		<div class="groupMainBlock">
+        			<?php  $this->load->view('education_field');?>
+        		</div>
+			  </div>
               <div class="filed col-md-12">
-                <input type="button" class="add" data-toggle="modal" data-target="#eduModal" value="Add Education"/>
+               <input type="button" class="add" data-toggle="modal" data-target="#eduModal" value="Add Education"/>
               </div>
-         
               <h4 class="clear">Contact Details</h4>
-              <div class="filed col-md-6">
+             <div class="filed col-md-6">
                 <input type="text" class="form-control" placeholder="Email" value="<?php echo $r->email ?>" >
               </div>
               <div class="filed col-md-6">
@@ -218,424 +238,40 @@
                 <input type="submit" class="smbtn" value="Save">
               </div>
               <div class="filed col-md-6">
-                <input type="submit" class="fmbtn" value="Update">
+                <input type="submit" class="fmbtn" value="Upload Settings">
               </div>
-                </form>
-                 <!------------------- Education Modal --------------------->    
-          <div class="filed col-md-12 col-lg-12">
-               <div class="modal fade" id="eduModal" tabindex="-1" role="dialog" aria-labelledby="eduModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h3 class="modal-title" id="myModalLabel">Add Education Background</h3>
-                  </div>
-                  <form action="" name="education_form" id="education_form">
-                  <div class="modal-body">
-                  <div class="row">
-                  	 <div class="form-group col-md-4">
-                        	<label class="control-label">Field of Study:</label>
-			                <input type="text" class="form-control" placeholder="" value="" name="field_of_study" >
-            		  </div>
-                      <div class="form-group col-md-4">
-                        	<label>College / Institution:</label>
-			                <input type="text" class="form-control" placeholder="" value="" name="college_institution" >
-            		  </div>
-                      <div class="form-group col-md-4">
-                        	<label>Degree / Certificate:</label>
-			                <input type="text" class="form-control" placeholder="" value="" name="degree_certificate" >
-            		  </div>
-                      </div>
-                      <div class="row">
-                      &nbsp;&nbsp;&nbsp;&nbsp;<label>Years Attended:</label><br />
-                      	<div class="form-group col-md-3">  	
-                            <select name="year_attended_from" class="form-control">
-                            	<option value="0">YYYY</option>
-                                <?php for($i=1950;$i<=date(Y);$i++){?>
-                                	<option value="<?php echo $i;?>"><?php echo $i;?></option>
-                                <?php }?>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-2">  	
-                            <select name="month_attended_from" class="form-control">
-                            	<option value="0">MM</option>
-                                <?php for($i=1;$i<=12;$i++){?>
-                                	<option value="<?php echo $i;?>"><?php echo $i;?></option>
-                                <?php }?>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-2" style="text-align:center;">
-                        	To
-                        </div>
-                        <div class="form-group col-md-3">  	
-                            <select name="year_attended_to" class="form-control">
-                            	<option value="0">YYYY</option>
-                                <?php for($i=1950;$i<=date(Y);$i++){?>
-                                	<option value="<?php echo $i;?>"><?php echo $i;?></option>
-                                <?php }?>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-2">  	
-                            <select name="month_attended_to" class="form-control">
-                            	<option value="0">MM</option>
-                                <?php for($i=1;$i<=12;$i++){?>
-                                	<option value="<?php echo $i;?>"><?php echo $i;?></option>
-                                <?php }?>
-                            </select>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="form-group col-md-12">
-                        	<label>Specialized Studies:</label>
-	                        <textarea name="special_studies" class="form-control"></textarea>	
-                            <input type="hidden" name="edu_action" value="add">
-                            <input type="hidden" value="" name="edu_form_id" >
-                        </div>
-                      </div>
-                      
-                      <div class="clear"></div>
-                 
-                  </div>
-                  <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Add Educational Background</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                  
-                  </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-            </div>
-<!-------------------------- Education Modal end --------------->
-
               <div class="clear"></div>
             </div>
             <div role="tabpanel" class="tab-pane" id="business_details">
-            	 <h4 class="clear">Professional Experience</h4>     
-                 <div class="posts">
-       				 <div class="groupMainBlock1">
-        				<?php  $this->load->view('profession_field');?>  
-      			     </div>
-				</div>
-
+              <h4 class="clear">Professional Experience</h4>
+              <div class="posts">
+        		<div class="groupMainBlock2">
+        			<?php  $this->load->view('profession_field');?>  	
+        		</div>
+        		</div>
               <div class="filed col-md-12">
-                <input type="button" class="add" data-toggle="modal" data-target="#profModal" value="add experience"/>
+                <input type="submit" class="add" data-toggle="modal" data-target="#profModal"  value="add experience">
               </div>
-               <h4 class="clear">Organizations</h4>
-               
-        <div class="posts">
-        <div class="groupMainBlock2">
-        	<?php  $this->load->view('organization_field');?>  	
-        </div>
-        </div>
+              <h4 class="clear">Organizations</h4>
+              <div class="posts">
+        		<div class="groupMainBlock2">
+        			<?php  $this->load->view('organization_field');?>  	
+        		</div>
+        		</div>
               <div class="filed col-md-12">
-                <input type="submit" class="add" data-toggle="modal" data-target="#orgModal"  value="add Organizations">
+                <input type="submit" class="add" data-toggle="modal" data-target="#orgModal" value="add Organizations">
               </div>
-               <h4 class="clear">Groups</h4>
-               
-               <div class="posts">
-        
+              <h4 class="clear">Groups</h4>
+              <div class="posts">
                <div class="groupMainBlock3">
-        	<?php  $this->load->view('group_field');?> 
-        </div>
-        </div>
-               
-
+        			<?php  $this->load->view('group_field');?> 
+       			 </div>
+       			 </div>
               <div class="filed col-md-12">
-                <input type="submit" class="add" data-toggle="modal" data-target="#grpModal"  value="add Groups">
+                <input type="submit" class="add" data-toggle="modal" data-target="#grpModal" value="add Groups">
               </div>
               <div class="clear"></div>
             </div>
-            
-            
-            <!-----   Professional modal begin   ----->         
-            
-            <div class="filed col-md-12 col-lg-12">
-               <div class="modal fade" id="profModal" tabindex="-1" role="dialog" aria-labelledby="profModalLabel" aria-hidden="true">
-
-<!-- Modal -->
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h3 class="modal-title" id="myModalLabel">Add Professional Experience</h3>
-                    </div>
-                  <form action="" name="profession_form" id="profession_form">
-                  <div class="modal-body">
-                  <div class="row">
-                  	 <div class="form-group col-md-4">
-                        	<label class="control-label">Job Title:</label>
-			                <input type="text" class="form-control" placeholder="" value="" name="job_title" >
-            		  </div>                     
-                      </div>
-                      <div class="row">
-                      <div class="col-md-6">
-                      &nbsp;&nbsp;&nbsp;&nbsp;<label>Start Date:</label>
-                      </div>
-                      <div class="col-md-6">
-                      &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;<label>End Date:</label>
-                      </div>
-                      </div>
-                      <div class="row">
-                      	<div class="form-group col-md-3">  	
-                            <select name="year_attended_from" class="form-control">
-                            	<option value="0">YYYY</option>
-                                <?php for($i=1950;$i<=date(Y);$i++){?>
-                                	<option value="<?php echo $i;?>"><?php echo $i;?></option>
-                                <?php }?>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-2">  	
-                            <select name="month_attended_from" class="form-control">
-                            	<option value="0">MM</option>
-                                <?php for($i=1;$i<=12;$i++){?>
-                                	<option value="<?php echo $i;?>"><?php echo $i;?></option>
-                                <?php }?>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-2" style="text-align:center;">
-                        	To
-                        </div>
-                        <div class="form-group col-md-3">  	
-                            <select name="year_attended_to" class="form-control">
-                            	<option value="0">YYYY</option>
-                                <?php for($i=1950;$i<=date(Y);$i++){?>
-                                	<option value="<?php echo $i;?>"><?php echo $i;?></option>
-                                <?php }?>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-2">  	
-                            <select name="month_attended_to" class="form-control">
-                            	<option value="0">MM</option>
-                                <?php for($i=1;$i<=12;$i++){?>
-                                	<option value="<?php echo $i;?>"><?php echo $i;?></option>
-                                <?php }?>
-                            </select>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="form-group col-md-12">
-                        	<label>Job Description:</label>
-	                        <textarea name="job_description" class="form-control"></textarea>	
-                        </div>
-                      </div>
-                        <div class="checkbox">
-    					<label>
-      							<input type="checkbox" name="current" value="current"> Current
-    					</label>
-                        <input type="hidden" name="prof_action" value="add">
-                            <input type="hidden" value="" name="prof_form_id" >
-  					</div>
-                        <div class="clear"></div>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Add Professional Experience</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                  
-                  </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-            </div>
-            
-            
-            <!-----   Professional modal end   ----->  
-     
-     
-     <!--------------- Organization modal begin -------------->
-     
-     
-        
-            <div class="filed col-md-12 col-lg-12">
-               <div class="modal fade" id="orgModal" tabindex="-1" role="dialog" aria-labelledby="orgModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h3 class="modal-title" id="myModalLabel">Add Organization</h3>
-                  </div>
-                  <form action="" name="organization_form" id="organization_form">
-                  <div class="modal-body">
-                  <div class="row">
-                  	 <div class="form-group col-md-4">
-                        	<label class="control-label">Name Of Organization:</label>
-			                <input type="text" class="form-control" placeholder="" value="" name="org_name" >
-            		  </div>  
-                       <div class="clear"></div>    
-                       <div class="form-group col-md-4">
-                        	<label class="control-label">Position Held:</label>
-			                <input type="text" class="form-control" placeholder="" value="" name="position" >
-            		  </div>                 
-                      </div>
-                      <div class="row">
-                        <div class="form-group col-md-12">
-                        	<label>Organization Description:</label>
-	                        <textarea name="org_description" class="form-control"></textarea>	
-                        </div>
-                      </div>
-                      <div class="row">
-                      <div class="col-md-6">
-                      &nbsp;&nbsp;&nbsp;&nbsp;<label>Start Date:</label>
-                      </div>
-                      <div class="col-md-6">
-                      &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;<label>End Date:</label>
-                      </div>
-                      </div>
-                      <div class="row">
-                      	<div class="form-group col-md-3">  	
-                            <select name="year_attended_from" class="form-control">
-                            	<option value="0">YYYY</option>
-                                <?php for($i=1950;$i<=date(Y);$i++){?>
-                                	<option value="<?php echo $i;?>"><?php echo $i;?></option>
-                                <?php }?>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-2">  	
-                            <select name="month_attended_from" class="form-control">
-                            	<option value="0">MM</option>
-                                <?php for($i=1;$i<=12;$i++){?>
-                                	<option value="<?php echo $i;?>"><?php echo $i;?></option>
-                                <?php }?>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-2" style="text-align:center;">
-                        	To
-                        </div>
-                        <div class="form-group col-md-3">  	
-                            <select name="year_attended_to" class="form-control">
-                            	<option value="0">YYYY</option>
-                                <?php for($i=1950;$i<=date(Y);$i++){?>
-                                	<option value="<?php echo $i;?>"><?php echo $i;?></option>
-                                <?php }?>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-2">  	
-                            <select name="month_attended_to" class="form-control">
-                            	<option value="0">MM</option>
-                                <?php for($i=1;$i<=12;$i++){?>
-                                	<option value="<?php echo $i;?>"><?php echo $i;?></option>
-                                <?php }?>
-                            </select>
-                        </div>
-                      </div>
-                      <div class="row">
-                       <div class="form-group col-md-12">
-                      <label class="control-label">Employee Status:</label>
-                     <select class="form-control" name="emp_status">
- 						 <option value="working">Working</option>
- 						 <option value="resigned">Resigned</option>
-						 <option value="freelancer">Free lancer</option>
-						</select>
-                        </div>
-                         <input type="hidden" name="org_action" value="add">
-                         <input type="hidden" value="" name="org_form_id" >
-                    </div>
-                        <div class="clear"></div>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Add Organization</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                  
-                  </div>
-                  </form>
-                </div>
-
-               <h4 class="clear">Organizations</h4>
-              <div class="filed col-md-12">
-                <input type="submit" class="add" value="add Organizations">
-              </div>
-            </div>
-            </div>
-            
-     
-     
-     <!--------------- Organization modal end ----------------->
-            
-     <!----------------- Group Modal Begin -------------------->
-     
-     
-     <div class="filed col-md-12 col-lg-12">
-               <div class="modal fade" id="grpModal" tabindex="-1" role="dialog" aria-labelledby="grpModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h3 class="modal-title" id="myModalLabel">Add Group</h3>
-                  </div>
-                  <form action="" name="group_form" id="group_form">
-                  <div class="modal-body">
-                  <div class="row">
-                   <div class="col-md-3">
-                        	<label class="control-label">Name Of Group:</label>
-                            </div>
-                            <div class="col-md-8">
-			                <input type="text" class="form-control" placeholder="" value="" name="group_name" >
-                            </div>
-            		  </div>
-                  <div class="row">
-                        <div class="form-group col-md-4">
-                        	<label>Group Type:</label>
-	                        <input type="text" class="form-control" placeholder="" value="" name="group_type" >
-                        </div>
-                      </div>
-                      
-                       <div class="row">
-                        <div class="form-group col-md-4">
-                        	<label>WebSite Url:</label>
-	                        <input type="text" class="form-control" placeholder="" value="" name="website_url" >
-                        </div>
-                      </div>
-                  <div class="row">
-                   
-                  	 <div class="form-group col-md-4">
-                        	<label class="control-label">City:</label>
-			                <input type="text" class="form-control" placeholder="" value="" name="city" >
-            		  </div>
-                   
-                       <div class="form-group col-md-4">
-                      <label class="control-label">State:</label>
-                     <select class="form-control" name="state">
- 						 <option value="Andhrapradesh">Andhrapradesh</option>
- 						 <option value="Telangana">Telangana</option>
-						 <option value="Kerala">Kerala</option>
-						</select>
-                        </div>
-                 
-                      <div class="form-group col-md-4">
-                        	<label>Zip / Postal:</label>
-			                <input type="text" class="form-control" placeholder="" value="" name="postal_code" >
-            		  </div>
-                      </div>
-                      
-                      <div class="row">
-                        <div class="form-group col-md-12">
-                        	<label>Additional Information:</label>
-	                        <textarea name="additional_info" class="form-control"></textarea>	
-                            <input type="hidden" name="grp_action" value="add">
-                            <input type="hidden" value="" name="grp_form_id" >
-                        </div>
-                      </div>
-                      
-                      <div class="clear"></div>
-                 
-                  </div>
-                  <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Add Group</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                  
-                  </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-            </div>
-     
-
-     <!----------------- Group Modal end  --------------------->      
-             
-            
             <div role="tabpanel" class="tab-pane" id="privacy">
              	<h4 class="clear">Visibility Settings</h4>
                 <form method="post" name="privacy_form" id="privacy_form" >
@@ -724,12 +360,14 @@
               </form>
               <div class="clear"></div>
               </div>
-            </div>
-            <?php } ?>
+              <?php } ?>
           </div>
         </div>
       </div>
     </section>
+    
+    
+    
     <section class="col-lg-3 col-md-3 col-sm-3 col-xs-12 coloumn3">
       <aside>
         <div class="pendingRequest">
@@ -764,7 +402,7 @@
           <a href="#" class="link">More Friends</a> </div>
         <div class="ad"><img src="<?php echo base_url(); ?>images/ad2.png" alt=""></div>
         <div class="companies">
-          <h3>Companies I’m Following! </h3>
+          <h3>Companies I'm Following! </h3>
           <ul>
             <li>
               <figure><img src="<?php echo base_url(); ?>images/cp1.png" alt=""></figure>
@@ -790,6 +428,394 @@
         </div>
       </aside>
     </section>
-  </div>
-</section>
+    </div>
+    </section>
+    
+                <!------------------- Education Modal --------------------->    
+          <div class="filed col-md-12 col-lg-12">
+               <div class="modal fade" id="eduModal" tabindex="-1" role="dialog" aria-labelledby="eduModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3 class="modal-title" id="myModalLabel">Add Education Background</h3>
+                  </div>
+                  <form action="" name="education_form" id="education_form">
+                  <div class="modal-body">
+                  <div class="row">
+                  	 <div class="form-group col-md-4">
+                        	<label class="control-label">Field of Study:</label>
+			                <input type="text" class="form-control" placeholder="" value="" name="field_of_study"  >
+            		  </div>
+                      <div class="form-group col-md-4">
+                        	<label>College / Institution:</label>
+			                <input type="text" class="form-control" placeholder="" value="" name="college_institution" >
+            		  </div>
+                      <div class="form-group col-md-4">
+                        	<label>Degree / Certificate:</label>
+			                <input type="text" class="form-control" placeholder="" value="" name="degree_certificate" >
+            		  </div>
+                      </div>
+                      <div class="row">
+                      &nbsp;&nbsp;&nbsp;&nbsp;<label>Years Attended:</label><br />
+                      	<div class="form-group col-md-3">  	
+                            <select name="year_attended_from" class="form-control" >
+                            	<option value="0">YYYY</option>
+                                <?php for($i=1950;$i<=date(Y);$i++){?>
+                                	<option value="<?php echo $i;?>"><?php echo $i;?></option>
+                                <?php }?>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">  	
+                            <select name="month_attended_from" class="form-control" >
+                            	<option value="0">MM</option>
+                                <?php for($i=1;$i<=12;$i++){?>
+                                	<option value="<?php echo $i;?>"><?php echo $i;?></option>
+                                <?php }?>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2" style="text-align:center;">
+                        	To
+                        </div>
+                        <div class="form-group col-md-3">  	
+                            <select name="year_attended_to" class="form-control" >
+                            	<option value="0">YYYY</option>
+                                <?php for($i=1950;$i<=date(Y);$i++){?>
+                                	<option value="<?php echo $i;?>"><?php echo $i;?></option>
+                                <?php }?>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">  	
+                            <select name="month_attended_to" class="form-control">
+                            	<option value="0">MM</option>
+                                <?php for($i=1;$i<=12;$i++){?>
+                                	<option value="<?php echo $i;?>"><?php echo $i;?></option>
+                                <?php }?>
+                            </select>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="form-group col-md-12">
+                        	<label>Specialized Studies:</label>
+	                        <textarea name="special_studies" class="form-control" ></textarea>	
+                            <input type="hidden" name="edu_action" value="add">
+                            <input type="hidden" value="" name="edu_form_id" >
+                        </div>
+                      </div>
+                      
+                      <div class="clear"></div>
+                 
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Add Educational Background</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  
+                  </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            </div>
+<!-------------------------- Education Modal end --------------->
+    
+    
+     <!-----   Professional modal begin   ----->         
+            
+            <div class="filed col-md-12 col-lg-12">
+               <div class="modal fade" id="profModal" tabindex="-1" role="dialog" aria-labelledby="profModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3 class="modal-title" id="myModalLabel">Add Professional Experience</h3>
+                    </div>
+                  <form action="" name="profession_form" id="profession_form">
+                  <div class="modal-body">
+                  <div class="row">
+                  	 <div class="form-group col-md-4">
+                        	<label class="control-label">Job Title:</label>
+			                <input type="text" class="form-control" placeholder="" value="" name="job_title" data-rule-required="true" 
+    						        data-msg-required="please enter Job Title">
+            		  </div>                     
+                      </div>
+                      <div class="row">
+                      <div class="col-md-6">
+                      &nbsp;&nbsp;&nbsp;&nbsp;<label>Start Date:</label>
+                      </div>
+                      <div class="col-md-6">
+                      &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;<label>End Date:</label>
+                      </div>
+                      </div>
+                      <div class="row">
+                      	<div class="form-group col-md-3">  	
+                            <select name="year_attended_from" class="form-control" data-rule-required="true" 
+    						        data-msg-required="please select Year">
+                            	<option value="0">YYYY</option>
+                                <?php for($i=1950;$i<=date(Y);$i++){?>
+                                	<option value="<?php echo $i;?>"><?php echo $i;?></option>
+                                <?php }?>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">  	
+                            <select name="month_attended_from" class="form-control" data-rule-required="true" 
+    						        data-msg-required="please select Month">
+                            	<option value="0">MM</option>
+                                <?php for($i=1;$i<=12;$i++){?>
+                                	<option value="<?php echo $i;?>"><?php echo $i;?></option>
+                                <?php }?>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2" style="text-align:center;">
+                        	To
+                        </div>
+                        <div class="form-group col-md-3">  	
+                            <select name="year_attended_to" class="form-control" data-rule-required="true" 
+    						        data-msg-required="please select Year">
+                            	<option value="0">YYYY</option>
+                                <?php for($i=1950;$i<=date(Y);$i++){?>
+                                	<option value="<?php echo $i;?>"><?php echo $i;?></option>
+                                <?php }?>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">  	
+                            <select name="month_attended_to" class="form-control" data-rule-required="true" 
+    						        data-msg-required="please select Month">
+                            	<option value="0">MM</option>
+                                <?php for($i=1;$i<=12;$i++){?>
+                                	<option value="<?php echo $i;?>"><?php echo $i;?></option>
+                                <?php }?>
+                            </select>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="form-group col-md-12">
+                        	<label>Job Description:</label>
+	                        <textarea name="job_description" class="form-control" data-rule-required="true" 
+    						        data-msg-required="please enter Job Description"></textarea>	
+                        </div>
+                      </div>
+                        <div class="checkbox">
+    					<label>
+      							<input type="checkbox" name="current" value="current" data-rule-required="true" 
+    						        data-msg-required="please select current job"> Current
+    					</label>
+                        <input type="hidden" name="prof_action" value="add">
+                            <input type="hidden" value="" name="prof_form_id" >
+  					</div>
+                        <div class="clear"></div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Add Professional Experience</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  
+                  </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            </div>
+            
+            
+            <!-----   Professional modal end   ----->  
+    
+     <!--------------- Organization modal begin -------------->
+     
+     
+        
+            <div class="filed col-md-12 col-lg-12">
+               <div class="modal fade" id="orgModal" tabindex="-1" role="dialog" aria-labelledby="orgModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3 class="modal-title" id="myModalLabel">Add Organization</h3>
+                  </div>
+                  <form action="" name="organization_form" id="organization_form">
+                  <div class="modal-body">
+                  <div class="row">
+                  	 <div class="form-group col-md-4">
+                        	<label class="control-label">Name Of Organization:</label>
+			                <input type="text" class="form-control" placeholder="" value="" name="org_name" data-rule-required="true" 
+    						        data-msg-required="please enter Organization Name">
+            		  </div>  
+                       <div class="clear"></div>    
+                       <div class="form-group col-md-4">
+                        	<label class="control-label">Position Held:</label>
+			                <input type="text" class="form-control" placeholder="" value="" name="position" data-rule-required="true" 
+    						        data-msg-required="please enter job Position">
+            		  </div>                 
+                      </div>
+                      <div class="row">
+                        <div class="form-group col-md-12">
+                        	<label>Organization Description:</label>
+	                        <textarea name="org_description" class="form-control" data-rule-required="true" 
+    						        data-msg-required="please enetr about Organization"></textarea>	
+                        </div>
+                      </div>
+                      <div class="row">
+                      <div class="col-md-6">
+                      &nbsp;&nbsp;&nbsp;&nbsp;<label>Start Date:</label>
+                      </div>
+                      <div class="col-md-6">
+                      &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;<label>End Date:</label>
+                      </div>
+                      </div>
+                      <div class="row">
+                      	<div class="form-group col-md-3">  	
+                            <select name="year_attended_from" class="form-control" data-rule-required="true" 
+    						        data-msg-required="please select Year">
+                            	<option value="0">YYYY</option>
+                                <?php for($i=1950;$i<=date(Y);$i++){?>
+                                	<option value="<?php echo $i;?>"><?php echo $i;?></option>
+                                <?php }?>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">  	
+                            <select name="month_attended_from" class="form-control" data-rule-required="true" 
+    						        data-msg-required="please select Month">
+                            	<option value="0">MM</option>
+                                <?php for($i=1;$i<=12;$i++){?>
+                                	<option value="<?php echo $i;?>"><?php echo $i;?></option>
+                                <?php }?>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2" style="text-align:center;">
+                        	To
+                        </div>
+                        <div class="form-group col-md-3">  	
+                            <select name="year_attended_to" class="form-control" data-rule-required="true" 
+    						        data-msg-required="please select Year">
+                            	<option value="0">YYYY</option>
+                                <?php for($i=1950;$i<=date(Y);$i++){?>
+                                	<option value="<?php echo $i;?>"><?php echo $i;?></option>
+                                <?php }?>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">  	
+                            <select name="month_attended_to" class="form-control" data-rule-required="true" 
+    						        data-msg-required="please Select month">
+                            	<option value="0">MM</option>
+                                <?php for($i=1;$i<=12;$i++){?>
+                                	<option value="<?php echo $i;?>"><?php echo $i;?></option>
+                                <?php }?>
+                            </select>
+                        </div>
+                      </div>
+                      <div class="row">
+                       <div class="form-group col-md-12">
+                      <label class="control-label">Employee Status:</label>
+                     <select class="form-control" name="emp_status" data-rule-required="true" 
+    						        data-msg-required="please Select Employe status">
+ 						 <option value="working">Working</option>
+ 						 <option value="resigned">Resigned</option>
+						 <option value="freelancer">Free lancer</option>
+						</select>
+                        </div>
+                         <input type="hidden" name="org_action" value="add">
+                         <input type="hidden" value="" name="org_form_id" >
+                    </div>
+                        <div class="clear"></div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Add Organization</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  
+                  </div>
+                  </form>
+                </div>
+</div>
+            </div>
+            </div>
+            
+     
+     
+     <!--------------- Organization modal end ----------------->
+    
+     <!----------------- Group Modal Begin -------------------->
+     
+     
+     <div class="filed col-md-12 col-lg-12">
+               <div class="modal fade" id="grpModal" tabindex="-1" role="dialog" aria-labelledby="grpModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3 class="modal-title" id="myModalLabel">Add Group</h3>
+                  </div>
+                  <form action="" name="group_form" id="group_form">
+                  <div class="modal-body">
+                  <div class="row">
+                   <div class="col-md-3">
+                        	<label class="control-label">Name Of Group:</label>
+                            </div>
+                            <div class="col-md-8">
+			                <input type="text" class="form-control" placeholder="" value="" name="group_name" data-rule-required="true" 
+    						        data-msg-required="please enter Group Name">
+                            </div>
+            		  </div>
+                  <div class="row">
+                        <div class="form-group col-md-4">
+                        	<label>Group Type:</label>
+	                        <input type="text" class="form-control" placeholder="" value="" name="group_type" data-rule-required="true" 
+    						        data-msg-required="please enter Group Type">
+                        </div>
+                      </div>
+                      
+                       <div class="row">
+                        <div class="form-group col-md-4">
+                        	<label>WebSite Url:</label>
+	                        <input type="text" class="form-control" placeholder="" value="" name="website_url" data-rule-required="true" 
+    						        data-msg-required="please enter Website Address">
+                        </div>
+                      </div>
+                  <div class="row">
+                   
+                  	 <div class="form-group col-md-4">
+                        	<label class="control-label">City:</label>
+			                <input type="text" class="form-control" placeholder="" value="" name="city" data-rule-required="true" 
+    						        data-msg-required="please enter City">
+            		  </div>
+                   
+                       <div class="form-group col-md-4">
+                      <label class="control-label">State:</label>
+                     <select name="usa_states" id="usa_states" class="form-control" data-rule-required="true" 
+    						        data-msg-required="please select State">
+          				 <option value="">Select State</option>
+          				 </select>
+                        </div>
+                 
+                      <div class="form-group col-md-4">
+                        	<label>Zip / Postal:</label>
+			                <input type="text" class="form-control" placeholder="" value="" name="postal_code" data-rule-required="true" 
+    						        data-msg-required="please enter Postal Code">
+            		  </div>
+                      </div>
+                      
+                      <div class="row">
+                        <div class="form-group col-md-12">
+                        	<label>Additional Information:</label>
+	                        <textarea name="additional_info" class="form-control" data-rule-required="true" 
+    						        data-msg-required="please enter Any Additional Information"></textarea>	
+                            <input type="hidden" name="grp_action" value="add">
+                            <input type="hidden" value="" name="grp_form_id" >
+                        </div>
+                      </div>
+                      
+                      <div class="clear"></div>
+                 
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Add Group</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  
+                  </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            </div>
+     
+
+     <!----------------- Group Modal end  --------------------->      
+  
 <?php $this->load->view('footer');?>

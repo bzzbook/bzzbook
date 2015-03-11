@@ -1,5 +1,5 @@
-<?php 
-	$profession_details = $this->customermodel->getprofessionDetails();
+	<?php 
+	$profession_details = $this->profile_set->getprofessionDetails();
 ?>
 
         	<?php 

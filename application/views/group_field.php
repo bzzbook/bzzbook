@@ -1,5 +1,5 @@
 <?php 
-	$group_details = $this->customermodel->getgroupDetails();
+	$group_details = $this->profile_set->getgroupDetails();
 ?>
 
 <?php 

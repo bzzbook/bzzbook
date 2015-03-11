@@ -8,21 +8,21 @@
           <a href="#" class="navbar-brand">Menu</a> </div>
         <div class="collapse navbar-collapse bs-example-js-navbar-collapse">
           <ul class="nav navbar-nav">
-            <li> <a  href="<?php echo base_url(); ?>profile/post">Profile</a></li>
+           <li> <a  href="<?php echo base_url(); ?>profile/post">Profile</a></li>
             <li> <a  href="<?php echo base_url(); ?>profile/about_me">About Me</a></li>
             <li> <a  href="#">My Friends</a></li>
             <li> <a  href="#">My Photos</a></li>
-            <li> <a  href="<?php echo base_url(); ?>profile/business_details">My Business Details</a></li>
+              <li> <a  href="<?php echo base_url(); ?>profile/business_details">My Business Details</a></li>
             <li> <a  href="#">My Companies</a></li>
           </ul>
           <div class="pull-right viewAs">
             <p>Viewing as:</p>
             <select class="form-control" >
-              <optgroup label="Your Personal Profile">
+              <optgroup label="Your Personal profile">
               <option>Jhon Smith</option>
               </optgroup>
               <optgroup label="Your Companies">
-              <option data-to-proile-type="Company"> Ayatas technologies </option>
+              <option data-to-profile-type="Company">Ayatas technologies</option>
               </optgroup>
             </select>
           </div>
@@ -38,13 +38,18 @@
     <section class="col-lg-3 col-md-3 col-sm-4 col-xs-12 coloumn1">
       <aside>
         <div class="profile">
-          <div class="img"><img src="<?php echo base_url(); ?>images/user.png" alt=""></div>
-          <div class="details">Jhon Smith....<a href="<?php echo base_url(); ?>profile/profile_set">Edit Profile</a><span>Sr. UI Developer at Company</span></div>
+          <?php $data = $this->profile_set->get_profile_pic(); 	?>
+          <div class="img">
+          <?php	foreach($data as $image){ ?>
+          <img src="<?php echo base_url();?>uploads/thumbs/<?php echo $image->thumbnail; ?>" alt="">
+          <?php } ?>
+          </div>
+          <div class="details">Jhon Smith....<a href="<?php echo base_url(); ?>profile/profile_setting">Edit Profile</a><span>Sr. UI Developer at Company</span></div>
           <div class="clear"></div>
         </div>
         <div class="sideNav">
           <ul>
-              <li><a href="<?php echo base_url(); ?>profile/message">Messages <span>5</span></a></li>
+            <li><a href="<?php echo base_url(); ?>profile/message">Messages <span>5</span></a></li>
             <li><a href="#">Buzzers ! <span>20</span></a></li>
             <li><a href="<?php echo base_url(); ?>profile/groups">My Groups</a></li>
             <li><a href="<?php echo base_url(); ?>profile/jobs">My Jobs</a></li>

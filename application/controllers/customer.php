@@ -97,15 +97,15 @@ class customer extends CI_Controller {
 	  }
   
   
-  public function postborad_update()
+  public function postboard_update()
   {
 	  parse_str($_POST['form_data'],$postboard_info);
-	echo $this->customermodel->managepostboarddata($postboard_info);
+	 echo $this->customermodel->managepostboarddata($postboard_info);
   }
   public function updateabout()
   {
 		parse_str($_POST['form_data'], $aboutformdata);
-	   echo  $this->customermodel->updateAboutInfo($aboutformdata);
+	   echo $this->customermodel->updateAboutInfo($aboutformdata);
   }
   public function updateprivacy()
   {
@@ -193,6 +193,36 @@ class customer extends CI_Controller {
 			$this->load->view('uploadform', $data);
 		}
   }
+
+public function search_company()
+
+{
+	//$data['industry'] = $this->lookup->get_lookup_industry();
+	$this->load->view('companies_search');
+	
+}
+
+public function search_job()
+
+{
+	//$data['industry'] = $this->lookup->get_lookup_industry();
+	$this->load->view('jobs_search');
+	
+}
+public function search_event()
+
+{
+	//$data['industry'] = $this->lookup->get_lookup_industry();
+	$this->load->view('events_search');
+	
+}
+public function search_member()
+
+{
+	//$data['industry'] = $this->lookup->get_lookup_industry();
+	$this->load->view('members_search');
+	
+}
 }
 
 ?>

@@ -15,10 +15,55 @@
 <script src="<?php echo base_url(); ?>js/jquery.validate.min.js"></script>
 <script src="<?php echo base_url(); ?>js/additional-methods.js"></script>
 <script src="<?php echo base_url(); ?>js/countries.js"></script>
+<script src="<?php echo base_url(); ?>js/usa_states.js"></script>
 <script language="javascript">print_country("country");</script> 
+<script language="javascript">print_usa_states("usa_states");</script>  
+
 <script type="text/javascript">
    $('#email_invite').validate();
-   $('#profile').validate();
+   $('#upload_file').validate(); 
+ /*  //modal education form validation
+   function edu_form() {
+    $("#education_form").validate({
+  
+  // Specify the validation rules
+
+		rules: {
+            field_of_study: "required",
+            college_institution: "required",
+			degree_certificate: "required",
+			year_attended_from: "required",
+			month_attended_from: "required",
+			year_attended_to: "required",
+			month_attended_to: "required",
+            special_studies: "required"
+        },
+        
+        // Specify the validation error messages
+        messages: {
+			field_of_study: "Please enter your Educaton",
+            college_institution: "Please enter your Institution Name",
+			degree_certificate: "Please enter your Graduation",
+			year_attended_from: "Please enter Year",
+			month_attended_from: "Please enter Month",
+			year_attended_to: "Please enter Year",
+			month_attended_to: "Please enter Month",
+            special_studies: "Please enter about your Studies"
+        },
+        
+        submitHandler: function(form) {
+            form.submit();
+			
+        }
+    });
+
+  }
+ */
+   /*$('#profile').validate();
+   $('#group_form').validate();
+   $('#organization_form').validate();
+   $('#profession_form').validate();
+   $('#education_form').validate();*/
 	</script>
 <script>
 $(function(){
@@ -45,7 +90,7 @@ $(function(){
 			});
 			
 				$("form[name=postboard]").submit(function(event){
-			   url="<?php echo base_url();?>customer/postborad_update/";
+			   url="<?php echo base_url();?>customer/postboard_update/";
 				 $.ajax({
         			type: "POST",
 			        url: url,
@@ -296,6 +341,52 @@ function view_comments(id){
 	$('#res_comments'+id).hide();
 	$('#res_comments_viewmore'+id).show();
 }
+
+
+$(document).ready(function() {
+ 
+    $('#grp_add').click(function(){
+        $('#select-from option:selected').each( function() {
+                $('#select-to').append("<option value='"+$(this).val()+"'>"+$(this).text()+"</option>");
+            $(this).remove();
+        });
+    });
+    $('#grp_remove').click(function(){
+        $('#select-to option:selected').each( function() {
+            $('#select-from').append("<option value='"+$(this).val()+"'>"+$(this).text()+"</option>");
+            $(this).remove();
+        });
+    });
+ 
+});
+
+
+//ajax for profile pic upload
+/*
+$(function() {
+	$('#upload_file').submit(function(e) {
+		url ="<?php echo base_url(); ?>profile/do_upload/";
+		e.preventDefault();
+		$.ajaxFileUpload({
+			url 			:url, 
+			secureuri		:false,
+			fileElementId	:'userfile',
+			dataType		: 'json',
+			data			: {	},
+			success	: function (data, status)
+			{
+				if(data.status != 'error')
+				{
+					$('#status').html('<p>Reloading files...</p>');
+					refresh_files();
+				}
+				alert(data.msg);
+			}
+		});
+		return false;
+	});
+});
+*/
 </script>
 </body>
 </html>

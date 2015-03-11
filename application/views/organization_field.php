@@ -1,5 +1,5 @@
 <?php 
-	$organization_details = $this->customermodel->getorganizationDetails();
+	$organization_details = $this->profile_set->getorganizationDetails();
 ?>
 
       	<?php 

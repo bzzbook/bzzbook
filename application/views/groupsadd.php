@@ -38,8 +38,13 @@
     <section class="col-lg-3 col-md-3 col-sm-4 col-xs-12 coloumn1">
       <aside>
         <div class="profile">
-          <div class="img"><img src="<?php echo base_url(); ?>images/user.png" alt=""></div>
-          <div class="details">Jhon Smith....<a href="<?php echo base_url(); ?>profile/profile_set">Edit Profile</a><span>Sr. UI Developer at Company</span></div>
+          <?php $data = $this->profile_set->get_profile_pic(); 	?>
+          <div class="img">
+          <?php	foreach($data as $image){ ?>
+          <img src="<?php echo base_url();?>uploads/thumbs/<?php echo $image->thumbnail; ?>" alt="">
+          <?php } ?>
+          </div>
+          <div class="details">Jhon Smith....<a href="<?php echo base_url(); ?>profile/profile_setting">Edit Profile</a><span>Sr. UI Developer at Company</span></div>
           <div class="clear"></div>
         </div>
         <div class="sideNav">
@@ -105,16 +110,28 @@
     <div class="form-group">
    <div class="FormFields col-md-5">
  <label>Members</label>
-    <span><textarea name="" cols="" rows=""></textarea></span>
+    <span><select multiple name="select-from" id="select-from" class="form-control">
+     <option value="1">option1</option>
+     <option value="2">option2</option>
+     <option value="3">option3</option>
+     <option value="4">option4</option>
+    </select>
+</span>
 	</div>
     <div class="FormFields text-center buttons col-md-2">
-   <input name="" class="btn btn-info black smallBtn" type="button" value="Add">
+   <input name="" class="btn btn-info black smallBtn" type="button" value="Add" id="grp_add">
    OR
-   <input name="" type="button" class="btn btn-info black smallBtn" value="Remove">
+   <input name="" type="button" class="btn btn-info black smallBtn" value="Remove" id="grp_remove">
     </div>
      <div class="FormFields col-md-5">
  <label>Groups</label>
-    <span><textarea name="" cols="" rows=""></textarea></span>
+    <span><select multiple name="select-to" id="select-to" class="form-control">
+     <option value="5">option5</option>
+     <option value="6">option6</option>
+     <option value="7">option7</option>
+     <option value="8">option8</option>
+    </select>
+</span>
 	</div>
     </div>
     <div class="clear"></div>

@@ -29,10 +29,10 @@ $session_data = $this->session->userdata('logged_in');
       <div class="input-group"> <span class="input-group-btn">
         <input type="button" value="" role="button"  class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" id="drop2">
         <ul aria-labelledby="drop2" role="menu" class="dropdown-menu">
-          <li><a href="file:///E|/code/Bzzbook-html/h#" tabindex="-1" role="menuitem">Jobs</a></li>
-          <li><a href="file:///E|/code/Bzzbook-html/h#" tabindex="-1" role="menuitem">Companies</a></li>
-          <li><a href="file:///E|/code/Bzzbook-html/h#" tabindex="-1" role="menuitem">Events</a></li>
-          <li><a href="file:///E|/code/Bzzbook-html/h#" tabindex="-1" role="menuitem">Members</a></li>
+          <li><a href="<?php echo base_url(); ?>customer/search_job" tabindex="-1" role="menuitem">Jobs</a></li>
+          <li><a href="<?php echo base_url(); ?>customer/search_company" tabindex="-1" role="menuitem">Companies</a></li>
+          <li><a href="<?php echo base_url(); ?>customer/search_event" tabindex="-1" role="menuitem">Events</a></li>
+          <li><a href="<?php echo base_url(); ?>customer/search_member" tabindex="-1" role="menuitem">Members</a></li>
         </ul>
         </span>
         <input type="search" placeholder="Search Here......" class="form-control">
@@ -41,7 +41,12 @@ $session_data = $this->session->userdata('logged_in');
     </div>
     <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
       <div class="curentUser">
-        <div class="userImg"><img src="<?php echo base_url(); ?>images/user.png" alt=""></div>
+      <?php $data = $this->profile_set->get_profile_pic(); 	
+				foreach($data as $image){
+			?>
+        <div class="userImg"><img src="<?php echo base_url();?>uploads/thumbs/<?php echo $image->thumbnail; ?>" alt="">
+        <?php } ?>
+        </div>
         <a href="#" role="button"  class="dropdown-toggle userName" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Logged in as:<span><?php echo  $session_data['email']; ?></span></a>
         <ul  role="menu" class="dropdown-menu">
           <li><a href="<?php echo base_url(); ?>signg_in/sign_out" tabindex="-1" role="menuitem">Logout</a></li>
