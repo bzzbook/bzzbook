@@ -332,7 +332,7 @@
     <section class="col-lg-3 col-md-3 col-sm-3 col-xs-12 coloumn3">
       <aside>
         <div class="pendingRequest">
-          <h3>Pending Friend Requests </h3>
+          <h3> Friend Requests </h3>
           <ul>
             <li>
               <figure><img src="<?php echo base_url(); ?>images/f1.jpg" alt=""></figure>
