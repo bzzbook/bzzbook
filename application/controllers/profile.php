@@ -12,7 +12,9 @@ class Profile extends CI_Controller {
 
 public function index()
 {  
-	  $this->load->view('posts');	
+	     $data['content']='posts';
+	     $this->load->view('template-view',$data);
+	  //$this->load->view('posts');	
 }
 
 public function profile_setting()
@@ -25,14 +27,18 @@ public function profile_setting()
 	$data['profession_details'] = $this->profile_set->getprofessionDetails();
 	$data['organization_details'] = $this->profile_set->getorganizationDetails();
 	$data['group_details'] = $this->profile_set->getgroupDetails();
-	$this->load->view('profile_settings',$data);	
+	$data['content']='profile_settings';
+	$this->load->view('template-view',$data);
+	//$this->load->view('profile_settings',$data);	
 }
 
 public function about_me()
 {
 	$data['result'] = $this->profile_set->save_settings();
 	$data['education_details'] = $this->profile_set->geteducationList();
-	$this->load->view('about_me',$data);
+	$data['content']='about_me';
+	$this->load->view('template-view',$data);
+	//$this->load->view('about_me',$data);
 }
 
 
@@ -41,32 +47,46 @@ public function business_details()
 	$data['profession_details'] = $this->profile_set->getprofessionList();
 	$data['organization_details'] = $this->profile_set->getorganizationList();
 	$data['group_details'] = $this->profile_set->getgroupList();
-	$this->load->view('business_details',$data);
+	$data['content']='business_details';
+	$this->load->view('template-view',$data);
+	//$this->load->view('business_details',$data);
 }
 
 public function post()
   {
-	 $this->load->view('posts');
+	  $data['content']='posts';
+	$this->load->view('template-view',$data);
+	// $this->load->view('posts');
 }
 public function message()
   { 
-   $this->load->view('messages');
+  	$data['content']='messages';
+	$this->load->view('template-view',$data);
+   //$this->load->view('messages');
 }
 public function events()
 {
-	$this->load->view('events');
+		$data['content']='events';
+	$this->load->view('template-view',$data);
+	//$this->load->view('events');
 }
 public function groups()
 {
-	$this->load->view('groups');
+	$data['content']='groups';
+	$this->load->view('template-view',$data);
+	//$this->load->view('groups');
 }
   public function jobs()
 {
-	$this->load->view('jobs');
+	$data['content']='jobs';
+	$this->load->view('template-view',$data);
+	//$this->load->view('jobs');
 }
  public function addgroup()
 {
-	$this->load->view('groupsadd');
+	$data['content']='groupsadd';
+	$this->load->view('template-view',$data);
+	//$this->load->view('groupsadd');
 }
   public function eduDelete($id)
   {
