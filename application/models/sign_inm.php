@@ -14,6 +14,7 @@ class sign_inm extends CI_Model {
 
 	   public function sign_in($data)
 	   {
+		 
 		    $condition = "email =" . "'" . $data['email'] . "' AND " . "password =" . "'" . md5($data['password']) . "'";
 		  
 			$this->db->select('*');

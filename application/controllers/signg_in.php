@@ -121,7 +121,7 @@ class signg_in extends CI_Controller {
 	   );
 
 	   $res=$this->customermodel->write_comments($data);
-	   $res=$this->customer->write_comments($data);
+	  // $res=$this->customer->write_comments($data);
 	   redirect('profiles');
 	   
    }

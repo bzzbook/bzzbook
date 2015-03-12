@@ -198,7 +198,9 @@ public function search_company()
 
 {
 	//$data['industry'] = $this->lookup->get_lookup_industry();
-	$this->load->view('companies_search');
+	$data['content']='companies_search';
+	$this->load->view('template-view',$data);
+	//$this->load->view('companies_search');
 	
 }
 
@@ -206,21 +208,27 @@ public function search_job()
 
 {
 	//$data['industry'] = $this->lookup->get_lookup_industry();
-	$this->load->view('jobs_search');
+	$data['content']='jobs_search';
+	$this->load->view('template-view',$data);
+	//$this->load->view('jobs_search');
 	
 }
 public function search_event()
 
 {
 	//$data['industry'] = $this->lookup->get_lookup_industry();
-	$this->load->view('events_search');
+	$data['content']='events_search';
+	$this->load->view('template-view',$data);
+	//$this->load->view('events_search');
 	
 }
 public function search_member()
 
 {
 	//$data['industry'] = $this->lookup->get_lookup_industry();
-	$this->load->view('members_search');
+	$data['content']='members_search';
+	$this->load->view('template-view',$data);
+	//$this->load->view('members_search');
 	
 }
 }
