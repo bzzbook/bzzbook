@@ -186,6 +186,7 @@ public function groups()
 			$config['source_image'] = $path;
 			$config['create_thumb'] = TRUE;
 			$config['maintain_ratio'] = TRUE;
+			//$config['upload_path'] = './uploads/thumbs/';
 			$config['new_image'] = './uploads/thumbs/';
 			$config['thumb_marker'] = '_thumb';
 			$config['width'] = 91;
@@ -202,6 +203,7 @@ public function groups()
 		    $config_fav['image_library'] = 'gd2';
 			$config_fav['maintain_ratio'] = TRUE;
 			$config_fav['create_thumb'] = TRUE;
+		//	$config_fav['upload_path'] = './uploads/favorite/';
 			$config_fav['new_image'] = './uploads/favorite/';
 			$config_fav['thumb_marker'] = '_fav';
 			$config_fav['width'] = 62;
