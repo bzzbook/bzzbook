@@ -132,6 +132,25 @@ public function groups()
 	echo json_encode($edu_data);
   }
   
+  public function get_grp_friends($id)
+  {
+	  $data=$this->profile_set->disp_friends($id);
+	  $select = '<select name="select-from" id="select-from" class="form-control">';
+	  $frnd_list = $data[0]->friends;
+	
+	$friends = explode(",",$frnd_list);
+	//print_r ($friends);
+	foreach($friends as $frnd):
+	$name = $this->profile_set->getcustDetails($frnd);
+	
+	foreach($name as $n):
+	$select.="<option value='".$n->cust_id."'>".$n->first_name." ".$n->last_name."</option>";
+	endforeach;
+	endforeach;
+	$select.="</select>";
+	echo json_encode($data);
+  }
+  
    public function profEdit()
   {
 	 $data = $this->profile_set->editProfDetails($_POST['profession_id']);
@@ -240,7 +259,15 @@ public function groups()
 			redirect('/profile/profile_setting');
 		}
 	} 
- 
+	
+	public function my_photos()
+	{
+		$data['photos'] = $this->profile_set->get_my_pics();
+		$data['content']='myphotos';
+		$this->load->view('template-view',$data);
+		
+	}
+
 }
 
 ?>

@@ -139,7 +139,8 @@ class Customermodel extends CI_Model {
    
    public function manageeducationdata($data)
    {
-	   	$educationInfo = array('field_of_study'=>$data['field_of_study'],
+	   	$educationInfo = array(
+		'field_of_study'=>$data['field_of_study'],
 		'college_institution'=>$data['college_institution'],
 		'degree_certificate'=>$data['degree_certificate'],
 		'attended_from'=>$data['year_attended_from'].'-'.$data['month_attended_from'],
@@ -147,10 +148,20 @@ class Customermodel extends CI_Model {
 		'specialised_studies'=>$data['special_studies'],
 		'cust_id'=>$this->session->userdata('logged_in')['account_id']
 		);
+		
+		if($data['edu_action'] == 'add')
+		{
 		if($this->db->insert('education_info', $educationInfo))
 			return $this->db->insert_id();
 		else
 			return false;
+		}else{
+			$edu_id = $data['edu_form_id'];
+			
+			 $this->db->where('educationinfo_id',$edu_id);
+			$this->db->update('education_info', $educationInfo);
+			
+		}
    }
     public function manageprofessiondata($data)
    {

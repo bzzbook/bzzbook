@@ -150,6 +150,24 @@ class Profile_set extends CI_Model {
    }
    
    
+   //functio0n for adding  groups
+   
+   public function get_groups()
+   {
+	    $id = $this->session->userdata('logged_in')['account_id'];
+	    $condition = "cust_id =" . "'" . $id . "'";
+		$this->db->select('*');
+		$this->db->from('group_info');
+		$this->db->where($condition);
+		$this->db->order_by("grpinfo_id");
+		$query = $this->db->get();
+		if ($query->num_rows() > 0) {
+			return $query->result();
+		} else {
+		return false;
+		}
+   }
+   
    
    
    // deleting individual education details by id
@@ -255,6 +273,52 @@ if ($query->num_rows() > 0) {
 public function get_all_profile_pics()
 {
 $this->db->order_by("img_info_id", "desc");
+$query = $this->db->get('images','9');
+if ($query->num_rows() > 0) {
+			return $query->result();
+		} else {
+		return false;
+		}
+}
+
+
+public function disp_friends($grp_id)
+{
+  $id = $this->session->userdata('logged_in')['account_id'];
+	    $condition = "cust_id =" . "'" . $id . "'" . " AND " . "grpinfo_id = "  . "'" . $grp_id . "'";
+		$this->db->select('friends');
+		$this->db->from('group_info');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		if ($query->num_rows() > 0) {
+			return $query->result();
+		} else {
+		return false;
+		}	
+}
+
+public function getcustDetails($id)
+   {
+	    //$id = $this->session->userdata('logged_in')['account_id'];
+	   $condition = "cust_id =" . "'" . $id . "'";
+		$this->db->select('*');
+		$this->db->from('cust_sign_up');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		if ($query->num_rows() == 1) {
+			return $query->result();
+		} else {
+		return false;
+		}
+   }
+
+public function get_my_pics()
+{
+	$id = $this->session->userdata('logged_in')['account_id'];
+	$condition = "cust_id =" . "'" . $id . "'";
+	$this->db->select('filename');
+	$this->db->where($condition);
+	$this->db->order_by("img_info_id", "desc");
 $query = $this->db->get('images','9');
 if ($query->num_rows() > 0) {
 			return $query->result();

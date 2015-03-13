@@ -16,8 +16,11 @@
     <div class="groupEditBlock">
     <div class="form-group">
     <div class="col-md-6">
-<select name="f" class="form-control">
-      <option value="1">Friends</option>
+<select name="f" class="form-control" id="grp_list">
+<?php $data = $this->profile_set->get_groups(); ?>
+     <?php foreach($data as $grp) { ?>
+                 <option value="<?php echo $grp->grpinfo_id ?>"><?php echo $grp->grp_name ?></option>
+                 <?php } ?> 
     </select>
 </div>    
     </div>
@@ -25,11 +28,8 @@
     <div class="form-group">
    <div class="FormFields col-md-5">
  <label>Members</label>
-    <span><select multiple name="select-from" id="select-from" class="form-control">
-     <option value="1">option1</option>
-     <option value="2">option2</option>
-     <option value="3">option3</option>
-     <option value="4">option4</option>
+    <span id="select_frm"><select multiple name="select-from" id="select-from" class="form-control">
+     
     </select>
 </span>
 	</div>
