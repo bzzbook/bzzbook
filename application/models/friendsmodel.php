@@ -16,8 +16,11 @@ class Friendsmodel extends CI_Model {
 		$this->db->limit(1);
 		$query = $this->db->get();
 		if ($query->num_rows() == 1) {
-			$result = $query->result_array();	
-			$frnd_ids = explode(',',$result[0]['friends']);
+			$result = $query->result_array();
+			if(!empty($result[0]['accepted_friend_ids']))
+			$frnd_ids = explode(',',$result[0]['accepted_friend_ids']);
+			else
+			return false;
 			$frnds = array();
 			foreach($frnd_ids as $frnd_id)
 			{

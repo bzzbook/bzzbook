@@ -306,7 +306,7 @@ public function getcustDetails($id)
 		$this->db->where($condition);
 		$query = $this->db->get();
 		if ($query->num_rows() == 1) {
-			return $query->result();
+			return $query->result_array();
 		} else {
 		return false;
 		}
@@ -325,6 +325,19 @@ if ($query->num_rows() > 0) {
 		} else {
 		return false;
 		}
+}
+
+public function creategroup($grpname,$members)
+{
+	$id = $this->session->userdata('logged_in')['account_id'];
+
+	$data = array(
+   'grp_name' => $grpname ,
+   'cust_id' => $id ,
+   'friends' => $members
+);
+$this->db->insert('group_info', $data); 
+$this->session->set_flashdata('group-add-msg', 'Group Created Successfully');
 }
 }
 ?>

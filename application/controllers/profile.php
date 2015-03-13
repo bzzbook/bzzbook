@@ -134,21 +134,31 @@ public function groups()
   
   public function get_grp_friends($id)
   {
+	  
 	  $data=$this->profile_set->disp_friends($id);
-	  $select = '<select name="select-from" id="select-from" class="form-control">';
-	  $frnd_list = $data[0]->friends;
-	
-	$friends = explode(",",$frnd_list);
-	//print_r ($friends);
-	foreach($friends as $frnd):
-	$name = $this->profile_set->getcustDetails($frnd);
-	
-	foreach($name as $n):
-	$select.="<option value='".$n->cust_id."'>".$n->first_name." ".$n->last_name."</option>";
-	endforeach;
-	endforeach;
-	$select.="</select>";
-	echo json_encode($data);
+	  if($data)
+	  {
+		$select = '<select name="select-from" id="select-from" class="form-control" multiple="multiple">';
+		$frnd_list = $data[0]->friends;
+		if(!empty($frnd_list))
+		{
+		$friends = explode(",",$frnd_list);
+		//print_r ($friends);
+		foreach($friends as $frnd):
+		$name = $this->profile_set->getcustDetails($frnd);
+		$select.="<option value='".$name[0]['cust_id']."'>".$name[0]['first_name']." ".$name[0]['last_name']."</option>";
+		endforeach;
+		}
+		else
+			$select.="<option value='-1'>No List Available</option>";
+
+		$select.="</select>";
+		echo $select;
+	  }
+	  else 
+	  {
+		  echo $select = '<select name="select-from" id="select-from" class="form-control" multiple="multiple"><option value="-1">No List Available</option></select></select>';
+	  }
   }
   
    public function profEdit()
@@ -266,6 +276,10 @@ public function groups()
 		$data['content']='myphotos';
 		$this->load->view('template-view',$data);
 		
+	}
+	public function creategroup()
+	{
+		$this->profile_set->creategroup($_POST['grp_name'],$_POST['members']);
 	}
 
 }

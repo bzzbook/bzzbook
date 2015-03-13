@@ -14,9 +14,16 @@
 <div class="clearfix"></div>
         </div>
     <div class="groupEditBlock">
+    <?php 
+	if($this->session->flashdata('group-add-msg'))
+	{
+		echo "<h2>".$this->session->flashdata('group-add-msg')."</h2>";
+	}
+	?>
     <div class="form-group">
     <div class="col-md-6">
 <select name="f" class="form-control" id="grp_list">
+<option value="-1">select group</option>
 <?php $data = $this->profile_set->get_groups(); ?>
      <?php foreach($data as $grp) { ?>
                  <option value="<?php echo $grp->grpinfo_id ?>"><?php echo $grp->grp_name ?></option>
@@ -41,10 +48,7 @@
      <div class="FormFields col-md-5">
  <label>Groups</label>
     <span><select multiple name="select-to" id="select-to" class="form-control">
-     <option value="5">option5</option>
-     <option value="6">option6</option>
-     <option value="7">option7</option>
-     <option value="8">option8</option>
+    
     </select>
 </span>
 	</div>
@@ -52,11 +56,11 @@
     <div class="clear"></div>
     <div class="FormFields col-md-12 ">
     	<label>Group Name</label>
-        <span><input name="" type="text"></span>
+        <span><input name="grpname" type="text" id="grpname"></span>
     </div>
     <div class="clear"></div>
     <div class="FormFields col-md-12">
-    	<button class="btn black btn-info">Save</button>
+    	<button class="btn black btn-info" onclick="saveGroup();">Save</button>
     </div>
         <div class="clear"></div>
     </div>
