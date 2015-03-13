@@ -128,8 +128,9 @@ header .search .input-group .input-group-btn ul li a:hover{ background:url(../im
 .midbody .coloumn3 aside .pendingRequest figure img{width:60px; height:60px;}
 .midbody .coloumn3 aside .pendingRequest .disc{ padding-left:8px;}
 .midbody .coloumn3 aside .pendingRequest .disc h4{ color:#737373; font-size:15px; padding-bottom:15px;}
-.midbody .coloumn3 aside .pendingRequest .disc a{ display:inline-block; font-size:12px; color:#fff; background:#609b34; height:30px; line-height:30px; padding:0 10px; -webkit-border-radius:2px; border-radius:2px;}
-.midbody .coloumn3 aside .pendingRequest .disc a+a{ background:#2f2f2f; margin-left:3px;}
+.midbody .coloumn3 aside .pendingRequest .disc a{ display:inline-block; font-size:12px; color:#fff; background:/*#609b34*/#fbc436; height:30px; line-height:30px; padding:0 10px; -webkit-border-radius:2px; border-radius:2px;}
+.midbody .coloumn3 aside .pendingRequest .disc a+a{ background:#609b34; margin-left:3px;}
+.midbody .coloumn3 aside .pendingRequest .disc a+a+a{ background:#2f2f2f; margin-left:3px;}
 .midbody .coloumn3 aside .link{ color:#a7a7a7; font-size:14px; font-weight:400;}
 
 .midbody .coloumn3 aside .latestFriends{ padding:18px 12px; border-bottom:1px solid #ececec;}
