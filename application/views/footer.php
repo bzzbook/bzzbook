@@ -334,8 +334,7 @@ function likefun(pid,uid,status){
 			//$("#like_ajax"+pid).html("Like");
 			$("#link_like"+pid).html("Like");
         }
-       });
-	
+       });	
 }
 function view_comments(id){
 	$('#res_comments'+id).hide();
@@ -402,6 +401,52 @@ $(function() {
 	});
 });
 */
+function acceptFrnd(id)
+{
+		url="<?php echo base_url(); ?>friends/confirmrequest/"+id;
+		$.ajax({
+        type: "POST",
+        url: url,
+        success: function(data)
+        {   
+			$("#pendingReqUl").html(data);
+		},
+		cache: false
+		});
+		
+}
+
+function denyFrnd(id)
+{
+		url="<?php echo base_url(); ?>friends/denyrequest/"+id;
+		$.ajax({
+        type: "POST",
+        url: url,
+        success: function(data)
+        {   
+			$("#pendingReqUl").html(data);
+		},
+		cache: false
+		});
+		
+}
+
+function blockFrnd(id)
+{
+		url="<?php echo base_url(); ?>friends/blockrequest/"+id;
+		$.ajax({
+        type: "POST",
+        url: url,
+        success: function(data)
+        {   
+			$("#pendingReqUl").html(data);
+		},
+		cache: false
+		});
+		
+}
+
+
 </script>
 </body>
 </html>

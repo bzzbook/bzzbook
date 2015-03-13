@@ -8,10 +8,12 @@
         <li role="presentation"><a href="#organization" aria-controls="profile" role="tab" data-toggle="tab">Organizations</a></li>
         <li role="presentation"><a href="#group" aria-controls="messages" role="tab" data-toggle="tab">Groups</a></li>
         </ul>
-      </div>   
+      </div>  
         <div class="tab-content col-md-7">
-        <?php foreach($profession_details as $profdetails):?>
+
         <div role="tabpanel" class="tab-pane active" id="prof_exp">
+        <?php if($profession_details) { foreach($profession_details as $profdetails):?> 
+
         <h4>Job Title</h4>
         <p><?php echo $profdetails->job_title?></p>
         <h4>Worked Duration</h4>
@@ -20,10 +22,11 @@
         <p><?php echo $profdetails->job_description?></p>
          <h4>Employement Status</h4>
         <p><?php echo $profdetails->current_job?></p>
+         <?php endforeach; } else echo "No Details Found"; ?>
         </div>
-  <?php endforeach; ?>
-        <?php foreach($organization_details as $orgdetails): ?>
+ 
         <div role="tabpanel" class="tab-pane" id="organization">
+        <?php if($organization_details) { foreach($organization_details as $orgdetails): ?>
         <h4>Organization Name</h4>
         <p><?php echo $orgdetails->org_name; ?></p>
         <h4>Positiion</h4>
@@ -34,10 +37,12 @@
         <p><?php echo $orgdetails->start_date; ?> To <?php echo $orgdetails->end_date; ?> </p>
         <h4>Employement Status</h4>
         <p><?php echo $orgdetails->emp_status; ?></p>
+         <?php endforeach; } else echo "No Details Found";?>
         </div>
-        <?php endforeach;?>
-         <?php foreach($group_details as $groupdetails): ?>
+       
         <div role="tabpanel" class="tab-pane" id="group">
+        <?php if($group_details) { foreach($group_details as $groupdetails): ?>
+
          <h4>Group Name</h4>
         <p><?php echo $groupdetails->grp_name;?></p>
          <h4>Group Type</h4>
@@ -50,8 +55,9 @@
         <?php echo $groupdetails->postal_code;?></p>
          <h4>Additional Information</h4>
         <p><?php echo $groupdetails->additional_info;?></p>
+                  <?php endforeach; } else echo "No Details Found";?>
+
          </div>
-          <?php endforeach;?>
         </div>
         <div class="clear"></div>
       </div>
