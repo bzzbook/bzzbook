@@ -368,8 +368,8 @@ $(document).ready(function() {
 	 $.post( url )
 			.done(function( data ) 
 			{	
-			info = JSON.parse(data);
-			$("#select_frm").val(info.friends);
+			
+			$("#select_frm").html(data);
 	    });
 			return false;
 	});
@@ -441,6 +441,29 @@ function blockFrnd(id)
         success: function(data)
         {   
 			$("#pendingReqUl").html(data);
+		},
+		cache: false
+		});
+		
+}
+function saveGroup()
+{
+	var list_of_members ='';
+	var name = $('#grpname').val();
+	 $('#select-to option').each( function() {
+		 	 list_of_members += $(this).val()+",";
+        });
+		list_of_members = list_of_members.substring(0, list_of_members.length - 1);
+		
+		url="<?php echo base_url(); ?>profile/creategroup/";
+		$.ajax({
+        type: "POST",
+        url: url,
+		data: { grp_name: name,members: list_of_members} ,
+        success: function(data)
+        {   
+			var redirect_url = "<?php echo base_url(); ?>"+'profile/addgroup';
+			window.location.replace(redirect_url);
 		},
 		cache: false
 		});
