@@ -201,7 +201,7 @@ public function groups()
  
 	 function do_upload()
 	{
-		$config['upload_path'] = './uploads/profile/';
+		$config['upload_path'] = './uploads/';
 		$config['allowed_types'] = 'gif|jpg|png';
 		$config['create_thumb'] = TRUE;
 		$config['max_size']	= '';
@@ -226,7 +226,7 @@ public function groups()
 			$config['create_thumb'] = TRUE;
 			$config['maintain_ratio'] = TRUE;
 			//$config['upload_path'] = './uploads/thumbs/';
-			$config['new_image'] = './uploads/thumbs/';
+			//$config['new_image'] = './uploads/thumbs/';
 			$config['thumb_marker'] = '_thumb';
 			$config['width'] = 91;
 			$config['height'] = 91;
@@ -243,7 +243,7 @@ public function groups()
 			$config_fav['maintain_ratio'] = TRUE;
 			$config_fav['create_thumb'] = TRUE;
 		//	$config_fav['upload_path'] = './uploads/favorite/';
-			$config_fav['new_image'] = './uploads/favorite/';
+			//$config_fav['new_image'] = './uploads/favorite/';
 			$config_fav['thumb_marker'] = '_fav';
 			$config_fav['width'] = 62;
 			$config_fav['height'] = 62;
@@ -263,10 +263,13 @@ public function groups()
 	public function my_photos()
 	{
 		$data['photos'] = $this->profile_set->get_my_pics();
+		$data['videos'] = $this->profile_set->get_my_videos();
 		$data['content']='myphotos';
 		$this->load->view('template-view',$data);
 		
 	}
+	
+
 
 }
 

@@ -231,6 +231,69 @@ public function search_member()
 	//$this->load->view('members_search');
 	
 }
+
+	public function do_upload()
+	{
+		$config['upload_path'] = './uploads/';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$config['create_thumb'] = TRUE;
+		$config['max_size']	= '';
+		$config['max_width']  = '';
+		$config['max_height']  = '';
+
+		$this->load->library('upload', $config);
+
+		if ( ! $this->upload->do_upload())
+		{
+			$error = array('error' => $this->upload->display_errors());
+			print_r($error);
+			//$this->load->view('uploadform', $error);
+		}
+		else
+		{
+			$data = $this->upload->data();
+	  	  // print_r($data);
+		    $path = $data['full_path'];
+		    $config['image_library'] = 'gd2';
+			$config['source_image'] = $path;
+			$config['create_thumb'] = TRUE;
+			$config['maintain_ratio'] = TRUE;
+			//$config['upload_path'] = './uploads/thumbs/';
+			//$config['new_image'] = './uploads/thumbs/';
+			$config['thumb_marker'] = '_thumb';
+			$config['width'] = 91;
+			$config['height'] = 91;
+
+			$this->load->library('image_lib', $config);
+			$this->image_lib->initialize($config);
+			$this->image_lib->resize();
+			$img_thumb = $data['raw_name'].'_thumb'.$data['file_ext'];
+
+			//creating new image
+			$path = $data['full_path'];
+			$config_fav['source_image'] = $path;
+		    $config_fav['image_library'] = 'gd2';
+			$config_fav['maintain_ratio'] = TRUE;
+			$config_fav['create_thumb'] = TRUE;
+		//	$config_fav['upload_path'] = './uploads/favorite/';
+			//$config_fav['new_image'] = './uploads/favorite/';
+			$config_fav['thumb_marker'] = '_fav';
+			$config_fav['width'] = 62;
+			$config_fav['height'] = 62;
+
+			$this->load->library('image_lib', $config_fav);
+			$this->image_lib->initialize($config_fav);
+			$this->image_lib->resize();
+			$img_fav = $data['raw_name'].'_fav'.$data['file_ext'];
+			
+			
+			//print_r($data);
+			$file_id = $this->profile_set->add_pics($data['file_name'],$img_thumb,$img_fav);
+			redirect('/profile/my_photos');
+	}
+
+	}
+
 }
 
 ?>

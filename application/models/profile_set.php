@@ -259,6 +259,20 @@ class Profile_set extends CI_Model {
         return $this->db->insert_id();
   
 }
+public function add_pics($filename,$thumbnail,$img_fav)
+{
+	 $data = array(
+            'filename' => $filename,
+			'thumbnail' => $thumbnail,
+			'favorite' => $img_fav,
+			'cust_id' => $this->session->userdata('logged_in')['account_id']
+        );
+        $this->db->insert('images', $data);
+        return $this->db->insert_id();
+	
+}
+
+
 public function get_profile_pic()
 {
 $this->db->order_by("img_info_id", "desc");
@@ -319,7 +333,22 @@ public function get_my_pics()
 	$this->db->select('filename');
 	$this->db->where($condition);
 	$this->db->order_by("img_info_id", "desc");
-$query = $this->db->get('images','9');
+$query = $this->db->get('images','12');
+if ($query->num_rows() > 0) {
+			return $query->result();
+		} else {
+		return false;
+		}
+}
+
+public function get_my_videos()
+{
+	$id = $this->session->userdata('logged_in')['account_id'];
+	$condition = "cust_id =" . "'" . $id . "'";
+	$this->db->select('videos');
+	$this->db->where($condition);
+	$this->db->order_by("img_info_id", "desc");
+$query = $this->db->get('images','2');
 if ($query->num_rows() > 0) {
 			return $query->result();
 		} else {

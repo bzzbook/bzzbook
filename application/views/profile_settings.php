@@ -19,7 +19,7 @@
 			<?php	foreach($data as $image){
 			?>
             <!-- <?php //echo base_url(); ?>images/pf_pic.png -->
-              <figure class="pfpic"><span>Profile Pic</span><img src="<?php echo base_url();?>uploads/profile/<?php echo $image->filename; ?>" alt="" height="159" width="146"></figure>
+              <figure class="pfpic"><span>Profile Pic</span><img src="<?php echo base_url();?>uploads/<?php echo $image->filename; ?>" alt="" height="159" width="146"></figure>
                <?php $attr = array('id' => 'upload_file', 'name' => 'upload_file'); ?> 
               <?php echo form_open_multipart('profile/do_upload',$attr);?>
               <?php } ?>

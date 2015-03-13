@@ -17,6 +17,7 @@
 <script src="<?php echo base_url(); ?>js/countries.js"></script>
 <script src="<?php echo base_url(); ?>js/usa_states.js"></script>
 <script language="javascript">print_country("country");</script> 
+<script src="<?php echo base_url(); ?>js/lightbox.min.js"></script>
 <script language="javascript">print_usa_states("usa_states");</script>  
 
 <script type="text/javascript">

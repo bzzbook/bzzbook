@@ -157,8 +157,7 @@ class Customermodel extends CI_Model {
 			return false;
 		}else{
 			$edu_id = $data['edu_form_id'];
-			
-			 $this->db->where('educationinfo_id',$edu_id);
+		    $this->db->where('educationinfo_id',$edu_id);
 			$this->db->update('education_info', $educationInfo);
 			
 		}
