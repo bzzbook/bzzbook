@@ -16,8 +16,9 @@
         <h4>Interest</h4>
         <p><?php echo $info->intrests;?> </p>
         </div>
-        <?php foreach($education_details as $edu): ?>
+       
         <div role="tabpanel" class="tab-pane" id="educational">
+         <?php if($education_details) { foreach($education_details as $edu): ?>
         <h4>Institution:</h4>
         <p><?php echo $edu->college_institution; ?></p>
         <h4>Field of Study:</h4>
@@ -28,8 +29,9 @@
         <p><?php echo $edu->attended_from; ?> To <?php echo $edu->attended_upto; ?> </p>
         <h4>Specialized Studies:</h4>
         <p><?php echo $edu->specialised_studies; ?></p>
+          <?php endforeach; } else echo "No Details Found";?>
         </div>
-        <?php endforeach;?>
+      
         <div role="tabpanel" class="tab-pane" id="Contact">
          <h4>Email:</h4>
         <p><?php echo $info->email;?></p>
