@@ -149,18 +149,11 @@ class Customermodel extends CI_Model {
 		'cust_id'=>$this->session->userdata('logged_in')['account_id']
 		);
 		
-		if($data['edu_action'] == 'add')
-		{
 		if($this->db->insert('education_info', $educationInfo))
 			return $this->db->insert_id();
 		else
 			return false;
-		}else{
-			$edu_id = $data['edu_form_id'];
-		    $this->db->where('educationinfo_id',$edu_id);
-			$this->db->update('education_info', $educationInfo);
-			
-		}
+		
    }
     public function manageprofessiondata($data)
    {
