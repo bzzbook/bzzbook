@@ -148,12 +148,21 @@ class Customermodel extends CI_Model {
 		'specialised_studies'=>$data['special_studies'],
 		'cust_id'=>$this->session->userdata('logged_in')['account_id']
 		);
-		
+		if($data['edu_action']=='add')
+		{
 		if($this->db->insert('education_info', $educationInfo))
 			return $this->db->insert_id();
 		else
 			return false;
-		
+		}
+		else if($data['edu_action']=='update')
+		{
+			$this->db->where('cust_id', $educationInfo['cust_id']);
+			if($this->db->update('education_info', $educationInfo))
+			return true;
+			else 
+			return false; 
+		}
    }
     public function manageprofessiondata($data)
    {
@@ -161,14 +170,26 @@ class Customermodel extends CI_Model {
 		'job_title'=>$data['job_title'],
 		'start_date'=>$data['year_attended_from'].'-'.$data['month_attended_from'],
 		'end_date'=>$data['year_attended_to'].'-'.$data['month_attended_to'],
-		'job_description'=>$data['job_description'],
-		'current_job'=>$data['current'],
+		'job_description'=>$data['job_description'],	
 		'cust_id'=>$this->session->userdata('logged_in')['account_id']
 		);
+		if(isset($data['current']))
+			$professionInfo['current_job']=$data['current'];
+		if($data['prof_action']=='add')
+		{
 		if($this->db->insert('profession_info', $professionInfo))
 			return $this->db->insert_id();
 		else
 			return false;
+		}
+		elseif($data['prof_action']=='update')
+		{
+			$this->db->where('cust_id', $professionInfo['cust_id']);
+			if($this->db->update('profession_info', $professionInfo))
+			return true;
+			else 
+			return false; 
+		}
    }
     public function manageorganizationdata($data)
    {
@@ -181,10 +202,21 @@ class Customermodel extends CI_Model {
 		'org_desc'=>$data['org_description'],
 		'cust_id'=>$this->session->userdata('logged_in')['account_id']
 		);
+		if($data['org_action']=='add')
+		{
 		if($this->db->insert('organization_info', $organizationInfo))
 			return $this->db->insert_id();
 		else
 			return false;
+		}
+		elseif($data['org_action']=='update')
+		{
+			$this->db->where('cust_id', $organizationInfo['cust_id']);
+			if($this->db->update('organization_info', $organizationInfo))
+			return true;
+			else 
+			return false; 
+		}
    }
     public function managegroupdata($data)
    {
@@ -192,16 +224,27 @@ class Customermodel extends CI_Model {
 		'grp_name'=>$data['group_name'],
 		'grp_type'=>$data['group_type'],
 		'web_url'=>$data['website_url'],
-		'state'=>$data['state'],
+		'state'=>$data['usa_states'],
 		'postal_code'=>$data['postal_code'],
 		'additional_info'=>$data['additional_info'],
 		'city'=>$data['city'],
 		'cust_id'=>$this->session->userdata('logged_in')['account_id']
 		);
+		if($data['grp_action']=='add')
+		{
 		if($this->db->insert('group_info',$groupInfo))
 			return $this->db->insert_id();
 		else
 			return false;
+		}
+		elseif($data['grp_action']=='update')
+		{
+			$this->db->where('cust_id', $groupInfo['cust_id']);
+			if($this->db->update('group_info', $groupInfo))
+			return true;
+			else 
+			return false; 
+		}
    }
    
     public function managepostboarddata($data)

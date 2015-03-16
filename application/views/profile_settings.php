@@ -148,7 +148,7 @@
             <div role="tabpanel" class="tab-pane" id="business_details">
               <h4 class="clear">Professional Experience</h4>
               <div class="posts">
-        		<div class="groupMainBlock2">
+        		<div class="groupMainBlock1">
         			<?php  if($profession_details) $this->load->view('profession_field'); else echo "Please add experience"; ?>  	
         		</div>
         		</div>

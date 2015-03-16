@@ -12,7 +12,7 @@
                 </div>
                 
                 <div class="EduBlock">
-                <h3>Field Of Study</h3>
+                <h3>Degree</h3>
                 <p><?php echo $edudetails->degree_certificate;?></p>
                 </div>
                 <div class="EduBlock">

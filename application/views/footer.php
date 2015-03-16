@@ -129,11 +129,21 @@ $(function(){
 					event.preventDefault();
 			});
 			$("#education_form").submit(function( event){
+					
+					if($("#year_attended_from").val()==0 || $("#month_attended_from").val()==0 || $("#year_attended_to").val()==0 || $("#month_attended_to").val()==0 || $("#field_of_study").val()=='' || $("#college_institution").val()=='' || $("#degree_certificate").val()=='')
+					{
+						$("#eduformerrors").html("Fields with '*' are mandatory, Please fill them...");
+					}
+					else if($("#year_attended_from").val() > $("#year_attended_to").val())
+					{
+						$("#eduformerrors").html("Years Attended Details Not Valid, Please check...");
+					}
+					else
+					{				
 					url="<?php echo base_url();?>customer/manageducation/";
 					$.post( url, { formdata: $(this).serialize() })
 					.done(function( data ) {
-						 $("input[name=edu_action]").val("add");
-					   	if(data == false)
+						   	if(data == false)
 							alert("Please Enter Valid Details");
 						else
 						{
@@ -144,9 +154,22 @@ $(function(){
 						}
 						
 					  });
+					}
 					event.preventDefault();
 				});
 				$("#profession_form").submit(function( event){
+					
+					if($("#pro_year_attended_from").val()==0 || $("#pro_month_attended_from").val()==0 || $("#pro_year_attended_to").val()==0 || $("#pro_month_attended_to").val()==0 || $("#job_title").val()=='' || $("#job_description").val()=='' )
+					{
+						$("#proformerrors").html("Fields with '*' are mandatory, Please fill them...");
+					}
+					else if($("#pro_year_attended_from").val() > $("#pro_year_attended_to").val())
+					{
+						$("#proformerrors").html("Start should not be greater than end date");
+					}
+					else
+					{	
+							
 					url="<?php echo base_url();?>customer/manageprofession/";
 					$.post( url, { formdata: $(this).serialize() })
 					.done(function( data ) {
@@ -158,8 +181,19 @@ $(function(){
 							$('#profModal').modal('toggle');
 							profile_edit();
 					  });
+					}
 				event.preventDefault();});	
 				$("#organization_form").submit(function( event){
+					if($("#org_year_attended_from").val()==0 || $("#org_month_attended_from").val()==0 || $("#org_year_attended_to").val()==0 || $("#org_month_attended_to").val()==0 || $("#org_name").val()=='' || $("#position").val()==''   )
+					{
+						$("#orgformerrors").html("Fields with '*' are mandatory, Please fill them...");
+					}
+					else if($("#org_year_attended_from").val() > $("#org_year_attended_to").val())
+					{
+						$("#orgformerrors").html("Start date should not be greater than end date");
+					}
+					else
+					{	
 					url="<?php echo base_url();?>customer/manageorganization/";
 					$.post( url, { formdata: $(this).serialize() })
 					.done(function( data ) {
@@ -171,9 +205,16 @@ $(function(){
 							$('#orgModal').modal('toggle');
 							organization_edit();
 					  });
+					}
 				event.preventDefault();
 				});	
 				$('#group_form').submit( function( event){
+					if($("#group_name").val()=='' || $("#city").val()=="" || $("#usa_states").val()==0 || $("#postal_code").val()=='' )
+					{
+						$("#grpformerrors").html("Fields with '*' are mandatory, Please fill them...");
+					}
+					else
+					{	
 					url="<?php echo base_url(); ?>customer/managegroup/";
 					$.post( url, { formdata: $(this).serialize()})
 					.done(function( data ) {
@@ -185,6 +226,7 @@ $(function(){
 						$('#grpModal').modal('toggle');
 						group_edit();
 					});
+					}
 					event.preventDefault();
 				});
 				function education_edit()
@@ -206,7 +248,7 @@ $(function(){
 							to_date = info.attended_upto.split('-')
 							$("select[name=year_attended_to]").val(to_date[0]);
 							$("select[name=month_attended_to]").val(to_date[1]);
-							$("input[name=edu_action]").val("update")
+							$("input[name=edu_action]").val("update");
 							$('#eduModal').modal('toggle');
 						});
 						return false;
@@ -274,7 +316,7 @@ $(function(){
 							$("input[name=group_type]").val(info.grp_type);
 							$("input[name=website_url]").val(info.web_url);
 							$("input[name=city]").val(info.city);
-							$("select[name=state]").val(info.state);
+							$("select[name=usa_states]").val(info.state);
 							$("input[name=postal_code]").val(info.postal_code);
 							$("textarea[name=additional_info]").val(info.additional_info);
 							$("input[name=grp_action]").val("update")
@@ -480,6 +522,8 @@ function addeducation()
 	$("select[name=month_attended_from]").val(0);
 	$("select[name=year_attended_to]").val(0);
 	$("select[name=month_attended_to]").val(0);
+	$("#edu_action").val('add');
+	$("#eduformerrors").html('');
 }
 function addexp()
 {
@@ -489,6 +533,9 @@ function addexp()
 	$("select[name=year_attended_to]").val(0);
 	$("select[name=month_attended_to]").val(0);
 	$("textarea[name=job_description]").val('');
+	$("#prof_action").val('add');
+	$("#proformerrors").html('');
+	
 }
 function addorg()
 {
@@ -500,6 +547,8 @@ function addorg()
 	$("select[name=year_attended_to]").val(0);
 	$("select[name=month_attended_to]").val(0);
 	$("select[name=emp_status]").val('working');
+	$("#org_action").val('add');
+	$("#orgformerrors").html('');
 }
 function addgroup()
 {
@@ -510,8 +559,22 @@ function addgroup()
 		$("select[name=state]").val(0);
 		$("input[name=postal_code]").val('');
 		$("textarea[name=additional_info]").val('');
+		$("#grp_action").val('add');
+		$("#grpformerrors").html('');
 }
+//function validateEduForm()
+//{	
+//	if($("#year_attended_from").val()==0 || $("#month_attended_from").val()==0 || $("#year_attended_to").val()==0 || $("#month_attended_to").val()==0 || $("#field_of_study").val()=='' || $("#college_institution").val()=='' || $("#degree_certificate").val()=='')
+//	{
+//	$("#eduformerrors").html("Fields with '*' are mandatory, Please fill them...");
+//	}
+//}
 </script>
+<style>
+.form-mandatory{
+color:red;
+}
+</style>
 <?php $this->load->view('profile_models'); ?>
 </body>
 </html>
