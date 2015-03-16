@@ -73,8 +73,7 @@ $(function(){
 	profile_edit();
 	organization_edit();
 	group_edit();
-	
-		$("form[name=formabout_me]").submit(function(event){
+			$("form[name=formabout_me]").submit(function(event){
 			   url="<?php echo base_url();?>customer/updateabout/";
 				 $.ajax({
         			type: "POST",
@@ -471,7 +470,47 @@ function saveGroup()
 		
 }
 
-
+function addeducation()
+{
+	$("input[name=field_of_study]").val('');
+	$("input[name=college_institution]").val('');
+	$("input[name=degree_certificate]").val('');
+	$("textarea[name=special_studies]").val('');						
+	$("select[name=year_attended_from]").val(0);
+	$("select[name=month_attended_from]").val(0);
+	$("select[name=year_attended_to]").val(0);
+	$("select[name=month_attended_to]").val(0);
+}
+function addexp()
+{
+	$("input[name=job_title]").val('');
+	$("select[name=year_attended_from]").val(0);
+	$("select[name=month_attended_from]").val(0);
+	$("select[name=year_attended_to]").val(0);
+	$("select[name=month_attended_to]").val(0);
+	$("textarea[name=job_description]").val('');
+}
+function addorg()
+{
+	$("input[name=org_name]").val('');
+	$("input[name=position]").val('');
+	$("textarea[name=org_description]").val('');
+	$("select[name=year_attended_from]").val(0);
+	$("select[name=month_attended_from]").val(0);
+	$("select[name=year_attended_to]").val(0);
+	$("select[name=month_attended_to]").val(0);
+	$("select[name=emp_status]").val('working');
+}
+function addgroup()
+{
+		$("input[name=group_name]").val('');
+		$("input[name=group_type]").val('');
+		$("input[name=website_url]").val('');
+		$("input[name=city]").val('');
+		$("select[name=state]").val(0);
+		$("input[name=postal_code]").val('');
+		$("textarea[name=additional_info]").val('');
+}
 </script>
 <?php $this->load->view('profile_models'); ?>
 </body>

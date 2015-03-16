@@ -124,7 +124,7 @@
         		</div>
 			  </div>
               <div class="filed col-md-12">
-               <input type="button" class="add" data-toggle="modal" data-target="#eduModal" value="Add Education"/>
+               <input type="button" class="add" data-toggle="modal" data-target="#eduModal" value="Add Education" onclick="addeducation();"/>
               </div>
               <h4 class="clear">Contact Details</h4>
              <div class="filed col-md-6">
@@ -153,7 +153,7 @@
         		</div>
         		</div>
               <div class="filed col-md-12">
-                <input type="submit" class="add" data-toggle="modal" data-target="#profModal"  value="add experience">
+                <input type="submit" class="add" data-toggle="modal" data-target="#profModal"  value="add experience" onclick="addexp();">
               </div>
               <h4 class="clear">Organizations</h4>
               <div class="posts">
@@ -162,7 +162,7 @@
         		</div>
         		</div>
               <div class="filed col-md-12">
-                <input type="submit" class="add" data-toggle="modal" data-target="#orgModal" value="add Organizations">
+                <input type="submit" class="add" data-toggle="modal" data-target="#orgModal" value="add Organizations" onclick="addorg();">
               </div>
               <h4 class="clear">Groups</h4>
               <div class="posts">
@@ -171,7 +171,7 @@
        			 </div>
        			 </div>
               <div class="filed col-md-12">
-                <input type="submit" class="add" data-toggle="modal" data-target="#grpModal" value="add Groups">
+                <input type="submit" class="add" data-toggle="modal" data-target="#grpModal" value="add Groups" onclick="addgroup()">
               </div>
               <div class="clear"></div>
             </div>
