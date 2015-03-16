@@ -4,8 +4,8 @@
         <div role="tabpanel"> 
           <!-- Nav tabs -->
           <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation"><a href="#compose" aria-controls="profile" role="tab" data-toggle="tab">Compose Message</a></li>
-            <li role="presentation" class="active"><a href="#inbox" aria-controls="messages" role="tab" data-toggle="tab">Inbox</a></li>
+           <li role="presentation" class="active"><a href="#compose" aria-controls="profile" role="tab" data-toggle="tab">Compose Message</a></li>
+            <li role="presentation"><a href="#inbox" aria-controls="messages" role="tab" data-toggle="tab">Inbox</a></li>
             <li role="presentation"><a href="#sent" aria-controls="settings" role="tab" data-toggle="tab">Sent</a></li>
             <li role="presentation"><a href="#archive" aria-controls="messages" role="tab" data-toggle="tab">Archived</a></li>
             <li role="presentation"><a href="#trash" aria-controls="settings" role="tab" data-toggle="tab">Trash</a></li>
@@ -13,27 +13,41 @@
           
           <!-- Tab panes -->
           <div class="tab-content">
-            <div role="tabpanel" class="tab-pane" id="compose">
+            <div role="tabpanel" class="tab-pane active" id="compose">
+             <?php 
+	if($this->session->flashdata('send_msg'))
+	{
+		echo "<h2>".$this->session->flashdata('send_msg')."</h2>";
+	}
+	?>
+            <form method="post" action="<?php echo base_url(); ?>message/send_msg" >
              <div class="form-group col-md-6">
-             	<select name="" class="form-control">
-             	  <option>Friends</option>
+             	<select name="group_id" class="form-control" id="grp_list_msg">
+             	  <option value="-1">select group</option>
+					<?php $data = $this->profile_set->get_groups(); ?>
+    				 <?php foreach($data as $grp) { ?>
+                 <option value="<?php echo $grp->grpinfo_id ?>"><?php echo $grp->grp_name ?></option>
+                 <?php } ?> 
              	</select>
              </div>
-             <div class="form-group col-md-6">
-             	<select name="" class="form-control">
-             	  <option>Michael</option>
-             	</select>
+             <div class="form-group col-md-6 test">
+             	  <span id="select_frm" class=""select_frm"><select name="select-from" id="select-from" class="form-control">
+     
+   			 </select>
+             </span>
              </div>
              <div class="clear"></div>
              <div class="form-group col-md-12">
-<textarea name="" cols="" rows="" class="form-control"></textarea>
+<textarea name="message_content" cols="" rows="" class="form-control"></textarea>
 </div>
               <div class="form-group">
-                <button class="btn btn-info pull-right">Send</button>
+                <input type="submit" class="btn btn-info pull-right" value="send">
                 </div>
               <div class="clear"></div>
+              
+              </form>
             </div>
-            <div role="tabpanel" class="tab-pane active" id="inbox">
+            <div role="tabpanel" class="tab-pane" id="inbox">
               <h4 class="clear">Total Inbox Messages (1)  <a href="#" class="btn btn-info pull-right">Delete Selected</a> <span class="clearfix"></span> </h4>
               
             	 <div class="messages form-group">

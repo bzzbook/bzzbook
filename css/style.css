@@ -309,7 +309,7 @@ footer.home h3 em{ color:#fdc70f; font-style:normal;}
 .messageSt .form-group{ margin-bottom:0px; }
 .messageSt #compose{ padding-bottom:20px; }
 
-.groupsSt h2{ background:url(../images/sideNav.png) no-repeat 0 8px; padding:0 0 0 35px; height:42px; line-height:42px; font-size:18px;  }
+.groupsSt > h2{ background:url(../images/sideNav.png) no-repeat 0 8px; padding:0 0 0 35px; height:42px; line-height:42px; font-size:18px;  }
 .groupsSt .tabBar{ padding:20px 0; background:#fbc436; border-bottom:2px solid #000; }
 .groupsSt .tabBar span{ display:inline-block;  line-height:30px; padding-right:10px; color:#fff;   }
 .groupsSt .form-group{ margin-bottom:0px; }
@@ -359,3 +359,12 @@ footer.home h3 em{ color:#fdc70f; font-style:normal;}
 .EduProperty .EduBlock h3{ font-size:12px; font-weight:bold; color:#9e9d9d;  }
 .EduProperty .EduBlock p{ color:#696969; }
 .EduProperty .EduBlock a{ line-height:30px; display:block; float:left; color:#000; margin-left:20px; }
+
+
+.myCompany{ text-align:left; padding-bottom:20px;}
+.myCompRight{ float:right;}
+
+.companyFollow{ margin-bottom:20px;}
+.companyFollow ul{ list-style:none;}
+.companyFollow li{ list-style:none;}
+.companyFollow li img{ float:left;}

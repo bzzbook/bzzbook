@@ -373,6 +373,20 @@ $(document).ready(function() {
 	    });
 			return false;
 	});
+	
+	
+	 $('#grp_list_msg').change(function(){
+     id = $(this).val();
+	 url="<?php echo base_url() ?>profile/get_grp_friends/"+id;
+	 $.post( url )
+			.done(function( data ) 
+			{	
+			
+			$("#select_frm").html(data);
+			$("#select-from").removeAttr("multiple");
+	    });
+			return false;
+	});
 
 
 
