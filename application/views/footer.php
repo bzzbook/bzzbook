@@ -357,9 +357,7 @@ function myfunc(cid){
 	$('#msg'+cid).hide();
 
 }
-function likefun(pid,uid,status){
-	
-	alert(status);
+function likefun(pid,uid){
 	var posted_by=pid;
 	var account_id=uid;
 	url="<?php echo base_url();?>signg_in/insertlinks/"+pid+"/"+uid;
@@ -369,13 +367,13 @@ function likefun(pid,uid,status){
         data: { posted_by: pid, account_id : uid} ,
         success: function(html)
         {   
-			
-         if(status == 'like')
+			info = JSON.parse(html);
+         if(info.like == 'no')
 		 	//$("#like_ajax"+pid).html("Unlike");
-			$("#link_like"+pid).html("Unlike");
+			$("#link_like"+pid).html("Like");
 		  else
 			//$("#like_ajax"+pid).html("Like");
-			$("#link_like"+pid).html("Like");
+			$("#link_like"+pid).html("Unlike");
         }
        });	
 }
