@@ -311,6 +311,21 @@ public function disp_friends($grp_id)
 		}	
 }
 
+public function disp_only_friends()
+{
+  $id = $this->session->userdata('logged_in')['account_id'];
+	    $condition = "cust_id =" . "'" . $id . "'" ;
+		$this->db->select('accepted_friend_ids');
+		$this->db->from('friends');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		if ($query->num_rows() > 0) {
+			return $query->result();
+		} else {
+		return false;
+		}	
+}
+
 public function getcustDetails($id)
    {
 	    //$id = $this->session->userdata('logged_in')['account_id'];

@@ -167,6 +167,36 @@ public function friends()
 	  }
   }
   
+  
+  public function get_friends()
+  {
+	  $data=$this->profile_set->disp_only_friends();
+	  if($data)
+	  {
+		$select = '<select name="select-from" id="select-from" class="form-control" multiple="multiple">';
+		$frnd_list = $data[0]->accepted_friend_ids;
+		if(!empty($frnd_list))
+		{
+		$friends = explode(",",$frnd_list);
+		//print_r ($friends);
+		foreach($friends as $frnd):
+		$name = $this->profile_set->getcustDetails($frnd);
+		$select.="<option value='".$name[0]['cust_id']."'>".$name[0]['first_name']." ".$name[0]['last_name']."</option>";
+		endforeach;
+		}
+		else
+			$select.="<option value='-1'>No List Available</option>";
+
+		$select.="</select>";
+		echo $select;
+	  }
+	  else 
+	  {
+		  echo $select = '<select name="select-from" id="select-from" class="form-control" multiple="multiple"><option value="-1">No List Available</option></select></select>';
+	  }
+  
+	  
+  }
    public function profEdit()
   {
 	 $data = $this->profile_set->editProfDetails($_POST['profession_id']);

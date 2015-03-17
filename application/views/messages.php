@@ -21,15 +21,6 @@
 	}
 	?>
             <form method="post" action="<?php echo base_url(); ?>message/send_msg" >
-             <div class="form-group col-md-6">
-             	<select name="group_id" class="form-control" id="grp_list_msg">
-             	  <option value="-1">select group</option>
-					<?php $data = $this->profile_set->get_groups(); ?>
-    				 <?php foreach($data as $grp) { ?>
-                 <option value="<?php echo $grp->grpinfo_id ?>"><?php echo $grp->grp_name ?></option>
-                 <?php } ?> 
-             	</select>
-             </div>
              <div class="form-group col-md-6 test">
              	  <span id="select_frm" class=""select_frm"><select name="select-from" id="select-from" class="form-control">
      

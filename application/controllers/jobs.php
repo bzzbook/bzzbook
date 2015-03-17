@@ -8,7 +8,8 @@ class Jobs extends CI_Controller {
     }
 	public function index()
 	{
-		$this->load->view('sign_in_v');
+    $data['content']='create_jobs';
+	$this->load->view('template-view',$data);
 	}
 	
 	public function create_job()

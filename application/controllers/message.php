@@ -16,7 +16,7 @@ public function index()
 }
 public function send_msg()
 {
-	
+
 		//$data['group_ig'] = $this->input->post('group_id');
 		$data['send_by'] = $this->session->userdata('logged_in')['account_id'];
 		$data['send_to'] = $this->input->post('select-from');

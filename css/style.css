@@ -368,3 +368,27 @@ footer.home h3 em{ color:#fdc70f; font-style:normal;}
 .companyFollow ul{ list-style:none;}
 .companyFollow li{ list-style:none;}
 .companyFollow li img{ float:left;}
+
+/*Create Jobs*/
+.createjob p{  font-family: 'Roboto', sans-serif; background:url(../images/creatbg.png)  no-repeat 0 3px; font-size:15px; line-height:20px; color:#121313; padding:0 0 0 22px;}
+.createjob span{ font-family: 'Roboto', sans-serif; font-size:15px; color:#121313; display:block; padding-top:3px;}
+.createjob samp{ font-family: 'Roboto', sans-serif; font-size: larger; color:#6a6a6b;}
+.createbutton{ background:#fbc436 !important; margin-left:10px; margin-top:5px; font-size:16px; color:#fff; font-weight:400; line-height:32px; padding:0 15px; display:inline-block; -webkit-border-radius: 3px 3px 3px 3px; border-radius: 3px 3px 3px 3px;  border:none !important;}
+.createjobs{ font-size:15px !important; line-height:20px; color:#121313; padding:0 0 0 22px; background:none !important; padding-top:30px !important;}
+
+
+/* Form Fields */
+#job-create-popup-black{ margin:0 auto; margin-top:10px; }
+#job-create-popup-black p{  font-family: 'Roboto', sans-serif; font-size:22px;  color:#242424; padding:0 0 10px 0; border-bottom:1px solid #e9e9e9; text-align:center;}
+.job-popup-headers{ background:#292727; font-size:18px; line-height:20px; color:#fff; padding:10px 10px; border-bottom:1px solid #e9e9e9;}
+
+.forms{ margin:10px 0 30px 0;}
+.forms label{ font-size:16px !important;  font-family: 'Roboto', sans-serif; color:#8a8989; text-align:left; line-height:20px; font-weight:none !important; padding-bottom:6px;}
+.forms span{ display:block;width:100%;}
+.forms input.medium{line-height:20px; width:100%; }
+.forms input.large{line-height:20px;  width:100%;}
+.forms select.large{line-height:20px; width:100%; }
+.forms select.medium{line-height:20px; width:100%; }
+.forms textarea{line-height:20px; width:100%; }
+.newbutton{ margin:0 0 16px 0;}
+.cancelbutton{ margin:0 0 16px 0;  background:#e6e3e5 !important; margin-left:10px; margin-top:5px; font-size:16px; color:#222121; font-weight:400; line-height:32px; padding:0 15px; display:inline-block; -webkit-border-radius: 3px 3px 3px 3px; border-radius: 3px 3px 3px 3px;  border:none !important;}

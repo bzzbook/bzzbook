@@ -18,9 +18,8 @@
 <script src="<?php echo base_url(); ?>js/countries.js"></script>
 <script src="<?php echo base_url(); ?>js/usa_states.js"></script>
 <script language="javascript">print_country("country");</script> 
-<script src="<?php echo base_url(); ?>js/lightbox.min.js"></script>
 <script language="javascript">print_usa_states("usa_states");</script>  
-
+<script src="<?php echo base_url(); ?>js/lightbox.min.js"></script>
 <script type="text/javascript">
    $('#email_invite').validate();
    $('#upload_file').validate(); 
@@ -417,9 +416,9 @@ $(document).ready(function() {
 	});
 	
 	
-	 $('#grp_list_msg').change(function(){
+	 $(document).ready(function(){
      id = $(this).val();
-	 url="<?php echo base_url() ?>profile/get_grp_friends/"+id;
+	 url="<?php echo base_url() ?>profile/get_friends/";
 	 $.post( url )
 			.done(function( data ) 
 			{	
