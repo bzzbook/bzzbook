@@ -42,37 +42,31 @@ class Customermodel extends CI_Model {
 	    $pid=$data['post_id'];
 	    $aid=$data['account_id'];
 	    $like=$data['like'];
-	    $condition = "post_id =" . "'" . $pid . "' and account_id = $aid";
+	    $condition = "post_id =" . $pid . " AND account_id =".$aid;
 	    $this->db->select('*');
 		$this->db->from('tbl_likes');
 		$this->db->where($condition);
 		$query = $this->db->get();
 		if($query->num_rows()>0){
 			$res=$query->result();
-			$res_like=$res[0]->like;
-			
-			if($res_like == 'yes'){
+			$res_like=$res[0]->like;			
+			if($res_like == 'yes' ){
 				$slike="no";
 			}
-			else if($res_like == 'no'){
+			else if($res_like == 'no' || $res_like == ''){
 				$slike="yes";
 			}
-			
-			
 		$data1 = array('like' => $slike);
-
         $this->db->where(array('post_id'=>$pid,'account_id'=>$aid));
-        //$where = "post_id = $pid AND account_id = $aid"; 
-
-       // $str = $this->db->update_string('table_name', $data, $where);
-
-
-		$this->db->update('tbl_likes',$data1);	
-			
-		}else{
-	    $this->db->insert('tbl_likes',$data);
+  		$this->db->update('tbl_likes',$data1);	
+			echo json_encode($data1);
 		}
-		return true;
+		else{
+	    $this->db->insert('tbl_likes',$data);
+			$data1 = array('like' => 'yes');
+			echo json_encode($data1);
+		}
+		
    }
    public function likedata($pid){
 	    $condition = "post_id =" . "'" . $pid . "'";
