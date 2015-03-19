@@ -112,7 +112,7 @@ class Friendsmodel extends CI_Model {
 			$list = "";
 		    if($pend_req) { foreach($pend_req as $req){
            $list .= " <li>
-              <figure><img src='".base_url()."uploads/".$req['user_img_fav']."' alt='".$req['name']."'></figure>
+              <figure><img src='".base_url()."uploads/".$req['image']."' alt='".$req['name']."'></figure>
               <div class='disc'>
                 <h4>".$req['name']."</h4>
                 <div class='dcBtn'><a href='javascript:void(0);' onclick='acceptFrnd(".$req['id'].")'>Confirm</a><a href='javascript:void(0);' onclick='denyFrnd(".$req['id'].")'>Deny</a><a href='javascript:void(0);' onclick='blockFrnd(".$req['id'].");'>Block</a>  </div>
@@ -138,7 +138,7 @@ class Friendsmodel extends CI_Model {
 			$list = "";
 		    if($pend_req) { foreach($pend_req as $req){
            $list .= " <li>
-              <figure><img src='".base_url()."uploads/".$req['user_img_fav']."' alt='".$req['name']."'></figure>
+              <figure><img src='".base_url()."uploads/".$req['image']."' alt='".$req['name']."'></figure>
               <div class='disc'>
                 <h4>".$req['name']."</h4>
                 <div class='dcBtn'><a href='javascript:void(0);' onclick='acceptFrnd(".$req['id'].")'>Confirm</a><a href='javascript:void(0);' onclick='denyFrnd(".$req['id'].")'>Deny</a> <a href='javascript:void(0);' onclick='blockFrnd(".$req['id'].");'>Block</a></div>
@@ -164,7 +164,7 @@ class Friendsmodel extends CI_Model {
 			$list = "";
 		    if($pend_req) { foreach($pend_req as $req){
            $list .= " <li>
-              <figure><img src='".base_url()."uploads/".$req['user_img_fav']."' alt='".$req['name']."'></figure>
+              <figure><img src='".base_url()."uploads/".$req['image']."' alt='".$req['name']."'></figure>
               <div class='disc'>
                 <h4>".$req['name']."</h4>
                 <div class='dcBtn'><a href='javascript:void(0);' onclick='acceptFrnd(".$req['id'].")'>Confirm</a><a href='javascript:void(0);' onclick='denyFrnd(".$req['id'].")'>Deny</a> <a href='javascript:void(0);' onclick='blockFrnd(".$req['id'].");'>Block</a> </div>
