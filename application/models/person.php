@@ -5,16 +5,37 @@ class person extends CI_Model {
 	function __construct()
    { 
    		parent::__construct(); 
-  		$this->load->database("bzzbook"); 
+  		$this->load->database("bzznew"); 
     } 
 
 	   
-	   public function sign_up($data)
+	   public function sign_up($user)
 	   {
-		    
-		    $this->db->insert('cust_sign_up',$data);
+		   
+		  if($this->db->insert('bzz_users',$user))
+		 {
+			  return $this->db->insert_id();
+		 }else{
+			 return false;
+		 }
 
 	   }
+	   public function user_info($user_info)
+	   {
+		    $this->db->insert('bzz_userinfo',$user_info);
+	   }
+	   
+	   
+	     public function user_info($user_id)
+	   {
+		   $data['profile_visible'] = 'y';
+		   $data['email_notification'] = 'y';
+		   $data['comments_visible']= 'y';
+		   $data['companies_visible'] ='y';
+		   $data['user_id'] = $user_id;
+		   $this->db->insert('bzz_usersettings',$data);
+	   }
+	   
 	   public function post_buzz($data)
 	   {
 		   

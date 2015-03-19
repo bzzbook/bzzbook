@@ -15,10 +15,10 @@ class sign_inm extends CI_Model {
 	   public function sign_in($data)
 	   {
 		 
-		    $condition = "email =" . "'" . $data['email'] . "' AND " . "password =" . "'" . md5($data['password']) . "'";
+		    $condition = "user_email =" . "'" . $data['email'] . "' AND " . "password =" . "'" . md5($data['password']) . "'";
 		  
 			$this->db->select('*');
-			$this->db->from('cust_sign_up');
+			$this->db->from('bzz_users');
 			$this->db->where($condition);
 			$this->db->limit(1);
 			$query = $this->db->get();
@@ -30,9 +30,9 @@ class sign_inm extends CI_Model {
 			}
 	 	public function read_user_information($sess_array) {
 
-		$condition = "email =" . "'" . $sess_array['email'] . "'";
+		$condition = "user_email =" . "'" . $sess_array['email'] . "'";
 		$this->db->select('*');
-		$this->db->from('cust_sign_up');
+		$this->db->from('bzz_users');
 		$this->db->where($condition);
 		$this->db->limit(1);
 		$query = $this->db->get();

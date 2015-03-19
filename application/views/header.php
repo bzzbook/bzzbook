@@ -15,6 +15,8 @@ $session_data = $this->session->userdata('logged_in');
 <link href="<?php echo base_url(); ?>css/style.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>css/responsive.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>css/lightbox.css" rel="stylesheet">
+<link href="<?php echo base_url(); ?>css/uploadfile.css" rel="stylesheet">
+<link rel="stylesheet" href="<?php echo base_url(); ?>css/jqtransform.css" type="text/css" media="all" />
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -42,11 +44,9 @@ $session_data = $this->session->userdata('logged_in');
     </div>
     <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
       <div class="curentUser">
-      <?php $data = $this->profile_set->get_profile_pic(); 	
-				foreach($data as $image){
-			?>
-        <div class="userImg"><img src="<?php echo base_url();?>uploads/<?php echo $image->thumbnail; ?>" alt="">
-        <?php } ?>
+      <?php  $image = $this->profile_set->get_profile_pic();	?>
+        <div class="userImg">
+         <img src="<?php echo base_url();?>uploads/<?php echo $image[0]->user_img_thumb ?>" alt=""> 
         </div>
         <a href="#" role="button"  class="dropdown-toggle userName" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Logged in as:<span><?php echo  $session_data['email']; ?></span></a>
         <ul  role="menu" class="dropdown-menu">

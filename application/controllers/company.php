@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class company extends CI_Controller {
+class Company extends CI_Controller {
 	 
 	  public function __construct() {
         parent::__construct();
@@ -68,6 +68,44 @@ class company extends CI_Controller {
 		 $data['content']='my_companies';
 	     $this->load->view('template-view',$data);
 	}
+	
+public function addcompany()
+	{
+/*		
+	$config['upload_path'] = './uploads/';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$config['create_thumb'] = TRUE;
+		$config['max_size']	= '';
+		$config['max_width']  = '';
+		$config['max_height']  = '';
+
+		$this->load->library('upload', $config);
+
+		if ( ! $this->upload->do_upload())
+		{
+			$error = array('error' => $this->upload->display_errors());
+			print_r($error);
+			//$this->load->view('uploadform', $error);
+		}
+		else
+		{
+			$data = $this->upload->data();
+			
+			 $img_name = $data['file_name'];
+		}*/
+		$img_name ="52.jpg";
+		$this->load->model('companies');
+	   parse_str($_POST['formdata'],$company_info);
+	   $returninfo = $this->companies->managecompanydata($company_info,$img_name);
+	 if($returninfo != false):
+	  	$company_info['inserted_id'] = $returninfo;
+	return true;
+	 else:
+	 	return false;
+	 endif;
+  
+	}
 }
+
 
 ?>

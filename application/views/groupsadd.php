@@ -26,7 +26,7 @@
 <option value="-1">select group</option>
 <?php $data = $this->profile_set->get_groups(); ?>
      <?php foreach($data as $grp) { ?>
-                 <option value="<?php echo $grp->grpinfo_id ?>"><?php echo $grp->grp_name ?></option>
+                 <option value="<?php echo $grp->groupinfo_id ?>"><?php echo $grp->group_name ?></option>
                  <?php } ?> 
     </select>
 </div>    

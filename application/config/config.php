@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://'.$_SERVER['HTTP_HOST'].'/bzzbook/';
+$config['base_url']	= 'http://'.$_SERVER['HTTP_HOST'].'/bzznew/';
 
 /*
 |--------------------------------------------------------------------------

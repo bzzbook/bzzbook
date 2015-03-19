@@ -18,9 +18,9 @@ class Companies extends CI_Model {
 	   public function companies_list()
 	   {
 		   $id = $this->session->userdata('logged_in')['account_id'];
-	       $condition = "cust_id =" . "'" . $id .  "'";
+	       $condition = "user_id =" . "'" . $id .  "'";
 		   $this->db->select('*');
-		   $this->db->from('comp_sign_up');
+		   $this->db->from('bzz_companyinfo');
 		   $this->db->where($condition);
 		   $query = $this->db->get();
 		   if($query->num_rows() > 0)
@@ -33,9 +33,9 @@ class Companies extends CI_Model {
 	   	 public function following_comp_list()
 	   {
 		   $id = $this->session->userdata('logged_in')['account_id'];
-	       $condition = "cust_id =" . "'" . $id .  "'";
+	       $condition = "user_id =" . "'" . $id .  "'";
 		   $this->db->select('*');
-		   $this->db->from('comp_sign_up');
+		   $this->db->from('bzz_companyinfo');
 		   $this->db->where($condition);
 		   $query = $this->db->get();
 		   if($query->num_rows() > 0)
@@ -45,5 +45,32 @@ class Companies extends CI_Model {
 			return false;
 		}
 	   }	
+public function managecompanydata($data,$img_name)
+{
+		$company_info = array(
+		'cmp_name'=>$data['cmp_name'],
+		'cmp_industry'=>$data['cmp_industry'],
+		'cmp_estb'=>$data['cmp_estb'],
+		'cmp_colleagues'=>$data['cmp_colleagues'],
+		'cmp_about'=>$data['cmp_about'],
+		'company_address'=>$data['company_address'],
+		'company_state'=>$data['company_state'],
+		'company_city'=>$data['company_city'],	
+		'company_postalcode'=>$data['company_postalcode'],
+		'company_email'=>$data['company_email'],
+		'company_phone'=>$data['company_phone'],
+		'company_office'=>$data['company_office'],		
+		'company_fax'=>$data['company_fax'],
+		'company_image'=>$img_name,
+		'user_id'=>$this->session->userdata('logged_in')['account_id']
+		);
+	   if( $this->db->insert('bzz_companyinfo', $company_info))
+	   return $this->db->insert_id();
+	   else
+	   return false;
+	
+}
+
+
 }
 ?>

@@ -1,7 +1,8 @@
+     <?php  $image = $this->profile_set->get_profile_pic();	?>
     <section class="col-lg-6 col-md-6 col-sm-5 col-xs-12 coloumn2">
       <div class="updateStatus" id="updateStatus">
         <ul>
-          <li><img src="<?php echo base_url(); ?>images/user.png" alt=""></li>
+          <li> <img src="<?php echo base_url();?>uploads/<?php echo $image[0]->user_img_thumb ?>" alt="<?php echo base_url();?>uploads/<?php echo $image[0]->user_img_thumb ?>" height="60" width="55"> </li>
           <li><a href="#">Create a Post</a></li>
           <li><a href="#">Upload Photos/Video</a></li>
           <li><a href="#">Create Photo/Video Album</a></li>
@@ -20,8 +21,9 @@
       <?php 
 	  
 	  $products = $this->customermodel->All_Posts();
+	  if($products):
 	  foreach( $products as $row):
-	  $hrs=$row->post_date;
+	  $hrs=$row->posted_on;
 	  $currt_hrs=date('Y-m-d H:i:s');
       $timestamp1 = strtotime($hrs);
       $timestamp2 = strtotime($currt_hrs);
@@ -44,42 +46,45 @@
 	  $posted_id=$row->posted_by;
 	  $get_profiledata = $this->customermodel->profiledata($posted_id);
 	  
-	  $user_id=$this->session->userdata['logged_in']['account_id'];
+	  $user_id=$this->session->userdata('logged_in')['account_id'];
 	  	  
 	  ?>
 	
 	   <article>
           <figure><img src="<?php echo base_url(); ?>images/post_writer.png" alt=""></figure>
           <div class="content" id="content">
-            <h3 class="pw"><?php echo ucfirst($get_profiledata[0]->firstname)."&nbsp;".ucfirst($get_profiledata[0]->lastname);?><span>
+            <h3 class="pw"><?php echo ucfirst($get_profiledata[0]->user_firstname)."&nbsp;".ucfirst($get_profiledata[0]->user_lastname);?><span>
 			<?php if($hr_final<24){?><?php echo $hr_final;?>hr<?php }else{
 				echo  str_replace("-"," ",$days)."days ago";
 			}?></span></h3>
-            <p id="msg<?php echo $row->id;?>"><?php
+            <p id="msg<?php echo $row->post_id;?>"><?php
 		     $str_leng=strlen($row->post_content);
 			 if($str_leng>50){
-				echo  $str_des=substr($row->post_content,0,50)."...";?><a href="#" onclick="myfunc('<?php echo $row->id;?>')">more</a><?php 
+				echo  $str_des=substr($row->post_content,0,50)."...";?><a href="#" onclick="myfunc('<?php echo $row->post_id;?>')">more</a><?php 
 			 }else{
 				echo  $str_des=substr($row->post_content,0,50);
 			 }
 			?></p>
-             <p id="des<?php echo $row->id;?>" style="display:none;"><?php echo $row->post_content;?></p>
+             <p id="des<?php echo $row->post_id;?>" style="display:none;"><?php echo $row->post_content;?></p>
             <div class="links">
-            <?php   $get_likedetails = $this->customermodel->likedata($row->id);
-					if(sizeof($get_likedetails)>0):
-			       	$account_id=$get_likedetails[0]->account_id;
-					$like=$get_likedetails[0]->like;
-					endif;
+            <?php   $get_likedetails = $this->customermodel->likedata($row->post_id);
+					
+					if(sizeof($get_likedetails)>0){
+			       	$user_id=$get_likedetails[0]->liked_by;
+					$like=$get_likedetails[0]->like_status;
+					}
+					else
+					$like='';
 			?>
             
             
              
-        <div id="like_ajax<?php echo $row->id;?>">
-            <?php if(@$account_id == $user_id && $like=='yes'){?>
-				<a href="javascript:void(0);" onclick="likefun('<?php echo $row->id;?>','<?php echo $row->posted_by;?>','unlike')"  id="link_like<?php echo $row->id;?>" style="padding-right:0px;">Unlike
+        <div id="like_ajax<?php echo $row->post_id;?>">
+            <?php if(@$user_id == $user_id && $like=='Y'){?>
+				<a href="javascript:void(0);" onclick="likefun('<?php echo $row->post_id;?>','<?php echo $row->posted_by;?>','unlike')"  id="link_like<?php echo $row->post_id;?>" style="padding-right:0px;">Unlike
             <?php    
 			}else{?>
-				<a href="javascript:void(0);" onclick="likefun('<?php echo $row->id;?>','<?php echo $row->posted_by;?>','like')"  id="link_like<?php echo $row->id;?>" style="padding-right:0px;">Like
+				<a href="javascript:void(0);" onclick="likefun('<?php echo $row->post_id;?>','<?php echo $row->posted_by;?>','like')"  id="link_like<?php echo $row->post_id;?>" style="padding-right:0px;">Like
 			<?php }?></a><span>(<?php echo count($get_likedetails); ?>)</span>&nbsp;&nbsp;<a href="#">Comment</a> <a href="#">Share</a> <a href="#">Save As Favorite</a>
             </div>
            
@@ -94,15 +99,15 @@
           </div>
           
           <!-- display all comments -->
-          <div id="res_comments<?php echo $row->id;?>">
+          <div id="res_comments<?php echo $row->post_id;?>">
             <?php   
-			       $comments_details = $this->customermodel->comments_data($row->id);
+			       $comments_details = $this->customermodel->comments_data($row->post_id);
 			       for($i=0;$i<count($comments_details);$i++){
 				   // foreach($comments_details as $row_comment):
 			       if($i<=4){?>
                     <div class="postComment">
-                    <div class="img"><img src="<?php echo base_url(); ?>images/user.png" alt=""></div>
-                    <?php  echo $comments_details[$i]->comment;
+                    <div class="img"> <img src="<?php echo base_url();?>uploads/<?php echo $image[0]->user_img_thumb ?>" alt="<?php echo base_url();?>uploads/<?php echo $image[0]->user_img_thumb ?>" height="60" width="55"></div>
+                    <?php  echo $comments_details[$i]->comment_content;
 			         ?>
                    
                    </div>
@@ -113,17 +118,17 @@
 				   // endforeach;
 		    ?>
             <?php if(count($comments_details)>4){ ?>
-            <a href="#" onclick="view_comments('<?php echo $row->id;?>')" style="font-size:12px;">View More</a>
+            <a href="#" onclick="view_comments('<?php echo $row->post_id;?>')" style="font-size:12px;">View More</a>
             <?php } ?>
           </div>
              
-           <div id="res_comments_viewmore<?php echo $row->id;?>" style="display:none;">
+           <div id="res_comments_viewmore<?php echo $row->post_id;?>" style="display:none;">
             <?php   
-			       $comments_details = $this->customermodel->comments_data($row->id);
+			       $comments_details = $this->customermodel->comments_data($row->post_id);
 			       foreach($comments_details as $row_comment):
 			?>
                     <div class="postComment">
-                    <div class="img"><img src="<?php echo base_url(); ?>images/user.png" alt=""></div>
+                    <div class="img"><img src=" <img src="<?php echo base_url();?>uploads/<?php echo $image[0]->user_img_thumb ?>" alt="<?php echo base_url();?>uploads/<?php echo $image[0]->user_img_thumb ?>" height="60" width="55"></div>
             
                     <?php echo $row_comment->comment;
 			         ?>
@@ -138,10 +143,10 @@
           
           
           <div class="postComment">
-            <div class="img"><img src="<?php echo base_url(); ?>images/user.png" alt=""></div>
+            <div class="img"> <img src="<?php echo base_url();?>uploads/<?php echo $image[0]->user_img_thumb ?>" alt="<?php echo base_url();?>uploads/<?php echo $image[0]->user_img_thumb ?>" height="60" width="55"></div>
            <form action="<?php echo base_url();?>signg_in/write_comment" method="post" style="width:100% !important;">
                <input type="text" class="form-control comment" placeholder="Write a Comment..." name="write_comment" id="write_comment">
-               <input type="hidden" name="post_id" value="<?php echo $row->id;?>">
+               <input type="hidden" name="post_id" value="<?php echo $row->post_id;?>">
                <input type="hidden" name="posted_by" value="<?php echo $row->posted_by;?>">
            </form>
           </div>
@@ -154,7 +159,7 @@
 	 
 	  
 	 <?php  endforeach;
-	  
+	  		endif;
 	  ?>
       
       <!-- code ends here by 23-02-2015-->

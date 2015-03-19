@@ -21,7 +21,13 @@
          <h4>Job Description</h4>
         <p><?php echo $profdetails->job_description?></p>
          <h4>Employement Status</h4>
-        <p><?php echo $profdetails->current_job?></p>
+        <p><?php 
+		if($profdetails->current_job == 'y')
+		{echo "Currently Working";
+		}else{
+			echo "Currently Not Working";
+				}
+		?></p>
          <?php endforeach; } else echo "No Details Found"; ?>
         </div>
  
@@ -29,14 +35,23 @@
         <?php if($organization_details) { foreach($organization_details as $orgdetails): ?>
         <h4>Organization Name</h4>
         <p><?php echo $orgdetails->org_name; ?></p>
-        <h4>Positiion</h4>
+        <h4>Position</h4>
         <p><?php echo $orgdetails->position; ?></p>
         <h4>Organization Description</h4>
         <p><?php echo $orgdetails->org_desc; ?></p>
         <h4>Worked Duration</h4>
         <p><?php echo $orgdetails->start_date; ?> To <?php echo $orgdetails->end_date; ?> </p>
         <h4>Employement Status</h4>
-        <p><?php echo $orgdetails->emp_status; ?></p>
+        <p><?php 
+		if($orgdetails->emp_status == 'y')
+		{ echo "working";
+							}elseif($orgdetails->emp_status == 'res'){
+								echo "resigned";
+							}else
+							{
+								echo "freelancer";
+							}
+								 ?></p>
          <?php endforeach; } else echo "No Details Found";?>
         </div>
        
@@ -44,17 +59,17 @@
         <?php if($group_details) { foreach($group_details as $groupdetails): ?>
 
          <h4>Group Name</h4>
-        <p><?php echo $groupdetails->grp_name;?></p>
+        <p><?php echo $groupdetails->group_name;?></p>
          <h4>Group Type</h4>
-        <p><?php echo $groupdetails->grp_type;?></p>
+        <p><?php echo $groupdetails->group_type;?></p>
          <h4>Website Address</h4>
-        <p><?php echo $groupdetails->web_url;?></p>
+        <p><?php echo $groupdetails->group_web_url;?></p>
          <h4>Location</h4>
-        <p><?php echo $groupdetails->state;?>,
-        <?php echo $groupdetails->city;?>,
-        <?php echo $groupdetails->postal_code;?></p>
+        <p><?php echo $groupdetails->group_state;?>,
+        <?php echo $groupdetails->group_city;?>,
+        <?php echo $groupdetails->group_postalcode;?></p>
          <h4>Additional Information</h4>
-        <p><?php echo $groupdetails->additional_info;?></p>
+        <p><?php echo $groupdetails->group_about;?></p>
                   <?php endforeach; } else echo "No Details Found";?>
 
          </div>

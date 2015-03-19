@@ -38,7 +38,11 @@ class customer extends CI_Controller {
 		$this->form_validation->set_rules('position','Job Position','required|xss_clean');
 		$this->form_validation->set_rules('industry','Industry','required|xss_clean');
 		$this->form_validation->set_rules('companyname','Company Name','required|xss_clean');
-    	$this->form_validation->set_rules('aboutme','About','required');
+		$this->form_validation->set_rules('office_phone','Office phone no','required|xss_clean');
+		$this->form_validation->set_rules('fax','Fax','required|xss_clean');
+		$this->form_validation->set_rules('aboutme','About','required');
+		$this->form_validation->set_rules('intrests','Intrests','required');
+    	$this->form_validation->set_rules('skills','Skills','required');
 		$this->form_validation->set_rules('agree','Terms & Conditions','required');
 		
 		if($this->form_validation->run() == FALSE)
@@ -46,28 +50,38 @@ class customer extends CI_Controller {
 			$this->load->view('customer_sign_up');
 		}else{
 		
-		$data['first_name'] = $this->input->post('firstname');
-		$data['last_name'] = $this->input->post('lastname');
-		$data['email'] = $this->input->post('email');
-		$data['phone_number'] = $this->input->post('phone_number');
-		$data['user_name'] = $this->input->post('user_name');
-		$data['password'] = $this->input->post('password');
-		$data['con_password'] = $this->input->post('conf_password');
-		$data['country'] = $this->input->post('country');
-		$data['state'] = $this->input->post('state');
-		$data['city'] = $this->input->post('city');
-		$data['postal_code'] = $this->input->post('postal_code');
-		$data['dob'] = $this->input->post('dob');
-		$data['gender'] = $this->input->post('gender');
-		$data['job_type'] = $this->input->post('position');
-		$data['industry'] = $this->input->post('industry');
-		$data['company_name'] = $this->input->post('companyname');
-		$data['about'] = $this->input->post('aboutme');
-		$data['terms_conditions'] = $this->input->post('agree');
 		
+		$user['user_email'] = $this->input->post('email');	
+		$user['username'] = $this->input->post('user_name');
+		$user['password'] = $this->input->post('password');
+		$user['user_country'] = $this->input->post('country');
+		$user['user_state'] = $this->input->post('state');
+		$user['user_city'] = $this->input->post('city');
+		$user['user_postalcode'] = $this->input->post('postal_code');
+		$user['user_type'] = 'user';
 		$this->load->model('person');
-		$this->person->sign_up($data);	
+		$user_id =  $this->person->sign_up($user);
+		
+		$user_info['user_phoneno'] = $this->input->post('phone_number');
+		//$user_info['con_password'] = $this->input->post('conf_password');
+		$user_info['user_firstname'] = $this->input->post('firstname');
+		$user_info['user_lastname'] = $this->input->post('lastname');
+		$user_info['user_dob'] = $this->input->post('dob');
+		$user_info['user_gender'] = $this->input->post('gender');
+		$user_info['user_jobtype'] = $this->input->post('position');
+		$user_info['user_industry'] = $this->input->post('industry');
+		$user_info['user_cmpname'] = $this->input->post('companyname');
+		$user_info['user_officephone'] = $this->input->post('office_phone');
+		$user_info['user_fax'] = $this->input->post('fax');
+		$user_info['user_intrests'] = $this->input->post('intrests');
+		$user_info['user_skills'] = $this->input->post('skills');
+		$user_info['user_about'] = $this->input->post('aboutme');
+		//$user_info['user_terms_conditions'] = $this->input->post('agree');
+		$user_info['user_id'] = $user_id;
+		
+		$this->person->user_info($user_info);
 		$this->session->set_flashdata('cust_success', 'Sign Up Successfully. We will get back to you shortly');
+		$this->person->user_settings($user_id);
 		$this->load->view('sign_in_v');
 		}
    }
@@ -293,6 +307,37 @@ public function search_member()
 	}
 
 	}
+	
+	public function my_photos()
+	{
+		
+		$config['upload_path'] = './uploads/';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$config['create_thumb'] = TRUE;
+		$config['max_size']	= '';
+		$config['max_width']  = '';
+		$config['max_height']  = '';
+
+		$this->load->library('upload', $config);
+
+		if ( ! $this->upload->do_upload())
+		{
+			$error = array('error' => $this->upload->display_errors());
+			print_r($error);
+			//$this->load->view('uploadform', $error);
+		}
+		else
+		{
+			$data = $this->upload->data();
+			//print_r($data);
+			$file_id = $this->profile_set->add_pics($data['file_name']);
+			redirect('/profile/my_photos');
+	}
+
+	
+		
+	}
+	
 
 }
 

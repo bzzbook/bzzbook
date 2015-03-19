@@ -44,9 +44,9 @@ class signg_in extends CI_Controller {
 						 */
 						 
 		$sess_array = array(
-		   					'email' =>$result[0]->email,
+		   					'email' =>$result[0]->user_email,
 						    'password' =>$result[0]->password,
-							'account_id' =>$result[0]->cust_id
+							'account_id' =>$result[0]->user_id
 							
 						   );
 		
@@ -55,7 +55,7 @@ class signg_in extends CI_Controller {
 		$result = $this->sign_inm->read_user_information($sess_array);
 		if($result != false){
 			$data = array(
-						'email' =>$result[0]->email,
+						'email' =>$result[0]->user_email,
 						'password' =>$result[0]->password
 						
 					     );
@@ -98,9 +98,9 @@ class signg_in extends CI_Controller {
    }
    function insertlinks($pid,$uid){
 	   $data=array(
-	       'post_id'=>$pid,
-	       'account_id'=>$uid,
-		   'like'=>'yes'
+	       'like_on'=>$pid,
+	       'liked_by'=>$uid,
+		   
 	   );
 	 $res=$this->customermodel->insertlinks($data);
 	 if($res){
@@ -115,9 +115,9 @@ class signg_in extends CI_Controller {
     public function write_comment(){
 		
 	   $data=array(
-	   'comment'=>$this->input->post('write_comment'),
-	   'post_id'=>$this->input->post('post_id'),
-	   'account_id'=>$this->input->post('posted_by')
+	   'comment_content'=>$this->input->post('write_comment'),
+	   'commented_on'=>$this->input->post('post_id'),
+	   'commented_by'=>$this->input->post('posted_by')
 	   );
 
 	   $res=$this->customermodel->write_comments($data);
@@ -128,10 +128,10 @@ class signg_in extends CI_Controller {
     
    
    function checkpass($pass){
-	    $user_id = $this->session->userdata('logged_in')['account_id'];
-	    $condition = "password =" . "'" . md5($pass) . "'"." and cust_id=$user_id";
+	    $id = $this->session->userdata('logged_in')['account_id'];
+	    $condition = "password =" . "'" . md5($pass) . "'"." and user_id=$id";
 		$this->db->select('*');
-		$this->db->from('cust_sign_up');
+		$this->db->from('bzz_users');
 		$this->db->where($condition);
 		$query = $this->db->get();
 		

@@ -9,7 +9,7 @@ $frnd_reqs = $this->friendsmodel->getPendingRequests();
           <ul id="pendingReqUl">
           <?php if($frnd_reqs) { foreach($frnd_reqs as $req){ ?>
             <li>
-              <figure><img src="<?php echo base_url().'uploads/'.$req['image']; ?>" alt="<?php echo $req['name']; ?>"></figure>
+              <figure><img src="<?php echo base_url().'uploads/'.$req['image']; ?>" alt="<?php echo $req['image']; ?>"></figure>
               <div class="disc">
                 <h4><?php echo $req['name']; ?></h4>
                 <div class="dcBtn"><a href="javascript:void(0);" onclick="acceptFrnd(<?php echo $req['id']; ?>);">Confirm</a><a href="javascript:void(0);" onclick="denyFrnd(<?php echo $req['id']; ?>);">Deny</a> <a href="javascript:void(0);" onclick="blockFrnd(<?php echo $req['id']; ?>);">Block</a></div>

@@ -11,6 +11,7 @@
 <script src="<?php echo base_url(); ?>js/jquery-1.11.1.min.js"></script> 
 <!-- Include all compiled plugins (below), or include individual files as needed --> 
 <script src="<?php echo base_url(); ?>js/bootstrap.min.js"></script> 
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script src="<?php echo base_url(); ?>js/animate-plus.min.js"></script> 
 <script src="<?php echo base_url(); ?>js/custom.js"></script>
 <script src="<?php echo base_url(); ?>js/jquery.validate.min.js"></script>
@@ -18,8 +19,51 @@
 <script src="<?php echo base_url(); ?>js/countries.js"></script>
 <script src="<?php echo base_url(); ?>js/usa_states.js"></script>
 <script language="javascript">print_country("country");</script> 
+<script src="<?php echo base_url(); ?>js/jquery.jqtransform.js"></script>
 <script language="javascript">print_usa_states("usa_states");</script>  
 <script src="<?php echo base_url(); ?>js/lightbox.min.js"></script>
+<script src="<?php echo base_url(); ?>js/jquery.uploadfile.min.js"></script>
+<script>
+		$( document ).ready(function() {
+		$('.select').jqTransform({ imgPath: '' });
+		});
+</script>
+<script>
+$(document).ready(function()
+{
+var settings = {
+    url : "<?php echo base_url(); ?>upload.php ?>",
+    dragDrop:true,
+    fileName: "myfile",
+    allowedTypes:"jpg,png,gif,doc,pdf,zip",	
+    returnType:"json",
+	 onSuccess:function(files,data,xhr)
+    {
+       // alert((data));
+    },
+    showDelete:true,
+    deleteCallback: function(data,pd)
+	{
+    for(var i=0;i<data.length;i++)
+    {
+        $.post("delete.php",{op:"delete",name:data[i]},
+        function(resp, textStatus, jqXHR)
+        {
+            //Show Message  
+            $("#status").append("<div>File Deleted</div>");   
+			$("#status1").append("<div>File Deleted</div>");      
+        });
+     }      
+    pd.statusbar.hide(); //You choice to hide/not.
+
+}
+}
+var uploadObj = $("#mulitplefileuploader").uploadFile(settings);
+var uploadObj = $("#mulitplefileuploader1").uploadFile(settings);
+
+
+});
+</script>   
 <script type="text/javascript">
    $('#email_invite').validate();
    $('#upload_file').validate(); 
@@ -311,19 +355,20 @@ $(function(){
 						$.post( url, { group_id: group_id})
 						.done(function( data ) {
 							info = JSON.parse(data);
-							$("input[name=group_name]").val(info.grp_name);
-							$("input[name=group_type]").val(info.grp_type);
-							$("input[name=website_url]").val(info.web_url);
-							$("input[name=city]").val(info.city);
-							$("select[name=usa_states]").val(info.state);
-							$("input[name=postal_code]").val(info.postal_code);
-							$("textarea[name=additional_info]").val(info.additional_info);
+							$("input[name=group_name]").val(info.group_name);
+							$("input[name=group_type]").val(info.group_type);
+							$("input[name=website_url]").val(info.group_web_url);
+							$("input[name=city]").val(info.group_city);
+							$("select[name=usa_states]").val(info.group_state);
+							$("input[name=postal_code]").val(info.group_postalcode);
+							$("textarea[name=additional_info]").val(info.group_about);
 							$("input[name=grp_action]").val("update")
 							$('#grpModal').modal('toggle');
 						});
 						return false;
 				});
 				}
+				
 });
 function pwdchange(){
 var pass=$('#pwd').val();
@@ -358,16 +403,16 @@ function myfunc(cid){
 }
 function likefun(pid,uid){
 	var posted_by=pid;
-	var account_id=uid;
+	var user_id=uid;
 	url="<?php echo base_url();?>signg_in/insertlinks/"+pid+"/"+uid;
 	  $.ajax({
         type: "POST",
         url: url,
-        data: { posted_by: pid, account_id : uid} ,
+        data: { liked_by: pid, like_on : uid} ,
         success: function(html)
         {   
 			info = JSON.parse(html);
-         if(info.like == 'no')
+         if(info.like_status == 'N')
 		 	//$("#like_ajax"+pid).html("Unlike");
 			$("#link_like"+pid).html("Like");
 		  else
@@ -573,6 +618,79 @@ function addgroup()
 		$("#grp_action").val('add');
 		$("#grpformerrors").html('');
 }
+
+$(function () {
+    $("#fileupload").change(function () {
+        $("#dvPreview").html("");
+        var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+        if (regex.test($(this).val().toLowerCase())) {
+            if ($.browser.msie && parseFloat(jQuery.browser.version) <= 9.0) {
+                $("#dvPreview").show();
+                $("#dvPreview")[0].filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = $(this).val();
+            }
+            else {
+                if (typeof (FileReader) != "undefined") {
+                    $("#dvPreview").show();
+                    $("#dvPreview").append("<img />");
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $("#dvPreview img").attr("src", e.target.result);
+      $("#dvPreview img").attr("style", 'width:149px;height:156px' );
+                    }
+                    reader.readAsDataURL($(this)[0].files[0]);
+                } else {
+                    alert("This browser does not support FileReader.");
+                }
+            }
+        } else {
+            alert("Please upload a valid image file.");
+        }
+    });
+	
+	
+	$("#company_form").submit(function( event ){
+     url = "<?php echo base_url(); ?>company/addcompany/";
+  				   $.post(url, { formdata: $(this).serialize() })
+					.done(function( data ) {
+						   	if(data == false)
+							alert("Please Enter Valid Details");
+						else
+						{
+							alert("details are stored");		
+						}
+					});
+					event.preventDefault();
+});
+});
+function getconversations(msg_id,sent_by)
+{
+ url="<?php echo base_url(); ?>message/getconversations/"+msg_id+'/'+sent_by;
+  $.ajax({
+        type: "POST",
+        url: url,
+        success: function(data)
+        {   
+   $("#message_conversation_content").html(data);
+  },
+  cache: false
+  });
+}
+
+
+
+   /*	 
+	 $.post( url, { formdata: $(this).serialize() })
+     
+ .done(function( data ) {
+         if(data == false)
+       alert("hi");
+      else
+       $(".comperrormsg").html(data);
+       $('#company_form').trigger("reset");
+       //$('#orgModal').modal('toggle');
+//       organization_edit();*/
+      // });  
+//}
 //function validateEduForm()
 //{	
 //	if($("#year_attended_from").val()==0 || $("#month_attended_from").val()==0 || $("#year_attended_to").val()==0 || $("#month_attended_to").val()==0 || $("#field_of_study").val()=='' || $("#college_institution").val()=='' || $("#degree_certificate").val()=='')

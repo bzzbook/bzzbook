@@ -1,3 +1,4 @@
+
 <section class="col-lg-6 col-md-6 col-sm-5 col-xs-12 coloumn2 pfSettings">
       <h2>My Settings</h2>
       <div class="posts">
@@ -14,16 +15,13 @@
 
           <!-- Tab panes -->
           <div class="tab-content">
-           <?php foreach($result as $r) { ?>
+           
             <div role="tabpanel" class="tab-pane active" id="post_board">
-             <?php $data = $this->profile_set->get_profile_pic(); 	?>
-			<?php	foreach($data as $image){
-			?>
-            <!-- <?php //echo base_url(); ?>images/pf_pic.png -->
-              <figure class="pfpic"><span>Profile Pic</span><img src="<?php echo base_url();?>uploads/<?php echo $image->filename; ?>" alt="" height="159" width="146"></figure>
+             <?php $image = $this->profile_set->get_profile_pic(); 	?>
+			            <!-- <?php //echo base_url(); ?>images/pf_pic.png -->
+              <figure class="pfpic"><span>Profile Pic</span><img src="<?php echo base_url();?>uploads/<?php echo $image[0]->user_img_name  ?>" alt="" height="159" width="146"></figure>
                <?php $attr = array('id' => 'upload_file', 'name' => 'upload_file'); ?> 
               <?php echo form_open_multipart('profile/do_upload',$attr);?>
-              <?php } ?>
            <div class="upload"> <span class="btn btn-success fileinput-button"> <span>Change Picture</span> 
                 <!-- The file input field used as target for the file upload widget -->
              <input type="file" name="userfile" id="userfile" size="20" required/>
@@ -34,35 +32,35 @@
                  </form>
                  <h4>Location Info</h4>
                <form name="postboard" id="postboard" method="POST" action="">
-             <div class="field col-md-6">
+             <div class="field col-md-6 select">
            	<select class="form-control" name="country"  onchange="print_state('state',this.selectedIndex);"  id="country">
 			<option value=""></option>
 			</select> 
          	</div> 
-          	<div class="field col-md-6">
+          	<div class="field col-md-6 select">
            <select name="state" id="state" class="form-control">
            <option value=""></option>
            </select>
          	</div>
              <div class="filed col-md-6">
-                <input type="text" class="form-control" placeholder="City" value="<?php echo $r->city ?>" name="city" >
+                <input type="text" class="form-control" placeholder="City" value="<?php echo $user[0]->user_city ?>" name="city" >
               </div> 
               
               <div class="filed col-md-6">
-                 <input type="text" class="form-control" placeholder="Zip Code" value="<?php echo $r->postal_code ?>" name="postal_code">
+                 <input type="text" class="form-control" placeholder="Zip Code" value="<?php echo $user[0]->user_postalcode ?>" name="postal_code">
               </div>
               <h4 class="clear">Username Info</h4>
               <div class="filed col-md-6">
-                 <input type="text" class="form-control" placeholder="Username" value="<?php echo $r->user_name ?>" name="user_name" readonly >
+                 <input type="text" class="form-control" placeholder="Username" value="<?php echo $user[0]->username ?>" name="user_name" readonly >
               </div>
               <div class="filed col-md-6">
-                 <input type="text" class="form-control" placeholder="First Name" value="<?php echo $r->first_name ?>" name="firstname" >
+                 <input type="text" class="form-control" placeholder="First Name" value="<?php echo $user_info[0]->user_firstname ?>" name="firstname" >
               </div>
               <div class="filed col-md-6">
-                <input type="text" class="form-control" placeholder="Last Name" value="<?php echo $r->last_name ?>" name="lastname" >
+                <input type="text" class="form-control" placeholder="Last Name" value="<?php echo $user_info[0]->user_lastname ?>" name="lastname" >
               </div>
               <div class="filed col-md-6">
-                <input type="text" class="form-control" placeholder="Email" value="<?php echo $r->email ?>" name="email" >
+                <input type="text" class="form-control" placeholder="Email" value="<?php echo $user[0]->user_email ?>" name="email" readonly>
               </div>
               <h4 class="clear">Password Info</h4>
               <div class="filed col-md-6">
@@ -77,13 +75,13 @@
               </div>
               <h4 class="clear">Job Info</h4>
               <div class="filed col-md-6">
-                  <input type="text" class="form-control" placeholder="Job Title" value="<?php echo $r->job_type ?>" name="position" >
+                  <input type="text" class="form-control" placeholder="Job Title" value="<?php echo $user_info[0]->user_jobtype ?>" name="position" >
               </div>
-              <div class="filed col-md-6">
+              <div class="filed col-md-6 select">
                 <select class="form-control" name="industry">
                    <?php foreach($industry as $industries):?>
                  <option value="<?php echo $industries->lookup_value;?>"
-				 <?php if($r->industry == $industries->lookup_value){
+				 <?php if($user_info[0]->user_industry == $industries->lookup_value){
 					 echo "selected=selected";
 				 }?>><?php echo $industries->lookup_value ?></option>
                  <?php endforeach;?> 
@@ -93,7 +91,7 @@
                <input type="text" class="form-control" placeholder="Other Industry" value="" name="oth_industry" >
               </div>
               <div class="filed col-md-6">
-                <input type="text" class="form-control" placeholder="Company Name" value="<?php echo $r->company_name ?>" name="companyname" >
+                <input type="text" class="form-control" placeholder="Company Name" value="<?php echo $user_info[0]->user_cmpname ?>" name="companyname" >
               </div>
               <div class="filed col-md-6">
                <input type="submit" class="fmbtn" value="Update Settings">
@@ -105,15 +103,15 @@
               <h4 class="clear">About Me Info</h4>
              <form action="" name="formabout_me">
                 	 <div class="filed col-md-12">
-                <textarea cols="" rows="" class="form-control" name="about_me_info" ><?php echo $r->about ?></textarea>
+                <textarea cols="" rows="" class="form-control" name="about_me_info" ><?php echo $user_info[0]->user_about ?></textarea>
                 <input type="submit" class="smbtn" value="Save">
               </div>
               <div class="filed col-md-12">
-                <textarea cols="" rows="" class="form-control" name="about_me_intrests"><?php echo $r->intrests?></textarea>
+                <textarea cols="" rows="" class="form-control" name="about_me_intrests"><?php echo $user_info[0]->user_intrests ?></textarea>
                 <input type="submit" class="smbtn" value="Save">
               </div>
               <div class="filed col-md-12">
-                <textarea cols="" rows="" class="form-control" name="about_me_skills"><?php echo $r->skills;?></textarea>
+                <textarea cols="" rows="" class="form-control" name="about_me_skills"><?php echo $user_info[0]->user_skills;?></textarea>
                 <input type="submit" class="smbtn" value="Save">
               </div>
               </form>
@@ -128,16 +126,16 @@
               </div>
               <h4 class="clear">Contact Details</h4>
              <div class="filed col-md-6">
-                <input type="text" class="form-control" placeholder="Email" value="<?php echo $r->email ?>" >
+                <input type="text" class="form-control" placeholder="Email" value="<?php echo $user[0]->user_email ?>" readonly>
               </div>
               <div class="filed col-md-6">
-                <input type="text" class="form-control" placeholder="Phone" value="<?php echo $r->phone_number ?>">
+                <input type="text" class="form-control" placeholder="Phone" value="<?php echo $user_info[0]->user_phoneno ?>">
               </div>
               <div class="filed col-md-6">
-                <input type="text" class="form-control" placeholder="Office">
+                <input type="text" class="form-control" placeholder="Office"  value="<?php echo $user_info[0]->user_officephone ?>">
               </div>
               <div class="filed col-md-6">
-                <input type="text" class="form-control" placeholder="Fax">
+                <input type="text" class="form-control" placeholder="Fax"  value="<?php echo $user_info[0]->user_fax ?>">
                 <input type="submit" class="smbtn" value="Save">
               </div>
               <div class="filed col-md-6">
@@ -183,21 +181,21 @@
                 <div class="pull-right">
                 <label class="radio-inline">
                 	<?php
-						if($r->profile_visible == 'yes')
+						if($user_set[0]->profile_visible == 'Y')
 							$profileyes_check = "checked";
 						else
 							$profileno_check = "checked";
 					?>
-                  <input type="radio" id="inlineRadio1" value="yes" name="profile_visible" <?php echo @$profileyes_check?>>
+                  <input type="radio" id="inlineRadio1" value="Y" name="profile_visible" <?php echo @$profileyes_check?>>
                   Yes </label>
                 <label class="radio-inline">
-                  <input type="radio" id="inlineRadio2" value="no" name="profile_visible" <?php echo @$profileno_check?>>
+                  <input type="radio" id="inlineRadio2" value="N" name="profile_visible" <?php echo @$profileno_check?>>
                   No </label>
                   </div>
               </div>
               <div class="radio">
               <?php
-						if($r->comments_visible == 'yes')
+						if($user_set[0]->comments_visible == 'Y')
 							$commentsyes_check = "checked";
 						else
 							$commentsno_check = "checked";
@@ -205,17 +203,17 @@
                 <label for="notifications">Make my comments visible to non friends:</label>
                 <div class="pull-right">
                 <label class="radio-inline">
-                  <input type="radio" id="inlineRadio1" value="yes" name="comments_visible" <?php echo @$commentsyes_check?>>
+                  <input type="radio" id="inlineRadio1" value="Y" name="comments_visible" <?php echo @$commentsyes_check?>>
                   Yes </label>
                 <label class="radio-inline">
-                  <input type="radio" id="inlineRadio2" value="no" name="comments_visible" <?php echo @$commentsno_check?>>
+                  <input type="radio" id="inlineRadio2" value="N" name="comments_visible" <?php echo @$commentsno_check?>>
                   No </label>
                   </div>
               </div>
               <div class="radio">
               <?php
 			  
-						if($r->companies_visible == 'yes')
+						if($user_set[0]->companies_visible == 'Y')
 							$companiesyes_check = "checked";
 						else
 							$companiesno_check = "checked";
@@ -223,10 +221,10 @@
                 <label for="notifications">Show my companies that I follow to non friends:</label>
                 <div class="pull-right">
                 <label class="radio-inline">
-                  <input type="radio" value="yes" name="companies_visible" <?php echo @$companiesyes_check?>>
+                  <input type="radio" value="Y" name="companies_visible" <?php echo @$companiesyes_check?>>
                   Yes </label>
                 <label class="radio-inline">
-                  <input type="radio" value="no" name="companies_visible" <?php echo @$companiesno_check?>>
+                  <input type="radio" value="N" name="companies_visible" <?php echo @$companiesno_check?>>
                   No </label>
                   </div>
 
@@ -243,7 +241,7 @@
               <div class="radio">
                <?php
 			  
-						if($r->email_notification == 'yes')
+						if($user_set[0]->email_notification == 'Y')
 							$notificationsyes_check = "checked";
 						else
 							$notificationsno_check = "checked";
@@ -252,10 +250,10 @@
                 <label for="notifications">Send Notifications To My email:</label>
                 <div class="pull-right">
                 <label class="radio-inline">
-                  <input type="radio"  value="yes" name="email_notofication" <?php echo @$notificationsyes_check?>>
+                  <input type="radio"  value="Y" name="email_notofication" <?php echo @$notificationsyes_check?>>
                   Yes </label>
                 <label class="radio-inline">
-                  <input type="radio"  value="no" name="email_notofication" <?php echo @$notificationsno_check?>>
+                  <input type="radio"  value="N" name="email_notofication" <?php echo @$notificationsno_check?>>
                   No </label>
                   </div>
                 <div class="filed col-md-12">
@@ -264,7 +262,6 @@
               </form>
               <div class="clear"></div>
               </div>
-              <?php } ?>
           </div>
         </div>
       </div>

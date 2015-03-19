@@ -103,10 +103,10 @@
           <div class="field col-md-6"  style="min-height: 130px; margin: 10px 0px 0px;">
           <label style="display:block;">Gender</label>
           <label class="radio-inline">
-  			<input type="radio" name="gender" id="inlineRadio1" value="male" checked> male
+  			<input type="radio" name="gender" id="inlineRadio1" value="m" checked> male
 				</label>
 			<label class="radio-inline">
- 			 <input type="radio" name="gender" id="inlineRadio2" value="female"> female
+ 			 <input type="radio" name="gender" id="inlineRadio2" value="f"> female
 			</label>
           </div>
            <div class="field col-md-6" data-rule-required="true" 
@@ -135,8 +135,24 @@
              <input type="text" name="companyname" class="form-control" placeholder="Company Name"  data-rule-required="true" 
              data-msg-required="please enter your company name"/> 
          </div>
+         <div class="field col-md-6">
+             <input type="text" name="office_phone" class="form-control" placeholder="Office phone"  data-rule-required="true" 
+             data-msg-required="please enter your company name"/> 
+         </div>
+         <div class="field col-md-6">
+             <input type="text" name="fax" class="form-control" placeholder="Fax"  data-rule-required="true" 
+             data-msg-required="please enter your company name"/> 
+         </div>
          <div class="field col-md-12">                       
-             <textarea class="form-control" name="aboutme" placeholder="About You.."  data-rule-required="true" 
+             <textarea class="form-control" name="skills" placeholder="Skills...."  data-rule-required="true" 
+             data-msg-required="please enter about you"></textarea>
+         </div>
+         <div class="field col-md-12">                       
+             <textarea class="form-control" name="intrests" placeholder="Intrests...."  data-rule-required="true" 
+             data-msg-required="please enter about you"></textarea>
+         </div>
+         <div class="field col-md-12">                       
+             <textarea class="form-control" name="aboutme" placeholder="About You...."  data-rule-required="true" 
              data-msg-required="please enter about you"></textarea>
          </div>
          <div class="field col-md-6">

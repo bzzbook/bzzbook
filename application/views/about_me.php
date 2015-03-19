@@ -1,6 +1,5 @@
 <section class="col-lg-6 col-md-6 col-sm-5 col-xs-12 coloumn2 aboutme">
       <h2>About Me</h2>
-      <?php foreach($result as $info):?>
       <div class="posts">
       <div class="col-md-5">
         <ul class="nav-tabs" role="tablist" id="myTab">
@@ -12,9 +11,9 @@
         <div class="tab-content col-md-7">
         <div role="tabpanel" class="tab-pane active" id="About">
         <h4>Overview</h4>
-        <p><?php echo $info->about?></p>
-        <h4>Interest</h4>
-        <p><?php echo $info->intrests;?> </p>
+        <p><?php echo $result[0]->user_about ?></p>
+        <h4>Intrest</h4>
+        <p><?php echo $result[0]->user_intrests ?> </p>
         </div>
        
         <div role="tabpanel" class="tab-pane" id="educational">
@@ -34,16 +33,15 @@
       
         <div role="tabpanel" class="tab-pane" id="Contact">
          <h4>Email:</h4>
-        <p><?php echo $info->email;?></p>
+        <p><?php echo $user[0]->user_email;?></p>
          <h4>Phone:</h4>
-        <p><?php echo $info->phone_number;?></p>
+        <p><?php echo $result[0]->user_phoneno;?></p>
          <h4>Office:</h4>
-        <p><?php echo $info->company_name;?></p>
+        <p><?php echo $result[0]->user_cmpname;?></p>
          <h4>Fax:</h4>
-        <p>9696969696</p>
+        <p><?php echo $result[0]->user_fax;?></p>
         </div>
         </div>
         <div class="clear"></div>
       </div>
-      <?php endforeach;?>
     </section>

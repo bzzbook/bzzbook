@@ -22,7 +22,9 @@ public function profile_setting()
 	$this->load->model('profile_set');
 	$this->load->model('lookup');
 	$data['industry'] = $this->lookup->get_lookup_industry();
-	$data['result'] = $this->profile_set->save_settings();
+	$data['user_info'] = $this->profile_set->save_settings();
+	$data['user'] = $this->profile_set->get_user();
+	$data['user_set'] = $this->profile_set->get_user_settings();
 	$data['education_details'] = $this->profile_set->geteducationDetails();
 	$data['profession_details'] = $this->profile_set->getprofessionDetails();
 	$data['organization_details'] = $this->profile_set->getorganizationDetails();
@@ -34,6 +36,7 @@ public function profile_setting()
 
 public function about_me()
 {
+	$data['user'] = $this->profile_set->get_user();
 	$data['result'] = $this->profile_set->save_settings();
 	$data['education_details'] = $this->profile_set->geteducationList();
 	$data['content']='about_me';
@@ -152,7 +155,7 @@ public function friends()
 		//print_r ($friends);
 		foreach($friends as $frnd):
 		$name = $this->profile_set->getcustDetails($frnd);
-		$select.="<option value='".$name[0]['cust_id']."'>".$name[0]['first_name']." ".$name[0]['last_name']."</option>";
+		$select.="<option value='".$name[0]['user_id']."'>".$name[0]['user_firstname']." ".$name[0]['user_lastname']."</option>";
 		endforeach;
 		}
 		else
@@ -181,7 +184,7 @@ public function friends()
 		//print_r ($friends);
 		foreach($friends as $frnd):
 		$name = $this->profile_set->getcustDetails($frnd);
-		$select.="<option value='".$name[0]['cust_id']."'>".$name[0]['first_name']." ".$name[0]['last_name']."</option>";
+		$select.="<option value='".$name[0]['user_id']."'>".$name[0]['user_firstname']." ".$name[0]['user_lastname']."</option>";
 		endforeach;
 		}
 		else
@@ -231,13 +234,13 @@ public function friends()
   {
 	 $data = $this->profile_set->editGrpDetails($_POST['group_id']);
 	 foreach( $data as $result):
-	 	$grp_data['grp_name'] = $result->grp_name;
-		$grp_data['grp_type'] = $result->grp_type;
-		$grp_data['web_url'] = $result->web_url;
-		$grp_data['city'] = $result->city;
-		$grp_data['state'] = $result->state;
-		$grp_data['postal_code'] = $result->postal_code;
-		$grp_data['additional_info'] = $result->additional_info;
+	 	$grp_data['group_name'] = $result->group_name;
+		$grp_data['group_type'] = $result->group_type;
+		$grp_data['group_web_url'] = $result->group_web_url;
+		$grp_data['group_city'] = $result->group_city;
+		$grp_data['group_state'] = $result->group_state;
+		$grp_data['group_postalcode'] = $result->group_postalcode;
+		$grp_data['group_about'] = $result->group_about;
 	
 		endforeach;
 		echo json_encode($grp_data);
@@ -308,8 +311,8 @@ public function friends()
 	
 	public function my_photos()
 	{
-		$data['photos'] = $this->profile_set->get_my_pics();
-		$data['videos'] = $this->profile_set->get_my_videos();
+		//$data['photos'] = $this->profile_set->get_my_pics();
+		//$data['videos'] = $this->profile_set->get_my_videos();
 		$data['content']='myphotos';
 		$this->load->view('template-view',$data);
 		
