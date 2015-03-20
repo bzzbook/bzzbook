@@ -98,8 +98,9 @@ public function addcompany()
 	   parse_str($_POST['formdata'],$company_info);
 	   $returninfo = $this->companies->managecompanydata($company_info,$img_name);
 	 if($returninfo != false):
-	  	$company_info['inserted_id'] = $returninfo;
-	return true;
+	  echo "true";
+	  
+	  // $company_info['inserted_id'] = $returninfo;
 	 else:
 	 	return false;
 	 endif;

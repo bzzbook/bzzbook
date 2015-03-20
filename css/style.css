@@ -238,7 +238,7 @@ footer.home h3 span{ display:block; font-size:34px; padding-top:10px; }
 footer.home h3 em{ color:#fdc70f; font-style:normal;}
 
 
-.pfSettings h2{ background:url(../images/settings_icon1.png) no-repeat 0 center; padding:0 0 0 30px; height:42px; line-height:42px; font-size:18px;}
+.pfSettings h2{ background:url(../images/sideNav.png) no-repeat 0 -149px; padding:0 0 0 35px; height:42px; line-height:45px; font-size:18px ;}
 .pfSettings .nav-tabs{ background:#fbc436; border-bottom:3px solid #1c1c1c; margin-bottom:15px;}
 .pfSettings .nav-tabs li a{ font-size:14px; color:#fff; border-radius:0; border:none;}
 .pfSettings .nav-tabs > li.active > a, .pfSettings .nav-tabs > li.active > a:hover, .pfSettings .nav-tabs > li.active > a:focus{ background:#000; border:none; color:#fff;}
@@ -310,7 +310,7 @@ footer.home h3 em{ color:#fdc70f; font-style:normal;}
 .messageSt .form-group{ margin-bottom:0px; }
 .messageSt #compose{ padding-bottom:20px; }
 
-.groupsSt > h2{ background:url(../images/sideNav.png) no-repeat 0 8px; padding:0 0 0 35px; height:42px; line-height:42px; font-size:18px;  }
+.groupsSt > h2{ background:url(../images/sideNav.png) no-repeat 0 -55px; padding:0 0 0 35px; height:42px; line-height:45px; font-size:18px;  }
 .groupsSt .tabBar{ padding:10px 0; background:#fbc436; border-bottom:2px solid #000; }
 .groupsSt .tabBar span{ display:inline-block;  line-height:34px; padding-right:10px; color:#fff;   }
 .groupsSt .form-group{ margin-bottom:0px; }
@@ -333,7 +333,7 @@ footer.home h3 em{ color:#fdc70f; font-style:normal;}
 .FormFields span{ display:block; }
 .groupEditBlock{ padding:20px 0; }
 .smallBtn{ line-height:18px; font-size:12px; padding:10px 12px !important;  }
-.form-group .buttons{ padding-top:75px; }
+.form-group .buttons{ padding-top:38px; }
 .black{ background:#000; border:0px;}
 .black:hover{background:#000; }
 .jobsSt h2{ background:url(../images/sideNav.png) no-repeat 0 -87px; padding:0 0 0 35px; height:42px; line-height:42px; font-size:18px;  }

@@ -7,13 +7,14 @@
                 <h3>Job Title</h3>
          
                 </div>
-                <div class="EduBlock">
-                <h3>Years Attended</h3>
-          
-                </div>
+               
                 <div class="EduBlock">
                 <h3>Job Description</h3>
  
+                </div>
+                 <div class="EduBlock">
+                <h3>Years Attended</h3>
+          
                 </div>
                  <div class="EduBlock pull-right">
           <h3>Options</h3>
@@ -31,13 +32,15 @@
                 <p><?php echo $profdetails->job_title;?></p>
                 </div>
                 <div class="EduBlock">
-               
-                <p><?php echo explode('-',$profdetails->start_date)[0];?> - <?php echo explode('-',$profdetails->end_date)[0];?></p>
-                </div>
-                <div class="EduBlock">
                 
                 <p><?php echo $profdetails->job_description;?></p>
                 </div>
+                
+                <div class="EduBlock">
+               
+                <p><?php echo explode('-',$profdetails->start_date)[0];?> - <?php echo explode('-',$profdetails->end_date)[0];?></p>
+                </div>
+                
                  <div class="EduBlock pull-right">
                <a class="link glyphicon glyphicon-pencil prof_edit" href="javascript:void(0);" id="prof_edit_modal<?php echo $profdetails->professionalinfo_id ?>"></a>
                 <a class="link glyphicon glyphicon-remove" id="edu_row<?php echo $profdetails->professionalinfo_id;?>" 
