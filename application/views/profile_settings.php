@@ -1,4 +1,3 @@
-
 <section class="col-lg-6 col-md-6 col-sm-5 col-xs-12 coloumn2 pfSettings">
       <h2>My Settings</h2>
       <div class="posts">

@@ -519,7 +519,7 @@ border-top-right-radius: 5px; }
 #AddCompany .add{ background:#2f2f2f; border:none; margin-bottom:20px; font-size:15px; color:#fff; font-weight:500; padding:3px 8px; -webkit-border-radius:3px; border-radius:3px; float:right;}
 #AddCompany .radio label{ font-weight:300;}
 
-
+.midbody .coloumn2 .posts figure.pfpic{width:26%; padding-left:0;}
 
 /*My Messages*/
 .messageSt h2{ background:url(../images/sideNav.png) no-repeat 0 8px; padding:0 0 0 35px; height:42px; line-height:42px; font-size:18px;}
