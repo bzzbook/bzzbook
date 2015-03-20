@@ -171,7 +171,7 @@
       							<input type="checkbox" name="current" value="1" data-rule-required="true" 
     						        data-msg-required="please select current job"> Current
     					</label>
-                        <input type="hidden" name="prof_action" value="add">
+                        <input type="hidden" name="prof_action" id="prof_action" value="add">
                             <input type="hidden" value="" name="prof_form_id" >
   					</div>
                         <div class="clear"></div>
@@ -279,12 +279,12 @@
                       <label class="control-label">Employee Status:</label>
                      <select class="form-control" name="emp_status" id="emp_status" data-rule-required="true" 
     						        data-msg-required="please Select Employe status">
- 						 <option value="wor">Working</option>
+ 						 <option value="wor" selected="selected">Working</option>
  						 <option value="res">Resigned</option>
 						 <option value="frla">Free lancer</option>
 						</select>
                         </div>
-                         <input type="hidden" name="org_action" value="add">
+                         <input type="hidden" name="org_action" id="org_action" value="add">
                          <input type="hidden" value="" name="org_form_id" >
                     </div>
                         <div class="clear"></div>
@@ -371,7 +371,7 @@
                         	<label>Additional Information:</label>
 	                        <textarea name="additional_info" class="form-control" data-rule-required="true" 
     						        data-msg-required="please enter Any Additional Information"></textarea>	
-                            <input type="hidden" name="grp_action" value="add">
+                            <input type="hidden" name="grp_action" id="grp_action" value="add">
                             <input type="hidden" value="" name="grp_form_id" >
                         </div>
                       </div>

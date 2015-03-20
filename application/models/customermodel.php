@@ -153,7 +153,8 @@ class Customermodel extends CI_Model {
 		}
 		else if($data['edu_action']=='update')
 		{
-			$this->db->where('user_id', $educationInfo['user_id']);
+			//$educationInfo['educationinfo_id']=$data['edu_form_id'];
+			$this->db->where('educationinfo_id', $data['edu_form_id']);
 			if($this->db->update('bzz_educationinfo', $educationInfo))
 			return true;
 			else 
@@ -166,7 +167,8 @@ class Customermodel extends CI_Model {
 		'job_title'=>$data['job_title'],
 		'start_date'=>$data['year_attended_from'].'-'.$data['month_attended_from'],
 		'end_date'=>$data['year_attended_to'].'-'.$data['month_attended_to'],
-		'job_description'=>$data['job_description'],	
+		'job_description'=>$data['job_description'],
+			
 		'user_id'=>$this->session->userdata('logged_in')['account_id']
 		);
 		if(isset($data['current']))
@@ -180,7 +182,8 @@ class Customermodel extends CI_Model {
 		}
 		elseif($data['prof_action']=='update')
 		{
-			$this->db->where('user_id', $professionInfo['user_id']);
+			//$professionInfo['professionalinfo_id']=$data['prof_form_id'];
+			$this->db->where('professionalinfo_id', $data['prof_form_id']);
 			if($this->db->update('bzz_professionalinfo', $professionInfo))
 			return true;
 			else 
@@ -207,7 +210,8 @@ class Customermodel extends CI_Model {
 		}
 		elseif($data['org_action']=='update')
 		{
-			$this->db->where('user_id', $organizationInfo['user_id']);
+			//$organizationInfo['organization_id']=$data['org_form_id'];
+			$this->db->where('organization_id', $data['org_form_id']);
 			if($this->db->update('bzz_organizationinfo', $organizationInfo))
 			return true;
 			else 
@@ -235,7 +239,8 @@ class Customermodel extends CI_Model {
 		}
 		elseif($data['grp_action']=='update')
 		{
-			$this->db->where('user_id', $groupInfo['user_id']);
+			//$groupInfo['groupinfo_id']=$data['grp_form_id'];
+			$this->db->where('groupinfo_id', $data['grp_form_id']);
 			if($this->db->update('bzz_groupinfo', $groupInfo))
 			return true;
 			else 
