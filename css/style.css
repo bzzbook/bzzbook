@@ -143,6 +143,7 @@ header .search .input-group .input-group-btn ul li a:hover{ background:url(../im
 
 .midbody .coloumn3 aside .companies{ padding:18px 12px; border-bottom:1px solid #ececec;}
 .midbody .coloumn3 aside .companies ul li{ display:flex;}
+.midbody .coloumn3 aside .companies ul li+li{ margin-top:10px; padding-top:10px; border-top:1px solid #CCC;}
 .midbody .coloumn3 aside .companies ul li figure img{ width:80px; height:80px;}
 .midbody .coloumn3 aside .companies ul li .content{ padding-left:10px;}
 .midbody .coloumn3 aside .companies ul li .content h4{ font-size:14px; color:#737373; padding-bottom:15px; font-weight:400;}

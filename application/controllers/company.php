@@ -71,8 +71,8 @@ class Company extends CI_Controller {
 	
 public function addcompany()
 	{
-/*		
-	$config['upload_path'] = './uploads/';
+		
+	  /*  $config['upload_path'] = './uploads/';
 		$config['allowed_types'] = 'gif|jpg|png';
 		$config['create_thumb'] = TRUE;
 		$config['max_size']	= '';
@@ -89,22 +89,22 @@ public function addcompany()
 		}
 		else
 		{
-			$data = $this->upload->data();
-			
-			 $img_name = $data['file_name'];
+			return true;	$data = $this->upload->data();
 		}*/
-		$img_name ="52.jpg";
+	
+		
+		//$img_name ="52.jpg";
 		$this->load->model('companies');
 	   parse_str($_POST['formdata'],$company_info);
-	   $returninfo = $this->companies->managecompanydata($company_info,$img_name);
-	 if($returninfo != false):
+	   $returninfo = $this->companies->managecompanydata($company_info);
+	   if($returninfo != false):
 	  echo "true";
 	  
 	  // $company_info['inserted_id'] = $returninfo;
 	 else:
 	 	return false;
 	 endif;
-  
+		
 	}
 }
 

@@ -63,7 +63,7 @@ public function managecompanydata($data,$img_name)
 		'company_phone'=>$data['company_phone'],
 		'company_office'=>$data['company_office'],		
 		'company_fax'=>$data['company_fax'],
-		'company_image'=>$img_name,
+		'company_image'=>$data['userfile'],
 		'user_id'=>$this->session->userdata('logged_in')['account_id']
 		);
 	   if( $this->db->insert('bzz_companyinfo', $company_info))
@@ -73,6 +73,23 @@ public function managecompanydata($data,$img_name)
 	
 }
 
+	   public function other_companies($limit=2)
+	   {
+		   $id = $this->session->userdata('logged_in')['account_id'];
+	       $condition = "user_id !=" . "'" . $id .  "'";
+		   $this->db->select('*');
+		   $this->db->from('bzz_companyinfo');
+		   $this->db->where($condition);
+		   if($limit!= 0)
+		   $this->db->limit($limit);
+		   $query = $this->db->get();
+		   if($query->num_rows() > 0)
+		   {
+			   return $query->result();
+		}else{
+			return false;
+		}
+	   }
 
 }
 ?>

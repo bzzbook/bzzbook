@@ -1,8 +1,9 @@
 <?php $result = $this->companies->companies_list($limit=2); ?>
 <div class="companies">
           <h3>My Companies </h3>
+            <ul>
             <?php if($result) { foreach($result as $company): ?>
-          <ul>
+         
             <li>
               <figure><img src="<?php echo base_url();?>uploads/<?php echo $company->company_image ?>" alt=""></figure>
               <div class="content">
@@ -13,7 +14,7 @@
                 <a href="#">Like <span>(2)</span></a> <a href="#">Follow <span>(20)</span></a>
                  </div>
             </li>
-          </ul>
+          
                             <?php endforeach; } else echo "No Details Found";?>
-
+</ul>
         </div>
