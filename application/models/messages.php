@@ -151,7 +151,7 @@ class Messages extends CI_Model {
    public function getconversations($msg_id,$sent_by)
    {
 	$reciever_id = $this->session->userdata('logged_in')['account_id'];  
-	$condition = "sent_by IN(".$sent_by.','.$reciever_id.") AND msg_id>='".$msg_id."'";
+	$condition = "sent_by IN(".$sent_by.','.$reciever_id.") AND recieved_by IN(".$sent_by.','.$reciever_id.") AND msg_id>='".$msg_id."'";
 	$this->db->select('*');
 	$this->db->from('bzz_messages');
 	$this->db->where($condition);

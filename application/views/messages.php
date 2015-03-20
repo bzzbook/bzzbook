@@ -110,7 +110,7 @@
                     <span><?php echo $sentMessage['content']; ?></span> 
                     </span><input name="" type="checkbox" value="">
                     <div class="clear"></div>
-                    <div class="button"><a href="<?php echo base_url()."message/deletesentmsg/".$sentMessage['msg_id'];?>" class="btn btn-black pull-right small-text">Delete</a> <a href="#" class="small-text btn btn-success pull-right" data-toggle="modal" data-target="#msg02">View Conversation</a> </div>
+                    <div class="button"><a href="<?php echo base_url()."message/deletesentmsg/".$sentMessage['msg_id'];?>" class="btn btn-black pull-right small-text">Delete</a> </div>
               <div class="clearfix"></div> 
                <div class="clear"></div>
                     
