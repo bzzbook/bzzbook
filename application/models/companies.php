@@ -15,13 +15,15 @@ class Companies extends CI_Model {
 		    $this->db->insert('comp_sign_up', $data);
 
 	   }
-	   public function companies_list()
+	   public function companies_list($limit=0)
 	   {
 		   $id = $this->session->userdata('logged_in')['account_id'];
 	       $condition = "user_id =" . "'" . $id .  "'";
 		   $this->db->select('*');
 		   $this->db->from('bzz_companyinfo');
 		   $this->db->where($condition);
+		   if($limit!= 0)
+		   $this->db->limit($limit);
 		   $query = $this->db->get();
 		   if($query->num_rows() > 0)
 		   {
@@ -65,7 +67,7 @@ public function managecompanydata($data,$img_name)
 		'user_id'=>$this->session->userdata('logged_in')['account_id']
 		);
 	   if( $this->db->insert('bzz_companyinfo', $company_info))
-	   return $this->db->insert_id();
+	   return true;
 	   else
 	   return false;
 	

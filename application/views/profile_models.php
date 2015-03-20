@@ -551,7 +551,7 @@
               </div>
              <h4 class="clear">Address</h4>
               <div class="filed col-md-12">
-                <textarea name="" class="form-control" name="company_address" id="company_address"></textarea>
+                <textarea class="form-control" name="company_address" id="company_address"></textarea>
               </div>
               <div class="filed col-md-6">
                 <select required="required" name="company_state" id="company_state" class="form-control">

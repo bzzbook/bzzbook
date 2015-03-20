@@ -1,4 +1,4 @@
-<?php $result = $this->companies->companies_list(); ?>
+<?php $result = $this->companies->companies_list($limit=2); ?>
 <div class="companies">
           <h3>My Companies </h3>
             <?php if($result) { foreach($result as $company): ?>
