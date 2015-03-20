@@ -44,16 +44,16 @@
 			?>
             
             <div role="tabpanel" class="tab-pane active" id="inbox">
-              <h4 class="clear">Total Inbox Messages (<?php echo count($messages); ?>)  <a href="#" class="btn btn-black pull-right">Delete Selected</a> <span class="clearfix"></span> </h4>       
+              <h4 class="clear">Total Inbox Messages (<?php echo count($messages); ?>)  <a id="delmsgbtn" href="javascript:void(0);" class="btn btn-black pull-right">Delete Selected</a> <span class="clearfix"></span> </h4>       
             <div class="messages form-group">
-            <?php foreach($messages as $message): ?>
+            <?php if($messages){ foreach($messages as $message): ?>
              <div class="message">
                  <h3 class="unread"><?php echo $message['name']; ?> Sent You a Message , <?php echo $message['sent_date']; ?></h3>
                  <img src="<?php echo base_url(); ?>uploads/<?php echo $message['user_image'];?>" width="55" height="60" alt="">                	
                 	<span class="sub">
                     <h5><?php echo $message['name']; ?></h5>
                     <span><?php echo $message['content']; ?></span> 
-                    </span><input name="deletemsg" type="checkbox" value="<?php echo $message['sent_by']; ?>">
+                    </span><input name="deletemsg" type="checkbox" value="<?php echo $message['msg_id']; ?>">
                     <div class="clear"></div>
                     <div class="button"><a href="<?php echo base_url()."message/deletemsg/".$message['msg_id'];?>" class="btn btn-black pull-right small-text">Delete</a> <a href="<?php echo base_url()."message/viewconversation/".$message['msg_id'];?>" class="small-text btn btn-success pull-right" data-toggle="modal" data-target="#msg" onclick="getconversations(<?php echo $message['msg_id'].','.$message['sent_by']; ?>);">View Conversation</a> <a class="small-text btn btn-warning pull-right" data-toggle="collapse" data-parent="#inbox" href="#msgReply<?php echo $message['msg_id']; ?>">Reply</a></div>
                     <div class="clear"></div>
@@ -68,7 +68,7 @@
                     </div>
               <div class="clearfix"></div> 
               </div>
-              <?php endforeach;?>
+              <?php endforeach; } else echo "Inbox Empty"?>
               
               <!--<div class="message">
                  <h3>Ramesh Kuppili Sent You a Message , Tuesday 10,2015 at 11:39 am</h3>
@@ -99,23 +99,23 @@
 			
 			?>
             <div role="tabpanel" class="tab-pane" id="sent">
-                <h4 class="clear">Sent Messages<a href="#" class="btn btn-black pull-right">Delete Selected</a></h4>
+                <h4 class="clear">Sent Messages<a href="javascript:void(0);" id="delsentselect" class="btn btn-black pull-right">Delete Selected</a></h4>
             	<div class="messages form-group">            
-                 <?php foreach($sentMessages as $sentMessage):?>   
+                 <?php if($sentMessages) { foreach($sentMessages as $sentMessage):?>   
               <div class="message">
                  <h3>Sent to <?php echo $sentMessage['name']." , ".$sentMessage['sent_date']; ?></h3>
                  <img src="<?php echo base_url()."uploads/".$sentMessage['user_image']; ?>" width="55" height="60" alt="">                	
                 	<span class="sub">
                     <h5><?php echo $sentMessage['name']; ?></h5>
                     <span><?php echo $sentMessage['content']; ?></span> 
-                    </span><input name="" type="checkbox" value="">
+                    </span><input name="" type="checkbox" value="<?php echo $sentMessage['msg_id']; ?>">
                     <div class="clear"></div>
                     <div class="button"><a href="<?php echo base_url()."message/deletesentmsg/".$sentMessage['msg_id'];?>" class="btn btn-black pull-right small-text">Delete</a> </div>
               <div class="clearfix"></div> 
                <div class="clear"></div>
                     
               </div>
-              <?php endforeach; ?>
+              <?php endforeach; } else echo "Sent Box Empty" ?>
               
               </div>
               <div class="clear"></div>
@@ -160,7 +160,7 @@
 			
 			?>
             <div role="tabpanel" class="tab-pane" id="trash">
-               <h4 class="clear">Trash Messages <a href="#" class="btn btn-black pull-right">Delete Selected</a></h4>
+               <h4 class="clear">Trash Messages <a href="javascript:void(0);" id="deletetrash" class="btn btn-black pull-right">Delete Selected</a></h4>
                  <div class="messages form-group">  
                     
                  <?php if($trashmessages){ foreach($trashmessages as $trashmessage): ?>       
@@ -170,7 +170,7 @@
                 	<span class="sub">
                     <h5><?php echo $trashmessage['name']; ?></h5>
                     <span><?php echo $trashmessage['content']; ?></span> 
-                    </span><input name="" type="checkbox" value="">
+                    </span><input name="" type="checkbox" value="<?php echo $trashmessage['msg_id']; ?>">
                     <div class="clear"></div>
                     <div class="button"><a href="<?php echo base_url()."message/deletefromtrash/".$trashmessage['msg_id']; ?>" class="btn btn-black pull-right small-text">Delete</a> <a href="#" class="small-text btn btn-success pull-right" data-toggle="modal" data-target="#msg01">View Conversation</a></div>
                     <div class="clear"></div>

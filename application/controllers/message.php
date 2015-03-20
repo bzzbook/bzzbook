@@ -75,6 +75,43 @@ public function getconversations($msg_id,$sent_by)
 	redirect('/profile/message');
 	}
 }
+public function deleteselectedmsgs($values)
+{
+	$this->load->model('messages');
+	$ids = explode('-',$values);
+	foreach($ids as $id)
+	{
+		if($id!='')
+		$this->messages->deletemsg($id);
+	}
+	echo "Success";
+	
+}
+public function deletesentselectedmsgs($values)
+{
+	$this->load->model('messages');
+	$ids = explode('-',$values);
+	foreach($ids as $id)
+	{
+		if($id!='')
+		$this->messages->deletesentmsg($id);
+	}
+	echo "Success";
+	
+}
+
+public function deletetrashmsgs($values)
+{
+	$this->load->model('messages');
+	$ids = explode('-',$values);
+	foreach($ids as $id)
+	{
+		if($id!='')
+		$this->messages->deletefromtrash($id);
+	}
+	echo "Success";
+	
+}
 
 
 

@@ -130,6 +130,17 @@ class Messages extends CI_Model {
 		else 
 		return false; 
    }
+    public function deleteselectedmsgs($values)
+   {
+	   $data = array(
+               'rec_move_to_trash' => 'Y'              
+            );
+		$this->db->where('msg_id', $msg_id);
+		if($this->db->update('bzz_messages', $data))
+		return true;
+		else 
+		return false; 
+   }
    public function deletesentmsg($msg_id)
    {
 	   $data = array(

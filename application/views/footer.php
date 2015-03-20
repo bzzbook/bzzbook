@@ -703,6 +703,75 @@ function getconversations(msg_id,sent_by)
 //	$("#eduformerrors").html("Fields with '*' are mandatory, Please fill them...");
 //	}
 //}
+ $(function(){
+      $('#delmsgbtn').click(function(){
+        var val = [];
+        $(':checkbox:checked').each(function(i){
+          val[i] = $(this).val();
+        });
+		var text='';
+		for	(index = 0; index < val.length; index++) {
+		text += val[index]+'-';
+		} 
+		 url="<?php echo base_url(); ?>message/deleteselectedmsgs/"+text;
+		  $.ajax({
+				type: "POST",
+				url: url,
+				success: function(data)
+				{   
+		   	var redirect_url = "<?php echo base_url(); ?>"+'profile/message';
+			window.location.replace(redirect_url);
+		  },
+		  cache: false
+		  });
+      });
+    });
+	 $(function(){
+      $('#delsentselect').click(function(){
+        var val = [];
+        $(':checkbox:checked').each(function(i){
+          val[i] = $(this).val();
+        });
+		var text='';
+		for	(index = 0; index < val.length; index++) {
+		text += val[index]+'-';
+		} 
+		 url="<?php echo base_url(); ?>message/deletesentselectedmsgs/"+text;
+		  $.ajax({
+				type: "POST",
+				url: url,
+				success: function(data)
+				{   
+		   	var redirect_url = "<?php echo base_url(); ?>"+'profile/message';
+			window.location.replace(redirect_url);
+		  },
+		  cache: false
+		  });
+      });
+    });
+	 $(function(){
+      $('#deletetrash').click(function(){
+        var val = [];
+        $(':checkbox:checked').each(function(i){
+          val[i] = $(this).val();
+        });
+		var text='';
+		for	(index = 0; index < val.length; index++) {
+		text += val[index]+'-';
+		} 
+		 url="<?php echo base_url(); ?>message/deletetrashmsgs/"+text;
+		  $.ajax({
+				type: "POST",
+				url: url,
+				success: function(data)
+				{   
+		   	var redirect_url = "<?php echo base_url(); ?>"+'profile/message';
+			window.location.replace(redirect_url);
+		  },
+		  cache: false
+		  });
+      });
+    });
 </script>
 <style>
 .form-mandatory{
