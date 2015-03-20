@@ -114,7 +114,10 @@ class customer extends CI_Controller {
   public function postboard_update()
   {
 	  parse_str($_POST['form_data'],$postboard_info);
-	 echo $this->customermodel->managepostboarddata($postboard_info);
+	if($this->customermodel->managepostboarddata($postboard_info))
+	echo "success";
+	else
+	return false;
   }
   public function updateabout()
   {

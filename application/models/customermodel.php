@@ -269,11 +269,16 @@ class Customermodel extends CI_Model {
 		);
 		//'other_industry'=>$data['oth_industry'],
 		$this->db->where('user_id',$this->session->userdata('logged_in')['account_id']);
-		$this->db->update('bzz_userinfo',$userInfo);
-		$this->db->update('bzz_users',$user);
-		//	return true;
-//		else
-//			return false;	
+		if($this->db->update('bzz_userinfo',$userInfo))
+  $con1 = true;
+  $this->db->where('user_id',$this->session->userdata('logged_in')['account_id']);
+  if($this->db->update('bzz_users',$user))
+  $con2 = true;
+  if($con1 && $con2)
+  return true;
+  else
+  return false;
+		
    }
    
  

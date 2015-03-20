@@ -32,12 +32,12 @@
                  </form>
                  <h4>Location Info</h4>
                <form name="postboard" id="postboard" method="POST" action="">
-             <div class="field col-md-6 select">
+             <div class="field col-md-6 ">
            	<select class="form-control" name="country"  onchange="print_state('state',this.selectedIndex);"  id="country">
 			<option value=""></option>
 			</select> 
          	</div> 
-          	<div class="field col-md-6 select">
+          	<div class="field col-md-6 ">
            <select name="state" id="state" class="form-control">
            <option value=""></option>
            </select>

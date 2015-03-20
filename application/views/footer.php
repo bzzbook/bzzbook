@@ -103,10 +103,9 @@ $(function(){
 			        data: { form_data: $(this).serialize()} ,
         			success: function(html)
 			        {   
-            			if(html == true)
+            			
 							alert("Information Updated");
-						else
-							alert("Something went wrong Please try after sometime");
+						
 			        }
 			       });			
 				event.preventDefault();
