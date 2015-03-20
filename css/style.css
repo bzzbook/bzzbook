@@ -419,7 +419,7 @@ footer.home h3 em{ color:#fdc70f; font-style:normal;}
 .groupProperty .groupBlock.pull-right{ text-align:right;}
 .groupProperty .groupBlock p{ font-size:15px; line-height:30px;}
 .groupProperty{ border-top:1px solid #ebebeb;}
-.groupProperty:first-child, .EduProperty:first-child, .jobProperty:first-child, .EventProperty:first-child{background: none repeat scroll 0 0 #333333; color: #ffffff;}
+.groupProperty:first-child, .EduProperty:first-child, .EventProperty:first-child{background: none repeat scroll 0 0 #333333; color: #ffffff;}
 .groupProperty:first-child .groupBlock h3, .EduProperty:first-child .groupBlock h3, .jobProperty:first-child .jobBlock h3, .EventProperty:first-child .EventBlock h3{color: #ffffff;}
 
 .ajax-upload-dragdrop{ border:none !important; width:auto !important; padding:0 !important;}

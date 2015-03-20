@@ -8,27 +8,22 @@ class Jobmodel extends CI_Model {
   		
     } 
 	
-	public function insert_jobs()
+	public function insert_jobs($data)
 	{
 		 	$jobInfo = array(
 		'job_title'=>$data['job_title'],
 		'job_type'=>$data['job_type'],
 		'job_category'=>$data['job_category'],
-		'job_salary'=>$data['salary'],
+		'job_salary'=>$data['job_salary'],
 		'job_keyword'=>$data['job_keywords'],
-		'job_company_name'=>$data['company_name'],
-		'job_industry'=>$data['industry'],
-		'job_address'=>$data['address'],
-		'job_state'=>$data['state'],
-		'job_city'=>$data['city'],
-		'job_postal_code'=>$data['postal_code'],
-		'job_contact_name'=>$data['name'],
-		'job_contact_phone'=>$data['phone'],
-		'job_contact_email'=>$data['email'],
-		'job_how_to_apply'=>$data['apply_procedure'],
-		'job_description'=>$data['job_description'],
-		'job_requirements'=>$data['job_requirements'],
-		'cust_id'=>$this->session->userdata('logged_in')['account_id']
+		'company_posted_by'=>$data['job_company_name'],
+		'job_contact_name'=>$data['cont_name'],
+		'job_contact_phone'=>$data['cont_phone'],
+		'job_contact_email'=>$data['cont_email'],
+		'job_how_to_apply'=>$data['how_to_apply'],
+		'job_description'=>$data['job_desc'],
+		'job_requirements'=>$data['req_skills'],
+		'user_id'=>$this->session->userdata('logged_in')['account_id']
 		);
 		
 		if($this->db->insert('jobs', $jobInfo))
@@ -36,5 +31,24 @@ class Jobmodel extends CI_Model {
 		else
 			return false;
 	} 
+	public function getCompanies()
+	{
+		$user_id = $this->session->userdata('logged_in')['account_id']; 
+		$condition = "user_id =" . "'" . $user_id . "'";
+		$this->db->select('cmp_name,companyinfo_id');
+		$this->db->from('bzz_companyinfo');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+	public function getJobs()
+	{
+		$user_id = $this->session->userdata('logged_in')['account_id']; 
+		$this->db->select('*');
+		$this->db->from('jobs');
+		$this->db->join('bzz_companyinfo', 'bzz_companyinfo.companyinfo_id = jobs.company_posted_by');
+		$query = $this->db->get();
+		return $query->result_array();
+	}
  }
 ?>

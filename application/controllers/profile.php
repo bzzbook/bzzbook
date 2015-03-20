@@ -177,12 +177,12 @@ public function friends()
 	  if($data)
 	  {
 		$select = '<select name="select-from" id="select-from" class="form-control" multiple="multiple">';
-		$frnd_list = $data[0]->accepted_friend_ids;
+		//$frnd_list = $data[0]->friend_id;
 		if(!empty($frnd_list))
 		{
-		$friends = explode(",",$frnd_list);
+		//$friends = explode(",",$frnd_list);
 		//print_r ($friends);
-		foreach($friends as $frnd):
+		foreach($data as $frnd):
 		$name = $this->profile_set->getcustDetails($frnd);
 		$select.="<option value='".$name[0]['user_id']."'>".$name[0]['user_firstname']." ".$name[0]['user_lastname']."</option>";
 		endforeach;
