@@ -404,17 +404,16 @@
         <h4 class="modal-title" id="myModalLabel">Add Company</h4>
       </div>
       <div class="modal-body">
-       
+         <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompany" >
               <figure class="pfpic"><span>Company Logo</span><div id="dvPreview" ><img width="146" height="159" id="blah" src="<?php echo base_url(); ?>images/cl_pic.png" alt=""></div></figure>
-              <form name="company_form" id="company_form" action="" >
               <div class="upload"> <span class="btn btn-success fileinput-button"> <span>Add Logo</span> 
                 <!-- The file input field used as target for the file upload widget -->
-                  
+                
                 <input id="fileupload" type="file" name="userfile" multiple>
                 </span> </div>
-               
+                 
         <h4 class="clear">Company Info</h4>
-      
+    
               <div class="filed col-md-6">
                 <input type="text" class="form-control" name="cmp_name" id="cmp_name" placeholder="Company Name">
               </div>

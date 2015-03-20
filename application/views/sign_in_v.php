@@ -65,7 +65,7 @@ echo "</div>";
     <div class="col-md-6 col-sm-8 col-xs-12 pull-right">
       <div class="title">
         <h2>Create a <span>Buzz</span> </h2>
-        <h3>with Your <span>Bussiness</span></h3>
+        <h3>with Your <span>Business</span></h3>
         <h4>with the future of <span>social media!</span></h4>
       </div>
       <div class="signupToday">

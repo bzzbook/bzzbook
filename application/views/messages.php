@@ -172,7 +172,7 @@
                     <span><?php echo $trashmessage['content']; ?></span> 
                     </span><input name="" type="checkbox" value="<?php echo $trashmessage['msg_id']; ?>">
                     <div class="clear"></div>
-                    <div class="button"><a href="<?php echo base_url()."message/deletefromtrash/".$trashmessage['msg_id']; ?>" class="btn btn-black pull-right small-text">Delete</a> <a href="#" class="small-text btn btn-success pull-right" data-toggle="modal" data-target="#msg01">View Conversation</a></div>
+                    <div class="button"><a href="<?php echo base_url()."message/deletefromtrash/".$trashmessage['msg_id']; ?>" class="btn btn-black pull-right small-text">Delete</a> <!-- <a href="#" class="small-text btn btn-success pull-right" data-toggle="modal" data-target="#msg01">View Conversation</a> --></div>
                     <div class="clear"></div>
                      
               </div>

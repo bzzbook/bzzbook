@@ -18,7 +18,7 @@ if(strpos($_SERVER['REQUEST_URI'],'company/my_companies') !== false) {
 <?php }
 ?>
 <script src="<?php echo base_url(); ?>js/animate-plus.min.js"></script> 
-<script src="<?php echo base_url(); ?>js/custom.js"></script>
+<!--<script src="<?php //echo base_url(); ?>js/custom.js"></script>-->
 <script src="<?php echo base_url(); ?>js/jquery.validate.min.js"></script>
 <script src="<?php echo base_url(); ?>js/additional-methods.js"></script>
 <script src="<?php echo base_url(); ?>js/countries.js"></script>
@@ -32,6 +32,8 @@ if(strpos($_SERVER['REQUEST_URI'],'company/my_companies') !== false) {
 		$( document ).ready(function() {
 		$('.select').jqTransform({ imgPath: '' });
 		});
+   $('#email_invite').validate();
+   $('#upload_file').validate(); 
 </script>
 <script>
 $(document).ready(function()
@@ -69,52 +71,7 @@ var uploadObj = $("#mulitplefileuploader1").uploadFile(settings);
 
 });
 </script>   
-<script type="text/javascript">
-   $('#email_invite').validate();
-   $('#upload_file').validate(); 
- /*  //modal education form validation
-   function edu_form() {
-    $("#education_form").validate({
-  
-  // Specify the validation rules
 
-		rules: {
-            field_of_study: "required",
-            college_institution: "required",
-			degree_certificate: "required",
-			year_attended_from: "required",
-			month_attended_from: "required",
-			year_attended_to: "required",
-			month_attended_to: "required",
-            special_studies: "required"
-        },
-        
-        // Specify the validation error messages
-        messages: {
-			field_of_study: "Please enter your Educaton",
-            college_institution: "Please enter your Institution Name",
-			degree_certificate: "Please enter your Graduation",
-			year_attended_from: "Please enter Year",
-			month_attended_from: "Please enter Month",
-			year_attended_to: "Please enter Year",
-			month_attended_to: "Please enter Month",
-            special_studies: "Please enter about your Studies"
-        },
-        
-        submitHandler: function(form) {
-            form.submit();
-			
-        }
-    });
-
-  }
- */
-   /*$('#profile').validate();
-   $('#group_form').validate();
-   $('#organization_form').validate();
-   $('#profession_form').validate();
-   $('#education_form').validate();*/
-	</script>
 <script>
 $(function(){
 	education_edit();
@@ -653,8 +610,8 @@ $(function () {
     });
 	
 	
-	$("#company_form").submit(function( event ){
-     url = "<?php echo base_url(); ?>company/addcompany/";
+/*	$("#company_form").submit(function( event ){
+     url = "<?php // echo base_url(); ?>company/addcompany/";
   				   $.post(url, { formdata: $(this).serialize() })
 					.done(function( data ) {
 						   	if(data == false)
@@ -665,7 +622,7 @@ $(function () {
 						}
 					});
 					event.preventDefault();
-});
+});*/
 });
 function getconversations(msg_id,sent_by)
 {

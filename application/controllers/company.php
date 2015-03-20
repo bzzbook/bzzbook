@@ -72,7 +72,7 @@ class Company extends CI_Controller {
 public function addcompany()
 	{
 		
-	  /*  $config['upload_path'] = './uploads/';
+	    $config['upload_path'] = './uploads/';
 		$config['allowed_types'] = 'gif|jpg|png';
 		$config['create_thumb'] = TRUE;
 		$config['max_size']	= '';
@@ -89,21 +89,41 @@ public function addcompany()
 		}
 		else
 		{
-			return true;	$data = $this->upload->data();
-		}*/
-	
+			return true;	
 		
+		}
+	   
+		//$name = $this->upload->data();
+		$img_name = 'four.jpg';
+	    $data['cmp_name'] = $this->input->post('cmp_name');
+		$data['cmp_industry'] = $this->input->post('cmp_industry');
+		$data['cmp_estb'] = $this->input->post('cmp_estb');
+		$data['cmp_colleagues'] = $this->input->post('cmp_colleagues');
+		$data['cmp_about'] = $this->input->post('cmp_about');
+		$data['company_address'] = $this->input->post('company_address');
+		$data['company_state'] = $this->input->post('company_state');
+		$data['company_city'] = $this->input->post('company_city');
+		$data['company_postalcode'] = $this->input->post('company_postalcode');
+		$data['company_email'] = $this->input->post('company_email');
+		$data['company_phone'] = $this->input->post('company_phone');
+		$data['company_office'] = $this->input->post('company_office');
+		$data['company_fax'] = $this->input->post('company_fax');
+		$data['company_image'] = $img_name;
+		$data['user_id']= $this->session->userdata('logged_in')['account_id'];
+		
+		 $data['result'] = $this->companies->managecompanydata($data);
+		 $data['content']='my_companies';
+	     $this->load->view('template-view',$data);
 		//$img_name ="52.jpg";
-		$this->load->model('companies');
+		/*$this->load->model('companies');
 	   parse_str($_POST['formdata'],$company_info);
-	   $returninfo = $this->companies->managecompanydata($company_info);
+	   $returninfo = $this->companies->managecompanydata($company_info,$img_name);
 	   if($returninfo != false):
 	  echo "true";
-	  
 	  // $company_info['inserted_id'] = $returninfo;
 	 else:
 	 	return false;
-	 endif;
+	 endif;*/
 		
 	}
 }

@@ -47,9 +47,9 @@ class Companies extends CI_Model {
 			return false;
 		}
 	   }	
-public function managecompanydata($data,$img_name)
+public function managecompanydata($data)
 {
-		$company_info = array(
+	/*	$company_info = array(
 		'cmp_name'=>$data['cmp_name'],
 		'cmp_industry'=>$data['cmp_industry'],
 		'cmp_estb'=>$data['cmp_estb'],
@@ -63,10 +63,10 @@ public function managecompanydata($data,$img_name)
 		'company_phone'=>$data['company_phone'],
 		'company_office'=>$data['company_office'],		
 		'company_fax'=>$data['company_fax'],
-		'company_image'=>$data['userfile'],
+		'company_image'=>$img_name,
 		'user_id'=>$this->session->userdata('logged_in')['account_id']
-		);
-	   if( $this->db->insert('bzz_companyinfo', $company_info))
+		);*/
+	   if( $this->db->insert('bzz_companyinfo',$data))
 	   return true;
 	   else
 	   return false;

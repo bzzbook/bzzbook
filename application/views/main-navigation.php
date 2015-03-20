@@ -10,9 +10,9 @@
            <li> <a  href="<?php echo base_url(); ?>profile/post">Profile</a></li>
             <li> <a  href="<?php echo base_url(); ?>profile/about_me">About Me</a></li>
             <li> <a  href="<?php echo base_url(); ?>profile/friends">My Friends</a></li>
-         <li> <a  href="<?php echo base_url(); ?>profile/my_photos">My Photos</a></li>
-              <li> <a  href="<?php echo base_url(); ?>profile/business_details">My Business Details</a></li>
-            <li> <a  href="#">My Companies</a></li>
+            <li> <a  href="<?php echo base_url(); ?>profile/my_photos">My Photos</a></li>
+             <li> <a  href="<?php echo base_url(); ?>profile/business_details">My Business Details</a></li>
+            <li> <a  href="<?php echo base_url(); ?>company/my_companies">My Companies</a></li>
           </ul>
           <div class="pull-right viewAs">
             <p>Viewing as:</p>

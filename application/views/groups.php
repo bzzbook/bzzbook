@@ -17,33 +17,34 @@
     <div class="groupProperty">
         <div class="groupBlock">
         <h3>Group Name:</h3>
-        <p>Social</p>
+      
         </div>
         <div class="groupBlock">
-        <h3># of Members:</h3>
-        <p>2</p>
+        <h3>Members</h3>
+        
         </div>
         <div class="groupBlock">
         <h3>Date Created:</h3>
-        <p>18/02/2015</p>
+       
         </div>
-         <div class="groupBlock pull-right">
-        <a href="#" class="link glyphicon glyphicon-pencil"></a>
-        <a href="#" class="link glyphicon glyphicon-remove"></a>
+          <div class="groupBlock  pull-right">
+        <h3>Options</h3>
+       
         </div>
+        
         <div class="clearfix"></div>
     </div>
     <div class="groupProperty">
         <div class="groupBlock">
-        <h3>Group Name:</h3>
+      
         <p>Social</p>
         </div>
         <div class="groupBlock">
-        <h3># of Members:</h3>
+       
         <p>2</p>
         </div>
         <div class="groupBlock">
-        <h3>Date Created:</h3>
+      
         <p>18/02/2015</p>
         </div>
          <div class="groupBlock pull-right">

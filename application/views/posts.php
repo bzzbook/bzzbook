@@ -51,7 +51,7 @@
 	  ?>
 	
 	   <article>
-          <figure><img src="<?php echo base_url(); ?>images/post_writer.png" alt=""></figure>
+          <figure><img src="<?php echo base_url(); ?>uploads/<?php echo $image[0]->user_img_thumb; ?>" alt=""></figure>
           <div class="content" id="content">
             <h3 class="pw"><?php echo ucfirst($get_profiledata[0]->user_firstname)."&nbsp;".ucfirst($get_profiledata[0]->user_lastname);?><span>
 			<?php if($hr_final<24){?><?php echo $hr_final;?>hr<?php }else{
