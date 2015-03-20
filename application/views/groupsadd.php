@@ -21,22 +21,19 @@
 	}
 	?>
     <div class="form-group">
-    <div class="col-md-6">
-<select name="f" class="form-control" id="grp_list">
-<option value="-1">select group</option>
-<?php $data = $this->profile_set->get_groups(); ?>
-     <?php foreach($data as $grp) { ?>
-                 <option value="<?php echo $grp->groupinfo_id ?>"><?php echo $grp->group_name ?></option>
-                 <?php } ?> 
-    </select>
-</div>    
+        
     </div>
     <div class="clear"></div>
     <div class="form-group">
    <div class="FormFields col-md-5">
- <label>Members</label>
-    <span id="select_frm"><select multiple name="select-from" id="select-from" class="form-control">
-     
+ <label>Friends</label>
+    <select multiple name="select-from" id="select-from" class="form-control">
+      <?php $friends = $this->friendsmodel->getfriends();
+				  foreach($friends as $friend)
+				  {
+             	  echo " <option value='".$friend['id']."'>".$friend['name']."</option>";
+				  }
+				  ?>
     </select>
 </span>
 	</div>

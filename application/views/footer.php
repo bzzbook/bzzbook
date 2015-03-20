@@ -444,8 +444,8 @@ $(document).ready(function() {
  
 });
 
-// ajax call for get friends list on add group button click
-
+ // ajax call for get friends list on add group button click
+/*
 	 $('#grp_list').change(function(){
      id = $(this).val();
 	 url="<?php echo base_url() ?>profile/get_grp_friends/"+id;
@@ -471,7 +471,7 @@ $(document).ready(function() {
 	    });
 			return false;
 	});
-
+*/
 
 
 //ajax for profile pic upload
