@@ -11,8 +11,13 @@
 <script src="<?php echo base_url(); ?>js/jquery-1.11.1.min.js"></script> 
 <!-- Include all compiled plugins (below), or include individual files as needed --> 
 <script src="<?php echo base_url(); ?>js/bootstrap.min.js"></script> 
-<!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
---><script src="<?php echo base_url(); ?>js/animate-plus.min.js"></script> 
+<?php
+if(strpos($_SERVER['REQUEST_URI'],'company/my_companies') !== false) {
+?>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<?php }
+?>
+<script src="<?php echo base_url(); ?>js/animate-plus.min.js"></script> 
 <script src="<?php echo base_url(); ?>js/custom.js"></script>
 <script src="<?php echo base_url(); ?>js/jquery.validate.min.js"></script>
 <script src="<?php echo base_url(); ?>js/additional-methods.js"></script>
