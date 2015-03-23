@@ -31,22 +31,37 @@ class Companies extends CI_Model {
 		}else{
 			return false;
 		}
-	   }
-	   	 public function following_comp_list()
+	   }  
+	   	 public function following_companies_list()
 	   {
 		   $id = $this->session->userdata('logged_in')['account_id'];
-	       $condition = "user_id =" . "'" . $id .  "'";
+	       $condition = "user_id =" . "'" . $id . "'" . " AND " . "follow_status = 'Y' ";
 		   $this->db->select('*');
-		   $this->db->from('bzz_companyinfo');
+		   $this->db->from('bzz_cmp_follow');
 		   $this->db->where($condition);
 		   $query = $this->db->get();
+		   $companies = array();
 		   if($query->num_rows() > 0)
 		   {
-			   return $query->result();
-		}else{
-			return false;
-		}
-	   }	
+			   $result = $query->result_array();
+			  
+			   foreach($result as $row):
+			   $cmp_id= $row['companyinfo_id'];
+			 
+				   $condition = "companyinfo_id =". "'" . $cmp_id . "'";
+				   $this->db->select('*');
+			       $this->db->from('bzz_companyinfo');
+				   $this->db->where($condition);
+				   $query = $this->db->get();
+				   if ($query->num_rows() > 0) {
+				   $company = $query->result_array();	
+				   $companies[] = $company[0];
+		           }
+	            	endforeach;
+		   return $companies;
+		   }
+		   
+	   }
 public function managecompanydata($data)
 {
 	/*	$company_info = array(
@@ -90,6 +105,87 @@ public function managecompanydata($data)
 			return false;
 		}
 	   }
+	   
+	   public function company_follow($data)
+	   {
+		       $this->db->insert('bzz_cmp_follow',$data);
+   
+	   }
+	   public function company_unfollow($cmpinfo_id)
+	   {
+		   $data= array(
+		   'user_id' => $this->session->userdata('logged_in')['account_id'],
+		   'companyinfo_id' => $cmpinfo_id,
+		   'follow_status' => 'N'
+		   );
+		   $id = $this->session->userdata('logged_in')['account_id'];
+		   $condition =  "user_id =" . "'" . $id . "'" . " AND " . "companyinfo_id =" . "'" . $cmpinfo_id .  "'"; 
+		   $this->db->where($condition);
+		   $this->db->update('bzz_cmp_follow', $data); 
+	   }
 
+
+public function get_mn_cmp_list()
+	{
+		$id = $this->session->userdata('logged_in')['account_id'];
+	    $condition = "user_id =" . "'" . $id . "'";
+		$this->db->select('*');
+		$this->db->from('bzz_companyinfo');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		if ($query->num_rows() > 0) {
+			return $query->result();
+		} else {
+		return false;
+		}
+	}
+	
+	
+	public function get_companies_to_follow()
+	{
+	    $id = $this->session->userdata('logged_in')['account_id'];
+	    $condition = "user_id =" . "'" . $id . "' AND request_status='Y'";
+		$this->db->select('*');
+		$this->db->from('bzz_userfriends');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		if ($query->num_rows() > 0) {
+			$friends = $query->result_array();
+			$company = array();
+			foreach($friends as $friend)
+			{
+			    $condition = "user_id =" . "'" . $friend['friend_id'] . "'";
+				$this->db->select('*');
+				$this->db->from('bzz_cmp_follow');
+				$this->db->where($condition);
+				$query = $this->db->get();
+				if ($query->num_rows() > 0) {
+					$result_cmp = $query->result_array();	
+					
+					foreach($result_cmp as $cmp)
+					{
+						$condition = "companyinfo_id =" . "'" . $cmp['companyinfo_id'] . "'";
+						$this->db->select('*');
+						$this->db->from('bzz_companyinfo');
+						$this->db->where($condition);
+						$query = $this->db->get();
+						if($query->num_rows()>0)
+						{
+							return $result = $query->result_array();
+						}else{
+							return false;
+						}
+						$cmp['companyinfo_id']=$result[0]['companyinfo_id'];
+						$cmp['cmp_name']=$result[0]['cmp_name'];
+						$company[] = $cmp;
+					}
+					
+				}}
+			return $company;
+		} else {
+		return false;
+		}
+   
+	}
 }
 ?>

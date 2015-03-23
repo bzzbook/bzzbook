@@ -1,3 +1,8 @@
+<?php $result = $this->profile_set->get_userinfo();
+ $name = $result[0]['user_firstname']." ".$result[0]['user_lastname'];
+ $companies = $this->companies->get_mn_cmp_list();
+ ?> 
+
 <section class="mainNav">
   <div class="container">
     <nav class="navbar navbar-static" id="navbar-example">
@@ -18,10 +23,13 @@
             <p>Viewing as:</p>
             <select class="form-control" >
               <optgroup label="Your Personal profile">
-              <option>Jhon Smith</option>
+              <option value="<?php echo $result[0]['user_id']?>"><?php echo $name ?></option>
               </optgroup>
               <optgroup label="Your Companies">
-              <option data-to-profile-type="Company">Ayatas technologies</option>
+              <?php foreach($companies as $cmp):?>
+                 <option  data-to-profile-type="Company" value="<?php echo $cmp->companyinfo_id ?>"><?php echo $cmp->cmp_name ?></option>
+                 <?php endforeach;?> 
+       
               </optgroup>
             </select>
           </div>

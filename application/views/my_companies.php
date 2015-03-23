@@ -1,4 +1,8 @@
-<?php $result = $this->companies->companies_list(); ?>
+<?php 
+$result = $this->companies->companies_list(); 
+$result1 = $this->companies->following_companies_list();
+?>
+
 <section class="col-lg-6 col-md-6 col-sm-5 col-xs-12 coloumn2 pfSettings">
       <h2>My Companies <button data-toggle="modal" data-target="#AddCompany" class="btn btn-primary createbutton fright" type="button">Add Company</button></h2>
       <div class="posts">
@@ -31,50 +35,25 @@
                <?php endforeach; } else echo "No Details Found";?>      
             </div>
             <div role="tabpanel" class="tab-pane" id="companies_following">
-              
+               <?php if($result1) { foreach($result1 as $company): ?>
               <div class="companyFollow col-md-12">
                <div class="col-md-4 im">
-<a href="#"><img src="images/cp2.png" width="127" height="127" alt=""></a>
+<a href="#"><img src="<?php echo base_url(); ?>uploads/<?php echo $company['company_image'] ?>"  width="127" height="127" alt=""></a>
 </div>
                     <div class="col-md-7">
-                    	<h4 class="clear">Palmetto cleaning systems</h4>
-                      <p>Industry: Consumer Goods</p>
-                      <p>Established in: 2014</p>
-                      <p>Employes on Bzzbook: 10</p>
+                      <h4 class="clear"><?php echo $company['cmp_name'] ?></h4>
+                      <p>Industry: <?php echo $company['cmp_industry'] ?></p>
+                      <p>Established in: <?php echo $company['cmp_estb'] ?></p>
+                      <p>Employes on Bzzbook: <?php echo $company['cmp_colleagues'] ?></p>
                     </div>
                     <div class="clear"></div>
-                <div class="col-md-6 col-md-push-7"> <a class="btn btn-info black" href="#">view Profile</a> <a class="btn btn-info gray" href="#">unfollow</a> </div>
+                <div class="col-md-6 col-md-push-7"> <a class="btn btn-info black" href="#">view Profile</a>
+                 <a class="btn btn-info gray" href="<?php echo base_url("company/cmp_unfollow/".$company['companyinfo_id']) ?>">unfollow</a> </div>
               </div>
               
-              <div class="companyFollow col-md-12">
-               <div class="col-md-4 im">
-<a href="#"><img src="images/cp2.png" width="127" height="127" alt=""></a>
-</div>
-                    <div class="col-md-7">
-                    	<h4 class="clear">Palmetto cleaning systems</h4>
-                      <p>Industry: Consumer Goods</p>
-                      <p>Established in: 2014</p>
-                      <p>Employes on Bzzbook: 10</p>
-                    </div>
-                    <div class="clear"></div>
-                <div class="col-md-6 col-md-push-7"> <a class="btn btn-info black" href="#">view Profile</a> <a class="btn btn-info gray" href="#">unfollow</a> </div>
-              </div>
-              
-              <div class="companyFollow col-md-12">
-               <div class="col-md-4 im">
-<a href="#"><img src="images/cp2.png" width="127" height="127" alt=""></a>
-</div>
-                    <div class="col-md-7">
-                    	<h4 class="clear">Palmetto cleaning systems</h4>
-                      <p>Industry: Consumer Goods</p>
-                      <p>Established in: 2014</p>
-                      <p>Employes on Bzzbook: 10</p>
-                    </div>
-                    <div class="clear"></div>
-                <div class="col-md-6 col-md-push-7"> <a class="btn btn-info black" href="#">view Profile</a> <a class="btn btn-info gray" href="#">unfollow</a> </div>
-              </div>
               
               <div class="clear"></div>
+               <?php endforeach; } else echo "No Details Found";?>  
             </div>
           </div>
         </div>

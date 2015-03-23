@@ -23,6 +23,22 @@ class Profile_set extends CI_Model {
 		}
    }
    
+   
+    public function get_userinfo(){
+	    $id = $this->session->userdata('logged_in')['account_id'];
+	    $condition = "user_id =" . "'" . $id . "'";
+		$this->db->select('*');
+		$this->db->from('bzz_userinfo');
+		$this->db->where($condition);
+		$this->db->limit(1);
+		$query = $this->db->get();
+		if ($query->num_rows() == 1) {
+			return $query->result_array();
+		} else {
+		return false;
+		}
+   }
+   
    public function get_user()
    {
 	    $id = $this->session->userdata('logged_in')['account_id'];

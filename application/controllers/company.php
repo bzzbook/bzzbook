@@ -124,7 +124,30 @@ public function addcompany()
 	 endif;*/
 		
 	}
+	
+	public function cmp_follow($cmpinfo_id)
+	{
+		
+		 $data['companyinfo_id'] = $cmpinfo_id;
+		 $data['user_id'] = $this->session->userdata('logged_in')['account_id'];
+		 $data['follow_status'] = 'Y';
+	     $data['result'] = $this->companies->company_follow($data);
+		 $data['content']='my_companies';
+	     $this->load->view('template-view',$data);
+		
+	}
+public function cmp_unfollow($cmpinfo_id)
+	{ 
+		 $data['result'] = $this->companies->company_unfollow($cmpinfo_id);
+		 $data['content']='my_companies';
+	     $this->load->view('template-view',$data);
+		
+	}
+
+
 }
+
+
 
 
 ?>
