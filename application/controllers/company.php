@@ -74,7 +74,6 @@ public function addcompany()
 		
 	    $config['upload_path'] = './uploads/';
 		$config['allowed_types'] = 'gif|jpg|png';
-		$config['create_thumb'] = TRUE;
 		$config['max_size']	= '';
 		$config['max_width']  = '';
 		$config['max_height']  = '';
@@ -89,12 +88,12 @@ public function addcompany()
 		}
 		else
 		{
-			return true;	
+			$filedata = $this->upload->data();
+			$data['company_image'] = $filedata['file_name'];
 		
 		}
 	   
-		//$name = $this->upload->data();
-		$img_name = 'four.jpg';
+		
 	    $data['cmp_name'] = $this->input->post('cmp_name');
 		$data['cmp_industry'] = $this->input->post('cmp_industry');
 		$data['cmp_estb'] = $this->input->post('cmp_estb');
@@ -108,7 +107,6 @@ public function addcompany()
 		$data['company_phone'] = $this->input->post('company_phone');
 		$data['company_office'] = $this->input->post('company_office');
 		$data['company_fax'] = $this->input->post('company_fax');
-		$data['company_image'] = $img_name;
 		$data['user_id']= $this->session->userdata('logged_in')['account_id'];
 		
 		 $data['result'] = $this->companies->managecompanydata($data);

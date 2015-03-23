@@ -404,12 +404,12 @@
         <h4 class="modal-title" id="myModalLabel">Add Company</h4>
       </div>
       <div class="modal-body">
-         <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompany" >
+         <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompany" enctype="multipart/form-data" method="post">
               <figure class="pfpic"><span>Company Logo</span><div id="dvPreview" ><img width="146" height="159" id="blah" src="<?php echo base_url(); ?>images/cl_pic.png" alt=""></div></figure>
               <div class="upload"> <span class="btn btn-success fileinput-button"> <span>Add Logo</span> 
                 <!-- The file input field used as target for the file upload widget -->
                 
-                <input id="fileupload" type="file" name="userfile" multiple>
+                <input type="file" name="userfile" id="fileupload"/>
                 </span> </div>
                  
         <h4 class="clear">Company Info</h4>
@@ -554,7 +554,7 @@
                 <textarea class="form-control" name="company_address" id="company_address"></textarea>
               </div>
               <div class="filed col-md-6">
-                <select required="required" name="company_state" id="company_state" class="form-control">
+                <select required="required" name="company_state" id="company_state" class="form-control" onchange="print_state('state',this.selectedIndex);">
                             <option selected="selected" value="0">------- Select State --------</option>
                                                                 <option value="Alabama">Alabama</option>
                                                                 <option value="Alaska">Alaska</option>
