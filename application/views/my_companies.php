@@ -20,10 +20,10 @@
 <a href="#"><img src="<?php echo base_url(); ?>uploads/<?php echo $company->company_image  ?>" width="127" height="127" alt=""></a>
 </div>
                     <div class="col-md-7">
-                      <h4 class="clear"><?php echo $company->cmp_name ?></h4>
+                      <h4 class="clear"><?php echo ucfirst($company->cmp_name) ?></h4>
                       <p>Industry: <?php echo $company->cmp_industry ?></p>
                       <p>Established in: <?php echo $company->cmp_estb ?></p>
-                      <p>Employes on Bzzbook: <?php echo $company->cmp_colleagues ?></p>
+                      <p>No of Employees: <?php echo $company->cmp_colleagues ?></p>
                     </div>
                              
               </div>

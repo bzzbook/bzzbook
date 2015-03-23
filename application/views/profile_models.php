@@ -404,7 +404,7 @@
         <h4 class="modal-title" id="myModalLabel">Add Company</h4>
       </div>
       <div class="modal-body">
-         <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompany" enctype="multipart/form-data" method="post">
+         <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompany" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
               <figure class="pfpic"><span>Company Logo</span><div id="dvPreview" ><img width="146" height="159" id="blah" src="<?php echo base_url(); ?>images/cl_pic.png" alt=""></div></figure>
               <div class="upload"> <span class="btn btn-success fileinput-button"> <span>Add Logo</span> 
                 <!-- The file input field used as target for the file upload widget -->
@@ -415,7 +415,7 @@
         <h4 class="clear">Company Info</h4>
     
               <div class="filed col-md-6">
-                <input type="text" class="form-control" name="cmp_name" id="cmp_name" placeholder="Company Name">
+                <input type="text" class="form-control" required="required" name="cmp_name" id="cmp_name" placeholder="Company Name">
               </div>
               <div class="filed col-md-6">
                 <select class="form-control" name="cmp_industry" id="cmp_industry">
@@ -547,7 +547,7 @@
                 </select>
               </div>
                <div class="filed col-md-6">
-                <input type="text" class="form-control" name="cmp_colleagues" id="cmp_colleagues" placeholder="Employee">
+                <input type="text" class="form-control" required="required" name="cmp_colleagues" id="cmp_colleagues" placeholder="Employee">
               </div>
              <h4 class="clear">Address</h4>
               <div class="filed col-md-12">

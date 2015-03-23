@@ -579,7 +579,97 @@ function addgroup()
 		$("#grp_action").val('add');
 		$("#grpformerrors").html('');
 }
-
+function validateCompanyForm()
+{
+	var error_msg ='';
+	if(validatefileupload('fileupload'))
+	{
+	     error_msg +='';
+	}
+	else 
+	{
+	 	error_msg +="Please check file format\n";
+	}
+	if(isAlphaNum('cmp_name'))
+	{
+	     error_msg +='';
+	}
+	else 
+	{
+	 	error_msg +="Company Name Not Valid\n";
+	}
+	if(isSelected('cmp_industry'))
+	{
+	     error_msg +='';
+	}
+	else 
+	{
+	 	error_msg +="Please select industry type\n";
+	}
+	if(isSelected('cmp_estb'))
+	{
+	     error_msg +='';
+	}
+	else 
+	{
+	 	error_msg +="Please select an year when the company is established\n";
+	}
+	if(isNumber('cmp_colleagues'))
+	{
+	     error_msg +='';
+	}
+	else 
+	{
+	 	error_msg +="Please specify the no of employees in the company\n";
+	}
+	if(error_msg!='')
+	{
+	alert(error_msg);
+	return false
+	}
+	else
+	return true;
+	
+}
+function validatefileupload(file_id)
+{
+	var fup = document.getElementById(file_id);
+	var fileName = fup.value;
+	var ext = fileName.substring(fileName.lastIndexOf('.') + 1);
+	if(ext == "gif" || ext == "GIF" || ext == "JPEG" || ext == "jpeg" || ext == "jpg" || ext == "JPG" || ext == "doc")
+	{
+		return true;
+	} 
+	else
+	{
+		return false;
+	}
+}
+function isAlphaNum(field_id)
+{
+	var value = document.getElementById(field_id).value;
+	var Exp = /^[0-9a-z]+$/;
+	if(!value.match(Exp))
+	return false;
+	else
+	return true;
+}
+function isSelected(field_id)
+{
+	var value = document.getElementById(field_id).value;	
+	if(value==0)
+	return false;
+	else
+	return true;
+}
+function isNumber(field_id)
+{
+	var value = document.getElementById(field_id).value;	
+	if(isNaN(value))
+	return false;
+	else
+	return true;
+}
 $(function () {
     $("#fileupload").change(function () {
         $("#dvPreview").html("");
