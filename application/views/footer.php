@@ -1,3 +1,11 @@
+<?php
+$upload_path = "uploads/";				
+						
+$thumb_width = "150";						
+$thumb_height = "150";		
+
+?>
+
 <footer class="post">
   <ul>
     <li><a hrte>ABOUT US</a></li>
@@ -19,6 +27,7 @@ if(strpos($_SERVER['REQUEST_URI'],'company/my_companies') !== false) {
 ?>
 <script src="<?php echo base_url(); ?>js/animate-plus.min.js"></script> 
 <!--<script src="<?php //echo base_url(); ?>js/custom.js"></script>-->
+
 <script src="<?php echo base_url(); ?>js/jquery.validate.min.js"></script>
 <script src="<?php echo base_url(); ?>js/additional-methods.js"></script>
 <script src="<?php echo base_url(); ?>js/countries.js"></script>
@@ -819,6 +828,88 @@ function getconversations(msg_id,sent_by)
       });
     });
 </script>
+
+
+<script type="text/javascript" src="<?php echo base_url(); ?>cropimage/js/jquery.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>cropimage/js/jquery.form.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>cropimage/js/jquery.imgareaselect.js"></script>
+
+<script type="text/javascript" >
+    $(document).ready(function() {
+        $('#submitbtn').click(function() {
+            $("#viewimage").html('');
+            $("#viewimage").html('<img src="cropimage/images/loading.gif" />');
+            $(".uploadform").ajaxForm({
+            	url: '<?php echo base_url(); ?>profile/upload_thumb',
+                success:    showResponse 
+            });
+        });
+    });
+    
+    function showResponse(responseText, statusText, xhr, $form){
+		
+		
+	    if(responseText.indexOf('.')>0){
+			$('.crop_set_preview').show();
+			$('.crop_box').height(400);
+			$('#thumbviewimage').html('<img src="<?php echo base_url().$upload_path;?>'+responseText.trim()+'"   style="position: relative;" alt="Thumbnail Preview" />');
+	    	$('#viewimage').html('<img class="preview" alt="" src="<?php echo base_url().$upload_path; ?>'+responseText.trim()+'"   id="thumbnail" />');
+	    	$('#filename').val(responseText.trim()); 
+			$('#thumbnail').imgAreaSelect({  aspectRatio: '1:1', handles: true  , onSelectChange: preview });
+		}else{
+			$('#thumbviewimage').html(responseText.trim());
+	    	$('#viewimage').html(responseText.trim());
+		}
+    }
+    
+</script>
+
+<script type="text/javascript">
+function preview(img, selection) { 
+	var scaleX = <?php echo $thumb_width;?> / selection.width; 
+	var scaleY = <?php echo $thumb_height;?> / selection.height; 
+
+	$('#thumbviewimage > img').css({
+		width: Math.round(scaleX * img.width) + 'px', 
+		height: Math.round(scaleY * img.height) + 'px',
+		marginLeft: '-' + Math.round(scaleX * selection.x1) + 'px', 
+		marginTop: '-' + Math.round(scaleY * selection.y1) + 'px' 
+	});
+	
+	var x1 = Math.round((img.naturalWidth/img.width)*selection.x1);
+	var y1 = Math.round((img.naturalHeight/img.height)*selection.y1);
+	var x2 = Math.round(x1+selection.width);
+	var y2 = Math.round(y1+selection.height);
+	
+	$('#x1').val(x1);
+	$('#y1').val(y1);
+	$('#x2').val(x2);
+	$('#y2').val(y2);	
+	
+	$('#w').val(Math.round((img.naturalWidth/img.width)*selection.width));
+	$('#h').val(Math.round((img.naturalHeight/img.height)*selection.height));
+	
+} 
+
+$(document).ready(function () { 
+	$('#save_thumb').click(function() {
+		var x1 = $('#x1').val();
+		var y1 = $('#y1').val();
+		var x2 = $('#x2').val();
+		var y2 = $('#y2').val();
+		var w = $('#w').val();
+		var h = $('#h').val();
+		if(x1=="" || y1=="" || x2=="" || y2=="" || w=="" || h==""){
+			alert("Please Make a Selection First");
+			return false;
+		}else{
+			return true;
+		}
+	});
+}); 
+</script>
+
+
 <style>
 .form-mandatory{
 color:red;

@@ -307,18 +307,17 @@ class Profile_set extends CI_Model {
         return $this->db->insert_id();
   
 }
-/*public function add_pics($filename,$thumbnail,$img_fav)
+public function add_pics($filename)
 {
 	 $data = array(
-            'filename' => $filename,
-			'thumbnail' => $thumbnail,
-			'favorite' => $img_fav,
+            'image' => substr($filename,6),
+			'image_thumb' => $filename,
 			'user_id' => $this->session->userdata('logged_in')['account_id']
         );
-        $this->db->insert('images', $data);
+        $this->db->insert('bzz_user_uploads', $data);
         return $this->db->insert_id();
 	
-}*/
+}
 
 
 public function get_profile_pic()
@@ -393,10 +392,10 @@ public function get_my_pics()
 {
 	$id = $this->session->userdata('logged_in')['account_id'];
 	$condition = "user_id =" . "'" . $id . "'";
-	$this->db->select('user_img_name');
+	$this->db->select('*');
 	$this->db->where($condition);
-	$this->db->order_by("user_imageinfo_id", "desc");
-$query = $this->db->get('bzz_user_images','12');
+	$this->db->order_by("upload_id", "desc");
+$query = $this->db->get('bzz_user_uploads');
 if ($query->num_rows() > 0) {
 			return $query->result();
 		} else {
