@@ -10,6 +10,7 @@ $session_data = $this->session->userdata('logged_in');
 <title>BzzBook CREATE A BUZZ WITH YOUR BZZINESS</title>
 
 <!-- Bootstrap -->
+
 <link href="<?php echo base_url(); ?>css/bootstrap.min.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>css/animate.min.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>css/style.css" rel="stylesheet">
@@ -17,6 +18,7 @@ $session_data = $this->session->userdata('logged_in');
 <link href="<?php echo base_url(); ?>css/lightbox.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>css/uploadfile.css" rel="stylesheet">
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/jqtransform.css" type="text/css" media="all" />
+
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
