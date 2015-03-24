@@ -87,9 +87,9 @@ $thumb_height = "150";
      
        <?php if($data){  foreach($data as $image){ ?>
         <div class="view second-effect" >
-        <img src="<?php echo base_url();?>uploads/<?php echo $image->image_thumb; ?>" />
+        <img src="<?php echo base_url();?>uploads/<?php echo $image->image_thumb; ?>" width="137px" />
         <div class="mask">
-        <a href="<?php  echo base_url();?>uploads/<?php echo $image->image; ?>" class="info" data-lightbox="example-1" data-lightbox="my_photos">Read More</a>
+        <a href="<?php  echo base_url();?>uploads/<?php echo $image->image_thumb; ?>" class="info" data-lightbox="example-1" data-lightbox="my_photos">Read More</a>
         </div>
         </div>
         <?php  } } ?>
@@ -109,13 +109,11 @@ $thumb_height = "150";
         	<div class="col-md-6">
 <span>My Videos ( <?php // echo count($media); ?> 3 ) </span> 
 </div>  
-<div class="">
+<div class="btn1 btn-black fileinput-button"> <span>Change Picture</span> 
                 <!-- The file input field used as target for the file upload widget -->
-              <div id="uploadvideo">Upload</div>
-<div class="clear"></div>
-<div id="status1"></div>
-
-</div>
+             <input name="userfile" id="userfile" size="20" required="" type="file">
+                 
+                </div>
 <div class="clearfix"></div> 
 
         </div>

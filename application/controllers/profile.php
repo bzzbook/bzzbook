@@ -361,8 +361,8 @@ public function friends()
 	{
 		$upload_path = "uploads/";				
 						
-		$thumb_width = "150";						
-		$thumb_height = "150";	
+		$thumb_width = "600";						
+		$thumb_height = "600";	
 		if (isset($_POST["upload_thumbnail"])) {
 	
 			$filename = $_POST['filename'];

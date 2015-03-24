@@ -851,7 +851,7 @@ function getconversations(msg_id,sent_by)
 		
 	    if(responseText.indexOf('.')>0){
 			$('.crop_set_preview').show();
-			$('.crop_box').height(400);
+			$('.crop_box').height(350);
 			$('#thumbviewimage').html('<img src="<?php echo base_url().$upload_path;?>'+responseText.trim()+'"   style="position: relative;" alt="Thumbnail Preview" />');
 	    	$('#viewimage').html('<img class="preview" alt="" src="<?php echo base_url().$upload_path; ?>'+responseText.trim()+'"   id="thumbnail" />');
 	    	$('#filename').val(responseText.trim()); 
