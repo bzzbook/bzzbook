@@ -325,12 +325,12 @@ public function friends()
 		$preview_width = "360";
 		$preview_height = "270";
 
-		if ($_POST['submitbtn']=="Upload") {
+		if ($_POST['submitbtn']=="Upload" && isset($_FILES['imagefile'])) {
 		
 		 $name = $_FILES['imagefile']['name']; // filename to get file's extension
 		 $size = $_FILES['imagefile']['size'];
 		
-		 if (strlen($name)) {
+		 if (strlen($name)>0) {
 			$extension = substr($name, strrpos($name, '.')+1);
 			if (in_array($extension, $file_formats)) { // check it if it's a valid format or not
 				if ($size < (2048 * 1024)) { // check it if it's bigger than 2 mb or no
@@ -361,8 +361,8 @@ public function friends()
 	{
 		$upload_path = "uploads/";				
 						
-		$thumb_width = "150";						
-		$thumb_height = "150";	
+		$thumb_width = "600";						
+		$thumb_height = "600";	
 		if (isset($_POST["upload_thumbnail"])) {
 	
 			$filename = $_POST['filename'];

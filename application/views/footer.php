@@ -838,7 +838,7 @@ function getconversations(msg_id,sent_by)
     $(document).ready(function() {
         $('#submitbtn').click(function() {
             $("#viewimage").html('');
-            $("#viewimage").html('<img src="cropimage/images/loading.gif" />');
+            $("#viewimage").html('<img src="<?php echo base_url(); ?>cropimage/images/loading.gif" />');
             $(".uploadform").ajaxForm({
             	url: '<?php echo base_url(); ?>profile/upload_thumb',
                 success:    showResponse 
@@ -848,15 +848,15 @@ function getconversations(msg_id,sent_by)
     
     function showResponse(responseText, statusText, xhr, $form){
 		
-		
 	    if(responseText.indexOf('.')>0){
 			$('.crop_set_preview').show();
-			$('.crop_box').height(400);
+			$('.crop_box').height(350);
 			$('#thumbviewimage').html('<img src="<?php echo base_url().$upload_path;?>'+responseText.trim()+'"   style="position: relative;" alt="Thumbnail Preview" />');
 	    	$('#viewimage').html('<img class="preview" alt="" src="<?php echo base_url().$upload_path; ?>'+responseText.trim()+'"   id="thumbnail" />');
 	    	$('#filename').val(responseText.trim()); 
 			$('#thumbnail').imgAreaSelect({  aspectRatio: '1:1', handles: true  , onSelectChange: preview });
 		}else{
+			alert('please select file first');
 			$('#thumbviewimage').html(responseText.trim());
 	    	$('#viewimage').html(responseText.trim());
 		}
