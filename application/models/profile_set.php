@@ -318,7 +318,15 @@ public function add_pics($filename)
         return $this->db->insert_id();
 	
 }
-
+public function  add_user_videos($filename)
+{
+	$data = array(
+            'video_name' => $filename,
+			'user_id' => $this->session->userdata('logged_in')['account_id']
+        );
+        $this->db->insert('bzz_user_videos', $data);
+        return $this->db->insert_id();
+}
 
 public function get_profile_pic()
 {
@@ -402,33 +410,75 @@ if ($query->num_rows() > 0) {
 		return false;
 		}
 }
-/*
+
 public function get_my_videos()
 {
 	$id = $this->session->userdata('logged_in')['account_id'];
-	$condition = "user_id =" . "'" . $id . "'";
-	$this->db->select('videos');
+	$condition = "user_id =" . "'" . $id . "' AND video_name!=''";
+	$this->db->select('video_name');
 	$this->db->where($condition);
-	$this->db->order_by("img_info_id", "desc");
-$query = $this->db->get('images','2');
+	$this->db->order_by("video_id", "desc");
+$query = $this->db->get('bzz_user_videos');
 if ($query->num_rows() > 0) {
-			return $query->result();
+			return $query->result_array();
 		} else {
 		return false;
 		}
 }
-*/
+
 public function creategroup($grpname,$members)
 {
 	$id = $this->session->userdata('logged_in')['account_id'];
 
 	$data = array(
-   'grp_name' => $grpname ,
+   'group_name' => $grpname ,
    'user_id' => $id ,
-   'friends' => $members
+   'group_members' => $members
 );
-$this->db->insert('group_info', $data); 
+$this->db->insert('bzz_user_groups', $data); 
 $this->session->set_flashdata('group-add-msg', 'Group Created Successfully');
 }
+
+public function updategroup($group_id,$grpname,$members)
+{
+   $data = array(
+   'group_name' => $grpname ,
+   'group_members' => $members
+);
+$this->db->where('group_id',$group_id);
+$this->db->update('bzz_user_groups', $data); 
+$this->session->set_flashdata('group-add-msg', 'Group updated Successfully');
+}
+
+   public function get_user_groups()
+   {
+	    $id = $this->session->userdata('logged_in')['account_id'];
+	    $condition = "user_id =" . "'" . $id . "'";
+		$this->db->select('*');
+		$this->db->from('bzz_user_groups');
+		$this->db->where($condition);
+		$this->db->order_by("group_id");
+		$query = $this->db->get();
+		if ($query->num_rows() > 0) {
+			return $query->result_array();
+		} else {
+		return false;
+		}
+   }
+   
+	public function get_group_byid($group_id)
+   {
+	    $id = $this->session->userdata('logged_in')['account_id'];
+	    $condition = "group_id =" . "'" . $group_id . "'";
+		$this->db->select('*');
+		$this->db->from('bzz_user_groups');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		if ($query->num_rows() > 0) {
+			return $query->result_array();
+		} else {
+		return false;
+		}
+   }
 }
 ?>
