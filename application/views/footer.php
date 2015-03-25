@@ -355,7 +355,13 @@ var pass=$('#pwd').val();
 			}
         }
        });
+
 }
+ $('#profile_interchange').change(function(){
+     id = $(this).val();
+	 url="<?php echo base_url(); ?>company/company_disp/"+id;
+	 window.location.replace(url);
+	});
 </script>
 <!-- <script type="text/javascript">
 		$( document ).ready(function() {

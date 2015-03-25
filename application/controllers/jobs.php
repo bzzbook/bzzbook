@@ -10,8 +10,10 @@ class Jobs extends CI_Controller {
 	public function index()
 	{
 	$this->load->model('jobmodel');
+	$id = $this->session->userdata('cmp_session')['cmp_id'];
+	$data['cmp_info'] =  $this->companies->get_cmp_by_id($id); 
     $data['content']='create_jobs';
-	$this->load->view('template-view',$data);
+	$this->load->view('cmp-template-view',$data);
 	}
 	
 	public function create_job()

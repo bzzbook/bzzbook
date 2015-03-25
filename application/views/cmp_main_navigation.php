@@ -10,7 +10,7 @@
             <li> <a  href="#">Company Profile</a></li>
             <li> <a  href="#">Company Info</a></li>
             <li> <a  href="#">Post Board</a></li>
-            <li> <a  href="#">Jobs</a></li>
+            <li> <a  href="<?php echo base_url(); ?>jobs">Jobs</a></li>
             <li> <a  href="#">Events</a></li>
             <li> <a  href="#">Followers</a></li>
           </ul>
