@@ -96,7 +96,7 @@
 				  			$companies = $this->jobmodel->getCompanies();	
 							foreach($companies as $company)
 							{
-								echo "<option value='".$company['comp_id']."'>".$company['company_name']."</option>";
+								echo "<option value='".$company['companyinfo_id']."'>".$company['cmp_name']."</option>";
 							}
 				   ?></select>
                   </span> </div>
