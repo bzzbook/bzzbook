@@ -450,10 +450,13 @@ $this->db->update('bzz_user_groups', $data);
 $this->session->set_flashdata('group-add-msg', 'Group updated Successfully');
 }
 
-   public function get_user_groups()
+   public function get_user_groups($searchinput='')
    {
 	    $id = $this->session->userdata('logged_in')['account_id'];
+		if(empty($searchinput))
 	    $condition = "user_id =" . "'" . $id . "'";
+		else
+		$condition = "user_id =" . "'" . $id . "' AND group_name LIKE '%".$searchinput."%'";
 		$this->db->select('*');
 		$this->db->from('bzz_user_groups');
 		$this->db->where($condition);
@@ -480,5 +483,15 @@ $this->session->set_flashdata('group-add-msg', 'Group updated Successfully');
 		return false;
 		}
    }
+   
+   public function delete_group($group_id)
+   {
+	   $this->db->delete('bzz_user_groups', array('group_id' => $group_id)); 
+	   $this->session->set_flashdata('group-add-msg', 'Group deleted Successfully');
+	   redirect('profile/groups');
+
+	   
+   }
 }
+
 ?>

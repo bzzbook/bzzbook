@@ -515,7 +515,6 @@ function blockFrnd(id)
 }
 function saveGroup()
 {
-	alert('hii');
 	var list_of_members ='';
 	var name = $('#grpname').val();
 	 $('#select-to option').each( function() {
@@ -540,7 +539,6 @@ function saveGroup()
 
 function updateGroup(group_id)
 {
-	alert('hii');
 	var list_of_members ='';
 	var name = $('#grpname').val();
 	 $('#select-to option').each( function() {
@@ -563,6 +561,26 @@ function updateGroup(group_id)
 		
 }
 
+/*function searchgroups()
+{
+	alert('hi');
+	url="<?php echo base_url(); ?>profile/groups/";
+		$.ajax({
+        type: "POST",
+        url: url,
+        success: function(data)
+        {   
+			alert('hi');
+			//var redirect_url = "<?php echo base_url(); ?>"+'profile/groups';
+			//window.location.replace(redirect_url);
+		},
+		cache: false
+		});
+}*/
+function searchformsubmit()
+{
+	document.getElementById("groupssearchform").submit();
+}
 function addeducation()
 {
 	$("input[name=field_of_study]").val('');

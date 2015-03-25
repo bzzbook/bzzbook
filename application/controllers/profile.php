@@ -75,6 +75,7 @@ public function events()
 }
 public function groups()
 {
+	
 	$data['content']='groups';
 	$this->load->view('template-view',$data);
 	//$this->load->view('groups');
@@ -85,7 +86,12 @@ public function edit_group($group_id)
 	$data['content']='edit_group';
 	$this->load->view('template-view',$data);
 }
-  public function jobs()
+public function delete_group($group_id)
+{
+	$this->profile_set->delete_group($group_id);
+}
+
+public function jobs()
 {
 	$data['content']='jobs';
 	$this->load->view('template-view',$data);
