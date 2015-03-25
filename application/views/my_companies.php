@@ -43,7 +43,7 @@ $result1 = $this->companies->following_companies_list();
                     <div class="col-md-7">
                       <h4 class="clear"><?php echo $company['cmp_name'] ?></h4>
                       <p>Industry: <?php echo $company['cmp_industry'] ?></p>
-                      <p>Established in: <?php $unixTimestamp = strtotime($cmp_info[0]['cmp_estb']); echo date('F',$unixTimestamp).", ".date('Y',$unixTimestamp); ?></p>
+                      <p>Established in: <?php $unixTimestamp = strtotime($company['cmp_estb']); echo date('F',$unixTimestamp).", ".date('Y',$unixTimestamp); ?></p>
                       <p>Employes on Bzzbook: <?php echo $company['cmp_colleagues'] ?></p>
                     </div>
                     <div class="clear"></div>
