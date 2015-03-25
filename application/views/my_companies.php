@@ -26,7 +26,7 @@ $result1 = $this->companies->following_companies_list();
                     <div class="col-md-7">
                       <h4 class="clear"><?php echo ucfirst($company->cmp_name) ?></h4>
                       <p>Industry: <?php echo $company->cmp_industry ?></p>
-                      <p>Established in: <?php echo $company->cmp_estb ?></p>
+                      <p>Established in: <?php $unixTimestamp = strtotime($company->cmp_estb); echo date('F',$unixTimestamp).", ".date('Y',$unixTimestamp); ?></p>
                       <p>No of Employees: <?php echo $company->cmp_colleagues ?></p>
                     </div>
                              
@@ -38,16 +38,16 @@ $result1 = $this->companies->following_companies_list();
                <?php if($result1) { foreach($result1 as $company): ?>
               <div class="companyFollow col-md-12">
                <div class="col-md-4 im">
-<a href="#"><img src="<?php echo base_url(); ?>uploads/<?php echo $company['company_image'] ?>"  width="127" height="127" alt=""></a>
+<a href="<?php echo base_url("company/company_disp/".$company['companyinfo_id']) ?>"><img src="<?php echo base_url(); ?>uploads/<?php echo $company['company_image'] ?>"  width="127" height="127" alt=""></a>
 </div>
                     <div class="col-md-7">
                       <h4 class="clear"><?php echo $company['cmp_name'] ?></h4>
                       <p>Industry: <?php echo $company['cmp_industry'] ?></p>
-                      <p>Established in: <?php echo $company['cmp_estb'] ?></p>
+                      <p>Established in: <?php $unixTimestamp = strtotime($company['cmp_estb']); echo date('F',$unixTimestamp).", ".date('Y',$unixTimestamp); ?></p>
                       <p>Employes on Bzzbook: <?php echo $company['cmp_colleagues'] ?></p>
                     </div>
                     <div class="clear"></div>
-                <div class="col-md-6 col-md-push-7"> <a class="btn btn-info black" href="#">view Profile</a>
+                <div class="col-md-6 col-md-push-7"> <a class="btn btn-info black" href="<?php echo base_url("company/company_disp/".$company['companyinfo_id']) ?>">view Profile</a>
                  <a class="btn btn-info gray" href="<?php echo base_url("company/cmp_unfollow/".$company['companyinfo_id']) ?>">unfollow</a> </div>
               </div>
               

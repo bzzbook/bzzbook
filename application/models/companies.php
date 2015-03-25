@@ -213,5 +213,18 @@ public function get_mn_cmp_list()
 		}
    
 	}
+	
+	public function get_cmp_by_id($id)
+	{
+		$condition = "companyinfo_id =" . "'" . $id . "'";
+		$this->db->select('*');
+		$this->db->from('bzz_companyinfo');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		if($query->num_rows()>0)
+		{
+			return $query->result_array();
+		}
+	}
 }
 ?>

@@ -18,7 +18,7 @@ input:focus, textarea:focus, input[type="text"]:focus { outline: 0; }
 input:-moz-placeholder, textarea:-moz-placeholder {color: #bebebe;}
 input:-ms-input-placeholder, textarea:-ms-input-placeholder {color: #bebebe;}
 input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {color: #bebebe;}
-a:hover, a:active, a:focus, input:focus, button:focus { outline: 0;  text-decoration: none; }
+a:hover, a:active, a:focus, input:focus, button:focus { outline: 0;  text-decoration: none;}
 
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900);
 
@@ -344,21 +344,21 @@ footer.home h3 em{ color:#fdc70f; font-style:normal;}
 .black:hover{background:#000; }
 .jobsSt h2{ background:url(../images/sideNav.png) no-repeat 0 -87px; padding:0 0 0 35px; height:42px; line-height:42px; font-size:18px;  }
 
-.jobProperty{ padding:10px; background:#f9f9f9; border-top:1px solid #ccc;   }
+.jobProperty:first-child{ padding:10px; border:1px solid #e9e9e9; margin:10px 0; position:relative;color: #ffffff; }
 .jobProperty .jobBlock{ float:left; padding:0 20px 0 10px; width:30%;}
 .jobProperty .jobBlock+.jobBlock{ width:30%;}
 .jobProperty .jobBlock+.jobBlock+.jobBlock{ width:20%;}
 .jobProperty .jobBlock+.jobBlock+.jobBlock+.jobBlock{ width:20%;}
-.jobProperty .jobBlock h3{ font-size:12px; font-weight:bold; color:#9e9d9d;  }
+.jobProperty .jobBlock h3{ font-size:12px; font-weight:bold; color:#9e9d9d;}
 .jobProperty .jobBlock p{ color:#696969; }
 .jobProperty .jobBlock a{ line-height:30px; display:block; float:left; color:#000; margin-left:20px; }
 
-.EventProperty{ padding:10px; background:#f9f9f9; border-top:1px solid #ccc;   }
+.EventProperty:first-child{ padding:10px; border-top:1px solid #ccc;  background: none repeat scroll 0 0 #333333; color: #ffffff; }
 .EventProperty .EventBlock{ float:left; padding:0 20px 0 10px; width:30%;}
 .EventProperty .EventBlock+.EventBlock{ width:30%;}
 .EventProperty .EventBlock+.EventBlock+.EventBlock{ width:20%;}
 .EventProperty .EventBlock+.jobBlock+.jobBlock+.jobBlock{ width:20%;}
-.EventProperty .EventBlock h3{ font-size:12px; font-weight:bold; color:#9e9d9d;  }
+.EventProperty .EventBlock h3{ font-size:12px; font-weight:bold; color:#9e9d9d; }
 .EventProperty .EventBlock p{ color:#696969; }
 .EventProperty .EventBlock a{ line-height:30px; display:block; float:left; color:#000; margin-left:20px; }
 
@@ -383,8 +383,8 @@ footer.home h3 em{ color:#fdc70f; font-style:normal;}
 
 /*Create Jobs*/
 .createjob p{  font-family: 'Roboto', sans-serif; background:url(../images/creatbg.png)  no-repeat 0 3px; font-size:15px; line-height:20px; color:#121313; padding:0 0 0 22px;}
-.createjob span{ font-family: 'Roboto', sans-serif; font-size:15px; color:#121313; display:block; padding-top:3px;}
-.createjob samp{ font-family: 'Roboto', sans-serif; font-size: larger; color:#6a6a6b;}
+.createjob span{ font-family: 'Roboto', sans-serif; font-size:14px; color:#6a6a6b; display:block; padding:5px 0; border-bottom:1px dashed #dbdbdb;}
+.createjob samp{ font-family: 'Roboto', sans-serif; font-size: 15px; color:#121313; margin-right:5px;}
 .createbutton{ background:#fbc436 !important; margin-left:10px; margin-top:5px; font-size:16px; color:#fff; font-weight:400; line-height:32px; padding:0 15px; display:inline-block; -webkit-border-radius: 3px 3px 3px 3px; border-radius: 3px 3px 3px 3px;  border:none !important;}
 .createjobs{ font-size:15px !important; line-height:20px; color:#121313; padding:0 0 0 22px; background:none !important; padding-top:30px !important;}
 
@@ -585,7 +585,7 @@ border-top-right-radius: 5px; }
 .company .visitorBox .visitiBoxInner .compCover img{ width:100%; }
 .company .visitorBox .visitiBoxInner .companyDetails{ position:absolute; top:0; width:100%;}
 .company .visitorBox .visitiBoxInner .companyDetails .cmplogo{ display:flex;}
-.company .visitorBox .visitiBoxInner .companyDetails .cmplogo img{ width:100%;}
+.company .visitorBox .visitiBoxInner .companyDetails .cmplogo img{ width:100%; height:165px;}
 .company .visitorBox .visitiBoxInner .companyDetails .cmplogo { border: 1px solid #868686; display: flex; margin: 68px 7px 0 0; padding: 6px;}
 .company .visitorBox .visitiBoxInner .companyDetails .cmpContent{ padding:70px 0 0 25px;}
 .company .visitorBox .visitiBoxInner .companyDetails .cmpContent h2{ color:#fff; font-size:20px; text-transform:uppercase; padding-bottom:15px;}
@@ -605,11 +605,18 @@ border-top-right-radius: 5px; }
 .compCover::before { background: none repeat scroll 0 0 #000;  content: "";  height: 100%;  position: absolute;  width: 100%; opacity:0.6;}
 .company .coloumn1 aside, .company .coloumn2 .updateStatus{border-top:1px solid #e9e9e9;}
 
+.jobDetailsBtn{ bottom: 16px;  display: block;  font-size: 13px;  position:relative; margin:26px 0 0 0;  background: none repeat scroll 0 0 #fbc436;
+    border-radius: 2px;
+    color: #fff;
+    display: inline-block;
+    font-size: 11px;
+    height: 25px;
+    line-height: 25px;
+    padding: 0 10px; background:#000; hover :#3FF; cursor:pointer;}
+.jobDetailsBtn:hover{color:#fff; background:#609b34;}
+.jobDetailsBtn:hover, .jobDetailsBtn:focus{color:#fff;}
+.jobDetails{}
 
-
-
-
-=======
 .btn1{
 display: inline-block;
 margin-bottom: 0px;
@@ -628,7 +635,7 @@ border-radius: 4px;
 float:right;
 margin-right:10px;
 }
->>>>>>> 98d434bca6e39c4e63fbbc8f790a5f0820bc6d1c
+
 
 
 

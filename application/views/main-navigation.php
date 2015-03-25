@@ -21,7 +21,7 @@
           </ul>
           <div class="pull-right viewAs">
             <p>Viewing as:</p>
-            <select class="form-control" >
+            <select class="form-control" id="profile_interchange" >
               <optgroup label="Your Personal profile">
               <option value="<?php echo $result[0]['user_id']?>"><?php echo $name ?></option>
               </optgroup>

@@ -22,7 +22,7 @@ $videos = $this->profile_set->get_my_videos();
       <div class="posts">
         <div class="tabBar form-group" style="padding-bottom:10px">
         	<div class="col-md-6">
-<span>My Photos ( <?php  echo count($data); ?> ) </span> 
+<span>My Photos ( <?php if($data) echo count($data); else echo " Photos not uploaded ";  ?> ) </span> 
 </div>  
 <?php /*?> <?php $attr = array('id' => 'upload_pics', 'name' => 'upload_pics'); ?> 
  <?php echo form_open_multipart('customer/do_upload',$attr);?>
@@ -107,7 +107,7 @@ $videos = $this->profile_set->get_my_videos();
       <div class="posts">
         <div class="tabBar form-group"  style="padding-bottom:10px">
         	<div class="col-md-6">
-<span>My Videos ( <?php // echo count($media); ?> 3 ) </span> 
+<span>My Videos ( <?php if($videos) echo count($videos); else echo " Videos not uploaded "; ?> ) </span> 
 </div>  
 <div class="btn1 btn-black fileinput-button"> <span>Upload Video</span> 
                 <!-- The file input field used as target for the file upload widget -->
