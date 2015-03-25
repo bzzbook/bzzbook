@@ -577,6 +577,36 @@ border-top-right-radius: 5px; }
 
 
 
+/*Company*/
+.company .cmpLeft{ padding:0;}
+.company .visitorBox .visitiBoxInner{ padding:5px; background:#f9f8f8; margin:15px 0; border:1px solid #e9e9e9; position:relative; }
+.company .visitorBox .visitiBoxInner .compCover{ width:100%; height:300px; overflow:hidden; position:relative;}
+.company .visitorBox .visitiBoxInner .compCover img{ width:100%; }
+.company .visitorBox .visitiBoxInner .companyDetails{ position:absolute; top:0; width:100%;}
+.company .visitorBox .visitiBoxInner .companyDetails .cmplogo{ display:flex;}
+.company .visitorBox .visitiBoxInner .companyDetails .cmplogo img{ width:100%;}
+.company .visitorBox .visitiBoxInner .companyDetails .cmplogo { border: 1px solid #868686; display: flex; margin: 68px 7px 0 0; padding: 6px;}
+.company .visitorBox .visitiBoxInner .companyDetails .cmpContent{ padding:70px 0 0 25px;}
+.company .visitorBox .visitiBoxInner .companyDetails .cmpContent h2{ color:#fff; font-size:20px; text-transform:uppercase; padding-bottom:15px;}
+.company .visitorBox .visitiBoxInner .companyDetails .cmpContent h2 span{ margin:0 10px 0 0; position:relative; top:3px;}
+.company .visitorBox .visitiBoxInner .companyDetails .cmpContent p{ color:#fff; font-size:16px; padding-bottom:15px;}
+.company .visitorBox .visitiBoxInner .companyDetails .cmpContent p span{ display:block; }
+.company .visitorBox .visitiBoxInner .companyDetails .cmpContent .smg{ display:inline-block; font-size:14px; color:#fff; background:#609b34; padding:10px 20px; -webkit-border-radius:2px; border-radius:2px; border:none;}
+.company .visitorBox .visitiBoxInner .companyDetails .cmpContent .follow{ display:inline-block; font-size:14px; color:#fff; background:#fbc436; padding:10px 20px; -webkit-border-radius:2px; border-radius:2px; border:none; margin-left:10px;}
+
+#companyPf header{ border-top:6px solid #000;}
+#companyPf .mainNav{ background:url(../images/nav_bg_cmp.jpg) repeat-x 0 0;}
+#companyPf .mainNav nav ul li a{ color:#000;}
+#companyPf .mainNav nav ul li a:hover{background:#000; color:#fff;}
+#companyPf .mainNav nav .viewAs p{ color:#000;}
+#companyPf .mainNav nav .viewAs select{ background:#fff;}
+
+.compCover::before { background: none repeat scroll 0 0 #000;  content: "";  height: 100%;  position: absolute;  width: 100%; opacity:0.6;}
+.company .coloumn1 aside, .company .coloumn2 .updateStatus{border-top:1px solid #e9e9e9;}
+
+
+
+
 
 
 

@@ -136,14 +136,22 @@ public function addcompany()
 	     $this->load->view('template-view',$data);
 		
 	}
-public function cmp_unfollow($cmpinfo_id)
+		public function cmp_unfollow($cmpinfo_id)
 	{ 
 		 $data['result'] = $this->companies->company_unfollow($cmpinfo_id);
 		 $data['content']='my_companies';
 	     $this->load->view('template-view',$data);
 		
 	}
-
+	public function company_disp()
+	{
+		/*$id = $cmpinfo_id;
+		echo $id;*/
+		$data['content']='cmp_posts';
+	    $this->load->view('cmp-template-view',$data);
+		
+		
+	}
 
 }
 
