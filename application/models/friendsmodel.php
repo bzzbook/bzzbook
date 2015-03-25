@@ -175,11 +175,23 @@ class Friendsmodel extends CI_Model {
 			 echo $list;
 		
 	}
-	
-	
-	public function get_frnds_frnds()
+	public function get_userinfo_byid($user_id)
 	{
-		$id = $this->session->userdata('logged_in')['account_id'];
+		$condition = "user_id =" . "'" . $user_id . "'";
+		$this->db->select('*');
+		$this->db->from('bzz_userinfo');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		if($query->num_rows()>0)
+		{
+			return $result = $query->result_array();
+		}
+	return false;
+	}
+	
+	public function get_frnds_frnds($id)
+	{
+		//$id = $this->session->userdata('logged_in')['account_id'];
 		$condition = "user_id =" . "'" . $id . "'";
 		$this->db->select('friend_id');
 		$this->db->from('bzz_userfriends');

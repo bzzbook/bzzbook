@@ -79,6 +79,12 @@ public function groups()
 	$this->load->view('template-view',$data);
 	//$this->load->view('groups');
 }
+public function edit_group($group_id)
+{
+	$data['group_id'] = $group_id;
+	$data['content']='edit_group';
+	$this->load->view('template-view',$data);
+}
   public function jobs()
 {
 	$data['content']='jobs';
@@ -357,6 +363,10 @@ public function friends()
 	{
 		$this->profile_set->creategroup($_POST['grp_name'],$_POST['members']);
 	}
+	public function updategroup()
+	{
+		$this->profile_set->updategroup($_POST['group_id'],$_POST['grp_name'],$_POST['members']);
+	}
 	public function upload_profile_thumb()
 	{
 		$upload_path = "uploads/";				
@@ -426,6 +436,31 @@ public function friends()
 	$this->profile_set->add_pics($filename);
 	return $thumb_image_name;
 	}
+	public function add_video(){
+        if (isset($_FILES['userfile']['name']) && $_FILES['userfile']['name'] != '') {
+            unset($config);
+            $date = date("ymd");
+            $configVideo['upload_path'] = 'uploads/';
+            $configVideo['max_size'] = '102400';
+            $configVideo['allowed_types'] = 'mp4|ogg|ogv|wmv';
+            $configVideo['overwrite'] = FALSE;
+            $configVideo['remove_spaces'] = TRUE;
+            $video_name = $date.$_FILES['userfile']['name'];
+            $configVideo['file_name'] = $video_name;
+
+            $this->load->library('upload', $configVideo);
+            $this->upload->initialize($configVideo);
+            if (!$this->upload->do_upload('userfile')) {
+                echo $this->upload->display_errors();
+            } else {
+                $videoDetails = $this->upload->data();
+				if($this->profile_set->add_user_videos($video_name))
+                echo "Successfully Uploaded";
+				else
+				return false;
+            }
+        }
+}
 
 }
 

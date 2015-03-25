@@ -1,5 +1,5 @@
 <?php $friends = $this->friendsmodel->getfriends(); 
-      $friends_of_friends_list = $this->friendsmodel->get_frnds_frnds();
+      
 ?>
 <section class="col-lg-6 col-md-6 col-sm-5 col-xs-12 coloumn2 groupsSt">
   <h2>My friends</h2>
@@ -24,7 +24,7 @@
         	<figure class="pfpic"><img alt="<?php echo base_url();?>uploads/<?php echo $frnd['image'] ?>" src="<?php echo base_url();?>uploads/<?php echo $frnd['image'] ?>" ></figure>
             <div class="friendInfo">
             	<h4><?php echo $frnd['name']?></h4>
-                <span>( <?php  echo count($friends_of_friends_list); ?> friends)</span>
+                <span>( <?php $friendscount = $this->friendsmodel->get_frnds_frnds($frnd['id']); if($friendscount) echo count($friendscount); else echo '0' ;?> friends)</span>
                 <div class="select">
                 	<select>
                     	<option>Friends</option>

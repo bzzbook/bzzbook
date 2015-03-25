@@ -14,7 +14,7 @@ $thumb_height = "150";
 
 <?php 
  $data = $this->profile_set->get_my_pics(); 
-//$media = $this->profile_set->get_my_videos();
+$videos = $this->profile_set->get_my_videos();
 ?>
 
 <section class="col-lg-6 col-md-6 col-sm-5 col-xs-12 coloumn2 groupsSt">
@@ -109,25 +109,44 @@ $thumb_height = "150";
         	<div class="col-md-6">
 <span>My Videos ( <?php // echo count($media); ?> 3 ) </span> 
 </div>  
-<div class="btn1 btn-black fileinput-button"> <span>Change Picture</span> 
+<div class="btn1 btn-black fileinput-button"> <span>Upload Video</span> 
                 <!-- The file input field used as target for the file upload widget -->
+              <form action="" class="uploadvideoform" method="post" enctype="multipart/form-data">
              <input name="userfile" id="userfile" size="20" required="" type="file">
-                 
+             </form>    
                 </div>
 <div class="clearfix"></div> 
 
         </div>
         
     <div class="groupEditBlock">
-    <?php //  foreach($media as $video){ ?>
+    <?php  if($videos){ foreach($videos as $video){ ?>
+    
+    <?php $extension = substr($video['video_name'], strrpos($video['video_name'], '.')+1); 
+		  if($extension=='wmv'){
+	?>
+    <OBJECT id="mediaPlayer" classid='CLSID:22D6F312-B0F6-11D0-94AB-0080C74C7E95' width="150"
+        height="150" type="application/x-oleobject">
+        <param name='src' value="<?php  echo base_url();?>uploads/<?php  echo $video['video_name']; ?>">		
+	<param name="showcontrols" VALUE="true">
+	<param name="showstatusbar" value="true">
+	<param name="showdisplay" VALUE="false">
+        <param name='autostart' value="true">
+        <param name='loop' value="true">
+        <EMBED type="application/x-mplayer2" src="<?php  echo base_url();?>uploads/<?php  echo $video['video_name']; ?>" width="150" height="150"
+        autostart="false" showcontrols="true" showstatusbar="true" showdisplay="false" loop="true" 
+        name="mediaPlayer" pluginspage="http://microsoft.com/windows/mediaplayer/en/download/">
+        </EMBED>
+        </OBJECT>
+    <?php } else {?>
     <video width="150" height="150" controls="" style="margin-left:20px">
-  <source src="<?php  //echo base_url();?>videos/<?php // echo $video->videos; ?>" type="video/mp4" >
- <!-- <source type="video/mp4" src="http://bzzbook.com/videos/intro.mp4"></source>
+  <source src="<?php  echo base_url();?>uploads/<?php  echo $video['video_name']; ?>" type="video/mp4" >
+   <!-- <source type="video/mp4" src="http://bzzbook.com/videos/intro.mp4"></source>
 <source type="video/ogg" src="http://bzzbook.com/videos/intro.ogv"></source> -->
 </video>
 <!-- <img alt="" src="images/pf_pic.png" width="125" height="135" style="margin-left:20px"></figure><span></span> -->
     
-    <?php // } ?>
+    <?php  } } }?>
     <div class="clear"></div>
     </div>
       </div>

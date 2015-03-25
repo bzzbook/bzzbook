@@ -397,7 +397,7 @@ function view_comments(id){
 }
 
 
-$(document).ready(function() {
+
  
     $('#grp_add').click(function(){
         $('#select-from option:selected').each( function() {
@@ -412,7 +412,6 @@ $(document).ready(function() {
         });
     });
  
-});
 
  // ajax call for get friends list on add group button click
 /*
@@ -516,6 +515,7 @@ function blockFrnd(id)
 }
 function saveGroup()
 {
+	alert('hii');
 	var list_of_members ='';
 	var name = $('#grpname').val();
 	 $('#select-to option').each( function() {
@@ -531,6 +531,31 @@ function saveGroup()
         success: function(data)
         {   
 			var redirect_url = "<?php echo base_url(); ?>"+'profile/addgroup';
+			window.location.replace(redirect_url);
+		},
+		cache: false
+		});
+		
+}
+
+function updateGroup(group_id)
+{
+	alert('hii');
+	var list_of_members ='';
+	var name = $('#grpname').val();
+	 $('#select-to option').each( function() {
+		 	 list_of_members += $(this).val()+",";
+        });
+		list_of_members = list_of_members.substring(0, list_of_members.length - 1);
+		
+		url="<?php echo base_url(); ?>profile/updategroup/";
+		$.ajax({
+        type: "POST",
+        url: url,
+		data: { grp_name: name,members: list_of_members,group_id:group_id} ,
+        success: function(data)
+        {   
+			var redirect_url = "<?php echo base_url(); ?>"+'profile/groups';
 			window.location.replace(redirect_url);
 		},
 		cache: false
@@ -845,7 +870,7 @@ function getconversations(msg_id,sent_by)
             });
         });
     });
-    
+  
     function showResponse(responseText, statusText, xhr, $form){
 		
 	    if(responseText.indexOf('.')>0){
@@ -861,7 +886,23 @@ function getconversations(msg_id,sent_by)
 	    	$('#viewimage').html(responseText.trim());
 		}
     }
-    
+      $(document).ready(function() {
+        $('#userfile').change(function() {
+			$(".uploadvideoform").ajaxForm({
+            	url: '<?php echo base_url(); ?>profile/add_video',
+                success:    showVideoResponse 
+            }).submit();
+        });
+    });
+	function showVideoResponse(responsetxt)
+	{
+		if(responsetxt)
+		{
+		    alert(responsetxt);
+		    var redirect_url = "<?php echo base_url(); ?>"+'profile/my_photos';
+			window.location.replace(redirect_url);
+		}
+	}
 </script>
 
 <script type="text/javascript">

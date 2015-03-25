@@ -1,3 +1,6 @@
+<?php 
+$groups = $this->profile_set->get_user_groups();
+?>
 <section class="col-lg-6 col-md-6 col-sm-5 col-xs-12 coloumn2 groupsSt">
       <h2>Groups</h2>
       <div class="posts">
@@ -34,25 +37,27 @@
         
         <div class="clearfix"></div>
     </div>
+    <?php if($groups){ foreach($groups as $group){ ?>
     <div class="groupProperty">
         <div class="groupBlock">
       
-        <p>Social</p>
+        <p><?php echo $group['group_name']; ?></p>
         </div>
         <div class="groupBlock">
        
-        <p>2</p>
+        <p><?php echo count(explode(',',$group['group_members'])); ?></p>
         </div>
         <div class="groupBlock">
       
-        <p>18/02/2015</p>
+        <p><?php echo date('Y-m-d', strtotime($group['date_created']));?></p>
         </div>
          <div class="groupBlock pull-right">
-        <a href="#" class="link glyphicon glyphicon-pencil"></a>
-        <a href="#" class="link glyphicon glyphicon-remove"></a>
+        <a href="<?php echo base_url().'profile/edit_group/'.$group['group_id']?>" class="link glyphicon glyphicon-pencil"></a>
+        <a href="<?php echo base_url().'profile/delete_group/'.$group['group_id']?>" class="link glyphicon glyphicon-remove"></a>
         </div>
         <div class="clearfix"></div>
     </div>
+    <?php } }?>
     </div>
         
         
