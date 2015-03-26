@@ -1,4 +1,4 @@
-<!-------------------------- Education Modal Sta --------------->
+<!-------------------------- Education Modal Start --------------->
 
 
   <div class="filed col-md-12 col-lg-12">
