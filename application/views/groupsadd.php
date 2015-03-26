@@ -7,8 +7,9 @@
 </div>
             <div class="col-md-6 pull-right">
 <div class="input-group">
-          <input type="text" placeholder="Search Groups" id="exampleInputAmount" class="form-control">
-          <div class="input-group-addon glyphicon glyphicon-search"></div>
+ <form action="<?php echo base_url().'profile/groups'; ?>" method="post" id="groupssearchform" >
+          <input type="text" placeholder="Search Groups" id="seachgroupsinput" name="seachgroupsinput" class="form-control">
+          </form>          <div class="input-group-addon glyphicon glyphicon-search" onclick="searchformsubmit();"></div>
         </div>
 </div>  
 <div class="clearfix"></div>
