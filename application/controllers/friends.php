@@ -29,6 +29,14 @@ public function blockrequest($id)
 {
 	$data['friends'] = $this->friendsmodel->blockfriend($id);	
 }
+public function movefriend($frndid,$groupid)
+{
+	$this->load->model('friendsmodel');
+	if($this->friendsmodel->appendFriend($frndid,$groupid))
+	echo 'Friend Added to the group';
+	else 
+	return false;
+}
 
 
 

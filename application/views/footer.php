@@ -1006,6 +1006,20 @@ $('#addJobForm').submit( function( event){
         var expr = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
         return expr.test(email);
     };
+	
+	function movetogroup(userid,selectedvalue)
+	{
+		if(selectedvalue!=0)
+		{
+		url="<?php echo base_url(); ?>friends/movefriend/"+userid+'/'+selectedvalue;
+					$.post( url )
+					.done(function( data ) {
+						if(data)
+						alert(data);
+						
+					});
+		}
+	}
 </script>
 
 

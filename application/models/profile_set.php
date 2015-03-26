@@ -330,13 +330,16 @@ public function  add_user_videos($filename)
 
 public function get_profile_pic()
 {
-$this->db->order_by("user_imageinfo_id", "desc");
-$query = $this->db->get('bzz_user_images','1');
-if ($query->num_rows() > 0) {
-			return $query->result();
-		} else {
-		return false;
-		}
+	$user_id = $this->session->userdata('logged_in')['account_id'];
+	$condition = "user_id ='".$user_id."'";
+	$this->db->where($condition);
+	$this->db->order_by("user_imageinfo_id", "desc");
+	$query = $this->db->get('bzz_user_images','1');
+	if ($query->num_rows() > 0) {
+		return $query->result();
+	} else {
+	return false;
+	}
 }
 /*public function get_all_profile_pics()
 {
