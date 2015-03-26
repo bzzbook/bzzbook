@@ -973,6 +973,39 @@ $(document).ready(function () {
 		}
 	});
 }); 
+
+$('#addJobForm').submit( function( event){
+						
+					var errors = '';
+					if($("#job_title").val()=='' || $("#job_type").val()=="" || $("#job_category").val()==0 || $("#job_salary").val()=='' || $("#job_keywords").val()=='' || $("#job_company_name").val()=='' || $("#cont_name").val()=='' || $("#cont_email").val()=='' || $("#job_desc").val()=='' || $("#req_skills").val()==''  )
+					{
+						
+						$("#jobformerrors").html("Fields with '*' are mandatory, Please fill them...");
+					}
+					else if(!ValidateEmail($("#cont_email").val()))
+					{
+						$("#jobformerrors").html("Email you have entered not valid");
+					}
+					else
+					{	
+					
+					url="<?php echo base_url(); ?>jobs/create_job/";
+					$.post( url, { formdata: $(this).serialize()})
+					.done(function( data ) {
+						if(data == false)
+						alert("Please Enter Valid Details");
+						else
+						$(".joblisting").html(data);
+						$('#addJobForm').trigger("reset");
+						$( "#canceladdjob" ).trigger( "click" );
+					});
+					}
+					event.preventDefault();
+				});
+				function ValidateEmail(email) {
+        var expr = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+        return expr.test(email);
+    };
 </script>
 
 
