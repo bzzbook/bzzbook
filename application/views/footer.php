@@ -369,6 +369,33 @@ $(function(){
 						return false;
 				});
 				}
+				function job_edit()
+				{
+				$(".job_edit").click(function(){
+						job_id = $(this).attr("id").substr(14);
+						$("input[name=edu_form_id]").val(job_id)
+						url="<?php echo base_url(); ?>jobs/jobEdit/";
+						$.post( url, { job_id: job_id})
+						.done(function( data ) {
+							info = JSON.parse(data);
+							$("input[name=job_title]").val(info.job_title);
+							$("input[name=job_type]").val(info.job_type);
+							$("input[name=job_keyword]").val(info.job_keyword);							
+							$("input[name=job_contact_phone]").val(info.job_contact_phone);
+							$("input[name=job_contact_email]").val(info.job_contact_email);
+							$("input[name=job_contact_name]").val(info.job_contact_name);
+							$("textarea[name=job_description]").val(info.job_description);
+							$("textarea[name=job_how_to_apply]").val(info.job_how_to_apply);
+							$("textarea[name=job_requirements]").val(info.job_requirements);
+							$("select[name=job_category]").val(info.job_category);
+							$("select[name=company_posted_by]").val(info.company_posted_by);
+							$("select[name=job_salary]").val(info.job_salary);
+							$("input[name=edu_action]").val("update");
+							$('.bs-example-modal-lg').modal('toggle');
+						});
+						return false;
+				});
+				}
 				
 });
 function pwdchange(){
@@ -390,7 +417,12 @@ var pass=$('#pwd').val();
 }
  $('#profile_interchange').change(function(){
      id = $(this).val();
+	 if(id  ==  'user')
+	 {
+	  url="<?php echo base_url(); ?>profile";
+	 }else{
 	 url="<?php echo base_url(); ?>company/company_disp/"+id;
+	 }
 	 window.location.replace(url);
 	});
 
