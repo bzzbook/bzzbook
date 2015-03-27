@@ -6,6 +6,7 @@ class signg_in extends CI_Controller {
 	 
 	  public function __construct() {
         parent::__construct();
+		
 
     }
 	public function index()
@@ -65,8 +66,10 @@ class signg_in extends CI_Controller {
 						redirect('/profiles');
 		}
 						}else{
-							$data['error_message'] = 'Invalid Username or Password';
-							$this->load->view('sign_in_v', $data);
+							$this->session->set_flashdata('error','Invalid Username or Password ,   Please Try again with valid Details!...');
+							redirect('signg_in');
+							/*$data['error_message'] = 'Invalid Username or Password';
+							$this->load->view('sign_in_v', $data);*/
 						}
 					}
 	}
@@ -79,8 +82,9 @@ class signg_in extends CI_Controller {
                     $this->session->unset_userdata('logged_in', $sess_array);
 					$cmp_session = array('cmp_id'=> '');
 					$this->session->unset_userdata($cmp_session);
-					$data['message_display'] = 'Successfully Logout';
+					//$data['message_display'] = 'Successfully Logout';
 					//redirect(base_url());
+					$this->session->set_flashdata('signout',' You have Successfully Loged Out!..');
 					redirect(base_url());
   }
   

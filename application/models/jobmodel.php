@@ -54,6 +54,36 @@ class Jobmodel extends CI_Model {
 		return $query->result_array();
 	}
  
+ 
+ public function get_user_cmp_jobs()
+  { 
+	    $user_id = $this->session->userdata('logged_in')['account_id']; 
+		//$id = $this->session->userdata('cmp_id');
+		$condition = "user_id =" . "'" . $user_id . "'";
+		$this->db->select('*');
+		$this->db->from('bzz_companyinfo');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		$job_details =array();
+		if($query->num_rows()>0)
+		{
+			$companies = $query->result_array();
+		}
+		
+		foreach($companies as $cmp){
+		$job = array();
+		$condition = "company_posted_by =" . "'" . $cmp['companyinfo_id'] . "'";
+		$this->db->select('*');
+		$this->db->from('jobs');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		if($query->num_rows()>0)
+			{
+			 return $jobs = $query->result_array();
+			}
+		}
+
+  }
  	public function check_btn()
 	{
 		$user_id = $this->session->userdata('logged_in')['account_id']; 
@@ -69,6 +99,24 @@ class Jobmodel extends CI_Model {
 		}
 	}
  
+ public function delJobDetails($id)
+ {
+	   $this->db->where('job_id',$id);
+       $this->db->delete('jobs'); 
+ }
+ 
+ public function editJobDetails($id)
+ {
+	    $this->db->select('*');
+		$this->db->from('jobs');
+		$this->db->where('job_id', $id);
+		$query = $this->db->get();
+		if ($query->num_rows() > 0) {
+			return $query->result();
+		} else {
+		return false;
+		}
+ }
  
  }
  

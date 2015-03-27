@@ -38,6 +38,7 @@ echo $message_display;
 echo "</div>";
 }
 ?>
+
         <form action="<?php echo base_url(); ?>signg_in/db_check_login" method="post">
           <div class="field">
             <label>Email</label>
@@ -54,9 +55,13 @@ echo "</div>";
           </div>
           
         </form>
-       
+      
       </div>
-       
+       <?php 
+	   echo "<div class='message'>";
+	   echo $this->session->flashdata('error');
+	   echo "</div>";
+	    ?> 
     </section>
   </section>
 </header>

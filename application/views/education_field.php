@@ -2,7 +2,7 @@
 	$education_details = $this->profile_set->geteducationDetails();
 ?>
 
-			<div class="EduProperty" >
+			<div class="EduProperty">
                 <div class="EduBlock">
                 <h3>Field Of Study</h3>
                

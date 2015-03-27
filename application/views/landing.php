@@ -43,8 +43,10 @@
         <span style="color:#F00; padding:0 0 0 16px">
         	<?php if($this->session->flashdata('success')){ 
 				echo $this->session->flashdata('success');
-			}else if($this->session->flashdata('logout')){
-				echo $this->session->flashdata('logout');
+			}else if($this->session->flashdata('signout')){
+				echo "<div class='message'>";
+				echo $this->session->flashdata('signout');
+				echo "</div>";
 			}?>
             
         </span>
@@ -138,6 +140,7 @@
 	</script>
  <script type="text/javascript">
    $('#sign_up').validate();
+     $(".message").delay('slow').fadeOut();
 	</script>
 </body>
 </html>

@@ -5,9 +5,7 @@ class Profile extends CI_Controller {
 	  public function __construct() {
         parent::__construct();
 		$this->load->model('profile_set');
-		$is_logged = $this->session->userdata('logged_in');	
-		if(!$is_logged)
-		redirect(base_url());
+		
     }
 
 public function index()
@@ -93,8 +91,8 @@ public function delete_group($group_id)
 
 public function jobs()
 {
-	$data['content']='jobs';
-	$this->load->view('template-view',$data);
+	$data['content']='user_cmp_jobs';
+	     $this->load->view('template-view',$data);
 	//$this->load->view('jobs');
 }
 public function friends()
@@ -137,7 +135,7 @@ public function friends()
       redirect("/profile/profile_setting");
   }
   
-  
+
   public function eduEdit()
   {
 	 $data = $this->profile_set->editEduDetails($_POST['education_id']);

@@ -1,6 +1,8 @@
 <?php 	$data  = $this->jobmodel->check_btn();
 		$user_id = $this->session->userdata('logged_in')['account_id']; 
 		$cmp_id = $this->session->userdata('cmp_id');
+		$industry= $this->lookup->get_lookup_industry();
+        $jobtype  = $this->lookup->get_lookup_jobtype();
 ?>
 <section class="col-lg-6 col-md-6 col-sm-5 col-xs-12 coloumn2 jobsSt">
 <?php 	if($user_id == $data[0]['user_id'] && $cmp_id == $data[0]['companyinfo_id']) { ?>
@@ -30,49 +32,24 @@
                   </div>
                 <div class="forms col-md-4">
                   <label>Job Type:*</label>
-                  <input type="text" class="medium" name="job_type" id="job_type">
+                  <span>
+                   <select class="medium" name="job_type" id="job_type">
+                    <option value="">Job Type</option>
+				<?php foreach($jobtype as $job):?>
+                <option value="<?php echo $job->lookup_value ?>"><?php echo $job->lookup_value ?></option>
+                <?php endforeach;?> 
+                </select>
+                </span> 
                 </div>
                 <div class="forms col-md-4">
                   <label>Catagory:*</label>
                   <span>
                   <select class="medium" name="job_category" id="job_category">
-                    <option selected="selected"  value="0">-- Please Select -- </option>
-                    <option value="Accounting/Finance/Banking">Accounting/Finance/Banking</option>
-                    <option>Admin/Office</option>
-                    <option>Advertising/PR/Marketing</option>
-                    <option>Airline/Aviation</option>
-                    <option>Arts/Entertainment/Creative</option>
-                    <option>Automotive</option>
-                    <option>Bio-Pharmaceutical/Science</option>
-                    <option>Clerical/Adminstrative</option>
-                    <option>Computer/Tech/Internet</option>
-                    <option>Construction/Real Estate/Facilities</option>
-                    <option>Customer Service/Call Center</option>
-                    <option>Education/Training</option>
-                    <option>Engineering/Architecture</option>
-                    <option>Hospitality/Tourism/Casino</option>
-                    <option>Human Resource</option>
-                    <option>Installation/Maintenance/Repair</option>
-                    <option>Insurance</option>
-                    <option>Law Enforcement</option>
-                    <option>Legal</option>
-                    <option>Management/Executive</option>
-                    <option>Manufacturing/Operations</option>
-                    <option>Media</option>
-                    <option>Medical Staffing</option>
-                    <option>Medical/All Positions</option>
-                    <option>Medical/Nursing</option>
-                    <option>Medical/Physicians</option>
-                    <option>Other/General/Entry-Level</option>
-                    <option>Public Sector</option>
-                    <option>Restaurant/Food Service</option>
-                    <option>Retail/Wholesale</option>
-                    <option>Sales/Telemarketing</option>
-                    <option>Salon/Spa/Fitness</option>
-                    <option>Telecommunications</option>
-                    <option>Trades/Electronics/Plumbing</option>
-                    <option>Transportation/Logistics/Warehouse</option>
-                  </select>
+                    <option value="">Industry</option>
+				 <?php foreach($industry as $industries):?>
+                 <option value="<?php echo $industries->lookup_value ?>"><?php echo $industries->lookup_value ?></option>
+                 <?php endforeach;?> 
+                 </select> 
                   </span> </div>
               </div>
               <div class="clearfix"></div>

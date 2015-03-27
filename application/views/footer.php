@@ -33,16 +33,16 @@ if(strpos($_SERVER['REQUEST_URI'],'company/my_companies') !== false) {
 <script src="<?php echo base_url(); ?>js/countries.js"></script>
 <script src="<?php echo base_url(); ?>js/usa_states.js"></script>
 <script language="javascript">print_country("country");</script> 
-<script src="<?php echo base_url(); ?>js/jquery.jqtransform.js"></script>
+<!--<script src="<?php echo base_url(); ?>js/jquery.jqtransform.js"></script>-->
 <script language="javascript">print_usa_states("usa_states");</script>  
 <script src="<?php echo base_url(); ?>js/lightbox.min.js"></script>
 <script src="<?php echo base_url(); ?>js/jquery.uploadfile.min.js"></script>
 <script>
-		$( document ).ready(function() {
+		/*$( document ).ready(function() {
 		$('.select').jqTransform({ imgPath: '' });
-	}); 
+	}); */
 	/*$( document ).ready(function() {
-		url = "<?php echo base_url(); ?>jobs/job_btn";
+		url = "<?php // echo base_url(); ?>jobs/job_btn";
 		$.ajax({ url:url
 			}).done(function(data){
 				if(data == true)
@@ -349,6 +349,35 @@ $(function(){
 						return false;
 				});
 				}
+								function education_edit()
+				{
+				$(".job_edit").click(function(){
+						job_id = $(this).attr("id").substr(14);
+						$("input[name=edu_form_id]").val(job_id)
+						url="<?php echo base_url(); ?>jobs/jobEdit/";
+						$.post( url, { job_id: job_id})
+						.done(function( data ) {
+							info = JSON.parse(data);
+							$("input[name=job_title]").val(info.job_title);
+							$("input[name=job_type]").val(info.job_type);
+							$("input[name=job_keyword]").val(info.job_keyword);							
+							$("input[name=job_contact_phone]").val(info.job_contact_phone);
+							$("input[name=job_contact_email]").val(info.job_contact_email);
+							$("input[name=job_contact_name]").val(info.job_contact_name);
+							$("textarea[name=job_description]").val(info.job_description);
+							$("textarea[name=job_how_to_apply]").val(info.job_how_to_apply);
+							$("textarea[name=job_requirements]").val(info.job_requirements);
+							$("select[name=job_category]").val(info.job_category);
+							$("select[name=company_posted_by]").val(info.company_posted_by);
+							$("select[name=job_salary]").val(info.job_salary);
+							$("input[name=edu_action]").val("update");
+							$('.bs-example-modal-lg').modal('toggle');
+						});
+						return false;
+				});
+				}
+
+				
 				
 });
 function pwdchange(){
@@ -772,7 +801,7 @@ $(function () {
             alert("Please upload a valid image file.");
         }
     });
-	
+	});
 	
 /*	$("#company_form").submit(function( event ){
      url = "<?php // echo base_url(); ?>company/addcompany/";
@@ -787,7 +816,7 @@ $(function () {
 					});
 					event.preventDefault();
 });*/
-});
+
 function getconversations(msg_id,sent_by)
 {
  url="<?php echo base_url(); ?>message/getconversations/"+msg_id+'/'+sent_by;
