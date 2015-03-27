@@ -22,7 +22,38 @@ $thumb_height = "150";
 <?php
 if(strpos($_SERVER['REQUEST_URI'],'company/my_companies') !== false) {
 ?>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script>
+$(function () {
+    $("#fileupload").change(function () {
+		alert('hi');
+        $("#dvPreview").html("");
+        var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+        if (regex.test($(this).val().toLowerCase())) {
+            if ($.browser.msie && parseFloat(jQuery.browser.version) <= 9.0) {
+                $("#dvPreview").show();
+                $("#dvPreview")[0].filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = $(this).val();
+            }
+            else {
+                if (typeof (FileReader) != "undefined") {
+                    $("#dvPreview").show();
+                    $("#dvPreview").append("<img />");
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $("#dvPreview img").attr("src", e.target.result);
+      $("#dvPreview img").attr("style", 'width:149px;height:156px' );
+                    }
+                    reader.readAsDataURL($(this)[0].files[0]);
+                } else {
+                    alert("This browser does not support FileReader.");
+                }
+            }
+        } else {
+            alert("Please upload a valid image file.");
+        }
+    });
+	
+});
+	</script>
 <?php }
 ?>
 <script src="<?php echo base_url(); ?>js/animate-plus.min.js"></script> 
@@ -38,9 +69,9 @@ if(strpos($_SERVER['REQUEST_URI'],'company/my_companies') !== false) {
 <script src="<?php echo base_url(); ?>js/lightbox.min.js"></script>
 <script src="<?php echo base_url(); ?>js/jquery.uploadfile.min.js"></script>
 <script>
-		$( document ).ready(function() {
+		/*$( document ).ready(function() {
 		$('.select').jqTransform({ imgPath: '' });
-		});
+		});*/
    $('#email_invite').validate();
    $('#upload_file').validate(); 
 </script>
@@ -74,8 +105,8 @@ var settings = {
 
 }
 }
-var uploadObj = $("#mulitplefileuploader").uploadFile(settings);
-var uploadObj = $("#mulitplefileuploader1").uploadFile(settings);
+//var uploadObj = $("#mulitplefileuploader").uploadFile(settings);
+//var uploadObj = $("#mulitplefileuploader1").uploadFile(settings);
 
 
 });
@@ -729,33 +760,7 @@ function isNumber(field_id)
 	else
 	return true;
 }
-$(function () {
-    $("#fileupload").change(function () {
-        $("#dvPreview").html("");
-        var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
-        if (regex.test($(this).val().toLowerCase())) {
-            if ($.browser.msie && parseFloat(jQuery.browser.version) <= 9.0) {
-                $("#dvPreview").show();
-                $("#dvPreview")[0].filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = $(this).val();
-            }
-            else {
-                if (typeof (FileReader) != "undefined") {
-                    $("#dvPreview").show();
-                    $("#dvPreview").append("<img />");
-                    var reader = new FileReader();
-                    reader.onload = function (e) {
-                        $("#dvPreview img").attr("src", e.target.result);
-      $("#dvPreview img").attr("style", 'width:149px;height:156px' );
-                    }
-                    reader.readAsDataURL($(this)[0].files[0]);
-                } else {
-                    alert("This browser does not support FileReader.");
-                }
-            }
-        } else {
-            alert("Please upload a valid image file.");
-        }
-    });
+
 	
 	
 /*	$("#company_form").submit(function( event ){
@@ -770,8 +775,8 @@ $(function () {
 						}
 					});
 					event.preventDefault();
-});*/
 });
+});*/
 function getconversations(msg_id,sent_by)
 {
  url="<?php echo base_url(); ?>message/getconversations/"+msg_id+'/'+sent_by;
@@ -1020,6 +1025,7 @@ $('#addJobForm').submit( function( event){
 					});
 		}
 	}
+	
 </script>
 
 

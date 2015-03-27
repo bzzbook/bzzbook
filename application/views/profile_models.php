@@ -259,7 +259,7 @@
                             <select name="year_attended_to" id="org_year_attended_to" class="form-control" data-rule-required="true" 
     						        data-msg-required="please select Year">
                             	<option value="0">YYYY</option>
-                                <?php for($i=1950;$i<=date(Y);$i++){?>
+                                <?php for($i=1950;$i<=date("Y");$i++){?>
                                 	<option value="<?php echo $i;?>"><?php echo $i;?></option>
                                 <?php }?>
                             </select>
