@@ -48,7 +48,7 @@ $videos = $this->profile_set->get_my_videos();
 	<div class="crop_set_upload">
 		<div class="crop_upload_label">Upload files: </div>
 		<div class="crop_select_image"><div class="file_browser"><input type="file" name="imagefile" id="imagefile" class="hide_broswe" /></div></div>
-		<div class="crop_select_image"><input type="submit" value="Upload" class="upload_button" name="submitbtn" id="submitbtn" /></div>
+		<div class="crop_select_image"><input type="submit" value="Upload" class="upload_button" name="submitbtn" id="submitbtn" /></div><div id="loadingimage" style="padding-top:15px;"></div>
 	</div>
 </form>			
 		<div class="crop_set_preview" style="display:none;">
