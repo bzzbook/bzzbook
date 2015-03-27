@@ -635,7 +635,10 @@ border-radius: 4px;
 float:right;
 margin-right:10px;
 }
-
+.myfriendspfpic{
+	height:75px;
+	overflow:hidden;
+}
 
 
 

@@ -203,5 +203,37 @@ class Friendsmodel extends CI_Model {
 		}
 	return false;
 	}
+	
+	public function appendFriend($frndid,$groupid)
+	{
+		$condition = "group_id =" . "'" . $groupid . "'";
+		$this->db->select('*');
+		$this->db->from('bzz_user_groups');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		if($query->num_rows()>0)
+		{
+			$result = $query->result_array();
+			$friends = explode(',',$result[0]['group_members']);
+			if(!empty($result[0]['group_members']) && !in_array($frndid,$friends))
+			$data = array(
+               'group_members' => $result[0]['group_members'].','.$frndid,
+            );
+			else if(in_array($frndid,$friends))
+			{
+				return true;
+			}
+			else
+			$data = array(
+               'group_members' => $frndid,
+            );
+
+			$this->db->where($condition);
+			if($this->db->update('bzz_user_groups', $data))
+			return true;
+		}
+		else
+		return false;
+	}
 }
 ?>

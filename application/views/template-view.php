@@ -1,5 +1,5 @@
 <?php $this->load->view('header');?>
-<?php $this->load->view('main-navigation');?>
+<?php if(isset($user_profile_id)) $this->load->view('friend-navigation'); else $this->load->view('main-navigation');?>
 <?php $this->load->view('content'); ?>
 <?php $this->load->view('footer'); ?>
 

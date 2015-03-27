@@ -18,18 +18,28 @@
     </div>
     <div class="groupEditBlock myfriends">
       <ul class="groupEditBlock"> 
-             <?php foreach($friends as $frnd){ ?>
+             <?php 
+			 if(isset($_POST['seachgroupsinput']))
+				$groups = $this->profile_set->get_user_groups($_POST['seachgroupsinput']);
+				else
+				$groups = $this->profile_set->get_user_groups();
+				$options = '';
+				foreach($groups as $group)
+				{
+					$options.="<option value='".$group['group_id']."'>".$group['group_name']."</option>";
+				}
+			 
+			 foreach($friends as $frnd){ ?>
         <li class="col-md-6">
         	<div class="fdblock">
-        	<figure class="pfpic"><img alt="<?php echo base_url();?>uploads/<?php echo $frnd['image'] ?>" src="<?php echo base_url();?>uploads/<?php echo $frnd['image'] ?>" ></figure>
+        	<figure class="myfriendspfpic"><img alt="<?php echo base_url();?>uploads/<?php echo $frnd['image'] ?>" src="<?php echo base_url();?>uploads/<?php echo $frnd['image'] ?>" ></figure>
             <div class="friendInfo">
-            	<h4><?php echo $frnd['name']?></h4>
+            	<h4><a href="<?php echo base_url().'profile/friend/'.$frnd['id']; ?>"><?php echo $frnd['name']?></a></h4>
                 <span>( <?php $friendscount = $this->friendsmodel->get_frnds_frnds($frnd['id']); if($friendscount) echo count($friendscount); else echo '0' ;?> friends)</span>
                 <div class="select">
-                	<select>
-                    	<option>Friends</option>
-                        <option>Family</option>
-                        <option>Bussiness</option>
+                	<select onchange="movetogroup(<?php echo $frnd['id']; ?>,this.value)">
+                    	<option value="0">Select group</option>
+                    	<?php echo $options; ?>
                     </select>
                 </div>
             </div>

@@ -58,7 +58,7 @@ public function business_details()
 public function post()
   {
 	  $data['content']='posts';
-	$this->load->view('template-view',$data);
+	  $this->load->view('template-view',$data);
 	// $this->load->view('posts');
 }
 public function message()
