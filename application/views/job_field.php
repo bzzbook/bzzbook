@@ -1,8 +1,8 @@
-<?php $jobs = $this->jobmodel->getJobs();
- ?>
-
-<div class="groupMainBlock">
-  <?php foreach($jobs as $job): ?>
+<?php 
+$jobs = $this->jobmodel->getJobs();
+?>
+  <?php if(!$jobs){ echo "No Jobs Found From This Company !.."; } else { foreach($jobs as $job): ?>
+  <div class="groupMainBlock">
   <div class="jobProperty">
     <div class="col-md-4 col-sm-12 col-xs-5" style="width:auto"><img src="<?php echo base_url().'uploads/'.$job['company_image']; ?>" class="img-responsive"  alt=""  width="120"></div>
     <div class="col-md-8 col-sm-12 col-xs-12 createjob"> <span><samp>Title : </samp><?php echo $job['job_title']; ?></span> <span><samp>Location : </samp><?php echo $job['company_country'].', '.$job['company_state'].', '.$job['company_city']; ?> </span> <span> <samp>Posted by : </samp> <?php echo $job['cmp_name']; ?> <samp>| Date : </samp>
@@ -20,6 +20,7 @@
       <a class="jobDetailsBtn" data-toggle="collapse" href="#<?php echo $job['job_id'] ?>" aria-expanded="false" aria-controls="collapseExample">Read More</a>
     </div>
     <div class="clearfix"></div>
-     </div>
-  <?php endforeach; ?>
+    </div>
 </div>
+  <?php  endforeach;  } ?>
+   

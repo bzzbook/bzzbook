@@ -29,6 +29,25 @@ class Jobs extends CI_Controller {
 	 endif;
 	}
 	
-
+ 	public function job_btn()
+	{
+		$user_id = $this->session->userdata('logged_in')['account_id']; 
+		$cmp_id = $this->session->userdata('cmp_id');
+		$this->load->model('jobmodel');
+		$data  = $this->jobmodel->check_btn();
+		/*print_r($data);
+		echo $data[0]['user_id'];
+		
+		echo $user_id;
+		
+		echo $cmp_id; 
+		echo $data[0]['companyinfo_id'];
+		exit;*/
+		if($user_id == $data[0]['user_id'] && $cmp_id == $data[0]['companyinfo_id'])
+		{
+			echo "success";
+		}
+		return false;
+	}
 }
 ?>

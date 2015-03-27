@@ -77,9 +77,11 @@ class signg_in extends CI_Controller {
                                         'email' => ''
                                        );
                     $this->session->unset_userdata('logged_in', $sess_array);
+					$cmp_session = array('cmp_id'=> '');
+					$this->session->unset_userdata($cmp_session);
 					$data['message_display'] = 'Successfully Logout';
 					//redirect(base_url());
-					$this->load->view('sign_in_v', $data);
+					redirect(base_url());
   }
   
   public function send_post()

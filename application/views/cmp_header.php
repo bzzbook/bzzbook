@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<?php
+$session_data = $this->session->userdata('logged_in');
+?>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -38,10 +41,11 @@
     </div>
     <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
       <div class="curentUser">
-        <div class="userImg"><img src="<?php echo base_url(); ?>images/user.png" alt=""></div>
-        <a href="#" role="button"  class="dropdown-toggle userName" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Logged in as:<span>Jhon Smith</span></a>
+         <?php  $image = $this->profile_set->get_profile_pic();	?>
+        <div class="userImg"> <img src="<?php echo base_url();?>uploads/<?php echo $image[0]->user_img_thumb ?>" alt="<?php echo base_url();?>uploads/<?php echo $image[0]->user_img_thumb ?>"> </div>
+        <a href="#" role="button"  class="dropdown-toggle userName" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Logged in as:<span><?php echo  $session_data['email']; ?></span></a>
         <ul  role="menu" class="dropdown-menu">
-          <li><a href="#" tabindex="-1" role="menuitem">Logout</a></li>
+          <li><a href="<?php echo base_url(); ?>signg_in/sign_out" tabindex="-1" role="menuitem">Logout</a></li>
         </ul>
       </div>
     </div>

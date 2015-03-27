@@ -1,5 +1,12 @@
+<?php 	$data  = $this->jobmodel->check_btn();
+		$user_id = $this->session->userdata('logged_in')['account_id']; 
+		$cmp_id = $this->session->userdata('cmp_id');
+?>
 <section class="col-lg-6 col-md-6 col-sm-5 col-xs-12 coloumn2 jobsSt">
-      <button type="button" class="btn btn-primary createbutton fright" data-toggle="modal" data-target=".bs-example-modal-lg">Create Job</button>
+<?php 	if($user_id == $data[0]['user_id'] && $cmp_id == $data[0]['companyinfo_id']) { ?>
+		
+		<button type="button" class="btn btn-primary createbutton fright" data-toggle="modal" data-target=".bs-example-modal-lg">Create Job</button>
+		<?php }?>
       <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
         
@@ -143,7 +150,7 @@
               <p class="job-popup-headers">Job Requirments</p>
               
               <div class="col-md-12 row forms">
-                <label>Requirment Skills:*<span class="form-form-mandatory">*</span></label>
+                <label>Requirment Skills:*<span class="form-form-mandatory"></span></label>
                 <span><textarea cols="2" rows="2" class="textarea" name="req_skills" id="req_skills"></textarea></span>
               </div>
               <div class="clearfix"> </div>

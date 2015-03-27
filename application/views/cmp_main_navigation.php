@@ -23,7 +23,7 @@
             <p>Viewing as:</p>
             <select class="form-control" id="profile_interchange" >
               <optgroup label="Your Personal profile">
-              <option value="<?php echo $result[0]['user_id']?>"><?php echo $name ?></option>
+              <option value="user"><?php echo $name ?></option>
               </optgroup>
               <optgroup label="Your Companies">
               <?php foreach($companies as $cmp):?>

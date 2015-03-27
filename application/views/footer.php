@@ -40,15 +40,26 @@ if(strpos($_SERVER['REQUEST_URI'],'company/my_companies') !== false) {
 <script>
 		$( document ).ready(function() {
 		$('.select').jqTransform({ imgPath: '' });
-		});
-   $('#email_invite').validate();
-   $('#upload_file').validate(); 
+	}); 
+	/*$( document ).ready(function() {
+		url = "<?php echo base_url(); ?>jobs/job_btn";
+		$.ajax({ url:url
+			}).done(function(data){
+				if(data == true)
+				$('#create_job_btn').show();
+				else
+				$('#create_job_btn').hide('fast');
+			});
+					event.preventDefault();
+	}); */
+     $('#email_invite').validate();
+     $('#upload_file').validate(); 
 </script>
-<script>
+<!--<script>
 $(document).ready(function()
 {
 var settings = {
-    url : "<?php echo base_url(); ?>upload.php ?>",
+    url : "<?php // echo base_url(); ?>upload.php ?>",
     dragDrop:true,
     fileName: "myfile",
     allowedTypes:"jpg,png,gif,doc,pdf,zip",	
@@ -79,7 +90,7 @@ var uploadObj = $("#mulitplefileuploader1").uploadFile(settings);
 
 
 });
-</script>   
+</script>   -->
 
 <script>
 $(function(){
@@ -359,7 +370,12 @@ var pass=$('#pwd').val();
 }
  $('#profile_interchange').change(function(){
      id = $(this).val();
+	 if(id  ==  'user')
+	 {
+	  url="<?php echo base_url(); ?>profile";
+	 }else{
 	 url="<?php echo base_url(); ?>company/company_disp/"+id;
+	 }
 	 window.location.replace(url);
 	});
 
