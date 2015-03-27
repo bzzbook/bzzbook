@@ -22,6 +22,7 @@ $thumb_height = "150";
 <?php
 if(strpos($_SERVER['REQUEST_URI'],'company/my_companies') !== false) {
 ?>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script>
 $(function () {
     $("#fileupload").change(function () {
@@ -883,9 +884,6 @@ function getconversations(msg_id,sent_by)
       });
     });
 </script>
-
-
-<script type="text/javascript" src="<?php echo base_url(); ?>cropimage/js/jquery.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>cropimage/js/jquery.form.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>cropimage/js/jquery.imgareaselect.js"></script>
 
