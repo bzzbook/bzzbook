@@ -26,8 +26,7 @@ if(strpos($_SERVER['REQUEST_URI'],'company/my_companies') !== false) {
 <script>
 $(function () {
     $("#fileupload").change(function () {
-		alert('hi');
-        $("#dvPreview").html("");
+		$("#dvPreview").html("");
         var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
         if (regex.test($(this).val().toLowerCase())) {
             if ($.browser.msie && parseFloat(jQuery.browser.version) <= 9.0) {
@@ -891,7 +890,7 @@ function getconversations(msg_id,sent_by)
     $(document).ready(function() {
         $('#submitbtn').click(function() {
             $("#viewimage").html('');
-            $("#viewimage").html('<img src="<?php echo base_url(); ?>cropimage/images/loading.gif" />');
+            $("#loadingimage").html('<img src="<?php echo base_url(); ?>cropimage/images/loading.gif" />');
             $(".uploadform").ajaxForm({
             	url: '<?php echo base_url(); ?>profile/upload_thumb',
                 success:    showResponse 
@@ -902,6 +901,7 @@ function getconversations(msg_id,sent_by)
     function showResponse(responseText, statusText, xhr, $form){
 		
 	    if(responseText.indexOf('.')>0){
+			$("#loadingimage").html('');
 			$('.crop_set_preview').show();
 			$('.crop_box').height(350);
 			$('#thumbviewimage').html('<img src="<?php echo base_url().$upload_path;?>'+responseText.trim()+'"   style="position: relative;" alt="Thumbnail Preview" />');
