@@ -320,16 +320,16 @@
                   <form action="" name="group_form" id="group_form">
                   <div class="modal-body">
                   <div class="row">
-                   <div class="col-md-3">
+                    <div class="form-group col-md-6">
                         	<label class="control-label">Name Of Group:<span class="form-mandatory">*</span></label>
-                            </div>
-                            <div class="col-md-8">
+                            
+                           
 			                <input type="text" class="form-control" placeholder="" value="" id="group_name" name="group_name" data-rule-required="true" 
     						        data-msg-required="please enter Group Name">
-                            </div>
+                          </div>  
             		  </div>
                   <div class="row">
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-6">
                         	<label>Group Type:</label>
 	                        <input type="text" class="form-control" placeholder="" value="" name="group_type" id="group_type" data-rule-required="true" 
     						        data-msg-required="please enter Group Type">
@@ -337,29 +337,33 @@
                       </div>
                       
                        <div class="row">
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-6">
                         	<label>WebSite Url:</label>
 	                        <input type="text" class="form-control" placeholder="" value="" name="website_url" data-rule-required="true" 
     						        data-msg-required="please enter Website Address">
                         </div>
                       </div>
                   <div class="row">
-                   
-                  	 <div class="form-group col-md-4">
+                        <div class="form-group col-md-6">
+                        <label>Country:</label>
+           <select class="form-control" onchange="print_state('st',this.selectedIndex);" id="con" name ="con">
+			<option value="">Select Country</option>
+			</select> 
+         </div> 
+         
+          <div class="form-group col-md-6">
+          <label>State:</label>
+           <select name="st" id="st" class="form-control" data-rule-required="true" 
+           data-msg-required="please enter state">
+           <option value="">Select State</option>
+           </select>
+         </div> 
+                 <div class="form-group col-md-6">
                         	<label class="control-label">City:<span class="form-mandatory">*</span></label>
 			                <input type="text" class="form-control" placeholder="" value="" name="city" id="city" data-rule-required="true" 
     						        data-msg-required="please enter City">
             		  </div>
-                   
-                       <div class="form-group col-md-4">
-                      <label class="control-label">State:<span class="form-mandatory">*</span></label>
-                     <select name="usa_states" id="usa_states" class="form-control" data-rule-required="true" 
-    						        data-msg-required="please select State">
-          				 <option value="newjercy">new jercy</option>
-          				 </select>
-                        </div>
-                 
-                      <div class="form-group col-md-4">
+                      <div class="form-group col-md-6">
                         	<label>Zip / Postal:<span class="form-mandatory">*</span></label>
 			                <input type="text" class="form-control" placeholder="" value="" name="postal_code" id="postal_code" data-rule-required="true" 
     						        data-msg-required="please enter Postal Code">
@@ -661,7 +665,7 @@
     </div>
   </div>
 </div>
-  
+<script language="javascript">print_country("con");</script>    
 
  <!---------------------- MESSAGES CONVERSATION MODEL END -------------->
  

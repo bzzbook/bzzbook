@@ -62,10 +62,10 @@ $(function () {
 <script src="<?php echo base_url(); ?>js/jquery.validate.min.js"></script>
 <script src="<?php echo base_url(); ?>js/additional-methods.js"></script>
 <script src="<?php echo base_url(); ?>js/countries.js"></script>
-<script src="<?php echo base_url(); ?>js/usa_states.js"></script>
-<script language="javascript">print_country("country");</script> 
+<!-- <script src="<?php // echo base_url(); ?>js/usa_states.js"></script> -->
+<script language="javascript">print_country("country");</script>  
 <script src="<?php echo base_url(); ?>js/jquery.jqtransform.js"></script>
-<script language="javascript">print_usa_states("usa_states");</script>  
+<!--<script language="javascript">print_usa_states("usa_states");</script> --> 
 <script src="<?php echo base_url(); ?>js/lightbox.min.js"></script>
 <script src="<?php echo base_url(); ?>js/jquery.uploadfile.min.js"></script>
 <script>
