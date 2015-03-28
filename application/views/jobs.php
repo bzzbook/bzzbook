@@ -1,45 +1,28 @@
-<section class="col-lg-6 col-md-6 col-sm-5 col-xs-12 coloumn2 jobsSt">
-      <h2>My Jobs</h2>
-      <div class="posts">
-        
-    <div class="groupMainBlock">
-    <div class="jobProperty">
-        <div class="jobBlock">
-        <h3>Designation</h3>
-       
-        </div>
-        <div class="jobBlock">
-        <h3>Req. Years of Exp.:</h3>
-        
-        </div>
-        <div class="jobBlock">
-        <h3>Date Created:</h3>
-        
-        </div>
-         <div class="jobBlock pull-right">
-         <h3>Options</h3>
-        </div>
-        <div class="clearfix"></div>
+<?php 
+$jobs = $this->jobmodel->get_user_cmp_jobs();
+/*print_r($jobs);
+exit;*/
+?>
+  <?php if(!$jobs){ echo "No Jobs Found From This Company !.."; } else { foreach($jobs as $job): ?>
+  <div class="groupMainBlock">
+  <div class="jobProperty">
+    <div class="col-md-4 col-sm-12 col-xs-5" style="width:auto"><img src="<?php echo base_url().'uploads/'.$job['company_image']; ?>" class="img-responsive"  alt=""  width="120"></div>
+    <div class="col-md-8 col-sm-12 col-xs-12 createjob"> <span><samp>Title : </samp><?php echo $job['job_title']; ?></span> <span><samp>Location : </samp><?php echo $job['company_country'].', '.$job['company_state'].', '.$job['company_city']; ?> </span> <span> <samp>Posted by : </samp> <?php echo $job['cmp_name']; ?> <samp>| Date : </samp>
+      <?php $unixTimestamp = strtotime($job['post_date']); echo date('F',$unixTimestamp)." ".date('d',$unixTimestamp).", ".date('Y',$unixTimestamp); ?>
+      </span> 
+         <span><samp>Category : </samp><?php echo $job['job_category']; ?></span> 
+      <div class="collapse jobDetails" id="<?php echo $job['job_id'] ?>">
+        <div class="createjob"> 
+        <span><samp>Description : </samp><?php echo $job['job_description']; ?></span>
+         <span><samp>Requirements : </samp><?php echo $job['job_requirements']; ?></span>
+         <span><samp>Category : </samp><?php echo $job['job_category']; ?></span> 
+         <span><samp>Contact Person : </samp><?php echo $job['job_contact_name']; ?></span> 
+         <span><samp>Contact Mail : </samp><?php echo $job['job_contact_email']; ?></span> </div>
+      </div>
+      <a class="jobDetailsBtn" data-toggle="collapse" href="#<?php echo $job['job_id'] ?>" aria-expanded="false" aria-controls="collapseExample">Read More</a>
     </div>
-    <div class="jobProperty">
-        <div class="jobBlock">
-       
-        <p>Social</p>
-        </div>
-        <div class="jobBlock">
-       
-        <p>2</p>
-        </div>
-        <div class="jobBlock">
-       
-        <p>18/02/2015</p>
-        </div>
-         <div class="jobBlock pull-right">
-        <a href="#" class="link glyphicon glyphicon-pencil"></a>
-        <a href="#" class="link glyphicon glyphicon-remove"></a>
-        </div>
-        <div class="clearfix"></div>
-       </div>
+    <div class="clearfix"></div>
     </div>
 </div>
-    </section>
+  <?php  endforeach;  } ?>
+   

@@ -64,25 +64,33 @@ class Jobmodel extends CI_Model {
 		$this->db->from('bzz_companyinfo');
 		$this->db->where($condition);
 		$query = $this->db->get();
-		$job_details =array();
+		$job = array();
 		if($query->num_rows()>0)
 		{
 			$companies = $query->result_array();
-		}
-		
+			
+		$jobs= array();
 		foreach($companies as $cmp){
-		$job = array();
-		$condition = "company_posted_by =" . "'" . $cmp['companyinfo_id'] . "'";
+			
+	    $condition = "companyinfo_id =" . "'" . $cmp['companyinfo_id'] . "'";
 		$this->db->select('*');
 		$this->db->from('jobs');
 		$this->db->where($condition);
+		$this->db->join('bzz_companyinfo', 'bzz_companyinfo.companyinfo_id = jobs.company_posted_by');
 		$query = $this->db->get();
-		if($query->num_rows()>0)
-			{
-			 return $jobs = $query->result_array();
-			}
+		if($query->num_rows() >0)
+		{
+	    $result= $query->result_array();		
+		foreach($result as $result)
+		{
+			$jobs[] = $result;
+		}	  
+		}	
 		}
-
+		return $jobs;
+		 
+  }
+ 
   }
  	public function check_btn()
 	{
