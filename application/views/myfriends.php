@@ -24,11 +24,14 @@
 				else
 				$groups = $this->profile_set->get_user_groups();
 				$options = '';
+				if($groups)
+				{
 				foreach($groups as $group)
 				{
 					$options.="<option value='".$group['group_id']."'>".$group['group_name']."</option>";
 				}
-			 
+				}
+			 if($friends){
 			 foreach($friends as $frnd){ ?>
         <li class="col-md-6">
         	<div class="fdblock">
@@ -45,7 +48,7 @@
             </div>
             </div>
       	</li>
-         <?php } ?>        
+         <?php } } else echo "No friends found."?>        
         
       </ul>
       <div class="clear"></div>

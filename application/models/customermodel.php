@@ -13,8 +13,30 @@ class Customermodel extends CI_Model {
 		 return true;
 	}
 	public function All_Posts(){
+		
+  	    $id = $this->session->userdata('logged_in')['account_id'];
+	    $condition = "user_id =" . "'" . $id . "' AND request_status = 'Y'";
+		$this->db->select('*');
+		$this->db->from('bzz_userfriends');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		if ($query->num_rows() > 0) {
+			$res = $query->result();
+			if($res)
+			{
+			foreach($res as $friend)	
+			{
+			   $friends[] =	$friend->friend_id;
+			}
+			}
+		}	
+		$friends = array();
+		
+		
+		$friends[] =  $id;
 	   $this->db->select('*');
 	   $this->db->from('bzz_posts');
+	   $this->db->where_in('posted_by',$friends);
 	   $this->db->order_by("post_id","desc");
 	   $query = $this->db->get();
    	   if ($query->num_rows() > 0) {
