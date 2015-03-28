@@ -7,8 +7,6 @@ class Events extends CI_Controller {
 	$is_logged = $this->session->userdata('logged_in');	
 		if(!$is_logged)
 		redirect(base_url());
-		else
-		redirect(base_url("events"));
     }
 	public function index()
 	{

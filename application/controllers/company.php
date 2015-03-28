@@ -148,8 +148,8 @@ public function addcompany()
 	{
 		//$id = $this->session->userdata('logged_in')['account_id'];
 		//$this->session->unset_userdata('logged_in');
-		$cmp_session = array( 'cmp_id' => $cmpinfo_id);
-		$this->session->set_userdata($cmp_session);
+		//$cmp_session = array( 'cmp_id' => $cmpinfo_id);
+		//$this->session->set_userdata($cmp_session);
 		$data['content']='cmp_posts';
 	    $this->load->view('cmp-template-view',$data);
 		

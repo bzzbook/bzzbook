@@ -3,6 +3,8 @@
 		$cmp_id = $this->session->userdata('cmp_id');
 		$industry= $this->lookup->get_lookup_industry();
         $jobtype  = $this->lookup->get_lookup_jobtype();
+		
+		
 ?>
 <section class="col-lg-6 col-md-6 col-sm-5 col-xs-12 coloumn2 jobsSt">
 <?php 	if($user_id == $data[0]['user_id'] && $cmp_id == $data[0]['companyinfo_id']) { ?>

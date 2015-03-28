@@ -6,6 +6,9 @@ class Companies extends CI_Model {
    { 
    		parent::__construct(); 
   		  $this->load->database("bzzbook"); 
+		  $is_logged = $this->session->userdata('logged_in');	
+		if(!$is_logged)
+		redirect(base_url());
     } 
 
 	   

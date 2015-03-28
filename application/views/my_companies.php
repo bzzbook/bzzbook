@@ -41,7 +41,7 @@ $result1 = $this->companies->following_companies_list();
 <a href="<?php echo base_url("company/company_disp/".$company['companyinfo_id']) ?>"><img src="<?php echo base_url(); ?>uploads/<?php echo $company['company_image'] ?>"  width="127" height="127" alt=""></a>
 </div>
                     <div class="col-md-7">
-                      <h4 class="clear"><?php echo $company['cmp_name'] ?></h4>
+                      <h4 class="clear"><?php echo ucfirst($company['cmp_name']) ?></h4>
                       <p>Industry: <?php echo $company['cmp_industry'] ?></p>
                       <p>Established in: <?php $unixTimestamp = strtotime($company['cmp_estb']); echo date('F',$unixTimestamp).", ".date('Y',$unixTimestamp); ?></p>
                       <p>Employes on Bzzbook: <?php echo $company['cmp_colleagues'] ?></p>

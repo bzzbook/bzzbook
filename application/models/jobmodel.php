@@ -97,16 +97,18 @@ class Jobmodel extends CI_Model {
 		$user_id = $this->session->userdata('logged_in')['account_id']; 
 		//$cmp_id = $this->session->userdata('cmp_id');
 		$condition = "user_id =" . "'" . $user_id . "'" ;
-		$this->db->select('companyinfo_id,user_id');
+		$this->db->select('*');
 		$this->db->from('bzz_companyinfo');
 		$this->db->where($condition);
 		$query = $this->db->get();
 		if($query->num_rows()>0)
 		{
-			return $query->result_array();
+			$companies =  $query->result_array();
+			
 		}
+	return $companies;
 	}
- 
+
  public function delJobDetails($id)
  {
 	   $this->db->where('job_id',$id);
