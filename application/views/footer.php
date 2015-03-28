@@ -143,8 +143,7 @@ $(function(){
 			        data: { form_data: $(this).serialize()} ,
         			success: function(html)
 			        {   
-            			
-							alert("Information Updated");
+            			alert("Information Updated");
 						
 			        }
 			       });			
