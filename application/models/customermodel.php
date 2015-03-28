@@ -20,6 +20,7 @@ class Customermodel extends CI_Model {
 		$this->db->from('bzz_userfriends');
 		$this->db->where($condition);
 		$query = $this->db->get();
+			$friends = array();
 		if ($query->num_rows() > 0) {
 			$res = $query->result();
 			if($res)
@@ -30,10 +31,7 @@ class Customermodel extends CI_Model {
 			}
 			}
 		}	
-		$friends = array();
-		
-		
-		$friends[] =  $id;
+	   $friends[] =  $id;
 	   $this->db->select('*');
 	   $this->db->from('bzz_posts');
 	   $this->db->where_in('posted_by',$friends);
