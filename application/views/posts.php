@@ -25,6 +25,41 @@
         <?php echo form_close(); ?>
         <div class="clear"></div>
       </div>
+      
+      
+       <div class="posts">
+      <article>
+          <div class="pfInfo"> <a href="#" class="pfImg"><img src="<?php echo base_url();?>images/ph.jpg" alt=""></a>
+            <div class="pfInfoDetails">
+              <h5><span class="pfname"><a href="#">Dunga Suresh</a></span> shared a <a href="#">link</a></h5>
+              <a href="#" class="date">October 2, 2013</a> </div>
+          </div>
+          <div class="userContent"> <figure><img src="<?php echo base_url();?>images/safe_image.png" alt=""></figure>
+            <h3>The Interpreter-TranslatorFree - Android Apps on Google Play</h3>
+            <p>"The interpreter" acquires text by your voice or by the keyboard in real time, translates it and reads it for you into one the 60 available languages."The interpreter" acquires text by your voice or by the keyboard in real time, translates it and reads it for you into one the 60 available languages.</p>
+          </div>
+          <div class="sharingLink"><a href="#">Like</a><a href="#">Comment</a><a href="#">Share</a></div>
+          <div class="commentBox">
+            <figure><img src="<?php echo base_url();?>images/ph.jpg" alt=""></figure>
+            <div class="postAComment"> 
+            	<div class="postACommentInner">
+            <a href="#" class="upload"><span aria-hidden="true" class="glyphicon glyphicon-camera"></span></a>
+              <textarea placeholder="Write a Comment..."></textarea>
+              <em>Press Enter to post.</em> </div>
+              </div>
+              <div class="clearfix"></div>
+          </div>
+        </article>
+      
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
      <div class="posts">
       
       <!-- code added by 23-02-2015-->
