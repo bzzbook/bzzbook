@@ -440,7 +440,7 @@ function myfunc(cid){
 	$('#msg'+cid).hide();
 
 }
-function likefun(pid,uid){
+function likefun(pid,uid,count){
 	var posted_by=pid;
 	var user_id=uid;
 	url="<?php echo base_url();?>signg_in/insertlinks/"+pid+"/"+uid;
@@ -451,15 +451,35 @@ function likefun(pid,uid){
         success: function(html)
         {   
 			info = JSON.parse(html);
-         if(info.like_status == 'N')
+         if(info.like_status == 'N'){
 		 	//$("#like_ajax"+pid).html("Unlike");
 			$("#link_like"+pid).html("Like");
-		  else
+		    $("#like_count"+pid).html(info.like_count-1);
+
+		 }			
+		  else{
 			//$("#like_ajax"+pid).html("Like");
 			$("#link_like"+pid).html("Unlike");
+	        $("#like_count"+pid).html(info.like_count+1);
+
+		  }
         }
        });	
 }
+function saveAsFav(pid){
+	
+	url="<?php echo base_url();?>signg_in/saveasfav/"+pid;
+	  $.ajax({
+        type: "POST",
+        url: url,
+        data: { liked_by: pid } ,
+        success: function(html)
+        {   
+			
+        }
+       });	
+}
+
 function view_comments(id){
 	$('#res_comments'+id).hide();
 	$('#res_comments_viewmore'+id).show();
@@ -1057,11 +1077,46 @@ $('#addJobForm').submit( function( event){
 	
 </script>
 
+<script language="javascript" type="text/javascript">
+window.onload = function () {
+    var fileUpload = document.getElementById("uploadPhotos");
+    fileUpload.onchange = function () {
+        if (typeof (FileReader) != "undefined") {
+            var dvPreview = document.getElementById("uploadPhotosdvPreview");
+            dvPreview.innerHTML = "";
+            var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+            for (var i = 0; i < fileUpload.files.length; i++) {
+                var file = fileUpload.files[i];
+                if (regex.test(file.name.toLowerCase())) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var img = document.createElement("IMG");
+                        img.height = "110";
+                        img.width = "110";
+                        img.src = e.target.result;
+                        dvPreview.appendChild(img);
+                    }
+                    reader.readAsDataURL(file);
+                } else {
+                    alert(file.name + " is not a valid image file.");
+                    dvPreview.innerHTML = "";
+                    return false;
+                }
+            }
+        } else {
+            alert("This browser does not support HTML5 FileReader.");
+        }
+    }
+};
+</script>
+
+
 
 <style>
 .form-mandatory{
 color:red;
 }
+#uploadPhotosdvPreview img{margin-right:5px; }
 </style>
 <?php $this->load->view('profile_models'); ?>
 </body>

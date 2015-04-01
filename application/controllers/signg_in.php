@@ -95,13 +95,75 @@ class signg_in extends CI_Controller {
 	 $session_data = $this->session->userdata('logged_in');
 	 $data['posted_by'] = $session_data['account_id'];
 	 $data['post_content'] = $this->input->post('posts');
+	 $data['uploaded_files'] = $this->doupload();
 	 
-	 $this->customermodel->post_buzz($data);
+	 if($this->input->post('post_group')==0)
+	 {
+		  $data['posted_to']='';
+		   $this->customermodel->post_buzz($data);
+		   echo "post saved successfully..."; 
+		   redirect('profiles');
+	 }
+	 else
+	 {
+		 $result = $this->profile_set->get_groupmembers($this->input->post('post_group'));
+		 $data['posted_to'] = $result[0]['group_members'];
+		 $this->customermodel->post_buzz($data);
+	 }
 	 echo "post saved successfully..."; 
 	 redirect('profiles');
 	 // redirect(site_url('customer_controller/view_post'));
 	 // redirect(site_url('customer/view_post'));
    }
+   function doupload() {
+					$name_array = array();
+					$count = count($_FILES['uploadPhotos']['size']);
+					foreach($_FILES as $key=>$value)
+					for($s=0; $s<=$count-1; $s++) {
+					$_FILES['userfile']['name']=$value['name'][$s];
+					$_FILES['userfile']['type']    = $value['type'][$s];
+					$_FILES['userfile']['tmp_name'] = $value['tmp_name'][$s];
+					$_FILES['userfile']['error']       = $value['error'][$s];
+					$_FILES['userfile']['size']    = $value['size'][$s];  
+						$config['upload_path'] = './uploads/';
+						
+						$type = $_FILES['userfile']['type'];
+						switch ($type) {
+						   case 'gif':
+						   case 'jpg':
+						   case 'png':
+							  // do img config setup
+							  					$config['allowed_types'] = 'gif|jpg|png';
+
+							  break;
+						   case 'avi':
+						   case 'flv':
+						   case 'wmv':
+						   case 'mp3':
+						   case 'wma':
+							  // do video config
+							  					$config['allowed_types'] = 'mp4';
+
+							  break;
+						}
+						
+						
+					$config['max_size']	= '';
+					$config['max_width']  = '';
+					$config['max_height']  = '';
+					$this->load->library('upload', $config);
+					$this->upload->do_upload();
+					$data = $this->upload->data();
+					$name_array[] = $data['file_name'];
+					}
+					$names= implode(',', $name_array);
+					/* $this->load->database();
+					$db_data = array('id'=> NULL,
+					'name'=> $names);
+					$this->db->insert('testtable',$db_data);
+					*/	return $names;
+}
+
    function insertlinks($pid,$uid){
 	   $data=array(
 	       'like_on'=>$pid,
@@ -115,6 +177,19 @@ class signg_in extends CI_Controller {
 	 }
 	  
 	   
+   }
+   function saveasfav($pid){
+	     $user_id = $this->session->userdata('logged_in')['account_id'];
+	     $data=array(
+	       'post_id'=>$pid,
+	       'user_id'=>$user_id,
+		   
+	   );
+	 $res=$this->customermodel->insertfav($data);
+	 if($res){
+		 
+		 echo "success";
+	 }
    }
    
    

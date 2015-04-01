@@ -10,7 +10,17 @@ class Customermodel extends CI_Model {
 	
 	function post_buzz($data){
 		 $this->db->insert('bzz_posts',$data);
+		 return $this->db->insert_id();
+	}
+	function post_to_wall($data){
+		 $this->db->insert('bzz_posts_postedto',$data);
 		 return true;
+	}
+	function insertfav($data){
+		 if($this->db->insert('bzz_favorites',$data))
+		 return true;
+		 else
+		 return false;
 	}
 	public function All_Posts(){
 		
@@ -34,12 +44,20 @@ class Customermodel extends CI_Model {
 	   $friends[] =  $id;
 	   $this->db->select('*');
 	   $this->db->from('bzz_posts');
-	   $this->db->where_in('posted_by',$friends);
-	   $this->db->order_by("post_id","desc");
+/*	   $this->db->where_in('posted_by',$friends);
+*/	   $this->db->order_by("post_id","desc");
 	   $query = $this->db->get();
    	   if ($query->num_rows() > 0) {
-	   		return  $query->result();
-		
+	   		$result =  $query->result();
+			$posts = array();
+			foreach($result as $res){
+		    $friend_ids = explode(',',$res->posted_to);
+			if(($res->posted_to==0 && in_array($res->posted_by,$friends))|| $res->posted_by==$id || in_array($id, $friend_ids))
+			{
+				$posts[] = $res;
+			}
+			}
+			return $posts;
 	   } 
 	   else 
 	   return false;
@@ -48,7 +66,8 @@ class Customermodel extends CI_Model {
 	    $condition = "user_id =" . "'" . $id . "'";
 		$this->db->select('*');
 		$this->db->from('bzz_userinfo');
-		$this->db->where($condition);
+		$this->db->join('bzz_user_images','bzz_userinfo.user_id=bzz_user_images.user_id AND bzz_userinfo.user_id='.$id);
+		$this->db->order_by('bzz_user_images.user_imageinfo_id','desc');
 		$this->db->limit(1);
 		$query = $this->db->get();
 
@@ -78,20 +97,22 @@ class Customermodel extends CI_Model {
 			else if($res_like == 'N'){
 				$slike="Y";
 			}
+			$like_count = count($this->customermodel->likedata($pid));
 		$data1 = array('like_status' => $slike);
         $this->db->where($condition);
   		$this->db->update('bzz_likes',$data1);	
+	    $data1 = array('like_status' => $slike,'like_count' => $like_count);
 			echo json_encode($data1);
 		}
 		else{
 	    $this->db->insert('bzz_likes',$data);
-			$data1 = array('like_status' => 'Y');
+			$data1 = array('like_status' => 'Y','like_count' => $like_count);
 			echo json_encode($data1);
 		}
 		
    }
    public function likedata($pid){
-	    $condition = "like_on =" . "'" . $pid . "'";
+	    $condition = "like_on =" . "'" . $pid . "' AND like_status = 'Y'";
 		$this->db->select('*');
 		$this->db->from('bzz_likes');
 		$this->db->where($condition);
@@ -300,7 +321,67 @@ class Customermodel extends CI_Model {
   return false;
 		
    }
-   
- 
+	function get_time_difference_php($created_time)
+ {
+        date_default_timezone_set('Asia/Calcutta'); //Change as per your default time
+        $str = strtotime($created_time);
+        $today = strtotime(date('Y-m-d H:i:s'));
+
+        // It returns the time difference in Seconds...
+        $time_differnce = $today-$str;
+
+        // To Calculate the time difference in Years...
+        $years = 60*60*24*365;
+
+        // To Calculate the time difference in Months...
+        $months = 60*60*24*30;
+
+        // To Calculate the time difference in Days...
+        $days = 60*60*24;
+
+        // To Calculate the time difference in Hours...
+        $hours = 60*60;
+
+        // To Calculate the time difference in Minutes...
+        $minutes = 60;
+
+        if(intval($time_differnce/$years) > 1)
+        {
+            return intval($time_differnce/$years)." years ago";
+        }else if(intval($time_differnce/$years) > 0)
+        {
+            return intval($time_differnce/$years)." year ago";
+        }else if(intval($time_differnce/$months) > 1)
+        {
+            return intval($time_differnce/$months)." months ago";
+        }else if(intval(($time_differnce/$months)) > 0)
+        {
+            return intval(($time_differnce/$months))." month ago";
+        }else if(intval(($time_differnce/$days)) > 1)
+        {
+            return intval(($time_differnce/$days))." days ago";
+        }else if (intval(($time_differnce/$days)) > 0) 
+        {
+            return intval(($time_differnce/$days))." day ago";
+        }else if (intval(($time_differnce/$hours)) > 1) 
+        {
+            return intval(($time_differnce/$hours))." hours ago";
+        }else if (intval(($time_differnce/$hours)) > 0) 
+        {
+            return intval(($time_differnce/$hours))." hour ago";
+        }else if (intval(($time_differnce/$minutes)) > 1) 
+        {
+            return intval(($time_differnce/$minutes))." minutes ago";
+        }else if (intval(($time_differnce/$minutes)) > 0) 
+        {
+            return intval(($time_differnce/$minutes))." minute ago";
+        }else if (intval(($time_differnce)) > 1) 
+        {
+            return intval(($time_differnce))." seconds ago";
+        }else
+        {
+            return "few seconds ago";
+        }
+  } 
  }
 ?>

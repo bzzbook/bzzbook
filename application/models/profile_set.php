@@ -471,6 +471,20 @@ $this->session->set_flashdata('group-add-msg', 'Group updated Successfully');
 		return false;
 		}
    }
+   public function get_groupmembers($grp_id)
+   {
+	    $condition = "group_id =" . "'" . $grp_id . "'";
+		$this->db->select('group_members');
+		$this->db->from('bzz_user_groups');
+		$this->db->where($condition);
+		$this->db->order_by("group_id");
+		$query = $this->db->get();
+		if ($query->num_rows() > 0) {
+			return $query->result_array();
+		} else {
+		return false;
+		}
+   }
    
 	public function get_group_byid($group_id)
    {

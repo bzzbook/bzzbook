@@ -1,17 +1,27 @@
-     <?php  $image = $this->profile_set->get_profile_pic();	?>
+    <?php  $image = $this->profile_set->get_profile_pic();	?>
     <section class="col-lg-6 col-md-6 col-sm-5 col-xs-12 coloumn2">
       <div class="updateStatus" id="updateStatus">
         <ul>
           <li> <img src="<?php echo base_url();?>uploads/<?php echo $image[0]->user_img_thumb ?>" alt="<?php echo base_url();?>uploads/<?php echo $image[0]->user_img_thumb ?>" height="60" width="55"> </li>
-          <li><a href="#">Create a Post</a></li>
-          <li><a href="#">Upload Photos/Video</a></li>
+          <li><a href="javascript:document.getElementById('posts').focus()" >Create a Post</a></li>
+          <li><a href="javascript:document.getElementById('uploadPhotos').click()">Upload Photos/Video</a></li>
           <li><a href="#">Create Photo/Video Album</a></li>
         </ul>
-        <?php $attr = array('name' => 'post_form', 'id' =>'my_form') ?>
+   
+        <div id="uploadPhotosdvPreview"></div>
+        <?php $attr = array('name' => 'post_form', 'id' =>'my_form', 'enctype'=>"multipart/form-data") ?>
         <?php 
 		echo form_open('signg_in/send_post',$attr) ?>
-        <textarea cols="" rows="" name="posts" class="form-control" placeholder="What's Buzzing?"></textarea>
-        <div class="updateControls"> <a href="javascript:{}" onclick="document.getElementById('my_form').submit(); return false;">Post</a> <a href="#">Public</a> </div>
+        <input type="file" name="uploadPhotos[]" id="uploadPhotos" multiple="multiple" style="display:none;" />
+        <textarea cols="" rows="" name="posts" id="posts" class="form-control" placeholder="What's Buzzing?"></textarea>
+        <div class="updateControls"> <a href="javascript:{}" onclick="document.getElementById('my_form').submit(); return false;">Post</a> <select name="post_group" id="post_group"><option value="0">Public</option> <?php $groups = $this->profile_set->get_user_groups(); if($groups) { 
+		foreach($groups as $group)
+		{
+			echo "<option value='".$group['group_id']."'>".$group['group_name']."</option>";
+		}
+		
+		
+		} ?></select> </div>
         <?php echo form_close(); ?>
         <div class="clear"></div>
       </div>
@@ -23,11 +33,12 @@
 	  $products = $this->customermodel->All_Posts();
 	  if($products):
 	  foreach( $products as $row):
-	  $hrs=$row->posted_on;
+	 /* $hrs=$row->posted_on;
 	  $currt_hrs=date('Y-m-d H:i:s');
       $timestamp1 = strtotime($hrs);
-      $timestamp2 = strtotime($currt_hrs);
-      $hour = abs($timestamp2 - $timestamp1)/(60*60);
+      $timestamp2 = strtotime($currt_hrs);*/
+	  $hrsago = $this->customermodel->get_time_difference_php($row->posted_on);
+      /*$hour = abs($timestamp2 - $timestamp1)/(60*60);
       $hr_final=round($hour);
 	  
 	  
@@ -41,22 +52,21 @@
       $seconds %= 3600;
 
       $minutes = floor($seconds / 60);
-      $seconds %= 60;
+      $seconds %= 60;*/
 	  
 	  $posted_id=$row->posted_by;
 	  $get_profiledata = $this->customermodel->profiledata($posted_id);
-	  
 	  $user_id=$this->session->userdata('logged_in')['account_id'];
 	  	  
 	  ?>
 	
 	   <article>
-          <figure><img src="<?php echo base_url(); ?>uploads/<?php echo $image[0]->user_img_thumb; ?>" alt=""></figure>
+          <figure><img src="<?php echo base_url(); ?>uploads/<?php echo $get_profiledata[0]->user_img_thumb; ?>" alt=""></figure>
           <div class="content" id="content">
             <h3 class="pw"><?php echo ucfirst($get_profiledata[0]->user_firstname)."&nbsp;".ucfirst($get_profiledata[0]->user_lastname);?><span>
-			<?php if($hr_final<24){?><?php echo $hr_final;?>hr<?php }else{
+			<?php /*if($hr_final<24){?><?php echo $hr_final;?>hr<?php }else{
 				echo  str_replace("-"," ",$days)."days ago";
-			}?></span></h3>
+			}*/ echo $hrsago; ?></span></h3>
             <p id="msg<?php echo $row->post_id;?>"><?php
 		     $str_leng=strlen($row->post_content);
 			 if($str_leng>50){
@@ -64,6 +74,23 @@
 			 }else{
 				echo  $str_des=substr($row->post_content,0,50);
 			 }
+			 if(!empty($row->uploaded_files))
+			 {
+			 $up_files = explode(',',$row->uploaded_files);
+			 $i = 0;
+			 foreach($up_files as $file)
+			 {
+				 if($i==0)
+				 {
+					 echo "<img src='".base_url()."uploads/".$file."' style='width:100%'/>";
+				 }
+				 else
+				 	 echo "<img src='".base_url()."uploads/".$file."' style='width:24%;float:left;margin-right:1%'/>";
+				 $i++;
+			 }
+			 echo "<div style='clear:both'></div>";
+			 }
+			 
 			?></p>
              <p id="des<?php echo $row->post_id;?>" style="display:none;"><?php echo $row->post_content;?></p>
             <div class="links">
@@ -81,11 +108,11 @@
              
         <div id="like_ajax<?php echo $row->post_id;?>">
             <?php if(@$user_id == $user_id && $like=='Y'){?>
-				<a href="javascript:void(0);" onclick="likefun('<?php echo $row->post_id;?>','<?php echo $row->posted_by;?>','unlike')"  id="link_like<?php echo $row->post_id;?>" style="padding-right:0px;">Unlike
+				<a href="javascript:void(0);" onclick="likefun('<?php echo $row->post_id;?>','<?php echo $row->posted_by;?>',<?php echo count($get_likedetails); ?>)"  id="link_like<?php echo $row->post_id;?>" style="padding-right:0px;">Unlike
             <?php    
 			}else{?>
-				<a href="javascript:void(0);" onclick="likefun('<?php echo $row->post_id;?>','<?php echo $row->posted_by;?>','like')"  id="link_like<?php echo $row->post_id;?>" style="padding-right:0px;">Like
-			<?php }?></a><span>(<?php echo count($get_likedetails); ?>)</span>&nbsp;&nbsp;<a href="#">Comment</a> <a href="#">Share</a> <a href="#">Save As Favorite</a>
+				<a href="javascript:void(0);" onclick="likefun('<?php echo $row->post_id;?>','<?php echo $row->posted_by;?>',<?php echo count($get_likedetails); ?>)"  id="link_like<?php echo $row->post_id;?>" style="padding-right:0px;">Like
+			<?php }?></a>(<span id="like_count<?php echo $row->post_id;?>"><?php echo count($get_likedetails); ?></span>)&nbsp;&nbsp;<a href="#">Comment</a> <a href="#">Share</a> <a href="javascript:void(0)" onclick="saveAsFav('<?php echo $row->post_id;?>')"><span>Save As Favorite</span></a>
             </div>
            
           </div>
@@ -104,11 +131,16 @@
 			       $comments_details = $this->customermodel->comments_data($row->post_id);
 			       for($i=0;$i<count($comments_details);$i++){
 				   // foreach($comments_details as $row_comment):
-			       if($i<=4){?>
+			       if($i<=4){ $com_user_data = $this->customermodel->profiledata($comments_details[$i]->commented_by); 	  $hrsago = $this->customermodel->get_time_difference_php($comments_details[$i]->commented_time);
+?>
                     <div class="postComment">
-                    <div class="img"> <img src="<?php echo base_url();?>uploads/<?php echo $image[0]->user_img_thumb ?>" alt="<?php echo base_url();?>uploads/<?php echo $image[0]->user_img_thumb ?>" height="60" width="55"></div>
-                    <?php  echo $comments_details[$i]->comment_content;
-			         ?>
+                    <div class="img"> <img src="<?php echo base_url();?>uploads/<?php echo $com_user_data[0]->user_img_thumb ?>" alt="<?php echo base_url();?>uploads/<?php echo $image[0]->user_img_thumb ?>" height="60" width="55"></div>
+                    <div><?php echo ucfirst($com_user_data[0]->user_firstname)."&nbsp;".ucfirst($com_user_data[0]->user_lastname);?><span>
+			<?php /*if($hr_final<24){?><?php echo $hr_final;?>hr<?php }else{
+				echo  str_replace("-"," ",$days)."days ago";
+			}*/ echo $hrsago; ?></span><br /> <?php  echo $comments_details[$i]->comment_content;
+			         ?></div>
+                   
                    
                    </div>
 			<?php 
