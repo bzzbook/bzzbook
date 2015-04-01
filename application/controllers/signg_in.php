@@ -126,35 +126,52 @@ class signg_in extends CI_Controller {
 					$_FILES['userfile']['error']       = $value['error'][$s];
 					$_FILES['userfile']['size']    = $value['size'][$s];  
 						$config['upload_path'] = './uploads/';
-						
 						$type = $_FILES['userfile']['type'];
-						switch ($type) {
-						   case 'gif':
-						   case 'jpg':
-						   case 'png':
-							  // do img config setup
-							  					$config['allowed_types'] = 'gif|jpg|png';
-
-							  break;
-						   case 'avi':
-						   case 'flv':
-						   case 'wmv':
-						   case 'mp3':
-						   case 'wma':
-							  // do video config
-							  					$config['allowed_types'] = 'mp4';
-
-							  break;
-						}
+						$config['allowed_types'] = 'gif|jpg|png';
+						
+						//switch ($type) {
+//						   case 'gif':
+//						   case 'jpg':
+//						   case 'png':
+//						     // do img config setup
+//							  					$config['allowed_types'] = 'gif|jpg|png';
+//
+//							  break;
+//						   case 'avi':
+//						   case 'flv':
+//						   case 'wmv':
+//						   case 'mp3':
+//						   case 'wma':
+//							  // do video config
+//							  					$config['allowed_types'] = 'mp4';
+//
+//							  break;
+//						}
 						
 						
 					$config['max_size']	= '';
 					$config['max_width']  = '';
 					$config['max_height']  = '';
 					$this->load->library('upload', $config);
-					$this->upload->do_upload();
-					$data = $this->upload->data();
-					$name_array[] = $data['file_name'];
+					
+					if ( ! $this->upload->do_upload())
+					{
+						$error = array('error' => $this->upload->display_errors());
+						print_r($error);
+						exit;
+						//$this->load->view('uploadform', $error);
+					}
+					else
+					{
+						$data = $this->upload->data();
+						$name_array[] = $data['file_name'];
+					}
+					
+					
+					
+					//$this->upload->do_upload();
+//					$data = $this->upload->data();
+//					$name_array[] = $data['file_name'];
 					}
 					$names= implode(',', $name_array);
 					/* $this->load->database();

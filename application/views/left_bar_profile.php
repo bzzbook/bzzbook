@@ -5,7 +5,7 @@
 		  
 		  	?>
           <div class="img">
-       <img src="<?php echo base_url();?>uploads/<?php echo $image[0]->user_img_thumb ?>" alt="">
+       <a href="<?php echo base_url().'profile/about_me'; ?>"><img class="profsettings" src="<?php echo base_url();?>uploads/<?php echo $image[0]->user_img_thumb ?>" alt=""></a>
           </div>
           <div class="details"><?php echo $name ?> <a href="<?php echo base_url(); ?>profile/profile_setting">Edit Profile</a><span><?php echo $result[0]['user_jobtype']?></span></div>
           <div class="clear"></div>

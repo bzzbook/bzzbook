@@ -112,7 +112,7 @@ header .search .input-group .input-group-btn ul li a:hover{ background:url(../im
 .posts article .pfInfo{ display:flex; margin-bottom:15px;}
 .posts article .pfInfo .pfImg{ border:1px solid #ccc; margin-right:10px;}
 .posts article .pfInfo .pfImg{ width:50px; height:50px;}
-.posts article .pfInfo .pfImg img{ width:100%;}
+.posts article .pfInfo .pfImg img{ width:50px; height:50px;}
 .posts article .pfInfo .pfInfoDetails h5{ font-weight:300; font-size:16px; padding-top:5px; }
 .posts article .pfInfo .pfInfoDetails h5 .pfname{ font-weight:500; text-transform:capitalize;}
 .posts article .pfInfo .pfInfoDetails h5 a{ color:#2c2c2c;}
@@ -657,7 +657,7 @@ margin-right:10px;
 .compCover::before { background: none repeat scroll 0 0 #000;  content: "";  height: 100%;  position: absolute;  width: 100%; opacity:0.6;}
 .ProfileView .coloumn1 aside, .ProfileView .coloumn2 .updateStatus{border-top:1px solid #e9e9e9;}
 .nopad{ padding:0 !important;}
-
-
+.profsettings{ width:58px; height:58px; }
+.headeruserimg{ width:60px; height:60px; }
 
 

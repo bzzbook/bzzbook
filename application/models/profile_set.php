@@ -307,6 +307,18 @@ class Profile_set extends CI_Model {
         return $this->db->insert_id();
   
 }
+public function croped_profile_pic($thumbnail)
+    {
+	
+        $data = array(
+            'user_img_name' => $thumbnail,
+			
+			'user_id' => $this->session->userdata('logged_in')['account_id']
+        );
+        $this->db->insert('bzz_user_images', $data);
+        return $this->db->insert_id();
+  
+}
 public function add_pics($filename)
 {
 	 $data = array(

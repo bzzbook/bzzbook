@@ -12,7 +12,7 @@
           <a href="#" class="navbar-brand">Menu</a> </div>
         <div class="collapse navbar-collapse bs-example-js-navbar-collapse">
           <ul class="nav navbar-nav">
-           <li> <a  href="<?php echo base_url(); ?>profile/post">Profile</a></li>
+           <li> <a  href="<?php echo base_url(); ?>profile/post">Postboard</a></li>
             <li> <a  href="<?php echo base_url(); ?>profile/about_me">About Me</a></li>
             <li> <a  href="<?php echo base_url(); ?>profile/friends">My Friends</a></li>
             <li> <a  href="<?php echo base_url(); ?>profile/my_photos">My Photos</a></li>

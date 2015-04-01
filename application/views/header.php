@@ -48,7 +48,7 @@ $session_data = $this->session->userdata('logged_in');
       <div class="curentUser">
       <?php  $image = $this->profile_set->get_profile_pic();	?>
         <div class="userImg">
-         <img src="<?php echo base_url();?>uploads/<?php echo $image[0]->user_img_thumb ?>" alt="<?php echo base_url();?>uploads/<?php echo $image[0]->user_img_thumb ?>"> 
+         <img class="headeruserimg" src="<?php echo base_url();?>uploads/<?php echo $image[0]->user_img_thumb ?>" alt="<?php echo base_url();?>uploads/<?php echo $image[0]->user_img_thumb ?>"> 
         </div>
         <a href="#" role="button"  class="dropdown-toggle userName" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Logged in as:<span><?php echo  $session_data['email']; ?></span></a>
         <ul  role="menu" class="dropdown-menu">

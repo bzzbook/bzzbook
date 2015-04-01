@@ -952,6 +952,37 @@ function getconversations(msg_id,sent_by)
 <script type="text/javascript" src="<?php echo base_url(); ?>cropimage/js/jquery.imgareaselect.js"></script>
 
 <script type="text/javascript" >
+	// image croping function for profile settings page--> Start
+	
+	 $(document).ready(function() {
+        $('#userpropicbtn').click(function() {
+            $("#viewimage").html('');
+            $("#loadingimage").html('<img src="<?php echo base_url(); ?>cropimage/images/loading.gif" />');
+            $(".ppuploadform").ajaxForm({
+            	url: '<?php echo base_url(); ?>profile/upload_thumb',
+                success:    showResUser 
+            });
+        });
+    });
+  
+    function showResUser(responseText, statusText, xhr, $form){
+		
+	    if(responseText.indexOf('.')>0){
+			$("#loadingimage").html('');
+			$('.crop_set_preview').show();
+			$('.crop_box').height(350);
+			$('#thumbviewimage').html('<img src="<?php echo base_url().$upload_path;?>'+responseText.trim()+'"   style="position: relative;" alt="Thumbnail Preview" />');
+	    	$('#viewimage').html('<img class="preview" alt="" src="<?php echo base_url().$upload_path; ?>'+responseText.trim()+'"   id="thumbnail" />');
+	    	$('#filename').val(responseText.trim()); 
+			$('#thumbnail').imgAreaSelect({  aspectRatio: '1:1', handles: true  , onSelectChange: preview });
+		}else{
+			alert('please select file first');
+			$('#thumbviewimage').html(responseText.trim());
+	    	$('#viewimage').html(responseText.trim());
+		}
+    }
+	// image croping function for profile settings page--> End
+	
     $(document).ready(function() {
         $('#submitbtn').click(function() {
             $("#viewimage").html('');

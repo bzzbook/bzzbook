@@ -1,3 +1,6 @@
+<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>cropimage/css/cropimage.css" />
+<link type="text/css" href="<?php echo base_url(); ?>cropimage/css/imgareaselect-default.css" rel="stylesheet" />
+
 <section class="col-lg-6 col-md-6 col-sm-5 col-xs-12 coloumn2 pfSettings">
       <h2>My Settings</h2>
       <div class="posts">
@@ -29,6 +32,51 @@
                <!-- <input type="hidden" value="" name="status" id="status"/> -->
                  <input type="submit" class="btn btn-success" value="upload"></div>
                  </form>
+                 
+         <?php /*?><section>
+            <div class="container">
+            
+                <div class="crop_box">
+            <form class="ppuploadform" method="post" enctype="multipart/form-data" action='' name="photo">	
+                <div class="crop_set_upload">
+                    <div class="crop_upload_label">Upload files: </div>
+                    <div class="crop_select_image"><div class="file_browser"><input type="file" name="imagefile" id="imagefile" class="hide_broswe" /></div></div>
+                    <div class="crop_select_image"><input type="submit" value="Upload" class="upload_button" name="userpropicbtn" id="submitbtn" /></div><div id="loadingimage" style="padding-top:15px;"></div>
+                </div>
+            </form>			
+                    <div class="crop_set_preview" style="display:none;">
+                        <div class="crop_preview_left"> 
+                            <div class="crop_preview_box_big" id='viewimage'> 
+                                
+                            </div>
+                        </div>
+                        <div class="crop_preview_right">
+                            Preview (150x150 px)
+                            <div class="crop_preview_box_small" id='thumbviewimage' style="position:relative; overflow:hidden;"> </div>
+                            
+                            <form name="thumbnail" action="<?php echo base_url();?>profile/profile_pic_thumb" method="post">
+                                <input type="hidden" name="x1" value="" id="x1" />
+                                <input type="hidden" name="y1" value="" id="y1" />
+                                <input type="hidden" name="x2" value="" id="x2" />
+                                <input type="hidden" name="y2" value="" id="y2" />
+                                <input type="hidden" name="w" value="" id="w" />
+                                <input type="hidden" name="h" value="" id="h" />
+                                <input type="hidden" name="wr" value="" id="wr" />
+                                
+                                <input type="hidden" name="filename" value="" id="filename" />
+                                <div class="crop_preview_submit"><input type="submit" name="upload_thumbnail" value="Save Thumbnail" id="save_thumb" class="submit_button" /> </div>
+                            </form>
+                            
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+</section><?php */?>
+                 
+                 
+                 
+                 
                  <h4>Location Info</h4>
                <form name="postboard" id="postboard" method="POST" action="">
              <div class="field col-md-6 ">
