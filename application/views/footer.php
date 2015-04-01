@@ -602,6 +602,20 @@ function blockFrnd(id)
 		});
 		
 }
+
+function cmpFollow(id)
+{
+	url="<?php echo base_url(); ?>company/cmp_follow/"+id;
+		$.ajax({
+        type: "POST",
+        url: url,
+        success: function(data)
+        {   
+			$("#cmpfollow").html(data);
+		},
+		cache: false
+		});
+}
 function saveGroup()
 {
 	var list_of_members ='';
