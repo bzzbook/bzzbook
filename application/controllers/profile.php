@@ -93,7 +93,7 @@ public function delete_group($group_id)
 
 public function jobs()
 {
-	$data['content']='user_cmp_jobs';
+	     $data['content']='user_cmp_jobs';
 	     $this->load->view('template-view',$data);
 	//$this->load->view('jobs');
 }

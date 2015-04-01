@@ -1,16 +1,25 @@
-<?php 	$data  = $this->jobmodel->check_btn();
+<?php 	
+		$data  = $this->jobmodel->check_btn();
 		$user_id = $this->session->userdata('logged_in')['account_id']; 
-		$cmp_id = $this->session->userdata('cmp_id');
+		//$cmp_id = $this->session->userdata('cmp_id');
 		$industry= $this->lookup->get_lookup_industry();
         $jobtype  = $this->lookup->get_lookup_jobtype();
 		
 		
 ?>
 <section class="col-lg-6 col-md-6 col-sm-5 col-xs-12 coloumn2 jobsSt">
-<?php 	if($user_id == $data[0]['user_id'] && $cmp_id == $data[0]['companyinfo_id']) { ?>
-		
+ <?php 			
+				$jobs = array();
+				foreach($data as $data){
+				$jobs[] = $data['companyinfo_id'];
+				}
+				
+					if(in_array($cmp_info[0]['companyinfo_id'],$jobs))
+					{
+              ?>
 		<button type="button" class="btn btn-primary createbutton fright" data-toggle="modal" data-target=".bs-example-modal-lg">Create Job</button>
-		<?php }?>
+        <?php } ?>
+		
       <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
         

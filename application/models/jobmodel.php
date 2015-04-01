@@ -41,11 +41,11 @@ class Jobmodel extends CI_Model {
 		$query = $this->db->get();
 		return $query->result_array();
 	}
-	public function getJobs()
+	public function getJobs($id)
 	{
 		//$user_id = $this->session->userdata('logged_in')['account_id']; 
-		$id = $this->session->userdata('cmp_id');
-		$condition = "companyinfo_id =" . "'" . $id . "'";
+		$cmp_id = $id;
+		$condition = "companyinfo_id =" . "'" . $cmp_id . "'";
 		$this->db->select('*');
 		$this->db->from('jobs');
 		$this->db->where($condition);

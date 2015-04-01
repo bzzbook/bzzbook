@@ -1,5 +1,8 @@
 <?php 
-$jobs = $this->jobmodel->getJobs();
+$id = $this->uri->segment(3);
+
+$jobs = $this->jobmodel->getJobs($id);
+
 ?>
   <?php if(!$jobs){ echo "No Jobs Found From This Company !.."; } else { foreach($jobs as $job): ?>
   <div class="groupMainBlock">

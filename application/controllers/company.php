@@ -10,7 +10,7 @@ class Company extends CI_Controller {
 	
 	public function index()
 	{
-	$this->load->view('sign_in_v');
+	
 	}
 	public function sign_up()
 	{
@@ -128,13 +128,12 @@ public function addcompany()
 	
 	public function cmp_follow($cmpinfo_id)
 	{
+		// $data['friends'] = $this->friendsmodel->confirmfriend($id);	
 		
-		 $data['companyinfo_id'] = $cmpinfo_id;
-		 $data['user_id'] = $this->session->userdata('logged_in')['account_id'];
-		 $data['follow_status'] = 'Y';
-	     $data['result'] = $this->companies->company_follow($data);
-		 $data['content']='my_companies';
-	     $this->load->view('template-view',$data);
+	
+	     $data['result'] = $this->companies->company_follow($cmpinfo_id);
+		/* $data['content']='my_companies';
+	     $this->load->view('template-view',$data);*/
 		
 	}
 		public function cmp_unfollow($cmpinfo_id)
@@ -146,6 +145,10 @@ public function addcompany()
 	}
 	public function company_disp($cmpinfo_id)
 	{
+		
+	
+		
+		$data['cmp_info'] =  $this->companies->get_cmp_by_id($cmpinfo_id);
 		//$id = $this->session->userdata('logged_in')['account_id'];
 		//$this->session->unset_userdata('logged_in');
 		//$cmp_session = array( 'cmp_id' => $cmpinfo_id);
@@ -154,7 +157,10 @@ public function addcompany()
 	    $this->load->view('cmp-template-view',$data);
 		
 	}
-
+public function geturisegment()
+{
+	return $this->uri->segment(3,0); 
+}
 }
 
 
