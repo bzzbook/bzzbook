@@ -616,6 +616,40 @@ function cmpFollow(id)
 		cache: false
 		});
 }
+
+
+function cmpFollowPage(id)
+{
+	var value = $('#follow-btn').prop('value');
+	var option = $('#follow_option').val();
+	urlfollow="<?php echo base_url(); ?>company/cmp_view_follow/"+id+"/"+option;
+	urlunfollow="<?php echo base_url(); ?>company/cmp_view_unfollow/"+id+"/"+option;;
+	
+	alert(value);
+	alert(option);
+	if(value == 'Follow')
+	{
+		$.ajax({
+        type: "POST",
+        url: urlfollow
+		}).done(function(){
+      $('#follow-btn').val('Un Follow');
+	  $('#followModal').modal('toggle');
+	  
+		});
+		
+	}else{
+		$.ajax({
+        type: "POST",
+        url: urlunfollow
+		}).done(function(){
+      $('#follow-btn').val('Follow');
+		
+		});
+		
+	}
+}
+
 function saveGroup()
 {
 	var list_of_members ='';
@@ -1076,7 +1110,7 @@ $(document).ready(function () {
 $('#addJobForm').submit( function( event){
 						
 					var errors = '';
-					if($("#job_title").val()=='' || $("#job_type").val()=="" || $("#job_category").val()==0 || $("#job_salary").val()=='' || $("#job_keywords").val()=='' || $("#job_company_name").val()=='' || $("#cont_name").val()=='' || $("#cont_email").val()=='' || $("#job_desc").val()=='' || $("#req_skills").val()==''  )
+					if($("#job_title").val()=='' || $("#job_type").val()=="" || $("#job_category").val()==0 || $("#job_salary").val()=='' || $("#salary_basis").val()=='' || $("#job_keywords").val()=='' || $("#job_company_name").val()=='' || $("#cont_name").val()=='' || $("#cont_email").val()=='' || $("#job_desc").val()=='' || $("#req_skills").val()==''  )
 					{
 						
 						$("#jobformerrors").html("Fields with '*' are mandatory, Please fill them...");

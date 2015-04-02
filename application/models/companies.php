@@ -177,6 +177,43 @@ public function managecompanydata($data)
 			  
 	   }
 	   
+	   public function company_view_follow($cmpinfo_id,$follow_as)
+	   {
+		   
+		   
+		    $id = $this->session->userdata('logged_in')['account_id'];
+		    $condition =  "user_id =" . "'" . $id . "'" . " AND " . "companyinfo_id = ". "'" .$cmpinfo_id."'";
+		    $this->db->where($condition);
+			$query = $this->db->get('bzz_cmp_follow');
+			$result = $query->result_array();
+			
+			if($result){
+		     if($result[0]['follow_status'] != 'Y')
+		    {
+		     $data['follow_status'] = 'Y';
+			 $condition =  "user_id =" . "'" . $id . "'" . " AND " . "companyinfo_id = ". "'" .$cmpinfo_id."'";
+		     $this->db->where($condition);
+		     $this->db->update('bzz_cmp_follow',$data);
+
+			 }
+			elseif($result[0]['follow_status'] == 'Y')
+			   {
+				   echo "failure";
+			   }
+			   
+			}
+			 else{
+			   $data['companyinfo_id'] = $cmpinfo_id;
+			   $data['user_id'] = $id;
+			   $data['follow_status'] = 'Y';
+			   $data['follow_as'] = $follow_as;
+			   $this->db->insert('bzz_cmp_follow',$data);
+			   
+			 }
+			 
+	   }
+	   
+	   
 	   public function company_unfollow($cmpinfo_id)
 	   {
 		   $data= array(
@@ -187,7 +224,7 @@ public function managecompanydata($data)
 		   $this->db->where($condition);
 		   $this->db->update('bzz_cmp_follow', $data); 
 	   }
-
+	   
 
 public function get_mn_cmp_list()
 	{

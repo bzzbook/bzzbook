@@ -15,6 +15,7 @@ class Jobmodel extends CI_Model {
 		'job_type'=>$data['job_type'],
 		'job_category'=>$data['job_category'],
 		'job_salary'=>$data['job_salary'],
+		'salary_basis'=>$data['salary_basis'],
 		'job_keyword'=>$data['job_keywords'],
 		'company_posted_by'=>$data['job_company_name'],
 		'job_contact_name'=>$data['cont_name'],

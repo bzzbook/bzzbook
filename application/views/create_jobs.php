@@ -53,7 +53,7 @@
                 </span> 
                 </div>
                 <div class="forms col-md-4">
-                  <label>Catagory:*</label>
+                  <label>Category:*</label>
                   <span>
                   <select class="medium" name="job_category" id="job_category">
                     <option value="">Industry</option>
@@ -65,19 +65,24 @@
               </div>
               <div class="clearfix"></div>
               <div  class="col-md-12 row ">
-                <div class="col-md-6 forms">
-                  <label>Approx. Salary:*</label>
+              <div class="col-md-4 forms">
+                  <label>Compensation:*</label>
                   <span>
-                  <select  class="large" name="job_salary" id="job_salary">
+                  <input type="text" class="medium" name="job_salary" id="job_salary">
+                  </span> </div>
+                <div class="col-md-3 forms">
+                  <label>Duration:*</label>
+                  <span>
+                  <select  class="large" name="salary_basis" id="salary_basis">
                     <option selected="selected" value="">-- Please Select -- </option>
-                    <option value="$10,000 to $30,000">$10,000 to $30,000</option>
-                    <option>$30,000 to $50,000</option>
-                    <option>$50,000 to $80,000</option>
-                    <option>$80,000 to $100,000</option>
-                    <option>$100,000 +</option>
+                    <option value="D">Per Day</option>
+                    <option value="W">Per Week</option>
+                    <option value="M">Per Month</option>
+                    <option value="Y">per Year</option>
+                   
                   </select>
                   </span> </div>
-                <div class="col-md-6 forms">
+                <div class="col-md-5 forms">
                   <label>keywords:*</label>
                   <span>
                   <input type="text" class="large" name="job_keywords" id="job_keywords">

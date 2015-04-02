@@ -136,6 +136,16 @@ public function addcompany()
 	     $this->load->view('template-view',$data);*/
 		
 	}
+	public function cmp_view_follow($cmpinfo_id,$follow_as)
+	{
+		  $data['result'] = $this->companies->company_view_follow($cmpinfo_id,$follow_as);
+	}
+	
+	public function cmp_view_unfollow($cmpinfo_id)
+	{
+		  $data['result'] = $this->companies->company_unfollow($cmpinfo_id);
+	}
+	
 		public function cmp_unfollow($cmpinfo_id)
 	{ 
 		 $data['result'] = $this->companies->company_unfollow($cmpinfo_id);

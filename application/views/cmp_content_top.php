@@ -42,6 +42,13 @@ exit;*/
               <?php 
 				
 				$following_cmps = array();
+				if(!$cmp_following)
+				{ ?>
+               
+      <input type="button" class="follow" value="Follow"  id="follow-btn" data-toggle="modal" data-target="#followModal"  /> <!--onclick="cmpFollowPage(<?php // echo $cmp_info[0]['companyinfo_id']; ?>);-->
+					
+			<?php	}
+					else{
 				foreach($cmp_following as $cmp){
 				$following_cmps[] = $cmp['companyinfo_id'];
 				}
@@ -49,11 +56,11 @@ exit;*/
 					if(!in_array($cmp_info[0]['companyinfo_id'],$following_cmps))
 					{
               ?>
-              <input type="button" class="follow" value="Follow" >
+     <input type="button" class="follow" value="Follow"  id="follow-btn" data-toggle="modal" data-target="#followModal"  /> <!--onclick="cmpFollowPage(<?php // echo $cmp_info[0]['companyinfo_id']; ?>);-->
               
 			  <?php }else{ ?>
-              <input type="button" class="follow" value="Un Follow" >
-			  <?php }  }?>
+              <input type="button" class="follow" id ="unfollow-btn" value="Un Follow" onclick="cmpFollowPage(<?php echo $cmp_info[0]['companyinfo_id']; ?>);">
+			  <?php }  } }?>
             </div>
           </div>
           <div class="col-md-3">
