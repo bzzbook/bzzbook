@@ -22,9 +22,11 @@ class Customermodel extends CI_Model {
 		 else
 		 return false;
 	}
-	public function All_Posts(){
-		
+	public function All_Posts($pst_usr_id){
+		if(empty($pst_usr_id))
   	    $id = $this->session->userdata('logged_in')['account_id'];
+		else
+		$id = $pst_usr_id;
 	    $condition = "user_id =" . "'" . $id . "' AND request_status = 'Y'";
 		$this->db->select('*');
 		$this->db->from('bzz_userfriends');
@@ -323,7 +325,7 @@ class Customermodel extends CI_Model {
    }
 	function get_time_difference_php($created_time)
  {
-        date_default_timezone_set('Asia/Calcutta'); //Change as per your default time
+        //date_default_timezone_set('Asia/Calcutta'); //Change as per your default time
         $str = strtotime($created_time);
         $today = strtotime(date('Y-m-d H:i:s'));
 
@@ -383,5 +385,19 @@ class Customermodel extends CI_Model {
             return "few seconds ago";
         }
   } 
+  
+  public function getPostById($id){
+	    $condition = "post_id =" . "'" . $id . "'";
+		$this->db->select('*');
+		$this->db->from('bzz_posts');
+		$this->db->where($condition);
+		$this->db->limit(1);
+		$query = $this->db->get();
+		if ($query->num_rows() == 1) {
+			return $query->result();
+		} else {
+		return false;
+		}
+   }
  }
 ?>

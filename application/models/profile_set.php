@@ -340,9 +340,12 @@ public function  add_user_videos($filename)
         return $this->db->insert_id();
 }
 
-public function get_profile_pic()
+public function get_profile_pic($usr_id='')
 {
+	if(empty($usr_id))
 	$user_id = $this->session->userdata('logged_in')['account_id'];
+	else 
+	$user_id = $usr_id;
 	$condition = "user_id ='".$user_id."'";
 	$this->db->where($condition);
 	$this->db->order_by("user_imageinfo_id", "desc");

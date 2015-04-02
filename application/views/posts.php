@@ -1,4 +1,4 @@
-   <?php  $image = $this->profile_set->get_profile_pic();	?>
+   <?php $image = $this->profile_set->get_profile_pic($user_id);	?>
     <section class="col-lg-6 col-md-6 col-sm-5 col-xs-12 coloumn2">
       <div class="updateStatus" id="updateStatus">
         <ul>
@@ -27,22 +27,28 @@
       </div>
      <div class="posts">
      <?php 
+	  if(empty($user_id))
 	  $curr_user_id = $this->session->userdata('logged_in')['account_id'];
-	  $products = $this->customermodel->All_Posts();
+	  else
+	  $curr_user_id = $user_id;
+	  $products = $this->customermodel->All_Posts($user_id);
 	  if($products):
 	  foreach( $products as $row):
 	  $hrsago = $this->customermodel->get_time_difference_php($row->posted_on);
       $posted_id=$row->posted_by;
 	  $get_profiledata = $this->customermodel->profiledata($posted_id);
+	  if(empty($user_id))
 	  $user_id=$this->session->userdata('logged_in')['account_id'];
+	  else
+	  $user_id = $user_id;
 	  ?>
       <article>
-          <div class="pfInfo"> <a href="#" class="pfImg"><img src="<?php echo base_url(); ?>uploads/<?php echo $get_profiledata[0]->user_img_thumb; ?>" alt=""></a>
+          <div class="pfInfo"> <a href="<?php echo base_url().'profile/post/'.$get_profiledata[0]->user_id; ?>" class="pfImg"><img src="<?php echo base_url(); ?>uploads/<?php echo $get_profiledata[0]->user_img_thumb; ?>" alt=""></a>
             <div class="pfInfoDetails">
-              <h5><span class="pfname"><a href="#"><?php echo ucfirst($get_profiledata[0]->user_firstname)."&nbsp;".ucfirst($get_profiledata[0]->user_lastname);?></a></span> shared a <a href="#">link</a></h5>
+              <h5><span class="pfname"><a href="<?php echo base_url().'profile/post/'.$get_profiledata[0]->user_id; ?>"><?php echo ucfirst($get_profiledata[0]->user_firstname)."&nbsp;".ucfirst($get_profiledata[0]->user_lastname);?></a></span></h5>
               <a href="#" class="date"><?php  echo $hrsago; ?></a> </div>
           </div>
-          <div class="userContent"> <figure><?php if(!empty($row->uploaded_files))
+          <div class="userContent"> <?php if(!empty($row->uploaded_files))
 			 {
 			 $up_files = explode(',',$row->uploaded_files);
 			 $i = 0;
@@ -53,7 +59,7 @@
 					 echo "<img src='".base_url()."uploads/".$file."' style='width:100%'/>";
 				 }
 				 else
-				 	 echo "<img src='".base_url()."uploads/".$file."' style='width:24%;float:left;margin-right:1%; height:83px'/>";
+				 	 echo "<img src='".base_url()."uploads/".$file."' style='width:24%;float:left;margin:.5%; height:83px'/>";
 				 $i++;
 			 }
 			 echo "<div style='clear:both'></div>";
@@ -79,7 +85,7 @@
             <?php    
 			}else{?>
 				<a href="javascript:void(0);" onclick="likefun('<?php echo $row->post_id;?>','<?php echo $row->posted_by;?>',<?php echo count($get_likedetails); ?>)"  id="link_like<?php echo $row->post_id;?>" style="padding-right:0px;">Like
-			<?php }?></a>(<span id="like_count<?php echo $row->post_id;?>"><?php echo count($get_likedetails); ?></span>)&nbsp;&nbsp;<a href="#">Comment</a> <a href="#">Share</a> <a href="javascript:void(0)" onclick="saveAsFav('<?php echo $row->post_id;?>')"><span>Save As Favorite</span></a></div>
+			<?php }?></a>(<span id="like_count<?php echo $row->post_id;?>"><?php echo count($get_likedetails); ?></span>)&nbsp;&nbsp;<a href="#">Comment</a> <a href="javascript:void(0)" onclick="sharePost(<?php echo $row->post_id; ?>)" data-toggle="modal" data-target="#myModal">Share</a> <a href="javascript:void(0)" onclick="saveAsFav('<?php echo $row->post_id;?>')"><span>Save As Favorite</span></a></div>
             <div id="res_comments<?php echo $row->post_id;?>">
             <?php   
 			       $comments_details = $this->customermodel->comments_data($row->post_id);
@@ -88,9 +94,9 @@
 			       if($i<=4){ $com_user_data = $this->customermodel->profiledata($comments_details[$i]->commented_by); 	  $hrsago = $this->customermodel->get_time_difference_php($comments_details[$i]->commented_time);
 ?>
                    <div class="commentBox">
-            <figure> <img src="<?php echo base_url();?>uploads/<?php echo $com_user_data[0]->user_img_thumb ?>" alt="<?php echo base_url();?>uploads/<?php echo $image[0]->user_img_thumb ?>"></figure>
+            <figure> <a href="<?php echo base_url().'profile/post/'.$com_user_data[0]->user_id; ?>"><img src="<?php echo base_url();?>uploads/<?php echo $com_user_data[0]->user_img_thumb ?>" alt="<?php echo base_url();?>uploads/<?php echo $image[0]->user_img_thumb ?>"></a></figure>
             <div class="postAComment"> 
-            	<div class="postACommentInner"><span class="pfname" style="color:#5A5998;"><?php echo ucfirst($com_user_data[0]->user_firstname)."&nbsp;".ucfirst($com_user_data[0]->user_lastname);?></span> <span class="date" style="color:black;">
+            	<div class="postACommentInner"><span class="pfname" style="color:#5A5998;"><a href="<?php echo base_url().'profile/post/'.$com_user_data[0]->user_id; ?>"><?php echo ucfirst($com_user_data[0]->user_firstname)."&nbsp;".ucfirst($com_user_data[0]->user_lastname);?></a></span> <span class="date" style="color:black;">
 			<?php /*if($hr_final<24){?><?php echo $hr_final;?>hr<?php }else{
 				echo  str_replace("-"," ",$days)."days ago";
 			}*/ echo $comments_details[$i]->comment_content; ?></span><br /> <?php  echo $hrsago;
@@ -128,3 +134,20 @@
       
       </div>
     </section>
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body" id="sharePostPopup">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

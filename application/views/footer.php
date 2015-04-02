@@ -1187,6 +1187,21 @@ window.onload = function () {
         }
     }
 };
+
+// share post function START - by vijay on 02-04-15 
+
+function sharePost(post_id){
+	url="<?php echo base_url(); ?>profile/get_post_byid/"+post_id;
+					$.post( url )
+					.done(function( data ) {
+						$('#sharePostPopup').html(data);
+						
+					});
+}
+
+
+
+// Share post function END
 </script>
 
 

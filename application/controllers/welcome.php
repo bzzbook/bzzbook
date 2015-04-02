@@ -22,7 +22,7 @@ class Welcome extends CI_Controller {
 		$is_logged = $this->session->userdata('logged_in');
 		if($is_logged)
 		{
-		$data = array('content'=>'posts');
+		$data = array('content'=>'posts','user_id'=>'');
 		$this->load->view('template-view',$data);
 		}else{
 		$this->load->view('landing');

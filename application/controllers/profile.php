@@ -12,6 +12,7 @@ class Profile extends CI_Controller {
 
 public function index()
 {  
+	     $data['user_id'] ='';
 	     $data['content']='posts';
 	     $this->load->view('template-view',$data);
 	  //$this->load->view('posts');	
@@ -55,8 +56,9 @@ public function business_details()
 	//$this->load->view('business_details',$data);
 }
 
-public function post()
-  {
+public function post($user_id)
+  {	
+  	  $data['user_id'] = $user_id;
 	  $data['content']='posts';
 	  $this->load->view('template-view',$data);
 	// $this->load->view('posts');
@@ -535,6 +537,52 @@ public function friends()
 	$filename = end($split);
 	$this->profile_set->croped_profile_pic($filename);
 	return $thumb_image_name;
+	}
+	
+	public function get_post_byid($post_id){
+		$row = $this->customermodel->getPostById($post_id);
+		$row = $row[0];
+		$posted_id=$row->posted_by;
+	 	$get_profiledata = $this->customermodel->profiledata($posted_id);
+	    $user_id=$this->session->userdata('logged_in')['account_id'];
+		
+		$content = "     <div class='posts'><article>
+<div class='pfInfo'> <a href='".base_url()."profile/post/".$get_profiledata[0]->user_id."' class='pfImg'><img src='".base_url()."uploads/".$get_profiledata[0]->user_img_thumb."' alt=''></a>
+            <div class='pfInfoDetails'>
+              <h5><span class='pfname'><a href='".base_url()."profile/post/".$get_profiledata[0]->user_id."'>".ucfirst($get_profiledata[0]->user_firstname)."&nbsp;".ucfirst($get_profiledata[0]->user_lastname)."</a></span></h5>
+              </div>
+          </div>
+          <div class='userContent'>";
+		  
+		  if(!empty($row->uploaded_files))
+			 {
+			 $up_files = explode(',',$row->uploaded_files);
+			 $i = 0;
+			 foreach($up_files as $file)
+			 {
+				 if($i==0)
+				 {
+					 $content .= "<img src='".base_url()."uploads/".$file."' style='width:100%'/>";
+				 }
+				 else
+				 	 $content .= "<img src='".base_url()."uploads/".$file."' style='width:24%;float:left;margin:.5%; height:83px'/>";
+				 $i++;
+			 }
+			 $content .= "<div style='clear:both'></div>";
+			 } 
+             
+             $content .="</figure>
+            <p>";
+			
+			$str_leng=strlen($row->post_content);
+			  if($str_leng>50){
+				$content .= substr($row->post_content,0,50)."...<a href='#' onclick='myfunc(".$row->post_id.")'>more</a>"; 
+			 }else{
+				$content .= substr($row->post_content,0,50)."</p>
+          </div></article></div>";
+			 }
+			 
+			 echo $content;
 	}
 }
 ?>

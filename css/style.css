@@ -660,4 +660,5 @@ margin-right:10px;
 .profsettings{ width:58px; height:58px; }
 .headeruserimg{ width:60px; height:60px; }
 
-
+.pfname a:hover{ text-decoration:underline; }
+.pfname a{color:#337AB7 !important; }

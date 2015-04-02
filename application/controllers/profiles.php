@@ -27,6 +27,7 @@ class profiles extends CI_Controller {
 		$is_logged = $this->session->userdata('logged_in');
 		if($is_logged)
 		{	
+			$data['user_id'] ='';
 			$data['content']='posts';
 			$this->load->view('template-view',$data);
 			//$this->load->view('posts');
