@@ -129,8 +129,39 @@ class Jobmodel extends CI_Model {
 		}
  }
  
- }
  
- 
- 
+ public function search_category_jobs($searchjob)
+ {
+		$condition = "job_category =" . "'" . $searchjob['industry'] . "'" ;
+		$this->db->select('*');
+		$this->db->from('jobs');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		$jobs = $query->result_array();
+		
+		if($query->num_rows>0)
+		{
+			$j = array();
+			foreach($jobs as $job)
+			{
+	$condition = "companyinfo_id =" . "'" . $job['company_posted_by'] . "'" . " AND " . "company_state =" . "'" .  $searchjob['usa_states'].  "'"; 	
+				$this->db->select('*');
+				$this->db->from('bzz_companyinfo');
+				$this->db->where($condition);
+				$this->db->join('jobs', 'bzz_companyinfo.companyinfo_id = jobs.company_posted_by');
+				$query = $this->db->get();
+				if($query->num_rows()>0)
+				{
+				$job_data = $query->result_array();
+				$j[] = $job_data;
+				
+				}
+			}
+			return $j;
+		//$data['jobs'] = $j;
+//		$data['content'] = 'job_search';
+//		$this->load->view('template-view',$data);
+		}
+		return false;
+ }}
 ?>

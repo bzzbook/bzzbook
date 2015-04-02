@@ -1,4 +1,3 @@
-
 <div class="groupMainBlock">
 <?php foreach($jobs as $job): ?>
           <div class="jobProperty">

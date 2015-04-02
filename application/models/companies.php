@@ -191,6 +191,7 @@ public function managecompanydata($data)
 		     if($result[0]['follow_status'] != 'Y')
 		    {
 		     $data['follow_status'] = 'Y';
+			 $data['follow_as'] = $follow_as;
 			 $condition =  "user_id =" . "'" . $id . "'" . " AND " . "companyinfo_id = ". "'" .$cmpinfo_id."'";
 		     $this->db->where($condition);
 		     $this->db->update('bzz_cmp_follow',$data);

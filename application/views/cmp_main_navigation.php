@@ -2,7 +2,7 @@
  $result = $this->profile_set->get_userinfo();
  $name = $result[0]['user_firstname']." ".$result[0]['user_lastname'];
  $companies = $this->companies->get_mn_cmp_list();
- $id = $this->session->userdata('cmp_id');
+// $id = $this->session->userdata('cmp_id');
  ?> 
 <section class="mainNav">
   <div class="container">
@@ -29,7 +29,7 @@
               <optgroup label="Your Companies">
               <?php foreach($companies as $cmp):?>
                  <option  data-to-profile-type="Company" value="<?php echo $cmp->companyinfo_id ?>" 
-                 <?php if($id == $cmp->companyinfo_id){
+                 <?php if($cmp_info[0]['companyinfo_id'] == $cmp->companyinfo_id){
 					 echo "selected=selected";
 				 }?>><?php echo $cmp->cmp_name ?></option>
                  <?php endforeach;?>

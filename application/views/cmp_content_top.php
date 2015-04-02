@@ -59,7 +59,7 @@ exit;*/
      <input type="button" class="follow" value="Follow"  id="follow-btn" data-toggle="modal" data-target="#followModal"  /> <!--onclick="cmpFollowPage(<?php // echo $cmp_info[0]['companyinfo_id']; ?>);-->
               
 			  <?php }else{ ?>
-              <input type="button" class="follow" id ="unfollow-btn" value="Un Follow" onclick="cmpFollowPage(<?php echo $cmp_info[0]['companyinfo_id']; ?>);">
+              <input type="button" class="follow" id ="unfollow-btn" value="UnFollow" onclick="cmpFollowPage(<?php echo $cmp_info[0]['companyinfo_id']; ?>);">
 			  <?php }  } }?>
             </div>
           </div>

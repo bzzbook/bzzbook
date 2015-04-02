@@ -68,6 +68,17 @@ class Jobs extends CI_Controller {
 	endforeach;
 	echo json_encode($job_data);
   }
+  
+  public function search_jobs()
+  {
+	  
+	 $searchjob['industry'] = $this->input->post('industry');
+	 $searchjob['usa_states'] = $this->input->post('usa_states');
+	 $data['jobs'] = $this->jobmodel->search_category_jobs($searchjob);
+	 $data['content']='jobs_search';
+	 $this->load->view('template-view',$data);
+  }
+  
 }
 
 
