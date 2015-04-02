@@ -1,4 +1,4 @@
-    <?php  $image = $this->profile_set->get_profile_pic();	?>
+   <?php  $image = $this->profile_set->get_profile_pic();	?>
     <section class="col-lg-6 col-md-6 col-sm-5 col-xs-12 coloumn2">
       <div class="updateStatus" id="updateStatus">
         <ul>
@@ -53,7 +53,7 @@
 					 echo "<img src='".base_url()."uploads/".$file."' style='width:100%'/>";
 				 }
 				 else
-				 	 echo "<img src='".base_url()."uploads/".$file."' style='width:24%;float:left;margin-right:1%'/>";
+				 	 echo "<img src='".base_url()."uploads/".$file."' style='width:24%;float:left;margin-right:1%; height:83px'/>";
 				 $i++;
 			 }
 			 echo "<div style='clear:both'></div>";

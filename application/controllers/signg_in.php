@@ -157,8 +157,6 @@ class signg_in extends CI_Controller {
 					if ( ! $this->upload->do_upload())
 					{
 						$error = array('error' => $this->upload->display_errors());
-						print_r($error);
-						exit;
 						//$this->load->view('uploadform', $error);
 					}
 					else
