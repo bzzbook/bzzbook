@@ -62,10 +62,10 @@ $(function () {
 <script src="<?php echo base_url(); ?>js/jquery.validate.min.js"></script>
 <script src="<?php echo base_url(); ?>js/additional-methods.js"></script>
 <script src="<?php echo base_url(); ?>js/countries.js"></script>
-<!-- <script src="<?php // echo base_url(); ?>js/usa_states.js"></script> -->
+<script src="<?php echo base_url(); ?>js/usa_states.js"></script>
 <script language="javascript">print_country("country");</script>  
 <script src="<?php echo base_url(); ?>js/jquery.jqtransform.js"></script>
-<!--<script language="javascript">print_usa_states("usa_states");</script> --> 
+<script language="javascript">print_usa_states("usa_states");</script>
 <script src="<?php echo base_url(); ?>js/lightbox.min.js"></script>
 <script src="<?php echo base_url(); ?>js/jquery.uploadfile.min.js"></script>
 <script>
@@ -73,7 +73,9 @@ $(function () {
 		$('.select').jqTransform({ imgPath: '' });
 		});*/
    $('#email_invite').validate();
-   $('#upload_file').validate(); 
+   $('#upload_file').validate();
+   $('#search_job').validate(); 
+   
 </script>
 <script>
 $(document).ready(function()
@@ -416,7 +418,7 @@ var pass=$('#pwd').val();
 }
  $('#profile_interchange').change(function(){
      id = $(this).val();
-	 if(id  ==  'user')
+	 if(id == 'user')
 	 {
 	  url="<?php echo base_url(); ?>profile";
 	 }else{
@@ -623,19 +625,17 @@ function cmpFollowPage(id)
 	var value = $('#follow-btn').prop('value');
 	var option = $('#follow_option').val();
 	urlfollow="<?php echo base_url(); ?>company/cmp_view_follow/"+id+"/"+option;
-	urlunfollow="<?php echo base_url(); ?>company/cmp_view_unfollow/"+id+"/"+option;;
-	
-	alert(value);
-	alert(option);
+	urlunfollow="<?php echo base_url(); ?>company/cmp_view_unfollow/"+id+"/"+option;
 	if(value == 'Follow')
 	{
 		$.ajax({
         type: "POST",
         url: urlfollow
 		}).done(function(){
-      $('#follow-btn').val('Un Follow');
+		$(this).hide();	
+      $('#unfollow-btn').show();
 	  $('#followModal').modal('toggle');
-	  
+	   location.reload();
 		});
 		
 	}else{
@@ -643,8 +643,9 @@ function cmpFollowPage(id)
         type: "POST",
         url: urlunfollow
 		}).done(function(){
-      $('#follow-btn').val('Follow');
-		
+			
+       $('#follow-btn').show();
+		 location.reload();
 		});
 		
 	}
