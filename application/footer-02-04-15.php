@@ -62,10 +62,10 @@ $(function () {
 <script src="<?php echo base_url(); ?>js/jquery.validate.min.js"></script>
 <script src="<?php echo base_url(); ?>js/additional-methods.js"></script>
 <script src="<?php echo base_url(); ?>js/countries.js"></script>
-<script src="<?php echo base_url(); ?>js/usa_states.js"></script>
+<!-- <script src="<?php // echo base_url(); ?>js/usa_states.js"></script> -->
 <script language="javascript">print_country("country");</script>  
 <script src="<?php echo base_url(); ?>js/jquery.jqtransform.js"></script>
-<script language="javascript">print_usa_states("usa_states");</script>
+<!--<script language="javascript">print_usa_states("usa_states");</script> --> 
 <script src="<?php echo base_url(); ?>js/lightbox.min.js"></script>
 <script src="<?php echo base_url(); ?>js/jquery.uploadfile.min.js"></script>
 <script>
@@ -73,9 +73,7 @@ $(function () {
 		$('.select').jqTransform({ imgPath: '' });
 		});*/
    $('#email_invite').validate();
-   $('#upload_file').validate();
-   $('#search_job').validate(); 
-   
+   $('#upload_file').validate(); 
 </script>
 <script>
 $(document).ready(function()
@@ -418,7 +416,7 @@ var pass=$('#pwd').val();
 }
  $('#profile_interchange').change(function(){
      id = $(this).val();
-	 if(id == 'user')
+	 if(id  ==  'user')
 	 {
 	  url="<?php echo base_url(); ?>profile";
 	 }else{
@@ -438,18 +436,10 @@ var pass=$('#pwd').val();
 	</script> -->
     <script type="text/javascript">
 function myfunc(cid){
-	$('#msg'+cid).toggle();
-	$('#des'+cid).toggle();
-	
+	$('#des'+cid).show();
+	$('#msg'+cid).hide();
 
 }
-function popmyfunc(cid){
-	$('#popmsg'+cid).toggle();
-	$('#popdes'+cid).toggle();
-	
-
-}
-
 function likefun(pid,uid,count){
 	var posted_by=pid;
 	var user_id=uid;
@@ -485,7 +475,7 @@ function saveAsFav(pid){
         data: { liked_by: pid } ,
         success: function(html)
         {   
-			alert('saved favorite successfully');
+			
         }
        });	
 }
@@ -633,17 +623,19 @@ function cmpFollowPage(id)
 	var value = $('#follow-btn').prop('value');
 	var option = $('#follow_option').val();
 	urlfollow="<?php echo base_url(); ?>company/cmp_view_follow/"+id+"/"+option;
-	urlunfollow="<?php echo base_url(); ?>company/cmp_view_unfollow/"+id+"/"+option;
+	urlunfollow="<?php echo base_url(); ?>company/cmp_view_unfollow/"+id+"/"+option;;
+	
+	alert(value);
+	alert(option);
 	if(value == 'Follow')
 	{
 		$.ajax({
         type: "POST",
         url: urlfollow
 		}).done(function(){
-		$(this).hide();	
-      $('#unfollow-btn').show();
+      $('#follow-btn').val('Un Follow');
 	  $('#followModal').modal('toggle');
-	   location.reload();
+	  
 		});
 		
 	}else{
@@ -651,9 +643,8 @@ function cmpFollowPage(id)
         type: "POST",
         url: urlunfollow
 		}).done(function(){
-			
-       $('#follow-btn').show();
-		 location.reload();
+      $('#follow-btn').val('Follow');
+		
 		});
 		
 	}
@@ -1200,6 +1191,7 @@ window.onload = function () {
 // share post function START - by vijay on 02-04-15 
 
 function sharePost(post_id){
+	$('#sharePostPopup').html();
 	url="<?php echo base_url(); ?>profile/get_post_byid/"+post_id;
 					$.post( url )
 					.done(function( data ) {
@@ -1208,11 +1200,6 @@ function sharePost(post_id){
 					});
 }
 
-
-	$('#sharePostBtn').click(function() {
-		
-		document.getElementById('share_form').submit(); return false;
-		});
 
 
 // Share post function END
@@ -1225,19 +1212,6 @@ function sharePost(post_id){
 color:red;
 }
 #uploadPhotosdvPreview img{margin-right:5px; }
-#sharePostBtn{
-	background: #609b34;
-  height: 30px;
-  font-size: 14px;
-  line-height: 30px;
-  padding: 0 15px;
-  display: inline-block;
-  -webkit-border-radius: 2px;
-  border-radius: 2px;
-  color: #fff;
-  font-weight: 300;
-}
-
 </style>
 <?php $this->load->view('profile_models'); ?>
 </body>

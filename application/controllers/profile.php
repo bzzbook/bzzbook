@@ -56,7 +56,7 @@ public function business_details()
 	//$this->load->view('business_details',$data);
 }
 
-public function post($user_id)
+public function post($user_id='')
   {	
   	  $data['user_id'] = $user_id;
 	  $data['content']='posts';
@@ -99,9 +99,11 @@ public function jobs()
 	     $this->load->view('template-view',$data);
 	//$this->load->view('jobs');
 }
-public function friends()
+
+public function showfavs()
 {
-	$data['content']='myfriends';
+	$data['user_id'] = '';
+	$data['content']='my_favorites';
 	$this->load->view('template-view',$data);
 	//$this->load->view('jobs');
 }
@@ -546,12 +548,11 @@ public function friends()
 	 	$get_profiledata = $this->customermodel->profiledata($posted_id);
 	    $user_id=$this->session->userdata('logged_in')['account_id'];
 		
-		$content = "     <div class='posts'><article>
-<div class='pfInfo'> <a href='".base_url()."profile/post/".$get_profiledata[0]->user_id."' class='pfImg'><img src='".base_url()."uploads/".$get_profiledata[0]->user_img_thumb."' alt=''></a>
-            <div class='pfInfoDetails'>
-              <h5><span class='pfname'><a href='".base_url()."profile/post/".$get_profiledata[0]->user_id."'>".ucfirst($get_profiledata[0]->user_firstname)."&nbsp;".ucfirst($get_profiledata[0]->user_lastname)."</a></span></h5>
-              </div>
-          </div>
+		$attr = array('name' => 'share_form', 'id' =>'share_form', 'enctype'=>"multipart/form-data");
+      	
+		$content = form_open('signg_in/share_post',$attr)."<input type='file' name='uploadPhotos[]' id='uploadPhotos' multiple='multiple' style='display:none;' />
+        <textarea cols='' rows='' name='share_post_content' id='posts' class='form-control' placeholder='say something...'></textarea><div class='posts'><article>
+
           <div class='userContent'>";
 		  
 		  if(!empty($row->uploaded_files))
@@ -572,15 +573,27 @@ public function friends()
 			 } 
              
              $content .="</figure>
-            <p>";
+            ";
 			
 			$str_leng=strlen($row->post_content);
 			  if($str_leng>50){
-				$content .= substr($row->post_content,0,50)."...<a href='#' onclick='myfunc(".$row->post_id.")'>more</a>"; 
+				$content .= "<div id='popmsg".$row->post_id."'>".substr($row->post_content,0,50)."...<a href='#' onclick='popmyfunc(".$row->post_id.")'>more</a>"."</div><div id='popdes".$row->post_id."' style='display:none'>".$row->post_content."<a href='#' onclick='popmyfunc(".$row->post_id.")'>less</a></div>
+          </div></article></div><div class='updateControls'> <button id='sharePostBtn'>Post</button> <select name='post_group' id='post_group'><option value='0'>Public</option>"; 
 			 }else{
 				$content .= substr($row->post_content,0,50)."</p>
-          </div></article></div>";
+          </div></article></div><div class='updateControls'> <button id='sharePostBtn'>Post</button> <select name='post_group' id='post_group'><option value='0'>Public</option>";
+		  
 			 }
+		$groups = $this->profile_set->get_user_groups(); if($groups) { 
+		foreach($groups as $group)
+		{
+			$content.="<option value='".$group['group_id']."'>".$group['group_name']."</option>";
+		}
+		
+		
+		} 
+		$content.="</select> </div><input type='hidden' id='uploaded_files' name='uploaded_files' value='".$row->uploaded_files."'><input type='hidden' id='uploaded_files' name='post_content' id='post_content' value='".$row->post_content."'>".form_close();
+			
 			 
 			 echo $content;
 	}

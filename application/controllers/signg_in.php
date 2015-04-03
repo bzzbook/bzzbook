@@ -115,6 +115,34 @@ class signg_in extends CI_Controller {
 	 // redirect(site_url('customer_controller/view_post'));
 	 // redirect(site_url('customer/view_post'));
    }
+   public function share_post()
+  {
+	 
+	 $this->load->model('customermodel');
+	 $session_data = $this->session->userdata('logged_in');
+	 $data['posted_by'] = $session_data['account_id'];
+	 $data['share_post_content'] = $this->input->post('share_post_content');
+	 $data['uploaded_files'] = $this->input->post('uploaded_files');
+	 $data['post_content'] = $this->input->post('post_content');
+	 $data['shared'] = 1;
+	 if($this->input->post('post_group')==0)
+	 {
+		  $data['posted_to']='';
+		   $this->customermodel->share_buzz($data);
+		   echo "post saved successfully..."; 
+		   redirect('profiles');
+	 }
+	 else
+	 {
+		 $result = $this->profile_set->get_groupmembers($this->input->post('post_group'));
+		 $data['posted_to'] = $result[0]['group_members'];
+		 $this->customermodel->share_buzz($data);
+	 }
+	 echo "post saved successfully..."; 
+	 redirect('profiles');
+	 // redirect(site_url('customer_controller/view_post'));
+	 // redirect(site_url('customer/view_post'));
+   }
    function doupload() {
 					$name_array = array();
 					$count = count($_FILES['uploadPhotos']['size']);

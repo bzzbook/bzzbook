@@ -12,7 +12,7 @@
         <?php $attr = array('name' => 'post_form', 'id' =>'my_form', 'enctype'=>"multipart/form-data") ?>
         <?php 
 		echo form_open('signg_in/send_post',$attr) ?>
-        <input type="file" name="uploadPhotos[]" id="uploadPhotos" multiple="multiple" style="display:none;" />
+        <input type="file" name="uploadPhotos[]" id="uploadPhotos" multiple style="display:none;" />
         <textarea cols="" rows="" name="posts" id="posts" class="form-control" placeholder="What's Buzzing?"></textarea>
         <div class="updateControls"> <a href="javascript:{}" onclick="document.getElementById('my_form').submit(); return false;">Post</a> <select name="post_group" id="post_group"><option value="0">Public</option> <?php $groups = $this->profile_set->get_user_groups(); if($groups) { 
 		foreach($groups as $group)
@@ -31,7 +31,7 @@
 	  $curr_user_id = $this->session->userdata('logged_in')['account_id'];
 	  else
 	  $curr_user_id = $user_id;
-	  $products = $this->customermodel->All_Posts($user_id);
+	  $products = $this->customermodel->my_favorites();
 	  if($products):
 	  foreach( $products as $row):
 	  $hrsago = $this->customermodel->get_time_difference_php($row->posted_on);

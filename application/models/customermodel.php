@@ -12,6 +12,10 @@ class Customermodel extends CI_Model {
 		 $this->db->insert('bzz_posts',$data);
 		 return $this->db->insert_id();
 	}
+	function share_buzz($data){
+		 $this->db->insert('bzz_posts',$data);
+		 return $this->db->insert_id();
+	}
 	function post_to_wall($data){
 		 $this->db->insert('bzz_posts_postedto',$data);
 		 return true;
@@ -63,6 +67,30 @@ class Customermodel extends CI_Model {
 	   } 
 	   else 
 	   return false;
+   }
+   public function my_favorites()
+   {
+	   $id = $this->session->userdata('logged_in')['account_id'];
+	   $condition = "user_id ='".$id."'";
+	   $this->db->select('*');
+	   $this->db->from('bzz_favorites');
+	   $this->db->where($condition);
+	   $query = $this->db->get();
+   	   if ($query->num_rows() > 0) {
+	   		$result =  $query->result();
+			$post_ids = array();
+			foreach($result as $row)
+			{
+				$post_ids[] = $row->post_id;
+			}
+		   $this->db->select('*');
+		   $this->db->from('bzz_posts');
+		   $this->db->where_in('post_id',$post_ids);
+		   $query = $this->db->get();
+   	       if ($query->num_rows() > 0) {
+	   		return $result =  $query->result();
+		   }
+	   }
    }
    public function profiledata($id){
 	    $condition = "user_id =" . "'" . $id . "'";
