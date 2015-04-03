@@ -215,6 +215,30 @@ public function managecompanydata($data)
 	   }
 	   
 	   
+	   public function company_follow_req_accept($user_id,$cmp_id,$follow_status='Y')
+	   { 
+		     $data['follow_status'] = $follow_status;
+		     $condition =  "user_id =" . "'" . $user_id . "'" . " AND " . "companyinfo_id = ". "'" .$cmp_id."'";
+		     $this->db->where($condition);
+		     $this->db->update('bzz_cmp_follow',$data);
+			
+			 $pend_req = $this->getPendingFollowRequests();
+			
+			$list = "";
+		    if($pend_req) { foreach($pend_req as $req){
+           $list .= " <li>
+              <figure><img src='".base_url()."uploads/".$req[0]['user_img_thumb']."' alt='".$req[0]['user_img_thumb']."'></figure>
+              <div class='disc'>
+                <h4>" .$req[0]['user_firstname']." ".$req[0]['user_lastname']."</h4>
+                <div class='dcBtn'><a href='javascript:void(0);' onclick='acceptFollow(".$req[0]['user_id'].",".$cmp_id.")'>Confirm</a><a href='javascript:void(0);' onclick='denyFollow(".$req[0]['user_id'].",".$cmp_id.")'>Deny</a></div>
+                </div>
+            </li>";
+             } }else $list = "No Requests Pending";
+			 
+			 echo $list;
+		   
+	   }
+	   
 	   public function company_unfollow($cmpinfo_id)
 	   {
 		   $data= array(
@@ -261,7 +285,7 @@ public function get_mn_cmp_list()
 			   //$condition = "user_id =" . "'" . $friend['friend_id'] ."'  AND follow_status='Y'" ;
 			    $condition = "user_id =" . "'" . $friend['friend_id'] . "'  AND follow_status='Y'" ;
 				$this->db->distinct();
-				$this->db->from('bzz_cmp_follow');
+				$this->db->from('bzz_cmp_follow'); 
 				$this->db->where($condition);
 				$query = $this->db->get();
 				if($query->num_rows()>0)
@@ -332,5 +356,56 @@ public function get_mn_cmp_list()
 		}
 		return false;
 	}
+	
+	public function getPendingFollowRequests()
+	{
+		$user_id =  $this->session->userdata('logged_in')['account_id'];
+		$cmp_id = $this->uri->segment(3,0);
+		$condition =  "user_id =" . "'" . $user_id . "'"; 
+		$this->db->select('*');
+		$this->db->from('bzz_companyinfo');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		$cmp_ids = array();
+		if($query->num_rows() > 0)
+		{
+			
+			$companies = $query->result_array();
+			foreach($companies as $company)
+			{	
+			$cmp_ids[] = $company['companyinfo_id'];
+			}
+		
+		if(in_array($cmp_id,$cmp_ids))
+		{
+			$condition = "companyinfo_id =" . "'" . $cmp_id . "'  AND follow_status='W'" ; 
+			$this->db->select('*');
+			$this->db->from('bzz_cmp_follow');
+			$this->db->where($condition);
+			$query = $this->db->get();
+			$followers = $query->result_array();
+			$user = array();
+			foreach($followers as $follower)
+			{
+				$condition = "user_id =" . "'" . $follower['user_id'] . "'";
+				$this->db->select('*');
+				$this->db->from('bzz_userinfo');
+				$this->db->join('bzz_user_images','bzz_userinfo.user_id=bzz_user_images.user_id AND bzz_userinfo.user_id='.$follower['user_id']);
+				//$this->db->where($condition);
+				$this->db->order_by('bzz_user_images.user_imageinfo_id','desc');
+				$this->db->limit(2);
+				$query = $this->db->get();
+				if($query->num_rows() > 0)
+				{
+				$user_data = $query->result_array();
+				$user[] = $user_data;
+				}
+			}
+		}
+	return $user;
+		 
+	}
+	return false;
+}
 }
 ?>

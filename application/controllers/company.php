@@ -101,7 +101,8 @@ public function addcompany()
 		$data['cmp_colleagues'] = $this->input->post('cmp_colleagues');
 		$data['cmp_about'] = $this->input->post('cmp_about');
 		$data['company_address'] = $this->input->post('company_address');
-		$data['company_state'] = $this->input->post('company_state');
+		$data['company_country'] = $this->input->post('contries');
+		$data['company_state'] = $this->input->post('states');
 		$data['company_city'] = $this->input->post('company_city');
 		$data['company_postalcode'] = $this->input->post('company_postalcode');
 		$data['company_email'] = $this->input->post('company_email');
@@ -128,17 +129,23 @@ public function addcompany()
 	
 	public function cmp_follow($cmpinfo_id)
 	{
-		// $data['friends'] = $this->friendsmodel->confirmfriend($id);	
 		
-	
 	     $data['result'] = $this->companies->company_follow($cmpinfo_id);
-		/* $data['content']='my_companies';
-	     $this->load->view('template-view',$data);*/
-		
+	
 	}
 	public function cmp_view_follow($cmpinfo_id,$follow_as)
 	{
 		  $data['result'] = $this->companies->company_view_follow($cmpinfo_id,$follow_as);
+	}
+	
+	public function cmp_follow_req_accept($user_id,$cmp_id)
+	{
+		$data['result'] = $this->companies->company_follow_req_accept($user_id,$cmp_id);
+	}
+	
+	public function cmp_follow_req_deny($user_id,$cmp_id)
+	{
+		$data['result'] = $this->companies->company_follow_req_accept($user_id,$cmp_id,'N');
 	}
 	
 	public function cmp_view_unfollow($cmpinfo_id)
@@ -155,9 +162,7 @@ public function addcompany()
 	}
 	public function company_disp($cmpinfo_id)
 	{
-		
-	
-		
+
 		$data['cmp_info'] =  $this->companies->get_cmp_by_id($cmpinfo_id);
 		//$id = $this->session->userdata('logged_in')['account_id'];
 		//$this->session->unset_userdata('logged_in');

@@ -659,6 +659,37 @@ function cmpFollowPage(id)
 	}
 }
 
+
+function acceptFollow(user_id,cmp_id)
+{
+	url="<?php echo base_url(); ?>company/cmp_follow_req_accept/"+user_id+"/"+cmp_id;
+		$.ajax({
+        type: "POST",
+        url: url,
+        success: function(data)
+        {   
+			$("#pendingReqUl").html(data);
+		},
+		cache: false
+		});
+}
+
+function denyFollow(user_id,cmp_id)
+{
+	url="<?php echo base_url(); ?>company/cmp_follow_req_deny/"+user_id+"/"+cmp_id;
+		$.ajax({
+        type: "POST",
+        url: url,
+        success: function(data)
+        {   
+			$("#pendingReqUl").html(data);
+		},
+		cache: false
+		});
+}
+
+
+
 function saveGroup()
 {
 	var list_of_members ='';
@@ -788,7 +819,7 @@ function validateCompanyForm()
 	{
 	 	error_msg +="Please check file format\n";
 	}
-	if(isAlphaNum('cmp_name'))
+	if(document.getElementById('cmp_name') != '')
 	{
 	     error_msg +='';
 	}
