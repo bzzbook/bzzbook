@@ -152,7 +152,7 @@ public function managecompanydata($data)
 			 else{
 			   $data['companyinfo_id'] = $cmpinfo_id;
 			   $data['user_id'] = $id;
-			   $data['follow_status'] = 'Y';
+			   $data['follow_status'] = 'W';
 			   $this->db->insert('bzz_cmp_follow',$data);
 			   
 			   //dynamic list display
