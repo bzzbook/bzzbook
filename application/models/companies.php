@@ -367,44 +367,45 @@ public function get_mn_cmp_list()
 		$this->db->where($condition);
 		$query = $this->db->get();
 		$cmp_ids = array();
+		$user = array();
 		if($query->num_rows() > 0)
 		{
 			
+			
 			$companies = $query->result_array();
-			foreach($companies as $company)
-			{	
-			$cmp_ids[] = $company['companyinfo_id'];
-			}
-		
+				foreach($companies as $company)
+				{	
+				$cmp_ids[] = $company['companyinfo_id'];
+				}
+			
 		if(in_array($cmp_id,$cmp_ids))
-		{
+			{
 			$condition = "companyinfo_id =" . "'" . $cmp_id . "'  AND follow_status='W'" ; 
 			$this->db->select('*');
 			$this->db->from('bzz_cmp_follow');
 			$this->db->where($condition);
 			$query = $this->db->get();
 			$followers = $query->result_array();
-			$user = array();
-			foreach($followers as $follower)
-			{
-				$condition = "user_id =" . "'" . $follower['user_id'] . "'";
-				$this->db->select('*');
-				$this->db->from('bzz_userinfo');
-				$this->db->join('bzz_user_images','bzz_userinfo.user_id=bzz_user_images.user_id AND bzz_userinfo.user_id='.$follower['user_id']);
-				//$this->db->where($condition);
-				$this->db->order_by('bzz_user_images.user_imageinfo_id','desc');
-				$this->db->limit(2);
-				$query = $this->db->get();
-				if($query->num_rows() > 0)
+			
+				foreach($followers as $follower)
 				{
-				$user_data = $query->result_array();
-				$user[] = $user_data;
-				}
-			}
+					$condition = "user_id =" . "'" . $follower['user_id'] . "'";
+					$this->db->select('*');
+					$this->db->from('bzz_userinfo');
+					$this->db->join('bzz_user_images','bzz_userinfo.user_id=bzz_user_images.user_id AND bzz_userinfo.user_id='.$follower['user_id']);
+					//$this->db->where($condition);
+					$this->db->order_by('bzz_user_images.user_imageinfo_id','desc');
+					$this->db->limit(2);
+					$query = $this->db->get();
+					if($query->num_rows() > 0)
+					{
+					$user_data = $query->result_array();
+					$user[] = $user_data;
+					}
+			    }
 		}
 	return $user;
-		 
-	}
+		}
 	return false;
 }
 }
