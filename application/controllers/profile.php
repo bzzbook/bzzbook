@@ -597,5 +597,12 @@ public function showfavs()
 			 
 			 echo $content;
 	}
+	public function friends()
+	{
+		$data['content']='myfriends';
+		$this->load->view('template-view',$data);
+		//$this->load->view('jobs');
+	}
+
 }
 ?>
