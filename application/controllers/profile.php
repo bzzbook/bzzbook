@@ -41,7 +41,7 @@ public function about_me()
 	$data['result'] = $this->profile_set->save_settings();
 	$data['education_details'] = $this->profile_set->geteducationList();
 	$data['content']='about_me';
-	$this->load->view('template-view',$data);
+	$this->load->view('full_content_view',$data);
 	//$this->load->view('about_me',$data);
 }
 

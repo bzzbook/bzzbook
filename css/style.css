@@ -95,7 +95,7 @@ header .search .input-group .input-group-btn ul li a:hover{ background:url(../im
 .midbody ad{ padding-bottom:24px;}
 .midbody ad img{ width:100%;}
 
-.midbody .coloumn2{ padding:0;}
+/*.midbody .coloumn2{ padding:0;}*/
 .midbody .coloumn2 .updateStatus{ background:#f9f8f8; border:1px solid #ececec; border-top:none; margin-bottom:15px;}
 .midbody .coloumn2 .updateStatus ul{ border-bottom:1px solid #ececec; display:flex;}
 .midbody .coloumn2 .updateStatus ul li{ list-style:none; float:left; height:60px; line-height:60px;}
@@ -112,7 +112,7 @@ header .search .input-group .input-group-btn ul li a:hover{ background:url(../im
 .posts article .pfInfo{ display:flex; margin-bottom:15px;}
 .posts article .pfInfo .pfImg{ border:1px solid #ccc; margin-right:10px;}
 .posts article .pfInfo .pfImg{ width:50px; height:50px;}
-.posts article .pfInfo .pfImg img{ width:50px; height:50px;}
+.posts article .pfInfo .pfImg img{ width:100%;}
 .posts article .pfInfo .pfInfoDetails h5{ font-weight:300; font-size:16px; padding-top:5px; }
 .posts article .pfInfo .pfInfoDetails h5 .pfname{ font-weight:500; text-transform:capitalize;}
 .posts article .pfInfo .pfInfoDetails h5 a{ color:#2c2c2c;}
@@ -277,12 +277,13 @@ footer.home h3 em{ color:#fdc70f; font-style:normal;}
 
 .aboutme h2{ background:url(../images/about.png) no-repeat 0 center; padding:0 0 0 30px; height:42px; line-height:42px; font-size:18px;}
 .aboutme .nav-tabs{ border:none;}
-.aboutme .nav-tabs li{ float:none; list-style:none; height:50px; line-height:50px; border-bottom:1px solid #eeeeee;}
-.aboutme .nav-tabs li a{ border:none !important; background:none !important; color:#737373; font-weight:300; }
+.aboutme .nav-tabs li{ float:none; list-style:none; border-bottom:1px solid #eeeeee;}
+.aboutme .nav-tabs li:last-child{ border:none;}
+.aboutme .nav-tabs li a{ border:none !important; background:none !important; color:#737373; font-weight:300; line-height:50px; display:block; }
 .aboutme .nav-tabs li.active a{ font-weight:500;}
-.aboutme .tab-pane{ padding:15px 0;}
+/*.aboutme .tab-pane{ padding:15px 0;}*/
 .aboutme .tab-pane h4{ color:#fbc436; padding-bottom:8px;}
-.aboutme .tab-pane p{ color:#737373; font-size:14px; padding-bottom:25px; font-weight:300;}
+.aboutme .tab-pane p{ color:#737373; font-size:14px; /*padding-bottom:25px;*/ font-weight:300;}
 .aboutme .tab-content{ border-left:1px solid #eeeeee; min-height:200px;}
 
 
@@ -636,29 +637,123 @@ border-radius: 4px;
 float:right;
 margin-right:10px;
 }
+.btn2{ 
+font-family:font-size:16px; font-family: 'Roboto', sans-serif; font-weight:300;	
+display: inline-block;
+margin-bottom: 0px;
+font-weight: normal;
+text-align: center;
+vertical-align: middle;
+cursor: pointer;
+background-image: none;
+border: 1px solid transparent;
+white-space: nowrap;
+padding:8px;
+font-size: 14px;
+border-radius: 2px;
+line-height: 1.42857;
+-moz-user-select: none;	
+float:right; margin-top:10px;
+
+}
+.btn3{ 
+font-family:font-size:12px; font-family: 'Roboto', sans-serif; font-weight:300;	
+display: inline-block;
+margin-bottom: 0px;
+font-weight: normal;
+text-align: center;
+vertical-align: middle;
+cursor: pointer;
+background-image: none;
+border: 1px solid transparent;
+white-space: nowrap;
+padding:4px;
+font-size: 14px;
+border-radius: 2px;
+line-height: 1.42857;
+-moz-user-select: none;	
+float:right; margin-top:10px;
+
+}
 .myfriendspfpic{
 	height:75px;
 	overflow:hidden;
+}
+.btn-green {
+    background-color: #609b34;
+      color: #fff; margin-right:10px;
 }
 
 /*Profile about*/ 
 .ProfileView { padding-right:0;}
 .ProfileView .cmpLeft{ padding:0;}
-.ProfileView .visitorBox .visitiBoxInner{ padding:5px; background:#f9f8f8; margin:15px 0; border:1px solid #e9e9e9; position:relative; }
-.ProfileView .visitorBox .visitiBoxInner .compCover{ width:100%; height:300px; overflow:hidden; position:relative;}
+.ProfileView .visitorBox .visitiBoxInner{background:#f9f8f8; margin:-1px 0 10px 0; position:relative; }
+.ProfileView .visitorBox .visitiBoxInner .compCover{ width:100%; height:auto; overflow:hidden; position:relative;}
 .ProfileView .visitorBox .visitiBoxInner .compCover img{ width:100%; }
-.ProfileView .visitorBox .visitiBoxInner .profileLogo{ position:absolute; width:200px; right:60px; top:60px;}
-.ProfileView .visitorBox .visitiBoxInner .profileLogo .cmplogo img{ width:100%; height:165px;}
-.ProfileView .visitorBox .visitiBoxInner .profileLogo .cmplogo{ border: 1px solid #868686; padding:5px; display:flex;}
-.ProfileView .visitorBox .visitiBoxInner .profileLogo .ProfileViewNav{}
+.ProfileView .visitorBox .visitiBoxInner .profileLogo{ position:absolute; width:200px; height:223px; left:66px; top:35px; overflow:hidden;}
+.ProfileView .visitorBox .visitiBoxInner .profileLogo .cmplogo img{ width:100%; height:110px;}
+.ProfileView .visitorBox .visitiBoxInner .profileLogo .cmplogo{ border: 3px solid #fbc436; -webkit-border-radius: 90px 90px 90px 90px;
+border-radius: 90px 90px 90px 90px; height: 110px; width: 110px; overflow: hidden;}
+
 
 .ProfileView .visitorBox .visitiBoxInner .companyDetails .cmpContent .follow{ display:inline-block; font-size:14px; color:#fff; background:#fbc436; padding:10px 20px; -webkit-border-radius:2px; border-radius:2px; border:none; margin-left:10px;}
+.ProfileView .visitorBox .visitiBoxInner .profileLogo .cmplogo .change-photo { background: rgba(251, 196, 54, 0.9); bottom:40px;  color: #000;  display: block;  font-size:12px;
+ padding: 6px;  position: absolute;   top: inherit;   width: 50%;}
+/*.ProfileView .visitorBox .visitiBoxInner .profileLogo .cmplogo span.inside .change-photo { background: rgba(251, 196, 54, 0.9); bottom:40px;  color: #000;  display: block;  font-size:12px; padding: 6px;  position: absolute;   top: inherit;   width: 50%;}*/
+ 
+.ProfileView .visitorBox .visitiBoxInner .profileLogo .cmplogo .change-photo em{ font-size:9px; font-style:normal; position:relative; top:-2px; left:10px; font-family: 'Roboto', sans-serif; } 
 
-.compCover::before { background: none repeat scroll 0 0 #000;  content: "";  height: 100%;  position: absolute;  width: 100%; opacity:0.6;}
+.profile-name {  bottom: 84px;  color: #ffffff;  font-size: 20px;  font-weight: bold;  letter-spacing: 1px;  position: absolute;  left: 88px;}
+
+
+.compCover::before { background: none repeat scroll 0 0 #000;  content: "";  height: 100%;  position: absolute;  width:30%; opacity:0.6;}
 .ProfileView .coloumn1 aside, .ProfileView .coloumn2 .updateStatus{border-top:1px solid #e9e9e9;}
 .nopad{ padding:0 !important;}
-.profsettings{ width:58px; height:58px; }
-.headeruserimg{ width:60px; height:60px; }
 
-.pfname a:hover{ text-decoration:underline; }
-.pfname a{color:#337AB7 !important; }
+
+.about-user-details{ border:1px solid #e9e9e9; clear:both; margin-left:15px; background-color: #fff;  margin-bottom: 25px;}
+.about-user-details h4{ height:58px; line-height:58px; padding:0 15px; background:#fbc436; border-bottom:1px solid #d3d6db; font-size:24px; color:#fff; margin-bottom:20px;}
+.about-user-details h4 span{ margin-right:10px; position:relative; /*top:3px;*/}
+.about-user-details h4 span.glyphicon{ color:#606060 !important;}
+
+.smallboxes h3{ font-size:16px; font-family: 'Roboto', sans-serif; font-weight:300; color:#646464; padding-top:10px; }
+.smallboxes ul { list-style:none; }
+.smallboxes ul li{ border-bottom:1px solid #efefef; padding-bottom:15px; margin-bottom:15px;}
+.iner_lefts{ float: left; width:43px; height:39px; background:#ececec; padding-right:15px; float:left; margin-right:9px;}
+
+.iner_mail{ float: left; padding-right:15px; float:left; margin-right:9px;}
+
+.iner_lefts img{ padding: 11px 0 0 14px;}
+.iner_rights{ float:right;}
+.graphic{ color:#609b34; font-size:12px; text-align:center; line-height:22px;}
+.graphic a{ color:#609b34;}
+.graphic a:hover{color:#609b34;}
+.iner_lefts .fa{ position:fixed;}
+.addresbox ul{ list-style:none;}
+.addresbox li{ padding:0; margin:0; float:left; font-size:14px; font-family: 'Roboto', sans-serif; font-weight:300; color:#646464; line-height:22px;}
+.addresbox .boxicon{ float:left; padding-right:5px;}
+.addresbox .boxicon_text{ float:right;}
+
+.my_companys ul{ list-style:none;}
+.my_companys li{ border: 1px solid #eee;  font-size:14px; font-family: 'Roboto', sans-serif; font-weight:300; color:#646464; line-height:22px; margin-bottom:15px;}
+.my_companys .company_box_img{ width:143px; height:157px; overflow:hidden; float:left;}
+.my_companys .company_box_right{ float:right;}
+.my_companys .company_box_right h3{ font-size:18 px; font-family: 'Roboto', sans-serif; font-weight:bold; color:#606060;  padding-top: 15px; border-bottom:1px solid #d5d5d5;  margin-bottom: 10px; }
+.my_companys .company_box_right span{  border-bottom: 3px solid #fbc436; line-height: 37px;  padding-bottom: 8px; width: 92px;}
+.iner_business ul{ list-style:none;}
+.iner_business li{border-bottom: 1px solid #efefef;  padding: 10px 0;}
+.iner_business h3{  color: #646464; font-family: "Roboto",sans-serif; font-size: 16px;}
+/*My Photos*/
+.about-user-details .userPhotos .photoThumb figure{ height:155px !important;}
+.about-user-details .userPhotos .photoThumb{ margin-bottom:20px; position:relative; overflow:hidden;}
+.about-user-details .userPhotos .photoThumb .phOptions{ position:absolute; bottom:0; background:rgba(0, 0, 0, 0.5); width:86%; height:30px;}
+.about-user-details .userPhotos .photoThumb .phOptions span{ position:absolute;}
+.about-user-details .userPhotos .photoThumb .phOptions span.mpImg{top:-16px; left:-5px;}
+.about-user-details .userPhotos .photoThumb .phOptions span.mpLike{ right:50px; top:4px; margin-right:10px;}
+.about-user-details .userPhotos .photoThumb .phOptions span.mpComment{ right:15px; top:4px;}
+.about-user-details .userPhotos .photoThumb .phOptions span a em{ color:#c9c9c9; font-style:normal; margin-left:5px; font-size:12px;}
+.about-user-details .userPhotos .photoThumb .mpView{ position:absolute; z-index:9; left:50%; margin-left:-36px; top:-42px; opacity:0; }
+.about-user-details .userPhotos .photoThumb:hover .mpView{ position:absolute; z-index:9; left:50%; margin-left:-36px; top:39px; opacity:1;}
+.about-user-details .userPhotos .photoThumb .mpViewvid{ position:absolute; z-index:9; left:50%; margin-left:-21px; top:-42px; opacity:0; }
+.about-user-details .userPhotos .photoThumb:hover .mpViewvid{ position:absolute; z-index:9; left:50%; margin-left:-21px; top:45px; opacity:1;}
+.about-user-details{ margin-bottom:15px;}
