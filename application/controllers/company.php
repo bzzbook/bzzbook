@@ -111,7 +111,16 @@ public function addcompany()
 		$data['company_fax'] = $this->input->post('company_fax');
 		$data['user_id']= $this->session->userdata('logged_in')['account_id'];
 		
-		 $data['result'] = $this->companies->managecompanydata($data);
+		 $companyinfo_id = $this->companies->managecompanydata($data);
+		 
+		 $settings['profile_visible'] = 'Y';
+		 $settings['comments_visible'] = 'Y';
+		 $settings['email_notification'] = 'Y';
+		 $settings['user_id'] = $this->session->userdata('logged_in')['account_id'];
+		 $settings['companyinfo_id'] = $companyinfo_id;
+		 
+		 $resut = $this->companies->managecmp_settings($settings);
+		 
 		 $data['content']='my_companies';
 	     $this->load->view('template-view',$data);
 		//$img_name ="52.jpg";
@@ -176,9 +185,73 @@ public function geturisegment()
 {
 	return $this->uri->segment(3,0); 
 }
+
+public function get_company_byid($id)
+{
+	$data['industry'] = $this->lookup->get_lookup_industry();
+	$data['cmp_info'] =  $this->companies->get_cmp_by_id($id);
+	//$data['company'] = $this->companies->get_cmp_by_id($id);
+	$data['content']='cmp_settings';
+	$this->load->view('cmp-template-view',$data);
+		
+}
+
+public function pic_upload()
+{
+	
+		$config['upload_path'] = './uploads/';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$config['create_thumb'] = TRUE;
+		$config['max_size']	= '';
+		$config['max_width']  = '';
+		$config['max_height']  = '';
+
+		$this->load->library('upload', $config);
+
+		if ( ! $this->upload->do_upload())
+		{
+			$error = array('error' => $this->upload->display_errors());
+		}
+		else
+		{
+	$data = $this->upload->data();
+	$id = $this->input->post('cmp_id');
+	$dataa = array(
+	'company_image' => $data['file_name']
+	);
+	$result = $this->companies->update_pic($dataa,$id);
+	$this->get_company_byid($id);
+}
 }
 
 
+public function updateprivacy($id)
+{
+	parse_str($_POST['formdata'],$privacyformdata);
+   echo $this->companies->updatePrivacyInfo($privacyformdata,$id);
+	
+}
+public function updateemailnotification($id)
+  {
+	  	parse_str($_POST['formdata'],$notificationdata);
+		echo $this->companies->updateEmailInfo($notificationdata,$id);
+  }
+  
+public function updateabout($id)
+  {
+		parse_str($_POST['form_data'], $aboutformdata);
+	   echo $this->companies->updateAboutInfo($aboutformdata,$id);
+  }
+  
+   public function postboard_update($id)
+  {
+	  parse_str($_POST['form_data'],$postboard_info);
+	if($this->companies->managepostboarddata($postboard_info,$id))
+	echo "success";
+	else
+	return false;
+  }
+}
 
 
 ?>

@@ -1247,6 +1247,64 @@ function sharePost(post_id){
 
 
 // Share post function END
+
+//cmp_privacy form & email notifications updatte by sp
+
+	$("form[name=about_cmp]").submit(function(event){
+		alert("hai");
+			   url="<?php echo base_url();?>company/updateabout/<?php echo $this->uri->segment(3,0) ?>";
+				 $.ajax({
+        			type: "POST",
+			        url: url,
+			        data: { form_data: $(this).serialize()} ,
+        			success: function(html)
+			        {   
+            			if(html == true)
+							alert("Information Updated");
+						else
+							alert("Something went wrong Please try after sometime");
+			        }
+			       });			
+				event.preventDefault();
+			});
+
+$("#cmp_privacy_form").submit(function( event ){
+					 url="<?php echo base_url();?>company/updateprivacy/<?php echo $this->uri->segment(3,0); ?>";
+					$.post( url, { formdata: $(this).serialize() })
+					.done(function( data ) {
+					   	if(data == true)
+							alert("Information Updated");
+						else
+							alert("Something Went wrong please try again after sometime");
+					  });
+					event.preventDefault();
+			});
+			
+	$("#cmp_emailnotification").submit(function( event ){
+				url="<?php echo base_url();?>company/updateemailnotification/<?php echo $this->uri->segment(3,0); ?>";
+				$.post( url, { formdata: $(this).serialize() })
+					.done(function( data ) {
+					   	if(data == true)
+							alert("Information Updated");
+						else
+							alert("Something Went wrong please try again after sometime");
+					  });
+					event.preventDefault();
+			});			
+$("form[name=cmp_postboard]").submit(function(event){
+			   url="<?php echo base_url();?>company/postboard_update/<?php echo $this->uri->segment(3,0); ?>";
+				 $.ajax({
+        			type: "POST",
+			        url: url,
+			        data: { form_data: $(this).serialize()} ,
+        			success: function(html)
+			        {   
+            			alert("Information Updated");
+						
+			        }
+			       });			
+				event.preventDefault();
+			});		
 </script>
 
 

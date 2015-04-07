@@ -9,7 +9,7 @@ exit;*/
  
 //$cmp_info = $this->companies->get_cmp_by_id($cmp_id); 
 /*print_r($data);
-print_r($cmp_info);
+
 
 print_r( $cmp_info[0]['companyinfo_id'] );
 print_r( $data[0]['companyinfo_id'] );

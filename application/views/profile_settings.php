@@ -73,10 +73,7 @@
                 
             </div>
 </section><?php */?>
-                 
-                 
-                 
-                 
+       
                  <h4>Location Info</h4>
                <form name="postboard" id="postboard" method="POST" action="">
              <div class="field col-md-6 ">

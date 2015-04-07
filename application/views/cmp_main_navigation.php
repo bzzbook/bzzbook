@@ -13,7 +13,7 @@
           <a href="#" class="navbar-brand">Menu</a> </div>
         <div class="collapse navbar-collapse bs-example-js-navbar-collapse">
           <ul class="nav navbar-nav">
-            <li> <a  href="#">Company Profile</a></li>
+            <li> <a  href="<?php echo base_url("company/get_company_byid/".$cmp_info[0]['companyinfo_id']); ?>">Company Profile</a></li>
             <li> <a  href="#">Company Info</a></li>
             <li> <a  href="#">Post Board</a></li>
             <li> <a  href="<?php echo base_url("jobs/disp_jobs/".$cmp_info[0]['companyinfo_id']); ?>">Applicants</a></li>

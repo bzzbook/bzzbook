@@ -85,7 +85,7 @@ public function managecompanydata($data)
 		'user_id'=>$this->session->userdata('logged_in')['account_id']
 		);*/
 	   if( $this->db->insert('bzz_companyinfo',$data))
-	   return true;
+	   return $this->db->insert_id();
 	   else
 	   return false;
 	
@@ -107,6 +107,15 @@ public function managecompanydata($data)
 		}else{
 			return false;
 		}
+	   }
+	   
+	   
+	   public function managecmp_settings($data)
+	   {
+		   if($this->db->insert('bzz_cmpsettings',$data))
+		   return true;
+	   else
+	   return false;
 	   }
 	   
 	  public function company_follow($cmpinfo_id)
@@ -348,7 +357,8 @@ public function get_mn_cmp_list()
 		$condition = "companyinfo_id =" . "'" . $id . "'";
 		$this->db->select('*');
 		$this->db->from('bzz_companyinfo');
-		$this->db->where($condition);
+	    $this->db->join('bzz_cmpsettings','bzz_companyinfo.companyinfo_id = bzz_cmpsettings.companyinfo_id AND bzz_companyinfo.companyinfo_id ='.$id);
+	//	$this->db->where($condition);
 		$query = $this->db->get();
 		if($query->num_rows() == 1)
 		{
@@ -408,5 +418,84 @@ public function get_mn_cmp_list()
 		}
 	return false;
 }
+
+public function updatePrivacyInfo($data,$id)
+{
+	
+		$updatedata = array(
+		'profile_visible'=>$data['profile_visible'],
+		'comments_visible'=>$data['comments_visible']
+		);
+		$condition =   "companyinfo_id =" . "'" . $id . "'"; 
+		$this->db->where($condition);
+		if($this->db->update('bzz_cmpsettings',$updatedata))
+			return true;
+		else
+			return false;	
+   
+}
+
+   public function updateEmailInfo($data,$id)
+   {
+	  $updatedata = array(
+		'email_notification'=>$data['email_notofication'],
+	  );
+	  $condition = "companyinfo_id =" . "'" . $id . "'"; 
+	  $this->db->where($condition);
+	  if($this->db->update('bzz_cmpsettings',$updatedata))
+			return true;
+		else
+			return false;
+   }
+   
+    public function updateAboutInfo($data,$id)
+   {
+	$updateddata = array(
+		'cmp_colleagues' => $data['cmp_colleagues'],
+		'company_phone' => $data['cmp_phone'],
+		'company_office' => $data['cmp_office'],
+		'company_email' => $data['cmp_email'],
+		'company_fax' => $data['cmp_fax']
+	);
+	 $condition = "companyinfo_id =" . "'" . $id . "'"; 
+	 $this->db->where($condition);
+	if($this->db->update('bzz_companyinfo',$updateddata))
+	return true;
+	else
+	return false;	
+   }
+   
+      public function managepostboarddata($data,$id)
+   {
+	   	$userInfo = array(
+		'cmp_name'=>$data['companyname'],
+		'company_country'=>$data['country'],
+		'company_state'=>$data['state'],
+		'company_city'=>$data['city'],
+		'company_postalcode'=>$data['postal_code'],
+		'cmp_industry'=>$data['industry'],
+		'cmp_estb'=>$data['estb'],
+		'cmp_about'=>$data['about_me_info']
+		);
+	 $condition = "companyinfo_id =" . "'" . $id . "'";
+     $this->db->where($condition);
+   if($this->db->update('bzz_companyinfo',$userInfo))
+  return true;
+  else
+  return false;
+		
+   }
+
+public function update_pic($dataa,$id)
+{
+	$condition = "companyinfo_id =" . "'" . $id . "'";  
+	$this->db->where($condition);
+	if($this->db->update('bzz_companyinfo',$dataa))
+	return true;
+	else
+	return false;
+
+}
+
 }
 ?>

@@ -22,11 +22,14 @@ class person extends CI_Model {
 	   }
 	   public function user_info($user_info)
 	   {
-		    $this->db->insert('bzz_userinfo',$user_info);
+		    if($this->db->insert('bzz_userinfo',$user_info))
+			return true;
+			else
+			return false;
 	   }
 	   
 	   
-	     public function user_info($user_id)
+	     public function user_settings($user_id)
 	   {
 		   $data['profile_visible'] = 'y';
 		   $data['email_notification'] = 'y';
