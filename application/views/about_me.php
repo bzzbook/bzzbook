@@ -2,12 +2,14 @@
       <div class="col-xs-12 ProfileView">
         <section class="visitorBox">
           <div class="visitiBoxInner">
-            <figure class="compCover"><img alt="" src="images/about_banner.jpg" class="img-responsive"></figure>
+            <figure class="compCover"><img alt="" src="<?php echo base_url(); ?>images/about_banner.jpg" class="img-responsive"></figure>
+              <?php  $image = $this->profile_set->get_profile_pic();
+			         $data = $this->profile_set->get_userinfo(); ?>
             <div class="profileLogo">
-              <figure class="cmplogo"><a href="#"><span class="glyphicon glyphicon-camera change-photo" aria-hidden="true"><em>Change Picture</em></span></a> <img src="images/about_in.jpg"></figure>
+              <figure class="cmplogo"><a href="#"><span class="glyphicon glyphicon-camera change-photo" aria-hidden="true"><em>Change Picture</em></span></a><img src="<?php echo base_url();?>uploads/<?php echo $image[0]->user_img_thumb ?>" alt="<?php echo base_url();?>uploads/<?php echo $image[0]->user_img_thumb ?>"></figure>
               <!-- <span class="inside glyphicon glyphicon-camera" ></span>--> 
             </div>
-            <h4 class="profile-name">Aaliyah</h4>
+            <h4 class="profile-name"><?php echo $data[0]['user_firstname']." ".$data[0]['user_lastname'] ?></h4>
             <div class="ProfileViewNav"></div>
           </div>
         </section>
@@ -56,7 +58,7 @@
                         <div class="clearfix"></div>
                       </li>
                       <li>
-                        <div class="iner_lefts"><img src="images/addicon.png" alt=""></div>
+                        <div class="iner_lefts"><img src="<?php echo base_url(); ?>images/addicon.png" alt=""></div>
                         <div class="inner_rights">
                           <h3>Add a relationship</h3>
                         </div>
@@ -67,17 +69,18 @@
                   <div class="addresbox col-lg-5 col-md-5 ">
                     <ul>
                       <li>
-                        <div class="boxicon"><img src="images/phoneicon.png" alt=""></div>
-                        <div class="boxicon_text">9876543210</div>
+                        <div class="boxicon"><img src="<?php echo base_url(); ?>images/phoneicon.png" alt=""></div>
+                        <div class="boxicon_text"><?php echo $result[0]->user_phoneno;?></div>
                       </li>
                       <li>
-                        <div class="boxicon"><img src="images/mailicon.png" alt=""></div>
-                        <div class="boxicon_text">987654321@bzzbook<br>
+                        <div class="boxicon"><img src="<?php echo base_url(); ?>images/mailicon.png" alt=""></div>
+                        <div class="boxicon_text"><?php echo $user[0]->user_email;?><br>
                           .com</div>
                       </li>
                       <li>
-                        <div class="boxicon"><img src="images/printicon.png" alt=""></div>
-                        <div class="boxicon_text">December 13, 1994</div>
+                        <div class="boxicon"><img src="<?php echo base_url(); ?>images/printicon.png" alt=""></div>
+                        <div class="boxicon_text"><?php $unixTimestamp = strtotime($user_info[0]['user_dob']); 
+						echo date('d',$unixTimestamp).", ".date('F',$unixTimestamp).", ".date('Y',$unixTimestamp); ?></div>
                       </li>
                     </ul>
                   </div>
@@ -85,11 +88,12 @@
                 <div role="tabpanel" class="tab-pane" id="education">
                   <div class="smallboxes col-md-6">
                     <ul>
+                     <?php if($education_details) { foreach($education_details as $edu): ?>
                       <li>
                         <div class="iner_lefts"></div>
                         <div class="inner_rights">
                           <h3>Institution:</h3>
-                          <p>andhra university</p>
+                          <p><?php echo $edu->college_institution; ?></p>
                         </div>
                         <div class="clearfix"></div>
                       </li>
@@ -97,7 +101,7 @@
                         <div class="iner_lefts"></div>
                         <div class="inner_rights">
                           <h3>Field of Study:</h3>
-                          <p>Computer science</p>
+                          <p><?php echo $edu->field_of_study; ?></p>
                         </div>
                         <div class="clearfix"></div>
                       </li>
@@ -105,7 +109,7 @@
                         <div class="iner_lefts"></div>
                         <div class="inner_rights">
                           <h3>Degree/Certificate:</h3>
-                          <p>Degree</p>
+                          <p><?php echo $edu->degree_certificate; ?></p>
                         </div>
                         <div class="clearfix"></div>
                       </li>
@@ -113,7 +117,7 @@
                         <div class="iner_lefts"></div>
                         <div class="inner_rights">
                           <h3>Years Attended:</h3>
-                          <p>May 1953 - July 1956 </p>
+                          <p><?php echo $edu->attended_from; ?> To <?php echo $edu->attended_upto; ?></p>
                         </div>
                         <div class="clearfix"></div>
                       </li>
@@ -121,10 +125,11 @@
                         <div class="iner_lefts"></div>
                         <div class="inner_rights">
                           <h3>Specialized Studies:</h3>
-                          <p>software developement, testingg </p>
+                          <p><?php echo $edu->specialised_studies; ?></p>
                         </div>
                         <div class="clearfix"></div>
                       </li>
+                        <?php endforeach; } else echo "No Details Found";?>
                     </ul>
                   </div>
                 </div>
@@ -148,7 +153,7 @@
                         <div class="clearfix"></div>
                       </li>
                       <li>
-                        <div class="iner_lefts"><img alt="" src="images/addicon.png"></div>
+                        <div class="iner_lefts"><img alt="" src="<?php echo base_url(); ?>images/addicon.png"></div>
                         <div class="inner_rights">
                           <h3>Add a relationship</h3>
                         </div>
@@ -168,56 +173,56 @@
                         <div class="clearfix"></div>
                       </li>
                       <li>
-                        <div class="iner_lefts"><img alt="" src="images/addicon.png"></div>
+                        <div class="iner_lefts"><img alt="" src="<?php echo base_url(); ?>images/addicon.png"></div>
                         <div class="inner_rights">
                           <h3>Add a mobile phone</h3>
                         </div>
                         <div class="clearfix"></div>
                       </li>
                       <li>
-                        <div class="iner_lefts"><img alt="" src="images/addicon.png"></div>
+                        <div class="iner_lefts"><img alt="" src="<?php echo base_url(); ?>images/addicon.png"></div>
                         <div class="inner_rights">
                           <h3>Add your address</h3>
                         </div>
                         <div class="clearfix"></div>
                       </li>
                       <li>
-                        <div class="iner_lefts"><img alt="" src="images/addicon.png"></div>
+                        <div class="iner_lefts"><img alt="" src="<?php echo base_url(); ?>images/addicon.png"></div>
                         <div class="inner_rights">
                           <h3>Add a website</h3>
                         </div>
                         <div class="clearfix"></div>
                       </li>
                       <li>
-                        <div class="iner_lefts"><img alt="" src="images/addicon.png"></div>
+                        <div class="iner_lefts"><img alt="" src="<?php echo base_url(); ?>images/addicon.png"></div>
                         <div class="inner_rights">
                           <h3>Basic Information</h3>
                         </div>
                         <div class="clearfix"></div>
                       </li>
                       <li>
-                        <div class="iner_lefts"><img alt="" src="images/addicon.png"></div>
+                        <div class="iner_lefts"><img alt="" src="<?php echo base_url(); ?>images/addicon.png"></div>
                         <div class="inner_rights">
                           <h3>Add who you're interested in</h3>
                         </div>
                         <div class="clearfix"></div>
                       </li>
                       <li>
-                        <div class="iner_lefts"><img alt="" src="images/addicon.png"></div>
+                        <div class="iner_lefts"><img alt="" src="<?php echo base_url(); ?>images/addicon.png"></div>
                         <div class="inner_rights">
                           <h3>Add a language</h3>
                         </div>
                         <div class="clearfix"></div>
                       </li>
                       <li>
-                        <div class="iner_lefts"><img alt="" src="images/addicon.png"></div>
+                        <div class="iner_lefts"><img alt="" src="<?php echo base_url(); ?>images/addicon.png"></div>
                         <div class="inner_rights">
                           <h3>Add your religious views</h3>
                         </div>
                         <div class="clearfix"></div>
                       </li>
                       <li>
-                        <div class="iner_lefts"><img alt="" src="images/addicon.png"></div>
+                        <div class="iner_lefts"><img alt="" src="<?php echo base_url(); ?>images/addicon.png"></div>
                         <div class="inner_rights">
                           <h3>Add your political views</h3>
                         </div>
@@ -230,14 +235,14 @@
                   <div class="smallboxes">
                     <ul>
                       <li>
-                        <div class="iner_lefts"><img alt="" src="images/addicon.png"></div>
+                        <div class="iner_lefts"><img alt="" src="<?php echo base_url(); ?>images/addicon.png"></div>
                         <div class="inner_rights">
                           <h3>Add your relationship status</h3>
                         </div>
                         <div class="clearfix"></div>
                       </li>
                       <li>
-                        <div class="iner_lefts"><img alt="" src="images/addicon.png"></div>
+                        <div class="iner_lefts"><img alt="" src="<?php echo base_url(); ?>images/addicon.png"></div>
                         <div class="inner_rights">
                           <h3>Add a family member</h3>
                         </div>
@@ -250,21 +255,21 @@
                   <div class="smallboxes">
                     <ul>
                       <li>
-                        <div class="iner_lefts"><img alt="" src="images/addicon.png"></div>
+                        <div class="iner_lefts"><img alt="" src="<?php echo base_url(); ?>images/addicon.png"></div>
                         <div class="inner_rights">
                           <h3>Write some details about yourself</h3>
                         </div>
                         <div class="clearfix"></div>
                       </li>
                       <li>
-                        <div class="iner_lefts"><img alt="" src="images/addicon.png"></div>
+                        <div class="iner_lefts"><img alt="" src="<?php echo base_url(); ?>images/addicon.png"></div>
                         <div class="inner_rights">
                           <h3>Add a nickname, a birth name..</h3>
                         </div>
                         <div class="clearfix"></div>
                       </li>
                       <li>
-                        <div class="iner_lefts"><img alt="" src="images/addicon.png"></div>
+                        <div class="iner_lefts"><img alt="" src="<?php echo base_url(); ?>images/addicon.png"></div>
                         <div class="inner_rights">
                           <h3>Add your favorite quotations</h3>
                         </div>
@@ -277,14 +282,14 @@
                   <div class="smallboxes">
                     <ul>
                       <li>
-                        <div class="iner_lefts"><img alt="" src="images/addicon.png"></div>
+                        <div class="iner_lefts"><img alt="" src="<?php echo base_url(); ?>images/addicon.png"></div>
                         <div class="inner_rights">
                           <h3>Life Events</h3>
                         </div>
                         <div class="clearfix"></div>
                       </li>
                       <li>
-                        <div class="iner_lefts"><img alt="" src="images/addicon.png"></div>
+                        <div class="iner_lefts"><img alt="" src="<?php echo base_url(); ?>images/addicon.png"></div>
                         <div class="inner_rights">
                           <h3>Add a life event</h3>
                         </div>

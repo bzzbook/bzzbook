@@ -67,7 +67,7 @@ class Company extends CI_Controller {
 	{
 		 $data['result'] = $this->companies->companies_list();
 		 $data['content']='my_companies';
-	     $this->load->view('template-view',$data);
+	     $this->load->view('full_content_view',$data);
 	}
 	
 public function addcompany()
@@ -166,7 +166,7 @@ public function addcompany()
 	{ 
 		 $data['result'] = $this->companies->company_unfollow($cmpinfo_id);
 		 $data['content']='my_companies';
-	     $this->load->view('template-view',$data);
+	     $this->load->view('full_content_view',$data);
 		
 	}
 	public function company_disp($cmpinfo_id)

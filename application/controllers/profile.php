@@ -38,6 +38,7 @@ public function profile_setting()
 public function about_me()
 {
 	$data['user'] = $this->profile_set->get_user();
+	$data['user_info'] = $this->profile_set->get_userinfo();
 	$data['result'] = $this->profile_set->save_settings();
 	$data['education_details'] = $this->profile_set->geteducationList();
 	$data['content']='about_me';
@@ -52,7 +53,7 @@ public function business_details()
 	$data['organization_details'] = $this->profile_set->getorganizationList();
 	$data['group_details'] = $this->profile_set->getgroupList();
 	$data['content']='business_details';
-	$this->load->view('template-view',$data);
+	$this->load->view('full_content_view',$data);
 	//$this->load->view('business_details',$data);
 }
 

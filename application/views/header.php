@@ -46,7 +46,7 @@ $session_data = $this->session->userdata('logged_in');
     </div>
     <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
       <div class="curentUser">
-      <?php  $image = $this->profile_set->get_profile_pic();	?>
+      <?php  $image = $this->profile_set->get_profile_pic(); ?>
         <div class="userImg">
          <img class="headeruserimg" src="<?php echo base_url();?>uploads/<?php echo $image[0]->user_img_thumb ?>" alt="<?php echo base_url();?>uploads/<?php echo $image[0]->user_img_thumb ?>"> 
         </div>

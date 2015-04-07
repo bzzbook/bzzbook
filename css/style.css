@@ -675,6 +675,7 @@ line-height: 1.42857;
 float:right; margin-top:10px;
 
 }
+.btn3 a{color:#FFF;}
 .myfriendspfpic{
 	height:75px;
 	overflow:hidden;
@@ -683,7 +684,7 @@ float:right; margin-top:10px;
     background-color: #609b34;
       color: #fff; margin-right:10px;
 }
-
+.btn-green a{color:#FFF;}
 /*Profile about*/ 
 .ProfileView { padding-right:0;}
 .ProfileView .cmpLeft{ padding:0;}
@@ -703,7 +704,7 @@ border-radius: 90px 90px 90px 90px; height: 110px; width: 110px; overflow: hidde
  
 .ProfileView .visitorBox .visitiBoxInner .profileLogo .cmplogo .change-photo em{ font-size:9px; font-style:normal; position:relative; top:-2px; left:10px; font-family: 'Roboto', sans-serif; } 
 
-.profile-name {  bottom: 84px;  color: #ffffff;  font-size: 20px;  font-weight: bold;  letter-spacing: 1px;  position: absolute;  left: 88px;}
+.profile-name {  bottom: 84px;  color: #ffffff;  font-size: 20px;  font-weight: bold;  letter-spacing: 1px;  position: absolute;  left: 59px;}
 
 
 .compCover::before { background: none repeat scroll 0 0 #000;  content: "";  height: 100%;  position: absolute;  width:30%; opacity:0.6;}
