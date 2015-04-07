@@ -57,8 +57,8 @@ $(function () {
 <?php }
 ?>
 <script src="<?php echo base_url(); ?>js/animate-plus.min.js"></script> 
-<!--<script src="<?php //echo base_url(); ?>js/custom.js"></script>-->
-
+<script src="<?php echo base_url(); ?>js/custom.js"></script>
+<script src="<?php echo base_url(); ?>js/jquery.validate.min.js"></script>
 <script src="<?php echo base_url(); ?>js/jquery.validate.min.js"></script>
 <script src="<?php echo base_url(); ?>js/additional-methods.js"></script>
 <script src="<?php echo base_url(); ?>js/countries.js"></script>
@@ -68,6 +68,7 @@ $(function () {
 <script language="javascript">print_usa_states("usa_states");</script>
 <script src="<?php echo base_url(); ?>js/lightbox.min.js"></script>
 <script src="<?php echo base_url(); ?>js/jquery.uploadfile.min.js"></script>
+
 <script>
 		/*$( document ).ready(function() {
 		$('.select').jqTransform({ imgPath: '' });

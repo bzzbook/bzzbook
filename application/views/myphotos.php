@@ -1,42 +1,29 @@
-<?php
-
-//error_reporting (E_ALL ^ E_NOTICE);
+<?php 
 
 $upload_path = "uploads/";		
 $thumb_width = "150";						
 $thumb_height = "150";	
-?>
-
-
-
-<?php 
- $data = $this->profile_set->get_my_pics(); 
+$data = $this->profile_set->get_my_pics(); 
 $videos = $this->profile_set->get_my_videos();
+$user_id = $this->session->userdata('logged_in')['account_id'];
+$profiledata = $this->customermodel->profiledata($user_id);
 ?>
-
-<section class="col-lg-6 col-md-6 col-sm-5 col-xs-12 coloumn2 groupsSt">
-      <h2>My Photos & Videos</h2>
-      <div class="posts">
-        <div class="tabBar form-group" style="padding-bottom:10px">
-        	<div class="col-md-6">
-<span>My Photos ( <?php if($data) echo count($data); else echo " Photos not uploaded ";  ?> ) </span> 
-</div>  
-<?php /*?> <?php $attr = array('id' => 'upload_pics', 'name' => 'upload_pics'); ?> 
- <?php echo form_open_multipart('customer/do_upload',$attr);?>
-<div class="">
-<div id="mulitplefileuploader">Upload</div>
-<div class="clear"></div>
-<div id="status"></div>
-
-</div>
-</form><?php */?>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>cropimage/css/cropimage.css" />
 <link type="text/css" href="<?php echo base_url(); ?>cropimage/css/imgareaselect-default.css" rel="stylesheet" />
 
-
-<div class="clearfix"></div>
-        </div>
-        
+<section class="col-lg-9 col-md-9 nopad">
+      <div class="col-xs-12 ProfileView">
+        <section class="visitorBox">
+          <div class="visitiBoxInner">
+            <figure class="compCover"><img alt="" src="<?php echo base_url(); ?>images/about_banner.jpg" class="img-responsive"></figure>
+            <div class="profileLogo">
+              <figure class="cmplogo"><img src="<?php echo base_url().'uploads/'.$profiledata[0]->user_img_thumb; ?>"></figure>
+              <!-- <span class="inside glyphicon glyphicon-camera" ></span>--> 
+            </div>
+            <h4 class="profile-name"><?php echo $profiledata[0]->user_firstname.' '.$profiledata[0]->user_lastname; ?></h4>
+            <div class="ProfileViewNav"></div>
+          </div>
+        </section>
         <section>
 <div class="container">
 
@@ -68,7 +55,15 @@ $videos = $this->profile_set->get_my_videos();
 					<input type="hidden" name="wr" value="" id="wr" />
 					
 					<input type="hidden" name="filename" value="" id="filename" />
-					<div class="crop_preview_submit"><input type="submit" name="upload_thumbnail" value="Save Thumbnail" id="save_thumb" class="submit_button" /> </div>
+                      <?php /*?> <textarea cols="" rows="" name="posts" id="posts" class="form-control" placeholder="What's Buzzing?"></textarea>
+					<select name="post_group" id="post_group"><option value="0">Public</option> <?php $groups = $this->profile_set->get_user_groups(); if($groups) { 
+		foreach($groups as $group)
+		{
+			echo "<option value='".$group['group_id']."'>".$group['group_name']."</option>";
+		}
+		
+		
+		} ?></select><?php */?> <div class="crop_preview_submit"><input type="submit" name="upload_thumbnail" value="Save Thumbnail" id="save_thumb" class="submit_button" /> </div>
 				</form>
 				
 			</div>
@@ -77,74 +72,52 @@ $videos = $this->profile_set->get_my_videos();
 	
 </div>
 </section>
-        
-        
-    <div class="groupEditBlock">
-     
-     
-       <?php if($data){  foreach($data as $image){ ?>
-        <div class="view second-effect" >
-        <img src="<?php echo base_url();?>uploads/<?php echo $image->image_thumb; ?>" width="137px" />
-        <div class="mask">
-        <a href="<?php  echo base_url();?>uploads/<?php echo $image->image_thumb; ?>" class="info" data-lightbox="example-1" data-lightbox="my_photos">Read More</a>
-        </div>
-        </div>
-        <?php  } } ?>
-     
-     
-			<?php /*?><?php foreach($data as $image){ ?>
-    <figure class="pfpic"><a class="example-image-link" href="<?php echo base_url();?>uploads/<?php echo $image->filename; ?>" data-lightbox="example-1">
-    <img alt="" data-lightbox="my_photos" src="<?php echo base_url();?>uploads/<?php echo $image->filename; ?>" ></a></figure>
-    <?php } ?><?php */?>
-    <div class="clear"></div>
- 
-    </div>      
       </div>
       
-      <div class="posts">
-        <div class="tabBar form-group"  style="padding-bottom:10px">
-        	<div class="col-md-6">
-<span>My Videos ( <?php if($videos) echo count($videos); else echo " Videos not uploaded "; ?> ) </span> 
-</div>  
-<div class="btn1 btn-black fileinput-button"> <span>Upload Video</span> 
+      <section class="about-user-details">
+        <h4><span aria-hidden="true" class="glyphicon glyphicon-picture"></span> My Photos (<?php if($data) echo count($data); else echo " Photos not uploaded ";  ?>)</h4>
+         	<div class="userPhotos">
+             <?php if($data){  foreach($data as $image){ ?>
+            	  <div class="photoThumb col-md-3">
+                	<a href="<?php  echo base_url();?>uploads/<?php echo $image->image_thumb; ?>" class="mpView" data-lightbox="example-1" data-lightbox="my_photos"><img src="<?php echo base_url(); ?>images/mp_view.png" alt=""></a>
+                	<figure><img src="<?php echo base_url();?>uploads/<?php echo $image->image_thumb; ?>" width="100%" alt=""></figure>
+                    <div class="phOptions">
+                    <span class="mpImg"><a href="#"><img src="<?php echo base_url(); ?>images/bzz_icon.png" alt=""></a></span>
+                    <span class="mpLike"><a href="#"><img src="<?php echo base_url(); ?>images/like_myphotos.png" alt=""><em>67</em></a></span>
+                    <span class="mpComment"><a href="#"><img src="<?php echo base_url(); ?>images/comments_myphotos.png" alt=""><em>56</em></a></span>
+                   
+                    </div>
+                </div>
+                 <?php  } } ?>
+                <div class="clear"></div>
+            </div>
+      </section>
+      <section class="about-user-details">
+        <h4><span aria-hidden="true" class="glyphicon glyphicon-facetime-video"></span>My Videos ( <?php if($videos) echo count($videos); else echo " Videos not uploaded "; ?> )<div class="btn1 btn-black fileinput-button"> <span>Upload Video</span> 
                 <!-- The file input field used as target for the file upload widget -->
               <form action="" class="uploadvideoform" method="post" enctype="multipart/form-data">
              <input name="userfile" id="userfile" size="20" required="" type="file">
              </form>    
-                </div>
-<div class="clearfix"></div> 
+                </div></h4>
+         	<div class="userPhotos">
+                <?php  if($videos){ foreach($videos as $video){ ?>
 
-        </div>
-        
-    <div class="groupEditBlock">
-    <?php  if($videos){ foreach($videos as $video){ ?>
-    
-    <?php $extension = substr($video['video_name'], strrpos($video['video_name'], '.')+1); 
-		  if($extension=='wmv'){
-	?>
-    <OBJECT id="mediaPlayer" classid='CLSID:22D6F312-B0F6-11D0-94AB-0080C74C7E95' width="150"
-        height="150" type="application/x-oleobject">
-        <param name='src' value="<?php  echo base_url();?>uploads/<?php  echo $video['video_name']; ?>">		
-	<param name="showcontrols" VALUE="true">
-	<param name="showstatusbar" value="true">
-	<param name="showdisplay" VALUE="false">
-        <param name='autostart' value="true">
-        <param name='loop' value="true">
-        <EMBED type="application/x-mplayer2" src="<?php  echo base_url();?>uploads/<?php  echo $video['video_name']; ?>" width="150" height="150"
-        autostart="false" showcontrols="true" showstatusbar="true" showdisplay="false" loop="true" 
-        name="mediaPlayer" pluginspage="http://microsoft.com/windows/mediaplayer/en/download/">
-        </EMBED>
-        </OBJECT>
-    <?php } else {?>
-    <video width="150" height="150" controls="" style="margin-left:20px">
+            	<div class="photoThumb col-md-3">
+<?php /*?>                	<a href="#" class="mpViewvid"><img src="<?php echo base_url(); ?>images/play_myphotos.png" alt=""></a>
+<?php */?>                	<figure><video width="185" controls="">
   <source src="<?php  echo base_url();?>uploads/<?php  echo $video['video_name']; ?>" type="video/mp4" >
    <!-- <source type="video/mp4" src="http://bzzbook.com/videos/intro.mp4"></source>
 <source type="video/ogg" src="http://bzzbook.com/videos/intro.ogv"></source> -->
-</video>
-<!-- <img alt="" src="images/pf_pic.png" width="125" height="135" style="margin-left:20px"></figure><span></span> -->
-    
-    <?php  } } }?>
-    <div class="clear"></div>
-    </div>
-      </div>
+</video></figure>
+                    <div class="phOptions">
+                    <span class="mpImg"><a href="#"><img src="<?php echo base_url(); ?>images/bzz_icon.png" alt=""></a></span>
+                    <span class="mpLike"><a href="#"><img src="<?php echo base_url(); ?>images/like_myphotos.png" alt=""><em>67</em></a></span>
+                    <span class="mpComment"><a href="#"><img src="<?php echo base_url(); ?>images/comments_myphotos.png" alt=""><em>56</em></a></span>
+                    </div>
+                </div>
+               
+               <?php } }?>
+                <div class="clear"></div>
+            </div>
+      </section>
     </section>

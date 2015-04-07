@@ -330,7 +330,7 @@ public function showfavs()
 		//$data['photos'] = $this->profile_set->get_my_pics();
 		//$data['videos'] = $this->profile_set->get_my_videos();
 		$data['content']='myphotos';
-		$this->load->view('template-view',$data);
+		$this->load->view('full_content_view',$data);
 		
 	}
 	public function upload_thumb()

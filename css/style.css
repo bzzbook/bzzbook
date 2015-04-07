@@ -757,3 +757,8 @@ border-radius: 90px 90px 90px 90px; height: 110px; width: 110px; overflow: hidde
 .about-user-details .userPhotos .photoThumb .mpViewvid{ position:absolute; z-index:9; left:50%; margin-left:-21px; top:-42px; opacity:0; }
 .about-user-details .userPhotos .photoThumb:hover .mpViewvid{ position:absolute; z-index:9; left:50%; margin-left:-21px; top:45px; opacity:1;}
 .about-user-details{ margin-bottom:15px;}
+.profsettings{ width:58px; height:58px; }
+.headeruserimg{ width:60px; height:60px; }
+
+.pfname a:hover{ text-decoration:underline; }
+.pfname a{color:#337AB7 !important; }
