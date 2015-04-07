@@ -93,7 +93,7 @@ $profiledata = $this->customermodel->profiledata($user_id);
             </div>
       </section>
       <section class="about-user-details">
-        <h4><span aria-hidden="true" class="glyphicon glyphicon-facetime-video"></span>My Videos ( <?php if($videos) echo count($videos); else echo " Videos not uploaded "; ?> )<div class="btn1 btn-black fileinput-button"> <span>Upload Video</span> 
+        <h4><span aria-hidden="true" class="glyphicon glyphicon-facetime-video"></span>My Videos ( <?php if($videos) echo count($videos); else echo " Videos not uploaded "; ?> )<div class="myphotos-uploadbtn1 btn-black fileinput-button"> <span>Upload Video</span> 
                 <!-- The file input field used as target for the file upload widget -->
               <form action="" class="uploadvideoform" method="post" enctype="multipart/form-data">
              <input name="userfile" id="userfile" size="20" required="" type="file">
