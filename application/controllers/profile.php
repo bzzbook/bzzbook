@@ -400,6 +400,26 @@ public function showfavs()
 			
 			$scale = $thumb_width/$w;
 			$cropped = $this->resizeThumbnailImage($thumb_image_location, $large_image_location,$w,$h,$x1,$y1,$scale);
+			 $this->load->model('customermodel');
+			 $session_data = $this->session->userdata('logged_in');
+			 $data['posted_by'] = $session_data['account_id'];
+			 $data['post_content'] = $this->input->post('posts');
+			 $data['uploaded_files'] = $cropped;
+			 
+			 if($this->input->post('post_group')==0)
+			 {
+				  $data['posted_to']='';
+				   $this->customermodel->post_buzz($data);
+				   echo "post saved successfully..."; 
+				  
+			 }
+			 else
+			 {
+				 $result = $this->profile_set->get_groupmembers($this->input->post('post_group'));
+				 $data['posted_to'] = $result[0]['group_members'];
+				 $this->customermodel->post_buzz($data);
+			 }
+			 echo "post saved successfully..."; 
 			
 			header("location:".base_url().'profile/my_photos');
 			exit();
@@ -445,7 +465,7 @@ public function showfavs()
 	$split = explode('/',$thumb_image_name);
 	$filename = end($split);
 	$this->profile_set->add_pics($filename);
-	return $thumb_image_name;
+	return $filename;
 	}
 	public function add_video(){
         if (isset($_FILES['userfile']['name']) && $_FILES['userfile']['name'] != '') {
@@ -604,6 +624,13 @@ public function showfavs()
 		$this->load->view('template-view',$data);
 		//$this->load->view('jobs');
 	}
-
+  public function updatefield()
+  {
+	  //parse_str($_POST['form_data'],$field_info);
+	if($this->profile_set->updatefield($_POST['field_name'],$_POST['field_value']))
+	echo "success";
+	else
+	return false;
+  }
 }
 ?>

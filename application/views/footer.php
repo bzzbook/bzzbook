@@ -1089,8 +1089,9 @@ function getconversations(msg_id,sent_by)
         $('#userfile').change(function() {
 			$(".uploadvideoform").ajaxForm({
             	url: '<?php echo base_url(); ?>profile/add_video',
-                success:    showVideoResponse 
+			    success:    showVideoResponse 
             }).submit();
+			
         });
     });
 	function showVideoResponse(responsetxt)
@@ -1305,7 +1306,43 @@ $("form[name=cmp_postboard]").submit(function(event){
 			        }
 			       });			
 				event.preventDefault();
-			});		
+			});	
+			
+			// add field function start
+			
+			function addField(fieldname)
+			{
+				var placeholder = fieldname.split('-');
+				var placeholdertext = '';
+				var h3content = $('#'+fieldname+'-li h3').html();
+				for(i=0;i<placeholder.length;i++)
+				{ 
+					placeholdertext += placeholder[i]+' '; 
+				}
+				$('#'+fieldname+'-li').html("<form action='javascript:void(0)' onsubmit='addfieldSubmit(&#39;"+fieldname+"&#39;&#44;&#39;"+h3content+"&#39;); return false;' method='post'><input type='text' id='"+fieldname+"' name='"+fieldname+"' placeholder='add "+placeholdertext+"'/>");
+			}
+			function addfieldSubmit(fieldname,h3content)
+			{
+				var fieldvalue = $('#'+fieldname).val();
+				
+				url="<?php echo base_url();?>profile/updatefield/";
+				 $.ajax({
+        			type: "POST",
+			        url: url,
+			        data: { field_name:fieldname,field_value: fieldvalue} ,
+        			success: function(html)
+			        {   
+						var data = "<div class='iner_lefts'></div>"+
+                        "<div class='inner_rights'>"+
+                          "<h3>"+h3content+"</h3><p>"+fieldvalue+"</p></div>"+
+                        "<div class='clearfix'></div>";
+						$('#'+fieldname+'-li').html(data);
+			        }
+					
+			       });			
+				//event.preventDefault();
+			}
+			// add field function end	
 </script>
 
 

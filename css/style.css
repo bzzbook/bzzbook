@@ -717,7 +717,7 @@ border-radius: 90px 90px 90px 90px; height: 110px; width: 110px; overflow: hidde
 .about-user-details h4 span{ margin-right:10px; position:relative; /*top:3px;*/}
 .about-user-details h4 span.glyphicon{ color:#606060 !important;}
 
-.smallboxes h3{ font-size:16px; font-family: 'Roboto', sans-serif; font-weight:300; color:#646464; padding-top:10px; }
+.smallboxes h3{ font-size:16px; font-family: 'Roboto', sans-serif; font-weight:300; color:#646464; /*padding-top:10px;*/ }
 .smallboxes ul { list-style:none; }
 .smallboxes ul li{ border-bottom:1px solid #efefef; padding-bottom:15px; margin-bottom:15px;}
 .iner_lefts{ float: left; width:43px; height:39px; background:#ececec; padding-right:15px; float:left; margin-right:9px;}

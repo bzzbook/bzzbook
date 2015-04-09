@@ -34,33 +34,36 @@
                 <div role="tabpanel" class="tab-pane active" id="overview">
                   <div class="smallboxes col-lg-7">
                     <ul>
-                      <li>
+                      <li id="profession-li">
                         <div class="iner_lefts"></div>
                         <div class="inner_rights">
-                          <h3>Graphic & Web Designer at Ayatas Technologies</h3>
-                          <div class="graphic"><a href="#">Edit your work</a></div>
+                          <h3>Designation</h3>
+                          <p><?php if(empty($result[0]->profession)) { ?><a href="javascript:void(0)" onclick="addField('profession')" id="profession">+ Add profession</a> <?php }else { echo $result[0]->profession; } ?></p>
+                          <div class="graphic"></div>
                         </div>
                         <div class="clearfix"></div>
                       </li>
-                      <li>
+                      <li id="schooling-li">
                         <div class="iner_lefts"></div>
                         <div class="inner_rights">
-                          <h3>Went to High School in  Alabama</h3>
+                          <h3>Schooling</h3>
+                          <p><?php if(empty($result[0]->schooling)) { ?><a href="javascript:void(0)" onclick="addField('schooling')" id="schooling">+ Add Schooling</a><?php }else { echo $result[0]->schooling; } ?></p>
                         </div>
                         <div class="clearfix"></div>
                       </li>
-                      <li>
+                      <li id="location-li">
                         <div class="iner_lefts"></div>
                         <div class="inner_rights">
-                          <h3>Lives in Springfield
-                            From  Alabama</h3>
+                          <h3>Current Location</h3>
+                          <p><?php if(empty($result[0]->location)) { ?><a href="javascript:void(0)" onclick="addField('location')" id="location">+ Add current location</a><?php }else { echo $result[0]->location; } ?></p>
                         </div>
                         <div class="clearfix"></div>
                       </li>
-                      <li>
-                        <div class="iner_lefts"><img src="<?php echo base_url(); ?>images/addicon.png" alt=""></div>
+                      <li id="relationship-li">
+                        <div class="iner_lefts"></div>
                         <div class="inner_rights">
-                          <h3>Add a relationship</h3>
+                          <h3>Relationship</h3> 
+                          <p><?php if(empty($result[0]->relationship)) { ?><a href="javascript:void(0)" onclick="addField('relationship')" id="relationship">+ Add a relationship</a><?php }else { echo $result[0]->relationship; } ?></p>
                         </div>
                         <div class="clearfix"></div>
                       </li>

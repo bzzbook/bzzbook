@@ -417,16 +417,43 @@ public function getcustDetails($id)
 public function get_my_pics()
 {
 	$id = $this->session->userdata('logged_in')['account_id'];
-	$condition = "user_id =" . "'" . $id . "'";
+	$condition = "posted_by =" . "'" . $id . "' and uploaded_files !=''";
 	$this->db->select('*');
 	$this->db->where($condition);
-	$this->db->order_by("upload_id", "desc");
-$query = $this->db->get('bzz_user_uploads');
-if ($query->num_rows() > 0) {
-			return $query->result();
-		} else {
-		return false;
-		}
+	$this->db->order_by("post_id", "desc");
+	$query = $this->db->get('bzz_posts');
+	if ($query->num_rows() > 0) {
+			$result = $query->result();
+			$pictures = array();
+			foreach($result as $post)
+			{
+				$condition = "like_on =" . "'" . $post->post_id . "' and like_status='Y'";
+				$this->db->select('*');
+				$this->db->where($condition);
+				$query = $this->db->get('bzz_likes');
+				$like_count = count($query->result());
+				
+				$condition = "commented_on =" . "'" . $post->post_id . "'";
+				$this->db->select('*');
+				$this->db->where($condition);
+				$query = $this->db->get('bzz_postcomments');
+				$comment_count = count($query->result());
+				
+				$picture = array();
+				$pics = explode(',',$post->uploaded_files);
+				foreach($pics as $pic)
+				{
+					$picture['post_id'] = $post->post_id;
+					$picture['image_thumb'] = $pic;
+					$picture['like_count'] = $like_count;
+					$picture['comment_count'] = $comment_count;
+					$pictures[] = $picture;
+				}
+			}
+			return $pictures;
+	} else {
+	return false;
+	}
 }
 
 public function get_my_videos()
@@ -520,10 +547,19 @@ $this->session->set_flashdata('group-add-msg', 'Group updated Successfully');
    {
 	   $this->db->delete('bzz_user_groups', array('group_id' => $group_id)); 
 	   $this->session->set_flashdata('group-add-msg', 'Group deleted Successfully');
-	   redirect('profile/groups');
-
-	   
+	   redirect('profile/groups');   
    }
+    public function updatefield($fieldname,$fieldvalue)
+	{
+		$up_data = array( $fieldname=>$fieldvalue);
+        $id = $this->session->userdata('logged_in')['account_id'];
+		$condition = "user_id = '".$id."'";
+		$this->db->where($condition);
+		if($this->db->update('bzz_userinfo',$up_data))
+		return true;
+		else
+		return false;
+	}
 }
 
 ?>

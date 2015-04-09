@@ -4,6 +4,7 @@ $upload_path = "uploads/";
 $thumb_width = "150";						
 $thumb_height = "150";	
 $data = $this->profile_set->get_my_pics(); 
+
 $videos = $this->profile_set->get_my_videos();
 $user_id = $this->session->userdata('logged_in')['account_id'];
 $profiledata = $this->customermodel->profiledata($user_id);
@@ -55,7 +56,7 @@ $profiledata = $this->customermodel->profiledata($user_id);
 					<input type="hidden" name="wr" value="" id="wr" />
 					
 					<input type="hidden" name="filename" value="" id="filename" />
-                      <?php /*?> <textarea cols="" rows="" name="posts" id="posts" class="form-control" placeholder="What's Buzzing?"></textarea>
+                       <textarea cols="" rows="" name="posts" id="posts" class="form-control" placeholder="Say something..."></textarea>
 					<select name="post_group" id="post_group"><option value="0">Public</option> <?php $groups = $this->profile_set->get_user_groups(); if($groups) { 
 		foreach($groups as $group)
 		{
@@ -63,7 +64,7 @@ $profiledata = $this->customermodel->profiledata($user_id);
 		}
 		
 		
-		} ?></select><?php */?> <div class="crop_preview_submit"><input type="submit" name="upload_thumbnail" value="Save Thumbnail" id="save_thumb" class="submit_button" /> </div>
+		} ?></select> <div class="crop_preview_submit"><input type="submit" name="upload_thumbnail" value="Save Thumbnail" id="save_thumb" class="submit_button" /> </div>
 				</form>
 				
 			</div>
@@ -79,12 +80,12 @@ $profiledata = $this->customermodel->profiledata($user_id);
          	<div class="userPhotos">
              <?php if($data){  foreach($data as $image){ ?>
             	  <div class="photoThumb col-md-3">
-                	<a href="<?php  echo base_url();?>uploads/<?php echo $image->image_thumb; ?>" class="mpView" data-lightbox="example-1" data-lightbox="my_photos"><img src="<?php echo base_url(); ?>images/mp_view.png" alt=""></a>
-                	<figure><img src="<?php echo base_url();?>uploads/<?php echo $image->image_thumb; ?>" width="100%" alt=""></figure>
+                	<a href="<?php  echo base_url();?>uploads/<?php echo $image['image_thumb']; ?>" class="mpView" data-lightbox="example-1" data-lightbox="my_photos"><img src="<?php echo base_url(); ?>images/mp_view.png" alt=""></a>
+                	<figure><img src="<?php echo base_url();?>uploads/<?php echo $image['image_thumb']; ?>" width="100%" height="100%" alt=""></figure>
                     <div class="phOptions">
                     <span class="mpImg"><a href="#"><img src="<?php echo base_url(); ?>images/bzz_icon.png" alt=""></a></span>
-                    <span class="mpLike"><a href="#"><img src="<?php echo base_url(); ?>images/like_myphotos.png" alt=""><em>67</em></a></span>
-                    <span class="mpComment"><a href="#"><img src="<?php echo base_url(); ?>images/comments_myphotos.png" alt=""><em>56</em></a></span>
+                    <span class="mpLike"><a href="javascript:void(0)"><img src="<?php echo base_url(); ?>images/like_myphotos.png" alt=""><em><?php echo $image['like_count'];?></em></a></span>
+                    <span class="mpComment"><a href="javascript:void(0)"><img src="<?php echo base_url(); ?>images/comments_myphotos.png" alt=""><em><?php echo $image['comment_count'];?></em></a></span>
                    
                     </div>
                 </div>
