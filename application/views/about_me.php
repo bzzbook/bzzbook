@@ -139,26 +139,27 @@
                 <div role="tabpanel" class="tab-pane" id="place">
                   <div class="smallboxes">
                     <ul>
-                      <li>
+                      <li id="location-li">
                         <div class="iner_lefts"></div>
                         <div class="inner_rights">
-                          <h3>Vizag</h3>
-                          <p>Current city</p>
+                          <h3>Current city</h3>
+                          <p><?php if(empty($result[0]->location)) { ?><a href="javascript:void(0)" onclick="addField('location')" id="location">+ Add a current location</a><?php }else { echo $result[0]->location; } ?></p>
                         </div>
                         <div class="clearfix"></div>
                       </li>
-                      <li>
+                      <li id="hometown-li">
                         <div class="iner_lefts"></div>
                         <div class="inner_rights">
-                          <h3>visakhapatnam</h3>
-                          <p>Hometown</p>
+                          <h3>Home Town</h3>
+                          <p><?php if(empty($result[0]->hometown)) { ?><a href="javascript:void(0)" onclick="addField('hometown')" id="hometown">+ Add a home town</a><?php }else { echo $result[0]->hometown; } ?></p>
                         </div>
                         <div class="clearfix"></div>
                       </li>
-                      <li>
-                        <div class="iner_lefts"><img alt="" src="<?php echo base_url(); ?>images/addicon.png"></div>
+                      <li id="relationship-li">
+                        <div class="iner_lefts"></div>
                         <div class="inner_rights">
-                          <h3>Add a relationship</h3>
+                          <h3>Relationship</h3>
+                          <p><?php if(empty($result[0]->relationship)) { ?><a href="javascript:void(0)" onclick="addField('relationship')" id="relationship">+ Add Relationship</a><?php }else { echo $result[0]->relationship; } ?></p>
                         </div>
                         <div class="clearfix"></div>
                       </li>
@@ -168,66 +169,75 @@
                 <div role="tabpanel" class="tab-pane" id="contact">
                   <div class="smallboxes">
                     <ul>
-                      <li>
-                        <div class="iner_mail">Email</div>
+                      <li id="email-li">
+                        <div class="iner_mail"></div>
                         <div class="inner_rights">
-                          <p>98765@bzzbook.com 
+                        	<h3>Email</h3>
+                          <p><?php if(empty($result[0]->email)) { ?><a href="javascript:void(0)" onclick="addField('email')" id="email">+ Add Email</a><?php }else { echo $result[0]->email; } ?></p> 
                         </div>
                         <div class="clearfix"></div>
                       </li>
-                      <li>
-                        <div class="iner_lefts"><img alt="" src="<?php echo base_url(); ?>images/addicon.png"></div>
+                      <li id="mobile-li">
+                        <div class="iner_lefts"></div>
                         <div class="inner_rights">
-                          <h3>Add a mobile phone</h3>
+                          <h3>Mobile</h3>
+                          <p><?php if(empty($result[0]->mobile)) { ?><a href="javascript:void(0)" onclick="addField('mobile')" id="mobile">+ Add Mobile No</a><?php }else { echo $result[0]->mobile; } ?></p>
                         </div>
                         <div class="clearfix"></div>
                       </li>
-                      <li>
-                        <div class="iner_lefts"><img alt="" src="<?php echo base_url(); ?>images/addicon.png"></div>
+                      <li id="address-li">
+                        <div class="iner_lefts"></div>
                         <div class="inner_rights">
-                          <h3>Add your address</h3>
+                          <h3>Address</h3>
+                          <p><?php if(empty($result[0]->address)) { ?><a href="javascript:void(0)" onclick="addField('address')" id="address">+ Add Address</a><?php }else { echo $result[0]->address; } ?></p>
                         </div>
                         <div class="clearfix"></div>
                       </li>
-                      <li>
-                        <div class="iner_lefts"><img alt="" src="<?php echo base_url(); ?>images/addicon.png"></div>
+                      <li id="website-li">
+                        <div class="iner_lefts"></div>
                         <div class="inner_rights">
-                          <h3>Add a website</h3>
+                          <h3>Website</h3>
+                          <p><?php if(empty($result[0]->website)) { ?><a href="javascript:void(0)" onclick="addField('website')" id="website">+ Add website</a><?php }else { echo $result[0]->website; } ?></p>
                         </div>
                         <div class="clearfix"></div>
                       </li>
-                      <li>
-                        <div class="iner_lefts"><img alt="" src="<?php echo base_url(); ?>images/addicon.png"></div>
+                      <li id="basicinfo-li">
+                        <div class="iner_lefts"></div>
                         <div class="inner_rights">
                           <h3>Basic Information</h3>
+                          <p><?php if(empty($result[0]->basicinfo)) { ?><a href="javascript:void(0)" onclick="addField('basicinfo')" id="basicinfo">+ Add Basic Info</a><?php }else { echo $result[0]->basicinfo; } ?></p>
                         </div>
                         <div class="clearfix"></div>
                       </li>
-                      <li>
-                        <div class="iner_lefts"><img alt="" src="<?php echo base_url(); ?>images/addicon.png"></div>
+                      <li id="interests-li">
+                        <div class="iner_lefts"></div>
                         <div class="inner_rights">
-                          <h3>Add who you're interested in</h3>
+                          <h3>Interests</h3>
+                          <p><?php if(empty($result[0]->interests)) { ?><a href="javascript:void(0)" onclick="addField('interests')" id="interests">+ Add Your Interests</a><?php }else { echo $result[0]->interests; } ?></p>
                         </div>
                         <div class="clearfix"></div>
                       </li>
-                      <li>
-                        <div class="iner_lefts"><img alt="" src="<?php echo base_url(); ?>images/addicon.png"></div>
+                      <li id="languages-li">
+                        <div class="iner_lefts"></div>
                         <div class="inner_rights">
-                          <h3>Add a language</h3>
+                          <h3>languages known</h3>
+                           <p><?php if(empty($result[0]->laguages)) { ?><a href="javascript:void(0)" onclick="addField('laguages')" id="laguages">+ Add Languages Known</a><?php }else { echo $result[0]->laguages; } ?></p>
                         </div>
                         <div class="clearfix"></div>
                       </li>
-                      <li>
-                        <div class="iner_lefts"><img alt="" src="<?php echo base_url(); ?>images/addicon.png"></div>
+                      <li id="religious-li">
+                        <div class="iner_lefts"></div>
                         <div class="inner_rights">
-                          <h3>Add your religious views</h3>
+                          <h3>Religious Views</h3>
+                          <p><?php if(empty($result[0]->religious)) { ?><a href="javascript:void(0)" onclick="addField('religious')" id="religious">+ Add Religious Views</a><?php }else { echo $result[0]->religious; } ?></p>
                         </div>
                         <div class="clearfix"></div>
                       </li>
-                      <li>
-                        <div class="iner_lefts"><img alt="" src="<?php echo base_url(); ?>images/addicon.png"></div>
+                      <li id="political-li">
+                        <div class="iner_lefts"></div>
                         <div class="inner_rights">
-                          <h3>Add your political views</h3>
+                          <h3>Political Views</h3>
+                          <p><?php if(empty($result[0]->political)) { ?><a href="javascript:void(0)" onclick="addField('political')" id="political">+ Add Political Views</a><?php }else { echo $result[0]->political; } ?></p>
                         </div>
                         <div class="clearfix"></div>
                       </li>
@@ -237,17 +247,19 @@
                 <div role="tabpanel" class="tab-pane" id="family">
                   <div class="smallboxes">
                     <ul>
-                      <li>
-                        <div class="iner_lefts"><img alt="" src="<?php echo base_url(); ?>images/addicon.png"></div>
+                      <li id="relationshipstatus-li">
+                        <div class="iner_lefts"></div>
                         <div class="inner_rights">
-                          <h3>Add your relationship status</h3>
+                          <h3>Relationship Status</h3>
+                          <p><?php if(empty($result[0]->relationshipstatus)) { ?><a href="javascript:void(0)" onclick="addField('relationshipstatus')" id="relationshipstatus">+ Add Relationship Status</a><?php }else { echo $result[0]->relationshipstatus; } ?></p>
                         </div>
                         <div class="clearfix"></div>
                       </li>
-                      <li>
-                        <div class="iner_lefts"><img alt="" src="<?php echo base_url(); ?>images/addicon.png"></div>
+                      <li id="familymembers-li">
+                        <div class="iner_lefts"></div>
                         <div class="inner_rights">
-                          <h3>Add a family member</h3>
+                          <h3>Family Member</h3>
+                          <p><?php if(empty($result[0]->familymembers)) { ?><a href="javascript:void(0)" onclick="addField('familymembers')" id="familymembers">+ Add Family Members</a><?php }else { echo $result[0]->familymembers; } ?></p>
                         </div>
                         <div class="clearfix"></div>
                       </li>
@@ -257,24 +269,27 @@
                 <div role="tabpanel" class="tab-pane" id="details">
                   <div class="smallboxes">
                     <ul>
-                      <li>
-                        <div class="iner_lefts"><img alt="" src="<?php echo base_url(); ?>images/addicon.png"></div>
+                      <li id="aboutme-li">
+                        <div class="iner_lefts"></div>
                         <div class="inner_rights">
-                          <h3>Write some details about yourself</h3>
+                          <h3>Details About Yourself</h3>
+                          <p><?php if(empty($result[0]->aboutme)) { ?><a href="javascript:void(0)" onclick="addField('aboutme')" id="aboutme">+ Add Details About Yourself</a><?php }else { echo $result[0]->aboutme; } ?></p>
                         </div>
                         <div class="clearfix"></div>
                       </li>
-                      <li>
-                        <div class="iner_lefts"><img alt="" src="<?php echo base_url(); ?>images/addicon.png"></div>
+                      <li id="nickname-li">
+                        <div class="iner_lefts"></div>
                         <div class="inner_rights">
-                          <h3>Add a nickname, a birth name..</h3>
+                          <h3>Nickname</h3>
+                          <p><?php if(empty($result[0]->nickname)) { ?><a href="javascript:void(0)" onclick="addField('nickname')" id="nickname">+ Add Nickname</a><?php }else { echo $result[0]->nickname; } ?></p>
                         </div>
                         <div class="clearfix"></div>
                       </li>
-                      <li>
-                        <div class="iner_lefts"><img alt="" src="<?php echo base_url(); ?>images/addicon.png"></div>
+                      <li id="favquotes-li">
+                        <div class="iner_lefts"></div>
                         <div class="inner_rights">
-                          <h3>Add your favorite quotations</h3>
+                          <h3>Favorite Quotations</h3>
+                           <p><?php if(empty($result[0]->favquotes)) { ?><a href="javascript:void(0)" onclick="addField('favquotes')" id="favquotes">+ Add Favorite Quotations</a><?php }else { echo $result[0]->favquotes; } ?></p>
                         </div>
                         <div class="clearfix"></div>
                       </li>
@@ -284,20 +299,15 @@
                 <div role="tabpanel" class="tab-pane" id="life">
                   <div class="smallboxes">
                     <ul>
-                      <li>
-                        <div class="iner_lefts"><img alt="" src="<?php echo base_url(); ?>images/addicon.png"></div>
+                      <li id="lifeevent-li">
+                        <div class="iner_lefts"></div>
                         <div class="inner_rights">
                           <h3>Life Events</h3>
+                          <p><?php if(empty($result[0]->lifeevent)) { ?><a href="javascript:void(0)" onclick="addField('lifeevent')" id="lifeevent">+ Add Life Event</a><?php }else { echo $result[0]->lifeevent; } ?></p>
                         </div>
                         <div class="clearfix"></div>
                       </li>
-                      <li>
-                        <div class="iner_lefts"><img alt="" src="<?php echo base_url(); ?>images/addicon.png"></div>
-                        <div class="inner_rights">
-                          <h3>Add a life event</h3>
-                        </div>
-                        <div class="clearfix"></div>
-                      </li>
+                    
                     </ul>
                   </div>
                 </div>
