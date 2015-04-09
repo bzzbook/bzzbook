@@ -22,7 +22,7 @@
       </div>
       <section class="about-user-details">
         <div class="mfSearch">
-        <h4 class="col-md-6"><span aria-hidden="true" class="glyphicon glyphicon-user"></span>Friends ( <?php  echo count($friends); ?> )</h4>
+        <h4 class="col-md-6"><span aria-hidden="true" class="glyphicon glyphicon-user"></span>Friends<?php if($friends) { ?>( <?php  echo count($friends); ?> ) <?php } ?></h4>
         <div class="col-md-6 pull-right">
         <div class="input-group">
           <input type="text" placeholder="Search for..." class="form-control">
