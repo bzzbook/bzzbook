@@ -22,7 +22,7 @@
               <div class="col-md-4">
                 <ul class="nav-tabs" role="tablist" id="myTab">
                   <li role="presentation" class="active"><a href="#overview" aria-controls="home" role="tab" data-toggle="tab">Overview</a></li>
-                  <li role="presentation"><a href="#education" aria-controls="profile" role="tab" data-toggle="tab">Work and Education </a></li>
+                  <!--<li role="presentation"><a href="#education" aria-controls="profile" role="tab" data-toggle="tab">Work and Education </a></li>-->
                   <li role="presentation"><a href="#place" aria-controls="messages" role="tab" data-toggle="tab">Places You've Lived </a></li>
                   <li role="presentation"><a href="#contact" aria-controls="messages" role="tab" data-toggle="tab">Contact and Basic Info</a></li>
                   <li role="presentation"><a href="#family" aria-controls="profile" role="tab" data-toggle="tab">Family and Relationships </a></li>
@@ -38,7 +38,7 @@
                         <div class="iner_lefts"></div>
                         <div class="inner_rights">
                           <h3>Designation</h3>
-                          <p><?php if(empty($result[0]->profession)) { ?><a href="javascript:void(0)" onclick="addField('profession')" id="profession">+ Add profession</a> <?php }else { echo $result[0]->profession; } ?></p>
+                          <p><?php if(empty($result[0]->profession)) { ?><a href="javascript:void(0)" onclick="addField('profession')" id="profession">+ Add profession</a> <?php }else { echo $result[0]->profession;?><a href="javascript:void(0)" onclick="addField('profession')"> edit</a>  <?php  } ?></p>
                           <div class="graphic"></div>
                         </div>
                         <div class="clearfix"></div>
@@ -47,7 +47,7 @@
                         <div class="iner_lefts"></div>
                         <div class="inner_rights">
                           <h3>Schooling</h3>
-                          <p><?php if(empty($result[0]->schooling)) { ?><a href="javascript:void(0)" onclick="addField('schooling')" id="schooling">+ Add Schooling</a><?php }else { echo $result[0]->schooling; } ?></p>
+                          <p><?php if(empty($result[0]->schooling)) { ?><a href="javascript:void(0)" onclick="addField('schooling')" id="schooling">+ Add Schooling</a><?php }else { echo $result[0]->schooling; ?><a href="javascript:void(0)" onclick="addField('schooling')"> edit</a>  <?php } ?></p>
                         </div>
                         <div class="clearfix"></div>
                       </li>
@@ -55,7 +55,7 @@
                         <div class="iner_lefts"></div>
                         <div class="inner_rights">
                           <h3>Current Location</h3>
-                          <p><?php if(empty($result[0]->location)) { ?><a href="javascript:void(0)" onclick="addField('location')" id="location">+ Add current location</a><?php }else { echo $result[0]->location; } ?></p>
+                          <p><?php if(empty($result[0]->location)) { ?><a href="javascript:void(0)" onclick="addField('location')" id="location">+ Add current location</a><?php }else { echo $result[0]->location; ?><a href="javascript:void(0)" onclick="addField('location')"> edit</a>  <?php } ?></p>
                         </div>
                         <div class="clearfix"></div>
                       </li>
@@ -63,7 +63,7 @@
                         <div class="iner_lefts"></div>
                         <div class="inner_rights">
                           <h3>Relationship</h3> 
-                          <p><?php if(empty($result[0]->relationship)) { ?><a href="javascript:void(0)" onclick="addField('relationship')" id="relationship">+ Add a relationship</a><?php }else { echo $result[0]->relationship; } ?></p>
+                          <p><?php if(empty($result[0]->relationship)) { ?><a href="javascript:void(0)" onclick="addField('relationship')" id="relationship">+ Add a relationship</a><?php }else { echo $result[0]->relationship; ?><a href="javascript:void(0)" onclick="addField('relationship')"> edit</a>  <?php } ?></p>
                         </div>
                         <div class="clearfix"></div>
                       </li>
@@ -143,7 +143,7 @@
                         <div class="iner_lefts"></div>
                         <div class="inner_rights">
                           <h3>Current city</h3>
-                          <p><?php if(empty($result[0]->location)) { ?><a href="javascript:void(0)" onclick="addField('location')" id="location">+ Add a current location</a><?php }else { echo $result[0]->location; } ?></p>
+                          <p><?php if(empty($result[0]->location)) { ?><a href="javascript:void(0)" onclick="addField('location')" id="location">+ Add a current location</a><?php }else { echo $result[0]->location; ?><a href="javascript:void(0)" onclick="addField('location')"> edit</a>  <?php } ?></p>
                         </div>
                         <div class="clearfix"></div>
                       </li>
@@ -151,29 +151,21 @@
                         <div class="iner_lefts"></div>
                         <div class="inner_rights">
                           <h3>Home Town</h3>
-                          <p><?php if(empty($result[0]->hometown)) { ?><a href="javascript:void(0)" onclick="addField('hometown')" id="hometown">+ Add a home town</a><?php }else { echo $result[0]->hometown; } ?></p>
+                          <p><?php if(empty($result[0]->hometown)) { ?><a href="javascript:void(0)" onclick="addField('hometown')" id="hometown">+ Add a home town</a><?php }else { echo $result[0]->hometown; ?><a href="javascript:void(0)" onclick="addField('hometown')"> edit</a>  <?php } ?></p>
                         </div>
                         <div class="clearfix"></div>
                       </li>
-                      <li id="relationship-li">
-                        <div class="iner_lefts"></div>
-                        <div class="inner_rights">
-                          <h3>Relationship</h3>
-                          <p><?php if(empty($result[0]->relationship)) { ?><a href="javascript:void(0)" onclick="addField('relationship')" id="relationship">+ Add Relationship</a><?php }else { echo $result[0]->relationship; } ?></p>
-                        </div>
-                        <div class="clearfix"></div>
-                      </li>
-                    </ul>
+                     </ul>
                   </div>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="contact">
                   <div class="smallboxes">
                     <ul>
                       <li id="email-li">
-                        <div class="iner_mail"></div>
+                        <div class="iner_lefts"></div>
                         <div class="inner_rights">
                         	<h3>Email</h3>
-                          <p><?php if(empty($result[0]->email)) { ?><a href="javascript:void(0)" onclick="addField('email')" id="email">+ Add Email</a><?php }else { echo $result[0]->email; } ?></p> 
+                          <p><?php if(empty($result[0]->email)) { ?><a href="javascript:void(0)" onclick="addField('email')" id="email">+ Add Email</a><?php }else { echo $result[0]->email; ?><a href="javascript:void(0)" onclick="addField('email')"> edit</a>  <?php } ?></p> 
                         </div>
                         <div class="clearfix"></div>
                       </li>
@@ -181,7 +173,7 @@
                         <div class="iner_lefts"></div>
                         <div class="inner_rights">
                           <h3>Mobile</h3>
-                          <p><?php if(empty($result[0]->mobile)) { ?><a href="javascript:void(0)" onclick="addField('mobile')" id="mobile">+ Add Mobile No</a><?php }else { echo $result[0]->mobile; } ?></p>
+                          <p><?php if(empty($result[0]->mobile)) { ?><a href="javascript:void(0)" onclick="addField('mobile')" id="mobile">+ Add Mobile No</a><?php }else { echo $result[0]->mobile; ?><a href="javascript:void(0)" onclick="addField('mobile')"> edit</a>  <?php } ?></p>
                         </div>
                         <div class="clearfix"></div>
                       </li>
@@ -189,7 +181,7 @@
                         <div class="iner_lefts"></div>
                         <div class="inner_rights">
                           <h3>Address</h3>
-                          <p><?php if(empty($result[0]->address)) { ?><a href="javascript:void(0)" onclick="addField('address')" id="address">+ Add Address</a><?php }else { echo $result[0]->address; } ?></p>
+                          <p><?php if(empty($result[0]->address)) { ?><a href="javascript:void(0)" onclick="addField('address')" id="address">+ Add Address</a><?php }else { echo $result[0]->address; ?><a href="javascript:void(0)" onclick="addField('address')"> edit</a>  <?php } ?></p>
                         </div>
                         <div class="clearfix"></div>
                       </li>
@@ -197,7 +189,7 @@
                         <div class="iner_lefts"></div>
                         <div class="inner_rights">
                           <h3>Website</h3>
-                          <p><?php if(empty($result[0]->website)) { ?><a href="javascript:void(0)" onclick="addField('website')" id="website">+ Add website</a><?php }else { echo $result[0]->website; } ?></p>
+                          <p><?php if(empty($result[0]->website)) { ?><a href="javascript:void(0)" onclick="addField('website')" id="website">+ Add website</a><?php }else { echo $result[0]->website; ?><a href="javascript:void(0)" onclick="addField('website')"> edit</a>  <?php } ?></p>
                         </div>
                         <div class="clearfix"></div>
                       </li>
@@ -205,7 +197,7 @@
                         <div class="iner_lefts"></div>
                         <div class="inner_rights">
                           <h3>Basic Information</h3>
-                          <p><?php if(empty($result[0]->basicinfo)) { ?><a href="javascript:void(0)" onclick="addField('basicinfo')" id="basicinfo">+ Add Basic Info</a><?php }else { echo $result[0]->basicinfo; } ?></p>
+                          <p><?php if(empty($result[0]->basicinfo)) { ?><a href="javascript:void(0)" onclick="addField('basicinfo')" id="basicinfo">+ Add Basic Info</a><?php }else { echo $result[0]->basicinfo; ?><a href="javascript:void(0)" onclick="addField('basicinfo')"> edit</a>  <?php } ?></p>
                         </div>
                         <div class="clearfix"></div>
                       </li>
@@ -213,7 +205,7 @@
                         <div class="iner_lefts"></div>
                         <div class="inner_rights">
                           <h3>Interests</h3>
-                          <p><?php if(empty($result[0]->interests)) { ?><a href="javascript:void(0)" onclick="addField('interests')" id="interests">+ Add Your Interests</a><?php }else { echo $result[0]->interests; } ?></p>
+                          <p><?php if(empty($result[0]->interests)) { ?><a href="javascript:void(0)" onclick="addField('interests')" id="interests">+ Add Your Interests</a><?php }else { echo $result[0]->interests; ?><a href="javascript:void(0)" onclick="addField('interests')"> edit</a>  <?php } ?></p>
                         </div>
                         <div class="clearfix"></div>
                       </li>
@@ -221,7 +213,7 @@
                         <div class="iner_lefts"></div>
                         <div class="inner_rights">
                           <h3>languages known</h3>
-                           <p><?php if(empty($result[0]->laguages)) { ?><a href="javascript:void(0)" onclick="addField('laguages')" id="laguages">+ Add Languages Known</a><?php }else { echo $result[0]->laguages; } ?></p>
+                           <p><?php if(empty($result[0]->languages)) { ?><a href="javascript:void(0)" onclick="addField('languages')" id="languages">+ Add Languages Known</a><?php }else { echo $result[0]->languages; ?><a href="javascript:void(0)" onclick="addField('languages')"> edit</a>  <?php } ?></p>
                         </div>
                         <div class="clearfix"></div>
                       </li>
@@ -229,7 +221,7 @@
                         <div class="iner_lefts"></div>
                         <div class="inner_rights">
                           <h3>Religious Views</h3>
-                          <p><?php if(empty($result[0]->religious)) { ?><a href="javascript:void(0)" onclick="addField('religious')" id="religious">+ Add Religious Views</a><?php }else { echo $result[0]->religious; } ?></p>
+                          <p><?php if(empty($result[0]->religious)) { ?><a href="javascript:void(0)" onclick="addField('religious')" id="religious">+ Add Religious Views</a><?php }else { echo $result[0]->religious; ?><a href="javascript:void(0)" onclick="addField('religious')"> edit</a>  <?php } ?></p>
                         </div>
                         <div class="clearfix"></div>
                       </li>
@@ -237,7 +229,7 @@
                         <div class="iner_lefts"></div>
                         <div class="inner_rights">
                           <h3>Political Views</h3>
-                          <p><?php if(empty($result[0]->political)) { ?><a href="javascript:void(0)" onclick="addField('political')" id="political">+ Add Political Views</a><?php }else { echo $result[0]->political; } ?></p>
+                          <p><?php if(empty($result[0]->political)) { ?><a href="javascript:void(0)" onclick="addField('political')" id="political">+ Add Political Views</a><?php }else { echo $result[0]->political; ?><a href="javascript:void(0)" onclick="addField('political')"> edit</a>  <?php } ?></p>
                         </div>
                         <div class="clearfix"></div>
                       </li>
@@ -251,7 +243,7 @@
                         <div class="iner_lefts"></div>
                         <div class="inner_rights">
                           <h3>Relationship Status</h3>
-                          <p><?php if(empty($result[0]->relationshipstatus)) { ?><a href="javascript:void(0)" onclick="addField('relationshipstatus')" id="relationshipstatus">+ Add Relationship Status</a><?php }else { echo $result[0]->relationshipstatus; } ?></p>
+                          <p><?php if(empty($result[0]->relationshipstatus)) { ?><a href="javascript:void(0)" onclick="addField('relationshipstatus')" id="relationshipstatus">+ Add Relationship Status</a><?php }else { echo $result[0]->relationshipstatus; ?><a href="javascript:void(0)" onclick="addField('relationshipstatus')"> edit</a>  <?php } ?></p>
                         </div>
                         <div class="clearfix"></div>
                       </li>
@@ -259,7 +251,7 @@
                         <div class="iner_lefts"></div>
                         <div class="inner_rights">
                           <h3>Family Member</h3>
-                          <p><?php if(empty($result[0]->familymembers)) { ?><a href="javascript:void(0)" onclick="addField('familymembers')" id="familymembers">+ Add Family Members</a><?php }else { echo $result[0]->familymembers; } ?></p>
+                          <p><?php if(empty($result[0]->familymembers)) { ?><a href="javascript:void(0)" onclick="addField('familymembers')" id="familymembers">+ Add Family Members</a><?php }else { echo $result[0]->familymembers; ?><a href="javascript:void(0)" onclick="addField('familymembers')"> edit</a>  <?php } ?></p>
                         </div>
                         <div class="clearfix"></div>
                       </li>
@@ -273,7 +265,7 @@
                         <div class="iner_lefts"></div>
                         <div class="inner_rights">
                           <h3>Details About Yourself</h3>
-                          <p><?php if(empty($result[0]->aboutme)) { ?><a href="javascript:void(0)" onclick="addField('aboutme')" id="aboutme">+ Add Details About Yourself</a><?php }else { echo $result[0]->aboutme; } ?></p>
+                          <p><?php if(empty($result[0]->aboutme)) { ?><a href="javascript:void(0)" onclick="addField('aboutme')" id="aboutme">+ Add Details About Yourself</a><?php }else { echo $result[0]->aboutme; ?><a href="javascript:void(0)" onclick="addField('aboutme')"> edit</a>  <?php } ?></p>
                         </div>
                         <div class="clearfix"></div>
                       </li>
@@ -281,7 +273,7 @@
                         <div class="iner_lefts"></div>
                         <div class="inner_rights">
                           <h3>Nickname</h3>
-                          <p><?php if(empty($result[0]->nickname)) { ?><a href="javascript:void(0)" onclick="addField('nickname')" id="nickname">+ Add Nickname</a><?php }else { echo $result[0]->nickname; } ?></p>
+                          <p><?php if(empty($result[0]->nickname)) { ?><a href="javascript:void(0)" onclick="addField('nickname')" id="nickname">+ Add Nickname</a><?php }else { echo $result[0]->nickname; ?><a href="javascript:void(0)" onclick="addField('nickname')"> edit</a>  <?php } ?></p>
                         </div>
                         <div class="clearfix"></div>
                       </li>
@@ -289,7 +281,7 @@
                         <div class="iner_lefts"></div>
                         <div class="inner_rights">
                           <h3>Favorite Quotations</h3>
-                           <p><?php if(empty($result[0]->favquotes)) { ?><a href="javascript:void(0)" onclick="addField('favquotes')" id="favquotes">+ Add Favorite Quotations</a><?php }else { echo $result[0]->favquotes; } ?></p>
+                           <p><?php if(empty($result[0]->favquotes)) { ?><a href="javascript:void(0)" onclick="addField('favquotes')" id="favquotes">+ Add Favorite Quotations</a><?php }else { echo $result[0]->favquotes; ?><a href="javascript:void(0)" onclick="addField('favquotes')"> edit</a>  <?php } ?></p>
                         </div>
                         <div class="clearfix"></div>
                       </li>
@@ -303,7 +295,7 @@
                         <div class="iner_lefts"></div>
                         <div class="inner_rights">
                           <h3>Life Events</h3>
-                          <p><?php if(empty($result[0]->lifeevent)) { ?><a href="javascript:void(0)" onclick="addField('lifeevent')" id="lifeevent">+ Add Life Event</a><?php }else { echo $result[0]->lifeevent; } ?></p>
+                          <p><?php if(empty($result[0]->lifeevent)) { ?><a href="javascript:void(0)" onclick="addField('lifeevent')" id="lifeevent">+ Add Life Event</a><?php }else { echo $result[0]->lifeevent; ?><a href="javascript:void(0)" onclick="addField('lifeevent')"> edit</a>  <?php } ?></p>
                         </div>
                         <div class="clearfix"></div>
                       </li>

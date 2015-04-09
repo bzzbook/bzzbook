@@ -1340,7 +1340,7 @@ $("form[name=cmp_postboard]").submit(function(event){
 			        {   
 						var data = "<div class='iner_lefts'></div>"+
                         "<div class='inner_rights'>"+
-                          "<h3>"+h3content+"</h3><p>"+fieldvalue+"</p></div>"+
+                          "<h3>"+h3content+"</h3><p>"+fieldvalue+"<a href='javascript:void(0)' onclick='addField(&#39;"+fieldname+"&#39;)'> edit</a></p></div>"+
                         "<div class='clearfix'></div>";
 						$('#'+fieldname+'-li').html(data);
 			        }
