@@ -293,7 +293,7 @@ public function finding_friends()
 	{
 		$user_ids[] = $user['user_id'];
 	}
-	print_r($user_ids);
+	//print_r($user_ids);
 
 	$frndcondition = "user_id =" . "'" . $id . "' AND request_status ='Y' OR 'B' OR 'W'";
 	$friends = array();
@@ -307,7 +307,7 @@ public function finding_friends()
 	{
 		$frnds[] = $frnd['friend_id'];
 	}
-	print_r($frnds);
+	//print_r($frnds);
 	$required_ids = array();
 	foreach($user_ids as $user)
 				{
@@ -347,7 +347,7 @@ public function finding_friends()
 public function related_friends()
 {
 	$id = $this->session->userdata('logged_in')['account_id'];
-	$condition = "user_id =" . "'" . $id . "' AND follow_status='Y'";
+	/*$condition = "user_id =" . "'" . $id . "' AND follow_status='Y'";
 	$this->db->select('companyinfo_id');
 	$this->db->from('bzz_cmp_follow');
 	$this->db->where($condition);
@@ -365,10 +365,35 @@ public function related_friends()
 	 $user_id = array();
 	 foreach($users as $user)
 	 {
-		 $user_id[] = $user;
+		 $user_id[] = $user['user_id'];
 	 }
 	 
-	 print_r($user_id);
+	// print_r($user_id);
+	 
+	 */
+	 // getting frnds of frnds
+	 
+	$condition = "user_id =" . "'" . $id . "' AND request_status='Y'";
+	$this->db->select('friend_id');
+	$this->db->from('bzz_userfriends');
+	$this->db->where($condition);
+	$query = $this->db->get();
+	$friends = $query->result_array();
+	$one = array();
+	foreach($friends as $friend)
+	{
+
+		$condition = "user_id =" . "'" . $friend['friend_id'] . "' AND request_status='Y' AND friend_id !=" . "'" . $id . "'" ;
+		$this->db->select('friend_id');
+		$this->db->from('bzz_userfriends');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		$frnds = $query->result_array();
+			
+	}
+	print_r($one);
+
+	 
 }
 		
 
