@@ -621,7 +621,7 @@ public function showfavs()
 	public function friends()
 	{
 		$data['content']='myfriends';
-		$this->load->view('template-view',$data);
+		$this->load->view('full_content_view',$data);
 		//$this->load->view('jobs');
 	}
   public function updatefield()

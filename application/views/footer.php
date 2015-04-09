@@ -57,7 +57,6 @@ $(function () {
 <?php }
 ?>
 <script src="<?php echo base_url(); ?>js/animate-plus.min.js"></script> 
-<script src="<?php echo base_url(); ?>js/custom.js"></script>
 <script src="<?php echo base_url(); ?>js/jquery.validate.min.js"></script>
 <script src="<?php echo base_url(); ?>js/jquery.validate.min.js"></script>
 <script src="<?php echo base_url(); ?>js/additional-methods.js"></script>
@@ -68,11 +67,12 @@ $(function () {
 <script language="javascript">print_usa_states("usa_states");</script>
 <script src="<?php echo base_url(); ?>js/lightbox.min.js"></script>
 <script src="<?php echo base_url(); ?>js/jquery.uploadfile.min.js"></script>
-
+<script src="<?php echo base_url(); ?>js/jquery.blImageCenter.js"></script> 
+<script src="<?php echo base_url(); ?>js/custom.js"></script> 
 <script>
-		/*$( document ).ready(function() {
+		$( document ).ready(function() {
 		$('.select').jqTransform({ imgPath: '' });
-		});*/
+		});
    $('#email_invite').validate();
    $('#upload_file').validate();
    $('#search_job').validate(); 
@@ -1196,6 +1196,12 @@ $('#addJobForm').submit( function( event){
 		}
 	}
 	
+$('#pfpic').change(function()
+{
+	$('#upload_pfpic').ajaxSubmit();
+	//$(".cmplogo").html(data);
+	location.reload(true);
+});	
 </script>
 
 <script language="javascript" type="text/javascript">

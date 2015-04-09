@@ -697,11 +697,15 @@ float:right; margin-top:10px;
 border-radius: 90px 90px 90px 90px; height: 110px; width: 110px; overflow: hidden;}
 
 
+.ProfileView .visitorBox .visitiBoxInner .profileLogo .profile-name{ text-transform:uppercase;}
 .ProfileView .visitorBox .visitiBoxInner .companyDetails .cmpContent .follow{ display:inline-block; font-size:14px; color:#fff; background:#fbc436; padding:10px 20px; -webkit-border-radius:2px; border-radius:2px; border:none; margin-left:10px;}
 .ProfileView .visitorBox .visitiBoxInner .profileLogo .cmplogo .change-photo { background: rgba(251, 196, 54, 0.9); bottom:40px;  color: #000;  display: block;  font-size:12px;
  padding: 6px;  position: absolute;   top: inherit;   width: 50%;}
+.ProfileView .visitorBox .visitiBoxInner .change-photo { background: rgba(251, 196, 54, 0.9); bottom:40px;  color: #000;  display: block;  font-size:12px;
+ padding: 5px;  position: absolute;   top: inherit;   width: 11%;  margin: 9px 75px;}
+/* .ProfileView .visitorBox .visitiBoxInner .change-photo em{ padding-left:6px; text-transform:capitalize; font-style:normal; }
 /*.ProfileView .visitorBox .visitiBoxInner .profileLogo .cmplogo span.inside .change-photo { background: rgba(251, 196, 54, 0.9); bottom:40px;  color: #000;  display: block;  font-size:12px; padding: 6px;  position: absolute;   top: inherit;   width: 50%;}*/
- 
+.ProfileView .visitorBox .visitiBoxInner .change-photo em{ font-size:9px; font-style:normal; position:relative; top:-2px; left:10px; font-family: 'Roboto', sans-serif; } 
 .ProfileView .visitorBox .visitiBoxInner .profileLogo .cmplogo .change-photo em{ font-size:9px; font-style:normal; position:relative; top:-2px; left:10px; font-family: 'Roboto', sans-serif; } 
 
 .profile-name {  bottom: 84px;  color: #ffffff;  font-size: 20px;  font-weight: bold;  letter-spacing: 1px;  position: absolute;  left: 59px;}
@@ -782,3 +786,16 @@ float:right;
 margin-right:10px;
 margin-top:14px;
 }
+
+
+.myfriends .groupEditBlock li .fdblock .myfriendspfpic{ float:left;}
+.myfriends .groupEditBlock li .fdblock .myfriendspfpic img{ height:100% !important;}
+.myfriends .friendInfo h3 a{ color:#000; text-transform:capitalize; font-size:15px;}
+.mfSearch{ background:#fbc436;}
+.mfSearch h4{ margin:0; border:none;}
+.mfSearch .input-group{ margin-top:10px;}
+.mfSearch .input-group .form-control{ background:#fff; border-radius:0;}
+.mfSearch .input-group .input-group-btn .btn{ text-align:center; top:0; background:#000; color:#fff;}
+
+
+
