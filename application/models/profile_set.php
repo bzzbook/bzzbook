@@ -305,6 +305,12 @@ class Profile_set extends CI_Model {
         );
         $this->db->insert('bzz_user_images', $data);
         return $this->db->insert_id();
+			
+			 $image = $this->profile_set->get_profile_pic();
+		 
+		$figure= "<figure class='cmplogo'><img src='".base_url()."uploads/".$image[0]->user_img_thumb."' alt='".base_url()."uploads/".$image[0]->user_img_thumb."'></figure>";
+		
+  echo $figure;
   
 }
 public function croped_profile_pic($thumbnail)

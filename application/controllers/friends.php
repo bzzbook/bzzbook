@@ -38,7 +38,16 @@ public function movefriend($frndid,$groupid)
 	return false;
 }
 
+//function for displaying all users by randomly to send friend requests
 
+public function find_frnds()
+{
+	$data['result'] = $this->friendsmodel->finding_friends();
+}
 
+public function find_related_frnds()
+{
+	$data['result'] = $this->friendsmodel->related_friends();
+}
 }
 ?>
