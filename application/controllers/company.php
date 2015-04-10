@@ -173,6 +173,7 @@ public function addcompany()
 	{
 
 		$data['cmp_info'] =  $this->companies->get_cmp_by_id($cmpinfo_id);
+		$data['user_id'] = '';
 		//$id = $this->session->userdata('logged_in')['account_id'];
 		//$this->session->unset_userdata('logged_in');
 		//$cmp_session = array( 'cmp_id' => $cmpinfo_id);

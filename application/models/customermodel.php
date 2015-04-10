@@ -12,6 +12,10 @@ class Customermodel extends CI_Model {
 		 $this->db->insert('bzz_posts',$data);
 		 return $this->db->insert_id();
 	}
+	function post_cmp_buzz($data){
+		 $this->db->insert('bzz_cmp_posts',$data);
+		 return $this->db->insert_id();
+	}
 	function share_buzz($data){
 		 $this->db->insert('bzz_posts',$data);
 		 return $this->db->insert_id();
@@ -64,6 +68,56 @@ class Customermodel extends CI_Model {
 			}
 			}
 			return $posts;
+	   } 
+	   else 
+	   return false;
+   }
+   public function All_Cmp_Posts($cmp_id){
+	
+  	    $id = $this->session->userdata('logged_in')['account_id'];		
+	    $condition = "companyinfo_id = '".$cmp_id."' AND user_id ='".$id."'";
+		$this->db->select('follow_as');
+		$this->db->from('bzz_cmp_follow');
+		$this->db->where($condition);
+		$follow_as = '';
+		$query = $this->db->get();
+		if ($query->num_rows() > 0) {
+			$res = $query->result();
+			$follow_as = $res[0]->follow_as;
+		}		
+		$condition = "companyinfo_id ='".$cmp_id."' ";
+		$this->db->select('user_id');
+		$this->db->from('bzz_companyinfo');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		if ($query->num_rows() > 0) {
+			$res = $query->result();
+			if($res[0]->user_id == $id)
+			{
+				$condition = "cmp_id ='".$cmp_id."'";
+			}
+			elseif(empty($follow_as))
+			{
+				$condition = "cmp_id ='".$cmp_id."' AND cmp_posted_to ='0'";
+			}
+			elseif($follow_as =='customer')
+			{
+				$condition = "cmp_id ='".$cmp_id."' AND cmp_posted_to ='2'";
+			}
+			elseif($follow_as =='colleague')
+			{
+				$condition = "cmp_id ='".$cmp_id."' AND cmp_posted_to ='1'";
+			}
+		}	
+	
+	   $this->db->select('*');
+	   $this->db->from('bzz_cmp_posts');
+	   $this->db->where($condition);
+	   $this->db->order_by("cmp_post_id","desc");
+	   $query = $this->db->get();
+   	   if ($query->num_rows() > 0) {
+	   		$result =  $query->result();
+			return $result;
 	   } 
 	   else 
 	   return false;
@@ -151,8 +205,21 @@ class Customermodel extends CI_Model {
 		return $query->result();
 		
    }
+   public function cmplikedata($pid){
+	    $condition = "like_on =" . "'" . $pid . "' AND like_status = 'Y'";
+		$this->db->select('*');
+		$this->db->from('bzz_cmp_likes');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		//return $query->num_rows();
+		return $query->result();
+		
+   }
    public function write_comments($data){
 	    $this->db->insert('bzz_postcomments',$data);
+   }
+   public function write_cmp_comments($data){
+	    $this->db->insert('bzz_cmp_postcomments',$data);
    }
    public function comments_data($pid){
 	   $condition = "commented_on =" . "'" . $pid . "' and comment_content != ''";
@@ -163,6 +230,16 @@ class Customermodel extends CI_Model {
 		//return $query->num_rows();
 		return $query->result(); 
    }
+   public function cmp_comments_data($pid){
+	   $condition = "commented_on =" . "'" . $pid . "' and comment_content != ''";
+		$this->db->select('*');
+		$this->db->from('bzz_cmp_postcomments');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		//return $query->num_rows();
+		return $query->result(); 
+   }
+
    public function updateAboutInfo($data)
    {
 	//	$updated_data=array('');  

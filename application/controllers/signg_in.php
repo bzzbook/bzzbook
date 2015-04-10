@@ -115,6 +115,23 @@ class signg_in extends CI_Controller {
 	 // redirect(site_url('customer_controller/view_post'));
 	 // redirect(site_url('customer/view_post'));
    }
+    public function send_cmp_post($cmp_id)
+  {
+	 
+	 $this->load->model('customermodel');
+	 $session_data = $this->session->userdata('logged_in');
+	 $data['cmp_posted_by'] = $session_data['account_id'];
+	 $data['cmp_id'] = $cmp_id;
+	 $data['cmp_post_content'] = $this->input->post('posts');
+	 $data['cmp_uploaded_files'] = $this->doupload();
+	 $data['cmp_posted_to']=$this->input->post('post_group');
+	 $this->customermodel->post_cmp_buzz($data);
+	 echo "post saved successfully..."; 
+	 redirect('company/company_disp/'.$cmp_id);
+	
+	 // redirect(site_url('customer_controller/view_post'));
+	 // redirect(site_url('customer/view_post'));
+   }
    public function share_post()
   {
 	 
@@ -247,6 +264,19 @@ class signg_in extends CI_Controller {
 	   $res=$this->customermodel->write_comments($data);
 	  // $res=$this->customer->write_comments($data);
 	   redirect('profiles');
+	   
+   }
+    public function write_cmp_comment($cmp_id){
+		
+	   $data=array(
+	   'comment_content'=>$this->input->post('write_comment'),
+	   'commented_on'=>$this->input->post('post_id'),
+	   'commented_by'=>$this->input->post('posted_by')
+	   );
+
+	   $res=$this->customermodel->write_cmp_comments($data);
+	  // $res=$this->customer->write_comments($data);
+	   redirect('company/company_disp/'.$cmp_id);
 	   
    }
     
