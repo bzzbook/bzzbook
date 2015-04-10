@@ -797,5 +797,8 @@ margin-top:14px;
 .mfSearch .input-group .form-control{ background:#fff; border-radius:0;}
 .mfSearch .input-group .input-group-btn .btn{ text-align:center; top:0; background:#000; color:#fff;}
 
-
-
+.memSearch{ background:#fbc436;}
+.memSearch h4{ margin:0; border:none;}
+.memSearch .input-group{ margin-top:10px;}
+.memSearch .input-group .form-control{ background:#fff; border-radius:0;}
+.memSearch .input-group .input-group-btn .btn{ text-align:center; top:0; background:#000; color:#fff;}

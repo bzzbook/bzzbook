@@ -175,6 +175,54 @@ class Friendsmodel extends CI_Model {
 			 echo $list;
 		
 	}
+	
+	public function addFriend_Request($frnd_id)
+	{
+		$id = $this->session->userdata('logged_in')['account_id'];
+		$frndcondition =  "user_id =" . "'" . $frnd_id . "' AND request_status!='Y' OR 'W' AND friend_id =" . "'" . $id . "'" ;
+		$this->db->select('*');
+		$this->db->from('bzz_userfriends');
+		$this->db->where($frndcondition);
+		$query = $this->db->get();
+		$data = $query->result_array();
+		if($data)
+		{
+	
+	    $condition = "user_id =" . "'" . $frnd_id . "' AND friend_id =".$id;
+		
+			$data = array(
+               'request_status' => 'W',
+            );
+			$this->db->where($condition);
+			$this->db->update('bzz_userfriends', $data); 
+		}
+		else{
+			 $condition = "user_id =" . "'" . $frnd_id . "' AND friend_id =".$id;
+		
+			$data = array(
+				'user_id' => $frnd_id,
+				'friend_id' => $id,
+               'request_status' => 'W',
+            );
+			$this->db->where($condition);
+			$this->db->insert('bzz_userfriends', $data); 
+		
+			
+			$frnd_req = $this->related_friends();
+			$list = "";
+		    if($frnd_req) { foreach($frnd_req as $req){
+           $list .= " <li>
+              <figure><img src='".base_url()."uploads/".$req[0]['user_img_thumb']."' alt='".$req[0]['user_firstname']. " ".$req[0]['user_lastname']."'></figure>
+              <div class='disc'>
+                <h4>".$req[0]['user_firstname']. " ".$req[0]['user_lastname']."</h4>
+                <div class='dcBtn'><a href='javascript:void(0);' onclick='addFrnd(".$req[0]['user_id'].")'>Add Friend</a> </div>
+                </div>
+            </li>";
+             } }else $list = "No Friends Found!..";
+			 
+			 echo $list;
+		}
+	}
 	public function get_userinfo_byid($user_id)
 	{
 		$condition = "user_id =" . "'" . $user_id . "'";
@@ -295,7 +343,7 @@ public function finding_friends()
 	}
 	//print_r($user_ids);
 
-	$frndcondition = "user_id =" . "'" . $id . "' AND request_status ='Y' OR 'B' OR 'W'";
+	$frndcondition = "user_id =" . "'" . $id . "' AND request_status ='Y' OR 'N' OR 'W'";
 	$friends = array();
 	$this->db->select('*');
 	$this->db->from('bzz_userfriends');
@@ -326,6 +374,7 @@ public function finding_friends()
 					  $this->db->select('*');
 					  $this->db->from('bzz_users');
 					  $this->db->join('bzz_user_images','bzz_users.user_id=bzz_user_images.user_id AND bzz_users.user_id='.$user_id);
+					  $this->db->join('bzz_userinfo','bzz_users.user_id=bzz_userinfo.user_id');
 					  $this->db->order_by('bzz_user_images.user_imageinfo_id','desc');
 					 // $this->db->where($condition);
 					  $query = $this->db->get();
@@ -334,7 +383,7 @@ public function finding_friends()
 					   $user_data[] = $userdata;
 				 		 } 
 					}
-				print_r($user_data);
+				return $user_data;
 				
 				}
 				return false;
@@ -347,20 +396,73 @@ public function finding_friends()
 public function related_friends()
 {
 	$id = $this->session->userdata('logged_in')['account_id'];
-	/*$condition = "user_id =" . "'" . $id . "' AND follow_status='Y'";
+	
+	 // getting frnds of frnds
+	 
+	$condition = "user_id =" . "'" . $id . "' AND request_status='Y'";
+	$this->db->select('friend_id');
+	$this->db->from('bzz_userfriends');
+	$this->db->where($condition);
+	$query = $this->db->get();
+	$friends = $query->result_array();
+	//print_r($friends);
+	
+	$frnd_ids = array();
+	 foreach($friends as $frnds)
+	 {
+		 $frnd_ids[] = $frnds['friend_id'];
+	 }
+	 
+	//print_r($frnd_ids);
+	
+	$n1 = implode(",",$frnd_ids);
+	//print_r($n1); 
+	
+	//exit;
+	$ids = array();
+	foreach($friends as $friend)
+	{
+
+$condition = "user_id =" . "'" . $friend['friend_id'] . "' AND request_status='Y' AND friend_id !=" . "'" . $id . "' AND friend_id NOT IN(".$n1.")" ;
+		$this->db->select('friend_id');
+		$this->db->from('bzz_userfriends');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		$frnds = $query->result_array();
+		if(!empty($frnds))
+		{
+		$ids[] = $frnds;
+		}
+		return false;
+		}
+$n2 = array();
+foreach($ids as $idz)
+{
+	$n2[] = $idz[0]['friend_id'];
+}
+//print_r($n2);
+
+//followers ids
+
+    $condition = "user_id =" . "'" . $id . "' AND follow_status='Y'";
 	$this->db->select('companyinfo_id');
 	$this->db->from('bzz_cmp_follow');
 	$this->db->where($condition);
 	$query = $this->db->get();
 	$cmp_followers = $query->result_array();
+	if($n1)
+	{
 	foreach($cmp_followers as $follower)
 	{
-		$condition =  "companyinfo_id =" . "'" . $follower['companyinfo_id'] . "' AND follow_status='Y' AND user_id !=" . "'" . $id . "'" ;
+		$condition =  "companyinfo_id =" . "'" . $follower['companyinfo_id'] . "' AND follow_status='Y' AND user_id !=" . "'" . $id . "' AND user_id NOT IN(".$n1.")" ;
 		$this->db->select('user_id');
 		$this->db->from('bzz_cmp_follow');
 		$this->db->where($condition);
 		$query = $this->db->get();
 		$users = $query->result_array();
+	}
+	}else{
+		return false;
 	}
 	 $user_id = array();
 	 foreach($users as $user)
@@ -370,32 +472,47 @@ public function related_friends()
 	 
 	// print_r($user_id);
 	 
-	 */
-	 // getting frnds of frnds
-	 
-	$condition = "user_id =" . "'" . $id . "' AND request_status='Y'";
-	$this->db->select('friend_id');
-	$this->db->from('bzz_userfriends');
-	$this->db->where($condition);
-	$query = $this->db->get();
-	$friends = $query->result_array();
-	$one = array();
-	foreach($friends as $friend)
-	{
+$all_ids = array_merge($user_id,$n2);
+// print_r($all_ids); 
 
-		$condition = "user_id =" . "'" . $friend['friend_id'] . "' AND request_status='Y' AND friend_id !=" . "'" . $id . "'" ;
-		$this->db->select('friend_id');
-		$this->db->from('bzz_userfriends');
-		$this->db->where($condition);
-		$query = $this->db->get();
-		$frnds = $query->result_array();
-			
-	}
-	print_r($one);
+	if($all_ids)
+				{
+					$userdata = array();
+					foreach($all_ids as $each_id)
+					{
+					  //$condition =  "user_id =" . "'" . $user_id . "'";
+					  $this->db->select('*');
+					  $this->db->from('bzz_users');
+					  $this->db->join('bzz_user_images','bzz_users.user_id=bzz_user_images.user_id AND bzz_users.user_id='.$each_id);
+					  $this->db->join('bzz_userinfo','bzz_users.user_id=bzz_userinfo.user_id');
+					  $this->db->order_by('bzz_user_images.user_imageinfo_id','desc');
+					 // $this->db->where($condition);
+					  $query = $this->db->get();
+					   if ($query->num_rows() > 0) 
+					   {
+				       $user_data =  $query->result_array();
+					   $userdata[] = $user_data;
+				 		 } 
+					}
+			return $userdata;
+				
+				}
 
-	 
+return false;
 }
-		
+	
+public function search_friends($value)
+{
+	
+	$this->db->select('*'); 
+	$this->db->from('bzz_userinfo');
+	$this->db->like('user_firstname',$value); 
+	$this->db->or_like('user_lastname',$value); 
+	$query = $this->db->get();
+	$data = $query->result_array();
+	print_r($data);
+	exit;
+}
 
 }
 ?>

@@ -137,7 +137,7 @@ public function managecompanydata($data)
 			 
 			 	$cmp_follow = $this->get_companies_to_follow();
 			$list = "";
-		    if($cmp_follow) { foreach($cmp_follow as $follow){
+		    if(!empty($cmp_follow)) { foreach($cmp_follow as $follow){
            $list .= " <li>
               <figure><img src='".base_url()."uploads/".$follow['company_image']."' alt='".$follow['cmp_name']."'></figure>
               <div class='disc'>
@@ -168,7 +168,7 @@ public function managecompanydata($data)
 			 
 			   	$cmp_follow = $this->get_companies_to_follow();
 			$list = "";
-		    if($cmp_follow) { foreach($cmp_follow as $follow){
+		    if(!empty($cmp_follow)) { foreach($cmp_follow as $follow){
            $list .= " <li>
               <figure><img src='".base_url()."uploads/".$follow['company_image']."' alt='".$follow['cmp_name']."'></figure>
               <div class='disc'>
@@ -284,8 +284,9 @@ public function get_mn_cmp_list()
 		$this->db->from('bzz_userfriends');
 		$this->db->where($condition);
 		$query = $this->db->get();
-		if ($query->num_rows() > 0) {
-			$friends = $query->result_array();
+		$friends = $query->result_array();
+		if($friends) {
+			
 			$jobs= array();
 			$elements = array();
 			foreach($friends as $friend)
@@ -303,7 +304,8 @@ public function get_mn_cmp_list()
 					
 					$elements[] = $follower[0]['companyinfo_id'];		
 				
-			    }
+			    }else
+				return false;
 		}
 			
 			
@@ -317,7 +319,8 @@ public function get_mn_cmp_list()
 				$cmp_follow = $query->result_array();
 				
 				$company = array();
-				foreach($cmp_follow as $cmp){
+				foreach($cmp_follow as $cmp)
+				{
 				$company[] = $cmp['companyinfo_id'];
 				}
 				
@@ -349,7 +352,7 @@ public function get_mn_cmp_list()
 				
 		}
   
-			
+		return false;	
 	}
 	
 	public function get_cmp_by_id($id)

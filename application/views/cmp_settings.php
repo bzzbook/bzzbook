@@ -94,7 +94,7 @@
                  <input type="text" class="form-control" placeholder="Zip Code" value="<?php echo $cmp_info[0]['company_postalcode'] ?>" name="postal_code">
               </div>
            
-              <div class="filed col-md-6 select">
+              <div class="filed col-md-6">
                 <select class="form-control" name="industry">
                    <?php foreach($industry as $industries):?>
                  <option value="<?php echo $industries->lookup_value;?>"
@@ -105,7 +105,7 @@
                 </select>
               </div>
               
-              <div class="filed col-md-6 select">
+              <div class="filed col-md-6">
                 <select class="form-control" name="estb"> 
                  <option value="1956">1956</option>
                  <?php for($i=1950;$i<=date(Y);$i++){?>

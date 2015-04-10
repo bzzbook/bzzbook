@@ -614,6 +614,20 @@ function blockFrnd(id)
 		
 }
 
+function addFrnd(id)
+{
+		url="<?php echo base_url(); ?>friends/addFriend/"+id;
+		$.ajax({
+        type: "POST",
+        url: url,
+        success: function(data)
+        {   
+			$("#add_friends").html(data);
+		},
+		cache: false
+		});
+		
+}
 function cmpFollow(id)
 {
 	url="<?php echo base_url(); ?>company/cmp_follow/"+id;
@@ -1349,6 +1363,24 @@ $("form[name=cmp_postboard]").submit(function(event){
 				//event.preventDefault();
 			}
 			// add field function end	
+			
+			
+			
+//search friends functionality by sp on 10-4-2015
+$('#search_members').click(function(){
+	value = $('#search_frnds').val();
+	alert(value);
+	url="<?php echo base_url(); ?>friends/search_frnds/"+value;
+		$.ajax({
+        type: "POST",
+        url: url,
+        success: function(data)
+        {   
+			$("#cmpfollow").html(data);
+		},
+		cache: false
+		});
+});
 </script>
 
 

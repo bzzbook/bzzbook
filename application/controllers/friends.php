@@ -38,6 +38,11 @@ public function movefriend($frndid,$groupid)
 	return false;
 }
 
+// add friends functionality by sp on 10-04-2015
+public function addFriend($id)
+{
+	$data['result'] = $this->friendsmodel->addFriend_Request($id);	
+}
 //function for displaying all users by randomly to send friend requests
 
 public function find_frnds()
@@ -48,6 +53,11 @@ public function find_frnds()
 public function find_related_frnds()
 {
 	$data['result'] = $this->friendsmodel->related_friends();
+}
+
+public function search_frnds($value)
+{
+	$data['result'] = $this->friendsmodel->search_friends($value);
 }
 }
 ?>

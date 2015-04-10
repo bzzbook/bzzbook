@@ -247,7 +247,7 @@ public function search_member()
 {
 	//$data['industry'] = $this->lookup->get_lookup_industry();
 	$data['content']='members_search';
-	$this->load->view('template-view',$data);
+	$this->load->view('full_content_view',$data);
 	//$this->load->view('members_search');
 	
 }
