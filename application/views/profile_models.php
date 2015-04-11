@@ -554,6 +554,49 @@
   </div>
 </div>
  <!----------------------- Follow PopUp End  ---------------------------->
+ <!----------------------- Follow PopUp1 Stat (right bar follow) --------------------------->
+
+
+<div class="modal fade" id="followModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    <form name="follow_form" id="follow_form">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">Follow This Company </h4>
+      </div>
+      
+      <div class="modal-body">
+        
+        <div class="row">
+          <div class="form-group col-md-12">
+            <label for="recipient-name" class="control-label">How Can You Follow This Company As:</label>
+            </div>
+            <div class="form-group col-md-6 ">
+            <select class="form-control" id="follow_option">
+                  <option value="colleague">Colleague</option>
+                  <option value="customer">Customer</option>
+                  <option value="other">Other</option>
+                 
+                </select>
+                 <input type="hidden" name="cmp_id" id="cmp_id" value=""/>
+          </div>
+    
+          </div>
+        
+      </div>
+      <div class="modal-footer">
+       
+        <input type="submit" class="btn btn-primary" value="Follow">
+         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+      
+      </form>
+    </div>
+  </div>
+</div>
+ <!----------------------- Follow PopUp1 End  ---------------------------->
+
 
 <!------------countrys and states scripts ------------>
 <script language="javascript">print_country("con");</script><!--  //for groups   --> 

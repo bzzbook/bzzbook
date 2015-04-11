@@ -628,19 +628,6 @@ function addFrnd(id)
 		});
 		
 }
-function cmpFollow(id)
-{
-	url="<?php echo base_url(); ?>company/cmp_follow/"+id;
-		$.ajax({
-        type: "POST",
-        url: url,
-        success: function(data)
-        {   
-			$("#cmpfollow").html(data);
-		},
-		cache: false
-		});
-}
 
 
 function cmpFollowPage(id)
@@ -673,6 +660,7 @@ function cmpFollowPage(id)
 		
 	}
 }
+
 
 
 function acceptFollow(user_id,cmp_id)
@@ -1380,6 +1368,27 @@ $('#search_members').click(function(){
 		},
 		cache: false
 		});
+		
+		
+		
+$("form[name=follw_form]").submit(function(){
+	alert("asdfsadf");
+	var option = $('#follow_option').val();
+	 var cmpid = $('#cmp_id').val($(this).data('id'));
+	 
+	//' alert('cmpid');
+//'	 alert(option);
+	url="<?php echo base_url(); ?>company/cmp_follow/"+cmpid+"/"+option;
+		$.ajax({
+        type: "POST",
+        url: url,
+        success: function(data)
+        {   
+			$("#cmpfollow").html(data);
+		},
+		cache: false
+		});
+	});
 });
 </script>
 
