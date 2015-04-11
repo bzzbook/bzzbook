@@ -1,8 +1,6 @@
 <?php 
 //$this->load->model('friendsmodel'); 
 $add_frnd_reqs = $this->friendsmodel->related_friends();
-print_r($add_frnd_reqs);
-exit;
 ?> 
  
  <div class="pendingRequest">

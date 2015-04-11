@@ -691,6 +691,50 @@ function denyFollow(user_id,cmp_id)
 		});
 }
 
+function cmpFollow(comp_id)
+{
+	
+	
+	$("form[name=follow_form]").submit(function(){
+	alert("asdfsadf");
+	 option = $('#follow_option').val();
+	 cmpid = $('#cmp_id').val('comp_id');
+	 $('#follow_modal1').modal('toggle');
+	 
+	 alert(cmpid);
+ alert(option);
+	url="<?php echo base_url(); ?>company/cmp_follow/"+cmpid+"/"+option;
+		$.ajax({
+        type: "POST",
+        url: url,
+        success: function(data)
+        {   
+			$("#cmpfollow").html(data);
+		},
+		cache: false
+		});
+	});
+	
+	
+	
+	
+	
+	
+	
+	
+	url="<?php echo base_url(); ?>company/cmp_follow_req_deny/"+user_id+"/"+cmp_id;
+		$.ajax({
+        type: "POST",
+        url: url,
+        success: function(data)
+        {   
+			$("#pendingReqUl").html(data);
+		},
+		cache: false
+		});
+}
+
+
 
 
 function saveGroup()
@@ -1370,25 +1414,8 @@ $('#search_members').click(function(){
 		});
 		
 		
-		
-$("form[name=follw_form]").submit(function(){
-	alert("asdfsadf");
-	var option = $('#follow_option').val();
-	 var cmpid = $('#cmp_id').val($(this).data('id'));
-	 
-	//' alert('cmpid');
-//'	 alert(option);
-	url="<?php echo base_url(); ?>company/cmp_follow/"+cmpid+"/"+option;
-		$.ajax({
-        type: "POST",
-        url: url,
-        success: function(data)
-        {   
-			$("#cmpfollow").html(data);
-		},
-		cache: false
-		});
-	});
+
+
 });
 </script>
 

@@ -560,7 +560,7 @@
 <div class="modal fade" id="followModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-    <form name="follow_form" id="follow_form">
+    <form name="follow_form" id="follow_form" method="post" action="">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="exampleModalLabel">Follow This Company </h4>
@@ -573,7 +573,7 @@
             <label for="recipient-name" class="control-label">How Can You Follow This Company As:</label>
             </div>
             <div class="form-group col-md-6 ">
-            <select class="form-control" id="follow_option">
+            <select class="form-control" id="follow_option" name="follow_option">
                   <option value="colleague">Colleague</option>
                   <option value="customer">Customer</option>
                   <option value="other">Other</option>
