@@ -1,5 +1,5 @@
    <?php  $image = $cmp_info;	
-   
+   //echo $image[0]['user_id'].' '.$this->session->userdata('logged_in')['account_id'];exit;
    ?>
     <section class="col-lg-6 col-md-6 col-sm-5 col-xs-12 coloumn2">
     <?php if($image[0]['user_id']==$this->session->userdata('logged_in')['account_id']) { ?>

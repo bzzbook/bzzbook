@@ -109,10 +109,11 @@ class Customermodel extends CI_Model {
 				$condition = "cmp_id ='".$cmp_id."' AND cmp_posted_to ='1'";
 			}
 		}	
+		else { $condition = ''; }
 	
 	   $this->db->select('*');
 	   $this->db->from('bzz_cmp_posts');
-	   $this->db->where($condition);
+	   if(!empty($condition)) $this->db->where($condition);
 	   $this->db->order_by("cmp_post_id","desc");
 	   $query = $this->db->get();
    	   if ($query->num_rows() > 0) {

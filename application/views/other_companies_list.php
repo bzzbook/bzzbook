@@ -15,8 +15,8 @@ exit;*/
               <div class="disc">
                 <h4><?php echo $req['cmp_name'] ?></h4>
                 <div class="dcBtn"><a href="<?php echo base_url("company/company_disp/".$req['companyinfo_id']) ?>"> View </a>
-                  <a href="javascript:void(0);" id="follow-btn" data-toggle="modal" data-target="#followModal"> Follow </a>
-              <!--  <a href="javascript:void(0);"  onclick="cmpFollow(<?php echo $req['companyinfo_id']; ?>);"> Follow </a>-->
+                  <a href="javascript:void(0);" onclick="cmpFollow(<?php echo //$req['companyinfo_id']; ?>);"> Follow </a>
+              <!--  <a href="javascript:void(0);"  id="follow-btn" data-toggle="modal" data-target="#followModal" onclick="cmpFollow(<?php echo //$req['companyinfo_id']; ?>);"> Follow </a>-->
                  <!--<a href="javascript:void(0);" onclick="blockFrnd(<?php // echo $req['id']; ?>);"> </a> --></div>
                 </div>
             </li>
