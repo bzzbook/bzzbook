@@ -160,9 +160,12 @@ class signg_in extends CI_Controller {
 	 // redirect(site_url('customer_controller/view_post'));
 	 // redirect(site_url('customer/view_post'));
    }
-   function doupload() {
+   function doupload($filename='') {
 					$name_array = array();
+					if($filename=='')
 					$count = count($_FILES['uploadPhotos']['size']);
+					else
+					$count = count($_FILES[$filename]['size']);
 					foreach($_FILES as $key=>$value)
 					for($s=0; $s<=$count-1; $s++) {
 					$_FILES['userfile']['name']=$value['name'][$s];
@@ -234,6 +237,18 @@ class signg_in extends CI_Controller {
 	 if($res){
 		 
 		 echo "success";
+	 }	   
+   }
+    function insertcmplikes($pid,$uid){
+	   $data=array(
+	       'like_on'=>$pid,
+	       'liked_by'=>$uid,
+		   
+	   );
+	 $res=$this->customermodel->insertcmplikes($data);
+	 if($res){
+		 
+		 echo "success";
 	 }
 	  
 	   
@@ -253,27 +268,29 @@ class signg_in extends CI_Controller {
    }
    
    
-    public function write_comment(){
+    public function write_comment($id){
 		
 	   $data=array(
 	   'comment_content'=>$this->input->post('write_comment'),
 	   'commented_on'=>$this->input->post('post_id'),
-	   'commented_by'=>$this->input->post('posted_by')
+	   'commented_by'=>$this->input->post('posted_by'),
+	   'uploadedfiles' => $this->doupload('uploadCommentPhotos'.$id)
 	   );
-
+	  
+	  //$data['uploadedfiles'] = $this->doupload('uploadCommentPhotos');
 	   $res=$this->customermodel->write_comments($data);
 	  // $res=$this->customer->write_comments($data);
 	   redirect('profiles');
 	   
    }
-    public function write_cmp_comment($cmp_id){
+    public function write_cmp_comment($cmp_post_id,$cmp_id){
 		
 	   $data=array(
 	   'comment_content'=>$this->input->post('write_comment'),
 	   'commented_on'=>$this->input->post('post_id'),
-	   'commented_by'=>$this->input->post('posted_by')
+	   'commented_by'=>$this->input->post('posted_by'),
+	   'uploadedfiles' => $this->doupload('CmpCommentPhotos'.$cmp_post_id)
 	   );
-
 	   $res=$this->customermodel->write_cmp_comments($data);
 	  // $res=$this->customer->write_comments($data);
 	   redirect('company/company_disp/'.$cmp_id);

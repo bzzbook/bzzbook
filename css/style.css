@@ -112,12 +112,16 @@ header .search .input-group .input-group-btn ul li a:hover{ background:url(../im
 .posts article .pfInfo{ display:flex; margin-bottom:15px;}
 .posts article .pfInfo .pfImg{ border:1px solid #ccc; margin-right:10px;}
 .posts article .pfInfo .pfImg{ width:50px; height:50px;}
-.posts article .pfInfo .pfImg img{ width:100%;}
-.posts article .pfInfo .pfInfoDetails h5{ font-weight:300; font-size:16px; padding-top:5px; }
+.posts article .pfInfo .pfImg img{ width:100%; height:100%; }
+.posts article .pfInfo .pfInfoDetails h5{ font-weight:300; font-size:14px; padding-top:5px; }
 .posts article .pfInfo .pfInfoDetails h5 .pfname{ font-weight:500; text-transform:capitalize;}
 .posts article .pfInfo .pfInfoDetails h5 a{ color:#2c2c2c;}
-.posts article .pfInfo .pfInfoDetails .date{ color:#606060; font-weight:300; font-size:14px; margin-top:6px; display:block;}
-.posts article .userContent{ border:1px solid #ccc; border-radius: 3px; padding-bottom:10px;}
+.posts article .pfInfo .pfInfoDetails .date{ color:#606060; margin-top:6px; display:block;   font-size: 11px;
+  font-weight: 300;
+  font-style: normal;}
+.posts article .userContent{ border:1px solid #ccc; border-radius: 3px; padding:5px;   font-size: 14px;
+  font-weight: 300;
+  font-style: normal;}
 .posts article .userContent figure img{ width:100%;}
 .posts article .userContent h3{ font-size:18px; color:#2c2c2c; padding:10px;}
 .posts article .userContent p{ font-weight:300; font-size:14px; padding:0 10px;}
@@ -128,7 +132,9 @@ header .search .input-group .input-group-btn ul li a:hover{ background:url(../im
 .posts article .commentBox figure img{ width:40px; height:40px; border:1px solid #ccc;}
 .posts article .commentBox textarea{ width:100%;  resize:none; font-size:12px; font-weight:300; overflow-y:hidden; padding:10px 40px 10px 10px; border:1px solid #ccc; max-height:40px; }
 .posts article .commentBox .postAComment{ float:left; width:92%;}
-.posts article .commentBox .postACommentInner{ padding-left:15px; position:relative;}
+.posts article .commentBox .postACommentInner{ padding-left:15px; position:relative;   font-size: 12px;
+  font-weight: 400;
+  font-style: normal;}
 .posts article .commentBox .postACommentInner em{ font-size:11px; font-weight:300; font-style:normal;}
 .posts article .commentBox .postACommentInner .upload{ position:absolute; color:#4e4e4e; right:10px; font-size:20px; top:7px;}
 
@@ -148,7 +154,9 @@ header .search .input-group .input-group-btn ul li a:hover{ background:url(../im
 .midbody .coloumn3 aside .latestFriends{ padding:18px 12px; border-bottom:1px solid #ececec;}
 .midbody .coloumn3 aside .latestFriends ul li{ float: left;  list-style: outside none none;  margin: 0 7% 7% 0;  overflow: hidden;   text-align:center; width:28%;}
 .midbody .coloumn3 aside .latestFriends ul li img{width:100%;}/*height:100%;(this property removed due to image getting disturbed in posts.php at friends lists images)*/
-.midbody .coloumn3 aside .latestFriends ul li a img{ width:auto; height:auto; display:block;}
+
+.midbody .coloumn3 aside .latestFriends ul li a img{ width:65px; height:65px; display:block;}
+
 .midbody .coloumn3 aside .latestFriends ul li:nth-child(3n) {  margin-right: 0;}
 
 .midbody .ad img{ width:100%;}

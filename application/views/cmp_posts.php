@@ -42,7 +42,7 @@
           <div class="pfInfo"> <a href="<?php echo base_url().'company/company_disp/'.$image[0]['companyinfo_id']; ?>" class="pfImg"><img src="<?php echo base_url(); ?>uploads/<?php echo $image[0]['company_image']; ?>" alt=""></a>
             <div class="pfInfoDetails">
               <h5><span class="pfname"><a href="<?php echo base_url().'company/company_disp/'.$image[0]['companyinfo_id']; ?>"><?php echo $image[0]['cmp_name'];?></a><?php if($row->cmp_shared==1) echo " shared a post "; ?> </span></h5>
-              <a href="#" class="date"><?php  echo $hrsago; ?></a> </div>
+              <a class="date"><?php  echo $hrsago; ?></a> </div>
           </div>
           <?php if(!empty($row->cmp_share_post_content)) echo "<div>".$row->cmp_share_post_content."</div>"; ?>
           <div class="userContent"> <?php if(!empty($row->cmp_uploaded_files))
@@ -78,11 +78,7 @@
 					else
 					$like='';
 					 if(@$user_id == $user_id && $like=='Y'){?>
-				<a href="javascript:void(0);" onclick="likefun('<?php echo $row->cmp_post_id;?>','<?php echo $row->cmp_posted_by;?>',<?php echo count($get_likedetails); ?>)"  id="link_like<?php echo $row->cmp_post_id;?>" style="padding-right:0px;">Unlike
-            <?php    
-			}else{?>
-				<a href="javascript:void(0);" onclick="likefun('<?php echo $row->cmp_post_id;?>','<?php echo $row->cmp_posted_by;?>',<?php echo count($get_likedetails); ?>)"  id="link_like<?php echo $row->cmp_post_id;?>" style="padding-right:0px;">Like
-			<?php }?></a>(<span id="like_count<?php echo $row->cmp_post_id;?>"><?php echo count($get_likedetails); ?></span>)&nbsp;&nbsp;<a href="#">Comment</a> <a href="javascript:void(0)" onclick="sharePost(<?php echo $row->cmp_post_id; ?>)" data-toggle="modal" data-target="#myModal">Share</a> <a href="javascript:void(0)" onclick="saveAsFav('<?php echo $row->cmp_post_id;?>')"><span>Save As Favorite</span></a></div>
+				<a href="javascript:void(0);" onclick="cmplikefun('<?php echo $row->cmp_post_id;?>','<?php echo $row->cmp_posted_by;?>',<?php echo count($get_likedetails); ?>)"  id="link_like<?php echo $row->cmp_post_id;?>" style="padding-right:0px;">Unlike<?php }else{ ?><a href="javascript:void(0);" onclick="cmplikefun('<?php echo $row->cmp_post_id;?>','<?php echo $row->cmp_posted_by;?>',<?php echo count($get_likedetails); ?>)"  id="link_like<?php echo $row->cmp_post_id;?>" style="padding-right:0px;">Like<?php }?></a>(<span id="like_count<?php echo $row->cmp_post_id;?>"><?php echo count($get_likedetails); ?></span>)&nbsp;&nbsp;<a href="javascript:document.getElementById('write_comment<?php echo $row->cmp_post_id; ?>').focus()">Comment</a> <a href="javascript:void(0)" onclick="shareCmpPost(<?php echo $row->cmp_post_id; ?>)" data-toggle="modal" data-target="#myModal">Share</a> </div>
             <div id="res_comments<?php echo $row->cmp_post_id;?>">
             <?php   
 			       $comments_details = $this->customermodel->cmp_comments_data($row->cmp_post_id);
@@ -97,7 +93,9 @@
 			<?php /*if($hr_final<24){?><?php echo $hr_final;?>hr<?php }else{
 				echo  str_replace("-"," ",$days)."days ago";
 			}*/ echo $comments_details[$i]->comment_content; ?></span><br /> <?php  echo $hrsago;
+					 $commentfiles = explode(',',$comments_details[$i]->uploadedfiles);
 			         ?></div>
+                      <?php if(!empty($comments_details[$i]->uploadedfiles)) { ?><div style="padding-left:16px;"><img width="200px" height="200px" src="<?php echo base_url();?>uploads/<?php echo $commentfiles[0]; ?>"</div> <?php } ?>
               </div>
               <div class="clearfix"></div>
           </div>
@@ -115,10 +113,11 @@
             <figure><img src="<?php if($image[0]['user_id']==$this->session->userdata('logged_in')['account_id']) { echo base_url();?>uploads/<?php echo $image[0]['company_image']; } else { echo base_url();?>uploads/<?php echo $get_profiledata[0]->user_img_thumb; } ?>" alt=""></figure>
             <div class="postAComment"> 
             	<div class="postACommentInner">
-                           <form action="<?php echo base_url();?>signg_in/write_cmp_comment/<?php echo $image[0]['companyinfo_id']; ?>" method="post" style="width:100% !important;">
-            <a href="#" class="upload"><span aria-hidden="true" class="glyphicon glyphicon-camera"></span></a>
- <input type="text" class="form-control comment" placeholder="Write a Comment..." name="write_comment" id="write_comment">                             <input type="hidden" name="post_id" value="<?php echo $row->cmp_post_id;?>">
+                           <form action="<?php echo base_url();?>signg_in/write_cmp_comment/<?php echo $row->cmp_post_id."/".$image[0]['companyinfo_id']; ?>" method="post" style="width:100% !important;" enctype="multipart/form-data">
+            <a href="javascript:document.getElementById('CmpCommentPhotos<?php echo $row->cmp_post_id;?>').click();javascript:document.getElementById('write_comment<?php echo $row->cmp_post_id;?>').focus(); " class="upload"><span aria-hidden="true" class="glyphicon glyphicon-camera"></span></a>
+ <input type="text" class="form-control comment" placeholder="Write a Comment..." name="write_comment" id="write_comment<?php echo $row->cmp_post_id;?>">                             <input type="hidden" name="post_id" value="<?php echo $row->cmp_post_id;?>">
                <input type="hidden" name="posted_by" value="<?php echo $curr_user_id;?>">
+                <input type="file" name="CmpCommentPhotos<?php echo $row->cmp_post_id;?>[]" id="CmpCommentPhotos<?php echo $row->cmp_post_id;?>" style="display:none;" />
 </form>
               <em>Press Enter to post.</em> </div>
               </div>

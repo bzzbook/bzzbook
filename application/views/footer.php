@@ -477,6 +477,32 @@ function likefun(pid,uid,count){
         }
        });	
 }
+function cmplikefun(pid,uid,count){
+	var posted_by=pid;
+	var user_id=uid;
+	url="<?php echo base_url();?>signg_in/insertcmplikes/"+pid+"/"+uid;
+	  $.ajax({
+        type: "POST",
+        url: url,
+        data: { liked_by: pid, like_on : uid} ,
+        success: function(html)
+        {   
+			info = JSON.parse(html);
+         if(info.like_status == 'N'){
+		 	//$("#like_ajax"+pid).html("Unlike");
+			$("#link_like"+pid).html("Like");
+		    $("#like_count"+pid).html(info.like_count-1);
+
+		 }			
+		  else{
+			//$("#like_ajax"+pid).html("Like");
+			$("#link_like"+pid).html("Unlike");
+	        $("#like_count"+pid).html(info.like_count+1);
+
+		  }
+        }
+       });	
+}
 function saveAsFav(pid){
 	
 	url="<?php echo base_url();?>signg_in/saveasfav/"+pid;
@@ -1292,6 +1318,15 @@ function sharePost(post_id){
 						
 					});
 }
+function shareCmpPost(post_id){
+	url="<?php echo base_url(); ?>profile/get_cmp_post_byid/"+post_id;
+					$.post( url )
+					.done(function( data ) {
+						$('#sharePostPopup').html(data);
+						
+					});
+}
+
 
 
 	$('#sharePostBtn').click(function() {

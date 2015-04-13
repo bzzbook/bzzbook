@@ -618,6 +618,62 @@ public function showfavs()
 			 
 			 echo $content;
 	}
+	public function get_cmp_post_byid($post_id){
+		$row = $this->customermodel->getCmpPostById($post_id);
+		$row = $row[0];
+		$posted_id=$row->cmp_posted_by;
+	 	$get_profiledata =  $this->companies->get_cmp_by_id($posted_id);
+	    $user_id=$this->session->userdata('logged_in')['account_id'];
+		
+		$attr = array('name' => 'share_form', 'id' =>'share_form', 'enctype'=>"multipart/form-data");
+      	
+		$content = form_open('signg_in/share_post',$attr)."<input type='file' name='uploadPhotos[]' id='uploadPhotos' multiple='multiple' style='display:none;' />
+        <textarea cols='' rows='' name='share_post_content' id='posts' class='form-control' placeholder='say something...'></textarea><div class='posts'><article>
+
+          <div class='userContent'>";
+		  
+		  if(!empty($row->cmp_uploaded_files))
+			 {
+			 $up_files = explode(',',$row->cmp_uploaded_files);
+			 $i = 0;
+			 foreach($up_files as $file)
+			 {
+				 if($i==0)
+				 {
+					 $content .= "<img src='".base_url()."uploads/".$file."' style='width:100%'/>";
+				 }
+				 else
+				 	 $content .= "<img src='".base_url()."uploads/".$file."' style='width:24%;float:left;margin:.5%; height:83px'/>";
+				 $i++;
+			 }
+			 $content .= "<div style='clear:both'></div>";
+			 } 
+             
+             $content .="</figure>
+            ";
+			
+			$str_leng=strlen($row->cmp_post_content);
+			  if($str_leng>50){
+				$content .= "<div id='popmsg".$row->post_id."'>".substr($row->cmp_post_content,0,50)."...<a href='#' onclick='popmyfunc(".$row->cmp_post_id.")'>more</a>"."</div><div id='popdes".$row->cmp_post_id."' style='display:none'>".$row->cmp_post_content."<a href='#' onclick='popmyfunc(".$row->cmp_post_id.")'>less</a></div>
+          </div></article></div><div class='updateControls'> <button id='sharePostBtn'>Post</button> <select name='post_group' id='post_group'><option value='0'>Public</option>"; 
+			 }else{
+				$content .= substr($row->cmp_post_content,0,50)."</p>
+          </div></article></div><div class='updateControls'> <button id='sharePostBtn'>Post</button> <select name='post_group' id='post_group'><option value='0'>Public</option>";
+		  
+			 }
+		$groups = $this->profile_set->get_user_groups(); if($groups) { 
+		foreach($groups as $group)
+		{
+			$content.="<option value='".$group['group_id']."'>".$group['group_name']."</option>";
+		}
+		
+		
+		} 
+		$content.="</select> </div><input type='hidden' id='uploaded_files' name='uploaded_files' value='".$row->cmp_uploaded_files."'><input type='hidden' id='uploaded_files' name='post_content' id='post_content' value='".$row->cmp_post_content."'>".form_close();
+			
+			 
+			 echo $content;
+	}
 	public function friends()
 	{
 		$data['content']='myfriends';

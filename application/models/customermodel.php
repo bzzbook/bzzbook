@@ -191,7 +191,40 @@ class Customermodel extends CI_Model {
 		}
 		else{
 	    $this->db->insert('bzz_likes',$data);
-			$data1 = array('like_status' => 'Y','like_count' => $like_count);
+			$data1 = array('like_status' => 'Y','like_count' => 0);
+			echo json_encode($data1);
+		}
+		
+   }
+   public function insertcmplikes($data)
+   {
+	    $pid=$data['like_on'];
+	    $aid=$data['liked_by'];
+	   // $like=$data['like'];
+	    $condition = "like_on =" . $pid . " AND liked_by =".$aid;
+	    $this->db->select('*');
+		$this->db->from('bzz_cmp_likes');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		if($query->num_rows()>0){
+			$res=$query->result();
+			$res_like=$res[0]->like_status;			
+			if($res_like == 'Y' ){
+				$slike="N";
+			}
+			else if($res_like == 'N'){
+				$slike="Y";
+			}
+			$like_count = count($this->customermodel->cmplikedata($pid));
+		$data1 = array('like_status' => $slike);
+        $this->db->where($condition);
+  		$this->db->update('bzz_cmp_likes',$data1);	
+	    $data1 = array('like_status' => $slike,'like_count' => $like_count);
+			echo json_encode($data1);
+		}
+		else{
+	    $this->db->insert('bzz_cmp_likes',$data);
+			$data1 = array('like_status' => 'Y','like_count' => 0);
 			echo json_encode($data1);
 		}
 		
@@ -223,7 +256,7 @@ class Customermodel extends CI_Model {
 	    $this->db->insert('bzz_cmp_postcomments',$data);
    }
    public function comments_data($pid){
-	   $condition = "commented_on =" . "'" . $pid . "' and comment_content != ''";
+	   $condition = "commented_on =" . "'" . $pid . "' and (comment_content != '' OR uploadedfiles!='')";
 		$this->db->select('*');
 		$this->db->from('bzz_postcomments');
 		$this->db->where($condition);
@@ -232,7 +265,7 @@ class Customermodel extends CI_Model {
 		return $query->result(); 
    }
    public function cmp_comments_data($pid){
-	   $condition = "commented_on =" . "'" . $pid . "' and comment_content != ''";
+	   $condition = "commented_on =" . "'" . $pid . "' and (comment_content != '' OR uploadedfiles!='')";
 		$this->db->select('*');
 		$this->db->from('bzz_cmp_postcomments');
 		$this->db->where($condition);
@@ -496,6 +529,19 @@ class Customermodel extends CI_Model {
 	    $condition = "post_id =" . "'" . $id . "'";
 		$this->db->select('*');
 		$this->db->from('bzz_posts');
+		$this->db->where($condition);
+		$this->db->limit(1);
+		$query = $this->db->get();
+		if ($query->num_rows() == 1) {
+			return $query->result();
+		} else {
+		return false;
+		}
+   }
+   public function getCmpPostById($id){
+	    $condition = "cmp_post_id =" . "'" . $id . "'";
+		$this->db->select('*');
+		$this->db->from('bzz_cmp_posts');
 		$this->db->where($condition);
 		$this->db->limit(1);
 		$query = $this->db->get();
