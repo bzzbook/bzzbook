@@ -502,7 +502,7 @@ return false;
 	
 public function search_friends($value)
 {
-	
+	$id = $this->session->userdata('logged_in')['account_id'];
 	$this->db->select('*'); 
 	$this->db->from('bzz_userinfo');
 	$this->db->like('user_firstname',$value); 
@@ -515,6 +515,8 @@ public function search_friends($value)
 		$userdata = array();
 	foreach($data as $data)
 	{
+		if($data['user_id'] != $id)
+		{
 			  $this->db->select('*');
 			  $this->db->from('bzz_users');
 			  $this->db->join('bzz_user_images','bzz_users.user_id=bzz_user_images.user_id AND bzz_users.user_id='.$data['user_id']);
@@ -524,6 +526,7 @@ public function search_friends($value)
 			  $query = $this->db->get();
 			  $frnds = $query->result_array();
 			$userdata[] = $frnds;
+	}
 	}
 	
 	$searchblock = "";

@@ -721,43 +721,24 @@ function cmpFollow(comp_id)
 {
 	
 	
-	$("form[name=follow_form]").submit(function(){
-	alert("asdfsadf");
-	 option = $('#follow_option').val();
-	 cmpid = $('#cmp_id').val('comp_id');
-	 $('#follow_modal1').modal('toggle');
-	 
-	 alert(cmpid);
- alert(option);
-	url="<?php echo base_url(); ?>company/cmp_follow/"+cmpid+"/"+option;
+    $('#followModal1').modal('toggle');
+	alert(comp_id);
+	if($('#follow_form').submit())
+	{
+	option = $('#follow_option').val();
+	url="<?php echo base_url(); ?>company/cmp_follow/"+option+"/"+comp_id;
 		$.ajax({
         type: "POST",
         url: url,
         success: function(data)
-        {   
-			$("#cmpfollow").html(data);
+        {  
+		//$('#followModal1').modal('toggle'); 
+			//$("#cmpfollow").html(data);
 		},
 		cache: false
 		});
-	});
-	
-	
-	
-	
-	
-	
-	
-	
-	url="<?php echo base_url(); ?>company/cmp_follow_req_deny/"+user_id+"/"+cmp_id;
-		$.ajax({
-        type: "POST",
-        url: url,
-        success: function(data)
-        {   
-			$("#pendingReqUl").html(data);
-		},
-		cache: false
-		});
+	}else
+	return false;
 }
 
 
