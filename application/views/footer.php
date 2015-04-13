@@ -1436,14 +1436,14 @@ $("form[name=cmp_postboard]").submit(function(event){
 //search friends functionality by sp on 10-4-2015
 $('#search_members').click(function(){
 	value = $('#search_frnds').val();
-	alert(value);
+	
 	url="<?php echo base_url(); ?>friends/search_frnds/"+value;
 		$.ajax({
         type: "POST",
         url: url,
         success: function(data)
         {   
-			$("#cmpfollow").html(data);
+			$(".groupEditBlock").html(data);
 		},
 		cache: false
 		});
@@ -1455,7 +1455,7 @@ $('#search_members').click(function(){
 </script>
 
 
-
+<?php /*?>
 <style>
 .form-mandatory{
 color:red;
@@ -1474,7 +1474,7 @@ color:red;
   font-weight: 300;
 }
 
-</style>
+</style><?php */?>
 <?php $this->load->view('profile_models'); ?>
 </body>
 </html>

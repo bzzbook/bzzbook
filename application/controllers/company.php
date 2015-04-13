@@ -136,10 +136,10 @@ public function addcompany()
 		
 	}
 	
-	public function cmp_follow($cmpinfo_id)
+	public function cmp_follow($cmpinfo_id,$follow_as)
 	{
-		
-	     $data['result'] = $this->companies->company_follow($cmpinfo_id);
+
+	     $data['result'] = $this->companies->company_follow($cmpinfo_id,$follow_as);
 	
 	}
 	public function cmp_view_follow($cmpinfo_id,$follow_as)

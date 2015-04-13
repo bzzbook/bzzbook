@@ -805,8 +805,23 @@ margin-top:14px;
 .mfSearch .input-group .form-control{ background:#fff; border-radius:0;}
 .mfSearch .input-group .input-group-btn .btn{ text-align:center; top:0; background:#000; color:#fff;}
 
+.searchfriends .groupEditBlock  .fdblock  figure{ width:35% !important;}
+.searchfriends .groupEditBlock  .fdblock  figure img{ width:100% !important; height:auto !important;}
+.searchfriends .groupEditBlock li{ list-style:none; padding:0 !important;}
+.searchfriends .groupEditBlock li .fdblock .friendInfo{ width:58%; float:right;}
+.searchfriends .groupEditBlock li .fdblock .friendInfo span{ font-size:12px; color:#9c9c9c;}
+.searchfriends .groupEditBlock{ padding:0;}
+.searchfriends .groupEditBlock li .fdblock{ padding:10px; display:inline-block; width:93%; border:1px solid #dedede; margin:10px;}
+.searchfriends .groupEditBlock li .fdblock .myfriendspfpic{ float:left;}
+.searchfriends .groupEditBlock li .fdblock .myfriendspfpic img{ height:100% !important;}
+.searchfriends .friendInfo h3 a{ color:#000; text-transform:capitalize; font-size:15px;}
+.searchfriends .groupEditBlock li .fdblock .disc a{ display:inline-block; font-size:12px; color:#fff; background:/*#609b34*/#fbc436; height:30px; line-height:30px; padding:0 10px; -webkit-border-radius:2px; border-radius:2px;  margin-top:4px;}
 .memSearch{ background:#fbc436;}
 .memSearch h4{ margin:0; border:none;}
 .memSearch .input-group{ margin-top:10px;}
 .memSearch .input-group .form-control{ background:#fff; border-radius:0;}
 .memSearch .input-group .input-group-btn .btn{ text-align:center; top:0; background:#000; color:#fff;}
+.form-mandatory{color:red;}
+#uploadPhotosdvPreview img{margin-right:5px; }
+#sharePostBtn{background: #609b34;  height: 30px;  font-size: 14px;  line-height: 30px;  padding: 0 15px;  display: inline-block;
+  -webkit-border-radius: 2px;  border-radius: 2px; color: #fff; font-weight: 300;}

@@ -118,7 +118,7 @@ public function managecompanydata($data)
 	   return false;
 	   }
 	   
-	  public function company_follow($cmpinfo_id)
+	  public function company_follow($cmpinfo_id,$follow_as)
 	   {
 		   
 		    $id = $this->session->userdata('logged_in')['account_id'];
@@ -131,6 +131,7 @@ public function managecompanydata($data)
 		     if($result[0]['follow_status'] != 'Y')
 		    {
 		     $data['follow_status'] = 'Y';
+			 $data['follow_as'] = $follow_as;
 			 $condition =  "user_id =" . "'" . $id . "'" . " AND " . "companyinfo_id = ". "'" .$cmpinfo_id."'";
 		     $this->db->where($condition);
 		     $this->db->update('bzz_cmp_follow',$data);
@@ -162,6 +163,7 @@ public function managecompanydata($data)
 			   $data['companyinfo_id'] = $cmpinfo_id;
 			   $data['user_id'] = $id;
 			   $data['follow_status'] = 'W';
+			   $data['follow_as'] = $follow_as;
 			   $this->db->insert('bzz_cmp_follow',$data);
 			   
 			   //dynamic list display
@@ -291,9 +293,11 @@ public function get_mn_cmp_list()
 			$elements = array();
 			foreach($friends as $friend)
 			{
+				
+				// friends following companies
 				$id = $this->session->userdata('logged_in')['account_id'];
 			   //$condition = "user_id =" . "'" . $friend['friend_id'] ."'  AND follow_status='Y'" ;
-			    $condition = "user_id =" . "'" . $friend['friend_id'] . "'  AND follow_status='Y'" ;
+			    $condition = "user_id =" . "'" . $friend['friend_id']  ."'  AND follow_status='Y'" ;
 				$this->db->distinct();
 				$this->db->from('bzz_cmp_follow'); 
 				$this->db->where($condition);
@@ -307,39 +311,69 @@ public function get_mn_cmp_list()
 			    }else
 				return false;
 		}
+			//echo 'friends following cmps';
+			$elements_uni = array_unique($elements);
+			//print_r($elements_uni);
+		//	exit;
+			
+			// user following companies list
 			
 			
-			   $condition = "user_id =" . "'" . $id . "'  AND follow_status='Y'" ; 
+		     	$condition = "user_id =" . "'" . $id  ."'  AND follow_status='Y' OR 'W'" ;
 				$this->db->select('companyinfo_id');
-				$this->db->from('bzz_cmp_follow');
+				$this->db->from('bzz_cmp_follow'); 
 				$this->db->where($condition);
 				$query = $this->db->get();
-				
-				
-				$cmp_follow = $query->result_array();
-				
-				$company = array();
-				foreach($cmp_follow as $cmp)
+				$userfollow = $query->result_array();
+				$userfollowing = array();
+				if($userfollow)
 				{
-				$company[] = $cmp['companyinfo_id'];
-				}
-				
-				$elements = array_unique($elements);
-			 
-				$required_ids = array();
-				foreach($elements as $element)
-				{
-					if(!in_array($element,$company))
-					{
-						$required_ids[] = $element;
-					}
 					
+					foreach($userfollow as $userfollow)
+					{
+						$userfollowing[] = $userfollow['companyinfo_id'];
+					}
+				//echo 'user following cmps';
+				//print_r($userfollowing);
+				
 				}
-				if($required_ids)
+			// user companies
+			$mycmpcondition = "user_id =" . "'" . $id . "'" ;
+			$this->db->select('companyinfo_id');
+			$this->db->from('bzz_companyinfo');
+			$this->db->where($mycmpcondition);
+			$query = $this->db->get();
+			$mycmps = $query->result_array();
+			if($mycmps)
+			{
+				$cmp = array();
+				foreach($mycmps as $mycmp)
+				{
+					$cmp[] = $mycmp['companyinfo_id'];	
+				}
+			//	echo 'user cmps';
+			//print_r($cmp);
+		
+			}
+			
+			
+			$following_cmps = array_merge($elements_uni,$userfollowing);
+		//	echo "all following companies";
+		//	print_r($following_cmps);
+			
+			$first = array_diff($following_cmps,$userfollowing);
+			//echo " first differ"; 
+		//	print_r($first);
+			
+			$second = array_diff($first,$cmp);
+		//	print_r($second);
+			
+				}
+				if($second)
 				{
 				  $this->db->select('*');
 				  $this->db->from('bzz_companyinfo');
-				  $this->db->where_in('companyinfo_id',$required_ids);
+				  $this->db->where_in('companyinfo_id',$second);
 				  $this->db->limit(2);
 				  $query = $this->db->get();
 				  if ($query->num_rows() > 0) {
@@ -348,10 +382,6 @@ public function get_mn_cmp_list()
 				  return false;
 				  }
 				}
-				return false;
-				
-		}
-  
 		return false;	
 	}
 	

@@ -30,6 +30,20 @@
       </div>
       <div class="clearfix"></div>
         </div>
-        
-      </section>
+        <div class="about-user-details-inner" >
+          <section class="col-lg-12 col-md-12 col-sm-5 col-xs-12 coloumn2 searchfriends">
+            <div class="posts">
+    <div class="tabBar form-group">
+      
+      <div class="clearfix"></div>
+    </div>
+    <div class="groupEditBlock searchfriends">
+      
+      <div class="clear"></div>
+    </div>
+  </div>
+          </section>
+          <div class="clearfix"></div>
+        </div>
+    </section>
     </section>

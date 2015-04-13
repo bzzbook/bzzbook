@@ -1,7 +1,7 @@
 <?php 
 $cmp_reqs = $this->companies->get_companies_to_follow();
-/*print_r($cmp_reqs);
-exit;*/
+//print_r($cmp_reqs);
+//exit;
 ?> 
  
  <div class="pendingRequest">

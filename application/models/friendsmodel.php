@@ -101,8 +101,7 @@ class Friendsmodel extends CI_Model {
    public function confirmfriend($req_id)
 	{
 		$id = $this->session->userdata('logged_in')['account_id'];
-	    $condition = "user_id =" . "'" . $id . "' AND friend_id =".$req_id;
-		
+		 $condition = "user_id =" . "'" . $id . "'" . " AND " . "friend_id =" . "'" . $req_id .  "'"; 
 			$data = array(
                'request_status' => 'Y',
             );
@@ -510,9 +509,81 @@ public function search_friends($value)
 	$this->db->or_like('user_lastname',$value); 
 	$query = $this->db->get();
 	$data = $query->result_array();
-	print_r($data);
-	exit;
+	//print_r($data);
+	if($query->num_rows() > 0)
+	{
+		$userdata = array();
+	foreach($data as $data)
+	{
+			  $this->db->select('*');
+			  $this->db->from('bzz_users');
+			  $this->db->join('bzz_user_images','bzz_users.user_id=bzz_user_images.user_id AND bzz_users.user_id='.$data['user_id']);
+			  $this->db->join('bzz_userinfo','bzz_users.user_id=bzz_userinfo.user_id');
+			  $this->db->order_by('bzz_user_images.user_imageinfo_id','desc');
+			 // $this->db->where($condition);
+			  $query = $this->db->get();
+			  $frnds = $query->result_array();
+			$userdata[] = $frnds;
+	}
+	
+	$searchblock = "";
+		   
+          
+             if($userdata) {
+				 
+				 $searchblock .= "
+		   
+      <ul class='groupEditBlock'> ";   
+				  foreach($userdata as $req){
+        $searchblock .= " <li class='col-md-4'>
+        	<div class='fdblock'>
+			 <figure class='myfriendspfpic'><img src='" . base_url() ."uploads/".$req[0]['user_img_thumb']."' alt='". $req[0]['user_firstname'] . " " .$req[0]['user_lastname'] ."'></figure>
+		 <div class='friendInfo'>
+             <h3>". $req[0]['user_firstname'] . " " .$req[0]['user_lastname']."</h3>";
+			 $friendscount = $this->friendsmodel->get_frnds_frnds($req[0]['user_id']); if($friendscount) { $frnds = count($friendscount); }else $frnds = '0' ;
+			 $searchblock .= "<span>(". $frnds ." "." friends)</span>
+              <div class='disc'>";
+			  
+			  $myfrnd = $this->user_frnds($req[0]['user_id']);
+			 if($myfrnd){
+			//print_r($myfrnd);
+			 if($myfrnd[0]['request_status'] == 'Y') 
+				   {
+               $searchblock .= "<div class='dcBtn'><a href='javascript:void(0);'>Friends</a></div>";
+				   }elseif( $myfrnd[0]['request_status'] == 'W'){
+			 $searchblock .= "<div class='dcBtn'><a href='javascript:void(0);'>Request Sent</a></div>";
+				   }else{
+			 $searchblock .= "<div class='dcBtn'><a href='javascript:void(0);' onclick='addFrnd(" .$req[0]['user_id']. ");'>Add Friend</a></div>";
+				   }
+			  
+			 }else{
+		 $searchblock .= "<div class='dcBtn'><a href='javascript:void(0);' onclick='addFrnd(" .$req[0]['user_id']. ");'>Add Friend</a></div>";
+			 }
+               $searchblock .= "</div>
+			</div>
+			  </li>	";
+	
+ } $searchblock .= "</ul>"; 
+ echo $searchblock;
+ }else $searchblock = "No friends Found Based On your Search!..";
+		 
+
+	}
+else echo "No friends Found Based On your Search!..";
 }
 
+public function user_frnds($frnd_id)
+{
+	$id = $this->session->userdata('logged_in')['account_id'];
+  	$condition =  "user_id =" . "'" . $id . "'" . " AND " . "friend_id =" . "'" . $frnd_id .  "'"; 
+	$this->db->select('*');
+	$this->db->from('bzz_userfriends');
+	$this->db->where($condition);
+	$query = $this->db->get();
+	if($query->num_rows >0)
+	{
+	return $query->result_array();
+}return false;
+}
 }
 ?>
