@@ -79,7 +79,12 @@ class Friendsmodel extends CI_Model {
 				$this->db->order_by('user_imageinfo_id','desc');
 				$query = $this->db->get();
 				$result = $query->result_array();
-				$frnd['image'] = $result[0]['user_img_fav'];
+				if(!empty($result[0]['user_img_fav']))
+				{
+					$frnd['image'] = $result[0]['user_img_fav'];
+				}
+				else
+					$frnd['image'] = 'default_profile_pic.png';
 				$frnd['id'] = $friend['friend_id'];
 				$frnds[] = $frnd;
 				
@@ -363,7 +368,10 @@ public function latest_frnds()
 				$this->db->order_by('user_imageinfo_id','desc');
 				$query = $this->db->get();
 				$result = $query->result_array();
+				if($result)
 				$frnd['image'] = $result[0]['user_img_thumb'];
+				else
+				$frnd['image'] = 'default_profile_pic.png';
 				$frnd['id'] = $friend['friend_id'];
 				$frnds[] = $frnd;
 			}

@@ -35,17 +35,38 @@ class Messages extends CI_Model {
 			$message_data['content'] = $message['message'];
 			$message_data['sent_by'] = $message['sent_by'];
 			$message_data['sent_date'] = $message['sent_date'];
+			$condition = "user_id = '".$message['sent_by']."'";
 			$this->db->select('*');
-			$this->db->from('bzz_userinfo');
-			$this->db->join('bzz_user_images','bzz_userinfo.user_id=bzz_user_images.user_id AND bzz_userinfo.user_id='.$message['sent_by']);
+			$this->db->from('bzz_user_images');
+			$this->db->where($condition);
 			$query = $this->db->get();
 			if($query->num_rows()>0)
-			{
-				$userinfo = $query->result_array();
-				$message_data['name'] = $userinfo[0]['user_firstname'].' '.$userinfo[0]['user_lastname'];
-				$message_data['user_image'] = $userinfo[0]['user_img_fav'];
+			{			
+				$this->db->select('*');
+				$this->db->from('bzz_userinfo');
+				$this->db->join('bzz_user_images','bzz_userinfo.user_id=bzz_user_images.user_id AND bzz_userinfo.user_id='.$message['sent_by']);
+				$query = $this->db->get();
+				if($query->num_rows()>0)
+				{
+					$userinfo = $query->result_array();
+					$message_data['name'] = $userinfo[0]['user_firstname'].' '.$userinfo[0]['user_lastname'];
+					$message_data['user_image'] = $userinfo[0]['user_img_fav'];
+				}
+				$messages_data[] = $message_data;
 			}
-			$messages_data[] = $message_data;
+			else
+			{
+				$this->db->select('*');
+				$this->db->from('bzz_userinfo');
+				$query = $this->db->get();
+				if($query->num_rows()>0)
+				{
+					$userinfo = $query->result_array();
+					$message_data['name'] = $userinfo[0]['user_firstname'].' '.$userinfo[0]['user_lastname'];
+					$message_data['user_image'] ='default_profile_pic.png';
+				}
+				$messages_data[] = $message_data;
+			}
 		}
 		return $messages_data;
 	}
@@ -70,6 +91,13 @@ class Messages extends CI_Model {
 			$message_data['content'] = $message['message'];
 			$message_data['recieved_by'] = $message['recieved_by'];
 			$message_data['sent_date'] = $message['sent_date'];
+			$condition = "user_id ='".$message['sent_by']."'";
+			$this->db->select('*');
+			$this->db->from('bzz_user_images');
+			$this->db->where($condition);
+			$query = $this->db->get();
+			if($query->num_rows()>0)
+			{
 			$this->db->select('*');
 			$this->db->from('bzz_userinfo');
 			$this->db->join('bzz_user_images','bzz_userinfo.user_id=bzz_user_images.user_id AND bzz_userinfo.user_id='.$message['sent_by']);
@@ -81,6 +109,20 @@ class Messages extends CI_Model {
 				$message_data['user_image'] = $userinfo[0]['user_img_fav'];
 			}
 			$messages_data[] = $message_data;
+			}
+			else
+			{
+				$this->db->select('*');
+			$this->db->from('bzz_userinfo');
+			$query = $this->db->get();
+			if($query->num_rows()>0)
+			{
+				$userinfo = $query->result_array();
+				$message_data['name'] = $userinfo[0]['user_firstname'].' '.$userinfo[0]['user_lastname'];
+				$message_data['user_image'] = 'default_profile_pic.png';
+			}
+			$messages_data[] = $message_data;
+			}
 		}
 		return $messages_data;
 	}
@@ -104,6 +146,13 @@ class Messages extends CI_Model {
 			$message_data['content'] = $message['message'];
 			$message_data['sent_by'] = $message['sent_by'];
 			$message_data['sent_date'] = $message['sent_date'];
+			$condition = "user_id = '".$message['sent_by']."'";
+			$this->db->select('*');
+			$this->db->from('bzz_user_images');
+			$this->db->where($condition);
+			$query = $this->db->get();
+			if($query->num_rows()>0)
+			{
 			$this->db->select('*');
 			$this->db->from('bzz_userinfo');
 			$this->db->join('bzz_user_images','bzz_userinfo.user_id=bzz_user_images.user_id AND bzz_userinfo.user_id='.$message['sent_by']);
@@ -115,6 +164,19 @@ class Messages extends CI_Model {
 				$message_data['user_image'] = $userinfo[0]['user_img_fav'];
 			}
 			$messages_data[] = $message_data;
+			}
+			else{
+				$this->db->select('*');
+			$this->db->from('bzz_userinfo');
+			$query = $this->db->get();
+			if($query->num_rows()>0)
+			{
+				$userinfo = $query->result_array();
+				$message_data['name'] = $userinfo[0]['user_firstname'].' '.$userinfo[0]['user_lastname'];
+				$message_data['user_image'] = 'default_profile_pic.png';
+			}
+			$messages_data[] = $message_data;
+			}
 		}
 		return $messages_data;
 	}
@@ -179,6 +241,13 @@ class Messages extends CI_Model {
 			$message_data['content'] = $message['message'];
 			$message_data['sent_by'] = $message['sent_by'];
 			$message_data['sent_date'] = $message['sent_date'];
+			$condition = "user_id = '".$message['sent_by']."'";
+			$this->db->select('*');
+			$this->db->from('bzz_user_images');
+			$query = $this->db->get();
+			$this->db->where($condition);
+			if($query->num_rows()>0)
+			{
 			$this->db->select('*');
 			$this->db->from('bzz_userinfo');
 			$this->db->join('bzz_user_images','bzz_userinfo.user_id=bzz_user_images.user_id AND bzz_userinfo.user_id='.$message['sent_by']);
@@ -190,6 +259,19 @@ class Messages extends CI_Model {
 				$message_data['user_image'] = $userinfo[0]['user_img_fav'];
 			}
 			$messages_data[] = $message_data;
+			}
+			else{
+				$this->db->select('*');
+			$this->db->from('bzz_userinfo');
+			$query = $this->db->get();
+			if($query->num_rows()>0)
+			{
+				$userinfo = $query->result_array();
+				$message_data['name'] = $userinfo[0]['user_firstname'].' '.$userinfo[0]['user_lastname'];
+				$message_data['user_image'] = 'default_profile_pic.png';
+			}
+			$messages_data[] = $message_data;
+			}
 		}
 		foreach($messages_data as $message)
 		{
