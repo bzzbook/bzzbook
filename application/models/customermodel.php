@@ -148,18 +148,37 @@ class Customermodel extends CI_Model {
 	   }
    }
    public function profiledata($id){
-	    $condition = "user_id =" . "'" . $id . "'";
+	    $condition = "user_id =" . "'" . $id . "'";		
 		$this->db->select('*');
-		$this->db->from('bzz_userinfo');
-		$this->db->join('bzz_user_images','bzz_userinfo.user_id=bzz_user_images.user_id AND bzz_userinfo.user_id='.$id);
-		$this->db->order_by('bzz_user_images.user_imageinfo_id','desc');
-		$this->db->limit(1);
+		$this->db->from('bzz_user_images');
+		$this->db->where($condition);
 		$query = $this->db->get();
-
-		if ($query->num_rows() == 1) {
-			return $query->result();
-		} else {
-		return false;
+		if($query->num_rows() > 0)
+		{
+			$this->db->select('*');
+			$this->db->from('bzz_userinfo');
+			$this->db->join('bzz_user_images','bzz_userinfo.user_id=bzz_user_images.user_id AND bzz_userinfo.user_id='.$id);
+			$this->db->order_by('bzz_user_images.user_imageinfo_id','desc');
+			$this->db->limit(1);
+			$query = $this->db->get();
+			if ($query->num_rows() == 1) {
+				return $query->result();
+			} else {
+			return false;
+			}
+		}
+		else{
+			$this->db->select('*');
+			$this->db->from('bzz_userinfo');
+			//$this->db->join('bzz_user_images','bzz_userinfo.user_id=bzz_user_images.user_id AND bzz_userinfo.user_id='.$id);
+			$this->db->order_by('user_id','desc');
+			$this->db->limit(1);
+			$query = $this->db->get();
+			if ($query->num_rows() == 1) {
+				return $query->result();
+			} else {
+			return false;
+			}
 		}
    }
    

@@ -8,7 +8,7 @@
                          <?php $attr = array('id' => 'upload_pfpic', 'name' => 'upload_file'); ?> 
               <?php echo form_open_multipart('profile/do_upload',$attr);?>
             <div class="profileLogo">
-              <figure class="cmplogo"> <img src="<?php echo base_url();?>uploads/<?php echo $image[0]->user_img_thumb ?>" alt="<?php echo base_url();?>uploads/<?php echo $image[0]->user_img_thumb ?>"></figure>
+              <figure class="cmplogo"> <img src="<?php echo base_url();?>uploads/<?php if(!empty($image[0]->user_img_thumb)) echo $image[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" alt="<?php echo base_url();?>uploads/<?php if(!empty($image[0]->user_img_thumb)) echo $image[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>"></figure>
               <!-- <span class="inside glyphicon glyphicon-camera" ></span>--> 
             </div>
             <h4 class="profile-name"><?php echo $data[0]['user_firstname']." ".$data[0]['user_lastname'] ?></h4>

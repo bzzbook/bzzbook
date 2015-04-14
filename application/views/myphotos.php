@@ -18,7 +18,7 @@ $profiledata = $this->customermodel->profiledata($user_id);
           <div class="visitiBoxInner">
             <figure class="compCover"><img alt="" src="<?php echo base_url(); ?>images/about_banner.jpg" class="img-responsive"></figure>
             <div class="profileLogo">
-              <figure class="cmplogo"><img src="<?php echo base_url().'uploads/'.$profiledata[0]->user_img_thumb; ?>"></figure>
+              <figure class="cmplogo"><img src="<?php echo base_url().'uploads/';if(!empty($profiledata[0]->user_img_thumb)) echo $profiledata[0]->user_img_thumb; else echo 'default_profile_pic.png';?>"></figure>
               <!-- <span class="inside glyphicon glyphicon-camera" ></span>--> 
             </div>
             <h4 class="profile-name"><?php echo $profiledata[0]->user_firstname.' '.$profiledata[0]->user_lastname; ?></h4>

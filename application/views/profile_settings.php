@@ -21,7 +21,7 @@
             <div role="tabpanel" class="tab-pane active" id="post_board">
              <?php $image = $this->profile_set->get_profile_pic(); 	?>
 			            <!-- <?php //echo base_url(); ?>images/pf_pic.png -->
-              <figure class="pfpic"><span>Profile Pic</span><img src="<?php echo base_url();?>uploads/<?php echo $image[0]->user_img_name  ?>" alt="" height="159" width="146"></figure>
+              <figure class="pfpic"><span>Profile Pic</span><img src="<?php echo base_url();?>uploads/<?php if(!empty($image[0]->user_img_thumb)) echo $image[0]->user_img_thumb; else echo 'default_profile_pic.png';  ?>" alt="" height="159" width="146"></figure>
                <?php $attr = array('id' => 'upload_file', 'name' => 'upload_file'); ?> 
               <?php echo form_open_multipart('profile/do_upload',$attr);?>
            <div class="upload"> <span class="btn btn-success fileinput-button"> <span>Change Picture</span> 

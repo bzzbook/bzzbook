@@ -302,13 +302,13 @@ public function get_mn_cmp_list()
 		$this->db->where($condition);
 		$query = $this->db->get();
 		$friends = $query->result_array();
+
 		if(!empty($friends)) {
-			
+
 			$jobs= array();
 			$elements = array();
 			foreach($friends as $friend)
-			{
-				
+			{			
 				// friends following companies
 				$id = $this->session->userdata('logged_in')['account_id'];
 			   //$condition = "user_id =" . "'" . $friend['friend_id'] ."'  AND follow_status='Y'" ;
@@ -319,13 +319,10 @@ public function get_mn_cmp_list()
 				$query = $this->db->get();
 				if($query->num_rows()>0)
 				{
-					$follower = $query->result_array();		
-					
-					$elements[] = $follower[0]['companyinfo_id'];		
-				
-			    }else
-				return false;
-		}
+					$follower = $query->result_array();							
+					$elements[] = $follower[0]['companyinfo_id'];					
+			    }
+	     	}
 			//echo 'friends following cmps';
 			$elements_uni = array_unique($elements);
 			//print_r($elements_uni);
@@ -334,7 +331,7 @@ public function get_mn_cmp_list()
 			// user following companies list
 			
 			
-		     	$condition = "user_id =" . "'" . $id  ."'  AND follow_status='Y' OR 'W'" ;
+		     	$condition = "user_id =" . "'" . $id  ."'  AND (follow_status='Y' OR follow_status='W')" ;
 				$this->db->select('companyinfo_id');
 				$this->db->from('bzz_cmp_follow'); 
 				$this->db->where($condition);
@@ -373,17 +370,17 @@ public function get_mn_cmp_list()
 			
 			
 			$following_cmps = array_merge($elements_uni,$userfollowing);
-		//	echo "all following companies";
-		//	print_r($following_cmps);
+			//	echo "all following companies";
+			//	print_r($following_cmps);
 			
 			$first = array_diff($following_cmps,$userfollowing);
 			//echo " first differ"; 
-		//	print_r($first);
+			//	print_r($first);
 			
 			$second = array_diff($first,$cmp);
-		//	print_r($second);
+			//	print_r($second);
 			
-				}
+				
 				if($second)
 				{
 				  $this->db->select('*');
@@ -393,11 +390,11 @@ public function get_mn_cmp_list()
 				  $query = $this->db->get();
 				  if ($query->num_rows() > 0) {
 				   return $query->result_array();
-				  } else {
-				  return false;
-				  }
+				  } 
 				}
-		return false;	
+		}
+		else 
+		return false;
 	}
 	
 	public function get_cmp_by_id($id)
