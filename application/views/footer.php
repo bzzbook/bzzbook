@@ -655,6 +655,20 @@ function addFrnd(id)
 		
 }
 
+function addSearchFrnd(id)
+{
+		url="<?php echo base_url(); ?>friends/addFriendFromSearch/"+id;
+		$.ajax({
+        type: "POST",
+        url: url,
+        success: function(data)
+        {   
+			$('#addFrnd').text('Request Sent');
+		},
+		cache: false
+		});
+		
+}
 
 function cmpFollowPage(id)
 {
@@ -722,10 +736,13 @@ function cmpFollow(comp_id)
 	
 	
     $('#followModal1').modal('toggle');
-	alert(comp_id);
-	if($('#follow_form').submit())
+	
+	$('#follow_form').submit( function()
 	{
-	option = $('#follow_option').val();
+	
+	var option = $('#follow_as').val();
+	alert(option);
+	alert(comp_id);
 	url="<?php echo base_url(); ?>company/cmp_follow/"+option+"/"+comp_id;
 		$.ajax({
         type: "POST",
@@ -737,7 +754,7 @@ function cmpFollow(comp_id)
 		},
 		cache: false
 		});
-	}else
+	});
 	return false;
 }
 
@@ -1417,7 +1434,14 @@ $("form[name=cmp_postboard]").submit(function(event){
 //search friends functionality by sp on 10-4-2015
 $('#search_members').click(function(){
 	value = $('#search_frnds').val();
-	
+	var errors = '';
+	if(value == '')
+	{
+		$("#error_data").html("Search Field Shouldn't be empty").fadeOut(1500);
+		location.reload();
+	}
+	else {
+		
 	url="<?php echo base_url(); ?>friends/search_frnds/"+value;
 		$.ajax({
         type: "POST",
@@ -1430,7 +1454,7 @@ $('#search_members').click(function(){
 		});
 		
 		
-
+	};
 
 });
 </script>

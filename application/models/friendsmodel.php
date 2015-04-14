@@ -107,6 +107,15 @@ class Friendsmodel extends CI_Model {
             );
 			$this->db->where($condition);
 			$this->db->update('bzz_userfriends', $data); 
+			
+			$frnddata = array(
+			   'user_id' => $req_id,
+			   'friend_id' => $id,
+               'request_status' => 'Y',
+            );
+			
+			$this->db->insert('bzz_userfriends', $frnddata);
+			
 			$pend_req = $this->getPendingRequests();
 			$list = "";
 		    if($pend_req) { foreach($pend_req as $req){
@@ -222,6 +231,46 @@ class Friendsmodel extends CI_Model {
 			 echo $list;
 		}
 	}
+	
+	// add friend functionality from search friends
+	
+	public function addSearchFriend_Request($frnd_id)
+	{
+		
+		$id = $this->session->userdata('logged_in')['account_id'];
+		$frndcondition =  "user_id =" . "'" . $frnd_id . "' AND request_status!='Y' OR 'W' AND friend_id =" . "'" . $id . "'" ;
+		$this->db->select('*');
+		$this->db->from('bzz_userfriends');
+		$this->db->where($frndcondition);
+		$query = $this->db->get();
+		$data = $query->result_array();
+		if($data)
+		{
+	
+	    $condition = "user_id =" . "'" . $frnd_id . "' AND friend_id =".$id;
+		
+			$data = array(
+               'request_status' => 'W',
+            );
+			$this->db->where($condition);
+			$this->db->update('bzz_userfriends', $data); 
+		}
+		else{
+			 $condition = "user_id =" . "'" . $frnd_id . "' AND friend_id =".$id;
+		
+			$data = array(
+				'user_id' => $frnd_id,
+				'friend_id' => $id,
+               'request_status' => 'W',
+            );
+			$this->db->where($condition);
+			$this->db->insert('bzz_userfriends', $data); 
+		
+		}
+	
+	}
+	
+	
 	public function get_userinfo_byid($user_id)
 	{
 		$condition = "user_id =" . "'" . $user_id . "'";
@@ -239,7 +288,7 @@ class Friendsmodel extends CI_Model {
 	public function get_frnds_frnds($id)
 	{
 		//$id = $this->session->userdata('logged_in')['account_id'];
-		$condition = "user_id =" . "'" . $id . "'";
+		$condition = "user_id =" . "'" . $id .  "' AND request_status='Y'";
 		$this->db->select('friend_id');
 		$this->db->from('bzz_userfriends');
 		$this->db->where($condition);
@@ -342,7 +391,7 @@ public function finding_friends()
 	}
 	//print_r($user_ids);
 
-	$frndcondition = "user_id =" . "'" . $id . "' AND request_status ='Y' OR 'N' OR 'W'";
+	$frndcondition = "user_id =" . "'" . $id . "' AND (request_status = 'Y' OR request_status = 'N' OR request_status = 'W')";
 	$friends = array();
 	$this->db->select('*');
 	$this->db->from('bzz_userfriends');
@@ -372,6 +421,7 @@ public function finding_friends()
 					  //$condition =  "user_id =" . "'" . $user_id . "'";
 					  $this->db->select('*');
 					  $this->db->from('bzz_users');
+					  $this->db->limit(2);
 					  $this->db->join('bzz_user_images','bzz_users.user_id=bzz_user_images.user_id AND bzz_users.user_id='.$user_id);
 					  $this->db->join('bzz_userinfo','bzz_users.user_id=bzz_userinfo.user_id');
 					  $this->db->order_by('bzz_user_images.user_imageinfo_id','desc');
@@ -525,8 +575,9 @@ public function search_friends($value)
 			 // $this->db->where($condition);
 			  $query = $this->db->get();
 			  $frnds = $query->result_array();
-			$userdata[] = $frnds;
+			  $userdata[] = $frnds;
 	}
+	
 	}
 	
 	$searchblock = "";
@@ -540,10 +591,10 @@ public function search_friends($value)
 				  foreach($userdata as $req){
         $searchblock .= " <li class='col-md-4'>
         	<div class='fdblock'>
-			 <figure class='myfriendspfpic'><img src='" . base_url() ."uploads/".$req[0]['user_img_thumb']."' alt='". $req[0]['user_firstname'] . " " .$req[0]['user_lastname'] ."'></figure>
+<figure class='myfriendspfpic'><img src='" . base_url() ."uploads/".$req[0]['user_img_thumb']."' alt='". $req[0]['user_firstname'] . " " .$req[0]['user_lastname'] ."'></figure>
 		 <div class='friendInfo'>
-             <h3>". $req[0]['user_firstname'] . " " .$req[0]['user_lastname']."</h3>";
-			 $friendscount = $this->friendsmodel->get_frnds_frnds($req[0]['user_id']); if($friendscount) { $frnds = count($friendscount); }else $frnds = '0' ;
+            <h3>". $req[0]['user_firstname'] . " " .$req[0]['user_lastname']."</h3>";
+ $friendscount = $this->friendsmodel->get_frnds_frnds($req[0]['user_id']); if($friendscount) { $frnds = count($friendscount); }else $frnds = '0' ;
 			 $searchblock .= "<span>(". $frnds ." "." friends)</span>
               <div class='disc'>";
 			  
@@ -556,11 +607,12 @@ public function search_friends($value)
 				   }elseif( $myfrnd[0]['request_status'] == 'W'){
 			 $searchblock .= "<div class='dcBtn'><a href='javascript:void(0);'>Request Sent</a></div>";
 				   }else{
-			 $searchblock .= "<div class='dcBtn'><a href='javascript:void(0);' onclick='addFrnd(" .$req[0]['user_id']. ");'>Add Friend</a></div>";
+			 $searchblock .= "<div class='dcBtn'><a id='addFrnd'
+			  href='javascript:void(0);' onclick='addSearchFrnd(" .$req[0]['user_id']. ");'>Add Friend</a></div>";
 				   }
 			  
 			 }else{
-		 $searchblock .= "<div class='dcBtn'><a href='javascript:void(0);' onclick='addFrnd(" .$req[0]['user_id']. ");'>Add Friend</a></div>";
+ $searchblock .= "<div class='dcBtn'><a id='addFrnd' href='javascript:void(0);' onclick='addSearchFrnd(" .$req[0]['user_id']. ");'>Add Friend</a></div>";
 			 }
                $searchblock .= "</div>
 			</div>
@@ -578,7 +630,7 @@ else echo "No friends Found Based On your Search!..";
 public function user_frnds($frnd_id)
 {
 	$id = $this->session->userdata('logged_in')['account_id'];
-  	$condition =  "user_id =" . "'" . $id . "'" . " AND " . "friend_id =" . "'" . $frnd_id .  "'"; 
+  	$condition =  "user_id =" . "'" . $frnd_id . "'" . " AND " . "friend_id =" . "'" . $id .  "'"; 
 	$this->db->select('*');
 	$this->db->from('bzz_userfriends');
 	$this->db->where($condition);

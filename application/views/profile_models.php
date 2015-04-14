@@ -573,7 +573,7 @@
             <label for="recipient-name" class="control-label">How Can You Follow This Company As:</label>
             </div>
             <div class="form-group col-md-6 ">
-            <select class="form-control" id="follow_option" name="follow_option">
+            <select class="form-control" id="follow_as" name="follow_as">
                   <option value="colleague">Colleague</option>
                   <option value="customer">Customer</option>
                   <option value="other">Other</option>

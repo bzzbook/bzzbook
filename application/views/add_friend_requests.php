@@ -1,6 +1,12 @@
 <?php 
 //$this->load->model('friendsmodel'); 
+$frnds = $this->friendsmodel->related_friends();
+if(empty($frnds))
+{
+$add_frnd_reqs = $this->friendsmodel->finding_friends();
+}else{
 $add_frnd_reqs = $this->friendsmodel->related_friends();
+}
 ?> 
  
  <div class="pendingRequest">

@@ -4,9 +4,7 @@ class customer extends CI_Controller {
 	 
 	  public function __construct() {
         parent::__construct();
-		$is_logged = $this->session->userdata('logged_in');	
-		if(!$is_logged)
-		redirect(base_url());
+	
 	
     }
 	public function index()
@@ -43,10 +41,10 @@ class customer extends CI_Controller {
 		$this->form_validation->set_rules('companyname','Company Name','required|xss_clean');
 		$this->form_validation->set_rules('office_phone','Office phone no','required|xss_clean');
 		$this->form_validation->set_rules('fax','Fax','required|xss_clean');
-		$this->form_validation->set_rules('aboutme','About','required');
-		$this->form_validation->set_rules('intrests','Intrests','required');
-    	$this->form_validation->set_rules('skills','Skills','required');
-		$this->form_validation->set_rules('agree','Terms & Conditions','required');
+		//$this->form_validation->set_rules('aboutme','About','required');
+	//	$this->form_validation->set_rules('intrests','Intrests','required');
+    	//$this->form_validation->set_rules('skills','Skills','required');
+		//$this->form_validation->set_rules('agree','Terms & Conditions','required');
 		
 		if($this->form_validation->run() == FALSE)
 		{
@@ -83,8 +81,9 @@ class customer extends CI_Controller {
 		$user_info['user_id'] = $user_id;
 		
 		$this->person->user_info($user_info);
-		$this->session->set_flashdata('cust_success', 'Sign Up Successfully. We will get back to you shortly');
+		
 		$this->person->user_settings($user_id);
+		$this->session->set_flashdata('cust_success', 'Sign Up Successfully. We will get back to you shortly');
 		$this->load->view('sign_in_v');
 		}
    }

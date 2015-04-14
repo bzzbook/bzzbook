@@ -26,7 +26,8 @@
           <p class="input-group-btn">
             <button type="button" class="btn btn-default glyphicon glyphicon-search" id="search_members">&nbsp;</button>
           </p>
-        </div>
+          </div>
+          <div id="error_data"></div>
       </div>
       <div class="clearfix"></div>
         </div>

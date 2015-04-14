@@ -126,8 +126,8 @@ public function managecompanydata($data)
 		    $this->db->where($condition);
 			$query = $this->db->get('bzz_cmp_follow');
 			$result = $query->result_array();
-			
-			if($result){
+			if(!empty($result))
+			{
 		     if($result[0]['follow_status'] != 'Y')
 		    {
 		     $data['follow_status'] = 'Y';
@@ -157,7 +157,6 @@ public function managecompanydata($data)
 			   {
 				   return false;
 			   }
-			   
 			}
 			 else{
 			   $data['companyinfo_id'] = $cmpinfo_id;
@@ -184,7 +183,6 @@ public function managecompanydata($data)
 		   
 			   
 			 }
-			   
 			  
 	   }
 	   
@@ -277,7 +275,24 @@ public function get_mn_cmp_list()
 		}
 	}
 	
+	// this function will return data of all companies when user registers initially
 	
+	public function get_initial_companies()
+	{
+		$id = $this->session->userdata('logged_in')['account_id'];
+	    $condition = "user_id !=" . "'" . $id . "'";
+		$this->db->select('*');
+		$this->db->from('bzz_companyinfo');
+		$this->db->where($condition);
+		$this->db->limit(2);
+		$query = $this->db->get();
+		if($query->num_rows() > 0)
+		{
+		 return $query->result_array();
+		}else 
+		return false;
+	}
+	//this fuction will return th data of frnds following companies
 	public function get_companies_to_follow()
 	{
 	    $id = $this->session->userdata('logged_in')['account_id'];
@@ -287,7 +302,7 @@ public function get_mn_cmp_list()
 		$this->db->where($condition);
 		$query = $this->db->get();
 		$friends = $query->result_array();
-		if($friends) {
+		if(!empty($friends)) {
 			
 			$jobs= array();
 			$elements = array();

@@ -12,7 +12,12 @@ class sign_up extends CI_Model {
 	   public function store($data)
 	   {
 		    $this->load->database("bzzbook"); 
-		    $this->db->insert('sign_up', $data);
+		    if($this->db->insert('sign_up', $data))
+			{
+				return $this->db->insert_id();
+			}
+			return false;
+				
 
 	   }
 	   public function sign_in($email,$pwd)

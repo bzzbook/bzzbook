@@ -144,16 +144,13 @@
              data-msg-required="please enter your company name"/> 
          </div>
          <div class="field col-md-12">                       
-             <textarea class="form-control" name="skills" placeholder="Skills...."  data-rule-required="true" 
-             data-msg-required="please enter about you"></textarea>
+             <textarea class="form-control" name="skills" placeholder="Skills...." ></textarea>
          </div>
          <div class="field col-md-12">                       
-             <textarea class="form-control" name="intrests" placeholder="Intrests...."  data-rule-required="true" 
-             data-msg-required="please enter about you"></textarea>
+             <textarea class="form-control" name="intrests" placeholder="Intrests...."  ></textarea>
          </div>
          <div class="field col-md-12">                       
-             <textarea class="form-control" name="aboutme" placeholder="About You...."  data-rule-required="true" 
-             data-msg-required="please enter about you"></textarea>
+             <textarea class="form-control" name="aboutme" placeholder="About You...."  ></textarea>
          </div>
          <div class="field col-md-6">
          <input type="checkbox" name="agree" value="agree" data-rule-required="true" 

@@ -1,5 +1,11 @@
 <?php 
+$cmps = $this->companies->get_companies_to_follow();
+if(!empty($cmps))
+{
 $cmp_reqs = $this->companies->get_companies_to_follow();
+}else{
+}
+$cmp_reqs = $this->companies->get_initial_companies();
 //print_r($cmp_reqs);
 //exit;
 ?> 

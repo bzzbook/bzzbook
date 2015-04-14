@@ -19,7 +19,7 @@
             <div class="ProfileViewNav"></div>
           </div>
         </section>
-      </div>
+     </div>
       <section class="about-user-details">
         <div class="mfSearch">
         <h4 class="col-md-6"><span aria-hidden="true" class="glyphicon glyphicon-user"></span>Friends<?php if($friends) { ?>( <?php  echo count($friends); ?> ) <?php } ?></h4>
