@@ -2,7 +2,7 @@
     <section class="col-lg-6 col-md-6 col-sm-5 col-xs-12 coloumn2">
       <div class="updateStatus" id="updateStatus">
         <ul>
-          <li> <img src="<?php echo base_url();?>uploads/<?php echo $image[0]->user_img_thumb ?>" alt="<?php echo base_url();?>uploads/<?php echo $image[0]->user_img_thumb ?>" height="60" width="55"> </li>
+          <li> <img src="<?php echo base_url();?>uploads/<?php if(!empty($image[0]->user_img_thumb)) echo $image[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" alt="<?php echo base_url();?>uploads/<?php if(!empty($image[0]->user_img_thumb)) echo $image[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" height="60" width="55"> </li>
           <li><a href="javascript:document.getElementById('posts').focus()" >Create a Post</a></li>
           <li><a href="javascript:document.getElementById('uploadPhotos').click()">Upload Photos/Video</a></li>
           <li><a href="#">Create Photo/Video Album</a></li>
@@ -43,7 +43,7 @@
 	  $user_id = $user_id;
 	  ?>
       <article>
-          <div class="pfInfo"> <a href="<?php echo base_url().'profile/post/'.$get_profiledata[0]->user_id; ?>" class="pfImg"><img src="<?php echo base_url(); ?>uploads/<?php echo $get_profiledata[0]->user_img_thumb; ?>" alt=""></a>
+          <div class="pfInfo"> <a href="<?php echo base_url().'profile/post/'.$get_profiledata[0]->user_id; ?>" class="pfImg"><img src="<?php echo base_url(); ?>uploads/<?php if(!empty($get_profiledata[0]->user_img_thumb)) echo $get_profiledata[0]->user_img_thumb; else echo 'default_profile_pic.png' ?>" alt=""></a>
             <div class="pfInfoDetails">
               <h5><span class="pfname"><a href="<?php echo base_url().'profile/post/'.$get_profiledata[0]->user_id; ?>"><?php echo ucfirst($get_profiledata[0]->user_firstname)."&nbsp;".ucfirst($get_profiledata[0]->user_lastname);?></a><?php if($row->shared==1) echo " shared a post "; ?> </span></h5>
               <a href="#" class="date"><?php  echo $hrsago; ?></a> </div>
@@ -95,7 +95,7 @@
 			       if($i<=4){ $com_user_data = $this->customermodel->profiledata($comments_details[$i]->commented_by); 	  $hrsago = $this->customermodel->get_time_difference_php($comments_details[$i]->commented_time);
 ?>
                    <div class="commentBox">
-            <figure> <a href="<?php echo base_url().'profile/post/'.$com_user_data[0]->user_id; ?>"><img src="<?php echo base_url();?>uploads/<?php echo $com_user_data[0]->user_img_thumb ?>" alt="<?php echo base_url();?>uploads/<?php echo $image[0]->user_img_thumb ?>"></a></figure>
+            <figure> <a href="<?php echo base_url().'profile/post/'.$com_user_data[0]->user_id; ?>"><img src="<?php echo base_url();?>uploads/<?php if(!empty($image[0]->user_img_thumb)) echo $image[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" alt="<?php echo base_url();?>uploads/<?php if(!empty($image[0]->user_img_thumb)) echo $image[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>"></a></figure>
             <div class="postAComment"> 
             	<div class="postACommentInner"><span class="pfname" style="color:#5A5998;"><a href="<?php echo base_url().'profile/post/'.$com_user_data[0]->user_id; ?>"><?php echo ucfirst($com_user_data[0]->user_firstname)."&nbsp;".ucfirst($com_user_data[0]->user_lastname);?></a></span> <span class="date" style="color:black;">
 			<?php /*if($hr_final<24){?><?php echo $hr_final;?>hr<?php }else{
@@ -116,7 +116,7 @@
             <?php } ?>
           </div>
           <div class="commentBox">
-            <figure><img src="<?php echo base_url();?>uploads/<?php echo $image[0]->user_img_thumb; ?>" alt=""></figure>
+            <figure><img src="<?php echo base_url();?>uploads/<?php if(!empty($image[0]->user_img_thumb)) echo $image[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" alt=""></figure>
             <div class="postAComment"> 
             	<div class="postACommentInner">
                            <form action="<?php echo base_url();?>signg_in/write_comment" method="post" style="width:100% !important;">

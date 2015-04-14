@@ -122,7 +122,7 @@ public function addcompany()
 		 $resut = $this->companies->managecmp_settings($settings);
 		 
 		 $data['content']='my_companies';
-	     $this->load->view('template-view',$data);
+	     $this->load->view('full_content_view',$data);
 		//$img_name ="52.jpg";
 		/*$this->load->model('companies');
 	   parse_str($_POST['formdata'],$company_info);
