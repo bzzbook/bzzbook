@@ -192,7 +192,7 @@ class Friendsmodel extends CI_Model {
 	public function addFriend_Request($frnd_id)
 	{
 		$id = $this->session->userdata('logged_in')['account_id'];
-		$frndcondition =  "user_id =" . "'" . $frnd_id . "' AND request_status!='Y' OR 'W' AND friend_id =" . "'" . $id . "'" ;
+		$frndcondition =  "user_id =" . "'" . $id . "' AND (request_status!='Y' OR request_status!='W') AND friend_id =" . "'" . $frnd_id . "'" ;
 		$this->db->select('*');
 		$this->db->from('bzz_userfriends');
 		$this->db->where($frndcondition);
@@ -200,9 +200,7 @@ class Friendsmodel extends CI_Model {
 		$data = $query->result_array();
 		if($data)
 		{
-	
-	    $condition = "user_id =" . "'" . $frnd_id . "' AND friend_id =".$id;
-		
+	 	    $condition = "user_id =" . "'" . $id . "' AND friend_id =".$frnd_id;		
 			$data = array(
                'request_status' => 'W',
             );
@@ -210,18 +208,19 @@ class Friendsmodel extends CI_Model {
 			$this->db->update('bzz_userfriends', $data); 
 		}
 		else{
-			 $condition = "user_id =" . "'" . $frnd_id . "' AND friend_id =".$id;
-		
+			$condition = "user_id =" . "'" . $id . "' AND friend_id =".$frnd_id;		
 			$data = array(
-				'user_id' => $frnd_id,
-				'friend_id' => $id,
+				'user_id' => $id,
+				'friend_id' => $frnd_id,
                'request_status' => 'W',
             );
 			$this->db->where($condition);
 			$this->db->insert('bzz_userfriends', $data); 
-		
+		}
 			
 			$frnd_req = $this->related_friends();
+			if(!$frnd_req)
+			$frnd_req = $this->friendsmodel->finding_friends();
 			$list = "";
 		    if($frnd_req) { foreach($frnd_req as $req){
            $list .= " <li>
@@ -234,7 +233,7 @@ class Friendsmodel extends CI_Model {
              } }else $list = "No Friends Found!..";
 			 
 			 echo $list;
-		}
+		
 	}
 	
 	// add friend functionality from search friends
@@ -399,7 +398,7 @@ public function finding_friends()
 	}
 	//print_r($user_ids);
 
-	$frndcondition = "user_id =" . "'" . $id . "' AND (request_status = 'Y' OR request_status = 'N' OR request_status = 'W')";
+	$frndcondition = "user_id =" . "'" . $id . "'";
 	$friends = array();
 	$this->db->select('*');
 	$this->db->from('bzz_userfriends');
@@ -438,7 +437,7 @@ public function finding_friends()
 					   if ($query->num_rows() > 0) {
 				       $userdata =  $query->result_array();
 					   $user_data[] = $userdata;
-				 		 } 
+				 	   } 
 					}
 				return $user_data;
 				

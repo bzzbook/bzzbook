@@ -5,7 +5,7 @@ if(empty($frnds))
 {
 $add_frnd_reqs = $this->friendsmodel->finding_friends();
 }else{
-$add_frnd_reqs = $this->friendsmodel->related_friends();
+$add_frnd_reqs = $frnds;
 }
 ?> 
  
