@@ -1439,7 +1439,32 @@ $("form[name=cmp_postboard]").submit(function(event){
 				//event.preventDefault();
 			}
 			// add field function end	
-			
+			function addWorkPlace()
+			{
+				var orgname = $('#org_name').val();
+				var position = $('#position').val();
+							
+				url="<?php echo base_url();?>profile/addworkplace/";
+				 $.ajax({
+        			type: "POST",
+			        url: url,
+			        data: { org_name:orgname,position: position} ,
+        			success: function(html)
+			        {   
+						var prev_cont = $('#profession-li .data_fileds').html();
+						var data = "<p>"+position+" at "+orgname+" <a href='' >Edit</a></p>"
+                        $('#profession-li .data_fileds').html(prev_cont+data);
+						$('#profession-li .graphic').hide();
+					    $('#profession-li .data_fileds').show();
+			        }
+					
+			       });			
+				//event.preventDefault();
+			}
+			function canceladdWork(){
+				 $('#profession-li .data_fileds').show();
+				 $('#profession-li .graphic').hide();
+			}
 			
 			
 //search friends functionality by sp on 10-4-2015

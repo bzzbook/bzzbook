@@ -52,11 +52,11 @@
 						  foreach($profession_details as $prof){
 								echo '<p>'.$prof->position.' at '.$prof->org_name.'<a href="javascript:void(0)" onclick="addWork()"> Edit</a></p>';
 						  } 
-						  } ?><p><a href="javascript:void(0)" onclick="addWork('profession')"> Add Work Place</a></p></div>
+						  } ?></div><p><a href="javascript:void(0)" onclick="addWork('profession')"> Add Work Place</a></p>
                           <div class="graphic" style="padding-top:10px; display:none;"><form action="javascript:void(0)" method="post"><div class="filed col-md-6">
-                <input class="form-control" placeholder="Company" name="company_name" type="text">
+                <input class="form-control" placeholder="Company" name="org_name" id="org_name" type="text">
               </div><div class="filed col-md-6">
-                <input class="form-control" placeholder="Positon Held" name="position" type="text">
+                <input class="form-control" placeholder="Positon Held" name="position" id="position" type="text">
               </div>
               <div class="filed col-md-6">
                <input class="fmbtn" style=" border-radius: 2px;
@@ -67,7 +67,7 @@ font-size: 12px;
 font-weight: 700;
 height: 34px;
 padding: 0px 10px;
-margin-bottom: 20px; float:left; margin-top:5px;" value="Save" type="submit"><input class="fmbtn" style=" border-radius: 2px;
+margin-bottom: 20px; float:left; margin-top:5px;" value="Save" type="submit"  onclick="addWorkPlace();"><input class="fmbtn" style=" border-radius: 2px;
 border: medium none;
 background: none repeat scroll 0% 0% #609B34;
 color: #FFF;
@@ -75,7 +75,7 @@ font-size: 12px;
 font-weight: 700;
 height: 34px;
 padding: 0px 10px;
-margin-bottom: 20px; float:left; margin-top:5px;" value="cancle" type="button" onclick="addWork">
+margin-bottom: 20px; margin-left:5px; float:left; margin-top:5px;" value="cancle" type="button" onclick="canceladdWork()">
               </div>
  
   </form>
