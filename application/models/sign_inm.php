@@ -26,7 +26,7 @@ class sign_inm extends CI_Model {
 			//print_r($user_data);
 			if($query->num_rows() == 1) {
 				//echo"hai";
-				$conf_condition = "conf_code =" . "'" . $user_data[0]['conf_code'] ."'  AND conf_status='Y'" ;
+				$conf_condition = "user_id =" . "'" . $user_data[0]['user_id'] ."'  AND conf_status='Y'" ;
 				$this->db->select('*');
 				$this->db->from('bzz_confirmation');
 				$this->db->where($conf_condition);

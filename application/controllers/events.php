@@ -16,7 +16,7 @@ class Events extends CI_Controller {
 	public function create_event()
 	{
 	 parse_str($_POST['formdata'],$event_info);
-	 $returninfo = $this->jobmodel->insert_jobs($event_info);
+	 $returninfo = $this->eventmodel->insert_events($event_info);
 	 if($returninfo != false):
 	  	$event_info['inserted_id'] = $returninfo;
 	 //	echo $this->load->view('event_field');
