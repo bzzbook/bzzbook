@@ -35,7 +35,6 @@ class signg_in extends CI_Controller {
 			    $result = $this->sign_inm->sign_in($data);
 		
 		
-		
 	    if($result == TRUE){
 	    /*	$sess_array = array(
 		   					'email' => $this->input->post('email'),
@@ -45,14 +44,14 @@ class signg_in extends CI_Controller {
 						 */
 						 
 		$sess_array = array(
-		   					'email' =>$result[0]->user_email,
-						    'password' =>$result[0]->password,
-							'account_id' =>$result[0]->user_id
+		   					'email' =>$result[0]['user_email'],
+						    'password' =>$result[0]['password'],
+							'account_id' =>$result[0]['user_id']
 							
 						   );
 		
         $this->session->set_userdata('logged_in',$sess_array);
-		print_r($this->session->userdata);
+	//	print_r($this->session->userdata);
 		$result = $this->sign_inm->read_user_information($sess_array);
 		if($result != false){
 			$data = array(

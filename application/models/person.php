@@ -57,6 +57,19 @@ class person extends CI_Model {
 		$this->db->where('cust_id', $id);
 		$this->db->update('cust_sign_up', $data);
 		}
+		
+		public function get_user_details($user_id)
+		{
+			$condition = "user_id =" . "'" . $user_id . "'" ;
+			$this->db->select('*');
+			$this->db->from('bzz_users');
+			$this->db->where($condition);
+			$query = $this->db->get();
+			if($query->num_rows() == 1){
+			return $query->result_array();
+			}
+			return false;
+		}
 	   		
 }
 ?>

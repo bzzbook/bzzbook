@@ -118,11 +118,12 @@ public function managecompanydata($data)
 	   return false;
 	   }
 	   
-	  public function company_follow($cmpinfo_id,$follow_as)
+	  public function company_follow($follow_as,$cmpinfo_id)
 	   {
 		   
 		    $id = $this->session->userdata('logged_in')['account_id'];
-		    $condition =  "user_id =" . "'" . $id . "'" . " AND " . "companyinfo_id = ". "'" .$cmpinfo_id."'";
+		
+		   /* $condition =  "user_id =" . "'" . $id . "'" . " AND " . "companyinfo_id = ". "'" .$cmpinfo_id."'";
 		    $this->db->where($condition);
 			$query = $this->db->get('bzz_cmp_follow');
 			$result = $query->result_array();
@@ -153,12 +154,12 @@ public function managecompanydata($data)
 			   
 
 			 }
-			elseif($result[0]['follow_status'] == 'Y')
+			else
 			   {
 				   return false;
 			   }
 			}
-			 else{
+			 else{*/
 			   $data['companyinfo_id'] = $cmpinfo_id;
 			   $data['user_id'] = $id;
 			   $data['follow_status'] = 'W';
@@ -166,7 +167,7 @@ public function managecompanydata($data)
 			   $this->db->insert('bzz_cmp_follow',$data);
 			   
 			   //dynamic list display
-			 
+			 /*
 			   	$cmp_follow = $this->get_companies_to_follow();
 			$list = "";
 		    if(!empty($cmp_follow)) { foreach($cmp_follow as $follow){
@@ -180,9 +181,9 @@ public function managecompanydata($data)
              } }else $list = "No Companies Available";
 			 
 			 echo $list;
-		   
+		   */
 			   
-			 }
+			// }
 			  
 	   }
 	   
@@ -302,6 +303,7 @@ public function get_mn_cmp_list()
 		$this->db->where($condition);
 		$query = $this->db->get();
 		$friends = $query->result_array();
+		
 
 		if(!empty($friends)) {
 
@@ -328,6 +330,27 @@ public function get_mn_cmp_list()
 			//print_r($elements_uni);
 		//	exit;
 			
+
+			//user friends created companies
+			$frnd_companies = array();
+			foreach($friends as $friend)
+			{	
+			   //$condition = "user_id =" . "'" . $friend['friend_id'] ."'  AND follow_status='Y'" ;
+			    $condition = "user_id =" . "'" . $friend['friend_id']  ."'" ;
+				$this->db->select('companyinfo_id');
+				$this->db->from('bzz_companyinfo'); 
+				$this->db->where($condition);
+				$query = $this->db->get();
+				if($query->num_rows()>0)
+				{
+					$frnd_cmps = $query->result_array();							
+					$frnd_companies[] = $frnd_cmps[0]['companyinfo_id'];					
+			    }
+	     	
+			}
+			
+			//print_r($frnd_companies);
+			
 			// user following companies list
 			
 			
@@ -345,11 +368,12 @@ public function get_mn_cmp_list()
 					{
 						$userfollowing[] = $userfollow['companyinfo_id'];
 					}
-				//echo 'user following cmps';
-				//print_r($userfollowing);
+				/*echo 'user following cmps';
+				print_r($userfollowing);*/
 				
 				}
 			// user companies
+			
 			$mycmpcondition = "user_id =" . "'" . $id . "'" ;
 			$this->db->select('companyinfo_id');
 			$this->db->from('bzz_companyinfo');
@@ -363,22 +387,22 @@ public function get_mn_cmp_list()
 				{
 					$cmp[] = $mycmp['companyinfo_id'];	
 				}
-			//	echo 'user cmps';
-			//print_r($cmp);
-		
+		/*	echo 'user cmps';
+			print_r($cmp);
+		*/
 			}
 			
 			
-			$following_cmps = array_merge($elements_uni,$userfollowing);
-			//	echo "all following companies";
-			//	print_r($following_cmps);
+			$following_cmps = array_unique(array_merge($elements_uni,$userfollowing,$frnd_companies));
+				/*echo "all following companies";
+				print_r($following_cmps);*/
 			
 			$first = array_diff($following_cmps,$userfollowing);
-			//echo " first differ"; 
-			//	print_r($first);
+			/*echo " first differ"; 
+				print_r($first);*/
 			
 			$second = array_diff($first,$cmp);
-			//	print_r($second);
+		//	print_r($second);
 			
 				
 				if($second)
@@ -386,7 +410,7 @@ public function get_mn_cmp_list()
 				  $this->db->select('*');
 				  $this->db->from('bzz_companyinfo');
 				  $this->db->where_in('companyinfo_id',$second);
-				  $this->db->limit(2);
+				 // $this->db->limit(2);
 				  $query = $this->db->get();
 				  if ($query->num_rows() > 0) {
 				   return $query->result_array();
@@ -394,7 +418,78 @@ public function get_mn_cmp_list()
 				}
 		}
 		else 
-		return false;
+		$cmpcondition = "user_id !=" . "'" . $id . "'" ;
+		$this->db->select('*');
+		$this->db->from('bzz_companyinfo');
+		$this->db->where($cmpcondition);
+		$query=$this->db->get();
+		$all_oth_cmps = $query->result_array();
+		$oth_cmps = array();
+		foreach($all_oth_cmps as $cmp)
+		{
+			$oth_cmps[] = $cmp['companyinfo_id'];
+		}
+		
+echo "other companies";
+
+print_r($oth_cmps);
+
+				$condition = "user_id =" . "'" . $id  ."'  AND (follow_status='Y' OR follow_status='W')" ;
+				$this->db->select('companyinfo_id');
+				$this->db->from('bzz_cmp_follow'); 
+				$this->db->where($condition);
+				$query = $this->db->get();
+				$usrfollow = $query->result_array();
+				$usrfollowing = array();
+				if($usrfollow)
+				{
+					
+					foreach($usrfollow as $userfollow)
+					{
+						$usrfollowing[] = $userfollow['companyinfo_id'];
+					}
+				echo 'user following cmps';
+				print_r($userfollowing);
+				
+				}
+				
+				// user companies
+				$id = $this->session->userdata('logged_in')['account_id'];
+			$mycompanycondition = "user_id =" . "'" . $id . "'" ;
+			$this->db->select('companyinfo_id');
+			$this->db->from('bzz_companyinfo');
+			$this->db->where($mycompanycondition);
+			$query = $this->db->get();
+			$mycmps = $query->result_array();
+			if($mycmps)
+			{
+				$usrcmp = array();
+				foreach($mycmps as $cmp)
+				{
+					$usrcmp[] = $cmp['companyinfo_id'];	
+				}
+		
+			}
+			echo 'user cmps';
+			print_r($usrcmp);
+			
+		$usrownfollow = array_merge($usrcmp,$userfollowing);
+			print_r($usrownfollow);
+		$companies = array_unique(array_diff($oth_cmps,$usrownfollow));
+		print_r($companies);
+		//exit;
+		if($companies)
+				{
+				  $this->db->select('*');
+				  $this->db->from('bzz_companyinfo');
+				  $this->db->where_in('companyinfo_id',$companies);
+				  $this->db->limit(2);
+				  $query = $this->db->get();
+				  if ($query->num_rows() > 0) {
+				   return $query->result_array();
+				  } 
+				
+				}
 	}
 	
 	public function get_cmp_by_id($id)

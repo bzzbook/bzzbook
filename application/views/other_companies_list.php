@@ -1,19 +1,19 @@
 <?php 
 $cmps = $this->companies->get_companies_to_follow();
-if(!empty($cmps))
-{
-$cmp_reqs = $this->companies->get_companies_to_follow();
-}else{
+/*if(!empty($cmps))
+{*/
+$cmp_reqs =$cmps;
+/*}else{
 }
 $cmp_reqs = $this->companies->get_initial_companies();
-//print_r($cmp_reqs);
+*///print_r($cmp_reqs);
 //exit;
 ?> 
  
  <div class="pendingRequest">
           <h3> Companies to follow </h3>
         
-          <ul id="cmpfollow">
+          <ul id="cmpfollowers">
           <?php if($cmp_reqs) {  foreach($cmp_reqs as $req) { ?>
            
             <li>

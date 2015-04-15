@@ -22,11 +22,28 @@ class sign_inm extends CI_Model {
 			$this->db->where($condition);
 			$this->db->limit(1);
 			$query = $this->db->get();
-			if ($query->num_rows() == 1) {
-				 return $query->result();
-				} else {
+			$user_data= $query->result_array();
+			//print_r($user_data);
+			if($query->num_rows() == 1) {
+				//echo"hai";
+				$conf_condition = "conf_code =" . "'" . $user_data[0]['conf_code'] ."'  AND conf_status='Y'" ;
+				$this->db->select('*');
+				$this->db->from('bzz_confirmation');
+				$this->db->where($conf_condition);
+				$query = $this->db->get();
+				$conf_data = $query->result();
+				// print_r($conf_data);
+				
+				if(!empty($conf_data))
+				{
+			     return $user_data;
+				// print_r($conf_data);
+				
+				} 
+				
+			}
 				return false;
-				}
+				
 			}
 	 	public function read_user_information($sess_array) {
 

@@ -58,6 +58,8 @@ class customer extends CI_Controller {
 		$user['user_city'] = $this->input->post('city');
 		$user['user_postalcode'] = $this->input->post('postal_code');
 		$user['user_type'] = 'user';
+		$confirmation_code = md5(random_string('unique'));
+		$user['conf_code'] = $confirmation_code;
 		$this->load->model('person');
 		$user_id =  $this->person->sign_up($user);
 		
@@ -79,10 +81,35 @@ class customer extends CI_Controller {
 		$user_info['user_id'] = $user_id;
 		
 		$this->person->user_info($user_info);
-		
 		$this->person->user_settings($user_id);
-		$this->session->set_flashdata('cust_success', 'Sign Up Successfully. We will get back to you shortly');
-		$this->load->view('sign_in_v');
+		$user_data = $this->person->get_user_details($user_id);
+		print_r($user_data);
+		$confirmation = 
+		array( 
+		  'conf_code' => $user_data[0]['conf_code'],
+		  'conf_status' => 'N',
+		  'user_id' => $user_id,
+		);
+		$this->load->model('confirmaccount');
+		$this->confirmaccount->confirmation_insert($confirmation);
+		//print_r($user_data);
+		if($user_data)
+		{
+		$this->email->to($user_data[0]['user_email']);
+		$this->email->subject('Confirmation mail for account activation');
+		$message = "Please Click Below Link To Activate Your Acount";
+		$message .= "www.bzzbook.com/confirmation/confirm/".$user_data[0]['conf_code'];
+		$this->email->message($message);
+		if($this->email->send())
+		{
+		    $this->session->set_flashdata('cust_success', 'Sign Up Successfully,To Activate Your account just check out Yor email');
+			redirect('/signg_in');
+		}else
+		{
+			$this->session->set_flashdata('cust_success', 'Cannot send Confirmation link to your e-mail address');
+			redirect('/customer/sign_up');
+		}
+		}
 		}
    }
    
@@ -93,7 +120,7 @@ class customer extends CI_Controller {
 	    $this->form_validation->set_rules('email','Email','trim|required|valid_email|xss_clean');
 	    $email = $this->input->post('email');
 	    $this->email->from('sivaprasad@ayatas.com','Sivaprasad');
-		$this->email->to($email,' user');
+		$this->email->to($email,'user');
 		$this->email->subject('this is testing email.......');
 		$this->email->message('hai this is message');
 		$this->email->send();

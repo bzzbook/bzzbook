@@ -695,7 +695,7 @@ function cmpFollowPage(id)
 		}).done(function(){
 			
        $('#follow-btn').show();
-		 location.reload();
+		location.reload();
 		});
 		
 	}
@@ -733,11 +733,9 @@ function denyFollow(user_id,cmp_id)
 
 function cmpFollow(comp_id)
 {
-	
-	
     $('#followModal1').modal('toggle');
 	
-	$('#follow_form').submit( function()
+	$('#follow_modal').click(function()
 	{
 	
 	var option = $('#follow_as').val();
@@ -749,8 +747,8 @@ function cmpFollow(comp_id)
         url: url,
         success: function(data)
         {  
-		//$('#followModal1').modal('toggle'); 
-			//$("#cmpfollow").html(data);
+		$('#followModal1').modal('toggle'); 
+	    $("#cmpfollowers").html(data);
 		},
 		cache: false
 		});
@@ -1437,7 +1435,7 @@ $('#search_members').click(function(){
 	var errors = '';
 	if(value == '')
 	{
-		$("#error_data").html("Search Field Shouldn't be empty").fadeOut(1500);
+		$("#error_data").html("Search Field Shouldn't be empty").fadeOut(7000);
 		location.reload();
 	}
 	else {
