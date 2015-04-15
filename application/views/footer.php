@@ -1402,7 +1402,20 @@ $("form[name=cmp_postboard]").submit(function(event){
 				{ 
 					placeholdertext += placeholder[i]+' '; 
 				}
-				$('#'+fieldname+'-li').html("<form action='javascript:void(0)' onsubmit='addfieldSubmit(&#39;"+fieldname+"&#39;&#44;&#39;"+h3content+"&#39;); return false;' method='post'><input type='text' id='"+fieldname+"' name='"+fieldname+"' placeholder='add "+placeholdertext+"'/>");
+				$('#'+fieldname+'-li').html("<form action='javascript:void(0)' onsubmit='addfieldSubmit(&#39;"+fieldname+"&#39;&#44;&#39;"+h3content+"&#39;); return false;' method='post'><input class='form-control' type='text' id='"+fieldname+"' name='"+fieldname+"' placeholder='add "+placeholdertext+"'/>");
+			}
+			function addWork(fieldname)
+			{
+				$('.data_fileds').hide();
+				$('#'+fieldname+'-li .graphic').show();
+				//var placeholder = fieldname.split('-');
+//				var placeholdertext = '';
+//				var h3content = $('#'+fieldname+'-li h3').html();
+//				for(i=0;i<placeholder.length;i++)
+//				{ 
+//					placeholdertext += placeholder[i]+' '; 
+//				}
+//				$('#'+fieldname+'-li').html("<form action='javascript:void(0)' onsubmit='addfieldSubmit(&#39;"+fieldname+"&#39;&#44;&#39;"+h3content+"&#39;); return false;' method='post'><input class='form-control' type='text' id='"+fieldname+"' name='"+fieldname+"' placeholder='add "+placeholdertext+"'/>");
 			}
 			function addfieldSubmit(fieldname,h3content)
 			{
@@ -1415,7 +1428,7 @@ $("form[name=cmp_postboard]").submit(function(event){
 			        data: { field_name:fieldname,field_value: fieldvalue} ,
         			success: function(html)
 			        {   
-						var data = "<div class='iner_lefts'></div>"+
+						var data = 
                         "<div class='inner_rights'>"+
                           "<h3>"+h3content+"</h3><p>"+fieldvalue+"<a href='javascript:void(0)' onclick='addField(&#39;"+fieldname+"&#39;)'> edit</a></p></div>"+
                         "<div class='clearfix'></div>";
