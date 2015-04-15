@@ -98,7 +98,7 @@ class customer extends CI_Controller {
 			//
 		$this->load->library('email');
 		$this->email->set_newline("\r\n");
-		$this->email->from('sivaprasad@ayatas.com',$username);
+		$this->email->from('sprasad96@gmail.com',$username);
 		$this->email->to($user_data[0]['user_email']);
 		$this->email->subject('Confirmation mail for account activation');
 		$message = "Please Click Below Link To Activate Your Acount";

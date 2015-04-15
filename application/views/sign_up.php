@@ -34,11 +34,7 @@
             <label>Password</label>
             <input type="password" class="form-control" data-rule-required="true" data-msg-required="please enter password" placeholder="Password" name="password">
             <?php echo form_error('password'); ?>
-            <?php 
-	   echo "<div class='message'>";
-	   echo $this->session->flashdata('cust_success');
-	   echo "</div>";
-?>
+          
           </div>
           <div class="submit">
             <input type="submit" value="Login" >
@@ -46,6 +42,11 @@
           
         </form>
       </div>
+        <?php 
+	   echo "<div class='message'>";
+	   echo $this->session->flashdata('cust_success');
+	   echo "</div>";
+?>
     </section>
   </section>
 </header>
@@ -120,7 +121,7 @@
 <script src="<?php echo base_url(); ?>js/additional-methods.js"></script>
 <script type="text/javascript">
 $(function(){
-  $(".message").fadeOut(5000);
+  $(".message").fadeOut(15000);
 });
 </script>
 </body>
