@@ -1452,10 +1452,49 @@ $("form[name=cmp_postboard]").submit(function(event){
         			success: function(html)
 			        {   
 						var prev_cont = $('#profession-li .data_fileds').html();
-						var data = "<p>"+position+" at "+orgname+" <a href='' >Edit</a></p>"
-                        $('#profession-li .data_fileds').html(prev_cont+data);
+						//var data = "<p>"+position+" at "+orgname+" <a href='javascript:void(0)' onclick='editWorkPlace()' >Edit</a></p>"
+                        $('#profession-li .data_fileds').html(prev_cont+html);
 						$('#profession-li .graphic').hide();
 					    $('#profession-li .data_fileds').show();
+			        }
+					
+			       });			
+				//event.preventDefault();
+			}
+			function editWorkPlace(orgid)
+			{				
+				url="<?php echo base_url();?>profile/editworkplace/";
+				 $.ajax({
+        			type: "POST",
+			        url: url,
+			        data: { org_id:orgid} ,
+        			success: function(html)
+			        {   
+                       
+						$('#paragraph'+orgid).html(html);
+					    
+			        }
+					
+			       });			
+				//event.preventDefault();
+			}
+			function updateWorkPlace(paragraphid)
+			{
+				var orgname = $('#org_name').val();
+				var position = $('#position').val();
+							
+				url="<?php echo base_url();?>profile/updateworkplace/";
+				 $.ajax({
+        			type: "POST",
+			        url: url,
+			        data: { org_name:orgname,position: position,org_id: paragraphid} ,
+        			success: function(html)
+			        {   
+						//var prev_cont = $('#profession-li .data_fileds').html();
+						var data = position+" at "+orgname+" <a href='javascript:void(0)' onclick='editWorkPlace("+paragraphid+")' >edit</a>"
+                        $('#paragraph'+paragraphid).html(data);
+						/*$('#profession-li .graphic').hide();
+					    $('#profession-li .data_fileds').show();*/
 			        }
 					
 			       });			
@@ -1465,7 +1504,10 @@ $("form[name=cmp_postboard]").submit(function(event){
 				 $('#profession-li .data_fileds').show();
 				 $('#profession-li .graphic').hide();
 			}
-			
+			function canceleditWork(orgname,pos,orgid){
+				 var data = pos+" at "+orgname+" <a href='javascript:void(0)' onclick='editWorkPlace("+orgid+")' >edit</a>"
+				 $('#paragraph'+orgid).html(data);
+			}
 			
 //search friends functionality by sp on 10-4-2015
 $('#search_members').click(function(){

@@ -691,8 +691,51 @@ public function showfavs()
    public function addworkplace()
   {
 	  //parse_str($_POST['form_data'],$field_info);
+	$insert_id =  $this->profile_set->addworkplace($_POST['org_name'],$_POST['position']);
 	if($this->profile_set->addworkplace($_POST['org_name'],$_POST['position']))
+	echo "<p id='paragraph".$insert_id."'>".$_POST['position']." at ".$_POST['org_name']." <a href='javascript:void(0)' onclick='editWorkPlace(".$insert_id.")' >edit</a></p>";
+	else
+	return false;
+  }
+  public function updateworkplace()
+  {
+	  //parse_str($_POST['form_data'],$field_info);
+	if($this->profile_set->updateworkplace($_POST['org_name'],$_POST['position'],$_POST['org_id']))
 	echo "success";
+	else
+	return false;
+  }
+   public function editworkplace()
+  {
+	  //parse_str($_POST['form_data'],$field_info);
+	$result = $this->profile_set->editworkplace($_POST['org_id']);
+	if($result)
+	echo '<div><form action="javascript:void(0)" method="post"><div class="filed col-md-6">
+                <input class="form-control" placeholder="Company" name="org_name" id="org_name" type="text" value="'.$result[0]->org_name.'">
+              </div><div class="filed col-md-6">
+                <input class="form-control" placeholder="Positon Held" name="position" id="position" value="'.$result[0]->position.'" type="text">
+              </div>
+              <div class="filed col-md-6">
+               <input class="fmbtn" style=" border-radius: 2px;
+border: medium none;
+background: none repeat scroll 0% 0% #609B34;
+color: #FFF;
+font-size: 12px;
+font-weight: 700;
+height: 34px;
+padding: 0px 10px;
+margin-bottom: 20px; float:left; margin-top:5px;" value="Save" type="submit"  onclick="updateWorkPlace('.$_POST['org_id'].');"><input class="fmbtn" style=" border-radius: 2px;
+border: medium none;
+background: none repeat scroll 0% 0% #609B34;
+color: #FFF;
+font-size: 12px;
+font-weight: 700;
+height: 34px;
+padding: 0px 10px;
+margin-bottom: 20px; margin-left:5px; float:left; margin-top:5px;" value="cancle" type="button" onclick="canceleditWork(\''.$result[0]->org_name.'\',\''.$result[0]->position.'\',\''.$_POST['org_id'].'\')">
+              </div>
+ 
+  </form></div><div style="clear:both"></div>';
 	else
 	return false;
   }
