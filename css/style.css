@@ -626,7 +626,7 @@ border-top-right-radius: 5px; }
     font-size: 11px;
     height: 25px;
     line-height: 25px;
-    padding: 0 10px; background:#000; hover :#3FF; cursor:pointer;}
+    padding: 0 10px; background:gray; hover :#3FF; cursor:pointer; float:right; }
 .jobDetailsBtn:hover{color:#fff; background:#609b34;}
 .jobDetailsBtn:hover, .jobDetailsBtn:focus{color:#fff;}
 .jobDetails{}
@@ -829,3 +829,56 @@ margin-top:14px;
 #uploadPhotosdvPreview img{margin-right:5px; }
 #sharePostBtn{background: #609b34;  height: 30px;  font-size: 14px;  line-height: 30px;  padding: 0 15px;  display: inline-block;
   -webkit-border-radius: 2px;  border-radius: 2px; color: #fff; font-weight: 300;}
+  /*events 15-4-15*/
+.events-user-details h4{ height:58px; line-height:58px; padding:0 15px; background:#fbc436; border-bottom:1px solid #d3d6db; font-size:24px; color:#fff; margin-bottom:20px;}
+.events-user-details h4 span.glyphicon {color: #606060 !important;}
+.right_event{ float:right;}
+.events .about-user-details{ border:none !important; margin-top:15px;}
+.events h3{ font-size:22px; color:#737373; line-height:30px; padding-top:10px;}
+.events h3 span{ font-size:22px; color:#ec5a53; padding-left:8px; }
+.events ul{ list-style:none;}
+.events li{ margin-bottom:20px !important; border-bottom:1px solid #dfdfdf; padding-bottom: 20px;}
+.events li:last-child{ border-bottom:none; }
+.events .dates{ font-size:13px; color:#737373; padding:8px 12px 8px 0px;  float:left;  }
+.events .dates span{ color:#ec5a53; padding-right:8px;}
+.events p{ font-size:16px; color:#737373; line-height:22px; font-family: "Roboto",sans-serif; font-weight:300; padding-bottom:20px;}
+.events .btn-black{ float:left;}
+
+.newcomments h3{ font-size:20px; color:#737373; font-family: "Roboto",sans-serif; text-transform:uppercase; margin-bottom:25px;}
+.newcomments h3 img{ padding-right:10px;}
+.newcomments ul{ list-style:none;}
+.newcomments li{ padding:20px 0; border-bottom:1px solid #dfdfdf; }
+.comment_imgbox{ width:85px; height:83px; float:left; margin-right:19px;}
+.newcomments h5{ font-size:20px; color:#464646;}
+.comment_text p{ padding-top:10px;}
+.comment_text h5 span{ color:#ec5a53; padding:0 10px;}
+.comment_text span.headers{ border-bottom:2px solid #ffda78; color:#464646; padding:0px !important;}
+.comment_text h5 small{ color:#464646; font-size:14px; font-family: "Roboto",sans-serif; font-weight:300;}
+.commentboxes li{  border-bottom:1px solid #dfdfdf !important; padding:0px 0 15px 0; }
+.commentboxes ul{ list-style:none;}
+.coment textarea{ background:#ededed; border-radius:0px !important; border:none;}
+.postes{ float:left; border-radius:none !important; font-size:16px; text-transform:uppercase;}
+
+.job{ border:1px solid #e9e9e9; clear:both; background-color: #fff;  margin-bottom: 25px; padding-top:25px; margin-left: 15px;
+width: 73.7%; !important;}
+.job .jobtext{ border-left:solid 1px #fbcb4e; margin-bottom: 30px;}
+.job .jobtext h6{ font-size:14px; text-transform:uppercase; line-height:30px; font-weight:300; padding-top:10px;}
+.job p{ font-size:14px; color:#696969; font-family: "Roboto",sans-serif; font-weight:300; padding-bottom:20px; line-height:22px;}
+.job_in{ border-bottom:1px solid #c9c9c9; margin: 0 0 30px;}
+.job span{ font-size:14px;font-family: "Roboto",sans-serif; font-weight:400; }
+
+.discription ul{ list-style:none;}
+.discription ul li{ padding:0;}
+.innertext{ padding-top:15px !important;}
+
+.subtext span{ padding-bottom:10px !important;}
+.subtext p{ padding-bottom:3px !important;}
+.subtext h5{ font-size:14px;font-family: "Roboto",sans-serif; font-weight:400; padding-bottom:8px;}
+.subtext p.headstyle{ padding:10px 0 !important;}
+.leftsml{ width:25%; float:left; font-size:14px; color:#a9a9a9; font-family: "Roboto",sans-serif; font-weight:300; line-height:22px;}
+.rightsml{ width:75%; float:right;  font-size:14px;font-family: "Roboto",sans-serif; font-weight:300; color:#696969; line-height:22px;}
+.keyskills h3{ padding:20px 0 !important;}
+.leftsml_bottom{ width:30%; float:left; font-size:14px; color:#696969; font-family: "Roboto",sans-serif; font-weight:300; line-height:22px;}
+.rightsml_bottom{ width:70%; float:right;  font-size:14px;font-family: "Roboto",sans-serif; font-weight:300; color:#696969; line-height:22px;}
+.education p{ padding:3px; }
+.box_button{ float:left; margin-bottom:30px;}

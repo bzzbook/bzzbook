@@ -12,15 +12,15 @@ $jobs = $this->jobmodel->getJobs($id);
       <?php $unixTimestamp = strtotime($job['post_date']); echo date('F',$unixTimestamp)." ".date('d',$unixTimestamp).", ".date('Y',$unixTimestamp); ?>
       </span> 
          <span><samp>Category : </samp><?php echo $job['job_category']; ?></span> 
-      <div class="collapse jobDetails" id="<?php echo $job['job_id'] ?>">
+     <?php /*?> <div class="collapse jobDetails" id="<?php echo $job['job_id'] ?>">
         <div class="createjob"> 
         <span><samp>Description : </samp><?php echo $job['job_description']; ?></span>
          <span><samp>Requirements : </samp><?php echo $job['job_requirements']; ?></span>
          <span><samp>Category : </samp><?php echo $job['job_category']; ?></span> 
          <span><samp>Contact Person : </samp><?php echo $job['job_contact_name']; ?></span> 
          <span><samp>Contact Mail : </samp><?php echo $job['job_contact_email']; ?></span> </div>
-      </div>
-      <a class="jobDetailsBtn" data-toggle="collapse" href="#<?php echo $job['job_id'] ?>" aria-expanded="false" aria-controls="collapseExample">Read More</a>
+      </div><?php */?>
+      <a class="jobDetailsBtn" href="<?php echo base_url().'jobs/job_view/'.$id.'/'.$job['job_id']; ?>" aria-expanded="false" aria-controls="collapseExample">Read More</a>
     </div>
     <div class="clearfix"></div>
     </div>
