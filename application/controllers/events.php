@@ -4,15 +4,20 @@ class Events extends CI_Controller {
 	 
 	  public function __construct() {
         parent::__construct();
-	$is_logged = $this->session->userdata('logged_in');	
-		if(!$is_logged)
-		redirect(base_url());
+
     }
 	public function index()
 	{
 		$this->load->view('sign_in_v');
 	}
 	
+	public function disp_events($id)
+	{
+	
+	$data['event_info'] = $this->eventmodel->get_events_by_cmpid($id)
+    $data['content']='cmp_events';
+	$this->load->view('cmp-fulltemplate-view',$data);
+	}
 	public function create_event()
 	{
 		
@@ -50,7 +55,9 @@ class Events extends CI_Controller {
 			$this->image_lib->initialize($config);
 			$this->image_lib->resize();
 			$event_image = $data['raw_name'].'_eventcover'.$data['file_ext'];
+			
 			$event_info = array(
+			
 		'event_name'=>$data['job_title'],
 		'event_location'=>$data['job_type'],
 		'event_date'=>$data['job_category'],
@@ -62,6 +69,13 @@ class Events extends CI_Controller {
 		'event_cr_user'=>$this->session->userdata('logged_in')['account_id']
 		);
 
+        $event_id = $this->eventmodel->insert_event($event_info);
+		if(!empty($event_id))
+		{
+			//$data['event_info'] = $this->eventmodel->get_events_by_cmpid($id)
+			$data['content']='cmp_events';
+			$this->load->view('cmp-fulltemplate-view',$data);
+		}
 		
 		}
 	

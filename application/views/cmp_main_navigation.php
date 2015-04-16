@@ -17,7 +17,7 @@
             <li> <a  href="#">Company Info</a></li>
             <li> <a  href="#">Post Board</a></li>
             <li> <a  href="<?php echo base_url("jobs/disp_jobs/".$cmp_info[0]['companyinfo_id']); ?>">Applicants</a></li>
-            <li> <a  href="#">Events</a></li>
+            <li> <a  href="<?php echo base_url("events/disp_events/".$cmp_info[0]['companyinfo_id']); ?>">Events</a></li>
             <li> <a  href="#">Followers</a></li>
           </ul>
           <div class="pull-right viewAs">

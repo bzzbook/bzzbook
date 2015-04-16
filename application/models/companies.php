@@ -474,7 +474,7 @@ public function get_mn_cmp_list()
 				print_r($userfollowing);*/
 				
 				}
-				$usrownfollow = array_merge($usrcmp,$userfollowing);
+				$usrownfollow = array_merge($usrcmp,$usrfollowing);
 				//print_r($usrownfollow);
 				$companies = array_unique(array_diff($oth_cmps,$usrownfollow));
 				//print_r($companies);

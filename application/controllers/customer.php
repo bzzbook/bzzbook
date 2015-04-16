@@ -108,7 +108,7 @@ $this->load->library('email', $config);
 		$this->email->from('sprasad96@gmail.com',$username);
 		$this->email->to($user_data[0]['user_email']);
 		$this->email->subject('Confirmation mail for account activation');
-		$message = "Please Click Below Link To Activate Your Acount";
+		$message = "Please Click Below Link To Activate Your Acount  \n";
 		$message .= "www.bzzbook.com/confirmation/confirm/".$user_data[0]['conf_code'];
 		$this->email->message($message);
 		if($this->email->send())
