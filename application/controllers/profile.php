@@ -688,5 +688,13 @@ public function showfavs()
 	else
 	return false;
   }
+   public function addworkplace()
+  {
+	  //parse_str($_POST['form_data'],$field_info);
+	if($this->profile_set->addworkplace($_POST['org_name'],$_POST['position']))
+	echo "success";
+	else
+	return false;
+  }
 }
 ?>

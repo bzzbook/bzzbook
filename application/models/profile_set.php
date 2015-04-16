@@ -566,6 +566,15 @@ $this->session->set_flashdata('group-add-msg', 'Group updated Successfully');
 		else
 		return false;
 	}
+	public function addworkplace($orgname,$position)
+	{
+		$id = $this->session->userdata('logged_in')['account_id'];
+		$up_data = array( 'org_name'=>$orgname,'position'=>$position,'user_id'=>$id);
+		if($this->db->insert('bzz_organizationinfo',$up_data))
+		return true;
+		else
+		return false;
+	}
 }
 
 ?>
