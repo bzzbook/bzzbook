@@ -1468,6 +1468,23 @@ $('#search_members').click(function(){
 	};
 
 });
+
+
+$('#event_form').submit( function( event)
+	{
+				
+		url="<?php echo base_url(); ?>events/create_event/";
+		$.post( url, { formdata: $(this).serialize()})
+		.done(function( data ) {
+			if(data == false)
+			alert("Please Enter Valid Details");
+			else
+			$(".joblisting").html(data);
+			$('#addJobForm').trigger("reset");
+			$( "#canceladdjob" ).trigger( "click" );
+			});
+			event.preventDefault();
+		});
 </script>
 
 

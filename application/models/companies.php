@@ -433,6 +433,29 @@ public function get_mn_cmp_list()
 			/*echo "other companies";
 			print_r($oth_cmps);
 			*/				
+			   
+				
+				// user companies
+			$id = $this->session->userdata('logged_in')['account_id'];
+			$mycompanycondition = "user_id =" . "'" . $id . "'" ;
+			$this->db->select('companyinfo_id');
+			$this->db->from('bzz_companyinfo');
+			$this->db->where($mycompanycondition);
+			$query = $this->db->get();
+			$mycmps = $query->result_array();
+			$usrcmp = array();
+			if($mycmps)
+			{
+				
+				foreach($mycmps as $cmp)
+				{
+					$usrcmp[] = $cmp['companyinfo_id'];	
+				}
+		
+			}
+			/*echo 'user cmps';
+			print_r($usrcmp);*/
+			
 			    $condition = "user_id =" . "'" . $id  ."'  AND (follow_status='Y' OR follow_status='W')" ;
 				$this->db->select('companyinfo_id');
 				$this->db->from('bzz_cmp_follow'); 
@@ -451,27 +474,6 @@ public function get_mn_cmp_list()
 				print_r($userfollowing);*/
 				
 				}
-				
-				// user companies
-			$id = $this->session->userdata('logged_in')['account_id'];
-			$mycompanycondition = "user_id =" . "'" . $id . "'" ;
-			$this->db->select('companyinfo_id');
-			$this->db->from('bzz_companyinfo');
-			$this->db->where($mycompanycondition);
-			$query = $this->db->get();
-			$mycmps = $query->result_array();
-			if($mycmps)
-			{
-				$usrcmp = array();
-				foreach($mycmps as $cmp)
-				{
-					$usrcmp[] = $cmp['companyinfo_id'];	
-				}
-		
-			}
-			/*echo 'user cmps';
-			print_r($usrcmp);*/
-			
 				$usrownfollow = array_merge($usrcmp,$userfollowing);
 				//print_r($usrownfollow);
 				$companies = array_unique(array_diff($oth_cmps,$usrownfollow));

@@ -96,7 +96,14 @@ class customer extends CI_Controller {
 		if($user_data)
 		{
 			//
-		$this->load->library('email');
+		$config['protocol'] = 'smtp';
+		$config['smtp_host'] = 'ssl://smtp.googlemail.com';
+		$config['smtp_port'] = 465;
+		$config['smtp_user'] = 'sprasad96@gmail.com';
+		$config['smtp_pass'] = 'sivaprasad598';
+
+// Load email library and passing configured values to email library
+$this->load->library('email', $config);
 		$this->email->set_newline("\r\n");
 		$this->email->from('sprasad96@gmail.com',$username);
 		$this->email->to($user_data[0]['user_email']);
