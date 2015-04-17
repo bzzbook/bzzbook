@@ -25,9 +25,9 @@ class confirmaccount extends CI_Model {
 			 if($query->num_rows() == 1)
 			 {
 			 $conf_data = $query->result_array();
-  			 $confirmation = array('conf_status' => 'Y');
+  			 $confirm_status = array('conf_status' => 'Y');
 			 $this->db->where($condition);
-			 if($this->db->update($confirmation))
+			 if($this->db->update('bzz_confirmation',$confirm_status))
 			 return true;
 		 }else
 		 return false;

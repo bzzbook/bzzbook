@@ -13,8 +13,8 @@ class Events extends CI_Controller {
 	
 	public function disp_events($id)
 	{
-	
-	$data['event_info'] = $this->eventmodel->get_events_by_cmpid($id)
+	$data['cmp_info'] =  $this->companies->get_cmp_by_id($id);
+	$data['event_info'] = $this->eventmodel->get_events_by_cmpid($id);
     $data['content']='cmp_events';
 	$this->load->view('cmp-fulltemplate-view',$data);
 	}
@@ -79,18 +79,7 @@ class Events extends CI_Controller {
 		
 		}
 	
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 	 parse_str($_POST['formdata'],$event_info);
 	 $returninfo = $this->eventmodel->insert_event($event_info);
 	 if($returninfo != false):
@@ -100,6 +89,13 @@ class Events extends CI_Controller {
 	 	return false;
 	 endif;
 	}
-
+public function get_event_byid($id,$cmp_id)
+{
+		$data['cmp_info'] =  $this->companies->get_cmp_by_id($cmp_id);
+		$data['event_info'] = $this->eventmodel->get_event_by_id($id);
+		$data['content']='cmp_event_and_discussions';
+		$this->load->view('cmp-fulltemplate-view',$data);
+		
+}
 }
 ?>

@@ -4,7 +4,7 @@ class confirmation extends CI_Controller {
 	 
 	  public function __construct() {
         parent::__construct();
-		$this->load->model->confirmaccount();
+		$this->load->model('confirmaccount');
     }
 	public function index()
 	{
@@ -19,7 +19,9 @@ class confirmation extends CI_Controller {
 		$user = $this->confirmaccount->confirmUserAccount($conf_code);
 		if(!empty($user))
 		{
-			$this->load->view('sign_in_v');
+			
+			$activation_success = "Your Account Hasbeen Activated You Can Login into Your Account!..."
+			$this->load->view('sign_in_v',$activation_success);
 		}
 	}
 	

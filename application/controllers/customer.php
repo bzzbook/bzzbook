@@ -83,7 +83,8 @@ class customer extends CI_Controller {
 		$this->person->user_info($user_info);
 		$this->person->user_settings($user_id);
 		$user_data = $this->person->get_user_details($user_id);
-		print_r($user_data);
+	/*	print_r($user_data);
+		exit;*/
 		$confirmation = 
 		array( 
 		  'conf_code' => $user_data[0]['conf_code'],
@@ -99,14 +100,15 @@ class customer extends CI_Controller {
 		$config['protocol'] = 'smtp';
 		$config['smtp_host'] = 'ssl://smtp.googlemail.com';
 		$config['smtp_port'] = 465;
-		$config['smtp_user'] = 'sprasad96@gmail.com';
-		$config['smtp_pass'] = 'sivaprasad598';
+		$config['smtp_user'] = 'mr.s.sivaprasad@gmail.com';
+		$config['smtp_pass'] = 'Siv@prasad598';
 
 // Load email library and passing configured values to email library
-$this->load->library('email', $config);
+		$mail = $user_data[0]['user_email'];
+		$this->load->library('email',$config);
 		$this->email->set_newline("\r\n");
-		$this->email->from('sprasad96@gmail.com',$username);
-		$this->email->to($user_data[0]['user_email']);
+		$this->email->from('mr.s.sivaprasad@gmail.com',$username);
+		$this->email->to($mail);
 		$this->email->subject('Confirmation mail for account activation');
 		$message = "Please Click Below Link To Activate Your Acount  \n";
 		$message .= "www.bzzbook.com/confirmation/confirm/".$user_data[0]['conf_code'];

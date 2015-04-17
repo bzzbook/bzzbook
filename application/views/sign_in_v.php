@@ -32,6 +32,14 @@ echo "</div>";
 }
 ?>
 <?php
+if (isset($activation_success)) {
+echo "<div class='message'>";
+echo $activation_success;
+echo "</div>";
+}
+?>
+
+<?php
 if (isset($message_display)) {
 echo "<div class='message'>";
 echo $message_display;
@@ -139,7 +147,7 @@ echo "</div>";
 <script src="<?php echo base_url(); ?>js/additional-methods.js"></script>
 <script type="text/javascript">
 $(function(){
-  $(".message").delay('slow').fadeOut();
+  $(".message").fadeOut(6000);
 });
 </script>
 </body>

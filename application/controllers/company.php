@@ -197,6 +197,14 @@ public function get_company_byid($id)
 		
 }
 
+public function get_company_info_byid($id)
+{
+	$data['cmp_info'] =  $this->companies->get_cmp_by_id($id);
+	$data['company_info'] =  $this->companies->get_cmp_by_id($id);
+	//$data['company'] = $this->companies->get_cmp_by_id($id);
+	$data['content']='company_info';
+	$this->load->view('cmp-fulltemplate-view',$data);
+}
 public function pic_upload()
 {
 	

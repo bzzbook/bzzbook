@@ -1,6 +1,5 @@
 <?php
-$upload_path = "uploads/";				
-						
+$upload_path = "uploads/";							
 $thumb_width = "150";						
 $thumb_height = "150";		
 

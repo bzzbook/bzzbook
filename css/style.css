@@ -587,7 +587,6 @@ border-top-right-radius: 5px; }
     .messageSt .tab-pane textarea.form-control{ margin-bottom:10px !important; }
     .messageSt .replyBlock{ padding:10px 0;}
 
-<<<<<<< HEAD
 
 
 /*Company*/
@@ -696,6 +695,8 @@ float:right; margin-top:10px;
     background-color: #609b34;
       color: #fff; margin-right:10px;
 }
+.btn-yellow{background-color: #fcc434;
+       color: #242424;}
 .btn-green a{color:#FFF;}
 /*Profile about*/ 
 .ProfileView { padding-right:0;}
@@ -732,6 +733,7 @@ border-radius: 90px 90px 90px 90px; height: 110px; width: 110px; overflow: hidde
 .about-user-details h4{ height:58px; line-height:58px; padding:0 15px; background:#fbc436; border-bottom:1px solid #d3d6db; font-size:24px; color:#fff; margin-bottom:20px;}
 .about-user-details h4 span{ margin-right:10px; position:relative; /*top:3px;*/}
 .about-user-details h4 span.glyphicon{ color:#606060 !important;}
+.about-user-details .events li .btn2 a{ color:#fff;}
 
 .smallboxes h3{ font-size:16px; font-family: 'Roboto', sans-serif; font-weight:300; color:#646464; /*padding-top:10px;*/ }
 .smallboxes ul { list-style:none; }

@@ -8,16 +8,20 @@
         <div class="events" >
           <section class="events col-lg-12 col-md-12 col-sm-5 col-xs-12 coloumn2 aboutme">
             <ul>
-              <li> <img src="../../../../../siva/new 3 grid design/bzzbookevents/bzzbook/images/event1.jpg" alt="">
-                <h3>Event by<span>Vivamus luctus lectus</span></h3>
-                <div class="dates"><span class="glyphicon glyphicon-calendar"> </span>02 May 2014</div>
+            <?php if(!empty($event_info)) { foreach($event_info as $event) { ?>
+              <li> <img src="<?php echo base_url(); ?>uploads/<?php if(!empty($event['event_image'])) echo $event['event_image']; else echo "event1.jpg"; ?>" alt="">
+                <h3><span><?php echo $event['event_name']; ?></span></h3>
+                <div class="dates"><span class="glyphicon glyphicon-calendar"> </span><?php $unixTimestamp = strtotime($event['event_date']);
+				 echo date('d',$unixTimestamp).", ".date('F',$unixTimestamp).", ".date('Y',$unixTimestamp); ?></div>
+                 <div class="dates"><span class="glyphicon glyphicon-map-marker"> </span><?php echo $event['event_location']; ?></div>
                 <div class="dates"><span class="glyphicon glyphicon-heart"> </span>Hits: 09 </div>
+                
                 <div class="clearfix"></div>
-                <p>Aliquam dapibus tincidunt metus. Praesent justo dolor, lobortis quis, lobortis dignissim, pulvinar ac, lorem. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus. Aenean nonummy hendrerit mauris. Phasellus porta. Fusce suscipit varius mi. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla dui. Fusce feugiat malesuada odio. Morbi… </p>
-                <div class="btn2 btn-black">Read More</div>
+                <p><?php echo $event['event_description']; ?></p>
+         <div class="btn2 btn-black"><a href="<?php echo base_url("events/get_event_byid/".$event['event_id']."/".$event['event_cr_cmp']); ?>">Read More</a></div>
                 <div class="clearfix"></div>
               </li>
-              
+              <?php } } else echo "No Events Created By This Company!..";?>
             </ul>
           </section>
           <div class="clearfix"></div>
