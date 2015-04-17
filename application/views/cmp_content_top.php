@@ -30,7 +30,8 @@ exit;*/
      			<?php 
 				
 				$companies = array();
-				
+				if(!empty($data))
+				{
 				foreach($data as $data){
 				$companies[] = $data['companyinfo_id'];
 				}
@@ -61,7 +62,10 @@ exit;*/
               
 			  <?php }else{ ?>
               <input type="button" class="follow" id ="unfollow-btn" value="UnFollow" onclick="cmpFollowPage(<?php echo $cmp_info[0]['companyinfo_id']; ?>);">
-			  <?php }  } }?>
+			  <?php }  } } }else{?>
+              <input type="button" class="smg" value="Send Massage">
+               <input type="button" class="follow" value="Follow"  id="follow-btn" data-toggle="modal" data-target="#followModal"  /> 
+               <?php } ?>
             </div>
           </div>
           <div class="col-md-3">

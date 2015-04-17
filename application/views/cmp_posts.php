@@ -95,7 +95,7 @@
 			}*/ echo $comments_details[$i]->comment_content; ?></span><br /> <?php  echo $hrsago;
 					 $commentfiles = explode(',',$comments_details[$i]->uploadedfiles);
 			         ?></div>
-                      <?php if(!empty($comments_details[$i]->uploadedfiles)) { ?><div style="padding-left:16px;"><img width="200px" height="200px" src="<?php echo base_url();?>uploads/<?php echo $commentfiles[0]; ?>"</div> <?php } ?>
+                      <?php if(!empty($comments_details[$i]->uploadedfiles)) { ?><div style="padding-left:16px;"><img width="200px" height="200px" src="<?php echo base_url();?>uploads/<?php echo $commentfiles[0]; ?>" /></div> <?php } ?>
               </div>
               <div class="clearfix"></div>
           </div>

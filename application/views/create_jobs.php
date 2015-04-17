@@ -10,6 +10,8 @@
 <section class="col-lg-6 col-md-6 col-sm-5 col-xs-12 coloumn2 jobsSt">
  <?php 			
 				$jobs = array();
+				if(!empty($data))
+				{
 				foreach($data as $data){
 				$jobs[] = $data['companyinfo_id'];
 				}
@@ -18,7 +20,8 @@
 					{
               ?>
 		<button type="button" class="btn btn-primary createbutton fright" data-toggle="modal" data-target=".bs-example-modal-lg">Create Job</button>
-        <?php } ?>
+        <?php } } ?>
+
 		
       <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
