@@ -20,7 +20,7 @@ class confirmation extends CI_Controller {
 		if(!empty($user))
 		{
 			
-			$activation_success = "Your Account Hasbeen Activated You Can Login into Your Account!..."
+			$activation_success = "Your Account Hasbeen Activated You Can Login into Your Account!...";
 			$this->load->view('sign_in_v',$activation_success);
 		}
 	}
