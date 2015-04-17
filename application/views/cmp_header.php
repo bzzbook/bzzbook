@@ -24,7 +24,7 @@ $session_data = $this->session->userdata('logged_in');
 <body id="companyPf">
 <header>
   <section class="container">
-    <figure class="col-lg-3 col-md-3 col-sm-4 col-xs-12 animate-plus" data-animations="pulse"  data-animation-when-visible="true"  data-animation-reset-offscreen="true"><a href="#"><img src="<?php echo base_url(); ?>images/logo.png" alt=""></a></figure>
+    <figure class="col-lg-3 col-md-3 col-sm-4 col-xs-12 animate-plus" data-animations="pulse"  data-animation-when-visible="true"  data-animation-reset-offscreen="true"><a href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>images/logo.png" alt=""></a></figure>
     <div class="col-lg-6 col-md-6 col-sm-4 col-xs-12 search">
       <div class="input-group"> <span class="input-group-btn">
         <input type="button" value="" role="button"  class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" id="drop2">
