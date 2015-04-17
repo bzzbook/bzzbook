@@ -238,6 +238,18 @@ class signg_in extends CI_Controller {
 		 echo "success";
 	 }	   
    }
+   function commentinsertlinks($pid,$uid){
+	   $data=array(
+	       'like_on'=>$pid,
+	       'liked_by'=>$uid,
+		   
+	   );
+	 $res=$this->customermodel->commentinsertlinks($data);
+	 if($res){
+		 
+		 echo "success";
+	 }	   
+   }
     function insertcmplikes($pid,$uid){
 	   $data=array(
 	       'like_on'=>$pid,

@@ -464,18 +464,47 @@ function likefun(pid,uid,count){
          if(info.like_status == 'N'){
 		 	//$("#like_ajax"+pid).html("Unlike");
 			$("#link_like"+pid).html("Like");
-		    $("#like_count"+pid).html(info.like_count-1);
+		    $("#like_count"+pid).html('<img src="<?php echo base_url(); ?>images/like_myphotos.png" alt="">&nbsp;'+(info.like_count-1)+'&nbsp;&nbsp;');
 
 		 }			
 		  else{
 			//$("#like_ajax"+pid).html("Like");
 			$("#link_like"+pid).html("Unlike");
-	        $("#like_count"+pid).html(info.like_count+1);
+	        $("#like_count"+pid).html('<img src="<?php echo base_url(); ?>images/like_myphotos.png" alt="">&nbsp;'+(info.like_count+1)+'&nbsp;&nbsp;');
 
 		  }
         }
        });	
 }
+
+function commentlikefun(pid,uid,count){
+	var posted_by=pid;
+	var user_id=uid;
+	url="<?php echo base_url();?>signg_in/commentinsertlinks/"+pid+"/"+uid;
+	  $.ajax({
+        type: "POST",
+        url: url,
+        data: { liked_by: pid, like_on : uid} ,
+        success: function(html)
+        {   
+			info = JSON.parse(html);
+         if(info.like_status == 'N'){
+		 	//$("#like_ajax"+pid).html("Unlike");
+			$("#cmt_link_like"+pid).html("Like");
+		    $("#cmt_like_count"+pid).html('<img src="<?php echo base_url(); ?>images/like_myphotos.png" alt="">&nbsp;'+(info.like_count-1)+'&nbsp;&nbsp;');
+
+		 }			
+		  else{
+			//$("#like_ajax"+pid).html("Like");
+			$("#cmt_link_like"+pid).html("Unlike");
+	        $("#cmt_like_count"+pid).html('<img src="<?php echo base_url(); ?>images/like_myphotos.png" alt="">&nbsp;'+(info.like_count+1)+'&nbsp;&nbsp;');
+
+		  }
+        }
+       });	
+}
+
+
 function cmplikefun(pid,uid,count){
 	var posted_by=pid;
 	var user_id=uid;

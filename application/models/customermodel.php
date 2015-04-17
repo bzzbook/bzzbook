@@ -215,6 +215,39 @@ class Customermodel extends CI_Model {
 		}
 		
    }
+    public function commentinsertlinks($data)
+   {
+	    $pid=$data['like_on'];
+	    $aid=$data['liked_by'];
+	   // $like=$data['like'];
+	    $condition = "like_on =" . $pid . " AND liked_by =".$aid;
+	    $this->db->select('*');
+		$this->db->from('bzz_comment_likes');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		if($query->num_rows()>0){
+			$res=$query->result();
+			$res_like=$res[0]->like_status;			
+			if($res_like == 'Y' ){
+				$slike="N";
+			}
+			else if($res_like == 'N'){
+				$slike="Y";
+			}
+			$like_count = count($this->customermodel->commentlikedata($pid));
+		$data1 = array('like_status' => $slike);
+        $this->db->where($condition);
+  		$this->db->update('bzz_comment_likes',$data1);	
+	    $data1 = array('like_status' => $slike,'like_count' => $like_count);
+			echo json_encode($data1);
+		}
+		else{
+	    $this->db->insert('bzz_comment_likes',$data);
+			$data1 = array('like_status' => 'Y','like_count' => 0);
+			echo json_encode($data1);
+		}
+		
+   }
    public function insertcmplikes($data)
    {
 	    $pid=$data['like_on'];
@@ -252,6 +285,16 @@ class Customermodel extends CI_Model {
 	    $condition = "like_on =" . "'" . $pid . "' AND like_status = 'Y'";
 		$this->db->select('*');
 		$this->db->from('bzz_likes');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		//return $query->num_rows();
+		return $query->result();
+		
+   }
+   public function commentlikedata($cid){
+	    $condition = "like_on =" . "'" . $cid . "' AND like_status = 'Y'";
+		$this->db->select('*');
+		$this->db->from('bzz_comment_likes');
 		$this->db->where($condition);
 		$query = $this->db->get();
 		//return $query->num_rows();
