@@ -30,6 +30,7 @@ exit;*/
      			<?php 
 				
 				$companies = array();
+				
 				foreach($data as $data){
 				$companies[] = $data['companyinfo_id'];
 				}

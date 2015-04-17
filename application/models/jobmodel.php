@@ -117,9 +117,9 @@ class Jobmodel extends CI_Model {
 		if($query->num_rows()>0)
 		{
 			$companies =  $query->result_array();
-			
+				return $companies;
 		}
-	return $companies;
+return false;
 	}
 
  public function delJobDetails($id)

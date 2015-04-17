@@ -97,5 +97,21 @@ public function get_event_byid($id,$cmp_id)
 		$this->load->view('cmp-fulltemplate-view',$data);
 		
 }
+
+public function write_discussion($event_id,$cmp_id)
+{
+	//$data['cmp_info'] =  $this->companies->get_cmp_by_id($cmp_id);
+	 $id = $this->session->userdata('logged_in')['account_id'];
+	 $data=array(
+	   'discussion_content'=>$this->input->post('discussion_content'),
+	   'discussion_on'=>$event_id,
+	   'discussion_by'=> $id,
+	   'company_id' => $cmp_id
+	   );
+	 
+	   $event = $this->eventmodel->insert_discussion($data);
+	   $data['cmp_info'] =  $this->companies->get_cmp_by_id($cmp_id);
+	   redirect('events/get_event_byid/'.$event_id."/".$cmp_id);
+}
 }
 ?>
