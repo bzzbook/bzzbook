@@ -646,15 +646,36 @@ public function get_followers($id)
 	$query = $this->db->get();
 	$followers = $query->result_array();
 	$data['followers'] = $followers;
-	print_r($followers);
-	if(!empty($followers)
+	//print_r($followers);
+	if(!empty($followers))
 	{
+		$user_data = array();
 		foreach($followers as $follower)
 		{
+
+		  //$condition =  "user_id =" . "'" . $user_id . "'";
+		  $this->db->select('user_firstname,user_lastname');
+		  $this->db->from('bzz_users');
+		  //$this->db->limit(2);
+		  $this->db->join('bzz_user_images','bzz_users.user_id=bzz_user_images.user_id AND bzz_users.user_id='.$follower['user_id']);
+		  $this->db->join('bzz_userinfo','bzz_users.user_id=bzz_userinfo.user_id');
+		  $this->db->order_by('bzz_user_images.user_imageinfo_id','desc'); 
+		  //$this->db->order_by('user_id');
+		  //$this->db->where($condition);
+		  $query = $this->db->get();
+		   if ($query->num_rows() > 0) 
+		   {
+		   $userdata =  $query->result_array();
+		   $user_data[] = $userdata;
+		   } 
+					
 		}
 		
 	}
-	exit;
+	$data['users_info'] = $user_data;
+	
+	//return $data;
+	
 }
 
 }
