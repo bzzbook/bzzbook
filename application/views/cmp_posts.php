@@ -87,7 +87,7 @@
 			       if($i<=4){ $com_user_data = $this->customermodel->profiledata($comments_details[$i]->commented_by); 	  $hrsago = $this->customermodel->get_time_difference_php($comments_details[$i]->commented_time);
 ?>
                    <div class="commentBox">
-            <figure> <a href="<?php if($image[0]['user_id']==$this->session->userdata('logged_in')['account_id']) { echo base_url().'company/company_disp/'.$image[0]['companyinfo_id']; }else{ echo base_url().'profile/post/'.$com_user_data[0]->user_id; } ?>"><img src="<?php  if($image[0]['user_id']==$this->session->userdata('logged_in')['account_id']) { echo base_url();?>uploads/<?php echo $image[0]['company_image']; } else {echo base_url();?>uploads/<?php echo $com_user_data[0]->user_img_thumb; } ?>" alt="<?php echo base_url();?>uploads/<?php echo $image[0]['company_image'] ?>"></a></figure>
+            <figure> <a href="<?php if($image[0]['user_id']==$this->session->userdata('logged_in')['account_id']) { echo base_url().'company/company_disp/'.$image[0]['companyinfo_id']; }else{ echo base_url().'profile/post/'.$com_user_data[0]->user_id; } ?>"><img src="<?php  if($image[0]['user_id']==$this->session->userdata('logged_in')['account_id']) { echo base_url();?>uploads/<?php echo $image[0]['company_image']; } else {echo base_url();?>uploads/<?php if(!empty($com_user_data[0]->user_img_thumb)) echo $com_user_data[0]->user_img_thumb; else echo 'default_profile_pic.png'; } ?>" alt="<?php echo base_url();?>uploads/<?php echo $image[0]['company_image'] ?>"></a></figure>
             <div class="postAComment"> 
             	<div class="postACommentInner"><span class="pfname" style="color:#5A5998;"><a href="<?php if($image[0]['user_id']==$this->session->userdata('logged_in')['account_id']) { echo base_url().'company/company_disp/'.$image[0]['companyinfo_id']; } else { echo base_url().'profile/post/'.$com_user_data[0]->user_id; } ?>"><?php if($image[0]['user_id']==$this->session->userdata('logged_in')['account_id']) { echo ucfirst($image[0]['cmp_name']);} else {  echo ucfirst($com_user_data[0]->user_firstname)."&nbsp;".ucfirst($com_user_data[0]->user_lastname); }?></a></span> <span class="date" style="color:black;">
 			<?php /*if($hr_final<24){?><?php echo $hr_final;?>hr<?php }else{
@@ -110,7 +110,7 @@
             <?php } ?>
           </div>
           <div class="commentBox">
-            <figure><img src="<?php if($image[0]['user_id']==$this->session->userdata('logged_in')['account_id']) { echo base_url();?>uploads/<?php echo $image[0]['company_image']; } else { echo base_url();?>uploads/<?php echo $get_profiledata[0]->user_img_thumb; } ?>" alt=""></figure>
+            <figure><img src="<?php if($image[0]['user_id']==$this->session->userdata('logged_in')['account_id']) { echo base_url();?>uploads/<?php echo $image[0]['company_image']; } else { echo base_url();?>uploads/<?php if(!empty($get_profiledata[0]->user_img_thumb)) echo $get_profiledata[0]->user_img_thumb; else echo 'default_profile_pic.png'; } ?>" alt=""></figure>
             <div class="postAComment"> 
             	<div class="postACommentInner">
                            <form action="<?php echo base_url();?>signg_in/write_cmp_comment/<?php echo $row->cmp_post_id."/".$image[0]['companyinfo_id']; ?>" method="post" style="width:100% !important;" enctype="multipart/form-data">
