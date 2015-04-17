@@ -637,6 +637,25 @@ public function update_pic($dataa,$id)
 	return false;
 
 }
+public function get_followers($id)
+{
+	$condition = "companyinfo_id =" . "'" . $id . "'";  
+	$this->db->select('*');
+	$this->db->from('bzz_cmp_follow');
+	$this->db->where($condition);
+	$query = $this->db->get();
+	$followers = $query->result_array();
+	$data['followers'] = $followers;
+	print_r($followers);
+	if(!empty($followers)
+	{
+		foreach($followers as $follower)
+		{
+		}
+		
+	}
+	exit;
+}
 
 }
 ?>

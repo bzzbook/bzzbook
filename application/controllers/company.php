@@ -260,6 +260,17 @@ public function updateabout($id)
 	else
 	return false;
   }
+public function get_my_followers($id)
+{
+	
+	$data['followers'] = $this->companies->get_followers($id);
+	$data['cmp_info'] =  $this->companies->get_cmp_by_id($id);
+	//$data['company'] = $this->companies->get_cmp_by_id($id);
+	$data['content']='cmp_followers';
+	$this->load->view('cmp-template-view',$data);	
+}
+
+
 }
 
 

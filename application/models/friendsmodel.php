@@ -429,9 +429,11 @@ public function finding_friends()
 					  $this->db->select('*');
 					  $this->db->from('bzz_users');
 					  $this->db->limit(2);
+					  
 					  $this->db->join('bzz_user_images','bzz_users.user_id=bzz_user_images.user_id AND bzz_users.user_id='.$user_id);
 					  $this->db->join('bzz_userinfo','bzz_users.user_id=bzz_userinfo.user_id');
-					  $this->db->order_by('bzz_user_images.user_imageinfo_id','desc');
+					  $this->db->order_by('bzz_user_images.user_imageinfo_id','desc'); 
+					  $this->db->order_by('user_id');
 					 // $this->db->where($condition);
 					  $query = $this->db->get();
 					   if ($query->num_rows() > 0) {

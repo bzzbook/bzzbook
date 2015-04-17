@@ -17,22 +17,22 @@
                       <li>
                         <div class="iner_business"></div>
                         <div class="inner_rights">
-                          <h3>Company Name</h3>
-                          <p><?php if($company_info[0]['cmp_name']) echo ucfirst($company_info[0]['cmp_name']); else echo "Information Not Available"; ?></p>
+                          
+                          <p><h3>Company Name</h3><?php if($company_info[0]['cmp_name']) echo ucfirst($company_info[0]['cmp_name']); else echo "Information Not Available"; ?></p>
                         </div>
                         <div class="clearfix"></div>
                       </li>
                       <li>
                         <div class="inner_rights">
-                          <h3>Established Since</h3>
-                          <p><?php $unixTimestamp = strtotime($company_info[0]['cmp_estb']); echo date('F',$unixTimestamp).", ".date('Y',$unixTimestamp); ?></p>
+                          
+                          <p><h3>Established Since</h3><?php $unixTimestamp = strtotime($company_info[0]['cmp_estb']); echo date('F',$unixTimestamp).", ".date('Y',$unixTimestamp); ?></p>
                         </div>
                         <div class="clearfix"></div>
                       </li>
                       <li>
                         <div class="inner_rights">
-                          <h3>About Company</h3>
-                          <p><?php if($company_info[0]['cmp_about']) echo $company_info[0]['cmp_about']; else echo "Information Not Available"; ?></p>
+                          
+                          <p><h3>About Company</h3><?php if($company_info[0]['cmp_about']) echo $company_info[0]['cmp_about']; else echo "Information Not Available"; ?></p>
                         </div>
                         <div class="clearfix"></div>
                       </li><li>
