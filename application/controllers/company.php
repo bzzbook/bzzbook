@@ -135,6 +135,48 @@ public function addcompany()
 	 endif;*/
 		
 	}
+	public function applyjob($cmp_id,$job_id)
+	{
+		
+	    $config['upload_path'] = './uploads/';
+		$config['allowed_types'] = 'pdf|doc|docx';
+		$config['max_size']	= '2048';
+		$config['max_width']  = '';
+		$config['max_height']  = '';
+
+		$this->load->library('upload', $config);
+		if ( ! $this->upload->do_upload())
+		{
+			$error = array('error' => $this->upload->display_errors());
+			print_r($error);
+			//$this->load->view('uploadform', $error);
+		}
+		else
+		{
+			$filedata = $this->upload->data();
+			$data['resume'] = $filedata['file_name'];
+		
+		}
+	    $data['name'] = $this->input->post('name');
+		$data['email'] = $this->input->post('email');
+		$data['phone'] = $this->input->post('phone');
+		$data['skills'] = $this->input->post('skills');
+		$data['message'] = $this->input->post('message');
+		$data['company_id'] = $cmp_id;
+		$data['job_id'] = $job_id;
+		$data['user_id'] = $this->session->userdata('logged_in')['account_id'];		
+	    $applicant_id = $this->companies->applyjob($data);
+		if($applicant_id)
+		{
+			$this->session->set_flashdata('application_status', 'Your application submitted successfully');
+			redirect('jobs/job_view/'.$cmp_id.'/'.$job_id);
+		}
+		
+		 
+		
+		
+	}
+
 	
 	public function cmp_follow($follow_as,$cmpinfo_id)
 	{

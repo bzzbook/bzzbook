@@ -31,6 +31,13 @@ class Jobs extends CI_Controller {
 		$data['content']='job_view';
 		$this->load->view('cmp-fulltemplate-view',$data);
 	}
+	public function applicants($cmp_id)
+	{
+		$data['cmp_info'] =  $this->companies->get_cmp_by_id($cmp_id);
+		$data['applicants'] = $this->jobmodel->getapplicants($cmp_id);
+		$data['content']='applicants_view';
+		$this->load->view('cmp-template-view',$data);
+	}
 	public function create_job()
 	{
 	 parse_str($_POST['formdata'],$job_info);
