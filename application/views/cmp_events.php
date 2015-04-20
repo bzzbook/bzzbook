@@ -2,7 +2,7 @@
       <section class="about-user-details">
         <h4><span aria-hidden="true" class="glyphicon glyphicon-calendar"></span> Events
           <div class="right_event">
-            <div class="btn2 btn-black">Add Event</div>
+            <div class="btn2 btn-black" data-target="#cr_event" data-toggle="modal">Add Event</div>
           </div>
         </h4>
         <div class="events" >

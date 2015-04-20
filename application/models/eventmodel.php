@@ -10,7 +10,8 @@ class EventModel extends CI_Model {
 	
 	public function insert_event($event_info)
 	{
-		if($this->db->insert('bzz_events', $event_info))
+		
+		if($this->db->insert('bzz_events',$event_info))
 			return $this->db->insert_id();
 		else
 			return false;

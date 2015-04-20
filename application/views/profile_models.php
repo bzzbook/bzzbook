@@ -595,8 +595,73 @@
   </div>
 </div>
  <!----------------------- Follow PopUp1 End  ---------------------------->
+<!------------------------- Event Modal Start ----------------------------->
 
+<div class="modal fade" id="cr_event" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div id="comperrormsg"></div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Create New Event</h4>
+      </div>
+      <div class="modal-body">
+<!--        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompany" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">-->
+        <figure class="pfpic">
+          <div id="dvPreview" ><img width="146" height="159" id="blah" src="<?php echo base_url(); ?>images/cl_pic.png" alt=""></div>
+        </figure>
+        <div class="upload"> <span class="btn btn-success fileinput-button"> <span>Add Logo</span> 
+          <!-- The file input field used as target for the file upload widget -->
+          
+         <!-- <input type="file" name="userfile" id="fileupload"/> -->
+          </span> </div>
+        <form class="latest_pop" action="<?php echo base_url(); ?>events/create_event" method="post">
+          <div class="form-group">
+            <label for="exampleInputEmail1">Name</label>
+            <input type="text" class="form-control" id="" placeholder="ex: Birthday Party" name="event_name">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Details</label>
+            <input type="text" class="form-control" id="" placeholder="Add More Info" name="event_description">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Where</label>
+            <input type="text" class="form-control" id="" placeholder="Add A Place?" name="event_description">
+          </div>
+          <label for="exampleInputEmail1">When</label>
+          <div class='col-md-8 col-sm-8 input-group date' id='datetimepicker11'>
+            <input type='text' class="form-control"  name="event_date"/>
+            <span class="input-group-addon"> <span class="glyphicon glyphicon-calendar"> </span> </span>
+            <div class="col-md-8 col-sm-8">
+              <input type="text" class="form-control" id="" placeholder="Add A Time?" name="event_time">
+            </div>
+          </div>
+          <label>Photo</label>
+          <div class="clearfix"></div>
+          <input type="file" name="user_file" id="user_file" />
+          <div class="clearfix"></div>
+          <label>Privacy</label>
+          <div class="clearfix"></div>
+          <select name="event_privacy">
+            <option>Guests and Friends</option>
+          </select>
+          <div class="clearfix"></div>
+         
+          <div class="newevent">
+          <div class="btn3 btn-yellow"><input type="submit" value="Create" /></div>
+          <div class="btn3 btn-black">Cancel</div>
+        
+        </div>
+         <div class="clearfix"></div>
+          
+        </form>
+       
+      </div>
+    </div>
+  </div>
+</div>
 
+<!------------------------- Event Modal End ------------------------------->
 <!------------countrys and states scripts ------------>
 <script language="javascript">print_country("con");</script><!--  //for groups   --> 
 <script language="javascript">print_country("contries");</script> <!-- //for companies-->

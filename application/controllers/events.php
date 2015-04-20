@@ -33,11 +33,16 @@ class Events extends CI_Controller {
 		if ( ! $this->upload->do_upload())
 		{
 			$error = array('error' => $this->upload->display_errors());
-
+			print_r($error);
 			//$this->load->view('uploadform', $error);
 		}
 		else
 		{
+			$filedata = $this->upload->data();
+			$event_info['event_image'] = $filedata['file_name'];
+		
+		}
+	   
 			$data = $this->upload->data();
 	  	  // print_r($data);
 		    $path = $data['full_path'];
@@ -58,28 +63,28 @@ class Events extends CI_Controller {
 			
 			$event_info = array(
 			
-		'event_name'=>$data['job_title'],
-		'event_location'=>$data['job_type'],
-		'event_date'=>$data['job_category'],
-		'event_time'=>$data['salary'],
-		'event_description'=>$data['job_keywords'],
-		'event_image'=>$event_image,
-		'job_industry'=>$data['industry'],
-		'event_cr_cmp'=>$data['state'],
+		'event_name'=>$this->input->post('event_name'),
+		'event_location'=>$this->input->post('event_location'),
+		'event_date'=>$this->input->post('event_date'),
+		'event_time'=>$this->input->post('event_time'),
+		'event_description'=>$this->input->post('event_description'),
+		'event_privacy'=>$this->input->post('event_privacy'),
+		'event_cr_cmp'=>$this->input->post('event_cr_cmp'),
 		'event_cr_user'=>$this->session->userdata('logged_in')['account_id']
 		);
+		echo "hail";
+		exit;
 
         $event_id = $this->eventmodel->insert_event($event_info);
-		if(!empty($event_id))
+/*		if(!empty($event_id))
 		{
 			//$data['event_info'] = $this->eventmodel->get_events_by_cmpid($id)
+			$data['event_info'] = $this->eventmodel->get_events_by_cmpid($this->uri->segment(3,0));
 			$data['content']='cmp_events';
 			$this->load->view('cmp-fulltemplate-view',$data);
-		}
+		}*/
 		
-		}
-	
-
+/*
 	 parse_str($_POST['formdata'],$event_info);
 	 $returninfo = $this->eventmodel->insert_event($event_info);
 	 if($returninfo != false):
@@ -87,7 +92,7 @@ class Events extends CI_Controller {
 	 //	echo $this->load->view('event_field');
 	 else:
 	 	return false;
-	 endif;
+	 endif;*/
 	}
 public function get_event_byid($id,$cmp_id)
 {

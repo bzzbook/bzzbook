@@ -2,7 +2,6 @@
 $upload_path = "uploads/";							
 $thumb_width = "150";						
 $thumb_height = "150";		
-
 ?>
 
 <footer class="post">
@@ -75,6 +74,7 @@ $(function () {
    $('#email_invite').validate();
    $('#upload_file').validate();
    $('#search_job').validate(); 
+   
    
 </script>
 <script>
@@ -1538,14 +1538,20 @@ $("form[name=cmp_postboard]").submit(function(event){
 			}
 			
 //search friends functionality by sp on 10-4-2015
-$('#search_members').click(function(){
+$('#search_frnds').keyup(function(){
 	value = $('#search_frnds').val();
+	var length = value.length;
 	var errors = '';
-	if(value == '')
+	if(value == '') 
 	{
 		$("#error_data").html("Search Field Shouldn't be empty").fadeOut(7000);
 		location.reload();
 	}
+	/*if(length < 1) 
+	{
+		$("#error_data").html("provide more letters to Search").fadeOut(7000);
+		location.reload();
+	}*/
 	else {
 		
 	url="<?php echo base_url(); ?>friends/search_frnds/"+value;
@@ -1565,10 +1571,10 @@ $('#search_members').click(function(){
 });
 
 
-$('#event_form').submit( function( event)
+/*$('#event_form').submit( function( event)
 	{
 				
-		url="<?php echo base_url(); ?>events/create_event/";
+		url="<?php // echo base_url(); ?>events/create_event/";
 		$.post( url, { formdata: $(this).serialize()})
 		.done(function( data ) {
 			if(data == false)
@@ -1579,7 +1585,7 @@ $('#event_form').submit( function( event)
 			$( "#canceladdjob" ).trigger( "click" );
 			});
 			event.preventDefault();
-		});
+		});*/
 </script>
 
 
