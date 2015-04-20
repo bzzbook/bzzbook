@@ -65,5 +65,13 @@ public function search_frnds($value)
 {
 	$data['result'] = $this->friendsmodel->search_friends($value);
 }
+public function view_all_reqs()
+{  
+         //$data['friends'] = $this->friendsmodel->getfriends();	
+	     $data['content']='all_add_friends';
+	     $this->load->view('template-view',$data);
+	  //$this->load->view('posts');	
+}
+
 }
 ?>

@@ -50,7 +50,7 @@ class Friendsmodel extends CI_Model {
    public function getPendingRequests($limit = 2)
 	{
 		$id = $this->session->userdata('logged_in')['account_id'];
-	    $condition = "user_id =" . "'" . $id . "' AND request_status ='W'";
+	    $condition = "friend_id =" . "'" . $id . "' AND request_status ='W'";
 		$this->db->select('*');
 		$this->db->from('bzz_userfriends');
 		$this->db->where($condition);

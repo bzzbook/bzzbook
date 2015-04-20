@@ -16,7 +16,8 @@
             <li> <a  href="<?php echo base_url("company/get_company_byid/".$cmp_info[0]['companyinfo_id']); ?>">Company Profile</a></li>
             <li> <a  href="<?php echo base_url("company/get_company_info_byid/".$cmp_info[0]['companyinfo_id']); ?>">Company Info</a></li>
             <li> <a  href="#">Post Board</a></li>
-            <li> <a  href="<?php echo base_url("jobs/disp_jobs/".$cmp_info[0]['companyinfo_id']); ?>">Applicants</a></li>
+            <li> <a  href="<?php echo base_url("jobs/disp_jobs/".$cmp_info[0]['companyinfo_id']); ?>">jobs</a></li>
+            <li> <a  href="<?php echo base_url("jobs/applicants/".$cmp_info[0]['companyinfo_id']); ?>">applicants</a></li>
             <li> <a  href="<?php echo base_url("events/disp_events/".$cmp_info[0]['companyinfo_id']); ?>">Events</a></li>
             <li> <a  href="<?php echo base_url("company/get_my_followers/".$cmp_info[0]['companyinfo_id']); ?>">Followers</a></li>
           </ul>

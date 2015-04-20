@@ -884,3 +884,11 @@ width: 73.7%; !important;}
 .rightsml_bottom{ width:70%; float:right;  font-size:14px;font-family: "Roboto",sans-serif; font-weight:300; color:#696969; line-height:22px;}
 .education p{ padding:3px; }
 .box_button{ float:left; margin-bottom:30px;}
+
+<!----------forms open--------->
+.latest_pop { color:#F0F!important;}
+.apply form-group{ font-size:30px;}
+.boxunderline{ border-bottom:1px solid #bbbbbb; color:#aeaeae; font-size:12px;  line-height: 33px; margin-top: -20px;}
+.addcompany{ float:left; padding:20px 0px; }
+.upload_cv label{   margin-top: -24px; padding: 5px;}
+.upload_cv .input-group-btn:last-child > .btn, .input-group-btn:last-child > .btn-group{ background:#e2e2e2;}

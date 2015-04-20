@@ -90,6 +90,13 @@ public function managecompanydata($data)
 	   return false;
 	
 }
+public function applyjob($data)
+{
+	   if( $this->db->insert('bzz_job_applications',$data))
+	   return $this->db->insert_id();
+	   else
+	   return false;
+}
 
 	   public function other_companies($limit=2)
 	   {

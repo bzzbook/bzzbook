@@ -54,6 +54,16 @@ class Jobmodel extends CI_Model {
 		$query = $this->db->get();
 		return $query->result_array();
 	}
+	public function getapplicants($cmp_id)
+	{
+		$condition = "company_id =" . "'" . $cmp_id . "'";
+		$this->db->select('*');
+		$this->db->from('bzz_job_applications');
+		$this->db->where($condition);
+		$this->db->join('jobs', 'jobs.job_id = bzz_job_applications.job_id');
+		$query = $this->db->get();
+		return $query->result_array();
+	}
 	public function getJob($id)
 	{
 		//$user_id = $this->session->userdata('logged_in')['account_id']; 
