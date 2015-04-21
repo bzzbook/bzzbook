@@ -73,19 +73,21 @@
 				echo  $str_des=substr($row->post_content,0,250);
 			 } ?></div>
           </div>
-          <div class="sharingLink"><?php $get_likedetails = $this->customermodel->likedata($row->post_id);
-					
-					if(sizeof($get_likedetails)>0){
-			       	$user_id=$get_likedetails[0]->liked_by;
-					$like=$get_likedetails[0]->like_status;
-					}
-					else
-					$like='';
-					 if(@$user_id == $user_id && $like=='Y'){?>
-				<a href="javascript:void(0);" onclick="likefun('<?php echo $row->post_id;?>','<?php echo $row->posted_by;?>',<?php echo count($get_likedetails); ?>)"  id="link_like<?php echo $row->post_id;?>" style="padding-right:0px;">Unlike
+          <div class="sharingLink"><?php 
+					$get_likedetails = $this->customermodel->likedata($row->post_id);
+					$current_user_like_data = $this->customermodel->currentuserlikedata($row->post_id);
+					if($current_user_like_data){
+			       //	$user_id=$current_user_like_data[0]->liked_by;
+//					$like=$get_likedetails[0]->like_status;
+//					}
+//					else
+//					$like='';
+//					 if(@$user_id == $user_id && $like=='Y'){
+	?>
+				<a href="javascript:void(0);" onclick="likefun('<?php echo $row->post_id;?>','<?php echo $curr_user_id;?>',<?php echo count($get_likedetails); ?>)"  id="link_like<?php echo $row->post_id;?>" style="padding-right:0px;">Unlike
             <?php    
 			}else{?>
-				<a href="javascript:void(0);" onclick="likefun('<?php echo $row->post_id;?>','<?php echo $row->posted_by;?>',<?php echo count($get_likedetails); ?>)"  id="link_like<?php echo $row->post_id;?>" style="padding-right:0px;">Like
+				<a href="javascript:void(0);" onclick="likefun('<?php echo $row->post_id;?>','<?php echo $curr_user_id;?>',<?php echo count($get_likedetails); ?>)"  id="link_like<?php echo $row->post_id;?>" style="padding-right:0px;">Like
 			<?php }?></a><span id="like_count<?php echo $row->post_id;?>"><?php  $like_count = count($get_likedetails); if($like_count>0) echo '<img src="'.base_url().'images/like_myphotos.png" alt="">'.$like_count.'&nbsp;&nbsp;'; ?></span><a href="javascript:document.getElementById('write_comment<?php echo $row->post_id; ?>').focus()">Comment</a> <a href="javascript:void(0)" onclick="sharePost(<?php echo $row->post_id; ?>)" data-toggle="modal" data-target="#myModal">Share</a> <a href="javascript:void(0)" onclick="saveAsFav('<?php echo $row->post_id;?>')"><span>Save As Favorite</span></a></div>
             <div id="res_comments<?php echo $row->post_id;?>">
             <?php   
@@ -104,18 +106,21 @@
 			
 					
 			         ?> <?php $comment_likes = $this->customermodel->commentlikedata($comments_details[$i]->postcomments_id);
-					
-					if(sizeof($comment_likes)>0){
-			       	$user_id=$comment_likes[0]->liked_by;
-					$like=$comment_likes[0]->like_status;
-					}
-					else
-					$like='';
-					 if(@$user_id == $user_id && $like=='Y'){?>
-				<a href="javascript:void(0);" onclick="commentlikefun('<?php echo $comments_details[$i]->postcomments_id;?>','<?php echo $comments_details[$i]->commented_by;?>',<?php echo count($comment_likes); ?>)"  id="cmt_link_like<?php echo $comments_details[$i]->postcomments_id;?>" style="padding-right:0px;">Unlike
+					$current_user_com_like_data = $this->customermodel->currentusercommentlikedata($comments_details[$i]->postcomments_id);
+					if($current_user_com_like_data){
+					//if(sizeof($comment_likes)>0){
+//			       	$user_id=$comment_likes[0]->liked_by;
+//					$like=$comment_likes[0]->like_status;
+//					}
+//					else
+//					$like='';
+//					 if(@$user_id == $user_id && $like=='Y'){
+						 
+						 ?>
+				<a href="javascript:void(0);" onclick="commentlikefun('<?php echo $comments_details[$i]->postcomments_id;?>','<?php echo $curr_user_id;?>',<?php echo count($comment_likes); ?>)"  id="cmt_link_like<?php echo $comments_details[$i]->postcomments_id;?>" style="padding-right:0px;">Unlike
             <?php    
 			}else{?>
-				<a href="javascript:void(0);" onclick="commentlikefun('<?php echo $comments_details[$i]->postcomments_id;?>','<?php echo $comments_details[$i]->commented_by;?>',<?php echo count($comment_likes); ?>)"  id="cmt_link_like<?php echo $comments_details[$i]->postcomments_id;?>" style="padding-right:0px;">Like
+				<a href="javascript:void(0);" onclick="commentlikefun('<?php echo $comments_details[$i]->postcomments_id;?>','<?php echo $curr_user_id;?>',<?php echo count($comment_likes); ?>)"  id="cmt_link_like<?php echo $comments_details[$i]->postcomments_id;?>" style="padding-right:0px;">Like
 			<?php }?></a>&nbsp;<span id="cmt_like_count<?php echo $comments_details[$i]->postcomments_id;?>"><?php  $like_count = count($comment_likes); if($like_count>0) echo '<img src="'.base_url().'images/like_myphotos.png" alt="">'.$like_count.'&nbsp;&nbsp;'; ?></span></div>
                     
               </div>

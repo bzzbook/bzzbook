@@ -35,7 +35,7 @@ class Customermodel extends CI_Model {
   	    $id = $this->session->userdata('logged_in')['account_id'];
 		else
 		$id = $pst_usr_id;
-	    $condition = "user_id =" . "'" . $id . "' AND request_status = 'Y'";
+	    $condition = "(user_id ='" . $id . "' OR friend_id ='".$id."') AND request_status = 'Y'";
 		$this->db->select('*');
 		$this->db->from('bzz_userfriends');
 		$this->db->where($condition);
@@ -48,10 +48,12 @@ class Customermodel extends CI_Model {
 			foreach($res as $friend)	
 			{
 			   $friends[] =	$friend->friend_id;
+			   $friends[] = $friend->user_id;
 			}
 			}
 		}	
 	   $friends[] =  $id;
+	   $friends = array_unique($friends);
 	   $this->db->select('*');
 	   $this->db->from('bzz_posts');
 /*	   $this->db->where_in('posted_by',$friends);
@@ -170,9 +172,10 @@ class Customermodel extends CI_Model {
 		else{
 			$this->db->select('*');
 			$this->db->from('bzz_userinfo');
+			$this->db->where($condition);
 			//$this->db->join('bzz_user_images','bzz_userinfo.user_id=bzz_user_images.user_id AND bzz_userinfo.user_id='.$id);
-			$this->db->order_by('user_id','desc');
-			$this->db->limit(1);
+			//$this->db->order_by('user_id','desc');
+			//$this->db->limit(1);
 			$query = $this->db->get();
 			if ($query->num_rows() == 1) {
 				return $query->result();
@@ -192,6 +195,7 @@ class Customermodel extends CI_Model {
 		$this->db->from('bzz_likes');
 		$this->db->where($condition);
 		$query = $this->db->get();
+		$like_count = count($this->customermodel->likedata($pid));
 		if($query->num_rows()>0){
 			$res=$query->result();
 			$res_like=$res[0]->like_status;			
@@ -201,7 +205,7 @@ class Customermodel extends CI_Model {
 			else if($res_like == 'N'){
 				$slike="Y";
 			}
-			$like_count = count($this->customermodel->likedata($pid));
+			
 		$data1 = array('like_status' => $slike);
         $this->db->where($condition);
   		$this->db->update('bzz_likes',$data1);	
@@ -210,7 +214,7 @@ class Customermodel extends CI_Model {
 		}
 		else{
 	    $this->db->insert('bzz_likes',$data);
-			$data1 = array('like_status' => 'Y','like_count' => 0);
+			$data1 = array('like_status' => 'Y','like_count' => $like_count);
 			echo json_encode($data1);
 		}
 		
@@ -225,6 +229,7 @@ class Customermodel extends CI_Model {
 		$this->db->from('bzz_comment_likes');
 		$this->db->where($condition);
 		$query = $this->db->get();
+		$like_count = count($this->customermodel->commentlikedata($pid));
 		if($query->num_rows()>0){
 			$res=$query->result();
 			$res_like=$res[0]->like_status;			
@@ -234,7 +239,7 @@ class Customermodel extends CI_Model {
 			else if($res_like == 'N'){
 				$slike="Y";
 			}
-			$like_count = count($this->customermodel->commentlikedata($pid));
+			
 		$data1 = array('like_status' => $slike);
         $this->db->where($condition);
   		$this->db->update('bzz_comment_likes',$data1);	
@@ -243,7 +248,7 @@ class Customermodel extends CI_Model {
 		}
 		else{
 	    $this->db->insert('bzz_comment_likes',$data);
-			$data1 = array('like_status' => 'Y','like_count' => 0);
+			$data1 = array('like_status' => 'Y','like_count' =>$like_count);
 			echo json_encode($data1);
 		}
 		
@@ -291,6 +296,18 @@ class Customermodel extends CI_Model {
 		return $query->result();
 		
    }
+   public function currentuserlikedata($pid){
+	    $id = $this->session->userdata('logged_in')['account_id'];
+	    $condition = "like_on =" . "'" . $pid . "' AND liked_by='".$id."' AND like_status = 'Y'";
+		$this->db->select('*');
+		$this->db->from('bzz_likes');
+		$this->db->where($condition);
+		if($query = $this->db->get())
+				return $query->result();
+		else
+				return false;
+		
+   }
    public function commentlikedata($cid){
 	    $condition = "like_on =" . "'" . $cid . "' AND like_status = 'Y'";
 		$this->db->select('*');
@@ -301,8 +318,19 @@ class Customermodel extends CI_Model {
 		return $query->result();
 		
    }
+   public function currentusercommentlikedata($cid){
+	    $id = $this->session->userdata('logged_in')['account_id'];
+	    $condition = "like_on ='".$cid."' AND liked_by='".$id."'  AND like_status = 'Y'";
+		$this->db->select('*');
+		$this->db->from('bzz_comment_likes');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		//return $query->num_rows();
+		return $query->result();
+		
+   }
    public function cmplikedata($pid){
-	    $condition = "like_on =" . "'" . $pid . "' AND like_status = 'Y'";
+	    $condition = "like_on ='".$pid."' AND like_status = 'Y'";
 		$this->db->select('*');
 		$this->db->from('bzz_cmp_likes');
 		$this->db->where($condition);

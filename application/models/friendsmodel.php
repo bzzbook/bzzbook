@@ -36,7 +36,10 @@ class Friendsmodel extends CI_Model {
 				$this->db->order_by('user_imageinfo_id','desc');
 				$query = $this->db->get();
 				$result = $query->result_array();
+				if($result)
 				$frnd['image'] = $result[0]['user_img_thumb'];
+				else
+				$frnd['image'] =  'default_profile_pic.png';
 				$frnd['id'] = $friend['friend_id'];
 				$frnds[] = $frnd;
 			}
@@ -61,7 +64,7 @@ class Friendsmodel extends CI_Model {
 			$frnds = array();
 			foreach($friends as $friend)
 			{				
-			    $condition = "user_id =" . "'" . $friend['friend_id'] . "'";
+			    $condition = "user_id =" . "'" . $friend['user_id'] . "'";
 				$this->db->select('*');
 				$this->db->from('bzz_userinfo');
 				$this->db->where($condition);
@@ -85,7 +88,7 @@ class Friendsmodel extends CI_Model {
 				}
 				else
 					$frnd['image'] = 'default_profile_pic.png';
-				$frnd['id'] = $friend['friend_id'];
+				$frnd['id'] = $friend['user_id'];
 				$frnds[] = $frnd;
 				
 				if($checklimit==$limit)
@@ -106,20 +109,20 @@ class Friendsmodel extends CI_Model {
    public function confirmfriend($req_id)
 	{
 		$id = $this->session->userdata('logged_in')['account_id'];
-		 $condition = "user_id =" . "'" . $id . "'" . " AND " . "friend_id =" . "'" . $req_id .  "'"; 
+		 $condition = "user_id =" . "'" . $req_id . "'" . " AND " . "friend_id =" . "'" . $id .  "'"; 
 			$data = array(
                'request_status' => 'Y',
             );
 			$this->db->where($condition);
 			$this->db->update('bzz_userfriends', $data); 
 			
-			$frnddata = array(
-			   'user_id' => $req_id,
-			   'friend_id' => $id,
+			/*$frnddata = array(
+			   'user_id' => $id,
+			   'friend_id' => $req_id,
                'request_status' => 'Y',
             );
 			
-			$this->db->insert('bzz_userfriends', $frnddata);
+			$this->db->insert('bzz_userfriends', $frnddata);*/
 			
 			$pend_req = $this->getPendingRequests();
 			$list = "";
@@ -242,7 +245,7 @@ class Friendsmodel extends CI_Model {
 	{
 		
 		$id = $this->session->userdata('logged_in')['account_id'];
-		$frndcondition =  "user_id =" . "'" . $frnd_id . "' AND request_status!='Y' OR 'W' AND friend_id =" . "'" . $id . "'" ;
+		$frndcondition =  "user_id =" . "'" . $frnd_id . "' AND (request_status!='Y' OR request_status!='W') AND friend_id =" . "'" . $id . "'" ;
 		$this->db->select('*');
 		$this->db->from('bzz_userfriends');
 		$this->db->where($frndcondition);
@@ -263,8 +266,8 @@ class Friendsmodel extends CI_Model {
 			 $condition = "user_id =" . "'" . $frnd_id . "' AND friend_id =".$id;
 		
 			$data = array(
-				'user_id' => $frnd_id,
-				'friend_id' => $id,
+				'user_id' => $id,
+				'friend_id' => $frnd_id,
                'request_status' => 'W',
             );
 			$this->db->where($condition);
@@ -641,12 +644,12 @@ $searchblock .= "<figure class='myfriendspfpic'><img src='" . base_url() ."uploa
 				   }elseif( $myfrnd[0]['request_status'] == 'W'){
 			 $searchblock .= "<div class='dcBtn'><a href='javascript:void(0);'>Request Sent</a></div>";
 				   }else{
-			 $searchblock .= "<div class='dcBtn'><a id='addFrnd'
+			 $searchblock .= "<div class='dcBtn'><a id='addFrnd".$req[0]['user_id']."'
 			  href='javascript:void(0);' onclick='addSearchFrnd(" .$req[0]['user_id']. ");'>Add Friend</a></div>";
 				   }
 			  
 			 }else{
- $searchblock .= "<div class='dcBtn'><a id='addFrnd' href='javascript:void(0);' onclick='addSearchFrnd(" .$req[0]['user_id']. ");'>Add Friend</a></div>";
+ $searchblock .= "<div class='dcBtn'><a id='addFrnd".$req[0]['user_id']."' href='javascript:void(0);' onclick='addSearchFrnd(" .$req[0]['user_id']. ");'>Add Friend</a></div>";
 			 }
                $searchblock .= "</div>
 			</div>
@@ -753,7 +756,7 @@ else echo "No friends Found Based On your Search!..";
 public function user_frnds($frnd_id)
 {
 	$id = $this->session->userdata('logged_in')['account_id'];
-  	$condition =  "user_id =" . "'" . $frnd_id . "'" . " AND " . "friend_id =" . "'" . $id .  "'"; 
+  	$condition =  "(user_id ='" .$frnd_id. "' or friend_id ='".$frnd_id."') AND (user_id = '".$id."' or friend_id ='".$id."')"; 
 	$this->db->select('*');
 	$this->db->from('bzz_userfriends');
 	$this->db->where($condition);

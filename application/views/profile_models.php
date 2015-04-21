@@ -663,6 +663,5 @@
 
 <!------------------------- Event Modal End ------------------------------->
 <!------------countrys and states scripts ------------>
-<script language="javascript">print_country("con");</script><!--  //for groups   --> 
-<script language="javascript">print_country("contries");</script> <!-- //for companies-->
+
 <!------------countrys and states scripts ------------>

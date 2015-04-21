@@ -67,6 +67,8 @@ $(function () {
 <script src="<?php echo base_url(); ?>js/jquery.uploadfile.min.js"></script>
 <script src="<?php echo base_url(); ?>js/jquery.blImageCenter.js"></script> 
 <script src="<?php echo base_url(); ?>js/custom.js"></script> 
+<script language="javascript">print_country("con");</script><!--  //for groups   --> 
+<script language="javascript">print_country("contries");</script> <!-- //for companies-->
 <script>
 		$( document ).ready(function() {
 		$('.select').jqTransform({ imgPath: '' });
@@ -691,7 +693,7 @@ function addSearchFrnd(id)
         url: url,
         success: function(data)
         {   
-			$('#addFrnd').text('Request Sent');
+			$('#addFrnd'+id).text('Request Sent');
 		},
 		cache: false
 		});

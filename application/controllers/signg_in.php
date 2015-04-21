@@ -233,8 +233,7 @@ class signg_in extends CI_Controller {
 		   
 	   );
 	 $res=$this->customermodel->insertlinks($data);
-	 if($res){
-		 
+	 if($res){		 
 		 echo "success";
 	 }	   
    }

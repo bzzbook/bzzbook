@@ -303,18 +303,16 @@ public function get_mn_cmp_list()
 	//this fuction will return th data of frnds following companies
 	public function get_companies_to_follow()
 	{
+		
 	    $id = $this->session->userdata('logged_in')['account_id'];
-	    $condition = "user_id =" . "'" . $id . "' AND request_status='Y'";
+	    $condition = "(user_id ='".$id."' OR friend_id = '".$id."') AND request_status='Y'";
 		$this->db->select('*');
 		$this->db->from('bzz_userfriends');
 		$this->db->where($condition);
 		$query = $this->db->get();
 		$friends = $query->result_array();
-		
-
 		if(!empty($friends))
-	 {
-
+	    {
 			$jobs= array();
 			$elements = array();
 			foreach($friends as $friend)
@@ -322,7 +320,7 @@ public function get_mn_cmp_list()
 				// friends following companies
 				$id = $this->session->userdata('logged_in')['account_id'];
 			   //$condition = "user_id =" . "'" . $friend['friend_id'] ."'  AND follow_status='Y'" ;
-			    $condition = "user_id =" . "'" . $friend['friend_id']  ."'  AND follow_status='Y'" ;
+			    $condition = "(user_id ='".$friend['friend_id']."' OR user_id='".$friend['user_id']."')  AND follow_status='Y'" ;
 				$this->db->distinct();
 				$this->db->from('bzz_cmp_follow'); 
 				$this->db->where($condition);
@@ -344,7 +342,7 @@ public function get_mn_cmp_list()
 				foreach($friends as $friend)
 				{	
 				   //$condition = "user_id =" . "'" . $friend['friend_id'] ."'  AND follow_status='Y'" ;
-					$condition = "user_id =" . "'" . $friend['friend_id']  ."'" ;
+					$condition = "(user_id ='".$friend['friend_id']."' OR user_id='".$friend['user_id']."')" ;
 					$this->db->select('companyinfo_id');
 					$this->db->from('bzz_companyinfo'); 
 					$this->db->where($condition);
@@ -352,7 +350,7 @@ public function get_mn_cmp_list()
 					if($query->num_rows()>0)
 					{
 						$frnd_cmps = $query->result_array();							
-						$frnd_companies[] = $frnd_cmps[0]['companyinfo_id'];					
+						$elements[] = $frnd_cmps[0]['companyinfo_id'];					
 					}
 				
 				}
@@ -374,7 +372,7 @@ public function get_mn_cmp_list()
 					
 					foreach($userfollow as $userfollow)
 					{
-						$userfollowing[] = $userfollow['companyinfo_id'];
+						$elements[] = $userfollow['companyinfo_id'];
 					}
 				/*echo 'user following cmps';
 				print_r($userfollowing);*/
@@ -395,33 +393,32 @@ public function get_mn_cmp_list()
 				{
 					$cmp[] = $mycmp['companyinfo_id'];	
 				}
+				$elements = array_diff($elements,$cmp);
 		   /*echo 'user cmps';
 			print_r($cmp);*/
 			}
 			
-			$following_cmps = array_unique(array_merge($elements_uni,$userfollowing,$frnd_companies));
+			$following_cmps = array_unique($elements);
 				/*echo "all following companies";
 				print_r($following_cmps);*/
 			
-			$first = array_diff($following_cmps,$userfollowing);
+			//$first = array_diff($following_cmps,$userfollowing);
 			/*echo " first differ"; 
 				print_r($first);*/
 			
-			$second = array_diff($first,$cmp);
 		    //print_r($second);
-			
-				
-						if($second)
+						if($following_cmps)
 						{
 						  $this->db->select('*');
 						  $this->db->from('bzz_companyinfo');
-						  $this->db->where_in('companyinfo_id',$second);
+						  $this->db->where_in('companyinfo_id',$following_cmps);
 						 // $this->db->limit(2);
 						  $query = $this->db->get();
 						  if ($query->num_rows() > 0) {
 						   return $query->result_array();
 						  } 
 						}
+			
 		}
 		else 
 		{
@@ -499,6 +496,7 @@ public function get_mn_cmp_list()
 					
 					}
 	}
+	
 	}
 	public function get_cmp_by_id($id)
 	{
