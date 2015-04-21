@@ -9,7 +9,7 @@ class Friendsmodel extends CI_Model {
   public function getfriends()
   {
 	    $id = $this->session->userdata('logged_in')['account_id'];
-	    $condition = "user_id =" . "'" . $id . "' AND request_status='Y'";
+	    $condition = "(user_id ='".$id."' OR friend_id='".$id."') AND request_status='Y'";
 		$this->db->select('*');
 		$this->db->from('bzz_userfriends');
 		$this->db->where($condition);
@@ -19,7 +19,10 @@ class Friendsmodel extends CI_Model {
 			$frnds = array();
 			foreach($friends as $friend)
 			{
-			    $condition = "user_id =" . "'" . $friend['friend_id'] . "'";
+				if($friend['friend_id']==$id)
+			    $condition = "user_id =" . "'" . $friend['user_id'] . "'";
+				else
+				$condition = "user_id =" . "'" . $friend['friend_id'] . "'";
 				$this->db->select('*');
 				$this->db->from('bzz_userinfo');
 				$this->db->where($condition);
@@ -426,39 +429,24 @@ public function finding_friends()
 			if($required_ids)
 				{
 					$user_data = array();
-					$i = 0;
 					foreach($required_ids as $user_id)
 					{
-					 if($i > 3)
-					 break;
-					 
-					 $usrcondition = "user_id =" . "'" . $user_id . "'";
-					 $this->db->select('*');
-					 $this->db->from('bzz_user_images');
-					 $this->db->where($usrcondition);
-					 $query = $this->db->get();
-					 if($query->num_rows > 0)
-					 {
+					  //$condition =  "user_id =" . "'" . $user_id . "'";
 					  $this->db->select('*');
+					  $this->db->from('bzz_users');
+					  $this->db->limit(2);
 					  
-					  $this->db->from('bzz_userinfo');
-					  $this->db->join('bzz_user_images','bzz_userinfo.user_id=bzz_user_images.user_id AND bzz_userinfo.user_id='.$user_id);
+					  $this->db->join('bzz_user_images','bzz_users.user_id=bzz_user_images.user_id AND bzz_users.user_id='.$user_id);
+					  $this->db->join('bzz_userinfo','bzz_users.user_id=bzz_userinfo.user_id');
 					  $this->db->order_by('bzz_user_images.user_imageinfo_id','desc'); 
-					 
+					   //$this->db->order_by('bzz_users.user_id','desc');
+					  //$this->db->order_by('user_id');
+					 // $this->db->where($condition);
 					  $query = $this->db->get();
-				      $userdata =  $query->result_array();
-					 }else{
-					  $this->db->select('*');
-					  
-					  $this->db->from('bzz_userinfo');
-					  $this->db->where($usrcondition);
-					 
-					  $query = $this->db->get(); 
+					   if ($query->num_rows() > 0) {
 				       $userdata =  $query->result_array();
-					 }
-					  
 					   $user_data[] = $userdata;
-					   $i++;
+				 	   } 
 					}
 				return $user_data;
 				
@@ -557,29 +545,20 @@ $all_ids = array_merge($user_id,$n2);
 					$userdata = array();
 					foreach($all_ids as $each_id)
 					{
-					$usrcondition = "user_id =" . "'" . $each_id . "'";
-					 $this->db->select('*');
-					 $this->db->from('bzz_user_images');
-					 $this->db->where($usrcondition);
-					 $query = $this->db->get();
-					 if($query->num_rows > 0)
-					 {
-						 $this->db->select('*');
+					  //$condition =  "user_id =" . "'" . $user_id . "'";
+					  $this->db->select('*');
 					  $this->db->from('bzz_users');
 					  $this->db->join('bzz_user_images','bzz_users.user_id=bzz_user_images.user_id AND bzz_users.user_id='.$each_id);
 					  $this->db->join('bzz_userinfo','bzz_users.user_id=bzz_userinfo.user_id');
 					  $this->db->order_by('bzz_user_images.user_imageinfo_id','desc');
+					 // $this->db->where($condition);
 					  $query = $this->db->get();
-					  $user_data =  $query->result_array();
-				}else{
-					  $this->db->select('*');  
-					  $this->db->from('bzz_users');
-					  $this->db->join('bzz_userinfo','bzz_users.user_id=bzz_userinfo.user_id AND bzz_users.user_id='.$each_id);
-					  $query = $this->db->get(); 
-				      $userdata =  $query->result_array();
-					 }
+					   if ($query->num_rows() > 0) 
+					   {
+				       $user_data =  $query->result_array();
 					   $userdata[] = $user_data;
 				 		 } 
+					}
 			return $userdata;
 				
 				}
