@@ -49,6 +49,11 @@ public function addFriendFromSearch($id)
 {
 	$data['result'] = $this->friendsmodel->addSearchFriend_Request($id);	
 }
+
+public function addFriendFromFollowers($id)
+{
+	$data['result'] = $this->friendsmodel->addSearchFriend_Request($id);	
+}
 //function for displaying all users by randomly to send friend requests
 
 public function find_frnds()

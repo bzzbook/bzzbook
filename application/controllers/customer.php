@@ -256,7 +256,7 @@ public function search_company()
 {
 	//$data['industry'] = $this->lookup->get_lookup_industry();
 	$data['content']='companies_search';
-	$this->load->view('template-view',$data);
+	$this->load->view('full_content_view',$data);
 	//$this->load->view('companies_search');
 	
 }
@@ -275,7 +275,7 @@ public function search_event()
 {
 	//$data['industry'] = $this->lookup->get_lookup_industry();
 	$data['content']='events_search';
-	$this->load->view('template-view',$data);
+	$this->load->view('full_content_view',$data);
 	//$this->load->view('events_search');
 	
 }

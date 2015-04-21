@@ -615,7 +615,7 @@
           
          <!-- <input type="file" name="userfile" id="fileupload"/> -->
           </span> </div>
-        <form class="latest_pop" action="<?php echo base_url(); ?>events/create_event" method="post">
+        <form class="latest_pop" action="<?php echo base_url(); ?>events/create_event" method="post" enctype="multipart/form-data">
           <div class="form-group">
             <label for="exampleInputEmail1">Name</label>
             <input type="text" class="form-control" id="" placeholder="ex: Birthday Party" name="event_name">
@@ -626,7 +626,7 @@
           </div>
           <div class="form-group">
             <label for="exampleInputEmail1">Where</label>
-            <input type="text" class="form-control" id="" placeholder="Add A Place?" name="event_description">
+            <input type="text" class="form-control" id="" placeholder="Add A Place?" name="event_location">
           </div>
           <label for="exampleInputEmail1">When</label>
           <div class='col-md-8 col-sm-8 input-group date' id='datetimepicker11'>
@@ -634,11 +634,12 @@
             <span class="input-group-addon"> <span class="glyphicon glyphicon-calendar"> </span> </span>
             <div class="col-md-8 col-sm-8">
               <input type="text" class="form-control" id="" placeholder="Add A Time?" name="event_time">
+              <input type="hidden"  name="cmp_id" value="<?php echo $this->uri->segment(3,0); ?>" />
             </div>
           </div>
           <label>Photo</label>
           <div class="clearfix"></div>
-          <input type="file" name="user_file" id="user_file" />
+          <input type="file" name="userfile" id="fileupload"/>
           <div class="clearfix"></div>
           <label>Privacy</label>
           <div class="clearfix"></div>

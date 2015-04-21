@@ -693,7 +693,22 @@ function addSearchFrnd(id)
         url: url,
         success: function(data)
         {   
-			$('#addFrnd'+id).text('Request Sent');
+			$('#addFrnd').text('Request Sent');
+		},
+		cache: false
+		});
+		
+}
+
+function addFollowerFrnd(id)
+{
+		url="<?php echo base_url(); ?>friends/addFriendFromFollowers/"+id;
+		$.ajax({
+        type: "POST",
+        url: url,
+        success: function(data)
+        {   
+			$('#addFrnd').text('Request Sent');
 		},
 		cache: false
 		});

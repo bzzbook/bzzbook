@@ -8,7 +8,9 @@
         <div class="events" >
           <section class="events col-lg-12 col-md-12 col-sm-5 col-xs-12 coloumn2 aboutme">
             <ul>
-            <?php if(!empty($event_info)) { foreach($event_info as $event) { ?>
+            <?php 
+			
+			if(!empty($event_info)) { foreach($event_info as $event) { ?>
               <li> <img src="<?php echo base_url(); ?>uploads/<?php if(!empty($event['event_image'])) echo $event['event_image']; else echo "event1.jpg"; ?>" alt="">
                 <h3><span><?php echo $event['event_name']; ?></span></h3>
                 <div class="dates"><span class="glyphicon glyphicon-calendar"> </span><?php $unixTimestamp = strtotime($event['event_date']);

@@ -309,10 +309,17 @@ public function get_my_followers($id)
 	$data['cmp_info'] =  $this->companies->get_cmp_by_id($id);
 	//$data['company'] = $this->companies->get_cmp_by_id($id);
 	$data['content']='cmp_followers';
-	$this->load->view('cmp-template-view',$data);	
+	$this->load->view('cmp-fulltemplate-view',$data);	
 }
 
-
+public function search_companies()
+{
+	 $searchcompanies['industry'] = $this->input->post('industry');
+	 $searchcompanies['usa_states'] = $this->input->post('usa_states');
+	 $data['search_result_companies'] = $this->companies->search_category_companies($searchcompanies);
+	 $data['content']='companies_search';
+	 $this->load->view('full_content_view',$data);
+}
 }
 
 

@@ -655,19 +655,52 @@ public function get_followers($id)
 	 $follower_details = array();
 	 foreach($cmp_followers as $follower)
 	 {
-			
-			$this->db->select('*');
-			$this->db->from('bzz_userinfo');
-			$this->db->join('bzz_user_images','bzz_userinfo.user_id=bzz_user_images.user_id AND bzz_userinfo.user_id='.$follower['user_id']);
-			$this->db->order_by('bzz_user_images.user_imageinfo_id','desc');
-			$query = $this->db->get();
-			$cmp_foll = $query->result_array();
-			$follower_details[] = $cmp_foll;
+		 
+		 $followercondition = "user_id ="."'".$follower['user_id']."'";
+		 $this->db->select('*');
+		 $this->db->from('bzz_user_images');
+		 $this->db->where($followercondition);
+		 $query = $this->db->get();
+		 if($query->num_rows > 0)
+		 {
+				$this->db->select('*');
+				$this->db->from('bzz_users');
+			    $this->db->join('bzz_user_images','bzz_users.user_id=bzz_user_images.user_id AND bzz_users.user_id='.$follower['user_id']);
+			    $this->db->join('bzz_userinfo','bzz_users.user_id=bzz_userinfo.user_id');
+			    $this->db->order_by('bzz_user_images.user_imageinfo_id','desc');
+			 	$query = $this->db->get();
+				$cmp_foll = $query->result_array();
+				
+		 }else{
+			  $this->db->select('*');
+			  $this->db->limit(2);
+			  $this->db->from('bzz_users');
+			  $this->db->join('bzz_userinfo','bzz_users.user_id=bzz_userinfo.user_id AND bzz_users.user_id='.$follower['user_id']);
+			 // $this->db->where($followercondition);
+			  $query = $this->db->get(); 
+			  $cmp_foll =  $query->result_array();
+		 }
+		 $follower_details[] = $cmp_foll;
 	 }
 	
 	return $follower_details;
 	}else
 echo "There are no Followers following This Company!...";
+}
+
+public function search_category_companies($searchcompanies)
+{		
+$condition = "cmp_industry =" . "'" . $searchcompanies['industry'] . "'" . " AND " . "company_state =" . "'" .  $searchcompanies['usa_states'].  "'";
+		$this->db->select('*');
+		$this->db->from('bzz_companyinfo');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		$companies = $query->result_array();
+		if(!empty($companies))
+		{
+		return $companies;
+		}else
+		return false;
 }
 
 }

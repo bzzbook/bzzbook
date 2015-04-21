@@ -12,7 +12,7 @@ class EventModel extends CI_Model {
 	{
 		
 		if($this->db->insert('bzz_events',$event_info))
-			return $this->db->insert_id();
+		return true;
 		else
 			return false;
 	} 
@@ -20,7 +20,7 @@ class EventModel extends CI_Model {
 	public function get_events_by_cmpid($cmp_id)
 	{
         $id = $this->session->userdata('logged_in')['account_id'];
-		$condition =  "event_cr_user =" . "'" . $id . "'" . " AND " . "event_cr_cmp = ". "'" .$cmp_id."'";
+		$condition = "event_cr_cmp = ". "'" .$cmp_id."'";
 		$this->db->select('*');
 		$this->db->from('bzz_events');
 		$this->db->where($condition);

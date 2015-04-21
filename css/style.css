@@ -259,7 +259,7 @@ footer.home h3 span{ display:block; font-size:34px; padding-top:10px; }
 footer.home h3 em{ color:#fdc70f; font-style:normal;}
 
 
-.pfSettings h2{ background:url(../images/sideNav.png) no-repeat 0 -149px; padding:0 0 0 35px; height:42px; line-height:45px; font-size:18px ;}
+.pfSettings h2{ background:url(../images/sideNav.png) no-repeat 0 -151px; padding:0 0 0 35px; height:42px; line-height:45px; font-size:18px ;}
 .pfSettings .nav-tabs{ background:#fbc436; border-bottom:3px solid #1c1c1c; margin-bottom:15px;}
 .pfSettings .nav-tabs li a{ font-size:14px; color:#fff; border-radius:0; border:none;}
 .pfSettings .nav-tabs > li.active > a, .pfSettings .nav-tabs > li.active > a:hover, .pfSettings .nav-tabs > li.active > a:focus{ background:#000; border:none; color:#fff;}
@@ -892,3 +892,32 @@ width: 73.7%; !important;}
 .addcompany{ float:left; padding:20px 0px; }
 .upload_cv label{   margin-top: -24px; padding: 5px;}
 .upload_cv .input-group-btn:last-child > .btn, .input-group-btn:last-child > .btn-group{ background:#e2e2e2;}
+
+<!----------follow open--------->
+.about-user-details .following{ border:2px solid #000 !important;  margin-bottom: 28px !important;}
+.about-user-details .fallow{ border:2px solid #000 !important;}
+.about-user-details .fallow_left{ float:left;}
+.about-user-details .fallow_right{ float:left; padding-left: 15px;}
+.about-user-details .fallow_right h5{ font-size:15px; font-weight:bold; color:#1b1a1a; padding-bottom: 6px;}
+.about-user-details .fallow_right h6{ font-size:16px; font-weight:300; color:#2f2f2f;}
+.about-user-details .fallow_right p{ font-size:12px; font-weight:normal; color:#404040; padding-bottom: 7px;}
+
+.about-user-details .fallow_right .btn-primary{ background:#609b34; float:right; /* margin-top:18px;*/}
+.about-user-details .fallow_right .btn-primary{ color:#fff !important; border-color: #fff;}
+
+.following.col-md-4 {
+   border: 1px solid #e6e6e6;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    padding: 8px;
+    width: 32%;
+}
+.about-user-details .cmpsearch{ height:58px; line-height:58px; padding:0 15px; background:#fbc436; border-bottom:1px solid #d3d6db; font-size:24px; color:#fff; margin-bottom:0px;}
+.about-user-details .cmpsearch span.glyphicon{ color:#606060 !important;}
+.about-user-details .cmpsearch form{line-height: 1.42857; padding: 12px 12px;}
+.about-user-details .cmpsearch form .btn{margin-bottom:7px;}
+
+.about-user-details .eventsearch{ height:58px; line-height:58px; padding:0 15px; background:#fbc436; border-bottom:1px solid #d3d6db; font-size:24px; color:#fff; margin-bottom:0px;}
+.about-user-details .eventsearch span.glyphicon{ color:#606060 !important;}
+.about-user-details .eventsearch form{line-height: 1.42857; padding: 12px 12px;}
+.about-user-details .eventsearch form .btn{margin-bottom:7px;}
