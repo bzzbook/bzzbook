@@ -314,7 +314,7 @@ public function search_member()
 		    $config['image_library'] = 'gd2';
 			$config['source_image'] = $path;
 			$config['create_thumb'] = TRUE;
-			$config['maintain_ratio'] = TRUE;
+			$config['maintain_ratio'] = FALSE;
 			//$config['upload_path'] = './uploads/thumbs/';
 			//$config['new_image'] = './uploads/thumbs/';
 			$config['thumb_marker'] = '_thumb';
@@ -330,7 +330,7 @@ public function search_member()
 			$path = $data['full_path'];
 			$config_fav['source_image'] = $path;
 		    $config_fav['image_library'] = 'gd2';
-			$config_fav['maintain_ratio'] = TRUE;
+			$config_fav['maintain_ratio'] = FALSE;
 			$config_fav['create_thumb'] = TRUE;
 		//	$config_fav['upload_path'] = './uploads/favorite/';
 			//$config_fav['new_image'] = './uploads/favorite/';
