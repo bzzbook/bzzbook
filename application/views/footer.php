@@ -692,7 +692,7 @@ function addSearchFrnd(id)
         url: url,
         success: function(data)
         {   
-			$('#addFrnd').text('Request Sent');
+			$('#addFrnd'+id ).text('Request Sent');
 		},
 		cache: false
 		});

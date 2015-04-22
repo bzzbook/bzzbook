@@ -250,7 +250,7 @@ class Friendsmodel extends CI_Model {
 	{
 		
 		$id = $this->session->userdata('logged_in')['account_id'];
-		$frndcondition =  "user_id =" . "'" . $frnd_id . "' AND (request_status!='Y' OR request_status!='W') AND friend_id =" . "'" . $id . "'" ;
+		$frndcondition = $frndcondition = "((user_id ='" .$frnd_id. "' or friend_id ='".$frnd_id."') AND (user_id = '".$id."' or friend_id ='".$id."')) AND (request_status!='Y' OR request_status!='W')"; 
 		$this->db->select('*');
 		$this->db->from('bzz_userfriends');
 		$this->db->where($frndcondition);
@@ -259,7 +259,7 @@ class Friendsmodel extends CI_Model {
 		if($data)
 		{
 	
-	    $condition = "user_id =" . "'" . $frnd_id . "' AND friend_id =".$id;
+	    $condition = "(user_id ='" .$frnd_id. "' or friend_id ='".$frnd_id."') AND (user_id = '".$id."' or friend_id ='".$id."')"; 
 		
 			$data = array(
                'request_status' => 'W',
@@ -268,7 +268,7 @@ class Friendsmodel extends CI_Model {
 			$this->db->update('bzz_userfriends', $data); 
 		}
 		else{
-			 $condition = "user_id =" . "'" . $frnd_id . "' AND friend_id =".$id;
+			 $condition ="(user_id ='" .$frnd_id. "' or friend_id ='".$frnd_id."') AND (user_id = '".$id."' or friend_id ='".$id."')"; 
 		
 			$data = array(
 				'user_id' => $id,
@@ -464,107 +464,132 @@ public function related_friends()
 {
 	$id = $this->session->userdata('logged_in')['account_id'];
 	
-	 // getting frnds of frnds
-	 
-	$condition = "user_id =" . "'" . $id . "' AND request_status='Y'";
-	$this->db->select('friend_id');
+	 // getting frnds ids
+	$condition =  "(user_id = '".$id."' or friend_id ='".$id."') AND request_status='Y'"; 
+	//$condition = "user_id =" . "'" . $id . "' AND request_status='Y'";
+	$this->db->select('friend_id,user_id');
 	$this->db->from('bzz_userfriends');
 	$this->db->where($condition);
 	$query = $this->db->get();
 	$friends = $query->result_array();
-	//print_r($friends);
-	
-	$frnd_ids = array();
+	$elements = array();
+	// print_r($friends);
 	 foreach($friends as $frnds)
 	 {
-		 $frnd_ids[] = $frnds['friend_id'];
+	    $frnd_frnds = $this->user_frnds($frnds['friend_id']);
+	 		foreach($frnd_frnds as $fr)
+			{
+				$elements[] = $fr['friend_id'];
+			}
+	    $elements[] = $frnds['user_id'];
 	 }
-	 
-	//print_r($frnd_ids);
-	
-	$n1 = implode(",",$frnd_ids);
-	//print_r($n1); 
-	
-	//exit;
-	$ids = array();
-	foreach($friends as $friend)
+	 //print_r($elements);
+//	 exit;
+//	
+	//my company followers
+	$companies = array();
+	$mycmpcondition ="user_id ="."'".$id."'";
+	$this->db->select('companyinfo_id');
+	$this->db->from('bzz_companyinfo');
+	$this->db->where($mycmpcondition);
+	$query = $this->db->get();
+	$mycmps = $query->result_array();
+	foreach($mycmps as $cmp)
 	{
-
-$condition = "user_id =" . "'" . $friend['friend_id'] . "' AND request_status='Y' AND friend_id !=" . "'" . $id . "' AND friend_id NOT IN(".$n1.")" ;
-		$this->db->select('friend_id');
-		$this->db->from('bzz_userfriends');
-		$this->db->where($condition);
-		$query = $this->db->get();
-		$frnds = $query->result_array();
-		if(!empty($frnds))
-		{
-		$ids[] = $frnds;
-		}
-		return false;
-		}
-$n2 = array();
-foreach($ids as $idz)
-{
-	$n2[] = $idz[0]['friend_id'];
-}
-//print_r($n2);
-
-//followers ids
-
-    $condition = "user_id =" . "'" . $id . "' AND follow_status='Y'";
+		$companies[] = $cmp['companyinfo_id'];
+	}
+	$cmpfollowcondition ="user_id ="."'".$id."'AND follow_status='Y'";
 	$this->db->select('companyinfo_id');
 	$this->db->from('bzz_cmp_follow');
-	$this->db->where($condition);
+	$this->db->where($cmpfollowcondition);
 	$query = $this->db->get();
-	$cmp_followers = $query->result_array();
-	if($n1)
+	$all_follow_cmps = $query->result_array();
+	foreach($all_follow_cmps as $follow_cmp)
 	{
-	foreach($cmp_followers as $follower)
-	{
-		$condition =  "companyinfo_id =" . "'" . $follower['companyinfo_id'] . "' AND follow_status='Y' AND user_id !=" . "'" . $id . "' AND user_id NOT IN(".$n1.")" ;
-		$this->db->select('user_id');
-		$this->db->from('bzz_cmp_follow');
-		$this->db->where($condition);
-		$query = $this->db->get();
-		$users = $query->result_array();
+		$companies[] = $follow_cmp['companyinfo_id'];
 	}
-	}else{
-		return false;
-	}
-	 $user_id = array();
-	 foreach($users as $user)
-	 {
-		 $user_id[] = $user['user_id'];
-	 }
-	 
-	// print_r($user_id);
-	 
-$all_ids = array_merge($user_id,$n2);
-// print_r($all_ids); 
 
+
+$this->db->select('user_id');
+$this->db->from('bzz_cmp_follow');
+$this->db->where_in('companyinfo_id',$companies);
+$query = $this->db->get();
+$cmpfollowers = $query->result_array();
+
+foreach($cmpfollowers as $users)
+{
+	$elements[] = $users['user_id'];
+}
+
+$usercondition ="user_id ="."'".$id."'";
+//location based search for users
+
+$this->db->where($usercondition);
+$query = $this->db->get('bzz_userinfo');
+$user_details = $query->result_array();
+
+/*print_r($user_details);
+echo $user_details[0]['user_id'];
+exit;*/
+
+
+$userslikecondition = "user_industry like '%".$user_details[0]['user_industry']."%' or user_cmpname like '%".$user_details[0]['user_cmpname']."%' or profession like '%".$user_details[0]['profession']."%' or location like '%".$user_details[0]['location']."%' or schooling like'%".$user_details[0]['schooling']."%' or hometown like'%".$user_details[0]['hometown']."%' or interests like'%".$user_details[0]['interests']."%'";
+$this->db->select('user_id');
+$this->db->from('bzz_userinfo');
+$this->db->where($userslikecondition);
+$query = $this->db->get();
+$usr_similar = $query->result_array();
+foreach($usr_similar as $user)
+{
+	$elements[] = $user['user_id'];
+}
+
+if(!empty($all_ids))
+{
+	$all_ids = array_unique($elements);
+
+$key = array_search($id,$all_ids);
+if($key!==false){
+  unset($all_ids[$key]);
+}
 	if($all_ids)
 				{
 					$userdata = array();
 					foreach($all_ids as $each_id)
 					{
-					  //$condition =  "user_id =" . "'" . $user_id . "'";
-					  $this->db->select('*');
-					  $this->db->from('bzz_users');
-					  $this->db->join('bzz_user_images','bzz_users.user_id=bzz_user_images.user_id AND bzz_users.user_id='.$each_id);
-					  $this->db->join('bzz_userinfo','bzz_users.user_id=bzz_userinfo.user_id');
-					  $this->db->order_by('bzz_user_images.user_imageinfo_id','desc');
-					 // $this->db->where($condition);
-					  $query = $this->db->get();
-					   if ($query->num_rows() > 0) 
-					   {
-				       $user_data =  $query->result_array();
-					   $userdata[] = $user_data;
-				 		 } 
+										
+						 
+						 $followercondition = "user_id ="."'".$each_id."'";
+						 $this->db->select('*');
+						 $this->db->from('bzz_user_images');
+						 $this->db->where($followercondition);
+						 $query = $this->db->get();
+						 if($query->num_rows > 0)
+						 {
+								$this->db->select('*');
+								$this->db->from('bzz_users');
+								$this->db->join('bzz_user_images','bzz_users.user_id=bzz_user_images.user_id AND bzz_users.user_id='.$each_id);
+								$this->db->join('bzz_userinfo','bzz_users.user_id=bzz_userinfo.user_id');
+								$this->db->order_by('bzz_user_images.user_imageinfo_id','desc');
+								$query = $this->db->get();
+								 $user_data =  $query->result_array();
+								
+						 }else{
+							  $this->db->select('*');
+							  $this->db->limit(2);
+							  $this->db->from('bzz_users');
+							  $this->db->join('bzz_userinfo','bzz_users.user_id=bzz_userinfo.user_id AND bzz_users.user_id='.$each_id);
+							 // $this->db->where($followercondition);
+							  $query = $this->db->get(); 
+							   $user_data =  $query->result_array();
+						 }
+						  $userdata[] = $user_data;
+			
 					}
 			return $userdata;
 				
 				}
-
+}
 return false;
 }
 	
