@@ -1,9 +1,7 @@
     <section class="events col-lg-9 col-md-9 nopad">
       <section class="about-user-details">
         <h4><span aria-hidden="true" class="glyphicon glyphicon-calendar"></span> Events
-          <div class="right_event">
-            <div class="btn2 btn-black">Add Event</div>
-          </div>
+          
         </h4>
         <div class="events" >
           <section class="events col-lg-12 col-md-12 col-sm-5 col-xs-12 coloumn2 aboutme">
@@ -14,7 +12,7 @@
                 <div class="dates"><span class="glyphicon glyphicon-calendar"> </span><?php $unixTimestamp = strtotime($event_info[0]['event_date']);
 				 echo date('d',$unixTimestamp).", ".date('F',$unixTimestamp).", ".date('Y',$unixTimestamp); ?></div>
                  <div class="dates"><span class="glyphicon glyphicon-map-marker"> </span><?php echo $event_info[0]['event_location']; ?></div>
-                <div class="dates"><span class="glyphicon glyphicon-heart"> </span>Hits: 09 </div>
+                <div class="dates"><span class="glyphicon glyphicon-heart"> </span>Hits: <?php echo $event_info[0]['event_hits']; ?> </div>
                 
                 <div class="clearfix"></div>
                 <p><?php echo $event_info[0]['event_description']; ?></p>
@@ -60,10 +58,11 @@
               </ul>
                   <div class="newcomments">
               <h3><img src="<?php echo base_url(); ?>images/single_comment.png" alt="">Leave a Reply</h3>
-      <form class="coment" id="event_discussion" method="post" action="<?php echo base_url(); ?>events/write_discussion/<?php echo $event_info[0]['event_id']; ?>/<?php echo $event_info[0]['event_cr_cmp']; ?>">
-              <textarea placeholder="Comment" rows="4" class="form-control" name="discussion_content"></textarea>
+      <form class="coment" id="event_discussion" name="event_discussion" method="post" action="<?php echo base_url(); ?>events/write_discussion/<?php echo $event_info[0]['event_id']; ?>/<?php echo $event_info[0]['event_cr_cmp']; ?>">
+              <textarea placeholder="Comment" rows="4" class="form-control" name="discussion_content"  data-rule-required="true" data-msg-required="Please Enter Your Comment!..."></textarea>
               <!--<input type="hidden" name="cmp_id" value="<?php // echo $this->uri->segment(4,0);?>" />-->
                <div class="postes">
+             
          		 <button type="submit" class="btn2 btn-yellow">Post Comment</button>
               </div>
               </form>

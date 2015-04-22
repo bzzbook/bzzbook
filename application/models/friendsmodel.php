@@ -771,5 +771,44 @@ public function user_frnds($frnd_id)
 	return $query->result_array();
 }return false;
 }
+
+	public function addFollowFriend_Request($frnd_id)
+	{
+		
+		$id = $this->session->userdata('logged_in')['account_id'];
+	$frndcondition = "((user_id ='" .$frnd_id. "' or friend_id ='".$frnd_id."') AND (user_id = '".$id."' or friend_id ='".$id."')) AND (request_status!='Y' OR request_status!='W')"; 
+		
+		//$frndcondition =  "user_id =" . "'" . $frnd_id . "' AND (request_status!='Y' OR request_status!='W') AND friend_id =" . "'" . $id . "'" ;
+		$this->db->select('*');
+		$this->db->from('bzz_userfriends');
+		$this->db->where($frndcondition);
+		$query = $this->db->get();
+		$data = $query->result_array();
+		if($data)
+		{
+	
+	    $condition = "(user_id ='" .$frnd_id. "' or friend_id ='".$frnd_id."') AND (user_id = '".$id."' or friend_id ='".$id."')"; 
+		
+			$data = array(
+               'request_status' => 'W',
+            );
+			$this->db->where($condition);
+			$this->db->update('bzz_userfriends', $data); 
+		}
+		else{
+			 $condition = "(user_id ='" .$frnd_id. "' or friend_id ='".$frnd_id."') AND (user_id = '".$id."' or friend_id ='".$id."')"; 
+		
+			$data = array(
+				'user_id' => $id,
+				'friend_id' => $frnd_id,
+               'request_status' => 'W',
+            );
+			$this->db->where($condition);
+			$this->db->insert('bzz_userfriends', $data); 
+		
+		}
+	
+	}
+	
 }
 ?>

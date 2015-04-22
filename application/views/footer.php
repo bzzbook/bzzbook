@@ -74,6 +74,7 @@ $(function () {
    $('#email_invite').validate();
    $('#upload_file').validate();
    $('#search_job').validate(); 
+   $('#event_discussion').validate();
    
    
 </script>
@@ -1581,7 +1582,6 @@ $('#search_frnds').keyup(function(){
 	};
 
 });
-
 
 /*$('#event_form').submit( function( event)
 	{
