@@ -127,10 +127,10 @@ public function applyjob($data)
 	   
 	  public function company_follow($follow_as,$cmpinfo_id)
 	   {
-		   
+		  
 		    $id = $this->session->userdata('logged_in')['account_id'];
 		
-		   /* $condition =  "user_id =" . "'" . $id . "'" . " AND " . "companyinfo_id = ". "'" .$cmpinfo_id."'";
+		    /* $condition =  "user_id =" . "'" . $id . "'" . " AND " . "companyinfo_id = ". "'" .$cmpinfo_id."'";
 		    $this->db->where($condition);
 			$query = $this->db->get('bzz_cmp_follow');
 			$result = $query->result_array();
@@ -174,7 +174,7 @@ public function applyjob($data)
 			   $this->db->insert('bzz_cmp_follow',$data);
 			   
 			   //dynamic list display
-			 /*
+			 
 			   	$cmp_follow = $this->get_companies_to_follow();
 			$list = "";
 		    if(!empty($cmp_follow)) { foreach($cmp_follow as $follow){
@@ -188,7 +188,7 @@ public function applyjob($data)
              } }else $list = "No Companies Available";
 			 
 			 echo $list;
-		   */
+		   
 			   
 			// }
 			  
@@ -372,8 +372,9 @@ public function get_mn_cmp_list()
 					
 					foreach($userfollow as $userfollow)
 					{
-						$elements[] = $userfollow['companyinfo_id'];
+						$userfollowing[] = $userfollow['companyinfo_id'];
 					}
+					$elements = array_diff($elements,$userfollowing);
 				/*echo 'user following cmps';
 				print_r($userfollowing);*/
 				
@@ -436,9 +437,7 @@ public function get_mn_cmp_list()
 		
 			/*echo "other companies";
 			print_r($oth_cmps);
-			*/				
-			   
-				
+			*/	
 				// user companies
 			$id = $this->session->userdata('logged_in')['account_id'];
 			$mycompanycondition = "user_id =" . "'" . $id . "'" ;

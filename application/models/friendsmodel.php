@@ -30,8 +30,7 @@ class Friendsmodel extends CI_Model {
 				$frnd = array();
 				if ($query->num_rows() == 1) {
 					$result = $query->result_array();	
-					$frnd['name'] = $result[0]['user_firstname'].' '.$result[0]['user_lastname'];
-					
+					$frnd['name'] = $result[0]['user_firstname'].' '.$result[0]['user_lastname'];					
 				}
 				$this->db->select('*');
 				$this->db->from('bzz_user_images');
@@ -43,6 +42,9 @@ class Friendsmodel extends CI_Model {
 				$frnd['image'] = $result[0]['user_img_thumb'];
 				else
 				$frnd['image'] =  'default_profile_pic.png';
+				if($friend['friend_id']==$id)
+				$frnd['id'] = $friend['user_id'];
+				else
 				$frnd['id'] = $friend['friend_id'];
 				$frnds[] = $frnd;
 			}

@@ -67,8 +67,6 @@ $(function () {
 <script src="<?php echo base_url(); ?>js/jquery.uploadfile.min.js"></script>
 <script src="<?php echo base_url(); ?>js/jquery.blImageCenter.js"></script> 
 <script src="<?php echo base_url(); ?>js/custom.js"></script> 
-<script language="javascript">print_country("con");</script><!--  //for groups   --> 
-<script language="javascript">print_country("contries");</script> <!-- //for companies-->
 <script>
 		$( document ).ready(function() {
 		$('.select').jqTransform({ imgPath: '' });
@@ -784,8 +782,6 @@ function cmpFollow(comp_id)
 	{
 	
 	var option = $('#follow_as').val();
-	alert(option);
-	alert(comp_id);
 	url="<?php echo base_url(); ?>company/cmp_follow/"+option+"/"+comp_id;
 		$.ajax({
         type: "POST",
@@ -812,7 +808,6 @@ function saveGroup()
 		 	 list_of_members += $(this).val()+",";
         });
 		list_of_members = list_of_members.substring(0, list_of_members.length - 1);
-		
 		url="<?php echo base_url(); ?>profile/creategroup/";
 		$.ajax({
         type: "POST",
@@ -1627,5 +1622,8 @@ color:red;
 
 </style><?php */?>
 <?php $this->load->view('profile_models'); ?>
+<script language="javascript">print_country("con");</script><!--  //for groups   --> 
+<script language="javascript">print_country("contries");</script> <!-- //for companies-->
+
 </body>
 </html>
