@@ -15,9 +15,12 @@ class Events extends CI_Controller {
 	{
 	$data['cmp_info'] =  $this->companies->get_cmp_by_id($id);
 	$data['event_info'] = $this->eventmodel->get_events_by_cmpid($id);
-    $data['content']='cmp_events';
+    $data['check_button'] =  $this->eventmodel->checkbutton($id);
+	$data['content']='cmp_events';
 	$this->load->view('cmp-fulltemplate-view',$data);
+	
 	}
+
 	public function create_event()
 	{
 		
@@ -94,5 +97,6 @@ public function write_discussion($event_id,$cmp_id)
 	   $data['cmp_info'] =  $this->companies->get_cmp_by_id($cmp_id);
 	   redirect('events/get_event_byid/'.$event_id."/".$cmp_id);
 }
+
 }
 ?>

@@ -912,12 +912,16 @@ width: 73.7%; !important;}
     padding: 8px;
     width: 32%;
 }
-.about-user-details .cmpsearch{ height:58px; line-height:58px; padding:0 15px; background:#fbc436; border-bottom:1px solid #d3d6db; font-size:24px; color:#fff; margin-bottom:0px;}
+.about-user-details .cmpsearch{ height:58px; line-height:58px; padding:0 15px; background:#fbc436; border-bottom:1px solid #d3d6db; font-size:24px; color:#fff; margin-bottom:20px;}
 .about-user-details .cmpsearch span.glyphicon{ color:#606060 !important;}
 .about-user-details .cmpsearch form{line-height: 1.42857; padding: 12px 12px;}
 .about-user-details .cmpsearch form .btn{margin-bottom:7px;}
 
-.about-user-details .eventsearch{ height:58px; line-height:58px; padding:0 15px; background:#fbc436; border-bottom:1px solid #d3d6db; font-size:24px; color:#fff; margin-bottom:0px;}
+.about-user-details .eventsearch{ height:58px; line-height:58px; padding:0 15px; background:#fbc436; border-bottom:1px solid #d3d6db; font-size:24px; color:#fff; margin-bottom:20px;}
 .about-user-details .eventsearch span.glyphicon{ color:#606060 !important;}
 .about-user-details .eventsearch form{line-height: 1.42857; padding: 12px 12px;}
 .about-user-details .eventsearch form .btn{margin-bottom:7px;}
+.btn-grey{background-color: #999;
+    border-color: #999;
+    color: #fff; float:left;}
+    .btn-grey:hover{ color:#fff; background:#000 }

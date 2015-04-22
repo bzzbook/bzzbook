@@ -33,18 +33,42 @@ class EventModel extends CI_Model {
 		return false;
 	}
  
- public function get_event_by_id($id)
+ 
+ public function checkbutton($cmp_id)
  {
-	 
-		$condition = "event_id =" . "'" . $id . "'";
+	   $id = $this->session->userdata('logged_in')['account_id'];
+		$condition = "event_cr_cmp = "."'" .$cmp_id."' AND event_cr_user = '" .$id."'";
 		$this->db->select('*');
 		$this->db->from('bzz_events');
 		$this->db->where($condition);
 		$query = $this->db->get();
-		$event = $query->result_array();
-		if(!empty($event))
+		$event_data = $query->result_array();
+		if(!empty($event_data))
 		{
-			return $event;
+			return $event_data;
+		}
+		return false;
+	
+	 
+ }
+ public function get_event_by_id($id)
+ {
+		$condition = "event_id =" . "'" . $id . "'";
+		$this->db->where($condition);
+		$query = $this->db->get('bzz_events');
+		$event = $query->result_array();
+	  if(!empty($event))
+		{
+	    $i = $event[0]['event_hits'];
+		$event_hit['event_hits'] = $i+1;
+	    $this->db->where($condition);
+	    $this->db->update('bzz_events',$event_hit);	
+		$this->db->select('*');
+		$this->db->from('bzz_events');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		$event_data = $query->result_array();
+		return $event_data;
 		}
 		return false;
  }
