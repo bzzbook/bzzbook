@@ -532,7 +532,7 @@ class Customermodel extends CI_Model {
 		
 		$user =array(
 		'user_email'=>$data['email'],
-		'password'=>md5($data['password']),
+		//'password'=>md5($data['password']),
 		//'con_password'=>md5($data['con_password']),
 		'user_country'=>$data['country'],
 		'user_state'=>$data['state'],
@@ -551,6 +551,25 @@ class Customermodel extends CI_Model {
   else
   return false;
 		
+   }
+   
+   public function passwordUpdate($password_info)
+   {
+	    
+		   $id = $this->session->userdata('logged_in')['account_id'];
+		   $condition = "user_id =" . "'".$id."'";
+		   $this->db->where($condition);
+		   $query = $this->db->get('bzz_users');
+		   $user_info = $query->result_array();
+		   print_r($user_info);
+		if($user_info[0]['password'] == md5($password_info['password']))
+		{
+			
+			$data = array('password' =>md5($password_info['con_new_password']));
+			$this->db->where($condition);
+			$this->db->update('bzz_users',$data);
+		}else
+		return false;
    }
 	function get_time_difference_php($created_time)
  {

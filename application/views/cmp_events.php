@@ -2,7 +2,8 @@
       <section class="about-user-details">
         <h4><span aria-hidden="true" class="glyphicon glyphicon-calendar"></span> Events
           <div class="right_event">
-          <?php if(!empty($check_button)) { ?>
+          <?php 
+		  if(!empty($check_button)){ ?>
             <div class="btn2 btn-black" data-target="#cr_event" data-toggle="modal">Add Event</div>
             <?php } ?>
           </div>

@@ -270,7 +270,7 @@ footer.home h3 em{ color:#fdc70f; font-style:normal;}
 .pfSettings .tab-pane h4{ font-size:15px; color:#353535; font-weight:500; padding-bottom:10px; border-bottom:1px solid #d8d8d8; margin-bottom:20px;}
 .pfSettings .tab-pane .form-control{  border: 1px solid #e3e3e3;  box-shadow: none;  color: #a8a8a8;  font-size: 12px;  font-weight: 300;   height:40px; margin-bottom:26px; border-radius:3px; }
 .pfSettings .tab-pane .select{ margin-bottom:26px;}
-.pfSettings .tab-pane .fmbtn{ border-radius:2px; border:none; background:#609b34; color:#fff; font-size:12px; font-weight:700; height:34px; padding:0 10px; margin-bottom:20px;}
+.pfSettings .tab-pane .fmbtn{ border-radius:2px; border:none; background:#609b34; color:#fff; font-size:12px; font-weight:700; height:34px; padding:0 10px; margin-bottom:20px; float:right;}
 
 .pfSettings .upload{ text-align:center; margin-bottom:15px;} 
 .fileinput-button { position: relative; overflow: hidden; }
@@ -925,3 +925,6 @@ width: 73.7%; !important;}
     border-color: #999;
     color: #fff; float:left;}
     .btn-grey:hover{ color:#fff; background:#000 }
+.modal-body .dob .field{ padding-left:0;}
+.modal-body .dob #calYears{ position:relative;}
+.modal-body .dob span.add-on{ position:absolute; right:10px; top:8px; font-size:20px; cursor:pointer;  }

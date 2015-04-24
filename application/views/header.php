@@ -17,6 +17,7 @@ $session_data = $this->session->userdata('logged_in');
 <link href="<?php echo base_url(); ?>css/responsive.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>css/lightbox.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>css/uploadfile.css" rel="stylesheet">
+<link href="<?php echo base_url(); ?>css/datepicker.css" rel="stylesheet">
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/jqtransform.css" type="text/css" media="all" />
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->

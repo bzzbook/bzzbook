@@ -159,6 +159,15 @@ class customer extends CI_Controller {
 	else
 	return false;
   }
+  
+  public function password_update()
+  {
+	   parse_str($_POST['form_data'],$password_info);
+	if($this->customermodel->passwordUpdate($password_info))
+	echo "success";
+	else
+	return "failure";
+  }
   public function updateabout()
   {
 		parse_str($_POST['form_data'], $aboutformdata);

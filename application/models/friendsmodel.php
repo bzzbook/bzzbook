@@ -465,8 +465,8 @@ public function related_friends()
 	$id = $this->session->userdata('logged_in')['account_id'];
 	
 	 // getting frnds ids
-	$condition =  "(user_id = '".$id."' or friend_id ='".$id."') AND request_status='Y'"; 
-	//$condition = "user_id =" . "'" . $id . "' AND request_status='Y'";
+	//$condition =  "(user_id = '".$id."' or friend_id ='".$id."') AND request_status='Y'"; 
+	$condition = "user_id =" . "'" . $id . "' AND request_status='Y'";
 	$this->db->select('friend_id,user_id');
 	$this->db->from('bzz_userfriends');
 	$this->db->where($condition);
@@ -476,11 +476,11 @@ public function related_friends()
 	// print_r($friends);
 	 foreach($friends as $frnds)
 	 {
-	    $frnd_frnds = $this->user_frnds($frnds['friend_id']);
+	    /*$frnd_frnds = $this->user_frnds($frnds['friend_id']);
 	 		foreach($frnd_frnds as $fr)
 			{
 				$elements[] = $fr['friend_id'];
-			}
+			}*/
 	    $elements[] = $frnds['user_id'];
 	 }
 	 //print_r($elements);

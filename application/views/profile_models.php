@@ -606,15 +606,6 @@
         <h4 class="modal-title" id="myModalLabel">Create New Event</h4>
       </div>
       <div class="modal-body">
-<!--        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompany" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">-->
-        <figure class="pfpic">
-          <div id="dvPreview" ><img width="146" height="159" id="blah" src="<?php echo base_url(); ?>images/cl_pic.png" alt=""></div>
-        </figure>
-        <div class="upload"> <span class="btn btn-success fileinput-button"> <span>Add Logo</span> 
-          <!-- The file input field used as target for the file upload widget -->
-          
-         <!-- <input type="file" name="userfile" id="fileupload"/> -->
-          </span> </div>
         <form class="latest_pop" action="<?php echo base_url(); ?>events/create_event" method="post" enctype="multipart/form-data">
           <div class="form-group">
             <label for="exampleInputEmail1">Name</label>
@@ -628,29 +619,39 @@
             <label for="exampleInputEmail1">Where</label>
             <input type="text" class="form-control" id="" placeholder="Add A Place?" name="event_location">
           </div>
-          <label for="exampleInputEmail1">When</label>
-          <div class='col-md-8 col-sm-8 input-group date' id='datetimepicker11'>
-            <input type='text' class="form-control"  name="event_date"/>
-            <span class="input-group-addon"> <span class="glyphicon glyphicon-calendar"> </span> </span>
-            <div class="col-md-8 col-sm-8">
+         
+           <div class="form-group dob">
+           <label for="exampleInputEmail1">When</label>
+            <div data-date-viewmode="years" data-date-format="dd-mm-yyyy" data-date="12-02-2012" id="calYears" 
+            class="input-group-bt date">
+              <input type="text" readonly name="birthdate" value="12-02-2012" size="16" class="form-control">
+              <span aria-hidden="true" class="add-on glyphicon glyphicon-calendar"></span> </div>
+          </div>
+            <!--<input type='text' class="form-control"  name="event_date"/>
+            <span class="input-group-addon"> <span class="glyphicon glyphicon-calendar"> </span> </span>-->
+            <div class="form-group">
+             <label for="exampleInputEmail1">Time</label>
               <input type="text" class="form-control" id="" placeholder="Add A Time?" name="event_time">
               <input type="hidden"  name="cmp_id" value="<?php echo $this->uri->segment(3,0); ?>" />
             </div>
-          </div>
+          
+          <div class="clearfix"></div>
+           <div class="form-group">
           <label>Photo</label>
-          <div class="clearfix"></div>
           <input type="file" name="userfile" id="fileupload"/>
+          </div>
           <div class="clearfix"></div>
-          <label>Privacy</label>
-          <div class="clearfix"></div>
+          
+           <div class="form-group">
           <select name="event_privacy">
             <option>Guests and Friends</option>
           </select>
+          </div>
           <div class="clearfix"></div>
          
-          <div class="newevent">
-          <div class="btn3 btn-yellow"><input type="submit" value="Create" /></div>
-          <div class="btn3 btn-black">Cancel</div>
+          <div class="newevent form-group">
+          <div><input type="submit" value="Create" class="btn3 btn-yellow" /></div>
+          <div><input type="button" class="btn3 btn-black" value="cancel"/></div>
         
         </div>
          <div class="clearfix"></div>

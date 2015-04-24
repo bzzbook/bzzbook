@@ -37,20 +37,21 @@ class EventModel extends CI_Model {
  public function checkbutton($cmp_id)
  {
 	   $id = $this->session->userdata('logged_in')['account_id'];
-		$condition = "event_cr_cmp = "."'" .$cmp_id."' AND event_cr_user = '" .$id."'";
+		$condition = "companyinfo_id = "."'" .$cmp_id."' AND user_id = '" .$id."'";
 		$this->db->select('*');
-		$this->db->from('bzz_events');
+		$this->db->from('bzz_companyinfo');
 		$this->db->where($condition);
 		$query = $this->db->get();
 		$event_data = $query->result_array();
+		
 		if(!empty($event_data))
 		{
 			return $event_data;
 		}
 		return false;
 	
-	 
  }
+
  public function get_event_by_id($id)
  {
 		$condition = "event_id =" . "'" . $id . "'";
