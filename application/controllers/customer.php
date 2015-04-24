@@ -388,7 +388,7 @@ public function search_member()
 	}
 	public function getpostcomments($post_id)
 	{
-		
+		$curr_user_id = $this->session->userdata('logged_in')['account_id'];
 		echo "<div id='res_comments".$post_id."'>";
            	       $comments_details = $this->customermodel->comments_data($post_id);
 			       for($i=0;$i<count($comments_details);$i++){
@@ -396,7 +396,7 @@ public function search_member()
 			       if($i<=4){ $com_user_data = $this->customermodel->profiledata($comments_details[$i]->commented_by); 	  $hrsago = $this->customermodel->get_time_difference_php($comments_details[$i]->commented_time);
 
                    echo "<div class='commentBox'>";
-            echo "<figure> <a href='".base_url()."profile/post/".$com_user_data[0]->user_id."'><img src='".base_url()."uploads/"; if(!empty($com_user_data[0]->user_img_thumb)) echo $com_user_data[0]->user_img_thumb; else echo 'default_profile_pic.png';
+            echo "<figure> <a href='".base_url()."profile/post/".$com_user_data[0]->user_id."'><img style='width:50px;float:left;' src='".base_url()."uploads/"; if(!empty($com_user_data[0]->user_img_thumb)) echo $com_user_data[0]->user_img_thumb; else echo 'default_profile_pic.png';
 			echo "' alt='".base_url()."uploads/";
 			if(!empty($image[0]->user_img_thumb)) echo $image[0]->user_img_thumb; else echo 'default_profile_pic.png';
 			echo "'></a></figure>
