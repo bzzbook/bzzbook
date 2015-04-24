@@ -1,3 +1,4 @@
+
 $('.about-user-details .userPhotos .photoThumb figure img').centerImage(); 	
 $('.ProfileView .visitorBox .visitiBoxInner .profileLogo .cmplogo img').centerImage(); 	
 $('.myfriends .groupEditBlock figure img').centerImage(); 	
@@ -26,5 +27,3 @@ $(document).ready(function() {
 			$( ".fbphotobox" ).append('<img class="photo" fbphotobox-src="images/dummy-1760x990-Mosque.jpg" src="images/dummy-1760x990-Mosque.jpg"/><img class="photo" fbphotobox-src="images/dummy-1920x2560-Goemetry.jpg" src="images/dummy-1920x2560-Goemetry.jpg"/>');
 		});
 	});	
-
- 	
