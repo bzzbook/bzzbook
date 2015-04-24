@@ -66,7 +66,11 @@ $(function () {
 <script src="<?php echo base_url(); ?>js/lightbox.min.js"></script>
 <script src="<?php echo base_url(); ?>js/jquery.uploadfile.min.js"></script>
 <script src="<?php echo base_url(); ?>js/jquery.blImageCenter.js"></script> 
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script> 
+<script src="<?php echo base_url(); ?>js/fbphotobox.js"></script>
 <script src="<?php echo base_url(); ?>js/custom.js"></script> 
+ 
+
 <script>
 		$( document ).ready(function() {
 		$('.select').jqTransform({ imgPath: '' });
@@ -1039,9 +1043,19 @@ function getconversations(msg_id,sent_by)
   cache: false
   });
 }
-
-
-
+function getPostComments(post_id)
+{
+ url="<?php echo base_url(); ?>customer/getpostcomments/"+post_id;
+  $.ajax({
+        type: "POST",
+        url: url,
+        success: function(data)
+        {   
+   $(".fbphotobox-image-content").html(data);
+  },
+  cache: false
+  });
+}
    /*	 
 	 $.post( url, { formdata: $(this).serialize() })
      

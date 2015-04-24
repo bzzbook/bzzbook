@@ -53,16 +53,19 @@
 			 {
 			 $up_files = explode(',',$row->uploaded_files);
 			 $i = 0;
+			 echo "<div class='fbphotobox'>";
 			 foreach($up_files as $file)
 			 {
 				 if($i==0)
 				 {
-					 echo "<img src='".base_url()."uploads/".$file."' style='width:100%'/>";
+					 echo " 
+    <a onclick='getPostComments(".$row->post_id.")'><img class='photo' fbphotobox-src='".base_url()."uploads/".$file."' src='".base_url()."uploads/".$file."' style='width:100%'/></a>";
 				 }
 				 else
-				 	 echo "<img src='".base_url()."uploads/".$file."' style='width:24%;float:left;margin:.5%; height:83px'/>";
+				 	 echo "<a onclick='getPostComments(".$row->post_id.")'><img class='photo' fbphotobox-src='".base_url()."uploads/".$file."' src='".base_url()."uploads/".$file."' style='width:24%;float:left;margin:.5%; height:83px'/></a>";
 				 $i++;
 			 }
+			 echo "</div>";
 			 echo "<div style='clear:both'></div>";
 			 } ?> </figure>
 <?php /*?>            <h3>The Interpreter-TranslatorFree - Android Apps on Google Play</h3>
