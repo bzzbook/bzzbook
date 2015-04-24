@@ -4,7 +4,7 @@
 <section class="col-lg-6 col-md-6 col-sm-5 col-xs-12 coloumn2 pfSettings">
       <h2>My Settings</h2>
       <div class="posts">
-        <div role="tabpanel"> 
+        <div role="tabpanel">
           <!-- Nav tabs -->
           <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#post_board" aria-controls="profile" role="tab" data-toggle="tab">Post Board</a></li>
@@ -106,17 +106,7 @@
               <div class="filed col-md-6">
                 <input type="text" class="form-control" placeholder="Email" value="<?php echo $user[0]->user_email ?>" name="email" readonly>
               </div>
-              <h4 class="clear">Password Info</h4>
-              <div class="filed col-md-6">
-                 <input type="password" class="form-control" placeholder="Password" id="pwd" onBlur="pwdchange()" name="password">
-              </div>
-              <div class="clear"></div>
-              <div class="filed col-md-6">
-                  <input type="password" class="form-control" placeholder="New Password" id="npwd"  name="password">
-              </div>
-              <div class="filed col-md-6">
-               <input type="password" class="form-control" placeholder="Confirm Password" id="cnpwd"  name="con_password">
-              </div>
+             
               <h4 class="clear">Job Info</h4>
               <div class="filed col-md-6">
                   <input type="text" class="form-control" placeholder="Job Title" value="<?php echo $user_info[0]->user_jobtype ?>" name="position" >
@@ -137,10 +127,36 @@
               <div class="filed col-md-6">
                 <input type="text" class="form-control" placeholder="Company Name" value="<?php echo $user_info[0]->user_cmpname ?>" name="companyname" >
               </div>
-              <div class="filed col-md-6">
+              <div class="filed col-md-12">
                <input type="submit" class="fmbtn" value="Update Settings">
               </div>
               <div class="clear"></div>
+              </form>
+               <h4 class="clear">Password Info</h4>
+             <form name="pf_pwd_change" id="pf_pwd_change" method="post">
+                 <div class="filed col-md-12">
+               <input type="button" class="fmbtn" id="pwd_change_btn" value="Change Password">
+              </div>
+              <div class="clear"></div>
+              <div id="change_pwd">
+               <div class="filed col-md-6">
+                 <input type="password" class="form-control"  placeholder="Enter Old Password" id="pwd" onblur="pwdchange()" name="password" data-rule-required="true" data-msg-required="please enter current password">
+              </div>
+              <div class="clear"></div>
+              <div class="filed col-md-6">
+                  <input type="password" class="form-control" placeholder="New Password" id="npwd"  name="new_password"   data-rule-required="true" data-msg-required="please enter your password">
+              </div>
+              <div class="filed col-md-6">
+               <input type="password" class="form-control" placeholder="Confirm Password" id="cnpwd"  name="con_new_password"  data-rule-required="true" 				 	
+            data-msg-required="please Enter Confirm password" data-rule-equalto="#npwd" 
+            data-msg-equalto="Confirm password should match with password">
+              </div>
+              <div id="change_pwd_error">
+              </div>
+              <div class="filed col-md-12">
+               <input type="submit" class="fmbtn" value="Update Password">
+              </div>
+              </div>
               </form>
             </div>
             <div role="tabpanel" class="tab-pane" id="about_me">
@@ -303,8 +319,10 @@
                 <div class="filed col-md-12">
                 <input type="submit" class="fmbtn" value="Upload Settings">
               </div>
+              </div>
               </form>
               <div class="clear"></div>
+             
               </div>
           </div>
         </div>

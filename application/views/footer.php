@@ -65,6 +65,7 @@ $(function () {
 <script language="javascript">print_usa_states("usa_states");</script>
 <script src="<?php echo base_url(); ?>js/lightbox.min.js"></script>
 <script src="<?php echo base_url(); ?>js/jquery.uploadfile.min.js"></script>
+<script src="<?php echo base_url(); ?>js/bootstrap-datepicker.js"></script> 
 <script src="<?php echo base_url(); ?>js/jquery.blImageCenter.js"></script> 
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script> 
 <script src="<?php echo base_url(); ?>js/fbphotobox.js"></script>
@@ -74,13 +75,14 @@ $(function () {
 <script>
 		$( document ).ready(function() {
 		$('.select').jqTransform({ imgPath: '' });
+		$('#calYears').datepicker();
 		});
    $('#email_invite').validate();
    $('#upload_file').validate();
    $('#search_job').validate(); 
    $('#event_discussion').validate();
-   
-   
+   $('#change_pwd').hide();
+   $('#pf_pwd_change').validate();
 </script>
 <script>
 $(document).ready(function()
@@ -156,6 +158,32 @@ $(function(){
 			       });			
 				event.preventDefault();
 			});
+			
+			$("form[name=pf_pwd_change]").submit(function(event){
+		
+				var errors = '';
+					if($('#pwd').val()== '' || $("#npwd").val()=='' || $("#cnpwd").val()=='')
+					{
+						//$("#change_pwd_error").html("please enter password AND Confirmation Password");
+				
+					}else{
+	   url="<?php echo base_url();?>customer/password_update/";
+		 $.ajax({
+			type: "POST",
+			url: url,
+			data: { form_data: $(this).serialize()} ,
+			success: function(html)
+			{   
+				$('#change_pwd').toggle();
+				alert("Password Updated");
+				$('#pwd_change_btn').toggle();
+				
+			}
+		   });			
+					}
+		event.preventDefault();
+	});
+			
 			$("#privacy_form").submit(function( event ){
 					 url="<?php echo base_url();?>customer/updateprivacy/";
 					$.post( url, { formdata: $(this).serialize() })
@@ -405,21 +433,31 @@ $(function(){
 				
 });
 function pwdchange(){
-var pass=$('#pwd').val();
+	
+var errors = '';
+	if($('#pwd').val()== '')
+	{
+		
+	//	$("#change_pwd_error").html("please enter password");
 
+	}else{
+var pass=$('#pwd').val();
    url="<?php echo base_url();?>signg_in/checkpass/"+pass;
    $.ajax({
         type: "POST",
         url: url,
         data: { pass: pass} ,
-        success: function(html)
+        success: function(data)
         {   
-            if(html=='failure'){
-				alert("Please enter valid password");
-			}
-        }
+		if(data == false){
+    	alert("Please enter valid password");
+		$('#pwd').focus();
+		}else{
+		$('#npwd').focus();
+		}
+		}
        });
-
+	}
 }
  $('#profile_interchange').change(function(){
      id = $(this).val();
@@ -696,7 +734,7 @@ function addSearchFrnd(id)
         url: url,
         success: function(data)
         {   
-			$('#addFrnd').text('Request Sent');
+			$('#addFrnd'+id ).text('Request Sent');
 		},
 		cache: false
 		});
@@ -1612,6 +1650,14 @@ $('#search_frnds').keyup(function(){
 			});
 			event.preventDefault();
 		});*/
+		
+	// password change from profile settings
+	$('#pwd_change_btn').click( function()
+	{
+		$('#change_pwd').toggle();
+		$(this).hide();
+	});
+	 	
 </script>
 
 

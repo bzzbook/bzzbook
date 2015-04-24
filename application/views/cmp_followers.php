@@ -11,19 +11,21 @@
             <h5><?php echo $follower[0]['user_firstname'] ." ". $follower[0]['user_lastname'];?></h5>
             <h6><?php echo $follower[0]['user_jobtype']; ?></h6>
             <p><?php echo $follower[0]['user_state'] ." , ". $follower[0]['user_country']; ?></p>
-            <?php if($friend_status)
+            <?php if(!empty($friend_status))
 			{
 			 if($friend_status[0]['request_status'] == 'Y') 
 				   { ?>  <button type="button" class="btn btn-primary btn-xs"
 			  href="javascript:void(0);">Friends</button>
               <?php  }elseif( $friend_status[0]['request_status'] == 'W'){ ?>
                <button type="button" class="btn btn-primary btn-xs"
-			  href="javascript:void(0);">Requested</button>
+			  href="javascript:void(0);">Request Sent</button>
               <?php }elseif( $friend_status[0]['request_status'] == 'N' || $friend_status[0]['request_status'] == 'B'){?>
             <button type="button" class="btn btn-primary btn-xs" id="addFrnd"
 			  href="javascript:void(0);" onclick="addFollowerFrnd(<?php echo $follower[0]['user_id']; ?>);">Add Friend</button>
-              <?php } } ?>
-			
+              <?php } }else {?>
+			 <button type="button" class="btn btn-primary btn-xs" id="addFrnd"
+			  href="javascript:void(0);" onclick="addFollowerFrnd(<?php echo $follower[0]['user_id']; ?>);">Add Friend</button>
+              <?php } ?>
           </div>
           
         </div>

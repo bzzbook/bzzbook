@@ -14,6 +14,7 @@ $session_data = $this->session->userdata('logged_in');
 <link href="<?php echo base_url(); ?>css/animate.min.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>css/style.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>css/responsive.css" rel="stylesheet">
+<link href="<?php echo base_url(); ?>css/datepicker.css" rel="stylesheet">
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>

@@ -315,12 +315,10 @@ class signg_in extends CI_Controller {
 		$this->db->from('bzz_users');
 		$this->db->where($condition);
 		$query = $this->db->get();
-		
-
 		if ($query->num_rows() == 1) {
-			echo "success";
+			echo true;
 		} else {
-		    echo "failure";
+		    echo false;
 		}
 	   
    }
