@@ -67,7 +67,7 @@ public function post($user_id='')
 public function message()
   { 
   	$data['content']='messages';
-	$this->load->view('template-view',$data);
+	$this->load->view('full_content_view',$data);
    //$this->load->view('messages');
 }
 public function events()

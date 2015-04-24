@@ -386,6 +386,71 @@ public function search_member()
 			redirect('/profile/my_photos');
 	}	
 	}
+	public function getpostcomments($post_id)
+	{
+		
+		echo "<div id='res_comments".$post_id."'>";
+           	       $comments_details = $this->customermodel->comments_data($post_id);
+			       for($i=0;$i<count($comments_details);$i++){
+				   // foreach($comments_details as $row_comment):
+			       if($i<=4){ $com_user_data = $this->customermodel->profiledata($comments_details[$i]->commented_by); 	  $hrsago = $this->customermodel->get_time_difference_php($comments_details[$i]->commented_time);
+
+                   echo "<div class='commentBox'>";
+            echo "<figure> <a href='".base_url()."profile/post/".$com_user_data[0]->user_id."'><img src='".base_url()."uploads/"; if(!empty($com_user_data[0]->user_img_thumb)) echo $com_user_data[0]->user_img_thumb; else echo 'default_profile_pic.png';
+			echo "' alt='".base_url()."uploads/";
+			if(!empty($image[0]->user_img_thumb)) echo $image[0]->user_img_thumb; else echo 'default_profile_pic.png';
+			echo "'></a></figure>
+            <div class='postAComment'> 
+            	<div class='postACommentInner'><span class='pfname' style='color:#5A5998;'><a href='".base_url().'profile/post/'.$com_user_data[0]->user_id."'>".ucfirst($com_user_data[0]->user_firstname)."&nbsp;".ucfirst($com_user_data[0]->user_lastname)."</a></span> <span class='date' style='color:black;'>";
+			/*if($hr_final<24){?><?php echo $hr_final;?>hr<?php }else{
+				echo  str_replace("-"," ",$days)."days ago";
+			}*/ echo $comments_details[$i]->comment_content."</span><br />";
+			$commentfiles = explode(',',$comments_details[$i]->uploadedfiles); 
+			if(!empty($comments_details[$i]->uploadedfiles)) { 
+			
+			echo "<div style='padding-top:15px;'><img width='200px' height='200px' src='".base_url().'uploads/'.$commentfiles[0]."/></div>"; 
+			} 
+			echo $hrsago; 
+			
+					
+			        $comment_likes = $this->customermodel->commentlikedata($comments_details[$i]->postcomments_id);
+					$current_user_com_like_data = $this->customermodel->currentusercommentlikedata($comments_details[$i]->postcomments_id);
+					if($current_user_com_like_data){
+					//if(sizeof($comment_likes)>0){
+//			       	$user_id=$comment_likes[0]->liked_by;
+//					$like=$comment_likes[0]->like_status;
+//					}
+//					else
+//					$like='';
+//					 if(@$user_id == $user_id && $like=='Y'){
+						 
+					
+				echo "<a href='javascript:void(0);' onclick='commentlikefun(".$comments_details[$i]->postcomments_id.','.$curr_user_id.','.count($comment_likes).")  id='cmt_link_like".$comments_details[$i]->postcomments_id."' style='padding-right:0px;'>Unlike";
+               
+			}else{
+				echo "<a href='javascript:void(0);' onclick='commentlikefun(".$comments_details[$i]->postcomments_id.','.$curr_user_id.','.count($comment_likes).")' id='cmt_link_like".$comments_details[$i]->postcomments_id."' style='padding-right:0px;'>Like";
+			 }
+			 echo "</a>&nbsp;<span id='cmt_like_count".$comments_details[$i]->postcomments_id."'>";
+			 $like_count = count($comment_likes); if($like_count>0) 
+			 echo "<img src='".base_url()."images/like_myphotos.png' alt=''>".$like_count.'&nbsp;&nbsp;'."</span></div>
+                    
+              </div>
+              <div class='clearfix'></div>
+          </div>";
+			
+				   }
+				   }
+				   
+				   // endforeach;
+		    
+             if(count($comments_details)>4){ 
+            echo "<a href='#' onclick='view_comments(".$row->post_id.")' style='font-size:12px;'>View More</a>";
+             }
+         echo  "</div>";
+		
+		
+		
+	}
 	
 
 }

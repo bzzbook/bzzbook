@@ -67,6 +67,8 @@ $(function () {
 <script src="<?php echo base_url(); ?>js/jquery.uploadfile.min.js"></script>
 <script src="<?php echo base_url(); ?>js/bootstrap-datepicker.js"></script> 
 <script src="<?php echo base_url(); ?>js/jquery.blImageCenter.js"></script> 
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script> 
+<script src="<?php echo base_url(); ?>js/fbphotobox.js"></script>
 <script src="<?php echo base_url(); ?>js/custom.js"></script> 
 <script>
 		$( document ).ready(function() {
@@ -1077,9 +1079,19 @@ function getconversations(msg_id,sent_by)
   cache: false
   });
 }
-
-
-
+function getPostComments(post_id)
+{
+ url="<?php echo base_url(); ?>customer/getpostcomments/"+post_id;
+  $.ajax({
+        type: "POST",
+        url: url,
+        success: function(data)
+        {   
+   $(".fbphotobox-image-content").html(data);
+  },
+  cache: false
+  });
+}
    /*	 
 	 $.post( url, { formdata: $(this).serialize() })
      
@@ -1638,12 +1650,28 @@ $('#search_frnds').keyup(function(){
 		});*/
 		
 	// password change from profile settings
-	$('#pwd_change_btn').click( function()
-	{
+$('#pwd_change_btn').click( function()
+{
 		$('#change_pwd').toggle();
 		$(this).hide();
-	});
-	 	
+});
+
+$('#select_all_msgs').click(function(event)
+{
+	if(this.checked)
+	{
+		$('.all_inbox_msgs').each(function(event)
+		{
+			this.checked = true;
+		});
+	}else{
+		$('.all_inbox_msgs').each(function(event)
+		{
+			this.checked = false;
+	
+		});
+	}
+});	 	
 </script>
 
 

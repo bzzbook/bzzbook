@@ -620,7 +620,7 @@
             <input type="text" class="form-control" id="" placeholder="Add A Place?" name="event_location">
           </div>
          
-           <div class="form-group dob">
+           <div class="form-group dob adding col-md-6 col-sm-6">
            <label for="exampleInputEmail1">When</label>
             <div data-date-viewmode="years" data-date-format="dd-mm-yyyy" data-date="12-02-2012" id="calYears" 
             class="input-group-bt date">
@@ -629,8 +629,8 @@
           </div>
             <!--<input type='text' class="form-control"  name="event_date"/>
             <span class="input-group-addon"> <span class="glyphicon glyphicon-calendar"> </span> </span>-->
-            <div class="form-group">
-             <label for="exampleInputEmail1">Time</label>
+            <div class="form-group ad_right col-md-6 col-sm-6">
+             <label for="exampleInputEmail1"></label>
               <input type="text" class="form-control" id="" placeholder="Add A Time?" name="event_time">
               <input type="hidden"  name="cmp_id" value="<?php echo $this->uri->segment(3,0); ?>" />
             </div>
@@ -642,11 +642,22 @@
           </div>
           <div class="clearfix"></div>
           
+          <div class="btn-group">
+  		<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+  		  <span aria-hidden="true" class="add-on glyphicon glyphicon-user"></span> &nbsp Event Privacy &nbsp <span class="caret"></span>
+		  </button>
+ 		 <ul class="dropdown-menu" role="menu">
+  				<li>Guests and Friends</li>
+                <li>Friends</li>
+                <li>Guests</li>
+ 		 </ul>
+		</div>
+         <!-- 
            <div class="form-group">
           <select name="event_privacy">
             <option>Guests and Friends</option>
           </select>
-          </div>
+          </div>-->
           <div class="clearfix"></div>
          
           <div class="newevent form-group">

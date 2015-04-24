@@ -1,19 +1,128 @@
-<section class="col-lg-6 col-md-6 col-sm-5 col-xs-12 coloumn2 messageSt">
+<section class="inbox col-lg-9 col-md-9 pfSettings">
+      <div class="posts_inbox">
+        <div role="tabpanel"> 
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#compose" aria-controls="profile" role="tab" data-toggle="tab">Compose</a></li>
+            <li role="presentation"><a href="#inbox" aria-controls="messages" role="tab" data-toggle="tab">Inbox</a></li>
+            <li role="presentation"><a href="#sent" aria-controls="settings" role="tab" data-toggle="tab">Sent</a></li>
+            <li role="presentation"><a href="#trash" aria-controls="messages" role="tab" data-toggle="tab">Trash</a></li>
+          </ul>
+          
+          <!-- Tab panes -->
+          <div class="tab-content">
+            
+            <div role="tabpanel" class="tab-pane active" id="compose">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="row"> <input type="checkbox" name="btSelectAll">
+                    </th>
+                    <th scope="row"><div class="move"><span aria-hidden="true" class="glyphicon glyphicon-refresh"></span></div></th>
+                    <th scope="row"><select class="move">
+                        <option>More</option>
+                      </select></th>
+                    <th scope="row"><select class="move" >
+                        <option>Move to</option>
+                      </select></th>
+                    <th class="ad_right"><div class="move">1-34 of 34<a href="#"><span aria-hidden="true" class="glyphicon glyphicon-chevron-left"></span></a> <a href="#"><span aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span></a></div></th>
+                  </tr>
+                </thead>
+               <tbody>
+                  <tr>
+                    <th scope="row"><input type="checkbox" name="btSelectAll"></th>
+                    <td><span aria-hidden="true" class="glyphicon glyphicon-star"></span></td>
+                    <td>Siva Prasad</td>
+                    <td>Lorem ipsum dolor sit amet</td>
+                    <td class="ad_right">09:33 AM</td>
+                  </tr>
+                  <tr>
+                    <th scope="row"><input type="checkbox" name="btSelectAll"></th>
+                    <td><span aria-hidden="true" class="glyphicon glyphicon-star"></span></td>
+                    <td>Siva Prasad</td>
+                    <td>Lorem ipsum dolor sit amet</td>
+                    <td class="ad_right">09:33 AM</td>
+                  </tr>
+                  <tr>
+                    <th scope="row"><input type="checkbox" name="btSelectItem" data-index="1"></th>
+                    <td><span aria-hidden="true" class="glyphicon glyphicon-star"></span></td>
+                    <td>Siva Prasad</td>
+                    <td>Lorem ipsum dolor sit amet</td>
+                    <td class="ad_right">09:33 AM</td>
+                  </tr>
+                  <tr>
+                    <th scope="row"><input type="checkbox" name="btSelectItem" data-index="1"></th>
+                    <td><span aria-hidden="true" class="glyphicon glyphicon-star"></span></td>
+                    <td>Siva Prasad</td>
+                    <td>Lorem ipsum dolor sit amet</td>
+                    <td class="ad_right">09:33 AM</td>
+                  </tr>
+                </tbody>
+                
+              </table>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="inbox">
+            <?php  $messages = $this->messages->getRecievedMessages();?>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="row"> <input type="checkbox" name="btSelectAll" id="select_all_msgs">
+                    </th>
+                    <th scope="row"><div class="move"><span aria-hidden="true" class="glyphicon glyphicon-refresh"></span></div></th>
+                    <th scope="row"><select class="move">
+                        <option>More</option>
+                      </select></th>
+                    <th scope="row"><select class="move" >
+                        <option>Move to</option>
+                      </select></th>
+                    <th class="ad_right"><div class="move">1-34 of <?php echo count($messages); ?><a href="#"><span aria-hidden="true" class="glyphicon glyphicon-chevron-left"></span></a> <a href="#"><span aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span></a></div></th>
+                  </tr>
+                </thead>
+                 <tbody>
+                  <?php if($messages){ foreach($messages as $message): ?>
+                  <tr>
+                    <th scope="row"><input type="checkbox" name="btSelectAll" class="all_inbox_msgs"></th>
+                    <td><span aria-hidden="true" class="glyphicon glyphicon-star"></span></td>
+                    <td><?php echo $message['name']; ?></td>
+                    <td> <?php echo $message['content']; ?></td>
+                    <td class="ad_right"> <?php echo $message['sent_date']; ?></td>
+                  </tr>
+                  <?php endforeach; } else echo "Inbox Empty"?>
+                </tbody>
+                
+              </table>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="sent">
+              <h4>sent</h4>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="trash">
+              <h4>trash</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- tabs close --> 
+      
+    </section>
+
+
+
+<?php /*?><!--<section class="col-lg-6 col-md-6 col-sm-5 col-xs-12 coloumn2 messageSt">
 <p style="color:green"><?php if($this->session->flashdata('send_msg'))
 			 echo $this->session->flashdata('send_msg'); ?></p>
       <h2>Messages</h2>
       <div class="posts">
         <div role="tabpanel"> 
-          <!-- Nav tabs -->
+           Nav tabs 
           <ul class="nav nav-tabs" role="tablist">
             <li role="presentation"><a href="#compose" aria-controls="profile" role="tab" data-toggle="tab">Compose Message</a></li>
             <li role="presentation" class="active"><a href="#inbox" aria-controls="messages" role="tab" data-toggle="tab">Inbox</a></li>
             <li role="presentation"><a href="#sent" aria-controls="settings" role="tab" data-toggle="tab">Sent</a></li>
-<!--            <li role="presentation"><a href="#archive" aria-controls="messages" role="tab" data-toggle="tab">Archived</a></li>
--->            <li role="presentation"><a href="#trash" aria-controls="settings" role="tab" data-toggle="tab">Trash</a></li>
+            <li role="presentation"><a href="#archive" aria-controls="messages" role="tab" data-toggle="tab">Archived</a></li>
+            <li role="presentation"><a href="#trash" aria-controls="settings" role="tab" data-toggle="tab">Trash</a></li>
           </ul>
           
-          <!-- Tab panes -->
+           Tab panes 
           <div class="tab-content">
             <div role="tabpanel" class="tab-pane" id="compose">
              <div class="form-group col-md-6">
@@ -70,7 +179,7 @@
               </div>
               <?php endforeach; } else echo "Inbox Empty"?>
               
-              <!--<div class="message">
+              <div class="message">
                  <h3>Ramesh Kuppili Sent You a Message , Tuesday 10,2015 at 11:39 am</h3>
                  <img src="<?php echo base_url(); ?>images/p1.png" width="55" height="60" alt="">                	
                 	<span class="sub">
@@ -87,7 +196,7 @@
                         <button class="small-text btn btn-warning ">Send</button>
                         </div>
                     </div>
-              </div>-->
+              </div>
               
               
               </div>  
@@ -172,7 +281,7 @@
                     <span><?php echo $trashmessage['content']; ?></span> 
                     </span><input name="" type="checkbox" value="<?php echo $trashmessage['msg_id']; ?>">
                     <div class="clear"></div>
-                    <div class="button"><a href="<?php echo base_url()."message/deletefromtrash/".$trashmessage['msg_id']; ?>" class="btn btn-black pull-right small-text">Delete</a> <!-- <a href="#" class="small-text btn btn-success pull-right" data-toggle="modal" data-target="#msg01">View Conversation</a> --></div>
+                    <div class="button"><a href="<?php echo base_url()."message/deletefromtrash/".$trashmessage['msg_id']; ?>" class="btn btn-black pull-right small-text">Delete</a>  <a href="#" class="small-text btn btn-success pull-right" data-toggle="modal" data-target="#msg01">View Conversation</a> --></div>
                     <div class="clear"></div>
                      
               </div>
@@ -187,4 +296,4 @@
           </div>
         </div>
       </div>
-    </section>
+    </section><?php */?>

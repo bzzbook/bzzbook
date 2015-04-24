@@ -4,9 +4,9 @@ body { font-size: 17px; width:100%; height:100%; margin:0; padding:0; font-famil
 html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video { margin:0; padding:0; border:0; outline:0; font-size:100%; vertical-align:baseline; background:transparent; }
 a img { border:none; }
 a { cursor:pointer; text-decoration:none; outline:none; }
-@-moz-document url-prefix() { 
+/*@-moz-document url-prefix() { 
   *{ -webkit-transition:all 0.5s ease; -moz-transition:all 0.5s ease; -o-transition:all 0.5s ease; transition:all 0.5s ease; }
-}
+}*/
 
 /* ============ Optionals ============ */
 .fleft { float:left; }
@@ -928,3 +928,22 @@ width: 73.7%; !important;}
 .modal-body .dob .field{ padding-left:0;}
 .modal-body .dob #calYears{ position:relative;}
 .modal-body .dob span.add-on{ position:absolute; right:10px; top:8px; font-size:20px; cursor:pointer;  }
+<!----------inbox open tables--------->
+.inbox.col-lg-9.col-md-9.pfSettings { margin-top: 25px;}
+.inbox.pfSettings {margin-top: 25px !important;}
+.posts_inbox.tabpanel{ margin-top:35px;}
+.inbox.pfSettings .tab-pane .table{ font-size:14px; color:#737373; font-family: "Roboto",sans-serif; font-weight:300;}
+.inbox.pfSettings .tab-pane .table{ padding:0 0px; border:solid 1px #d7d7d7;}
+.inbox.pfSettings .tab-pane .table > thead > tr > th{ border-bottom:0px;}
+.inbox.pfSettings .tab-pane .table .glyphicon { color:#fcd265;}
+.move{ font-size:14px; color:#bababa; font-family: "Roboto",sans-serif; font-weight:300;}
+.inbox.pfSettings .tab-pane .table .move .glyphicon{ color:#bababa; padding:2px; border:1px solid #bababa; }
+.ad_right{ text-align:right; color:#bababa;}
+.form-group > label {font-weight: 300;}
+.when_box{ font-weight: 300;}
+.newevent {border-top: 1px solid #ccc; margin: 15px 0px;}
+
+.adding{ padding:0px;}
+.ad_right{ padding-right:0;}
+.adding .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control{ background:none !important;}
+.down_cancel input .btn3 { margin-left:50px;}
