@@ -76,13 +76,21 @@ $(function () {
 		$( document ).ready(function() {
 		$('.select').jqTransform({ imgPath: '' });
 		$('#calYears').datepicker();
-		});
+		
    $('#email_invite').validate();
    $('#upload_file').validate();
    $('#search_job').validate(); 
    $('#event_discussion').validate();
    $('#change_pwd').hide();
    $('#pf_pwd_change').validate();
+   $('#updateControls').hide();
+ 
+  $('#posts').focusin(function() 
+   {
+   $('#updateControls').show();
+  
+});
+});
 </script>
 <script>
 $(document).ready(function()
@@ -749,7 +757,7 @@ function addFollowerFrnd(id)
         url: url,
         success: function(data)
         {   
-			$('#addFrnd').text('Request Sent');
+			$('#addFrnd'+id).text('Request Sent');
 		},
 		cache: false
 		});
@@ -1673,7 +1681,61 @@ $('#select_all_msgs').click(function(event)
 	
 		});
 	}
-});	 	
+});	
+
+$('#forgot_password').submit(function(){
+	usermail = $('#user_email').val();
+	var length = usermail.length;
+	var errors = '';
+	if(usermail == '') 
+	{
+		$("#error_data").html("Email Shouldn't be empty").fadeOut(7000);
+		location.reload();
+	}
+
+	else {
+	url="<?php echo base_url(); ?>signg_in/forgetpwd/"+usermail;
+		$.ajax({
+        type: "POST",
+        url: url,
+        success: function(data)
+        {   
+		if(data == false){
+    	alert("Please enter valid email Id");
+		$('#user_mail').focus();
+		}else{
+		 url="<?php echo base_url(); ?>signg_in/reset_pwd/"+usermail;
+	     window.location.replace(url);
+		}
+			
+		},
+		cache: false
+		});
+		
+		
+	};
+
+});
+ 	
+// auto complete for company textbox in aboutme page
+ $("#org_name").autocomplete({
+ 	minLength: 1,
+ 	source: function(req, add){
+ 		$.ajax({
+ 			url:'<?php echo base_url(); ?>company/cmp_name_search/', //Controller where search is performed
+ 			dataType: 'json',
+ 			type: 'POST',
+ 			data: req,
+ 			success: function(data){
+ 				//if(data.response =='true'){
+ 				 $('#org_name').html(data);
+ 				//}
+ 			}
+ 		});
+ 	}
+ });	
+	
+	
 </script>
 
 

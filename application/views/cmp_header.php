@@ -15,6 +15,8 @@ $session_data = $this->session->userdata('logged_in');
 <link href="<?php echo base_url(); ?>css/style.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>css/responsive.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>css/datepicker.css" rel="stylesheet">
+<link rel="stylesheet" href="<?php echo base_url(); ?>css/fbphotobox.css" type="text/css" />
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css" />
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>

@@ -1,9 +1,9 @@
 <?php 
 //$this->load->model('friendsmodel'); 
-$frnds = $this->friendsmodel->related_friends();
+$frnds = $this->friendsmodel->related_friends($limit = 2);
 if(empty($frnds))
 {
-$add_frnd_reqs = $this->friendsmodel->finding_friends();
+$add_frnd_reqs = $this->friendsmodel->finding_friends($limit = 2);
 }else{
 $add_frnd_reqs = $frnds;
 }
@@ -28,6 +28,6 @@ $add_frnd_reqs = $frnds;
                 <a href="#">Confirm</a><a href="#">Deny</a> </div>
             </li><?php */?>
           </ul>
-          <a href="#" class="link">View all</a> 
+          <a href="<?php echo base_url('friends/view_all_reqs'); ?>" class="link">View all</a> 
           
  </div>

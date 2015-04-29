@@ -41,7 +41,7 @@
 						
 				?>
                  <li>
-                  <div class="comment_imgbox"><img src="<?php echo base_url(); ?>uploads/<?php echo $user_info[0]['user_img_thumb'] ?>" alt="<?php echo base_url(); ?>uploads/<?php echo 'default_profile_pic.png'; ?> "></div>
+                  <div class="comment_imgbox"><img src="<?php echo base_url(); ?>uploads/<?php if(!empty($user_info[0]['user_img_thumb'])) echo $user_info[0]['user_img_thumb']; else echo "default_profile_pic.png"; ?>" alt="<?php echo base_url(); ?>uploads/<?php echo 'default_profile_pic.png'; ?> "></div>
                   <div class="comment_text">
                     <h5><span class="headers"><?php echo $user_info[0]['user_firstname'] ." " .$user_info[0]['user_lastname'] ?><small><span aria-hidden="true" class="glyphicon glyphicon-time">
                     </span>

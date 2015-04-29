@@ -95,7 +95,61 @@ class EventModel extends CI_Model {
  }
  public function getuserdetails($discussion_by_id)
  {
-
+	 
+	   $condition = "user_id =" . "'" . $discussion_by_id . "'";		
+		$this->db->select('*');
+		$this->db->from('bzz_user_images');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		if($query->num_rows() > 0)
+		{
+			$this->db->select('*');
+			$this->db->from('bzz_userinfo');
+			$this->db->join('bzz_user_images','bzz_userinfo.user_id=bzz_user_images.user_id AND bzz_userinfo.user_id='.$discussion_by_id);
+			$this->db->order_by('bzz_user_images.user_imageinfo_id','desc');
+			$query = $this->db->get();
+			if($query->num_rows() > 0) {
+				$user_data = $query->result_array();
+				return $user_data;	
+			} else {
+			return false;
+			}
+		}
+		else{
+			$this->db->select('*');
+			$this->db->from('bzz_userinfo');
+			$this->db->where($condition);
+			//$this->db->join('bzz_user_images','bzz_userinfo.user_id=bzz_user_images.user_id AND bzz_userinfo.user_id='.$id);
+			//$this->db->order_by('user_id','desc');
+			//$this->db->limit(1);
+			$query = $this->db->get();
+			if ($query->num_rows() > 0) {
+				$user_data = $query->result_array();
+				return $user_data;	
+			} else {
+			return false;
+			}
+		}
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+/*
 	$condition = "user_id =" . "'" . $discussion_by_id . "'";
 	$this->db->select('*');
 	$this->db->from('bzz_userinfo');
@@ -110,8 +164,8 @@ class EventModel extends CI_Model {
 	return $user_data;	
 	}
   return false;
- }
+ }*/
  }
  
- 
+ }
 ?>

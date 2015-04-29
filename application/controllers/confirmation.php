@@ -20,8 +20,9 @@ class confirmation extends CI_Controller {
 		if(!empty($user))
 		{
 			
-			$activation_success = "Your Account Hasbeen Activated You Can Login into Your Account!...";
-			$this->load->view('sign_in_v',$activation_success);
+			$this->session->set_flashdata('activation_success','Your Account Hasbeen Activated You Can Login into Your Account!...');
+			redirect('signg_in');
+			//$this->load->view('sign_in_v');
 		}
 	}
 	

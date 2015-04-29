@@ -157,6 +157,11 @@ public function addcompany()
 			$data['resume'] = $filedata['file_name'];
 		
 		}
+		/*$this->form_validation->set_rules('name','Applicant Name','required|xss_clean');
+	    $this->form_validation->set_rules('email','Applicant Email','required|xss_clean');
+		$this->form_validation->set_rules('phone','Phonr No','required|xss_clean');
+		$this->form_validation->set_rules('skills','Skills','required|xss_clean');*/
+		
 	    $data['name'] = $this->input->post('name');
 		$data['email'] = $this->input->post('email');
 		$data['phone'] = $this->input->post('phone');
@@ -171,9 +176,6 @@ public function addcompany()
 			$this->session->set_flashdata('application_status', 'Your application submitted successfully');
 			redirect('jobs/job_view/'.$cmp_id.'/'.$job_id);
 		}
-		
-		 
-		
 		
 	}
 
@@ -320,7 +322,36 @@ public function search_companies()
 	 $data['content']='companies_search';
 	 $this->load->view('full_content_view',$data);
 }
+
+public function view_all_other_cmps()
+{
+	   $data['content']='all_companies_to_follow';
+	     $this->load->view('full_content_view',$data);
 }
 
+public function cmp_name_search()
+{
+	 
+ $keyword = $this->input->post('term');
+ 
+ //$data['response'] = 'false'; //Set default response
+ 
+ $cmpdata = $this->companies->all_cmp_names_search($keyword); //Model DB search
+ $companies = array();
+ if(!empty($cmpdata))
+ {
+ foreach($cmpdata as $data)
+ {
+	$companies[] = $data['cmp_name']; 
+ }
 
+ }else
+ {
+	 echo "No Results folund!..";
+}
+ echo json_encode($companies);
+
+}
+
+}
 ?>

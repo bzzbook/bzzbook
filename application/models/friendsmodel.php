@@ -344,14 +344,17 @@ class Friendsmodel extends CI_Model {
 		return false;
 	}
 // latest frnds worked bt sp 8-4-2015
-public function latest_frnds()
+public function latest_frnds($limit)
 {
 	    $id = $this->session->userdata('logged_in')['account_id'];
-	    $condition = "user_id =" . "'" . $id . "' AND request_status='Y'";
-		$this->db->select('*');
+	    $condition = "(user_id ='" .$id. "' or friend_id ='".$id."') AND request_status='Y'";
+		$this->db->select('user_id,friend_id');
 		$this->db->from('bzz_userfriends');
-		$this->db->order_by('user_id','desc');
-		$this->db->limit(9);
+		$this->db->order_by('userfriends_id','desc');
+		if($limit != 0)
+		{
+		$this->db->limit(3);
+		}
 		$this->db->where($condition);
 		$query = $this->db->get();
 		if ($query->num_rows() >0) {
@@ -359,30 +362,50 @@ public function latest_frnds()
 			$frnds = array();
 			foreach($friends as $friend)
 			{
-			    $condition = "user_id =" . "'" . $friend['friend_id'] . "'";
-				$this->db->select('*');
-				$this->db->from('bzz_userinfo');
-				$this->db->where($condition);
-				$query = $this->db->get();
-				$frnd = array();
-				if ($query->num_rows() == 1) {
-					$result = $query->result_array();	
-					$frnd['name'] = $result[0]['user_firstname'].' '.$result[0]['user_lastname'];
-				}
-				$this->db->select('*');
-				$this->db->from('bzz_user_images');
-				$this->db->where($condition);
-				$this->db->order_by('user_imageinfo_id','desc');
-				$query = $this->db->get();
-				$result = $query->result_array();
-				if($result)
-				$frnd['image'] = $result[0]['user_img_thumb'];
-				else
-				$frnd['image'] = 'default_profile_pic.png';
-				$frnd['id'] = $friend['friend_id'];
-				$frnds[] = $frnd;
+				$frnds[] = $friend['user_id'];
+				$frnds[] = $friend['friend_id'];	
 			}
-			return $frnds;
+		}
+		
+		if(!empty($frnds))
+			{
+		$usr_ids = array_unique($frnds);
+		
+		$key = array_search($id,$usr_ids);
+		if($key!==false)
+		{
+  		unset($usr_ids[$key]);
+		}
+			foreach($usr_ids as $user_id)
+			{
+				 $usercondition = "user_id ="."'".$user_id."'";
+						 $this->db->select('*');
+						 $this->db->from('bzz_user_images');
+						 $this->db->where($usercondition);
+						 $query = $this->db->get();
+						 if($query->num_rows > 0)
+						 {
+								$this->db->select('*');
+								$this->db->from('bzz_users');
+								$this->db->join('bzz_user_images','bzz_users.user_id=bzz_user_images.user_id AND bzz_users.user_id='.$user_id);
+								$this->db->join('bzz_userinfo','bzz_users.user_id=bzz_userinfo.user_id');
+								$this->db->order_by('bzz_user_images.user_imageinfo_id','desc');
+								$query = $this->db->get();
+								 $user_data =  $query->result_array();
+								
+						 }else{
+							  $this->db->select('*');
+							// $this->db->limit(2);
+							  $this->db->from('bzz_users');
+							  $this->db->join('bzz_userinfo','bzz_users.user_id=bzz_userinfo.user_id AND bzz_users.user_id='.$user_id);
+							 // $this->db->where($followercondition);
+							  $query = $this->db->get(); 
+							   $user_data =  $query->result_array();
+						 }
+						  $userdata[] = $user_data;
+					}
+			
+			return $userdata;
 		} else {
 		return false;
 		}
@@ -390,7 +413,7 @@ public function latest_frnds()
 }
 
 //  worked by sp on 9-4-2015 to display other all users if dont have any friends or dont follows any companies
-public function finding_friends()
+public function finding_friends($limit)
 {
 	$id = $this->session->userdata('logged_in')['account_id'];
 	$usercondition = "user_id !=" . "'" . $id . "'";
@@ -436,13 +459,16 @@ public function finding_friends()
 					  //$condition =  "user_id =" . "'" . $user_id . "'";
 					  $this->db->select('*');
 					  $this->db->from('bzz_users');
+					  if($limit != 0)
+					  {
 					  $this->db->limit(2);
-					  
+					  }
 					  $this->db->join('bzz_user_images','bzz_users.user_id=bzz_user_images.user_id AND bzz_users.user_id='.$user_id);
 					  $this->db->join('bzz_userinfo','bzz_users.user_id=bzz_userinfo.user_id');
 					  $this->db->order_by('bzz_user_images.user_imageinfo_id','desc'); 
 					   //$this->db->order_by('bzz_users.user_id','desc');
 					  //$this->db->order_by('user_id');
+				
 					 // $this->db->where($condition);
 					  $query = $this->db->get();
 					   if ($query->num_rows() > 0) {
@@ -460,13 +486,13 @@ public function finding_friends()
 		
 // displaying friends of friends or followers of companies which are im following
 
-public function related_friends()
+public function related_friends($limit)
 {
 	$id = $this->session->userdata('logged_in')['account_id'];
 	
-	 // getting frnds ids
+	//getting frnds ids
 	//$condition =  "(user_id = '".$id."' or friend_id ='".$id."') AND request_status='Y'"; 
-	$condition = "user_id =" . "'" . $id . "' AND request_status='Y'";
+	$condition = "(user_id ='" .$id. "' or friend_id ='".$id."') AND request_status='Y'";
 	$this->db->select('friend_id,user_id');
 	$this->db->from('bzz_userfriends');
 	$this->db->where($condition);
@@ -474,6 +500,7 @@ public function related_friends()
 	$friends = $query->result_array();
 	$elements = array();
 	// print_r($friends);
+	$frnd_frnds = array();
 	 foreach($friends as $frnds)
 	 {
 	    /*$frnd_frnds = $this->user_frnds($frnds['friend_id']);
@@ -481,10 +508,24 @@ public function related_friends()
 			{
 				$elements[] = $fr['friend_id'];
 			}*/
-	    $elements[] = $frnds['user_id'];
+	    $frnd_frnds[] = $frnds['user_id'];
+		$frnd_frnds[] = $frnds['friend_id'];
 	 }
-	 //print_r($elements);
-//	 exit;
+	foreach($frnd_frnds as $frnd_frnd_id)
+	{
+	$condition = "(user_id ='" .$frnd_frnd_id. "' or friend_id ='".$frnd_frnd_id."') AND request_status='Y'";
+	$this->db->select('friend_id,user_id');
+	$this->db->from('bzz_userfriends');
+	$this->db->where($condition);
+	$query = $this->db->get();
+	$multiplefriends = $query->result_array();
+	foreach($multiplefriends as $mfriends)
+		{
+			$elements[] = $mfriends['user_id'];
+			$elements[] = $mfriends['friend_id'];
+		}
+	}
+
 //	
 	//my company followers
 	$companies = array();
@@ -509,6 +550,8 @@ public function related_friends()
 		$companies[] = $follow_cmp['companyinfo_id'];
 	}
 
+if(!empty($companies))
+{
 
 $this->db->select('user_id');
 $this->db->from('bzz_cmp_follow');
@@ -520,7 +563,7 @@ foreach($cmpfollowers as $users)
 {
 	$elements[] = $users['user_id'];
 }
-
+}
 $usercondition ="user_id ="."'".$id."'";
 //location based search for users
 
@@ -568,15 +611,15 @@ if($key!==false){
 						 {
 								$this->db->select('*');
 								$this->db->from('bzz_users');
-								$this->db->join('bzz_user_images','bzz_users.user_id=bzz_user_images.user_id AND bzz_users.user_id='.$each_id);
-								$this->db->join('bzz_userinfo','bzz_users.user_id=bzz_userinfo.user_id');
+								$this->db->join('bzz_user_images','bzz_users.user_id=bzz_user_images.user_id AND bzz_users.user_id='.$each_id);								$this->db->join('bzz_userinfo','bzz_users.user_id=bzz_userinfo.user_id');
 								$this->db->order_by('bzz_user_images.user_imageinfo_id','desc');
+								
 								$query = $this->db->get();
 								 $user_data =  $query->result_array();
 								
 						 }else{
 							  $this->db->select('*');
-							  $this->db->limit(2);
+							  
 							  $this->db->from('bzz_users');
 							  $this->db->join('bzz_userinfo','bzz_users.user_id=bzz_userinfo.user_id AND bzz_users.user_id='.$each_id);
 							 // $this->db->where($followercondition);
@@ -694,13 +737,7 @@ $searchblock .= "<figure class='myfriendspfpic'><img src='" . base_url() ."uploa
 else echo "No friends Found Based On your Search!..";
 
 	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 	/*	
@@ -786,7 +823,7 @@ else echo "No friends Found Based On your Search!..";
 public function user_frnds($frnd_id)
 {
 	$id = $this->session->userdata('logged_in')['account_id'];
-  	$condition =  "(user_id ='" .$frnd_id. "' or friend_id ='".$frnd_id."') AND (user_id = '".$id."' or friend_id ='".$id."')"; 
+  	$condition = "(user_id ='" .$frnd_id. "' or friend_id ='".$frnd_id."') AND (user_id = '".$id."' or friend_id ='".$id."')"; 
 	$this->db->select('*');
 	$this->db->from('bzz_userfriends');
 	$this->db->where($condition);

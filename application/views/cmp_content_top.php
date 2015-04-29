@@ -1,21 +1,7 @@
 <?php 		
-//$cmp_id = $this->session->userdata('cmp_id');
 $data  = $this->jobmodel->check_btn();
 $user_id = $this->session->userdata('logged_in')['account_id'];
 $cmp_following = $this->companies->following_companies_list();
-
-/*print_r($cmp_following);
-exit;*/
- 
-//$cmp_info = $this->companies->get_cmp_by_id($cmp_id); 
-/*print_r($data);
-
-
-print_r( $cmp_info[0]['companyinfo_id'] );
-print_r( $data[0]['companyinfo_id'] );
-print_r( $data[0]['user_id'] );
-echo $user_id;
-exit;*/
 ?>
 <section class="midbody container company">
   <div class="row">
@@ -26,7 +12,7 @@ exit;*/
           <div class="col-md-9">
             <div class="cmpContent">
               <h2><span class="glyphicon glyphicon-briefcase"></span><?php echo $cmp_info[0]['cmp_name'] ?></h2>
-              <p> <span><?php echo $cmp_info[0]['company_state'] ?>,<?php echo $cmp_info[0]['company_city'] ?></span> <span><?php echo $cmp_info[0]['cmp_industry'] ?></span> <span>Established Since: <span><?php $unixTimestamp = strtotime($cmp_info[0]['cmp_estb']); echo date('F',$unixTimestamp).", ".date('Y',$unixTimestamp); ?></span> <span>Number Of Employees: ( <?php echo $cmp_info[0]['cmp_colleagues'] ?> ) </span> </p>
+              <p> <span><?php echo $cmp_info[0]['company_state'] ?>,<?php echo $cmp_info[0]['company_city'] ?></span> <span><?php echo $cmp_info[0]['cmp_industry'] ?></span> <span>Established Since:<?php echo $cmp_info[0]['cmp_estb']; ?></span> <span>Number Of Employees: ( <?php echo $cmp_info[0]['cmp_colleagues'] ?> ) </span> </p>
      			<?php 
 				
 				$companies = array();
@@ -40,7 +26,7 @@ exit;*/
 					{
 				?>
 			
-              <input type="button" class="smg" value="Send Massage">
+              <input type="button" class="smg" value="Send Message"  data-toggle="modal" data-target="#cmp_sendmsg">
               <?php 
 				
 				$following_cmps = array();
@@ -63,7 +49,7 @@ exit;*/
 			  <?php }else{ ?>
               <input type="button" class="follow" id ="unfollow-btn" value="UnFollow" onclick="cmpFollowPage(<?php echo $cmp_info[0]['companyinfo_id']; ?>);">
 			  <?php }  } } }else{?>
-              <input type="button" class="smg" value="Send Massage">
+              <input type="button" class="smg" value="Send Message" data-toggle="modal" data-target="#cmp_sendmsg">
                <input type="button" class="follow" value="Follow"  id="follow-btn" data-toggle="modal" data-target="#followModal"  /> 
                <?php } ?>
             </div>
@@ -73,4 +59,6 @@ exit;*/
           </div>
         </div>
       </div>
+    </section>
+    </div>
     </section>

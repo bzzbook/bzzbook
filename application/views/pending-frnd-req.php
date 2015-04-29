@@ -23,6 +23,6 @@ $frnd_reqs = $this->friendsmodel->getPendingRequests();
                 <a href="#">Confirm</a><a href="#">Deny</a> </div>
             </li><?php */?>
           </ul>
-          <a href="#" class="link">View all</a> 
+          <a href="<?php echo base_url('friends/view_all_pending_reqs'); ?>" class="link">View all</a> 
           
  </div>

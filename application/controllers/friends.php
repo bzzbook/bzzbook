@@ -74,7 +74,22 @@ public function view_all_reqs()
 {  
          //$data['friends'] = $this->friendsmodel->getfriends();	
 	     $data['content']='all_add_friends';
-	     $this->load->view('template-view',$data);
+	     $this->load->view('full_content_view',$data);
+	  //$this->load->view('posts');	
+}
+
+public function view_all_pending_reqs()
+{  
+         //$data['friends'] = $this->friendsmodel->getfriends();	
+	     $data['content']='all_pending_frnd_requests';
+	     $this->load->view('full_content_view',$data);
+	  //$this->load->view('posts');	
+}
+public function view_all_latest_frnds()
+{  
+         //$data['friends'] = $this->friendsmodel->getfriends();	
+	     $data['content']='all_latest_friends';
+	     $this->load->view('full_content_view',$data);
 	  //$this->load->view('posts');	
 }
 

@@ -91,17 +91,26 @@
           <p>Lorem ipsum dolor sit amet, at choro omnium partiendo qui, nec nulla voluptua ex, te homero dissentiunt usu. Et vis latine epicuri voluptaria, <a href="#">posse veniam legimus eu ius</a>. Odio albucius ne vis, nec ad scaevola philosophia. Vide nominavi</p>
           <div class="sbButtons">
             <input type="submit" value="Sign Up Now">
-            <br>
-            <br>
-            <div
- 				 class="fb-like"
- 				 data-share="true"
- 				 data-width="450"
-  				 data-show-faces="true">
-			</div>
+           
           </div>
         </form>
       </div>
+      <div
+ 				 class="fb-like"
+ 				 data-share="true"
+ 				 data-width="450"
+  				 data-show-faces="true"
+                 style="margin-top:10px;">
+			</div>
+            <div class="twitter" style="margin-top:12px;">
+            <a href="https://twitter.com/twitter" class="twitter-follow-button" data-show-count="false">Follow @twitter</a>
+			<a class="twitter-share-button"
+  href="https://twitter.com/share"
+  data-via="twitterdev">
+Tweet
+</a>
+
+            </div>
     </div>
   </div>
   </div>
@@ -124,6 +133,27 @@
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
 </script>
+
+<script>window.twttr = (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0],
+    t = window.twttr || {};
+  if (d.getElementById(id)) return t;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://platform.twitter.com/widgets.js";
+  fjs.parentNode.insertBefore(js, fjs);
+ 
+  t._e = [];
+  t.ready = function(f) {
+    t._e.push(f);
+  };
+ 
+  return t;
+}(document, "script", "twitter-wjs"));</script>
+<script>
+window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return;js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);t._e=[];t.ready=function(f){t._e.push(f);};return t;}(document,"script","twitter-wjs"));
+</script>
+
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
 <script src="<?php echo base_url(); ?>js/jquery-1.11.1.min.js"></script> 
 <!-- Include all compiled plugins (below), or include individual files as needed --> 

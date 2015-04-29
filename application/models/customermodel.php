@@ -660,5 +660,21 @@ class Customermodel extends CI_Model {
 		return false;
 		}
    }
+   
+   public function reset_password($usermail,$pwd)
+   {
+	    $condition = "user_email =" . "'" . $usermail . "'";
+		$data['password'] = $pwd;
+		$this->db->update('bzz_users',$data);
+		$this->db->where($condition);
+		if($this->db->affected_rows() == 1)
+		{
+		$this->session->set_flashdata('resest_pwd_success','Your password Has Been Reset Successfully  You Can Login with New Password!....');
+			redirect('signg_in');
+		}else{
+		$this->session->set_flashdata('resest_pwd_failure','Your password Reset Not done ,Please Try again !....');
+			redirect('signg_in');
+		}
+   }
  }
 ?>

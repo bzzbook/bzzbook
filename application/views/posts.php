@@ -14,7 +14,7 @@
 		echo form_open('signg_in/send_post',$attr) ?>
         <input type="file" name="uploadPhotos[]" id="uploadPhotos" multiple="multiple" style="display:none;" />
         <textarea cols="" rows="" name="posts" id="posts" class="form-control" placeholder="What's Buzzing?"></textarea>
-        <div class="updateControls"> <a href="javascript:{}" onclick="document.getElementById('my_form').submit(); return false;">Post</a> <select name="post_group" id="post_group"><option value="0">Public</option> <?php $groups = $this->profile_set->get_user_groups(); if($groups) { 
+        <div class="updateControls" id="updateControls"> <a href="javascript:{}" onclick="document.getElementById('my_form').submit(); return false;">Post</a> <select name="post_group" id="post_group"><option value="0">Public</option> <?php $groups = $this->profile_set->get_user_groups(); if($groups) { 
 		foreach($groups as $group)
 		{
 			echo "<option value='".$group['group_id']."'>".$group['group_name']."</option>";
@@ -143,7 +143,7 @@
             <figure><img src="<?php echo base_url();?>uploads/<?php if(!empty($image[0]->user_img_thumb)) echo $image[0]->user_img_thumb; else echo 'default_profile_pic.png';; ?>" alt=""></figure>
             <div class="postAComment"> 
             	<div class="postACommentInner">
-                           <form action="<?php echo base_url();?>signg_in/write_comment/<?php echo $row->post_id;?>" method="post" style="width:100% !important;" enctype="multipart/form-data">
+                           <form action="<?php echo base_url();?>signg_in/write_comment/<?php echo $row->post_id;?>" method="post" style="width:100% !important;" enctype="multipart/form-data" autocomplete="off">
             <a href="javascript:document.getElementById('uploadCommentPhotos<?php echo $row->post_id;?>').click();javascript:document.getElementById('write_comment<?php echo $row->post_id;?>').focus(); " class="upload"><span aria-hidden="true" class="glyphicon glyphicon-camera"></span></a>
  <input type="text" class="form-control comment" placeholder="Write a Comment..." name="write_comment" id="write_comment<?php echo $row->post_id; ?>">                             <input type="hidden" name="post_id" value="<?php echo $row->post_id;?>">
                <input type="hidden" name="posted_by" value="<?php echo $curr_user_id;?>">

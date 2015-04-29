@@ -1,6 +1,5 @@
 <!-------------------------- Education Modal Start --------------->
 
-
   <div class="filed col-md-12 col-lg-12">
                <div class="modal fade" id="eduModal" tabindex="-1" role="dialog" aria-labelledby="eduModalLabel" aria-hidden="true">
               <div class="modal-dialog">
@@ -438,7 +437,7 @@
               <div class="filed col-md-6">
                 <select class="form-control" id="cmp_estb" name="cmp_estb">
                   <option value="0">Established in</option>
-                     <?php for($i=1950;$i<=date(Y);$i++){?>
+                     <?php for($i=1800;$i<=date(Y);$i++){?>
                                 	<option value="<?php echo $i;?>"><?php echo $i;?></option>
                                 <?php }?>             
                 </select>
@@ -678,3 +677,22 @@
 <!------------countrys and states scripts ------------>
 
 <!------------countrys and states scripts ------------>
+<!------------Company Send Message Start------------>
+<div class="modal fade" id="cmp_sendmsg">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Send Message</h4>
+      </div>
+      <div class="modal-body">
+        <textarea class="form-control" rows="3" cols="15"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!------------Company Send Message End ------------>

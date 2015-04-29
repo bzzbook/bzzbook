@@ -323,6 +323,28 @@ class signg_in extends CI_Controller {
 	   
    }
   
+   public function forgetpwd($user_email)
+   {
+	    $condition ="user_email ="."'".$user_email."'";
+		$this->db->select('*');
+		$this->db->from('bzz_users');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		if ($query->num_rows() == 1) {
+			echo true;
+		} else {
+		    echo false;
+		}
+	   
+   }
    
+    public function pwd_reset($user_email)
+   {
+	   $this->load->view('password_reset',$user_email);
+   }
+   public function reset_pwd($user_email,$pwd)
+   {
+	   $data['result'] = $this->customermodel->reset_password($user_email,$pwd);
+   }
  }
 ?>

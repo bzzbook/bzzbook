@@ -285,14 +285,17 @@ public function get_mn_cmp_list()
 	
 	// this function will return data of all companies when user registers initially
 	
-	public function get_initial_companies()
+	public function get_initial_companies($limit)
 	{
 		$id = $this->session->userdata('logged_in')['account_id'];
 	    $condition = "user_id !=" . "'" . $id . "'";
 		$this->db->select('*');
 		$this->db->from('bzz_companyinfo');
 		$this->db->where($condition);
+		if($limit != 0)
+		{
 		$this->db->limit(2);
+		}
 		$query = $this->db->get();
 		if($query->num_rows() > 0)
 		{
@@ -300,7 +303,7 @@ public function get_mn_cmp_list()
 		}else 
 		return false;
 	}
-	//this fuction will return th data of frnds following companies
+	//this fuction will return the data of frnds following companies
 	public function get_companies_to_follow()
 	{
 		
@@ -319,7 +322,6 @@ public function get_mn_cmp_list()
 			{			
 				// friends following companies
 				$id = $this->session->userdata('logged_in')['account_id'];
-			   //$condition = "user_id =" . "'" . $friend['friend_id'] ."'  AND follow_status='Y'" ;
 			    $condition = "(user_id ='".$friend['friend_id']."' OR user_id='".$friend['user_id']."')  AND follow_status='Y'" ;
 				$this->db->distinct();
 				$this->db->from('bzz_cmp_follow'); 
@@ -331,17 +333,14 @@ public function get_mn_cmp_list()
 					$elements[] = $follower[0]['companyinfo_id'];					
 			    }
 	     	}
-			//echo 'friends following cmps';
+		
 			$elements_uni = array_unique($elements);
-			//print_r($elements_uni);
-		    //exit;
 			
-
 			//user friends created companies
 			$frnd_companies = array();
 				foreach($friends as $friend)
 				{	
-				   //$condition = "user_id =" . "'" . $friend['friend_id'] ."'  AND follow_status='Y'" ;
+				  
 					$condition = "(user_id ='".$friend['friend_id']."' OR user_id='".$friend['user_id']."')" ;
 					$this->db->select('companyinfo_id');
 					$this->db->from('bzz_companyinfo'); 
@@ -354,8 +353,6 @@ public function get_mn_cmp_list()
 					}
 				
 				}
-			
-			//print_r($frnd_companies);
 			
 			// user following companies list
 			
@@ -375,8 +372,7 @@ public function get_mn_cmp_list()
 						$userfollowing[] = $userfollow['companyinfo_id'];
 					}
 					$elements = array_diff($elements,$userfollowing);
-				/*echo 'user following cmps';
-				print_r($userfollowing);*/
+			
 				
 				}
 			// user companies
@@ -395,19 +391,11 @@ public function get_mn_cmp_list()
 					$cmp[] = $mycmp['companyinfo_id'];	
 				}
 				$elements = array_diff($elements,$cmp);
-		   /*echo 'user cmps';
-			print_r($cmp);*/
+		  
 			}
 			
 			$following_cmps = array_unique($elements);
-				/*echo "all following companies";
-				print_r($following_cmps);*/
-			
-			//$first = array_diff($following_cmps,$userfollowing);
-			/*echo " first differ"; 
-				print_r($first);*/
-			
-		    //print_r($second);
+		
 						if($following_cmps)
 						{
 						  $this->db->select('*');
@@ -435,9 +423,7 @@ public function get_mn_cmp_list()
 				$oth_cmps[] = $cmp['companyinfo_id'];
 			}
 		
-			/*echo "other companies";
-			print_r($oth_cmps);
-			*/	
+		
 				// user companies
 			$id = $this->session->userdata('logged_in')['account_id'];
 			$mycompanycondition = "user_id =" . "'" . $id . "'" ;
@@ -456,8 +442,7 @@ public function get_mn_cmp_list()
 				}
 		
 			}
-			/*echo 'user cmps';
-			print_r($usrcmp);*/
+		
 			
 			    $condition = "user_id =" . "'" . $id  ."'  AND (follow_status='Y' OR follow_status='W')" ;
 				$this->db->select('companyinfo_id');
@@ -473,21 +458,18 @@ public function get_mn_cmp_list()
 					{
 						$usrfollowing[] = $userfollow['companyinfo_id'];
 					}
-				/*echo 'user following cmps';
-				print_r($userfollowing);*/
 				
 				}
 				$usrownfollow = array_merge($usrcmp,$usrfollowing);
-				//print_r($usrownfollow);
+			
 				$companies = array_unique(array_diff($oth_cmps,$usrownfollow));
-				//print_r($companies);
-		//exit;
+	
 			if($companies)
 					{
 					  $this->db->select('*');
 					  $this->db->from('bzz_companyinfo');
 					  $this->db->where_in('companyinfo_id',$companies);
-					  $this->db->limit(2);
+					  //$this->db->limit(2);
 					  $query = $this->db->get();
 					  if ($query->num_rows() > 0) {
 					   return $query->result_array();
@@ -660,7 +642,7 @@ public function get_followers($id)
 		 $this->db->from('bzz_user_images');
 		 $this->db->where($followercondition);
 		 $query = $this->db->get();
-		 if($query->num_rows > 0)
+		 if($query->num_rows() > 0)
 		 {
 				$this->db->select('*');
 				$this->db->from('bzz_users');
@@ -672,7 +654,7 @@ public function get_followers($id)
 				
 		 }else{
 			  $this->db->select('*');
-			  $this->db->limit(2);
+			 // $this->db->limit(2);
 			  $this->db->from('bzz_users');
 			  $this->db->join('bzz_userinfo','bzz_users.user_id=bzz_userinfo.user_id AND bzz_users.user_id='.$follower['user_id']);
 			 // $this->db->where($followercondition);
@@ -702,5 +684,19 @@ $condition = "cmp_industry =" . "'" . $searchcompanies['industry'] . "'" . " AND
 		return false;
 }
 
+public function all_cmp_names_search($keyword)
+{
+	$condition = "cmp_name  like '%".$keyword."%'";
+	$this->db->select('cmp_name');
+	$this->db->where($condition);
+	$query = $this->db->get('bzz_companyinfo');
+	if($query->num_rows() > 0)
+	{
+	$data = $query->result_array();
+	return $data; 
+	}else
+	return false;
 }
+}
+
 ?>
