@@ -353,5 +353,11 @@ public function cmp_name_search()
 
 }
 
+
+public function allSearch($category,$search_data)
+{
+	echo $category;
+	echo $search_data;
+}
 }
 ?>

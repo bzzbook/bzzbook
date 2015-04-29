@@ -31,14 +31,14 @@ $session_data = $this->session->userdata('logged_in');
     <div class="col-lg-6 col-md-6 col-sm-4 col-xs-12 search">
       <div class="input-group"> <span class="input-group-btn">
         <input type="button" value="" role="button"  class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" id="drop2">
-        <ul aria-labelledby="drop2" role="menu" class="dropdown-menu">
-          <li><a href="h#" tabindex="-1" role="menuitem">Jobs</a></li>
-          <li><a href="h#" tabindex="-1" role="menuitem">Companies</a></li>
-          <li><a href="h#" tabindex="-1" role="menuitem">Events</a></li>
-          <li><a href="h#" tabindex="-1" role="menuitem">Members</a></li>
+        <ul aria-labelledby="drop2" role="menu" class="dropdown-menu" id="searchbar_category">
+          <li id="jobs"><a href="#" tabindex="-1" role="menuitem">Jobs</a></li>
+          <li id="companies"><a href="#" tabindex="-1" role="menuitem">Companies</a></li>
+          <li id="events"><a href="#" tabindex="-1" role="menuitem">Events</a></li>
+          <li id="memberes"><a href="#" tabindex="-1" role="menuitem">Members</a></li>
         </ul>
         </span>
-        <input type="search" placeholder="Search Here......" class="form-control">
+        <input type="search" placeholder="Search Here......" class="form-control" id="cmp_header_searchbar">
         <div class="find"><a href="#">Find</a></div>
       </div>
     </div>

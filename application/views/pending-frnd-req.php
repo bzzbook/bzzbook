@@ -1,6 +1,6 @@
 <?php 
 //$this->load->model('friendsmodel'); 
-$frnd_reqs = $this->friendsmodel->getPendingRequests();
+$frnd_reqs = $this->friendsmodel->getPendingRequests($limit = 2);
 
 ?> 
  

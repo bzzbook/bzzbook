@@ -53,6 +53,8 @@ $cmp_following = $this->companies->following_companies_list();
                <input type="button" class="follow" value="Follow"  id="follow-btn" data-toggle="modal" data-target="#followModal"  /> 
                <?php } ?>
             </div>
+            <div class="dfdf">
+            </div>
           </div>
           <div class="col-md-3">
             <figure class="cmplogo"><img src="<?php echo base_url(); ?>uploads/<?php echo $cmp_info[0]['company_image'] ?>" ></figure>

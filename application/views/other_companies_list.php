@@ -19,12 +19,14 @@ $cmp_reqs = $this->companies->get_initial_companies($limit = 2);
               <div class="disc">
                 <h4><?php echo $req['cmp_name'] ?></h4>
                 <div class="dcBtn"><a href="<?php echo base_url("company/company_disp/".$req['companyinfo_id']); ?>"> View </a>
-                  <a href="javascript:void(0);"  onclick="cmpFollow(<?php echo $req['companyinfo_id']; ?>);"> Follow </a>
+                  <a href="javascript:void(0);" id="sidebar_follow<?php echo $req['companyinfo_id']; ?>" onclick="cmpFollow(<?php echo $req['companyinfo_id']; ?>);"> Follow </a>
               <!--  <a href="javascript:void(0);"  onclick="cmpFollow(<?php //echo $req['companyinfo_id']; ?>);"> Follow </a>
                data-id="<?php // echo $req['companyinfo_id']; ?>" data-toggle="modal" data-target="#followModal1"
               -->
                  <!--<a href="javascript:void(0);" onclick="blockFrnd(<?php // echo $req['id']; ?>);"> </a> --></div>
                 </div>
+              <div id="qwer">
+				</div>
             </li>
           
             <?php }  } else echo "No Companies Available"; ?>

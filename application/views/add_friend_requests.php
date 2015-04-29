@@ -17,7 +17,7 @@ $add_frnd_reqs = $frnds;
               <figure><img src="<?php if(!empty($req[0]['user_img_thumb'])) { echo base_url().'uploads/'.$req[0]['user_img_thumb']; }else echo base_url().'uploads/default_profile_pic.png'; ?>" alt="<?php echo $req[0]['user_firstname'] . " " .$req[0]['user_lastname']; ?>"></figure>
               <div class="disc">
                 <h4><?php echo $req[0]['user_firstname'] . " " .$req[0]['user_lastname']; ?></h4>
-                <div class="dcBtn"><a href="javascript:void(0);" onclick="addFrnd(<?php echo $req[0]['user_id']; ?>);">Add Friend</a></div>
+                <div class="dcBtn"><a id="sidebar_addfrnd<?php echo $req[0]['user_id']; ?>" href="javascript:void(0);" onclick="addFrnd(<?php echo $req[0]['user_id']; ?>);">Add Friend</a></div>
                 </div>
             </li>
             <?php } }else echo "No Friends Found!.."; ?>

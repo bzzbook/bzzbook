@@ -683,6 +683,7 @@ function acceptFrnd(id)
         success: function(data)
         {   
 			$("#pendingReqUl").html(data);
+			location.reload();
 		},
 		cache: false
 		});
@@ -698,6 +699,7 @@ function denyFrnd(id)
         success: function(data)
         {   
 			$("#pendingReqUl").html(data);
+			location.reload();
 		},
 		cache: false
 		});
@@ -713,6 +715,7 @@ function blockFrnd(id)
         success: function(data)
         {   
 			$("#pendingReqUl").html(data);
+			location.reload();
 		},
 		cache: false
 		});
@@ -721,6 +724,7 @@ function blockFrnd(id)
 
 function addFrnd(id)
 {
+	$("#sidebar_addfrnd"+id).html('<img src="<?php echo base_url(); ?>images/addfrnd_loader.gif" />');
 		url="<?php echo base_url(); ?>friends/addFriend/"+id;
 		$.ajax({
         type: "POST",
@@ -827,6 +831,9 @@ function denyFollow(user_id,cmp_id)
 
 function cmpFollow(comp_id)
 {
+		
+	 
+$("#sidebar_follow"+comp_id).html('<img src="<?php echo base_url(); ?>images/follow_loader.gif" />');
     $('#followModal1').modal('toggle');
 	
 	$('#follow_modal').click(function()
@@ -841,11 +848,36 @@ function cmpFollow(comp_id)
         {  
 		$('#followModal1').modal('toggle'); 
 	    $("#cmpfollowers").html(data);
+		//$("#sidebar_follow").hide();
 		},
 		cache: false
 		});
 	});
-	return false;
+	
+	
+	
+	$('.btn').click(function()
+	{
+		if($("#followModal1").is(':visible'))
+		 { 
+ 		 $("#sidebar_follow"+comp_id).text('Follow');
+		}else{
+		$("#sidebar_follow"+comp_id).html('<img src="<?php echo base_url(); ?>images/follow_loader.gif" />');
+		}
+	});
+	
+	
+	
+	$('.close').click(function()
+	{
+		if($("#followModal1").is(':visible'))
+		 { 
+ 		 $("#sidebar_follow"+comp_id).text('Follow');
+		}else{
+		$("#sidebar_follow"+comp_id).html('<img src="<?php echo base_url(); ?>images/follow_loader.gif" />');
+		}
+	});
+	
 }
 
 
@@ -1792,6 +1824,57 @@ $('#forgot_password').submit(function(){
  });	
 	
 	
+$('#searchbar_category li').click(function()
+{
+	   
+	  var category = $(this).attr('id');
+	  alert(category);
+	  if(this.id == '')
+	  {
+		  category = 'all';
+	  }
+	 
+	  var search_data = $('#cmp_header_searchbar').val();
+	  alert(search_data);
+	
+	/*  $.ajax({
+ 			url:"<?php echo base_url(); ?>company/allSearch/"+search_data+"/"+category; 
+ 			dataType: 'json',
+ 			type: 'POST',
+ 			data: req,
+ 			success: function(data){
+ 				//if(data.response =='true'){
+ 				 $('#org_name').html(data);
+ 				//}
+ 			}
+ 		});*/
+	});  
+
+/*$('#cmp_header_searchbar').click({
+	
+	
+		$('#searchbar_category li').click(functon() {
+			 alert(this.id);
+		});
+	//alert(cat);
+ 	//minLength: 1,
+ 	/*source: function(req, add){
+ 		$.ajax({
+ 			url:'<?php // echo base_url(); ?>company/allSearch/', //Controller where search is performed
+ 			dataType: 'json',
+ 			type: 'POST',
+ 			data: req,
+ 			success: function(data){
+ 				//if(data.response =='true'){
+ 				 $('#org_name').html(data);
+ 				//}
+ 			}
+ 		});
+ 	}
+ 
+
+	 
+});	*/
 </script>
 
 

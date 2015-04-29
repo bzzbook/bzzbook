@@ -1,5 +1,5 @@
 <?php 
-$frnd_reqs = $this->friendsmodel->getPendingRequests();
+$frnd_reqs = $this->friendsmodel->getPendingRequests($limit = 0);
 ?> 
 <section class="col-lg-9 col-md-9 nopad">
       <div class="col-xs-12 ProfileView">

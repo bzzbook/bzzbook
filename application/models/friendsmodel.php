@@ -68,7 +68,7 @@ class Friendsmodel extends CI_Model {
    }
 
    
-   public function getPendingRequests($limit = 2)
+   public function getPendingRequests($limit)
 	{
 		$id = $this->session->userdata('logged_in')['account_id'];
 	    $condition = "friend_id =" . "'" . $id . "' AND request_status ='W'";
@@ -142,7 +142,7 @@ class Friendsmodel extends CI_Model {
 			
 			$this->db->insert('bzz_userfriends', $frnddata);*/
 			
-			$pend_req = $this->getPendingRequests();
+			$pend_req = $this->getPendingRequests($limit = 2);
 			$list = "";
 		    if($pend_req) { foreach($pend_req as $req){
            $list .= " <li>
@@ -161,14 +161,14 @@ class Friendsmodel extends CI_Model {
 	public function denyfriend($req_id)
 	{
 		$id = $this->session->userdata('logged_in')['account_id'];
-	    $condition = "user_id =" . "'" . $id . "' AND friend_id =".$req_id;
+	    $condition ="(user_id ='" .$req_id. "' or friend_id ='".$req_id."') AND (user_id = '".$id."' or friend_id ='".$id."')";
 		
 			$data = array(
                'request_status' => 'N',
             );
 			$this->db->where($condition);
 			$this->db->update('bzz_userfriends', $data); 
-			$pend_req = $this->getPendingRequests();
+			$pend_req = $this->getPendingRequests($limit = 2);
 			$list = "";
 		    if($pend_req) { foreach($pend_req as $req){
            $list .= " <li>
@@ -187,14 +187,14 @@ class Friendsmodel extends CI_Model {
 	public function blockfriend($req_id)
 	{
 		$id = $this->session->userdata('logged_in')['account_id'];
-	    $condition = "user_id =" . "'" . $id . "' AND friend_id =".$req_id;
+	    $condition ="(user_id ='" .$req_id. "' or friend_id ='".$req_id."') AND (user_id = '".$id."' or friend_id ='".$id."')";
 		
 			$data = array(
                'request_status' => 'B',
             );
 			$this->db->where($condition);
 			$this->db->update('bzz_userfriends', $data); 
-			$pend_req = $this->getPendingRequests();
+			$pend_req = $this->getPendingRequests($limit = 2);
 			$list = "";
 		    if($pend_req) { foreach($pend_req as $req){
            $list .= " <li>
@@ -239,9 +239,9 @@ class Friendsmodel extends CI_Model {
 			$this->db->insert('bzz_userfriends', $data); 
 		}
 			
-			$frnd_req = $this->related_friends();
+			$frnd_req = $this->related_friends($limit = 2);
 			if(!$frnd_req)
-			$frnd_req = $this->friendsmodel->finding_friends();
+			$frnd_req = $this->friendsmodel->finding_friends($limit = 2);
 			$list = "";
 		    if($frnd_req) { foreach($frnd_req as $req){
            $list .= " <li>
