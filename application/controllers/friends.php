@@ -92,6 +92,12 @@ public function view_all_latest_frnds()
 	     $this->load->view('full_content_view',$data);
 	  //$this->load->view('posts');	
 }
+public function getfriendsuggestion($name,$addeduser=''){
+	$suggestions = $this->friendsmodel->getfriends($name,$addeduser);
+	foreach($suggestions as $suggestion){
+	echo "<div class='as_frnd_container' onclick='addfrndtogostpost(".$suggestion['id'].",&#39;".$suggestion['name']."&#39;)'><div class='as_frnd_img'><img src='".base_url().'uploads/'.$suggestion['image']."'/></div><div class='as_frnd_name'>".$suggestion['name']."</div><div class='clearfix' ></div></div>";
+	}
+}
 
 }
 ?>

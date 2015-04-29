@@ -95,8 +95,12 @@ class signg_in extends CI_Controller {
 	 $data['posted_by'] = $session_data['account_id'];
 	 $data['post_content'] = $this->input->post('posts');
 	 $data['uploaded_files'] = $this->doupload();
-	 
-	 if($this->input->post('post_group')==0)
+	 if($this->input->post('addedusers')!='')
+	 {
+		 $data['posted_to'] = $this->input->post('addedusers');
+		 $this->customermodel->post_buzz($data); 
+	 }
+	 else if($this->input->post('post_group')==0)
 	 {
 		  $data['posted_to']='';
 		   $this->customermodel->post_buzz($data);

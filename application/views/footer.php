@@ -83,7 +83,7 @@ $(function () {
    $('#event_discussion').validate();
    $('#change_pwd').hide();
    $('#pf_pwd_change').validate();
-   $('#updateControls').hide();
+  
  
   $('#posts').focusin(function() 
    {
@@ -1612,7 +1612,7 @@ $("form[name=cmp_postboard]").submit(function(event){
 			
 //search friends functionality by sp on 10-4-2015
 $('#search_frnds').keyup(function(){
-	value = $('#search_frnds').val();
+	var value = $('#search_frnds').val();
 	var length = value.length;
 	var errors = '';
 	if(value == '') 
@@ -1642,6 +1642,62 @@ $('#search_frnds').keyup(function(){
 	};
 
 });
+// Goust post functionality start
+function addfrndtogostpost(user_id,name){
+var cur_content = $('#selectedfriends').html();
+var new_content = "<span id='"+user_id+"'>"+name+"<a onclick='removefrnd("+user_id+")'><img class='as_close_btn' src='<?php echo base_url().'images/close_btn.png'; ?>'/></a></span>";
+ $('#selectedfriends').html(new_content+cur_content);
+ $('#searchfriends').focus();
+ $('#autosuggest').hide();
+var addedusers = $('#addedusers').val()
+if(addedusers!='')
+$('#addedusers').val(addedusers+','+user_id)
+else
+$('#addedusers').val(user_id)
+
+}
+function removefrnd(user_id){
+	var addedusers = $('#addedusers').val();
+	var len = addedusers.length;
+	var newval = '';
+	if(len==1)
+	{ 
+		newval = '';
+	}
+	else if(addedusers.indexOf(user_id)==(len-1)){
+	newval = addedusers.replace(','+user_id,'');
+	}
+	else if(addedusers.indexOf(user_id)==0)
+	newval = addedusers.replace(user_id+',','');
+	else
+	newval = addedusers.replace(user_id+',','');
+	$('#addedusers').val(newval);
+	$('#'+user_id).remove();
+}
+function keyupevent(){
+	var value = $('#searchfriends').val();
+	var addedusers = $('#addedusers').val();
+	if(value!='')
+	{	
+	url="<?php echo base_url(); ?>friends/getfriendsuggestion/"+value+"/"+addedusers;
+		$.ajax({
+        type: "POST",
+        url: url,
+        success: function(data)
+        {   
+			$('#autosuggest').html(data);
+			$('#autosuggest').show();
+		},
+		cache: false
+		});
+	}
+	else{ $('#autosuggest').hide(); }
+}
+function showghostinput(){
+	$('#selectedfriends').toggle();
+	$('#searchfriends').focus();
+}
+// ghost post functionality end
 
 /*$('#event_form').submit( function( event)
 	{

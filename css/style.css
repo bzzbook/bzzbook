@@ -104,8 +104,8 @@ header .search .input-group .input-group-btn ul li a:hover{ background:url(../im
 .midbody .coloumn2 .updateStatus ul li:nth-child(3) a{ background:url(../images/update_status_icon2.png) no-repeat 25px center;}
 .midbody .coloumn2 .updateStatus ul li:nth-child(4) a{ background:url(../images/update_status_icon3.png) no-repeat 25px center;}
 .midbody .coloumn2 .updateStatus textarea{ border:none; box-shadow:none; background:#f9f8f8; font-size:12px; font-weight:300; resize:none;}
-.midbody .coloumn2 .updateStatus .updateControls{ background:#e8e8e8; padding:10px;}
-.midbody .coloumn2 .updateStatus .updateControls a{ background:#609b34; height:30px; font-size:14px; line-height:30px; padding:0 15px; display:inline-block; -webkit-border-radius:2px; border-radius:2px; color:#fff; font-weight:300;}
+.midbody .coloumn2 .updateStatus .updateControls{ background:#e8e8e8; padding:5px; display:none;}
+.midbody .coloumn2 .updateStatus .updateControls a{ background:#609b34; /*height:30px;*/ font-size:14px; /*line-height:30px;*/ padding:0 15px; display:inline-block; -webkit-border-radius:2px; border-radius:2px; color:#fff; font-weight:300;}
 .midbody .coloumn2 .updateStatus .updateControls a+a{ background:#2f2f2f;}
 .midbody .coloumn2 .posts{ margin-bottom:15px; }
 .midbody .coloumn2 .posts article{background: #fff; border: 1px solid; border-color: #e5e6e9 #dfe0e4 #d0d1d5; border-radius: 2px; margin-bottom:15px; padding:15px 15px 0 15px;}
@@ -953,3 +953,33 @@ width: 73.7%; !important;}
    background:/*#609b34*/#fbc436;
     margin-left: 3px;
 }
+#selectedfriends{border-top:1px dashed grey;
+min-height:20px;
+width:100%; display:none;
+}
+#searchfriends{
+ background: none repeat scroll 0 0 transparent;
+    border: medium none;
+    font-size: 13px;
+    height: 20px;
+    padding-left: 5px;
+}
+
+#search_frnd_wrapper{ position:relative;}
+#autosuggest{position:absolute;	width:200px; z-index:111; background-color:white; display:none; padding:5px; border:1px solid #f1f1f1;}
+
+.as_frnd_container{ width:100%; margin-bottom:2px;}
+.as_frnd_container:hover{ cursor:pointer; cursor:hand; }
+.as_frnd_img img{ width:25%; float:left; }
+.as_frnd_name{ vertical-align:middle; }
+.clearfix{ clear:both; }
+.as_close_btn{ vertical-align:middle; }
+
+#autosuggest .as_frnd_container{  background:#fbc436; color:#000;line-height:30px;}
+#updateControls{ text-align:right; line-height:24px;} 
+#autosuggest .as_frnd_img img{ width:16%; margin-right:10px;}
+#selectedfriends > span {   float: left;  font-size: 13px;  margin-right: 5px;}
+#search_frnd_wrapper{ float:left;}
+
+.ghost{ height: 19px;  position: relative;  right: 6px; top: 4px;}
+.ghost:hover{ cursor:pointer; cursor:hand;}

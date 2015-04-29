@@ -680,6 +680,7 @@ public function showfavs()
 		$this->load->view('full_content_view',$data);
 		//$this->load->view('jobs');
 	}
+	
   public function updatefield()
   {
 	  //parse_str($_POST['form_data'],$field_info);
