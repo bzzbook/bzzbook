@@ -25,7 +25,7 @@ $(document).ready(function() {
 			}
 		});
 		
-		$("button").click(function() {
+		/*$("button").click(function() {
 			$( ".fbphotobox" ).append('<img class="photo" fbphotobox-src="images/dummy-1760x990-Mosque.jpg" src="images/dummy-1760x990-Mosque.jpg"/><img class="photo" fbphotobox-src="images/dummy-1920x2560-Goemetry.jpg" src="images/dummy-1920x2560-Goemetry.jpg"/>');
-		});
+		});*/
 	});	
