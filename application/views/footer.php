@@ -1717,8 +1717,10 @@ function keyupevent(){
         url: url,
         success: function(data)
         {   
+			if(data){
 			$('#autosuggest').html(data);
 			$('#autosuggest').show();
+			}
 		},
 		cache: false
 		});

@@ -93,9 +93,9 @@
           </div>
            <div class="field col-md-6 dob">
             <label>Birthday</label>
-            <div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2012-02-12" id="dpYears" 
+            <div data-date-viewmode="years" data-date-format="mm-dd-yyyy" data-date="28-12-2015" id="dpYears" 
             class="input-group-bt date">
-              <input type="text" readonly name="dob" value="2012-02-12" size="16" class="form-control">
+              <input type="text" name="dob" placeholder="mm-dd-yyyy" size="16" class="form-control" data-rule-dob="true" >
               <span aria-hidden="true" class="add-on glyphicon glyphicon-calendar"></span> </div>
       
           <p>Why do I need to provide my birthday?</p>

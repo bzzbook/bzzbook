@@ -13,53 +13,36 @@
           <div class="tab-content">
             
             <div role="tabpanel" class="tab-pane active" id="compose">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="row"> <input type="checkbox" name="btSelectAll">
-                    </th>
-                    <th scope="row"><div class="move"><span aria-hidden="true" class="glyphicon glyphicon-refresh"></span></div></th>
-                    <th scope="row"><select class="move">
-                        <option>More</option>
-                      </select></th>
-                    <th scope="row"><select class="move" >
-                        <option>Move to</option>
-                      </select></th>
-                    <th class="ad_right"><div class="move">1-34 of 34<a href="#"><span aria-hidden="true" class="glyphicon glyphicon-chevron-left"></span></a> <a href="#"><span aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span></a></div></th>
-                  </tr>
-                </thead>
-               <tbody>
-                  <tr>
-                    <th scope="row"><input type="checkbox" name="btSelectAll"></th>
-                    <td><span aria-hidden="true" class="glyphicon glyphicon-star"></span></td>
-                    <td>Siva Prasad</td>
-                    <td>Lorem ipsum dolor sit amet</td>
-                    <td class="ad_right">09:33 AM</td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><input type="checkbox" name="btSelectAll"></th>
-                    <td><span aria-hidden="true" class="glyphicon glyphicon-star"></span></td>
-                    <td>Siva Prasad</td>
-                    <td>Lorem ipsum dolor sit amet</td>
-                    <td class="ad_right">09:33 AM</td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><input type="checkbox" name="btSelectItem" data-index="1"></th>
-                    <td><span aria-hidden="true" class="glyphicon glyphicon-star"></span></td>
-                    <td>Siva Prasad</td>
-                    <td>Lorem ipsum dolor sit amet</td>
-                    <td class="ad_right">09:33 AM</td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><input type="checkbox" name="btSelectItem" data-index="1"></th>
-                    <td><span aria-hidden="true" class="glyphicon glyphicon-star"></span></td>
-                    <td>Siva Prasad</td>
-                    <td>Lorem ipsum dolor sit amet</td>
-                    <td class="ad_right">09:33 AM</td>
-                  </tr>
-                </tbody>
-                
-              </table>
+              <div class="bott_replys col-md-5 col-md-offset-1">
+                        <div class="bott_top"><a href="#"><i class="fa fa-mail-reply"></i></a>
+                          <button id="btnGroupVerticalDrop2" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> <span class="caret"></span> </button>
+                          <ul class="dropdown-menu" role="menu" aria-labelledby="btnGroupVerticalDrop4">
+                            <li><a href="#">Dropdown link</a></li>
+                            <li><a href="#">Dropdown link</a></li>
+                          </ul>
+                        </div>
+                        <div class="adres_box">To</div>
+                        <div class="adres_right"><a href="#">Cc</a> <a href="#">Bcc</a></div>
+                      </div>
+                      <div class="bott_replys ad_box col-md-5 col-md-offset-1">
+                        <div class="commentss"><img src="<?php echo base_url(); ?>images/commenting.png" alt=""></div>
+                      </div>
+                      <div class="bott_replys bott_boxcolor col-md-5 col-md-offset-1">
+                        <div class="col-md-1">
+                          <div class="btn3 btn-yellow ad_ing">Sent</div>
+                        </div>
+                        <div class="adres_box"><img src="<?php echo base_url(); ?>images/paper_clip.png" alt=""></span></div>
+                        <div class="adres_right_ad">
+                          <div class="ad_lefts">
+                            <div class="bott_top">
+                              <button id="btnGroupVerticalDrop2" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> 
+                              <span class="caret"></span> </button>
+                            </div>
+                          </div>
+                          <div class="ad_lefts ri_ght"><a href="#"><i class="fa fa-trash-o"></i></a></div>
+                          <div class="ad_lefts"><a href="#">Saved</a></div>
+                        </div>
+                      </div>
             </div>
             <div role="tabpanel" class="tab-pane" id="inbox">
             <?php  $messages = $this->messages->getRecievedMessages();?>

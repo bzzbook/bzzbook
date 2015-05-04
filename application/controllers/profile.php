@@ -70,6 +70,12 @@ public function message()
 	$this->load->view('full_content_view',$data);
    //$this->load->view('messages');
 }
+public function messageview()
+  { 
+  	$data['content']='messages_view';
+	$this->load->view('full_content_view',$data);
+   //$this->load->view('messages');
+}
 public function events()
 {
 		$data['content']='events';

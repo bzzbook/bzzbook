@@ -21,6 +21,7 @@ $session_data = $this->session->userdata('logged_in');
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/jqtransform.css" type="text/css" media="all" />
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/fbphotobox.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css" />
+<link href="<?php echo base_url(); ?>css/font-awesome.min.css" rel="stylesheet">
 
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
