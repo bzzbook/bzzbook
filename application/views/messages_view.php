@@ -72,6 +72,7 @@
                       </div>
                       <div class="bott_replys ad_box col-md-5 col-md-offset-1">
                         <div class="commentss"><img src="<?php echo base_url(); ?>images/commenting.png" alt=""></div>
+                        
                       </div>
                       <div class="bott_replys bott_boxcolor col-md-5 col-md-offset-1">
                         <div class="col-md-1">

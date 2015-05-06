@@ -1,3 +1,5 @@
+<script type="text/javascript" src="<?php echo base_url(); ?>js/jquery-1.3.2.js"></script>
+
 <section class="inbox col-lg-9 col-md-9 pfSettings">
       <div class="posts_inbox">
         <div role="tabpanel"> 
@@ -14,18 +16,18 @@
             
             <div role="tabpanel" class="tab-pane active" id="compose">
               <div class="bott_replys col-md-5 col-md-offset-1">
-                        <div class="bott_top"><a href="#"><i class="fa fa-mail-reply"></i></a>
-                          <button id="btnGroupVerticalDrop2" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> <span class="caret"></span> </button>
-                          <ul class="dropdown-menu" role="menu" aria-labelledby="btnGroupVerticalDrop4">
-                            <li><a href="#">Dropdown link</a></li>
-                            <li><a href="#">Dropdown link</a></li>
-                          </ul>
-                        </div>
-                        <div class="adres_box">To</div>
+                        
+                        <div class="adres_box"><label style="float:left; font-weight:normal">To</label><div id="selectedfriends" style="display:block; border:none;"><div id="search_frnd_wrapper"><input type="text" name="txtsearch" id="searchfriends" onkeyup="keyupevent();" /><input type="hidden" id="addedusers" name="addedusers" /><div id="autosuggest"></div></div></div></div>
                         <div class="adres_right"><a href="#">Cc</a> <a href="#">Bcc</a></div>
                       </div>
                       <div class="bott_replys ad_box col-md-5 col-md-offset-1">
                         <div class="commentss"><img src="<?php echo base_url(); ?>images/commenting.png" alt=""></div>
+                        <div id="swfupload-control">
+	<p>Upload upto 5 image files(jpg, png, gif), each having maximum size of 1MB</p>
+	<input type="button" id="button" />
+	<p id="queuestatus" ></p>
+	<ol id="log"></ol>
+</div>
                       </div>
                       <div class="bott_replys bott_boxcolor col-md-5 col-md-offset-1">
                         <div class="col-md-1">
