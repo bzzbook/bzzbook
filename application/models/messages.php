@@ -300,5 +300,35 @@ class Messages extends CI_Model {
 	}
 	
    }
+   
+   public function disp_msg_by_id($msgid)
+   {
+	   $this->db->select('*');
+	   $this->db->from('bzz_messages');
+	   $this->db->where('msg_id',$msgid);
+	   $query = $this->db->get();
+	   if($query->num_rows() == 1)
+	   {		   
+		$messages = $query->result_array();
+	    $data['message'] = $messages;
+	   }
+	  	   
+       $this->db->select('*');
+	   $this->db->from('bzz_users');
+	   $this->db->join('bzz_userinfo','bzz_users.user_id=bzz_userinfo.user_id AND bzz_users.user_id='.$messages[0]['sent_by']);
+	   //$this->db->where('user_id',$messages[0]['sent_by']);
+	   $query = $this->db->get();
+	   if($query->num_rows() == 1)
+	   {		   
+		$user_data = $query->result_array();
+	    $data['user'] = $user_data;
+	   }
+	   return $data;
+	    print_r($data);
+	  // exit;
+	 //  else
+	//   return false;
+	   	   
+   }
 }
 ?>

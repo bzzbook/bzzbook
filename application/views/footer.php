@@ -127,6 +127,9 @@ var settings = {
 
 
 });
+
+
+
 </script>   
 
 <script>
@@ -145,6 +148,24 @@ $(function(){
 			        {   
             			if(html == true)
 							alert("Information Updated");
+						else
+							alert("Something went wrong Please try after sometime");
+			        }
+			       });			
+				event.preventDefault();
+			});
+			
+			$("form[name=newone]").submit(function(event){
+			   url="<?php echo base_url();?>customer/sidebarSettings/";
+				 $.ajax({
+        			type: "POST",
+			        url: url,
+			        data: { form_data: $(this).serialize()} ,
+        			success: function(html)
+			        {   
+            			if(html == true)
+							alert("Information Updated");
+					
 						else
 							alert("Something went wrong Please try after sometime");
 			        }
@@ -1674,7 +1695,7 @@ $('#search_frnds').keyup(function(){
 	};
 
 });
-// Goust post functionality start
+// Ghost post functionality start
 function addfrndtogostpost(user_id,name){
 var cur_content = $('#selectedfriends').html();
 var new_content = "<span id='"+user_id+"'>"+name+"<a onclick='removefrnd("+user_id+")'><img class='as_close_btn' src='<?php echo base_url().'images/close_btn.png'; ?>'/></a></span>";
@@ -1733,6 +1754,74 @@ function showghostinput(){
 }
 // ghost post functionality end
 
+//business card ghostpost
+function keyupevent_bc(){
+	var value = $('#search_bc_friends').val();
+	var addedusers = $('#added_bc_users').val();
+	if(value!='')
+	{	
+	url="<?php echo base_url(); ?>friends/getfriend_bc_suggestion/"+value+"/"+addedusers;
+		$.ajax({
+        type: "POST",
+        url: url,
+        success: function(data)
+        {   
+			if(data){
+			$('#auto_bc_suggest').html(data);
+			$('#auto_bc_suggest').show();
+			}
+		},
+		cache: false
+		});
+	}
+	else{ $('#auto_bc_suggest').hide(); }
+}
+
+function addfrndtobcpost(user_id,name){
+var cur_content = $('#selected_bc_friends').html();
+var new_content = "<span id='"+user_id+"'>"+name+"<a onclick='removefrnd("+user_id+")'><img class='as_close_btn' src='<?php echo base_url().'images/close_btn.png'; ?>'/></a></span>";
+ $('#selected_bc_friends').html(new_content+cur_content);
+ $('#search_bc_friends').focus();
+ $('#auto_bc_suggest').hide();
+var addedusers = $('#added_bc_users').val()
+if(addedusers!='')
+$('#added_bc_users').val(addedusers+','+user_id)
+else
+$('#added_bc_users').val(user_id)
+
+}
+
+function removefrnd(user_id){
+	var addedusers = $('#added_bc_users').val();
+	var len = addedusers.length;
+	var newval = '';
+	if(len==1)
+	{ 
+		newval = '';
+	}
+	else if(addedusers.indexOf(user_id)==(len-1)){
+	newval = addedusers.replace(','+user_id,'');
+	}
+	else if(addedusers.indexOf(user_id)==0)
+	newval = addedusers.replace(user_id+',','');
+	else
+	newval = addedusers.replace(user_id+',','');
+	$('#added_bc_users').val(newval);
+	$('#'+user_id).remove();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*$('#event_form').submit( function( event)
 	{
 				
@@ -1773,39 +1862,6 @@ $('#select_all_msgs').click(function(event)
 	}
 });	
 
-$('#forgot_password').submit(function(){
-	usermail = $('#user_email').val();
-	var length = usermail.length;
-	var errors = '';
-	if(usermail == '') 
-	{
-		$("#error_data").html("Email Shouldn't be empty").fadeOut(7000);
-		location.reload();
-	}
-
-	else {
-	url="<?php echo base_url(); ?>signg_in/forgetpwd/"+usermail;
-		$.ajax({
-        type: "POST",
-        url: url,
-        success: function(data)
-        {   
-		if(data == false){
-    	alert("Please enter valid email Id");
-		$('#user_mail').focus();
-		}else{
-		 url="<?php echo base_url(); ?>signg_in/reset_pwd/"+usermail;
-	     window.location.replace(url);
-		}
-			
-		},
-		cache: false
-		});
-		
-		
-	};
-
-});
  	
 // auto complete for company textbox in aboutme page
  $("#org_name").autocomplete({
@@ -1840,7 +1896,7 @@ $('#searchbar_category li').click(function()
 	  alert(search_data);
 	
 	/*  $.ajax({
- 			url:"<?php echo base_url(); ?>company/allSearch/"+search_data+"/"+category; 
+ 			url:"<?php //echo base_url(); ?>company/allSearch/"+search_data+"/"+category; 
  			dataType: 'json',
  			type: 'POST',
  			data: req,
@@ -1851,7 +1907,30 @@ $('#searchbar_category li').click(function()
  			}
  		});*/
 	});  
+/*
+		$("#sidebar_settfggings").click(function(event){
 
+						url="<?php //echo base_url(); ?>profile/sidebarEdit/";
+						$.post( url )
+						.done(function( data ) {
+							info = JSON.parse(data);
+							alert(data);
+								$("input[name=pend_frnd_requests]").attr("checked","checked");
+								$("input[name=latest_frnds]").attr("checked","checked");
+								$("input[name=your_add_one]").attr("checked","checked");
+								$("input[name=add_friends]").attr("checked","checked");
+								$("input[name=companies_to_follow]").attr("checked","checked");
+								$("input[name=user_following_cmps]").attr("checked","checked");
+								$("input[name=companies_im_following]").attr("checked","checked");
+								$("input[name=my_companies]").attr("checked","checked");
+									
+							$('#sidebar_modal').modal('toggle');
+						});
+						return false;
+				});*/
+				
+				
+				
 /*$('#cmp_header_searchbar').click({
 	
 	
@@ -1877,6 +1956,23 @@ $('#searchbar_category li').click(function()
 
 	 
 });	*/
+	/*function sidebar()
+				{
+					
+	//$('#newone').submit(function(){
+		document.forms['newone'].submit();
+						
+						url="<?php // echo base_url(); ?>customer/sidebarSettings/";
+					$.post( url, { formdata: $(this).serialize() })
+					.done(function( data ) {
+					   	if(data == true)
+							alert("Information Updated");
+						else
+							alert("Something Went wrong please try again after sometime");
+					  });
+					event.preventDefault();
+	//	});
+				}*/
 </script>
 <script type="text/javascript">
 

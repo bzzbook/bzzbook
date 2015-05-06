@@ -599,6 +599,51 @@ $this->session->set_flashdata('group-add-msg', 'Group updated Successfully');
 		return false;
 		}
 	}
+public function editSideBarSettings()
+	{
+		$id = $this->session->userdata('logged_in')['account_id'];
+		$this->db->select('*');
+		$this->db->from('bzz_sidebar_display_settings');
+		$this->db->where('user_id',$id);
+		$query = $this->db->get();
+		if ($query->num_rows() > 0) {
+			return $query->result();
+		} else {
+		return false;
+		}
+	}
+
+public function get_user_profileinfo()
+{
+	$id = $this->session->userdata('logged_in')['account_id'];
+	
+		 $condition = "user_id ="."'".$id."'";
+		 $this->db->select('*');
+		 $this->db->from('bzz_user_images');
+		 $this->db->where($condition);
+		 $query = $this->db->get();
+		 if($query->num_rows() > 0)
+		 {
+				$this->db->select('*');
+				$this->db->from('bzz_users');
+				$this->db->limit(1);
+			    $this->db->join('bzz_user_images','bzz_users.user_id=bzz_user_images.user_id AND bzz_users.user_id='.$id);
+			    $this->db->join('bzz_userinfo','bzz_users.user_id=bzz_userinfo.user_id');
+			    $this->db->order_by('bzz_user_images.user_imageinfo_id','desc');
+			 	$query = $this->db->get();
+				$user_profileinfo = $query->result_array();
+				
+		 }else{
+			  $this->db->select('*');
+			  $this->db->limit(1);
+			  $this->db->from('bzz_users');
+			  $this->db->join('bzz_userinfo','bzz_users.user_id=bzz_userinfo.user_id AND bzz_users.user_id='.$id);
+			  $query = $this->db->get(); 
+			  $user_profileinfo =  $query->result_array();
+		 }
+	//	 print_r($user_profileinfo);
+	return $user_profileinfo;	 
+}
 }
 
 ?>

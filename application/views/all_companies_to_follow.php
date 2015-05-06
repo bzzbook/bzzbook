@@ -41,7 +41,7 @@ $cmp_reqs = $this->companies->get_initial_companies($limit = 0);
                   <p>Industry: <?php echo $req['cmp_industry']; ?></p>
         <p>Established in:<?php echo $req['cmp_estb']; ?></p>
                   <p>No of Employees: <?php echo $req['cmp_estb']; ?></p>
-        <div class="btn3 btn-yellow" ><a href="javascript:void(0)" onclick="cmpFollow(<?php echo $req['companyinfo_id']; ?>);";>Follow</a></div>
+        <div class="btn3 btn-yellow" ><a href="javascript:void(0)" id="mainpage_follow<?php echo $req['companyinfo_id']; ?>" onclick="cmpFollow(<?php echo $req['companyinfo_id']; ?>);";>Follow</a></div>
           <div class="btn3 btn-green"><a href="<?php echo  base_url("company/company_disp/".$req['companyinfo_id']) ?>">View Profile</a></div>
          
                 </div>        

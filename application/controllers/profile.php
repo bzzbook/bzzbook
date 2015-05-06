@@ -49,10 +49,11 @@ public function about_me()
 
 public function business_details()
 {
-	$data['profession_details'] = $this->profile_set->getprofessionList();
-	$data['organization_details'] = $this->profile_set->getorganizationList();
-	$data['group_details'] = $this->profile_set->getgroupList();
-	$data['content']='business_details';
+	//$data['profession_details'] = $this->profile_set->getprofessionList();
+	//$data['organization_details'] = $this->profile_set->getorganizationList();
+	//$data['group_details'] = $this->profile_set->getgroupList();
+	$data['profile_info'] = $this->profile_set->get_user_profileinfo();
+	$data['content']='my_business_card';
 	$this->load->view('full_content_view',$data);
 	//$this->load->view('business_details',$data);
 }
@@ -70,8 +71,9 @@ public function message()
 	$this->load->view('full_content_view',$data);
    //$this->load->view('messages');
 }
-public function messageview()
-  { 
+public function messageview($msgid)
+  {
+	$data['messages'] = $this->messages->disp_msg_by_id($msgid);
   	$data['content']='messages_view';
 	$this->load->view('full_content_view',$data);
    //$this->load->view('messages');
@@ -236,6 +238,27 @@ public function showfavs()
 		endforeach;
 		echo json_encode($prof_data);
   }
+  
+  
+  
+/*  public function sidebarEdit()
+  {
+	 $data = $this->profile_set->editSideBarSettings();
+    
+	 foreach( $data as $result):
+	 	$sidebar_data['pend_frnd_requests'] = $result->pend_frnd_requests;
+		$sidebar_data['latest_frnds'] = $result->latest_frnds;
+		$sidebar_data['your_add_one'] = $result->your_add_one;
+		$sidebar_data['add_friends'] = $result->add_friends;
+		$sidebar_data['companies_to_follow'] = $result->companies_to_follow;
+		$sidebar_data['companies_im_following'] = $result->companies_im_following;
+		$sidebar_data['your_add_two'] = $result->your_add_two;
+		$sidebar_data['my_companies'] = $result->my_companies;
+		
+		endforeach;
+		echo json_encode($sidebar_data);
+  }
+  */
   
    public function orgEdit()
   {
@@ -746,5 +769,60 @@ margin-bottom: 20px; margin-left:5px; float:left; margin-top:5px;" value="cancle
 	else
 	return false;
   }
+  
+  
+public function send_business_card()
+{
+	
+	 if($this->input->post('added_bc_users')!='')
+	 {
+		 $data = $this->input->post('added_bc_users');
+		 $data = explode(",",$data);
+		 $this->db->select('user_email');
+		 $this->db->from('bzz_users');
+		 $this->db->where_in('user_id',$data);
+		 $query = $this->db->get();
+		 $email_ids = $query->result_array();
+		 $emails = array();
+		 foreach($email_ids as $email_id)
+		 {
+			 $emails[] = $email_id['user_email'];
+		 }
+		
+		$config['protocol'] = 'smtp';
+		$config['smtp_host'] = 'ssl://smtp.googlemail.com';
+		$config['smtp_port'] = 465;
+		$config['smtp_user'] = 'mr.s.sivaprasad@gmail.com';
+		$config['smtp_pass'] = 'Siv@prasad598';
+
+// Load email library and passing configured values to email library
+	//	$mail = $usermail;
+		
+		$user_name = 'Sivaprasad';
+		$this->load->library('email',$config);
+		$this->email->set_newline("\r\n");
+		$this->email->from('mr.s.sivaprasad@gmail.com',$user_name);
+		$this->email->to($emails);
+		$this->email->subject('bzzbook Pasword Reset');
+		$message = $this->load->view('businesscard_email_template');
+		$this->email->message($message);
+		if($this->email->send())
+		{
+		   // $this->session->set_flashdata('cust_success', 'Your pasword Reset Link Sent to your email');
+			//redirect('/signg_in');
+			echo "mail sent to Your friends";
+		}else
+		{
+			//$this->session->set_flashdata('cust_success', 'Cannot send Password Reset link to your e-mail address');
+			//redirect('/signg_in');
+				echo "mail not sent to users";
+		}
+
+	
+		 
+	 }else
+	 echo "you should select atleast one Reciepient to send mail";
+}
+  
 }
 ?>
