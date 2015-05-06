@@ -696,6 +696,7 @@ $(function() {
 */
 function acceptFrnd(id)
 {
+	$("#pend_frnd_accept"+id).html('<img src="<?php echo base_url(); ?>images/addfrnd_loader.gif" />');
 		url="<?php echo base_url(); ?>friends/confirmrequest/"+id;
 		$.ajax({
         type: "POST",
@@ -712,6 +713,7 @@ function acceptFrnd(id)
 
 function denyFrnd(id)
 {
+	$("#pend_frnd_deny"+id).html('<img src="<?php echo base_url(); ?>images/follow_loader.gif" />');
 		url="<?php echo base_url(); ?>friends/denyrequest/"+id;
 		$.ajax({
         type: "POST",
@@ -728,6 +730,7 @@ function denyFrnd(id)
 
 function blockFrnd(id)
 {
+	$("#pend_frnd_block"+id).html('<img src="<?php echo base_url(); ?>images/block_loader.gif" />');
 		url="<?php echo base_url(); ?>friends/blockrequest/"+id;
 		$.ajax({
         type: "POST",
@@ -1863,23 +1866,53 @@ $('#select_all_msgs').click(function(event)
 
  	
 // auto complete for company textbox in aboutme page
- $("#org_name").autocomplete({
+ /*$("#org_name").autocomplete({
  	minLength: 1,
  	source: function(req, add){
  		$.ajax({
- 			url:'<?php echo base_url(); ?>company/cmp_name_search/', //Controller where search is performed
+ 			url:'<?php //echo base_url(); ?>company/cmp_name_search/', //Controller where search is performed
  			dataType: 'json',
  			type: 'POST',
  			data: req,
  			success: function(data){
- 				//if(data.response =='true'){
- 				 $('#org_name').html(data);
- 				//}
+ 				if(data){
+ 				 $('#auto_suggest_company').html(data);
+				 $('#auto_suggest_company').show();
+ 				}
  			}
  		});
  	}
- });	
+ });*/
 	
+	
+function keyupevent_cmp(){
+	var value = $('#org_name').val();
+		if(value!='')
+	{	
+	url="<?php echo base_url(); ?>company/cmp_name_search/"+value;
+		$.ajax({
+        type: "POST",
+        url: url,
+        success: function(data)
+        {   
+			if(data){
+			$('#auto_suggest_company').html(data);
+			$('#auto_suggest_company').show();
+			}
+		},
+		cache: false
+		});
+	}
+	else{ $('#auto_bc_suggest').hide(); }
+}
+
+function addtocmpname(cmpname)
+{
+	$('input[name="org_name"]').val(cmpname);
+	$('#auto_suggest_company').hide();
+}
+
+
 	
 $('#searchbar_category li').click(function()
 {
@@ -1907,7 +1940,7 @@ $('#searchbar_category li').click(function()
  		});*/
 	});  
 /*
-		$("#sidebar_settfggings").click(function(event){
+		$("#sidebar_settings").click(function(event){
 
 						url="<?php //echo base_url(); ?>profile/sidebarEdit/";
 						$.post( url )

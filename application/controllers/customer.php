@@ -128,9 +128,9 @@ class customer extends CI_Controller {
    }
    public function dob_check($str)
 	{
-		if (!preg_match("^[0-1][0-9]-[0-3][0-9]-[0-9]{4}$",$str))
+		if (!preg_match("/^[0-1][0-9]-[0-3][0-9]-[0-9]{4}$/",$str))
 		{
-			$this->form_validation->set_message('dob_check', 'date format should be mm-dd-yyyy');
+			$this->form_validation->set_message('dob_check','date format should be mm-dd-yyyy');
 			return FALSE;
 		}
 		else

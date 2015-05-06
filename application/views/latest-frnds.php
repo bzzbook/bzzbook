@@ -8,4 +8,7 @@
             <?php } }?>
           </ul>
           <div class="clear"></div>
-          <a href="<?php echo base_url('friends/view_all_latest_frnds'); ?>" class="link">More Friends</a> </div>
+          <?php if(!empty($frnds)) { ?>
+          <a href="<?php echo base_url('friends/view_all_latest_frnds'); ?>" class="link">More Friends</a> 
+          <?php } ?>
+          </div>

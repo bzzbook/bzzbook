@@ -11,6 +11,7 @@
 <link href="<?php echo base_url(); ?>css/animate.min.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>css/style.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>css/responsive.css" rel="stylesheet">
+
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -95,21 +96,82 @@ echo "</div>";
 </header>
 <section class="banner">
   <div class="container">
-    <div class="col-md-6 col-sm-8 col-xs-12 pull-right">
+    <div class="col-md-6 col-sm-8 col-xs-12 pull-right rightCol">
       <div class="title">
         <h2>Create a <span>Buzz</span> </h2>
         <h3>with Your <span>Business</span></h3>
         <h4>with the future of <span>social media!</span></h4>
       </div>
-      <div class="signupToday">
+      <div class="signupToday" id="hide_signup">
         <h2>Sign Up Today <span>&amp; See what all the <em>Bzz</em> is about!</span></h2>
         <p>Begin today with a better way to connect with friends, colleagues, and customers. Make Bzzbook your one stop shop for all your social media needs. Sign up today and be a part of the future of social media. </p>
         <div class="rgButtons">
-          <div class="button"> <span>Are you a person?</span> <a href="<?php echo base_url(); ?>customer/sign_up">Sign Up Now</a> </div>
+          <div class="button"> <span>Are you a person?</span> <a id="cust_signup" href="javascript:void(0);<?php /*?><?php echo base_url(); ?>customer/sign_up<?php */?>">Sign Up Now</a> </div>
           <div class="button"> <span>Are you a Business?</span> <a href="<?php echo base_url(); ?>company/sign_up">Sign Up Now</a> </div>
         </div>
         <div class="fb"><img src="<?php echo base_url(); ?>images/test_fb.png" alt=""></div>
       </div>
+      
+      <div class="custsignupToday" id="show_signup" style="display:none">
+        <h5>Sign Up Today!</h5>
+        <span style="color:#F00; padding:0 0 0 16px">
+        	<?php if($this->session->flashdata('success')){ 
+				echo $this->session->flashdata('success');
+			}else if($this->session->flashdata('signout')){
+				echo "<div class='message'>";
+				echo $this->session->flashdata('signout');
+				echo "</div>";
+			}?>
+            
+        </span>
+        <?php echo validation_errors(); ?>
+        <form name="sign_up_form" id="sign_up" method="post" action="<?php echo base_url(); ?>signg_up/sign_up">
+          <div class="field col-md-6">
+            <input type="text" class="form-control" data-rule-required="true" data-msg-required="please enter your first name"     
+            name="firstname" placeholder="First Name" >
+          </div>
+          <div class="field col-md-6">
+            <input type="text" class="form-control" data-rule-required="true"  data-msg-required="please enter your last name" 
+            name="lastname" placeholder="Last Name" >
+          </div>
+          <div class="field col-md-12">
+            <input type="text" class="form-control"  data-rule-required="true" data-msg-required="please enter your email" 
+            data-rule-email="true" data-msg-email="please enter a valid email address" name="email" placeholder="E-mail" >
+          </div>
+          <div class="field col-md-12">
+            <input type="tel" class="form-control" data-rule-required="true" data-msg-required="please enter your phone number" 
+            name="phone_number" placeholder="Phone Number" >
+          </div>
+          <div class="field col-md-12">
+            <input type="password" class="form-control" data-rule-required="true" data-msg-required="please enter your password" 
+            name="new_password" placeholder="New Password" >
+          </div>
+          <div class="field col-md-12 dob">
+            <label>Birthday</label>
+            <div data-date-viewmode="years" data-date-format="dd-mm-yyyy" data-date="12-02-2012" id="dpYears" 
+            class="input-group-bt date">
+              <input type="text" readonly name="birthdate" value="12-02-2012" size="16" class="form-control">
+              <span aria-hidden="true" class="add-on glyphicon glyphicon-calendar"></span> </div>
+          </div>
+          <p>Why do I need to provide my birthday?</p>
+          <div class="filed rdbtns">
+            <label class="checkbox-inline">
+              <input type="radio" name="gender" id="inlineRadio2" value="male" checked="checked">
+              Male </label>
+            <label class="checkbox-inline">
+              <input type="radio" name="gender" id="inlineRadio3" value="female" >
+              Female </label>
+          </div>
+          <p>Lorem ipsum dolor sit amet, at choro omnium partiendo qui, nec nulla voluptua ex, te homero dissentiunt usu. Et vis latine epicuri voluptaria, <a href="#">posse veniam legimus eu ius</a>. Odio albucius ne vis, nec ad scaevola philosophia. Vide nominavi</p>
+          <div class="sbButtons">
+            <input type="submit" value="Sign Up Now">
+           
+          </div>
+        </form>
+      </div>
+      
+      
+      
     </div>
   </div>
 </section>
@@ -173,6 +235,14 @@ $('#getmail').show();
 $(this).hide();
 $('#sign_in').show();
 });
+
+$('#cust_signup').click(function()
+{
+	$('#hide_signup').toggle();
+	$('#show_signup').toggle();
+	
+	});
+
 
 $('#sign_in').click(function()
 {

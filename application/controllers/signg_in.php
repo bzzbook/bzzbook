@@ -390,11 +390,8 @@ class signg_in extends CI_Controller {
 				//	echo "mail not sent";
 		}
 
-	
 }
- 
 
- 
  
  }
 ?>

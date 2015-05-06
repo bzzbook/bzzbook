@@ -975,6 +975,8 @@ width:100%; }
 
 #autosuggest{position:absolute;	width:200px; z-index:111; background-color:white; display:none; padding:5px; border:1px solid #f1f1f1;}
 #auto_bc_suggest{position:absolute;width:200px; z-index:111; background-color:white; display:none; padding:5px; border:1px solid #f1f1f1;}
+#auto_suggest_company{ background-color: white; border: 1px solid #f1f1f1; border-radius: 8px; display: none; margin-left: 13px; margin-top: 33px; padding: 5px; position: absolute; width: 234px; z-index: 111;}
+#auto_suggest_company .as_frnd_container{  background:#fbc436; color:#000;line-height:30px;}
 
 .as_frnd_container{ width:100%; margin-bottom:2px;}
 .as_frnd_container:hover{ cursor:pointer; cursor:hand; }
@@ -1063,7 +1065,7 @@ width:100%; }
 .bott_top .btn{ padding:0px 5px; background:none !important;}
 .privacys{ text-align:center;}
 .privacys a{ color:#282828; font-size:12px; text-decoration:underline;}
-<<<<<<< HEAD
+
 .deleted.replying { padding:0px;
     width: 100%;
 }
@@ -1079,7 +1081,7 @@ width:100%; }
 #log li.success{ border:1px solid #339933; background:#ccf9b9; }
 #log li span.cancel{ position:absolute; top:5px; right:5px; width:20px; height:20px; 
 	background:url('../js/swfupload/cancel.png') no-repeat; cursor:pointer; }
-=======
+
 .deleted.replying { padding:0px;}
 /*business card*/
 .business_card {border:none; font-size:14px; color:#646464; font-family: 'Roboto', sans-serif; font-weight:300; line-height:25px;}
@@ -1113,4 +1115,44 @@ width:100%; }
 .right_cards2 .fa-envelope-o{padding-left:10px;}
 
 
->>>>>>> 09b258dca0e433bddf0a9e9dd4e8968ec43a1126
+.rightCol .custsignupToday{ background:#fff url(../images/shadow.png) no-repeat center bottom; padding:24px 20px; position:relative; overflow:hidden;}
+.rightCol .custsignupToday:before{ width:40px; height:40px; content:""; background:#000; position:absolute; top:-20px; left:-20px; 
+    transform: rotate(45deg) ;
+    -webkit-transform: rotate(45deg) ;
+    -moz-transform: rotate(45deg) ;
+    -o-transform: rotate(45deg) ;
+    -ms-transform: rotate(45deg) ;
+}
+.rightCol .custsignupToday:after{ width:40px; height:40px; content:""; background:#000; position:absolute; top:-20px; right:-20px; 
+    transform: rotate(45deg) ;
+    -webkit-transform: rotate(45deg) ;
+    -moz-transform: rotate(45deg) ;
+    -o-transform: rotate(45deg) ;
+    -ms-transform: rotate(45deg) ;
+}
+.rightCol{ z-index:1;}
+.rightCol:after{ background:url(../images/lp_form_shadow.png) no-repeat center 0; content:""; width:645px; height:50px; position:absolute; bottom:-10px; z-index:-2; left:-46px;}
+.rightCol .custsignupToday h5{ background:url(../images/lp_signup_icon.png) no-repeat 0 0; font-size:47px; color:#343536; padding:10px 0 10px 80px; font-weight:400; border-bottom:1px solid #f1f4f5; padding-bottom:20px; margin-bottom:20px; }
+.rightCol .custsignupToday .field{ padding-bottom:20px;}
+.rightCol .custsignupToday .field .form-control{background:#fafcfd; border:1px solid #e3e3e3; box-shadow:none; height:48px; font-size:16px; color:#a8a8a8; font-weight:300;}
+.rightCol .custsignupToday .field label{ display:block; font-size:20px; color:#616161; font-weight:400; padding-bottom:10px;}	
+.rightCol .custsignupToday .dob .field{ padding-left:0;}
+.rightCol .custsignupToday .dob #dpYears{ position:relative;}
+.rightCol .custsignupToday .dob span.add-on{ position:absolute; right:10px; top:16px; font-size:20px; cursor:pointer;  }
+.rightCol .custsignupToday .rdbtns{ display:flex; padding:0 15px 15px; }	
+.rightCol .custsignupToday .rdbtns label{ padding-left:0; font-size:16px; color:#a8a8a8; font-weight:300;}	
+.rightCol .custsignupToday p{ font-size:12px; color:#a8a8a8; font-weight:300; padding:0 15px 15px; }
+.rightCol .custsignupToday .sbButtons{ margin:15px; float: left;}	
+.rightCol .custsignupToday .sbButtons input{ background:#86b726; -webkit-border-radius:4px; border-radius:4px; height:62px; line-height:62px; border:none; color:#fff; font-size:20px; padding:0 20px;}
+
+footer{ color:#acacac; font-size:20px; color:#acacac; text-align:center; padding:20px; font-weight:300;}
+
+.datepicker{-webkit-transition:none; -moz-transition:none; -o-transition:none; transition:none; top:inherit !important; width:95%; margin:0 2.5%; }
+.rightCol .custsignupToday .dob .datepicker .datepicker-years span.year{ width:70px ; height:70px ; line-height:70px ;}
+	
+	
+	
+	
+	
+	
+

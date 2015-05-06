@@ -105,7 +105,7 @@ class Friendsmodel extends CI_Model {
 					$frnd['image'] = $result[0]['user_img_fav'];
 				}
 				else
-					$frnd['image'] = 'default_profile_pic.png';
+				$frnd['image'] = 'default_profile_pic.png';
 				$frnd['id'] = $friend['user_id'];
 				$frnds[] = $frnd;
 				
@@ -370,7 +370,7 @@ public function latest_frnds($limit)
 		}
 		$this->db->where($condition);
 		$query = $this->db->get();
-		if ($query->num_rows() >0) {
+		if($query->num_rows() > 0) {
 			$friends = $query->result_array();
 			$frnds = array();
 			foreach($friends as $friend)
@@ -379,7 +379,7 @@ public function latest_frnds($limit)
 				$frnds[] = $friend['friend_id'];	
 			}
 		}
-		
+	
 		if(!empty($frnds))
 			{
 		$usr_ids = array_unique($frnds);
@@ -389,6 +389,7 @@ public function latest_frnds($limit)
 		{
   		unset($usr_ids[$key]);
 		}
+		
 			foreach($usr_ids as $user_id)
 			{
 				 $usercondition = "user_id ="."'".$user_id."'";
@@ -398,14 +399,14 @@ public function latest_frnds($limit)
 						 $query = $this->db->get();
 						 if($query->num_rows > 0)
 						 {
-								$this->db->select('*');
-								$this->db->from('bzz_users');
-								$this->db->join('bzz_user_images','bzz_users.user_id=bzz_user_images.user_id AND bzz_users.user_id='.$user_id);
-								$this->db->join('bzz_userinfo','bzz_users.user_id=bzz_userinfo.user_id');
-								$this->db->order_by('bzz_user_images.user_imageinfo_id','desc');
-								$query = $this->db->get();
-								 $user_data =  $query->result_array();
-								
+							$this->db->select('*');
+							$this->db->from('bzz_users');
+							$this->db->join('bzz_user_images','bzz_users.user_id=bzz_user_images.user_id AND bzz_users.user_id='.$user_id);
+							$this->db->join('bzz_userinfo','bzz_users.user_id=bzz_userinfo.user_id');
+							$this->db->order_by('bzz_user_images.user_imageinfo_id','desc');
+							$query = $this->db->get();
+							$user_data =  $query->result_array();
+							
 						 }else{
 							  $this->db->select('*');
 							// $this->db->limit(2);
@@ -417,7 +418,7 @@ public function latest_frnds($limit)
 						 }
 						  $userdata[] = $user_data;
 					}
-			
+					
 			return $userdata;
 		} else {
 		return false;
@@ -587,8 +588,8 @@ $user_details = $query->result_array();
 /*print_r($user_details);
 echo $user_details[0]['user_id'];
 exit;*/
-
-
+if(!empty($user_details))
+{
 $userslikecondition = "user_industry like '%".$user_details[0]['user_industry']."%' or user_cmpname like '%".$user_details[0]['user_cmpname']."%' or profession like '%".$user_details[0]['profession']."%' or location like '%".$user_details[0]['location']."%' or schooling like'%".$user_details[0]['schooling']."%' or hometown like'%".$user_details[0]['hometown']."%' or interests like'%".$user_details[0]['interests']."%'";
 $this->db->select('user_id');
 $this->db->from('bzz_userinfo');
@@ -599,7 +600,7 @@ foreach($usr_similar as $user)
 {
 	$elements[] = $user['user_id'];
 }
-
+}
 if(!empty($all_ids))
 {
 	$all_ids = array_unique($elements);

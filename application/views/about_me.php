@@ -54,8 +54,8 @@
 						  } 
 						  } ?></div><p><a href="javascript:void(0)" onclick="addWork('profession')"> Add Work Place</a></p>
                           <div class="graphic" style="padding-top:10px; display:none;"><form action="javascript:void(0)" method="post"><div class="filed col-md-6">
-                <input class="form-control" placeholder="Company" name="org_name" id="org_name" type="text">
-              </div><div class="filed col-md-6">
+                <input class="form-control" placeholder="Company" name="org_name" id="org_name" type="text" onkeyup="keyupevent_cmp();" autocomplete="off">
+              </div><div id="auto_suggest_company"> </div><div class="filed col-md-6">
                 <input class="form-control" placeholder="Positon Held" name="position" id="position" type="text">
               </div>
               <div class="filed col-md-6">

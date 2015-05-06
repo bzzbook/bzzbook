@@ -329,10 +329,10 @@ public function view_all_other_cmps()
 	     $this->load->view('full_content_view',$data);
 }
 
-public function cmp_name_search()
+public function cmp_name_search($keyword)
 {
 	 
- $keyword = $this->input->post('term');
+ //$keyword = $this->input->post('term');
  
  //$data['response'] = 'false'; //Set default response
  
@@ -342,15 +342,13 @@ public function cmp_name_search()
  {
  foreach($cmpdata as $data)
  {
-	$companies[] = $data['cmp_name']; 
+		
+	echo "<div class='as_frnd_container' onclick='addtocmpname(&#39;".$data['cmp_name']."&#39;)'><div class='as_frnd_name'>".$data['cmp_name']."</div><div class='clearfix' ></div></div>";
  }
 
  }else
- {
-	 echo "No Results folund!..";
-}
- echo json_encode($companies);
 
+	 echo "No Results found!..";
 }
 
 

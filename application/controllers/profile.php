@@ -804,17 +804,18 @@ public function send_business_card()
 		$this->email->from('mr.s.sivaprasad@gmail.com',$user_name);
 		$this->email->to($emails);
 		$this->email->subject('bzzbook Pasword Reset');
-		$message = $this->load->view('businesscard_email_template');
-		$this->email->message($message);
+		$this->email->set_mailtype("html");
+		$this->email->message($this->load->view('businesscard_email_template'));
 		if($this->email->send())
 		{
 		   // $this->session->set_flashdata('cust_success', 'Your pasword Reset Link Sent to your email');
-			//redirect('/signg_in');
+			redirect('/profile/business_details');
 			echo "mail sent to Your friends";
 		}else
 		{
 			//$this->session->set_flashdata('cust_success', 'Cannot send Password Reset link to your e-mail address');
 			//redirect('/signg_in');
+				redirect('/profile/business_details');
 				echo "mail not sent to users";
 		}
 

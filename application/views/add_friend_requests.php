@@ -28,6 +28,8 @@ $add_frnd_reqs = $frnds;
                 <a href="#">Confirm</a><a href="#">Deny</a> </div>
             </li><?php */?>
           </ul>
+          <?php if(!empty($add_frnd_reqs)) { ?>
           <a href="<?php echo base_url('friends/view_all_reqs'); ?>" class="link">View all</a> 
+          <?php } ?>
           
  </div>
