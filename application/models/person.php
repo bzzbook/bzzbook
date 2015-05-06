@@ -39,6 +39,19 @@ class person extends CI_Model {
 		   $this->db->insert('bzz_usersettings',$data);
 	   }
 	   
+	   public function user_sidebar_settings($user_id)
+	   {
+		$data['pend_frnd_requests']  = 'y';
+		$data['latest_frnds'] = 'y';
+		$data['your_add_one'] = 'y';
+		$data['add_friends'] = 'y';
+		$data['companies_to_follow'] = 'y';
+		$data['companies_im_following'] = 'y';	
+		$data['your_add_two'] = 'y';
+		$data['my_companies'] = 'y';
+		$data['user_id'] = $user_id;
+		$this->db->insert('bzz_sidebar_display_settings',$data);
+	   }
 	   public function post_buzz($data)
 	   {
 		   

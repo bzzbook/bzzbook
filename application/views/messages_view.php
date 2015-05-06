@@ -27,7 +27,7 @@
                   </tr>
                   <tr>
                     <th> <div class="col-md-8 deleted ico_ns"><a href="#"><i class="fa fa-user"></i></a></div>
-                      <div class="mod_text">Online PG Courses<span><a href="#">&lt;noreply@way2sms.biz&gt;</a> <a href="#">Unsubscribe</a> </span>
+                      <div class="mod_text"><?php echo $messages['user'][0]['user_firstname'] ." ". $messages['user'][0]['user_lastname']; ?><span><a href="#">&lt;<?php echo $messages['user'][0]['user_email']; ?>&gt;</a> <a href="#">UnSubScribe</a> </span>
                         <div class="col-md-3 tome">To me</div>
                         <div class="rep_lly col-md-9">
                           <button aria-expanded="false" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button" id="btnGroupVerticalDrop2"> <span class="caret"></span> </button>
@@ -47,15 +47,9 @@
                           </ul>
                         </div></div>
                       </div>
-                      <div class="right_side"><a href="#">Apr 25 (2 days ago)</a><span><a href="#"><i class="fa fa-star-o"></i></a></span></div>
+                      <div class="right_side"><a href="#"><?php echo $messages['message'][0]['sent_date']; ?></a><span><a href="#"><i class="fa fa-star-o"></i></a></span></div>
                       <div class="col-md-8 col-md-offset-2 midle_box">
-                        <p>Lorem ipsum is the dummy text
-                          
-                          Lorem ipsum is the dummy text Would like to introduce you all the Learnsocial 
-                          Lorem ipsum is the dummy text It's a learning platform that connects learners & 
-                          
-                          Lorem ipsum is the dummy text Ya, we intend to make Learning to be easy, simple 
-                          Lorem ipsum is the dummy textWe understand the learners well, keeping them in. </p>
+                        <p><?php echo $messages['message'][0]['message']; ?></p>
                       </div>
                       <div class="clearfix"></div>
                       <div class="borderbox"></div>

@@ -82,6 +82,7 @@ class customer extends CI_Controller {
 		
 		$this->person->user_info($user_info);
 		$this->person->user_settings($user_id);
+		$this->person->user_sidebar_settings($user_id);
 		$user_data = $this->person->get_user_details($user_id);
 	/*	print_r($user_data);
 		exit;*/
@@ -189,10 +190,17 @@ class customer extends CI_Controller {
 	  	parse_str($_POST['formdata'],$privacyformdata);
 		echo $this->customermodel->updatePrivacyInfo($privacyformdata);
   }
+  
   public function updateemailnotification()
   {
 	  	parse_str($_POST['formdata'],$privacyformdata);
 		echo $this->customermodel->updateEmailInfo($privacyformdata);
+  }
+    public function sidebarSettings()
+  {
+	  	parse_str($_POST['form_data'],$sidebar_data);
+		
+		echo $this->customermodel->updateSidebarSettings($sidebar_data);
   }
   public function manageducation()
   {

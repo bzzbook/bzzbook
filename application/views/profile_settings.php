@@ -1,6 +1,4 @@
-<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>cropimage/css/cropimage.css" />
-<link type="text/css" href="<?php echo base_url(); ?>cropimage/css/imgareaselect-default.css" rel="stylesheet" />
-
+ <?php  $sidebardata = $this->profile_set->editSideBarSettings(); ?>
 <section class="col-lg-6 col-md-6 col-sm-5 col-xs-12 coloumn2 pfSettings">
       <h2>My Settings</h2>
       <div class="posts">
@@ -322,10 +320,174 @@
               </div>
               </form>
               <div class="clear"></div>
+              
+              
+              
+              <h4 class="clear">SideBar Visible Settings</h4>
              
+       <form method="post" id="newone" name="newone" >
+             
+             <?php if($sidebardata){ //foreach($sidebardata as $sidebardata) { ?>
+             <div class="radio">
+                <label for="notifications">Pending friend Requests:</label>
+                <div class="pull-right">
+                <label class="radio-inline">
+                	<?php
+						if($sidebardata[0]->pend_frnd_requests == 'Y')
+							$pend_frnd_requests_yes = "checked";
+						else
+							$pend_frnd_requests_no = "checked";
+					?>
+                  <input type="radio" id="inlineRadio1" value="Y" name="pend_frnd_req" <?php echo @$pend_frnd_requests_yes?>>
+                  Yes </label>
+                <label class="radio-inline">
+                  <input type="radio" id="inlineRadio2" value="N" name="pend_frnd_req" <?php echo @$pend_frnd_requests_no?>>
+                  No </label>
+                  </div>
+              </div>
+                 
+             <div class="radio">
+                <label for="notifications">Latest friends:</label>
+                <div class="pull-right">
+                <label class="radio-inline">
+                	<?php
+						if($sidebardata[0]->latest_frnds == 'Y')
+							$latest_frnds_yes_check = "checked";
+						else
+							$latest_frnds_no_check = "checked";
+					?>
+                  <input type="radio" id="inlineRadio1" value="Y" name="latest_frnds" <?php echo @$latest_frnds_yes_check?>>
+                  Yes </label>
+                <label class="radio-inline">
+                  <input type="radio" id="inlineRadio2" value="N" name="latest_frnds" <?php echo @$latest_frnds_no_check?>>
+                  No </label>
+                  </div>
+              </div>
+             
+              <div class="radio">
+                <label for="notifications">Your Add One:</label>
+                <div class="pull-right">
+                <label class="radio-inline">
+                	<?php
+						if($sidebardata[0]->your_add_one == 'Y')
+							$add_one_yes_check = "checked";
+						else
+							$add_one_no_check = "checked";
+					?>
+                  <input type="radio" id="inlineRadio1" value="Y" name="your_add_one" <?php echo @$add_one_yes_check?>>
+                  Yes </label>
+                <label class="radio-inline">
+                  <input type="radio" id="inlineRadio2" value="N" name="your_add_one" <?php echo @$add_one_no_check?>>
+                  No </label>
+                  </div>
+              </div>
+             
+                 
+              <div class="radio">
+                <label for="notifications">Add Friends :</label>
+                <div class="pull-right">
+                <label class="radio-inline">
+                	<?php
+						if($sidebardata[0]->add_friends == 'Y')
+							$add_friends_yes_check = "checked";
+						else
+							$add_friends_no_check = "checked";
+					?>
+                  <input type="radio" id="inlineRadio1" value="Y" name="add_frnds" <?php echo @$add_friends_yes_check?>>
+                  Yes </label>
+                <label class="radio-inline">
+                  <input type="radio" id="inlineRadio2" value="N" name="add_frnds" <?php echo @$add_friends_no_check?>>
+                  No </label>
+                  </div>
+              </div>
+              
+               <div class="radio">
+                <label for="notifications"> Companies to Follow :</label>
+                <div class="pull-right">
+                <label class="radio-inline">
+                	<?php
+						if($sidebardata[0]->companies_to_follow == 'Y')
+							$companies_to_follow_yes_check = "checked";
+						else
+							$companies_to_follow_no_check = "checked";
+					?>
+                  <input type="radio" id="inlineRadio1" value="Y" name="cmps_to_follow" <?php echo @$companies_to_follow_yes_check?>>
+                  Yes </label>
+                <label class="radio-inline">
+                  <input type="radio" id="inlineRadio2" value="N" name="cmps_to_follow" <?php echo @$companies_to_follow_no_check?>>
+                  No </label>
+                  </div>
+              </div>
+              
+              
+               <div class="radio">
+                <label for="notifications">Companies I'm Following:</label>
+                <div class="pull-right">
+                <label class="radio-inline">
+                	<?php
+						if($sidebardata[0]->companies_im_following == 'Y')
+							$cmp_im_following_yes_check = "checked";
+						else
+							$cmp_im_following_no_check = "checked";
+					?>
+                  <input type="radio" id="inlineRadio1" value="Y" name="user_following_cmps" <?php echo @$cmp_im_following_yes_check?>>
+                  Yes </label>
+                <label class="radio-inline">
+                  <input type="radio" id="inlineRadio2" value="N" name="user_following_cmps" <?php echo @$cmp_im_following_no_check?>>
+                  No </label>
+                  </div>
+              </div>
+              
+              
+               <div class="radio">
+                <label for="notifications">Your Add Two:</label>
+                <div class="pull-right">
+                <label class="radio-inline">
+                	<?php
+						if($sidebardata[0]->your_add_two == 'Y')
+							$add_two_yes_check = "checked";
+						else
+							$add_two_no_check = "checked";
+					?>
+                  <input type="radio" id="inlineRadio1" value="Y" name="your_add_two" <?php echo @$add_two_yes_check?>>
+                  Yes </label>
+                <label class="radio-inline">
+                  <input type="radio" id="inlineRadio2" value="N" name="your_add_two" <?php echo @$add_two_no_check?>>
+                  No </label>
+                  </div>
+              </div>
+              
+              
+              
+               <div class="radio">
+                <label for="notifications">My Companies:</label>
+                <div class="pull-right">
+                <label class="radio-inline">
+                	<?php
+						if($sidebardata[0]->my_companies == 'Y')
+							$my_cmps_yes_check = "checked";
+						else
+							$my_cmps_no_check = "checked";
+					?>
+                  <input type="radio" id="inlineRadio1" value="Y" name="my_cmps" <?php echo @$my_cmps_yes_check?>>
+                  Yes </label>
+                <label class="radio-inline">
+                  <input type="radio" id="inlineRadio2" value="N" name="my_cmps" <?php echo @$my_cmps_no_check?>>
+                  No </label>
+                  </div>
+              </div>
+              <div class="filed col-md-12">
+                <input type="submit" class="fmbtn" value="Save Changes">
+              </div>
+              <?php }// } ?>
+             
+</form>
+   
               </div>
           </div>
         </div>
       </div>
     </section>
     
+<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>cropimage/css/cropimage.css" />
+<link type="text/css" href="<?php echo base_url(); ?>cropimage/css/imgareaselect-default.css" rel="stylesheet" />

@@ -393,6 +393,50 @@ class Customermodel extends CI_Model {
 			return false;	
    }
    
+   public function updateSidebarSettings($data)
+   {
+	    $id = $this->session->userdata('logged_in')['account_id'];
+	   	$updatedata = array(
+		'pend_frnd_requests'=>$data['pend_frnd_req'],
+		'latest_frnds'=>$data['latest_frnds'],
+		'your_add_one'=>$data['your_add_one'],
+		'add_friends'=>$data['add_frnds'],
+		'companies_to_follow'=>$data['cmps_to_follow'],
+		'companies_im_following'=>$data['user_following_cmps'],	
+		'your_add_two'=>$data['your_add_two'],
+		'my_companies'=>$data['my_cmps']
+		);
+		
+		$this->db->where('user_id',$id);
+		$query = $this->db->get('bzz_sidebar_display_settings');
+		$side_settings = $query->result_array();
+		
+		if($side_settings[0]['user_id'] == $id)
+		{
+		$this->db->where('user_id',$id);
+		if($this->db->update('bzz_sidebar_display_settings',$updatedata))
+		return true;
+		
+		}else{
+			
+		$data['pend_frnd_requests']  = 'y';
+		$data['latest_frnds'] = 'y';
+		$data['your_add_one'] = 'y';
+		$data['add_friends'] = 'y';
+		$data['companies_to_follow'] = 'y';
+		$data['companies_im_following'] = 'y';	
+		$data['your_add_two'] = 'y';
+		$data['my_companies'] = 'y';
+		$data['user_id'] = $user_id;
+	    if($this->db->insert('bzz_sidebar_display_settings',$data))
+		return true;
+		
+		
+		}
+		
+		return false;
+   }
+   
    public function updateEmailInfo($data)
    {
 	  $updatedata = array(

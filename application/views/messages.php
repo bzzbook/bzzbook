@@ -64,11 +64,14 @@
                  <tbody>
                   <?php if($messages){ foreach($messages as $message): ?>
                   <tr>
+                   
                     <th scope="row"><input type="checkbox" name="btSelectAll" class="all_inbox_msgs"></th>
+                    
                     <td><span aria-hidden="true" class="glyphicon glyphicon-star"></span></td>
-                    <td><?php echo $message['name']; ?></td>
+                    <td> <a href="<?php echo base_url("profile/messageview/".$message['msg_id']); ?>"><?php echo $message['name']; ?></a></td>
                     <td> <?php echo $message['content']; ?></td>
                     <td class="ad_right"> <?php echo $message['sent_date']; ?></td>
+                   
                   </tr>
                   <?php endforeach; } else echo "Inbox Empty"?>
                 </tbody>

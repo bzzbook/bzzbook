@@ -55,26 +55,41 @@ echo "</div>";
         <form action="<?php echo base_url(); ?>signg_in/db_check_login" method="post">
           <div class="field">
             <label>Email</label>
-            <input type="text" class="form-control" data-rule-required="true" data-msg-required=" please enter your email"  data-rule-email="true" data-msg-email="please enter a vallid email" placeholder="Enter email Here" name="email" >
+            <input type="text" class="form-control"   id="user_email" data-rule-required="true" data-msg-required=" please enter your email"  data-rule-email="true" data-msg-email="please enter a vallid email" placeholder="Enter email Here" name="email" >
             <?php echo form_error('email'); ?>
           </div>
-          <div class="field">
+          <div class="field" id="pwd_hide">
             <label>Password</label>
             <input type="password" class="form-control" data-rule-required="true" data-msg-required="please enter password"  placeholder="Password" name="password">
             <?php echo form_error('password'); ?>
           </div>
           <div class="submit">
-            <input type="submit" value="Login" >
+            <input type="submit" id="sign_in_btn" value="Login" >
           </div>
           
         </form>
+        
+           <div class="submit" id="getmail" style="display:none">
+            <input type="submit" id="forgot_pwd_req" value="Submit" >
+          </div>
       
+      </div>
+      <div id="error_data">
       </div>
        <?php 
 	   echo "<div class='message'>";
 	   echo $this->session->flashdata('error');
 	   echo "</div>";
 	    ?> 
+           <?php 
+	   echo "<div class='message'>";
+	   echo $this->session->flashdata('reset_success');
+	   echo "</div>";
+	    ?> 
+        
+     
+        <a id="forgotpwd" style="font-size:13px; padding-left:412px;" >Forgot Password</a>
+        <a id="sign_in" style="font-size:13px; padding-left:205px; display:none;" >Sign in</a>
     </section>
   </section>
 </header>
@@ -149,6 +164,72 @@ echo "</div>";
 $(function(){
   $(".message").fadeOut(6000);
 });
+
+$('#forgotpwd').click(function() 
+{
+$('#pwd_hide').hide();
+$('#sign_in_btn').hide();
+$('#getmail').show();
+$(this).hide();
+$('#sign_in').show();
+});
+
+$('#sign_in').click(function()
+{
+	$(this).hide();
+	$('#pwd_hide').toggle();
+	$('#sign_in_btn').toggle();
+	$('#forgotpwd').toggle();
+	$('#getmail').toggle();
+
+});
+$('#forgot_pwd_req').click(function(){
+	usermail = $('#user_email').val();
+	var length = usermail.length;
+	var errors = '';
+	if(usermail == '') 
+	{
+		$("#error_data").html("Email Shouldn't be empty").fadeOut(7000);
+		//location.reload();
+	}
+
+	else {
+	url="<?php echo base_url(); ?>signg_in/forgetpwd/"+usermail;
+		$.ajax({
+        type: "POST",
+        url: url,
+        success: function(data)
+        {   
+		if(data == false){
+    	alert("Please enter valid email Id");
+		$('#user_mail').focusin();
+		}else{
+			
+		 url="<?php echo base_url(); ?>signg_in/reset_pwd_sendmail/"+usermail;
+	     // $("#error_data").html("Pasword Reset Link Sent to Your Email!... Please CheckOut Once").fadeOut(7000);
+		// window.location.replace(url);
+		location.replace(url);
+	/*	$.ajax({
+        type: "POST",
+        url: url
+		}).done(function(){
+			
+       //$('#follow-btn').show();
+		//location.reload();
+		});*/
+		
+	
+		}
+			
+		},
+		cache: false
+		});
+		
+		
+	};
+
+});
+
 </script>
 </body>
 </html>

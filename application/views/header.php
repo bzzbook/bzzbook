@@ -18,8 +18,8 @@ $session_data = $this->session->userdata('logged_in');
 <link href="<?php echo base_url(); ?>css/lightbox.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>css/uploadfile.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>css/datepicker.css" rel="stylesheet">
-<link rel="stylesheet" href="<?php echo base_url(); ?>css/jqtransform.css" type="text/css" media="all" />
-<link rel="stylesheet" href="<?php echo base_url(); ?>css/fbphotobox.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="<?php echo base_url(); ?>css/jqtransform.css" type="text/css" media="all"/>
+<link rel="stylesheet" href="<?php echo base_url(); ?>css/fbphotobox.css" type="text/css"/>
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css" />
 <link href="<?php echo base_url(); ?>css/font-awesome.min.css" rel="stylesheet">
 
@@ -46,7 +46,7 @@ $session_data = $this->session->userdata('logged_in');
         </ul>
         </span>
         <input type="search" placeholder="Search Here......" class="form-control">
-        <div class="find"><a href="#">Find</a></div>
+        <div class="find"><a id="sidebar_settings">Find</a></div>
       </div>
     </div>
     <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
