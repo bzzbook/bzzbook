@@ -19,8 +19,14 @@ public function send_msg()
 
 		//$data['group_ig'] = $this->input->post('group_id');
 		$data['sent_by'] = $this->session->userdata('logged_in')['account_id'];
-		$data['recieved_by'] = $this->input->post('friendsList');
+		$data['recieved_by'] = $this->input->post('addedusers');
 		$data['message'] = $this->input->post('message_content');
+		$data['subject'] = $this->input->post('subject');
+		if(empty($data['recieved_by']) && empty($data['message']))
+		{
+			 $this->session->set_flashdata('send_msg', 'Please input recipients and message');
+			 redirect('/profile/message');
+		}
 		$this->load->model('messages');
 		$this->messages->insert_msg($data);
 	    $this->session->set_flashdata('send_msg', 'Message Send Successfully');

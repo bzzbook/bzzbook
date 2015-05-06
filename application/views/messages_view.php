@@ -22,33 +22,33 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <th><div class="mod_text">Smarter Way to Trade Online with Zero Account</div>
+                    <th><div class="mod_text"><?php echo $messages['message'][0]['subject']; ?></div>
                       <div class="mod_rights"><a href="#">inbox</a><span><a href="#"><i class="fa fa-times"></i></a></span></div></th>
                   </tr>
                   <tr>
                     <th> <div class="col-md-8 deleted ico_ns"><a href="#"><i class="fa fa-user"></i></a></div>
                       <div class="mod_text"><?php echo $messages['user'][0]['user_firstname'] ." ". $messages['user'][0]['user_lastname']; ?><span><a href="#">&lt;<?php echo $messages['user'][0]['user_email']; ?>&gt;</a> <a href="#">UnSubScribe</a> </span>
-                        <div class="col-md-3 tome">To me</div>
-                        <div class="rep_lly col-md-9">
+                        <div class="tome">To me</div>
+                        <!--<div class="rep_lly col-md-9">
                           <button aria-expanded="false" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button" id="btnGroupVerticalDrop2"> <span class="caret"></span> </button>
                           <ul aria-labelledby="btnGroupVerticalDrop4" role="menu" class="dropdown-menu">
                             <li><a href="#">Dropdown link</a></li>
                             <li><a href="#">Dropdown link</a></li>
                           </ul>
-                        </div>
+                        </div>-->
                       </div>
                       <div class="right_side">
                         <div class="deleted replying col-md-6"> <a href="#"> <i class="fa fa-mail-reply"></i> </a> 
-                        <div class="rep_lly">
+                        <!--<div class="rep_lly">
                           <button aria-expanded="false" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button" id="btnGroupVerticalDrop2"> <span class="caret"></span> </button>
                           <ul aria-labelledby="btnGroupVerticalDrop4" role="menu" class="dropdown-menu">
                             <li><a href="#">Dropdown link</a></li>
                             <li><a href="#">Dropdown link</a></li>
                           </ul>
-                        </div></div>
+                        </div>--></div>
                       </div>
                       <div class="right_side"><a href="#"><?php echo $messages['message'][0]['sent_date']; ?></a><span><a href="#"><i class="fa fa-star-o"></i></a></span></div>
-                      <div class="col-md-8 col-md-offset-2 midle_box">
+                      <div class="col-md-8 col-md-offset-1 midle_box">
                         <p><?php echo $messages['message'][0]['message']; ?></p>
                       </div>
                       <div class="clearfix"></div>

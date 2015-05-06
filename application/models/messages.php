@@ -11,10 +11,22 @@ class Messages extends CI_Model {
    
    public function insert_msg($data)
    {
-		 if($this->db->insert('bzz_messages',$data))
+	   	 $rec_ids = explode(',',$data['recieved_by']);
+		 $count_id = count($rec_ids);
+		 $i = 0;
+		 foreach($rec_ids as $id)
+		 {
+			 $content['message'] = $data['message'];
+			 $content['recieved_by'] = $id;
+			 $content['sent_by'] = $data['sent_by'];
+			 $content['subject'] = $data['subject'];
+			 if($this->db->insert('bzz_messages',$content))
+			 $i++;
+		 }
+		 if($count_id==$i)
 		 return true;
-		 else 
-		 return false;	
+		 else
+		 return false;
    }
    public function getRecievedMessages(){
     $reciever_id = $this->session->userdata('logged_in')['account_id'];  

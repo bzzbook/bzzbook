@@ -1047,7 +1047,7 @@ width:100%; }
 .bott_top .btn-default:hover, .btn-default:focus, .btn-default.focus, .btn-default:active, .btn-default.active, .open > .dropdown-toggle.btn-default{ background:none;}
 .adres_box{ width:50%; float:left;  padding-top: 1px; margin-left:5px;}
 .adres_right{ width:20%; float:right; text-align:right; padding-top: 4px;}
-.ad_box{ border-top:none; border-bottom:none; min-height:300px;}
+.ad_box{ border-top:none; border-bottom:none; min-height:100px;}
 .ad_box .commentss{ margin:8px;}
 .bott_boxcolor{ background:#e9e9e9; padding:5px 0px;}
 .adres_right_ad{ width:40%; float: right;}

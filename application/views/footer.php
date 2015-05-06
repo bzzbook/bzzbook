@@ -70,8 +70,7 @@ $(function () {
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script> 
 <script src="<?php echo base_url(); ?>js/fbphotobox.js"></script>
 <script src="<?php echo base_url(); ?>js/custom.js"></script> 
-<script type="text/javascript" src="<?php echo base_url(); ?>js/swfupload/swfupload.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>js/jquery.swfupload.js"></script>
+
 <script>
 		$( document ).ready(function() {
 		$('.select').jqTransform({ imgPath: '' });
