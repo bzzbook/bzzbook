@@ -70,6 +70,7 @@ class Messages extends CI_Model {
 			{
 				$this->db->select('*');
 				$this->db->from('bzz_userinfo');
+				$this->db->where($condition);
 				$query = $this->db->get();
 				if($query->num_rows()>0)
 				{

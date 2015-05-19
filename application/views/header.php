@@ -2,8 +2,7 @@
 <?php
 $session_data = $this->session->userdata('logged_in');
 ?>
-<html lang="en">
-<head>
+<html lang="en"><head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,8 +21,17 @@ $session_data = $this->session->userdata('logged_in');
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/fbphotobox.css" type="text/css"/>
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css" />
 <link href="<?php echo base_url(); ?>css/font-awesome.min.css" rel="stylesheet">
+<link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+
+<style type='text/css'>
+a.previous { display: none; }
 
 
+
+#inbox-message tr { display: none; }
+
+#inbox-message tr:nth-child(-n+2) { display: table-row; }
+</style>
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>

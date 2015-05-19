@@ -2,12 +2,12 @@
       <div class="posts_inbox">
         <div role="tabpanel"> 
           <!-- Nav tabs -->
-          <ul class="nav nav-tabs" role="tablist">
+          <!--<ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#compose" aria-controls="profile" role="tab" data-toggle="tab">Compose</a></li>
             <li role="presentation"><a href="#inbox" aria-controls="messages" role="tab" data-toggle="tab">Inbox</a></li>
             <li role="presentation"><a href="#sent" aria-controls="settings" role="tab" data-toggle="tab">Sent</a></li>
             <li role="presentation"><a href="#trash" aria-controls="messages" role="tab" data-toggle="tab">Trash</a></li>
-          </ul>
+          </ul>-->
           
           <!-- Tab panes -->
           <div class="tab-content">
