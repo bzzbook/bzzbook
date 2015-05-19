@@ -52,6 +52,19 @@ class person extends CI_Model {
 		$data['user_id'] = $user_id;
 		$this->db->insert('bzz_sidebar_display_settings',$data);
 	   }
+	   
+	   public function email_check($user_email)
+	   {
+		   $this->db->select('user_email');
+		   $this->db->from('bzz_users');
+		   $this->db->where('user_email',$user_email);
+		   $query = $this->db->get();
+		   if($query->num_rows() > 0)
+		   {
+			   return $query->result_array();
+		   }else
+		   return false;
+	   }
 	   public function post_buzz($data)
 	   {
 		   

@@ -2,7 +2,7 @@
 
 session_start();
 
-class signg_in extends CI_Controller {
+class Signg_in extends CI_Controller {
 	 
 	  public function __construct() {
         parent::__construct();
@@ -342,12 +342,10 @@ class signg_in extends CI_Controller {
 	   
    }
    
-   
-   
-    public function pwd_reset($user_email)
-   {	   
-	   $this->load->view('password_reset',$user_email);
-   }
+       public function pwd_reset($usermail)
+	{
+		   $this->load->view('password_reset',$usermail);
+    }
    public function reset_pwd()
    {
 	   $user_email = $this->input->post('usermail');	
@@ -359,21 +357,21 @@ class signg_in extends CI_Controller {
  
  public function reset_pwd_sendmail($usermail)
 {
-	
+	/*
 		$config['protocol'] = 'smtp';
 		$config['smtp_host'] = 'ssl://smtp.googlemail.com';
 		$config['smtp_port'] = 465;
 		$config['smtp_user'] = 'mr.s.sivaprasad@gmail.com';
 		$config['smtp_pass'] = 'Siv@prasad598';
-
+*/
 // Load email library and passing configured values to email library
 		$mail = $usermail;
 		
 		$user_name = 'Sivaprasad';
-		$this->load->library('email',$config);
+		//;$this->load->library('email',$config);
 		$this->email->set_newline("\r\n");
-		$this->email->from('mr.s.sivaprasad@gmail.com',$user_name);
-		$this->email->to($mail);
+		$this->email->from('sprasad96@gmail.com',$user_name);
+		$this->email->to($mail,'user');
 		$this->email->subject('bzzbook Pasword Reset');
 		$message = "Please Click Below Link To Resest Your Acount Password  \n";
 		$message .= "www.bzzbook.com/signg_in/pwd_reset/".$usermail;
@@ -383,6 +381,7 @@ class signg_in extends CI_Controller {
 		    $this->session->set_flashdata('cust_success', 'Your pasword Reset Link Sent to your email');
 			redirect('/signg_in');
 			//echo "mail sent";
+			//echo $this->email->print_debugger();
 		}else
 		{
 			$this->session->set_flashdata('cust_success', 'Cannot send Password Reset link to your e-mail address');

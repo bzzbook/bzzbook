@@ -25,25 +25,25 @@ class customer extends CI_Controller {
 		$this->form_validation->set_rules('lastname','LastName','trim|required|alpha|xss_clean');
 		$this->form_validation->set_rules('email','Email','trim|required|valid_email|xss_clean');
 		$this->form_validation->set_rules('phone_number','Phone Number','trim|required|xss_clean');
-		$this->form_validation->set_rules('user_name','User Name','trim|required|xss_clean');
-		$this->form_validation->set_rules('password','Password','trim|required|matches[conf_password]|xss_clean|md5');
-		$this->form_validation->set_rules('conf_password','Password Confirmation','trim|required|xss_clean|md5');
+	//	$this->form_validation->set_rules('user_name','User Name','trim|required|xss_clean');
+		$this->form_validation->set_rules('password','Password','trim|required|xss_clean|md5');
+		$this->form_validation->set_rules('dob','Birthday','required|xss_clean');
+		$this->form_validation->set_rules('gender','Gender','required');
+		/*$this->form_validation->set_rules('conf_password','Password Confirmation','trim|required|xss_clean|md5');
 		$this->form_validation->set_rules('country','Country','required|xss_clean');
 		$this->form_validation->set_rules('state','State','required|xss_clean');
 		$this->form_validation->set_rules('city','City','required|xss_clean');
-		$this->form_validation->set_rules('postal_code','Postal Code','required|xss_clean');
-		$this->form_validation->set_rules('dob','Birthday','required|xss_clean|callback_dob_check');
-		$this->form_validation->set_rules('gender','Gender','required');
+		$this->form_validation->set_rules('postal_code','Postal Code','required|xss_clean');			
 		$this->form_validation->set_rules('position','Job Position','required|xss_clean');
 		$this->form_validation->set_rules('industry','Industry','required|xss_clean');
 		$this->form_validation->set_rules('companyname','Company Name','required|xss_clean');
 		$this->form_validation->set_rules('office_phone','Office phone no','required|xss_clean');
 		$this->form_validation->set_rules('fax','Fax','required|xss_clean');
 		//$this->form_validation->set_rules('aboutme','About','required');
-	//	$this->form_validation->set_rules('intrests','Intrests','required');
+		//$this->form_validation->set_rules('intrests','Intrests','required');
     	//$this->form_validation->set_rules('skills','Skills','required');
 		//$this->form_validation->set_rules('agree','Terms & Conditions','required');
-		
+		*/
 		if($this->form_validation->run() == FALSE)
 		{
 			$this->load->view('customer_sign_up');
@@ -51,35 +51,40 @@ class customer extends CI_Controller {
 		
 		
 		$user['user_email'] = $this->input->post('email');	
-		$user['username'] = $this->input->post('user_name');
+		//$user['username'] = $this->input->post('user_name');
 		$user['password'] = $this->input->post('password');
-		$user['user_country'] = $this->input->post('country');
-		$user['user_state'] = $this->input->post('state');
-		$user['user_city'] = $this->input->post('city');
-		$user['user_postalcode'] = $this->input->post('postal_code');
+		//$user['user_country'] = $this->input->post('country');
+		//$user['user_state'] = $this->input->post('state');
+		//$user['user_city'] = $this->input->post('city');
+		//$user['user_postalcode'] = $this->input->post('postal_code');
 		$user['user_type'] = 'user';
 		$confirmation_code = md5(random_string('unique'));
 		$user['conf_code'] = $confirmation_code;
 		$this->load->model('person');
-		$user_id =  $this->person->sign_up($user);
 		
-		$user_info['user_phoneno'] = $this->input->post('phone_number');
-		//$user_info['con_password'] = $this->input->post('conf_password');
+		$user_info['user_phoneno'] = $this->input->post('phone_number');		
 		$user_info['user_firstname'] = $this->input->post('firstname');
 		$user_info['user_lastname'] = $this->input->post('lastname');
 		$user_info['user_dob'] = $this->input->post('dob');
 		$user_info['user_gender'] = $this->input->post('gender');
-		$user_info['user_jobtype'] = $this->input->post('position');
-		$user_info['user_industry'] = $this->input->post('industry');
-		$user_info['user_cmpname'] = $this->input->post('companyname');
-		$user_info['user_officephone'] = $this->input->post('office_phone');
-		$user_info['user_fax'] = $this->input->post('fax');
-		$user_info['user_intrests'] = $this->input->post('intrests');
-		$user_info['user_skills'] = $this->input->post('skills');
-		$user_info['user_about'] = $this->input->post('aboutme');
-		//$user_info['user_terms_conditions'] = $this->input->post('agree');
-		$user_info['user_id'] = $user_id;
 		
+		//$user_info['con_password'] = $this->input->post('conf_password');
+		//$user_info['user_jobtype'] = $this->input->post('position');
+		//$user_info['user_industry'] = $this->input->post('industry');
+		//$user_info['user_cmpname'] = $this->input->post('companyname');
+		//$user_info['user_officephone'] = $this->input->post('office_phone');
+		//$user_info['user_fax'] = $this->input->post('fax');
+		//$user_info['user_intrests'] = $this->input->post('intrests');
+		//$user_info['user_skills'] = $this->input->post('skills');
+		//$user_info['user_about'] = $this->input->post('aboutme');
+		//$user_info['user_terms_conditions'] = $this->input->post('agree');
+	
+		
+		$email_check = $this->person->email_check($user['user_email']);
+		if(empty($email_check))
+		{
+		$user_id =  $this->person->sign_up($user);
+		$user_info['user_id'] = $user_id;	
 		$this->person->user_info($user_info);
 		$this->person->user_settings($user_id);
 		$this->person->user_sidebar_settings($user_id);
@@ -98,15 +103,15 @@ class customer extends CI_Controller {
 		if($user_data)
 		{
 			//
-		$config['protocol'] = 'smtp';
+		/*$config['protocol'] = 'smtp';
 		$config['smtp_host'] = 'ssl://smtp.googlemail.com';
 		$config['smtp_port'] = 465;
 		$config['smtp_user'] = 'mr.s.sivaprasad@gmail.com';
-		$config['smtp_pass'] = 'Siv@prasad598';
+		$config['smtp_pass'] = 'Siv@prasad598';*/
 
 // Load email library and passing configured values to email library
 		$mail = $user_data[0]['user_email'];
-		$this->load->library('email',$config);
+		$this->load->library('email');
 		$this->email->set_newline("\r\n");
 		$this->email->from('mr.s.sivaprasad@gmail.com',$username);
 		$this->email->to($mail);
@@ -124,6 +129,11 @@ class customer extends CI_Controller {
 			redirect('/customer/sign_up');
 		}
 		}
+		}
+		else
+
+			$this->session->set_flashdata('email_status','Bzzbook Account already created with this email, So Please try with another email');
+			redirect('/signg_in');		
 		}
    }
    public function dob_check($str)
@@ -144,18 +154,22 @@ class customer extends CI_Controller {
 	  {
 	    $this->form_validation->set_rules('email','Email','trim|required|valid_email|xss_clean');
 	    $email = $this->input->post('email');
-	    $this->email->from('sivaprasad@ayatas.com','Sivaprasad');
+	    $this->email->from('sprasad96@gmail.com','Sivaprasad');
 		$this->email->to($email,'user');
 		$this->email->subject('this is testing email.......');
 		$this->email->message('hai this is message');
-		$this->email->send();
-		echo $email;
-		redirect('/profiles');
-	  }else{
-		  echo"wrong submission";
+		if($this->email->send())
+		{
+	//	echo $email;
+		
+		echo $this->email->print_debugger();
+		}//redirect('/profiles');
+	  else
+		{ 
+		 echo"wrong submission";  
 	  }
-	  
-  }
+	
+  }}
   public function view_post()
 	  {
 		$data['result'] = $this->customer_m->view_post(); 

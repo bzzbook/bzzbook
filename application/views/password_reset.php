@@ -24,10 +24,10 @@
     <figure class="col-lg-3 col-md-3 col-sm-4 col-xs-12 animate-plus" data-animations="pulse"  data-animation-when-visible="true"  data-animation-reset-offscreen="true"><a href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>images/logo.png" alt=""></a></figure>
     <section  class="col-lg-7 col-md-7 col-sm-7 col-xs-12 pull-right">
       <div class="userLogin">
-	<label>Password</label>
+	
         <form id="pwd_reset" action="<?php echo base_url(); ?>signg_in/reset_pwd" method="post">
           <div class="field">
-          <input type="hidden" value="<?php echo $usermail; ?>" name="usermail" id="usermail"/>
+          <input type="hidden" value="<?php $user_email; ?>" name="usermail" id="usermail"/>
             <label>password</label>
            <input type="password" name="password" id="password" class="form-control" placeholder="Password" 
             data-rule-required="true" 

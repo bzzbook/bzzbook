@@ -164,15 +164,17 @@
                 <textarea cols="" rows="" class="form-control" name="about_me_info" ><?php echo $user_info[0]->user_about ?></textarea>
                 <input type="submit" class="smbtn" value="Save">
               </div>
+                 <h4 class="clear">Your Interests</h4>
               <div class="filed col-md-12">
                 <textarea cols="" rows="" class="form-control" name="about_me_intrests"><?php echo $user_info[0]->user_intrests ?></textarea>
                 <input type="submit" class="smbtn" value="Save">
               </div>
+                 <h4 class="clear">Your Skills</h4>
               <div class="filed col-md-12">
                 <textarea cols="" rows="" class="form-control" name="about_me_skills"><?php echo $user_info[0]->user_skills;?></textarea>
                 <input type="submit" class="smbtn" value="Save">
               </div>
-              </form>
+              
               <h4 class="clear">Educational Background</h4>
               <div class="posts">
         		<div class="groupMainBlock">
@@ -196,9 +198,10 @@
                 <input type="text" class="form-control" placeholder="Fax"  value="<?php echo $user_info[0]->user_fax ?>">
                 <input type="submit" class="smbtn" value="Save">
               </div>
-              <div class="filed col-md-6">
+              </form>
+              <!--<div class="filed col-md-6">
                 <input type="submit" class="fmbtn" value="Upload Settings">
-              </div>
+              </div>-->
               <div class="clear"></div>
             </div>
             <div role="tabpanel" class="tab-pane" id="business_details">

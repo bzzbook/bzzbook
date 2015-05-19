@@ -774,7 +774,7 @@ margin-bottom: 20px; margin-left:5px; float:left; margin-top:5px;" value="cancle
 public function send_business_card()
 {
 	
-	 if($this->input->post('added_bc_users')!='')
+	if($this->input->post('added_bc_users')!='')
 	 {
 		 $data = $this->input->post('added_bc_users');
 		 $data = explode(",",$data);
@@ -789,41 +789,273 @@ public function send_business_card()
 			 $emails[] = $email_id['user_email'];
 		 }
 		
-		$config['protocol'] = 'smtp';
-		$config['smtp_host'] = 'ssl://smtp.googlemail.com';
-		$config['smtp_port'] = 465;
-		$config['smtp_user'] = 'mr.s.sivaprasad@gmail.com';
-		$config['smtp_pass'] = 'Siv@prasad598';
-
-// Load email library and passing configured values to email library
-	//	$mail = $usermail;
+		$user_name = 'bzzBook';
+		$profile_info = $this->profile_set->get_user_profileinfo(); 
 		
-		$user_name = 'Sivaprasad';
-		$this->load->library('email',$config);
 		$this->email->set_newline("\r\n");
-		$this->email->from('mr.s.sivaprasad@gmail.com',$user_name);
+		$this->email->from('www.bzzbook.com',$user_name);
 		$this->email->to($emails);
-		$this->email->subject('bzzbook Pasword Reset');
+		$this->email->subject('bzzbook Busines Card');
 		$this->email->set_mailtype("html");
-		$this->email->message($this->load->view('businesscard_email_template'));
+		$this->email->message($this->load->view('businesscard_email_template',$profile_info,TRUE));
 		if($this->email->send())
 		{
-		   // $this->session->set_flashdata('cust_success', 'Your pasword Reset Link Sent to your email');
-			redirect('/profile/business_details');
-			echo "mail sent to Your friends";
+		   $this->session->set_flashdata('business_card_status', 'The Business Card Sent To Your Friends!..');
+				redirect('/profile/business_details');
+		
 		}else
 		{
-			//$this->session->set_flashdata('cust_success', 'Cannot send Password Reset link to your e-mail address');
-			//redirect('/signg_in');
+			$this->session->set_flashdata('business_card_status','Temporary error Occured please Try after SomeTime!..');
+		
 				redirect('/profile/business_details');
-				echo "mail not sent to users";
+			
 		}
 
 	
 		 
-	 }else
-	 echo "you should select atleast one Reciepient to send mail";
+	}else  if($this->input->post('addedmails')!='')
+	{
+		$data = array();
+		 $data = $this->input->post('addedmails');
+		 $data = explode(",",$data);
+	
+	 	$user_name = 'bzzBook';
+		$profile_info = $this->profile_set->get_user_profileinfo(); 
+		
+		$this->email->set_newline("\r\n");
+		$this->email->from('www.bzzbook.com',$user_name);
+		$this->email->to($data);
+		$this->email->subject('bzzbook Busines Card');
+		$this->email->set_mailtype("html");
+		$this->email->message($this->load->view('businesscard_email_template',$profile_info,TRUE));
+		if($this->email->send())
+		{
+		   $this->session->set_flashdata('business_card_status', 'The Business Card Sent To Your Friends!..');
+				redirect('/profile/business_details');
+			
+		}else
+		{
+			$this->session->set_flashdata('business_card_status','Temporary error Occured please Try after SomeTime!..');
+			
+				redirect('/profile/business_details');
+			
+		}
+	}else
+	
+	$this->session->set_flashdata('business_card_status','you should select atleast one Reciepient to send mail');
+	redirect('/profile/business_details');
+	
 }
+
+
+
+
+   public function addhometown()
+  {
+	  //parse_str($_POST['form_data'],$field_info);
+	$insert_id =  $this->profile_set->add_home_town($_POST['home_town']);
+$result = $this->profile_set->save_settings();
+	if($this->profile_set->add_home_town($_POST['home_town']))
+		
+	
+	/*echo "<p id='paragraph".$insert_id."'>".$_POST['position']." at ".$_POST['org_name']." <a href='javascript:void(0)' onclick='editWorkPlace(".$insert_id.")' >edit</a></p>";*/
+	$this->load->view('home_town');
+ /* echo"<div id='hometown_val_disp' style='background-color:#FC9;' class='inner_rights'>  
+                        <h4 style='color:white;'>".$result[0]->hometown."<i class='fa fa-pencil'></i><a  onclick='home_town_edit()' href='javascript:void(0)'>edit</a></h4>
+                        </div>
+						
+						 <div id='hme_town' class='inner_rights' style='display:none'>
+                          <h3>Home Town</h3>
+                           <a href='javascript:void(0)' id='hometown'>Add a home town</a>
+                            </div>
+							
+		
+		    	<div id='hometown_disp' class='inner_rights' style='display:none;'>
+              <input type='text' name='home_town' id='home_town' value=".$result[0]->hometown.">
+              <input type='button' id='add_hometown' onclick='add_home_town()' value='submit'/>
+              <input type='button' id='close_hometown' value='cancel' onclick='close_home()'/>
+                        </div>"; */
+	else
+	return false;
+  }
   
+  
+  
+   public function addlocation()
+  {
+	  //parse_str($_POST['form_data'],$field_info);
+	$insert_id =  $this->profile_set->add_location($_POST['current_city']);
+$result = $this->profile_set->save_settings();
+	if($this->profile_set->add_location($_POST['current_city']))
+		
+	
+	/*echo "<p id='paragraph".$insert_id."'>".$_POST['position']." at ".$_POST['org_name']." <a href='javascript:void(0)' onclick='editWorkPlace(".$insert_id.")' >edit</a></p>";*/
+	
+	echo"    			
+	<div class='tophead'>Current City and Hometown</div>
+	<div id='currentcity_val_disp'>
+                        <div class='sm_leftbox'></div>
+                        <div class='sm_rightbox'><h3><a href='#'>".$result[0]->location."</a></h3>
+                        <p>Current city</p>
+                        </div>
+                        <div class='sm_rightside'>
+                        <div class='col-md-3 com_le'><i class='fa fa-globe'></i></div>
+                        <div class='col-md-6 com_mid'><a href='javascript:void(0)' onclick='current_city_edit()'><i class='fa fa-pencil'></i> Edit</a></div>
+                        <div class='col-md-3 com_rig'><a href='#'><i class='fa fa-times'></i></a></div>
+                        </div>
+						       <div class='clearfix'></div>
+                        </div>
+					
+					
+					
+					
+					 <div class='iner_lefts' id='add_currentcity1' style='display:none;'><i class='fa fa-plus'></i></div>
+                        <div class='inner_rights boxs' id='add_currentcity2' style='display:none;'>
+                        <a href='javascript:void(0)' id='add_currentcity' ><h3>Add your current city</h3> </a>
+                          
+                        </div>
+					
+										
+						
+						<div id='currentcity_disp' style='display:none;'>
+                            <div class='col-md-12' id='city_place'>
+                              <form class='form-inline'>
+                                <div class='form-group citys'>
+                                  <label for='exampleInputName2'>Current City</label>
+                                  <input type='text' id='current_location' value=".$result[0]->location.">
+                                </div>
+                                <div class='clearfix'></div>
+                              </form>
+                              <div class='box_bottom'>
+                                <div class='publics col-md-4'>
+                    <button type='button' class='btn btn-default dropdown-toggle' data-toggle='dropdown'
+					 aria-expanded='false'>Public <span class='caret'></span></button>
+                                </div>
+                                <div class='col-md-8 skil_box'>
+                                 <div class='btn3 btn-green' onclick='add_current_city()'>Save Changes</div>
+                                      
+                               <div class='btn3 btn-black' onclick='close_currentcity()'>Cancel</div>
+                               
+                                </div>
+                                <div class='clearfix'></div>
+                              </div>
+                            </div>
+							       <div class='clearfix'></div>
+                          </div> ";
+						
+					
+						
+						
+						
+	else
+	return false;
+  }
+
+ public function add_fam_members()
+  {
+	
+	  //parse_str($_POST['form_data'],$field_info);
+	//$insert_id =  $this->profile_set->add_family_members($_POST['member_name'],$_POST['member_relation']);
+	if( $this->profile_set->add_family_members($_POST['member_name'],$_POST['member_relation']))
+	$this->load->view('family_members_inner');
+	else
+	return false;
+	
+  }
+  
+  public function addaboutme()
+  {
+	  
+	  //parse_str($_POST['form_data'],$field_info);
+	$insert_id =  $this->profile_set->add_about_me($_POST['about_me']);
+    $result = $this->profile_set->save_settings();
+	if($this->profile_set->add_about_me($_POST['about_me']))
+		
+	
+	$this->load->view('about_me_inner');
+	else
+	return false;
+  
+	  
+  }
+  
+    public function addfavquotes()
+  {
+	  
+	 
+	$insert_id =  $this->profile_set->add_fav_quotes($_POST['fav_quotes']);
+    $result = $this->profile_set->save_settings();
+	if($this->profile_set->add_fav_quotes($_POST['fav_quotes']))
+		
+     $this->load->view('fav_quotes_inner');
+	else
+	return false;
+  
+	  
+  }
+  
+  
+    
+    public function addrelation()
+  {
+	  
+	 
+	$insert_id =  $this->profile_set->add_relation($_POST['relation']);
+    $result = $this->profile_set->save_settings();
+	if($this->profile_set->add_relation($_POST['relation']))
+		
+	$this->load->view('relationship_inner');
+	else
+	return false;
+  
+	  
+  }
+  
+  
+  
+public function add_nicnames()
+{	
+	  //parse_str($_POST['form_data'],$field_info);
+//	$insert_id =  $this->profile_set->add_nic_names($_POST['name'],$_POST['name_type']);
+	
+	if( $this->profile_set->add_nic_names($_POST['name'],$_POST['name_type']))
+	{
+		//print_r($data);
+		//echo '<br>';
+		//echo $data[0] ." is ". $data[1];
+		
+		$this->load->view('nick_names_inner');
+	}
+	else
+	return false;
+	
+}
+
+public function addmobile()
+{
+	//$insert_id =  $this->profile_set->add_about_me($_POST['about_me']);
+    $result = $this->profile_set->save_settings();
+	if($this->profile_set->add_mobile($_POST['mobile']))
+	
+	$this->load->view('aboutme/mobile_inner');
+	else
+	return false;
+  
+	
+}
+
+public function add_work()
+{
+	  
+	  parse_str($_POST['formdata'],$work_info);
+	  $returninfo = $this->profile_set->add_work_info($work_info);
+	  if($returninfo != false):
+	  	$organization_info['inserted_id'] = $returninfo;
+	  	echo $this->load->view('aboutme/work_inner');
+	 else:
+	 	return false;
+	 endif;
+	  
+}
 }
 ?>

@@ -11,6 +11,7 @@
 <link href="<?php echo base_url(); ?>css/animate.min.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>css/style.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>css/responsive.css" rel="stylesheet">
+<link href="<?php echo base_url(); ?>css/datepicker.css" rel="stylesheet">
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -52,6 +53,12 @@ echo "</div>";
 	   echo $this->session->flashdata('cust_success');
 	   echo "</div>";
 ?> 
+<?php 
+	   echo "<div class='message'>";
+	   echo $this->session->flashdata('email_status');
+	   echo "</div>";
+?> 
+
 
         <form action="<?php echo base_url(); ?>signg_in/db_check_login" method="post">
           <div class="field">
@@ -125,48 +132,54 @@ echo "</div>";
             
         </span>
         <?php echo validation_errors(); ?>
-        <form name="sign_up_form" id="sign_up" method="post" action="<?php echo base_url(); ?>signg_up/sign_up">
+        <div id="signup_validation"></div>
+        <form name="sign_up_form" id="sign_up" method="post" action="<?php echo base_url(); ?>customer/cust_sign_up">
           <div class="field col-md-6">
             <input type="text" class="form-control" data-rule-required="true" data-msg-required="please enter your first name"     
-            name="firstname" placeholder="First Name" >
+            name="firstname" id="firstname" placeholder="First Name" >
           </div>
           <div class="field col-md-6">
             <input type="text" class="form-control" data-rule-required="true"  data-msg-required="please enter your last name" 
-            name="lastname" placeholder="Last Name" >
+            name="lastname" placeholder="Last Name" id="lastname" >
           </div>
-          <div class="field col-md-12">
+          <div class="field col-md-6">
             <input type="text" class="form-control"  data-rule-required="true" data-msg-required="please enter your email" 
-            data-rule-email="true" data-msg-email="please enter a valid email address" name="email" placeholder="E-mail" >
+            data-rule-email="true" data-msg-email="please enter a valid email address" name="email" id="email" placeholder="E-mail" >
           </div>
-          <div class="field col-md-12">
+          <div class="field col-md-6">
             <input type="tel" class="form-control" data-rule-required="true" data-msg-required="please enter your phone number" 
-            name="phone_number" placeholder="Phone Number" >
+            name="phone_number" id="phone_number" placeholder="Phone Number" >
           </div>
-          <div class="field col-md-12">
+          <div class="field col-md-6">
             <input type="password" class="form-control" data-rule-required="true" data-msg-required="please enter your password" 
-            name="new_password" placeholder="New Password" >
+            name="password" id="password" placeholder="Password" >
           </div>
-          <div class="field col-md-12 dob">
-            <label>Birthday</label>
-            <div data-date-viewmode="years" data-date-format="dd-mm-yyyy" data-date="12-02-2012" id="dpYears" 
+          <div class="field col-md-6 dob">
+            <div data-date-viewmode="years" data-date-format="dd-mm-yyyy" data-date="12-02-2012" id="dateYears" 
             class="input-group-bt date">
-              <input type="text" readonly name="birthdate" value="12-02-2012" size="16" class="form-control">
+              <input type="text" name="dob" placeholder="dd-mm-yyyy" size="16" class="form-control" data-rule-required="true" data-msg-required="please enter your Birth date" >
               <span aria-hidden="true" class="add-on glyphicon glyphicon-calendar"></span> </div>
           </div>
-          <p>Why do I need to provide my birthday?</p>
-          <div class="filed rdbtns">
+          <!--<p>Why do I need to provide my birthday?</p> -->
+          <div class="row"> 
+          <div clas="col-md-6">
+          <div class="filed rdbtns col-md-6">
             <label class="checkbox-inline">
-              <input type="radio" name="gender" id="inlineRadio2" value="male" checked="checked">
+              <input type="radio" name="gender" id="inlineRadio2" value="m" checked="checked">
               Male </label>
             <label class="checkbox-inline">
-              <input type="radio" name="gender" id="inlineRadio3" value="female" >
+              <input type="radio" name="gender" id="inlineRadio3" value="f" >
               Female </label>
           </div>
-          <p>Lorem ipsum dolor sit amet, at choro omnium partiendo qui, nec nulla voluptua ex, te homero dissentiunt usu. Et vis latine epicuri voluptaria, <a href="#">posse veniam legimus eu ius</a>. Odio albucius ne vis, nec ad scaevola philosophia. Vide nominavi</p>
-          <div class="sbButtons">
-            <input type="submit" value="Sign Up Now">
-           
           </div>
+          <div class="col-md-6">
+            <div class="sbButtons field col-md-6">
+            <input type="submit" value="Sign Up Now">
+           </div>
+           </div>
+          </div>
+          <p>Lorem ipsum dolor sit amet, at choro omnium partiendo qui, nec nulla voluptua ex, te homero dissentiunt usu. Et vis latine epicuri voluptaria, <a href="#">posse veniam legimus eu ius</a>. Odio albucius ne vis, nec ad scaevola philosophia. Vide nominavi</p>
+        
         </form>
       </div>
       
@@ -222,10 +235,20 @@ echo "</div>";
 <script src="<?php echo base_url(); ?>js/custom.js"></script>
 <script src="<?php echo base_url(); ?>js/jquery.validate.min.js"></script>
 <script src="<?php echo base_url(); ?>js/additional-methods.js"></script>
+<script src="<?php echo base_url(); ?>js/bootstrap-datepicker.js"></script>
 <script type="text/javascript">
+		$( document ).ready(function() {
+			$('#dateYears').datepicker();
+		});
+	</script>
+<script type="text/javascript">
+
+$('#sign_up').validate();
 $(function(){
   $(".message").fadeOut(6000);
+ 
 });
+
 
 $('#forgotpwd').click(function() 
 {
@@ -242,7 +265,11 @@ $('#cust_signup').click(function()
 	$('#show_signup').toggle();
 	
 	});
-
+function getback()
+{
+	$('#hide_signup').toggle();
+	$('#show_signup').toggle();
+}
 
 $('#sign_in').click(function()
 {
@@ -301,5 +328,12 @@ $('#forgot_pwd_req').click(function(){
 });
 
 </script>
+<?php 
+$data = $this->session->flashdata('email_status');
+if(!empty($data))
+{
+	echo "<script> getback(); </script>";
+}
+?>
 </body>
 </html>

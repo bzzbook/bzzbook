@@ -82,14 +82,69 @@ $(function () {
    $('#event_discussion').validate();
    $('#change_pwd').hide();
    $('#pf_pwd_change').validate();
-  
+   $(".message").fadeOut(6000);
  
   $('#posts').focusin(function() 
    {
    $('#updateControls').show();
   
 });
+
+
+
+$('#share_business_card_frnds').keypress(function(e) {
+	
+    if(e.which == 32) {
+	var cur_content = $('#selected_emails').html();
+	
+	var user_mail = $.trim($(this).val());
+	
+	
+	var new_content  =  "<span class='bc_mail_ids' id='"+user_mail+"'>"+user_mail+"<a onclick='removemail(&#39"+user_mail+"&#39)'><img class='as_close_btn' src='<?php echo base_url().'images/close_post.png'; ?>'/></a></span>";
+	$('#selected_emails').html(new_content+cur_content);
+	$('#selected_emails').show();
+	$(this).val('').focus();
+	
+	 var added_emails = $('#addedmails').val()
+if(added_emails!='')
+$('#addedmails').val(added_emails+','+user_mail)
+else
+$('#addedmails').val(user_mail)
+
+    }
+
 });
+
+
+
+});
+
+
+
+
+function removemail(user_mail){
+
+	var added_emails = $('#addedmails').val();
+	var len = added_emails.length;
+	var newval = '';
+	if(len==1)
+	{ 
+		newval = '';
+	}
+	else if(added_emails.indexOf(user_mail)==(len-1)){
+	newval = added_emails.replace(','+user_mail,'');
+	}
+	else if(added_emails.indexOf(user_mail)==0)
+	newval = added_emails.replace(user_mail+',','');
+	else
+	newval = added_emails.replace(user_mail+',','');
+	$('#addedmails').val(newval);
+	$('#'+user_mail).remove();
+}
+
+
+
+
 </script>
 <script>
 $(document).ready(function()
@@ -859,7 +914,7 @@ function cmpFollow(comp_id)
 $("#sidebar_follow"+comp_id).html('<img src="<?php echo base_url(); ?>images/follow_loader.gif" />');
     $('#followModal1').modal('toggle');
 	
-	$('#follow_modal').click(function()
+	$('#follow_modal_btn').click(function()
 	{
 	
 	var option = $('#follow_as').val();
@@ -1781,7 +1836,7 @@ function keyupevent_bc(){
 
 function addfrndtobcpost(user_id,name){
 var cur_content = $('#selected_bc_friends').html();
-var new_content = "<span id='"+user_id+"'>"+name+"<a onclick='removefrnd("+user_id+")'><img class='as_close_btn' src='<?php echo base_url().'images/close_btn.png'; ?>'/></a></span>";
+var new_content = "<span  class='bc_mail_ids' id='"+user_id+"'>"+name+"<a onclick='removefrnd("+user_id+")'><img class='as_close_btn' src='<?php echo base_url().'images/close_post.png'; ?>'/></a></span>";
  $('#selected_bc_friends').html(new_content+cur_content);
  $('#search_bc_friends').focus();
  $('#auto_bc_suggest').hide();
@@ -1857,6 +1912,38 @@ $('#select_all_msgs').click(function(event)
 		});
 	}else{
 		$('.all_inbox_msgs').each(function(event)
+		{
+			this.checked = false;
+	
+		});
+	}
+});	
+$('#select_sent_msgs').click(function(event)
+{
+	if(this.checked)
+	{
+		$('.all_sent_msgs').each(function(event)
+		{
+			this.checked = true;
+		});
+	}else{
+		$('.all_sent_msgs').each(function(event)
+		{
+			this.checked = false;
+	
+		});
+	}
+});	
+$('#select_trash_msgs').click(function(event)
+{
+	if(this.checked)
+	{
+		$('.all_trash_msgs').each(function(event)
+		{
+			this.checked = true;
+		});
+	}else{
+		$('.all_sent_msgs').each(function(event)
 		{
 			this.checked = false;
 	
@@ -1939,6 +2026,9 @@ $('#searchbar_category li').click(function()
  			}
  		});*/
 	});  
+	
+
+	
 /*
 		$("#sidebar_settings").click(function(event){
 
@@ -2005,6 +2095,71 @@ $('#searchbar_category li').click(function()
 					event.preventDefault();
 	//	});
 				}*/
+</script>
+<script>
+
+
+  $(document).ready(function () {
+        // number of records per page
+        var pageSize = 2;
+        // reset current page counter on load
+        $("#hdnActivePage").val(1);
+        // calculate number of pages
+        var numberOfPages = $('#inbox-message tr').length / pageSize;
+        numberOfPages = numberOfPages.toFixed();
+		alert(numberOfPages);
+        // action on 'next' click
+        $("a.next").on('click', function () {
+			$('#start').text(parseInt($('#start').text())+pageSize);
+			$('#last').text(parseInt($('#last').text())+pageSize);
+            // show only the necessary rows based upon activePage and Pagesize
+            $("#inbox-message tr:nth-child(-n+" + (($("#hdnActivePage").val() * pageSize) + pageSize) + ")").show();
+            $("#inbox-message tr:nth-child(-n+" + $("#hdnActivePage").val() * pageSize + ")").hide();
+            var currentPage = Number($("#hdnActivePage").val());
+            // update activepage
+            $("#hdnActivePage").val(Number($("#hdnActivePage").val()) + 1);
+			alert(Number($("#hdnActivePage").val()) + 1);
+            // check if previous page button is necessary (not on first page)
+            if ($("#hdnActivePage").val() != "1") {
+                $("a.previous").show();
+                $("#previous").show();
+            }
+            // check if next page button is necessary (not on last page)
+            if ($("#hdnActivePage").val() == numberOfPages) {
+				//$('#last').text(parseInt($('#inbox-message tr').length)- parseInt(pageSize*numberOfPages));
+                $("a.next").hide();
+                $("#next").hide();
+            }
+        });
+        // action on 'previous' click
+        $("a.previous").on('click', function () {
+			$('#start').text(parseInt($('#start').text())-pageSize);
+			$('#last').text(parseInt($('#last').text())-pageSize);
+            var currentPage = Number($("#hdnActivePage").val());
+            $("#hdnActivePage").val(currentPage - 1);
+            // first hide all rows
+            $("#inbox-message tr").hide();
+            // and only turn on visibility on necessary rows
+            $("#inbox-message tr:nth-child(-n+" + ($("#hdnActivePage").val() * pageSize) + ")").show();
+            $("#inbox-message tr:nth-child(-n+" + (($("#hdnActivePage").val() * pageSize) - pageSize) + ")").hide();
+            // check if previous button is necessary (not on first page)
+            if ($("#hdnActivePage").val() == "1") {
+                $("a.previous").hide();
+                $("#previous").hide();
+            } 
+            // check if next button is necessary (not on last page)
+            if ($("#hdnActivePage").val() < numberOfPages) {
+                $("a.next").show();
+                $("#next").show();
+            } 
+            if ($("#hdnActivePage").val() == 1) {
+               //$("#previous").hide();
+            }
+        });
+    });    
+//]]>  
+
+</script>
 </script>
 <script type="text/javascript">
 
@@ -2096,6 +2251,749 @@ color:red;
 }
 
 </style><?php */?>
+<script> //current location script
+$('#add_currentcity').click(function(){
+	$('#add_currentcity2').hide();
+	$('#add_currentcity1').hide();
+	$('ul.home > #location-li').append($('#currentcity_disp').show());
+
+});
+
+
+
+function close_current_city()
+ {
+	$('#currentcity_disp').hide();
+	//$('#hme_town_one').show();
+	$('#add_currentcity2').show();
+	$('#add_currentcity1').show();
+	$('#add_currentcity').show();
+	}
+	
+	
+	
+function add_current_city()
+{
+	var currentcity = $('#current_location').val();
+	
+	url="<?php echo base_url();?>profile/addlocation/";
+	 $.ajax({
+		type: "POST",
+		url: url,
+		data: { current_city:currentcity } ,
+		success: function(html)
+		{   					
+			//$('#currentcity_val_disp').show();
+			$('#add_currentcity').hide();
+			$('ul.home > #location-li').html(html);
+		}
+		
+	   });			
+			
+	}
+
+
+function current_city_edit()
+	{
+		
+	$('#currentcity_val_disp').hide();
+	$('ul.home > #location-li').append($('#currentcity_disp').show());
+
+	}
+	
+		
+function close_currentcity() {
+	$('#currentcity_disp').hide();
+	$('#currentcity_val_disp').show();
+	
+}
+</script>
+<script> // hometown script
+$('#hometown').click(function(){
+	$('#hme_town').hide();
+	$('#hme_town1').hide();
+	$('ul.home > #hometown-li').append($('#hometown_disp').show());
+
+});
+
+function add_home_town()
+{
+	var hometown = $('#home_town').val();
+	url="<?php echo base_url();?>profile/addhometown/";
+	 $.ajax({
+		type: "POST",
+		url: url,
+		data: { home_town:hometown } ,
+		success: function(html)
+		{   					
+			$('#hometown-li #hometown_disp').hide();
+			$('#hme_town').hide();
+			$('#hometown-li').html(html);
+		}
+		
+	   });			
+			
+	}
+
+	function home_town_edit()
+	{
+		
+	$('#hometown_val_disp').hide();
+	$('ul.home > #hometown-li').append($('#hometown_disp').show());
+
+	}
+		
+function close_home_town() {
+	$('#hometown_disp').hide();
+	//$('#hme_town_one').show();
+	$('#hme_town').show();
+	$('#hme_town1').show();
+	}
+	
+function close_home() {
+	$('#hometown_disp').hide();
+	$('#hometown_val_disp').show();
+	
+}
+</script>
+<script> //family member relations script
+
+$('#familymembers').click(function()
+{
+	$('#add_f_member').hide();
+	$('#add_f_member1').hide();
+	$('ul.relations > #familymembers-li').append($('#family_relation').show());
+//	$('#relation').show();
+});
+
+function add_fam_member()
+{
+
+	var membername = $('#family_member').val();
+	var relation = $('#family_member_type').val();
+
+	url="<?php echo base_url();?>profile/add_fam_members/";
+	 $.ajax({
+		type: "POST",
+		url: url,
+		data: { member_name:membername, member_relation:relation } ,
+		success: function(html)
+		{   		
+					
+		
+			$('#add_f_member').show();
+			$('#add_f_member1').show();	
+			$('#familymembers-li').html(html);
+			
+		}
+		
+	   });			
+			
+	}
+	
+	function disp_add_member()
+	{
+		$('#add_fam_member').show();
+		$('#add_f_member').show();
+	}
+	
+	function close_add_family()
+	{
+		$('#family_relation').hide();
+		$('#add_f_member').show();
+		$('#add_f_member1').show();	
+	}
+	
+	function close_family()
+	{
+		$('#family_relation').hide();
+		$('#add_f_member').show();
+		$('#add_f_member1').show();	
+	}
+
+</script>
+
+<script> //about me script
+$('#aboutme_a').click(function(){
+	//alert('hai');
+	$(this).hide();
+	$('ul.details_about > #aboutme-li').append($('#aboutme_disp').show());
+
+});
+
+function close_about_me()
+{
+	$('#aboutme_disp').hide();
+	$('#aboutme_a').show();
+}
+
+
+function add_aboutme()
+{
+	var aboutme = $('#about_me_data').val();
+	
+	url="<?php echo base_url();?>profile/addaboutme/";
+	 $.ajax({
+		type: "POST",
+		url: url,
+		data: { about_me:aboutme } ,
+		success: function(html)
+		{   
+		
+			$('#aboutme_disp').hide();
+			$('#aboutme_a').hide();
+			$('ul.details_about > #aboutme-li').html(html);					
+			
+		}
+		
+	   });			
+			
+	}
+function about_me_edit()
+{
+	$(' #aboutme_val_disp').hide();
+	$('ul.details_about > #aboutme-li').append($('#aboutme_disp').show());
+	
+}
+
+function close_aboutme()
+{
+	$('#aboutme_disp').hide();
+	$('#aboutme_val_disp').show();
+}
+
+</script>
+<script> //favorite quotes sript
+$('#fav_quotes').click(function(){
+	//alert('hai');
+	$(this).hide();
+	$('ul.details_about > #favquotes-li').append($('#fav_quotes_disp').show());
+
+});
+
+function close_favquotes()
+{
+	$('#fav_quotes_disp').hide();
+	$('#favquotes_val_disp').show();
+	
+}
+
+
+function add_favquotes()
+{
+	var favquotes = $('#fav_quotes_data').val();
+	
+	url="<?php echo base_url();?>profile/addfavquotes/";
+	 $.ajax({
+		type: "POST",
+		url: url,
+		data: { fav_quotes:favquotes } ,
+		success: function(html)
+		{   
+		
+			$('#fav_quotes_disp').hide();
+			$('#fav_quotes').hide();
+			$('ul.details_about > #favquotes-li').html(html);					
+			
+		}
+		
+	   });			
+			
+	}
+function fav_quotes_edit()
+{
+	$('#favquotes_val_disp').hide();
+	$('ul.details_about > #favquotes-li').append($('#fav_quotes_disp').show());
+	
+}
+
+function close_fav_quotes()
+{
+	$('#fav_quotes_disp').hide();
+	$('#fav_quotes').show();
+}
+
+</script>
+
+<script>
+
+$('#relation_status').click(function()
+{
+	$('#relation1').hide();
+	$('#relation2').hide();
+	$('ul.relations > #relation-li').append($('#relation_disp').show());
+	
+});
+
+function close_relationship()
+{
+	$('#relation_disp').hide();
+	$('#relation1').show();
+	$('#relation2').show();
+}
+
+function add_relation()
+{
+	var relation = $('#relation_type').val();
+	
+	url = "<?php echo base_url(); ?>profile/addrelation/";
+	$.ajax({
+		type: "POST",
+		data: { relation : relation},
+		url : url,
+		success : function(html)
+		{
+			$('#relation_disp').hide();
+	      	$('ul.relations > #relation-li').html(html);		
+		
+		
+		}
+	});
+	
+}
+
+function edit_relation()
+{
+	$('#relation').hide();
+	$('#relation_disp').show();
+}
+
+function close_relation()
+{
+	$('#relation_disp').hide();
+	$('#relation').show();
+	
+}
+</script>
+<script>
+
+$('#nic_oth_names').change(function()
+{
+	var name = $(this).val();
+	var placeholder = "whats your " +name+" ?";
+	$('#nic_name').prop('placeholder',placeholder);
+
+
+});
+
+$('#oth_name').click(function()
+{
+	$(this).hide();
+	//$('#other_names').show();
+	$('ul.details_about > #nic_names-li').append($('#other_names').show());
+});
+
+function close_othernames()
+{
+	$('#other_names').hide();
+	$('#oth_name').show();
+}
+
+function add_othernames()
+{
+	var name_type = $('#nic_oth_names').val();
+	var name = $('#nic_name').val();
+	
+	
+		url="<?php echo base_url(); ?>profile/add_nicnames/";
+	    $.ajax({
+		type: "POST",
+		url: url,
+		data: { name:name, name_type:name_type } ,
+		success: function(html)
+		{   		
+					
+		
+			$('#other_names').hide();
+		    //$('#oth_name').show();
+			$('#nic_names-li').html(html);
+		}
+		
+	   });
+}
+
+function close_other_names()
+{
+	$('#other_names').hide();
+	$('#oth_name').show();
+	
+}
+
+</script>
+<script>
+
+$('#add_mbl').click(function()
+{
+	$('#add_mbl_block').hide();
+	$('#add_mbl_disp').show();
+});
+
+function close_mobile()
+{
+	$('#add_mbl_disp').hide();
+	$('#add_mbl_block').show();
+	
+}
+
+function add_mbl()
+{
+	var mobile = $('#mbl_no').val();
+		
+	url = "<?php echo base_url(); ?>profile/addmobile/";
+	$.ajax({
+		type: "POST",
+		data: { mobile : mobile},
+		url : url,
+		success : function(html)
+		{
+			$('#add_mbl_disp').hide();
+	      	$('ul.basic_info > #mobile-li').html(html);		
+		
+		
+		}
+	});
+	
+	
+}
+ function mbl_edit()
+{
+	$('#mobile_val_display').hide();
+	$('#add_mbl_disp').show();
+}
+
+function close_mbl()
+{
+	$('#add_mbl_disp').hide();
+	$('#mobile_val_display').show();
+}
+</script>
+<script>
+
+add_web_site
+$('#add_website').click(function()
+{
+	$('#website').hide();
+	$('#website_disp').show();
+});
+</script>
+
+<script> // about me workplace
+work_edit();
+curent_status();
+$('#add_workplace').click(function()
+{
+	$('#work_head1').hide();
+	$('#work_head2').hide();
+	//$('#work_place').show();
+	$('ul.backgrounds > #workplace-li .tophead').append($('#work_place').show());
+});
+
+function close_work()
+{
+	$('#work_place').hide();
+	$('#work_head1').show();
+	$('#work_head2').show();
+	$('#work_form').trigger("reset");
+	
+}
+
+
+		$("#work_form").submit(function( event){
+			
+					url="<?php echo base_url();?>profile/add_work/";
+					$.post( url, { formdata: $(this).serialize() })
+					.done(function( data ) {
+					   	if(data == false)
+							alert("Please Enter Valid Details");
+						else
+						
+						$('#work_head1').hide();
+						$('#work_head2').hide();
+						$('ul.backgrounds > #workplace-li').html(data);		
+						//$(".groupMainBlock2").html(data);
+						
+							//$('#organization_form').trigger("reset");
+						//	$('#orgModal').modal('toggle');
+							//organization_edit();
+						
+						
+					  });
+					
+				event.preventDefault();
+				});	
+
+
+function work_edit()
+{
+	$('.work_edit').click(function(){
+		
+		organization_id = $(this).attr("id").substr(9);
+		$("input[name=org_form_id]").val(organization_id)
+		url="<?php echo base_url(); ?>profile/orgEdit/";
+		$.post( url, { organization_id: organization_id})
+		.done(function( data ) {
+			info = JSON.parse(data);
+			$("input[name=company]").val(info.org_name);
+			$("input[name=position]").val(info.position);
+			$("textarea[name=description]").val(info.org_desc);
+			$("input[type='checkbox']").prop("checked","checked");
+			//start_date = info.start_date.split('-')
+			//$("select[name=year_attended_from]").val(start_date[0]);
+			//$("select[name=month_attended_from]").val(start_date[1]);
+			//end_date = info.end_date.split('-')
+		//$("select[name=year_attended_to]").val(end_date[0]);
+		//$("select[name=month_attended_to]").val(end_date[1]);
+			//$("select[name=curent_status]").val(info.emp_status);	
+			//$("input[name=org_action]").val("update")
+			$('#work_place').show();
+		});
+		return false;
+
+		
+	});
+	
+	
+}
+
+
+function add_year()
+{
+	$('#add_years').hide();
+	$('#frm_years').show();
+	$('#frm_months_link').show();
+	
+}
+
+
+	$('#frm_years').change(function()
+	{
+		if( $('#frm_years').val() == 0)
+		{
+		$('#frm_months_link').hide();
+		$('#frm_months').hide();
+		$('#frm_days').hide();
+		//$('#todates_dropdowns').hide();
+		$(this).hide();
+		$('#add_years').show();
+		//$('#to').hide();
+		} else {
+			
+			if($('#frm_months').is(":hidden"))
+			{
+	$('#frm_months_link').show();
+			}
+		
+		}
+		
+	});
+	
+	$('#frm_months_link').click(function()
+	{
+		
+		$(this).hide();
+		$('#frm_months').show();
+		$('#frm_days_link').show();
+	});
+	
+	$('#frm_months').change(function()
+	{
+		//alert($('#frm_months').val());
+		if( $('#frm_months').val() == 0)
+		{
+	//	$('#todates_dropdowns').hide();
+		$('#frm_days_link').hide();
+		$('#frm_days').hide();
+		$('#to_years_link').hide();
+		$(this).hide();
+		$('#frm_months_link').show();
+		//$('#to').hide();
+		} else {
+			if($('#frm_days').is(":hidden"))
+			{
+		$('#frm_days_link').show();
+			}}
+	});
+	
+	$('#frm_days_link').click(function ()
+	{
+		$(this).hide();
+		$('#frm_days').show();
+		
+		if( $('#curent_status').is(':checked'))
+		{
+			$('#to_present').show();
+			$('#to').hide();
+		}else{
+			$('#to_present').hide();
+			$('#to').show();
+			$('#to_years_link').show();
+		}
+		
+		
+	});
+	
+	$('#frm_days').change(function()
+	{
+		if( $('#frm_days').val() == 0)
+		{
+		$(this).hide();
+		$('#to_years_link').hide();
+		//$('#to_years').hide();
+		//$('#to').hide();
+		//$('#to_months').hide();
+	//	$('#to_days').hide();
+		$('#frm_days_link').show();
+		} else {
+			
+		
+			
+			if($('#curent_status').is(':checked'))
+			{
+				$('#to_present').show();
+				$('#to').hide();
+				$('#todates_dropdowns').hide();
+			}else{
+					
+					
+			if($('#to_years').is(":hidden"))
+			{
+				$('#to_years_link').show();
+			}
+				
+				
+				
+				$('#to_present').hide();
+				$('#to').show();
+				$('#todates_dropdowns').show();
+				
+			}
+			
+	//	$('#to').show();
+		//$('#to_present').hide();
+		
+		}
+	});
+	/*
+	function status()
+	{
+	$('#curent_status').is("checked",function()
+	{
+		alert('hai');
+		$('#to_present').hide();
+		
+	});
+	}*/
+	
+	
+	
+  $('#curent_status').click(function ()
+  {
+	 if( $('#curent_status').is(':checked'))
+	 {
+		 $('#to_years_link').hide();
+		 $('#to_present').show();
+		 $('#to').hide();
+	   $('#todates_dropdowns').hide();
+	 } else
+	 {
+		 $('#to_present').hide();
+		 $('#to').show();
+		 $('#todates_dropdowns').show();
+		 
+		 if($('#to_years').is(":hidden"))
+			{
+				$('#to_years_link').show();
+			}
+		 
+	 }
+	  });
+ 
+	
+	$('#to_years_link').click(function()
+	{
+		$(this).hide();
+		$('#to_years').show();
+		$('#to_months_link').show();
+		
+	});
+	
+	
+	$('#to_years').change(function()
+	{
+		if( $('#to_years').val() == 0)
+		{
+		$('#to_months_link').hide();
+		$('#to_months').hide();
+		$('#to_days').hide();
+		$(this).hide();
+		$('#to_years_link').show();
+		} else {
+			
+			if($('#to_months').is(":hidden"))
+			{
+	$('#to_months_link').show();
+			}
+		
+		}
+		
+	});
+	
+	
+	
+	$('#to_months_link').click(function()
+	{
+		
+		$(this).hide();
+		$('#to_months').show();
+		$('#to_days_link').show();
+	});
+	
+	$('#to_months').change(function()
+	{
+		//alert($('#frm_months').val());
+		if( $('#to_months').val() == 0)
+		{
+		$('#to_days_link').hide();
+		$('#to_days').hide();
+		$(this).hide();
+		$('#to_months_link').show();
+		} else {
+			if($('#to_days').is(":hidden"))
+			{
+		$('#to_days_link').show();
+			}}
+	});
+	
+		$('#to_days_link').click(function ()
+	{
+		$(this).hide();
+		$('#to_days').show();
+	});
+	
+	$('#to_days').change(function()
+	{
+		if( $('#to_days').val() == 0)
+		{
+		$(this).hide();
+		$('#to_days_link').show();
+		} 
+	});
+	
+	function curent_status()
+	{
+	if($('#curent_status').is(':checked'))
+	{
+		$('#add_years').show();
+		$('#to_present').show();
+	}else
+	{
+		$('#add_years').show();
+		$('#to').show();
+		$('#to_years_link').show();
+	}
+	}
+</script>
+
 <?php $this->load->view('profile_models'); ?>
 <script language="javascript">print_country("con");</script><!--  //for groups   --> 
 <script language="javascript">print_country("contries");</script> <!-- //for companies-->

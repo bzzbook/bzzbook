@@ -1,0 +1,48 @@
+<?php 
+	 $result = $this->profile_set->save_settings();
+?>
+    
+     <div id="hometown_disp" style="display:none;">
+                          <div class="col-md-12" id="city_place">
+                              <form class="form-inline ">
+                                <div class="form-group citys">
+                                  <label for="exampleInputName2">Home Town</label>
+                                  <input type="text" placeholder="" id="home_town" value="<?php if($result[0]->hometown) { echo $result[0]->location ; } ?>">
+                                </div>
+                                <div class="clearfix"></div>
+                              </form>
+                              <div class="box_bottom">
+                                <div class="publics col-md-4">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Public <span class="caret"></span></button>
+                                </div>
+                                <div class="col-md-8 skil_box">
+                                 <div class="btn3 btn-green" onclick="add_home_town()">Save Changes</div>
+                                      <?php if($result[0]->hometown) { ?>
+                               <div class="btn3 btn-black" onclick="close_home()">Cancel</div>
+                                   <?php }else{ ?>
+                                       <div class="btn3 btn-black" onclick="close_home_town()">Cancel</div>
+                                       <?php } ?>
+                                </div>
+                                <div class="clearfix"></div>
+                              </div>
+                            </div>
+                            <div class="clearfix"></div>
+                          </div>
+                          
+                          
+                           <div class="tophead">Hometown</div>
+                          <div id="hometown_val_disp">
+                        <div class="sm_leftbox"></div>
+                        <div class="sm_rightbox"><h3><a href="#"><?php echo $result[0]->hometown; ?></a></h3>
+                        <p>Home Town</p>
+                        </div>
+                        <div class="sm_rightside">
+                        <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
+                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="home_town_edit()"><i class="fa fa-pencil"></i> Edit</a></div>
+                        <div class="col-md-3 com_rig"><a href="#"><i class="fa fa-times"></i></a></div>
+                        </div>
+                        </div>
+                                       
+                      
+                      
+                      

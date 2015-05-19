@@ -121,7 +121,7 @@
 			var html = ['<div class="fbphotobox-main-container">',
 							'<div class="fbphotobox-container-left">',
 								'<table class="fbphotobox-main-image-table"><tr><td>',
-									'<div class="tag-container"><img class="fbphotobox-main-image" src=""/></div>',
+									'<div class="tag-container"><img id="imgdetect" class="fbphotobox-main-image" src=""/></div>',
 								'</td></tr></table>',
 								'<div class="fbphotobox-image-stage-overlay">',
 									'<div class="fbphotobox-container-left-header">',

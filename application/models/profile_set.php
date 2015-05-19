@@ -644,6 +644,179 @@ public function get_user_profileinfo()
 	//	 print_r($user_profileinfo);
 	return $user_profileinfo;	 
 }
+
+
+public function add_home_town($hometown)
+	{
+		$id = $this->session->userdata('logged_in')['account_id'];
+		$up_data = array('hometown'=>$hometown);
+		$this->db->where('user_id',$id);
+		if($this->db->update('bzz_userinfo',$up_data))
+		return true;
+		else
+		return false;
+	}
+	
+	
+	public function add_location($location)
+	{
+		$id = $this->session->userdata('logged_in')['account_id'];
+		$up_data = array('location'=>$location);
+		$this->db->where('user_id',$id);
+		if($this->db->update('bzz_userinfo',$up_data))
+		return true;
+		else
+		return false;
+	}
+	
+	
+	
+public function add_family_members($member_name,$member_relation)
+	{
+		$id = $this->session->userdata('logged_in')['account_id'];
+		
+		$this->db->select('familymembers');
+		$this->db->from('bzz_userinfo');
+		$this->db->where('user_id',$id);
+		$query = $this->db->get();
+		$data = $query->result_array();
+		
+		if(empty($data))
+		{
+			$fam_member_relation = $member_name."-".$member_relation;
+			$this->db->where('user_id',$id);
+			$this->db->insert('bzz_userinfo',$up_data);
+			if($this->db->insert('bzz_userinfo',$up_data))
+		return true;
+		else
+		return false;
+		
+		}else
+		{
+			$fam_member_relation = $member_name."-".$member_relation ;
+			$data = $data[0]['familymembers'];
+			$data .=$fam_member_relation;
+			
+			$up_data = array('familymembers'=>$data);
+		$this->db->where('user_id',$id);
+		if($this->db->update('bzz_userinfo',$up_data))
+		return true;
+		else
+		return false;
+		}
+		
+		
+	}
+	
+	
+	
+public function add_about_me($aboutme)
+	{
+		$id = $this->session->userdata('logged_in')['account_id'];
+		$up_data = array('aboutme'=>$aboutme);
+		$this->db->where('user_id',$id);
+		if($this->db->update('bzz_userinfo',$up_data))
+		return true;
+		else
+		return false;
+	}
+	
+		
+public function add_fav_quotes($favquotes)
+	{
+		$id = $this->session->userdata('logged_in')['account_id'];
+		$up_data = array('favquotes'=>$favquotes);
+		$this->db->where('user_id',$id);
+		if($this->db->update('bzz_userinfo',$up_data))
+		return true;
+		else
+		return false;
+	}
+	
+	
+	
+	public function add_relation($relation)
+	{
+		$id = $this->session->userdata('logged_in')['account_id'];
+		$up_data = array('relationshipstatus'=>$relation);
+		$this->db->where('user_id',$id);
+		if($this->db->update('bzz_userinfo',$up_data))
+		return true;
+		else
+		return false;
+	}
+	
+	
+	public function add_nic_names($name,$name_type)
+	{
+		$id = $this->session->userdata('logged_in')['account_id'];
+		
+		$this->db->select('nickname');
+		$this->db->from('bzz_userinfo');
+		$this->db->where('user_id',$id);
+		$query = $this->db->get();
+		$data = $query->result_array();
+		
+		if(empty($data))
+		{
+			$nick_name_data = $name."-".$name_type;
+			$this->db->where('user_id',$id);
+			$up_data = array('nickname'=>$nick_name_data);
+			$this->db->insert('bzz_userinfo',$up_data);
+			
+			if($this->db->insert('bzz_userinfo',$up_data))
+		return true;
+		else
+		return false;
+		
+		}else
+		{
+			$nick_name_data = $name."-".$name_type ;
+			$data = $data[0]['nickname'];
+			$data .=$nick_name_data;
+			
+			
+		 $up_data = array('nickname'=>$data);
+		$this->db->where('user_id',$id);
+		if($this->db->update('bzz_userinfo',$up_data))
+		return true;
+		else
+		return false;
+		}
+		
+	}
+	
+	public function add_mobile($mobile)
+	{
+		$id = $this->session->userdata('logged_in')['account_id'];
+		$up_data = array('mobile'=>$mobile);
+		$this->db->where('user_id',$id);
+		
+		if($this->db->update('bzz_userinfo',$up_data))
+		return true;
+		else
+		return false;
+	}
+	
+	public function add_work_info($data)
+	{
+		
+	   	$workInfo = array(
+		'org_name'=>$data['company'],
+		'position'=>$data['position'],
+		'emp_status'=>$data['curent_status'],
+		'start_date'=>$data['year_attended_from'].'-'.$data['month_attended_from'],
+		'end_date'=>$data['year_attended_to'].'-'.$data['month_attended_to'],
+		'org_desc'=>$data['description'],
+		'city'=>$data['city'],
+		'user_id'=>$this->session->userdata('logged_in')['account_id']
+		);
+		
+		if($this->db->insert('bzz_organizationinfo', $workInfo))
+			return $this->db->insert_id();
+		
+		  
+	}
 }
 
 ?>

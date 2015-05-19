@@ -76,7 +76,7 @@
             <label>Birthday</label>
             <div data-date-viewmode="years" data-date-format="dd-mm-yyyy" data-date="12-02-2012" id="dpYears" 
             class="input-group-bt date">
-              <input type="text" readonly name="birthdate" value="12-02-2012" size="16" class="form-control">
+              <input type="text" name="birthdate" plceholder="dd-mm-yy" size="16" class="form-control">
               <span aria-hidden="true" class="add-on glyphicon glyphicon-calendar"></span> </div>
           </div>
           <p>Why do I need to provide my birthday?</p>

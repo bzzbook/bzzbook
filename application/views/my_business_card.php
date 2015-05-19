@@ -16,6 +16,11 @@
             <div class="ProfileViewNav"></div>
           </div>
         </section>
+      <?php 
+	   echo "<div class='message'>";
+	   echo $this->session->flashdata('business_card_status');
+	   echo "</div>";
+?> 
       </div>
 <section class="about-user-details business_card">
         <h4><span><img src="<?php echo base_url(); ?>images/business_card.png" alt=""></span>My Business Card</h4>
@@ -138,7 +143,7 @@
           </div>
          
           </div>
-          <div class="btn2 btn-black"  data-toggle="modal" data-target="#share_business_card">Send My Friends</div>
-          <div class="btn2 btn-green">Share</div>
+          <div class="btn2 btn-black" data-toggle="modal" data-target="#send_bc_to_friends">Send My Friends</div>
+          <div class="btn2 btn-green" data-toggle="modal" data-target="#share_business_card">Share</div>
             </section>
       </section>
