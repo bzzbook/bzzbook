@@ -117,6 +117,39 @@ class Profile_set extends CI_Model {
 		}
    }
    
+   
+     public function get_college_details()
+   {
+	    $id = $this->session->userdata('logged_in')['account_id'];
+	    $condition = "user_id =" . "'" . $id . "'";
+		$this->db->select('*');
+		$this->db->from('bzz_user_college');
+		$this->db->where($condition);
+		$this->db->order_by("college_id", "desc"); 
+		$query = $this->db->get();
+		if ($query->num_rows() > 0) {
+			return $query->result();
+		} else {
+		return false;
+		}
+   }
+   
+        public function get_school_details()
+   {
+	    $id = $this->session->userdata('logged_in')['account_id'];
+	    $condition = "user_id =" . "'" . $id . "'";
+		$this->db->select('*');
+		$this->db->from('bzz_user_school');
+		$this->db->where($condition);
+		$this->db->order_by("school_id", "desc"); 
+		$query = $this->db->get();
+		if ($query->num_rows() > 0) {
+			return $query->result();
+		} else {
+		return false;
+		}
+   }
+   
    public function getgroupDetails()
    {
 	    $id = $this->session->userdata('logged_in')['account_id'];
@@ -282,6 +315,34 @@ class Profile_set extends CI_Model {
 		return false;
 		}
 	}
+	
+	public function editCollegeDetails($id)
+	{
+		$this->db->select('*');
+		$this->db->from('bzz_user_college');
+		$this->db->where('college_id', $id);
+		$query = $this->db->get();
+		if ($query->num_rows() > 0) {
+			return $query->result();
+		} else {
+		return false;
+		}
+	}
+	
+	public function editSchoolDetails($id)
+	{
+		$this->db->select('*');
+		$this->db->from('bzz_user_school');
+		$this->db->where('school_id', $id);
+		$query = $this->db->get();
+		if ($query->num_rows() > 0) {
+			return $query->result();
+		} else {
+		return false;
+		}
+	}
+	
+	
 	public function editGrpDetails($id)
 	{
 		$this->db->select('*');
@@ -798,25 +859,190 @@ public function add_fav_quotes($favquotes)
 		return false;
 	}
 	
+		
+	public function add_website($website)
+	{
+		$id = $this->session->userdata('logged_in')['account_id'];
+		$up_data = array('website'=>$website);
+		$this->db->where('user_id',$id);
+		
+		if($this->db->update('bzz_userinfo',$up_data))
+		return true;
+		else
+		return false;
+	}
+		
+	public function add_address($address,$city,$zip_code,$neighborhood)
+	{
+		$id = $this->session->userdata('logged_in')['account_id'];
+		$up_data = array(
+		'website'=>$address
+		);
+		$this->db->where('user_id',$id);
+		
+		if($this->db->update('bzz_userinfo',$up_data))
+		return true;
+		else
+		return false;
+	}
+	
+	
+	
+	
 	public function add_work_info($data)
 	{
 		
+		if(empty($data['to_years']))
+		{	
+			$dt = new DateTime();
+			$end_date = $dt->format('Y-m-d');
+			
+		}else
+		{
+			$end_date = $data['to_years'].'-'.$data['to_months'].'-'.$data['to_days'];
+		}
+
+
 	   	$workInfo = array(
 		'org_name'=>$data['company'],
 		'position'=>$data['position'],
 		'emp_status'=>$data['curent_status'],
-		'start_date'=>$data['year_attended_from'].'-'.$data['month_attended_from'],
-		'end_date'=>$data['year_attended_to'].'-'.$data['month_attended_to'],
+		'start_date'=>$data['frm_years'].'-'.$data['frm_months'].'-'.$data['frm_days'],
+		'end_date'=>$end_date,
 		'org_desc'=>$data['description'],
 		'city'=>$data['city'],
 		'user_id'=>$this->session->userdata('logged_in')['account_id']
 		);
 		
+		if($data['work_action']=='add')
+		{
 		if($this->db->insert('bzz_organizationinfo', $workInfo))
 			return $this->db->insert_id();
+		else
+			return false;
+		}
+		elseif($data['work_action']=='update')
+		{
+			//$organizationInfo['organization_id']=$data['org_form_id'];
+			$this->db->where('organization_id', $data['work_disp_id']);
+			if($this->db->update('bzz_organizationinfo', $workInfo))
+			return true;
+			else 
+			return false; 
+		}
 		
 		  
 	}
+
+
+
+	public function add_college_info($data)
+	{
+		
+		if(isset($data['edu_status']))
+		{
+			$edu_status = $data['edu_status'];
+			
+		}else
+		{
+			$edu_status = "N";
+		}
+		
+		if(empty($data['to_years']))
+		{	
+			$dt = new DateTime();
+			$end_date = $dt->format('Y-m-d');
+			
+		}
+
+
+	   	$college_info = array(
+		'college_name'=>$data['college_name'],
+		'edu_status'=>$edu_status,
+		'start_date'=>$data['frm_years'].'-'.$data['frm_months'].'-'.$data['frm_days'],
+		'end_date'=>$data['to_years'].'-'.$data['to_months'].'-'.$data['to_days'],
+		'description'=>$data['description'],
+		'concentration1'=>$data['concentration1'],
+		'concentration2'=>$data['concentration2'],
+		'concentration3'=>$data['concentration3'],
+		'attended'=>$data['optionsRadios'],
+		'user_id'=>$this->session->userdata('logged_in')['account_id']
+		);
+		
+	
+			if($data['clg_action']=='add')
+		{
+		if($this->db->insert('bzz_user_college', $college_info))
+			return $this->db->insert_id();
+		else
+			return false;
+		}
+		elseif($data['clg_action']=='update')
+		{
+			//$organizationInfo['organization_id']=$data['org_form_id'];
+			$this->db->where('college_id', $data['college_disp_id']);
+			if($this->db->update('bzz_user_college', $college_info))
+			return true;
+			else 
+			return false; 
+		}
+		
+		  
+	}
+	
+	
+	
+	
+	public function add_school_info($data)
+	{
+		
+		if(isset($data['sch_status']))
+		{
+			$sch_status = $data['sch_status'];
+			
+		}else
+		{
+			$sch_status = "N";
+		}
+		
+		if(empty($data['to_years']))
+		{	
+			$dt = new DateTime();
+			$end_date = $dt->format('Y-m-d');
+			
+		}
+
+
+	   	$school_info = array(
+		'school_name'=>$data['school_name'],
+		'sch_status'=>$sch_status,
+		'start_date'=>$data['frm_years'].'-'.$data['frm_months'].'-'.$data['frm_days'],
+		'end_date'=>$data['to_years'].'-'.$data['to_months'].'-'.$data['to_days'],
+		'description'=>$data['description'],
+		'user_id'=>$this->session->userdata('logged_in')['account_id']
+		);
+		
+	
+			if($data['sch_action']=='add')
+		{
+		if($this->db->insert('bzz_user_school', $school_info))
+			return $this->db->insert_id();
+		else
+			return false;
+		}
+		elseif($data['sch_action']=='update')
+		{
+			//$organizationInfo['organization_id']=$data['org_form_id'];
+			$this->db->where('school_id', $data['school_disp_id']);
+			if($this->db->update('bzz_user_school', $school_info))
+			return true;
+			else 
+			return false; 
+		}
+		
+		  
+	}
+
 }
 
 ?>

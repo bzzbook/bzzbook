@@ -2107,7 +2107,7 @@ $('#searchbar_category li').click(function()
         // calculate number of pages
         var numberOfPages = $('#inbox-message tr').length / pageSize;
         numberOfPages = numberOfPages.toFixed();
-		alert(numberOfPages);
+		
         // action on 'next' click
         $("a.next").on('click', function () {
 			$('#start').text(parseInt($('#start').text())+pageSize);
@@ -2118,7 +2118,7 @@ $('#searchbar_category li').click(function()
             var currentPage = Number($("#hdnActivePage").val());
             // update activepage
             $("#hdnActivePage").val(Number($("#hdnActivePage").val()) + 1);
-			alert(Number($("#hdnActivePage").val()) + 1);
+			
             // check if previous page button is necessary (not on first page)
             if ($("#hdnActivePage").val() != "1") {
                 $("a.previous").show();
@@ -2667,15 +2667,96 @@ function close_mbl()
 	$('#mobile_val_display').show();
 }
 </script>
-<script>
-
-add_web_site
+<script>//add_web_site
 $('#add_website').click(function()
 {
 	$('#website').hide();
 	$('#website_disp').show();
 });
+
+function close_website()
+{
+	$('#website').show();
+	$('#website_disp').hide();
+}
+
+function add_website()
+{
+	var website = $('#website_data').val();
+	
+	url = "<?php echo base_url(); ?>profile/addwebsite/";
+	$.ajax({
+		type: "POST",
+		data: { website : website},
+		url : url,
+		success : function(html)
+		{
+			$('#website_disp').hide();
+	      	$('ul.basic_info > #website-li').html(html);		
+		
+		
+		}
+	});
+	
+	
+}
+
+ function website_edit()
+{
+	$('#website_val_display').hide();
+	$('#website_disp').show();
+}
+
+function close_web_site()
+{
+	$('#website_val_display').show();
+	$('#website_disp').hide();
+}
+
 </script>
+<script>// aboutme address 
+
+$('#add_address').click(function()
+{
+	$('#address1').hide();
+	$('#address_disp').show();
+});
+
+function close_address()
+{
+	
+	$('#address1').show();
+	$('#address_disp').hide();
+}
+
+public function close_address()
+{
+
+var address = $('#address').val();
+var city = $('#ad_city').val();
+var zipcode = $('#zip_code').val();
+var neighborhood = $('#neighborhood').val();
+	
+	url = "<?php echo base_url(); ?>profile/addaddress/";
+	$.ajax({
+		type: "POST",
+		data: { address : address, city : city , zipcode : zipcode, neighborhood : neighborhood },
+		url : url,
+		success : function(html)
+		{
+			$('#website_disp').hide();
+	      	$('ul.basic_info > #website-li').html(html);		
+		
+		
+		}
+	});
+	
+	
+
+
+}
+</script>
+
 
 <script> // about me workplace
 work_edit();
@@ -2693,6 +2774,7 @@ function close_work()
 	$('#work_place').hide();
 	$('#work_head1').show();
 	$('#work_head2').show();
+	//$('#clearfix').show();
 	$('#work_form').trigger("reset");
 	
 }
@@ -2728,7 +2810,7 @@ function work_edit()
 	$('.work_edit').click(function(){
 		
 		organization_id = $(this).attr("id").substr(9);
-		$("input[name=org_form_id]").val(organization_id)
+		$("input[name=work_disp_id]").val(organization_id)
 		url="<?php echo base_url(); ?>profile/orgEdit/";
 		$.post( url, { organization_id: organization_id})
 		.done(function( data ) {
@@ -2737,6 +2819,16 @@ function work_edit()
 			$("input[name=position]").val(info.position);
 			$("textarea[name=description]").val(info.org_desc);
 			$("input[type='checkbox']").prop("checked","checked");
+			$("ïnput[type=city]").val(info.city);		
+			from_date = info.start_date.split('-')
+			$("select[name=frm_years]").val(from_date[0]);
+			$("select[name=frm_months]").val(from_date[1]);
+			$("select[name=frm_days]").val(from_date[2]);
+			to_date = info.end_date.split('-')
+			$("select[name=to_years]").val(to_date[0]);
+			$("select[name=to_months]").val(to_date[1]);
+			$("select[name=to_days]").val(to_date[2]);
+			
 			//start_date = info.start_date.split('-')
 			//$("select[name=year_attended_from]").val(start_date[0]);
 			//$("select[name=month_attended_from]").val(start_date[1]);
@@ -2744,8 +2836,11 @@ function work_edit()
 		//$("select[name=year_attended_to]").val(end_date[0]);
 		//$("select[name=month_attended_to]").val(end_date[1]);
 			//$("select[name=curent_status]").val(info.emp_status);	
-			//$("input[name=org_action]").val("update")
-			$('#work_place').show();
+			$("input[name=work_action]").val("update");
+			//$('#sm_rightside_'+organization_id).hide();
+			//$('#work_'+organization_id).find('#clearfix').hide();
+			$('#work_'+organization_id).append($('#work_place').show());
+			//$('#work_place').show();
 		});
 		return false;
 
@@ -2770,6 +2865,7 @@ function add_year()
 		if( $('#frm_years').val() == 0)
 		{
 		$('#frm_months_link').hide();
+		$('#frm_days_link').hide();
 		$('#frm_months').hide();
 		$('#frm_days').hide();
 		//$('#todates_dropdowns').hide();
@@ -2993,6 +3089,460 @@ function add_year()
 	}
 	}
 </script>
+
+<script> // education in aboutme
+
+college_edit();
+$('#add_college').click( function()
+{
+	$('#college1').hide();
+	$('#college2').hide();
+	$('ul.backgrounds > #college-li .tophead').append($('#college_disp').show());
+});
+
+function close_college()
+{
+	$('#college_disp').hide();
+	$('#college1').show();
+	$('#college2').show();
+	
+}
+
+
+
+$('#clg_add_year').click(function()
+{
+	$(this).hide();
+	$('#frm_years_college').show();
+	$('#frm_months_clg').show();
+});
+
+$('#frm_years_college').change(function()
+{
+	
+	if($('#frm_years_college').val() == 0)
+	{
+		$(this).hide();
+		$('#clg_add_year').show();
+		$('#frm_days_clg').hide();
+		$('#frm_months_clg').hide();
+		$('#frm_months_college').hide();
+		$('#frm_days_college').hide();
+	}else{
+		
+		if($('#frm_months_college').is(":hidden"))
+			{
+	$('#frm_months_clg').show();
+			}
+	}
+});
+
+
+$('#frm_months_clg').click(function()
+{
+	$(this).hide();
+	$('#frm_months_college').show();
+	$('#frm_days_clg').show();
+});
+
+$('#frm_months_college').change(function()
+{
+	
+	if($('#frm_months_college').val() == 0)
+	{
+		$(this).hide();
+		$('#frm_months_clg').show();
+		$('#frm_days_clg').hide();
+	}else{
+		
+		if($('#frm_days_college').is(":hidden"))
+			{
+	$('#frm_days_clg').show();
+			}
+	}
+});
+
+$('#frm_days_clg').click(function()
+{
+	$(this).hide();
+	$('#frm_days_college').show();
+	
+});
+
+
+$('#frm_days_college').change(function()
+{
+	
+	if($('#frm_days_college').val() == 0)
+	{
+		$(this).hide();
+		$('#frm_days_clg').show();
+	
+	}
+});
+
+
+
+
+
+	$('#to_years_clg').click(function()
+	{
+		$(this).hide();
+		$('#to_years_college').show();
+		$('#to_months_clg').show();
+		
+	});
+	
+	
+	$('#to_years_college').change(function()
+	{
+		if( $('#to_years_college').val() == 0)
+		{
+		$('#to_months_clg').hide();
+		$('#to_months_college').hide();
+		$('#to_days_clg').hide();
+		$('#to_days_college').hide();
+		$(this).hide();
+		$('#to_years_clg').show();
+		} else {
+			
+			if($('#to_months_college').is(":hidden"))
+			{
+	$('#to_months_clg').show();
+			}
+		
+		}
+		
+	});
+	
+	
+	
+	$('#to_months_clg').click(function()
+	{
+		
+		$(this).hide();
+		$('#to_months_college').show();
+		$('#to_days_clg').show();
+	});
+	
+	$('#to_months_college').change(function()
+	{
+		//alert($('#frm_months').val());
+		if( $('#to_months_college').val() == 0)
+		{
+		$('#to_days_clg').hide();
+		$('#to_days_college').hide();
+		$(this).hide();
+		$('#to_months_clg').show();
+		} else {
+			if($('#to_days_college').is(":hidden"))
+			{
+		$('#to_days_clg').show();
+			}}
+	});
+	
+		$('#to_days_clg').click(function ()
+	{
+		$(this).hide();
+		$('#to_days_college').show();
+	});
+	
+	$('#to_days_college').change(function()
+	{
+		if( $('#to_days_college').val() == 0)
+		{
+		$(this).hide();
+		$('#to_days_clg').show();
+		} 
+	});
+
+
+
+
+
+
+$("#college_form").submit(function( event){
+
+url="<?php echo base_url();?>profile/add_college/";
+$.post( url, { formdata: $(this).serialize() })
+.done(function( data ) {
+	if(data == false)
+		alert("Please Enter Valid Details");
+	else
+	
+	$('#college1').hide();
+	$('#college2').hide();
+	$('ul.backgrounds > #college-li').html(data);		
+	
+  });
+
+event.preventDefault();
+});	
+
+
+function college_edit()
+{
+	$('.college_edit').click(function(){
+		
+		college_id = $(this).attr("id").substr(12);
+		//alert(college_id);
+		$("input[name=college_disp_id]").val(college_id)
+		
+		url="<?php echo base_url(); ?>profile/collegeEdit/";
+		$.post( url, { college_id: college_id})
+		.done(function( data ) {
+			info = JSON.parse(data);
+			$("input[name=college_name]").val(info.college_name);
+			
+			$("textarea[name=description]").val(info.description);
+			$("input[type='checkbox']").prop("checked","checked");
+			$("input[name=concentration1]").val(info.concentration1);
+			$("input[name=concentration2]").val(info.concentration2);
+			$("input[name=concentration3]").val(info.concentration3);
+			from_date = info.start_date.split('-')
+			$("select[name=frm_years_college]").val(from_date[0]);
+			$("select[name=frm_months_college]").val(from_date[1]);
+			$("select[name=frm_days_college]").val(from_date[2]);
+			to_date = info.end_date.split('-')
+			$("select[name=to_years_college]").val(to_date[0]);
+			$("select[name=to_months_college]").val(to_date[1]);
+			$("select[name=to_days_college]").val(to_date[2]);
+			$("input[name=clg_action]").val("update")
+		$('#college_disp').show();
+		});
+		return false;
+
+		
+	});
+	
+	
+}
+
+
+</script>
+<script>// aboutme highschool functionality
+
+$('#add_school').click( function()
+{
+	$('#school1').hide();
+	$('#school2').hide();
+	$('#highschool').show();
+});
+
+function close_school()
+{
+	$('#highschool').hide();
+	$('#school1').show();
+	$('#school2').show();
+	
+}
+
+
+
+
+$('#frm_years_sch').click(function()
+{
+	$(this).hide();
+	$('#frm_years_school').show();
+	$('#frm_months_sch').show();
+});
+
+$('#frm_years_school').change(function()
+{
+	
+	if($('#frm_years_school').val() == 0)
+	{
+		$(this).hide();
+		$('#frm_years_sch').show();
+		$('#frm_days_sch').hide();
+		$('#frm_months_sch').hide();
+		$('#frm_months_school').hide();
+		$('#frm_days_school').hide();
+	}else{
+		
+		if($('#frm_months_school').is(":hidden"))
+			{
+	$('#frm_months_sch').show();
+			}
+	}
+});
+
+
+$('#frm_months_sch').click(function()
+{
+	$(this).hide();
+	$('#frm_months_school').show();
+	$('#frm_days_sch').show();
+});
+
+$('#frm_months_school').change(function()
+{
+	
+	if($('#frm_months_school').val() == 0)
+	{
+		$(this).hide();
+		$('#frm_months_sch').show();
+		$('#frm_days_sch').hide();
+	}else{
+		
+		if($('#frm_days_school').is(":hidden"))
+			{
+	$('#frm_days_sch').show();
+			}
+	}
+});
+
+$('#frm_days_sch').click(function()
+{
+	$(this).hide();
+	$('#frm_days_school').show();
+	
+});
+
+
+$('#frm_days_school').change(function()
+{
+	
+	if($('#frm_days_school').val() == 0)
+	{
+		$(this).hide();
+		$('#frm_days_sch').show();
+	
+	}
+});
+
+
+
+
+
+	$('#to_years_sch').click(function()
+	{
+		$(this).hide();
+		$('#to_years_school').show();
+		$('#to_months_sch').show();
+		
+	});
+	
+	
+	$('#to_years_school').change(function()
+	{
+		if( $('#to_years_school').val() == 0)
+		{
+		$('#to_months_sch').hide();
+		$('#to_months_school').hide();
+		$('#to_days_sch').hide();
+		$('#to_days_school').hide();
+		$(this).hide();
+		$('#to_years_sch').show();
+		} else {
+			
+			if($('#to_months_school').is(":hidden"))
+			{
+	$('#to_months_sch').show();
+			}
+		
+		}
+		
+	});
+	
+	
+	
+	$('#to_months_sch').click(function()
+	{
+		
+		$(this).hide();
+		$('#to_months_school').show();
+		$('#to_days_sch').show();
+	});
+	
+	$('#to_months_school').change(function()
+	{
+		//alert($('#frm_months').val());
+		if( $('#to_months_school').val() == 0)
+		{
+		$('#to_days_sch').hide();
+		$('#to_days_school').hide();
+		$(this).hide();
+		$('#to_months_sch').show();
+		} else {
+			if($('#to_days_school').is(":hidden"))
+			{
+		$('#to_days_sch').show();
+			}}
+	});
+	
+		$('#to_days_sch').click(function ()
+	{
+		$(this).hide();
+		$('#to_days_school').show();
+	});
+	
+	$('#to_days_school').change(function()
+	{
+		if( $('#to_days_school').val() == 0)
+		{
+		$(this).hide();
+		$('#to_days_sch').show();
+		} 
+	});
+
+
+$("#school_form").submit(function( event){
+
+url="<?php echo base_url();?>profile/add_school/";
+$.post( url, { formdata: $(this).serialize() })
+.done(function( data ) {
+	if(data == false)
+		alert("Please Enter Valid Details");
+	else
+	
+	$('#school1').hide();
+	$('#school2').hide();
+	$('ul.backgrounds > #school-li').html(data);		
+	
+  });
+
+event.preventDefault();
+});	
+
+
+
+function school_edit()
+{
+	$('.school_edit').click(function(){
+		
+		school_id = $(this).attr("id").substr(11);
+		//alert(college_id);
+		$("input[name=school_disp_id]").val(school_id)
+		
+		url="<?php echo base_url(); ?>profile/schoolEdit/";
+		$.post( url, { school_id: school_id})
+		.done(function( data ) {
+			info = JSON.parse(data);
+			$("input[name=school_name]").val(info.school_name);
+			$("textarea[name=description]").val(info.description);
+			$("input[type='checkbox']").prop("checked","checked");
+			from_date = info.start_date.split('-')
+			$("select[name=frm_years_college]").val(from_date[0]);
+			$("select[name=frm_months_college]").val(from_date[1]);
+			$("select[name=frm_days_college]").val(from_date[2]);
+			to_date = info.end_date.split('-')
+			$("select[name=to_years_college]").val(to_date[0]);
+			$("select[name=to_months_college]").val(to_date[1]);
+			$("select[name=to_days_college]").val(to_date[2]);
+			$("input[name=sch_action]").val("update")
+		$('#highschool').show();
+		});
+		return false;
+
+		
+	});
+	
+	
+}
+
+</script>
+
 
 <?php $this->load->view('profile_models'); ?>
 <script language="javascript">print_country("con");</script><!--  //for groups   --> 

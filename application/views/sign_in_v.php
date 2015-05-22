@@ -58,6 +58,16 @@ echo "</div>";
 	   echo $this->session->flashdata('email_status');
 	   echo "</div>";
 ?> 
+<?php 
+	   echo "<div class='message'>";
+	   echo $this->session->flashdata('resest_pwd_success');
+	   echo "</div>";
+?> 
+<?php 
+	   echo "<div class='message'>";
+	   echo $this->session->flashdata('resest_pwd_failure');
+	   echo "</div>";
+?> 
 
 
         <form action="<?php echo base_url(); ?>signg_in/db_check_login" method="post">
@@ -303,20 +313,9 @@ $('#forgot_pwd_req').click(function(){
 		}else{
 			
 		 url="<?php echo base_url(); ?>signg_in/reset_pwd_sendmail/"+usermail;
-	     // $("#error_data").html("Pasword Reset Link Sent to Your Email!... Please CheckOut Once").fadeOut(7000);
-		// window.location.replace(url);
+	    
 		location.replace(url);
-	/*	$.ajax({
-        type: "POST",
-        url: url
-		}).done(function(){
-			
-       //$('#follow-btn').show();
-		//location.reload();
-		});*/
-		
-	
-		}
+			}
 			
 		},
 		cache: false

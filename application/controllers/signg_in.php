@@ -267,6 +267,7 @@ class Signg_in extends CI_Controller {
 	  
 	   
    }
+   
    function saveasfav($pid){
 	     $user_id = $this->session->userdata('logged_in')['account_id'];
 	     $data=array(
@@ -344,19 +345,23 @@ class Signg_in extends CI_Controller {
    
        public function pwd_reset($usermail)
 	{
-		   $this->load->view('password_reset',$usermail);
+	  $data['usermail'] =  $usermail;
+	   $this->load->view('password_reset',$data);
     }
+	
    public function reset_pwd()
    {
 	   $user_email = $this->input->post('usermail');	
 	   $password = md5($this->input->post('password'));
 	   $data['result'] = $this->customermodel->reset_password($user_email,$password);
-	   $this->session->set_flashdata('reset_success', 'Your password Reset Done Sucessfully you Can login With new Password!...');
-	   redirect('/signg_in');
+	  // $this->session->set_flashdata('reset_success', 'Your password Reset Done Sucessfully you Can login With new Password!...');
+	 //  redirect('/signg_in');
    }
  
  public function reset_pwd_sendmail($usermail)
 {
+	
+	
 	/*
 		$config['protocol'] = 'smtp';
 		$config['smtp_host'] = 'ssl://smtp.googlemail.com';
@@ -366,7 +371,8 @@ class Signg_in extends CI_Controller {
 */
 // Load email library and passing configured values to email library
 		$mail = $usermail;
-		
+		//$this->load->library('encrypt');
+		//$usermail = $this->encrypt->encode($usermail);
 		$user_name = 'Sivaprasad';
 		//;$this->load->library('email',$config);
 		$this->email->set_newline("\r\n");
@@ -391,6 +397,40 @@ class Signg_in extends CI_Controller {
 
 }
 
+public function emailTest()
+{
+	
+	$config = Array(		
+		    'protocol' => 'smtp',
+		    'smtp_host' => 'ssl://smtp.googlemail.com',
+		    'smtp_port' => 465,
+		    'smtp_user' => 'ayatasdev@gmail.com',
+		    'smtp_pass' => 'Ayatas123',
+		    'smtp_timeout' => '4',
+		    'mailtype'  => 'html', 
+		    'charset'   => 'iso-8859-1'
+		);
+
+$this->load->library('email', $config);
+$this->email->set_newline("\r\n");
+
+//Add file directory if you need to attach a file
+$to ='sivaprasad@ayatas.com';
+$this->email->from('manikanta@ayatas.com', 'Sending Name');
+$this->email->to($to); 
+
+$this->email->subject('Email Subject');
+$this->email->message('Email Message'); 
+
+if($this->email->send()){
+   //Success email Sent
+   echo $this->email->print_debugger();
+   echo $to;
+}else{
+   //Email Failed To Send
+   echo $this->email->print_debugger();
+}
+}
  
  }
 ?>

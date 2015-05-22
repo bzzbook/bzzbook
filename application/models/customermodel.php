@@ -709,8 +709,9 @@ class Customermodel extends CI_Model {
    {
 	
 		$data['password'] = $pwd;
-		$this->db->update('bzz_users',$data);
+		
 		$this->db->where('user_email',$usermail);
+		$this->db->update('bzz_users',$data);
 		if($this->db->affected_rows() == 1)
 		{
 		$this->session->set_flashdata('resest_pwd_success','Your password Has Been Reset Successfully  You Can Login with New Password!....');

@@ -13,6 +13,20 @@
 
           <!-- Tab panes -->
           <div class="tab-content">
+          <?php $user_cmps = $this->companies->user_cr_companies(); 
+		  $cmp = array();
+		  foreach($user_cmps as $cmps)
+		  {
+			  $cmp[] = $cmps['companyinfo_id'];
+		  }
+		print_r($cmp);
+		  
+		$currentcmp = $cmp_info[0]['companyinfo_id'];
+		  
+		  $data = in_array($currentcmp,$cmp);
+		  
+		  print_r($data);
+		  ?>
            
             <div role="tabpanel" class="tab-pane active" id="post_board">
              <?php $image = $this->profile_set->get_profile_pic(); 	?>
@@ -20,6 +34,7 @@
               <figure class="pfpic"><span>Profile Pic</span><img src="<?php echo base_url();?>uploads/<?php echo $cmp_info[0]['company_image']  ?>" alt="" height="159" width="146"></figure>
                <?php $attr = array('id' => 'upload_file', 'name' => 'upload_file'); ?> 
               <?php echo form_open_multipart('company/pic_upload',$attr);?>
+              <?php if(!empty($data)) { ?>
            <div class="upload"> <span class="btn btn-success fileinput-button"> <span>Change Picture</span> 
                 <!-- The file input field used as target for the file upload widget -->
              <input type="file" name="userfile" id="userfile" size="20" required/>
@@ -28,7 +43,7 @@
                 <input type="hidden" value="<?php echo $cmp_info[0]['companyinfo_id'] ?>" name="cmp_id" id="cmp_id"/>
                  <input type="submit" class="btn btn-success" value="upload"></div>
                  </form>
-                 
+                 <?php } ?>
          <?php /*?><section>
             <div class="container">
             
@@ -74,7 +89,7 @@
                  <h4>Company Info</h4>
                <form name="cmp_postboard" id="cmp_postboard" method="POST" action="">
                <div class="filed col-md-6">
-                <input type="text" class="form-control" placeholder="Company Name" value="<?php echo $cmp_info[0]['cmp_name'] ?>" name="companyname" >
+                <input type="text" class="form-control" placeholder="Company Name" value="<?php echo $cmp_info[0]['cmp_name'] ?>" name="companyname"   readonly="readonly">
               </div>
              <div class="field col-md-6 ">
            	<select class="form-control" name="country"  onchange="print_state('state',this.selectedIndex);"  id="country">
@@ -87,15 +102,15 @@
            </select>
          	</div>
              <div class="filed col-md-6">
-                <input type="text" class="form-control" placeholder="City" value="<?php echo $cmp_info[0]['company_city'] ?>" name="city" >
+                <input type="text" class="form-control" placeholder="City" value="<?php echo $cmp_info[0]['company_city'] ?>" name="city"  readonly="<?php if(empty($data)) { echo "readonly"; } ?>" >
               </div> 
               
               <div class="filed col-md-6">
-                 <input type="text" class="form-control" placeholder="Zip Code" value="<?php echo $cmp_info[0]['company_postalcode'] ?>" name="postal_code">
+                 <input type="text" class="form-control" placeholder="Zip Code" value="<?php echo $cmp_info[0]['company_postalcode'] ?>" name="postal_code"  readonly="<?php if(!empty($data)) { echo "readonly"; } ?>">
               </div>
            
               <div class="filed col-md-6">
-                <select class="form-control" name="industry">
+                <select class="form-control" name="industry"  readonly="<?php if(!empty($data)) { echo "readonly"; } ?>">
                    <?php foreach($industry as $industries):?>
                  <option value="<?php echo $industries->lookup_value;?>"
 				 <?php if($cmp_info[0]['cmp_industry'] == $industries->lookup_value){
@@ -106,7 +121,7 @@
               </div>
               
               <div class="filed col-md-6">
-                <select class="form-control" name="estb"> 
+                <select class="form-control" name="estb"  readonly="<?php if(!empty($data)) { echo "readonly"; } ?>"> 
                  <option value="1956">1956</option>
                  <?php for($i=1950;$i<=date(Y);$i++){?>
                                 	<option value="<?php echo $i;?>"<?php if($cmp_info[0]['cmp_estb'] == $i) { 
@@ -116,10 +131,12 @@
                 </select>
               </div>
               <div class="filed col-md-12">
-                <textarea cols="" rows="" class="form-control" name="about_me_info" ><?php echo $cmp_info[0]['cmp_about'] ?></textarea>
+                <textarea cols="" rows="" class="form-control" name="about_me_info"  readonly="<?php if(!empty($data)) { echo "readonly"; } ?>" ><?php echo $cmp_info[0]['cmp_about'] ?></textarea>
               </div>
               <div class="filed col-md-6">
+               <?php if(!empty($data)) { ?>
                <input type="submit" class="fmbtn" value="Update Settings">
+               <?php } ?>
               </div>
               <div class="clear"></div>
               </form>
@@ -128,26 +145,28 @@
               <h4 class="clear">About Us</h4>
               <form id="about_cmp" name="about_cmp" >
                <div class="filed col-md-6">
-                <input type="text" class="form-control" name="cmp_colleagues"  placeholder="Employee" value="<?php echo $cmp_info[0]['cmp_colleagues'] ?>">
+                <input type="text" class="form-control" name="cmp_colleagues"  placeholder="Employee" value="<?php echo $cmp_info[0]['cmp_colleagues'] ?>"   readonly="<?php if(!empty($data)) { echo "readonly"; } ?>">
               </div>
          
             
               <h4 class="clear">Contact Information</h4>
              <div class="filed col-md-6">
-                <input type="text" class="form-control" name="cmp_email" placeholder="Email" value="<?php echo $cmp_info[0]['company_email'] ?>">
+                <input type="text" class="form-control" name="cmp_email" placeholder="Email" value="<?php echo $cmp_info[0]['company_email'] ?>"   readonly="<?php if(!empty($data)) { echo "readonly"; } ?>">
               </div>
               <div class="filed col-md-6">
-                <input type="text" class="form-control" name="cmp_phone" placeholder="Phone" value="<?php echo $cmp_info[0]['company_phone'] ?>">
+                <input type="text" class="form-control" name="cmp_phone" placeholder="Phone" value="<?php echo $cmp_info[0]['company_phone'] ?>"   readonly="<?php if(!empty($data)) { echo "readonly"; } ?>">
               </div>
               <div class="filed col-md-6">
-                <input type="text" class="form-control" name="cmp_office" placeholder="Office"  value="<?php echo $cmp_info[0]['company_office'] ?>">
+                <input type="text" class="form-control" name="cmp_office" placeholder="Office"  value="<?php echo $cmp_info[0]['company_office'] ?>"   readonly="<?php if(!empty($data)) { echo "readonly"; } ?>">
               </div>
               <div class="filed col-md-6">
-                <input type="text" class="form-control" name="cmp_fax" placeholder="Fax"  value="<?php echo $cmp_info[0]['company_fax'] ?>">
+                <input type="text" class="form-control" name="cmp_fax" placeholder="Fax"  value="<?php echo $cmp_info[0]['company_fax'] ?>"   readonly="<?php if(!empty($data)) { echo "readonly"; } ?>">
             
               </div>
               <div class="filed col-md-6">
+                 <?php if(!empty($data)) { ?>
                 <input type="submit" class="fmbtn" value="Update Settings">
+                <?php } ?>
               </div>
               </form>
               <div class="clear"></div>
@@ -166,10 +185,10 @@
 						else
 							$profileno_check = "checked";
 					?>
-                  <input type="radio" id="inlineRadio1" value="Y" name="profile_visible" <?php echo @$profileyes_check?>>
+                  <input type="radio" id="inlineRadio1" value="Y"   disabled="<?php if(!empty($data)) { echo "disabled"; } ?>" name="profile_visible" <?php echo @$profileyes_check?>>
                   Yes </label>
                 <label class="radio-inline">
-                  <input type="radio" id="inlineRadio2" value="N" name="profile_visible" <?php echo @$profileno_check?>>
+                  <input type="radio" id="inlineRadio2" value="N"  disabled="<?php if(!empty($data)) { echo "disabled"; } ?>" name="profile_visible" <?php echo @$profileno_check?>>
                   No </label>
                   </div>
               </div>
@@ -183,16 +202,18 @@
                 <label for="notifications">Make my comments visible to non friends:</label>
                 <div class="pull-right">
                 <label class="radio-inline">
-                  <input type="radio" id="inlineRadio1" value="Y" name="comments_visible" <?php echo @$commentsyes_check?>>
+                  <input type="radio" id="inlineRadio1" value="Y"  disabled="<?php if(!empty($data)) { echo "disabled"; } ?>"  name="comments_visible" <?php echo @$commentsyes_check?>>
                   Yes </label>
                 <label class="radio-inline">
-                  <input type="radio" id="inlineRadio2" value="N" name="comments_visible" <?php echo @$commentsno_check?>>
+                  <input type="radio" id="inlineRadio2" value="N"  disabled="<?php if(!empty($data)) { echo "disabled"; } ?>"  name="comments_visible" <?php echo @$commentsno_check?>>
                   No </label>
                   </div>
               </div>
               
              <div class="filed col-md-12">
+                <?php if(!empty($data)) { ?>
                 <input type="submit" value="Update" class="fmbtn">
+                <?php }?>
               </div>
               </form>
               <div class="clear"></div>
@@ -212,14 +233,17 @@
                 <label for="notifications">Send Notifications To My email:</label>
                 <div class="pull-right">
                 <label class="radio-inline">
-                  <input type="radio"  value="Y" name="email_notofication" <?php echo @$notificationsyes_check?>>
+                  <input type="radio"  value="Y"  disabled="<?php if(!empty($data)) { echo "disabled"; } ?>"  name="email_notofication" <?php echo @$notificationsyes_check?>>
                   Yes </label>
                 <label class="radio-inline">
-                  <input type="radio"  value="N" name="email_notofication" <?php echo @$notificationsno_check?>>
+                  <input type="radio"  value="N"  disabled="<?php if(!empty($data)) { echo "disabled"; } ?>"  name="email_notofication" <?php echo @$notificationsno_check?>>
                   No </label>
                   </div>
                 <div class="filed col-md-12">
+                   <?php if(!empty($data)) { ?>
                 <input type="submit" class="fmbtn" value="Upload Settings">
+                <?php } ?>
+              </div>
               </div>
               </form>
               <div class="clear"></div>

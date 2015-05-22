@@ -993,7 +993,7 @@ width:100%; }
 .as_close_btn{ vertical-align:middle; }
 
 #autosuggest .as_frnd_container{  background:#fbc436; color:#000;line-height:30px;}
-#updateControls{ text-align:right; line-height:24px;} 
+#updateControls{ text-align:right; line-height:24px; position:relative; } 
 #autosuggest .as_frnd_img img{ width:16%; margin-right:10px;}
 #selectedfriends > span {   float: left;  font-size: 13px;  margin-right: 5px;}
 #search_frnd_wrapper{ float:left;}
@@ -1003,7 +1003,7 @@ width:100%; }
 
 
 
-.ghost{ height: 19px;  position: relative;  right: 6px; top: 4px;}
+.ghost{ position: absolute; right: 175px; top: -2px;}
 .ghost:hover{ cursor:pointer; cursor:hand;}
 
 
@@ -1173,8 +1173,8 @@ footer{ color:#acacac; font-size:20px; color:#acacac; text-align:center; padding
 .smallboxes ul li:last-child { border-bottom:none; }
 #education .small_boxes { border-bottom:none; }
 #education .small_boxes ul { list-style:none; }
-.tophead { font-size:14px; font-weight:300; text-transform: uppercase; color:#737373; width:100%; line-height:35px; border-bottom:1px solid #ececec; margin-bottom:10px; }
-.workplace { font-size:13px; font-weight:300; padding:0; margin:0; }
+.tophead { font-size:14px; font-weight:300; text-transform: uppercase; color:#737373; width:100%;/* line-height:35px; */ border-bottom:1px solid #ececec; margin-bottom:10px; }
+.workplace { font-size:13px; font-weight:300; padding:0; margin: 15px 0 0;}
 .workplace label { width:102px; text-align:right; margin-bottom:8px; }
 .workplace input { width:210px; border:1px solid #ececec; font-size:13px; padding:5px; margin-bottom:8px; }
 *::-moz-placeholder, *:-moz-placeholder {
@@ -1210,7 +1210,7 @@ footer{ color:#acacac; font-size:20px; color:#acacac; text-align:center; padding
 .boxsmal { width:20px !important; }
 .description textarea { width:210px; }
 .description label { width:100px; vertical-align:top; }
-.add_new input { width:20px !important; }
+.add_new input { width:100px !important; }
 .add_new { width:150px !important; }
 .highschool { font-size:13px; font-weight:300; padding:0; margin:0; }
 #highschool label { width:102px; text-align:right; margin-bottom:8px; font-size:13px; }
@@ -1292,4 +1292,5 @@ footer{ color:#acacac; font-size:20px; color:#acacac; text-align:center; padding
 .birth_ins label{ width:150px; text-align:right; padding-right:10px;}
 .birth_ins input{ width:210px; border: 1px solid #ececec; margin-bottom:8px; padding:3px;}
 .birth_ins textarea{ width:210px; vertical-align:top; border: 1px solid #ececec;}
-
+.latest_works{  border-bottom: 1px solid #ececec; }
+.inner_rights { margin-bottom:15px;}

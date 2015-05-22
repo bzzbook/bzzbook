@@ -10,6 +10,7 @@ class customer extends CI_Controller {
 		$this->load->view('sign_in_v');
 	}
 
+
 	
 	public function sign_up()
 	{ 
@@ -152,12 +153,26 @@ class customer extends CI_Controller {
   {
 	  if(isset($_POST['submit']))
 	  {
-	    $this->form_validation->set_rules('email','Email','trim|required|valid_email|xss_clean');
+	    /*$this->form_validation->set_rules('email','Email','trim|required|valid_email|xss_clean');
 	    $email = $this->input->post('email');
 	    $this->email->from('sprasad96@gmail.com','Sivaprasad');
 		$this->email->to($email,'user');
 		$this->email->subject('this is testing email.......');
-		$this->email->message('hai this is message');
+		$this->email->message('hai this is message');*/
+		
+				$headers = 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+             
+                $to = $this->input->post('email');
+                $from = "no-reply@www.bzzbook.com";
+                $subject = "invitaion for friend";
+                $message = 'hai friends';
+                $this -> load -> library('email');
+                $this -> email -> set_newline("\r\n");
+                $this -> email -> from($from, 'Support bzzbook');
+                $this -> email -> to($to);
+                $this -> email -> subject($subject);
+                $this -> email -> message($message);
+               
 		if($this->email->send())
 		{
 	//	echo $email;
@@ -169,6 +184,16 @@ class customer extends CI_Controller {
 		 echo"wrong submission";  
 	  }
 	
+	
+/*	
+$to = $this->input->post('email');
+$subject = "My subject";
+$txt = "Hello world!";
+$headers = "From: webmaster@example.com" . "\r\n" .
+"CC: somebodyelse@example.com";
+
+mail($to,$subject,$txt,$headers);*/
+
   }}
   public function view_post()
 	  {
@@ -480,7 +505,7 @@ public function search_member()
             echo "<a href='#' onclick='view_comments(".$row->post_id.")' style='font-size:12px;'>View More</a>";
              }
          echo  "</div>";
-		
+
 		
 		
 	}
