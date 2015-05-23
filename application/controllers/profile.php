@@ -1104,6 +1104,66 @@ public function addaddress()
 	
 }
 
+public function addlanguages()
+{
+	//$insert_id =  $this->profile_set->add_about_me($_POST['about_me']);
+    $result = $this->profile_set->save_settings();
+	if($this->profile_set->add_languages($_POST['lang_data']))
+	$this->load->view('aboutme/languages_inner');
+	else
+	return false;
+  
+	
+}
+
+public function addpfskills()
+{
+	//$insert_id =  $this->profile_set->add_about_me($_POST['about_me']);
+    $result = $this->profile_set->save_settings();
+	if($this->profile_set->add_professional_skills($_POST['skill_data']))
+	$this->load->view('aboutme/pfskills_inner');
+	else
+	return false;
+  
+	
+}
+
+public function addinterest()
+{
+	//$insert_id =  $this->profile_set->add_about_me($_POST['about_me']);
+    $result = $this->profile_set->save_settings();
+	if($this->profile_set->add_interested_in($_POST['interested_in']))
+	$this->load->view('aboutme/interests_inner');
+	else
+	return false;
+  
+	
+}
+
+public function addrelegious()
+{
+	//$insert_id =  $this->profile_set->add_about_me($_POST['about_me']);
+    $result = $this->profile_set->save_settings();
+	if($this->profile_set->add_relegious_belief($_POST['relegion'],$_POST['description']))
+	$this->load->view('aboutme/relegious_inner');
+	else
+	return false;
+  
+	
+}
+
+
+public function addpolitical()
+{
+	//$insert_id =  $this->profile_set->add_about_me($_POST['about_me']);
+    $result = $this->profile_set->save_settings();
+	if($this->profile_set->add_political_belief($_POST['political'],$_POST['description']))
+	$this->load->view('aboutme/political_inner');
+	else
+	return false;
+  
+	
+}
 
 
 public function add_work()

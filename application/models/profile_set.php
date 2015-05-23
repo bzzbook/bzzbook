@@ -875,8 +875,10 @@ public function add_fav_quotes($favquotes)
 	public function add_address($address,$city,$zip_code,$neighborhood)
 	{
 		$id = $this->session->userdata('logged_in')['account_id'];
+		
+		$address_data = $address."|++|".$city."|++|".$zip_code."|++|".$neighborhood;
 		$up_data = array(
-		'website'=>$address
+		'address'=>$address_data
 		);
 		$this->db->where('user_id',$id);
 		
@@ -886,8 +888,71 @@ public function add_fav_quotes($favquotes)
 		return false;
 	}
 	
+	public function add_languages($language)
+	{
+		$id = $this->session->userdata('logged_in')['account_id'];
+		$up_data = array('languages'=>$language);
+		$this->db->where('user_id',$id);
+		
+		if($this->db->update('bzz_userinfo',$up_data))
+		return true;
+		else
+		return false;
+	}
 	
+	public function add_professional_skills($proff_skills)
+	{
+		$id = $this->session->userdata('logged_in')['account_id'];
+		$up_data = array('professional_skills'=>$proff_skills);
+		$this->db->where('user_id',$id);
+		
+		if($this->db->update('bzz_userinfo',$up_data))
+		return true;
+		else
+		return false;
+	}
+	public function add_interested_in($interested_in)
+	{
+		
+		$data = implode(",",$interested_in);
+		
+		$id = $this->session->userdata('logged_in')['account_id'];
+		$up_data = array('interests'=>$data);
+		$this->db->where('user_id',$id);
+		
+		if($this->db->update('bzz_userinfo',$up_data))
+		return true;
+		else
+		return false;
+	}
 	
+		public function add_relegious_belief($relegion,$description)
+	{
+		
+		$data = $relegion."|@|".$description;
+		$id = $this->session->userdata('logged_in')['account_id'];
+		$up_data = array('religious'=>$data);
+		$this->db->where('user_id',$id);
+		
+		if($this->db->update('bzz_userinfo',$up_data))
+		return true;
+		else
+		return false;
+	}
+	
+		public function add_political_belief($political,$description)
+	{
+		
+		$data = $political."|@|".$description;
+		$id = $this->session->userdata('logged_in')['account_id'];
+		$up_data = array('political'=>$data);
+		$this->db->where('user_id',$id);
+		
+		if($this->db->update('bzz_userinfo',$up_data))
+		return true;
+		else
+		return false;
+	}
 	
 	public function add_work_info($data)
 	{

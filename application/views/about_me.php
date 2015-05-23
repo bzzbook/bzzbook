@@ -243,18 +243,56 @@
                           </div>
                       </li>
                       <div class="clearfix"></div>
-                      <li>
+                      <li id="pfskills-li">
                         <div class="tophead">Professional Skills</div>
-                        <div class="iner_lefts"><a href="#"><i class="fa fa-plus"></i></a></div>
-                        <div class="inner_rights boxs">
-                          <h3><a href="#">Add a professional skill</a></h3>
+                           <?php if(empty($result[0]->professional_skills)) { ?>
+                        <div class="iner_lefts" id="prof_skills1"><a href="javascript:void(0)"><i class="fa fa-plus"></i></a></div>
+                        <div class="inner_rights boxs" id="prof_skills2">
+                          <h3><a href="javascript:void(0)" id="add_pf_skills">Add a professional skill</a></h3>
                           </div>
-                          <div id="skills" style="display:none;">
+                          <?php } else { ?>
+                          
+                          <div id="pf_skills_val_display">
+                        <div class="sm_leftbox"></div>
+                        <div class="sm_rightbox"><h3><a href="javascript:void(0)">
+						<?php 
+						$data = explode(',',$result[0]->professional_skills);
+						foreach($data as $lang)
+						{
+						 echo $lang." . ";
+						}
+						?>
+                        </a></h3>
+                        </div>
+                        <div class="sm_rightside">
+                        <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
+                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="pf_skills_edit()"><i class="fa fa-pencil"></i> Edit</a></div>
+                        <div class="col-md-3 com_rig"><a href="#"><i class="fa fa-times"></i></a></div>
+                        </div>
+                        </div>
+                          <div class="clearfix"></div>
+                         <?php } ?> 
+                          
+                          <div id="skills_disp" style="display:none;">
                             <div id="skil_place" class="workplace col-md-12">
                               <form class="form-inline">
                                 <div class="form-group skils">
+                                <div id="selected_skills">
+							   <?php 
+							    if($result[0]->professional_skills){ 
+							    $data = explode(',',$result[0]->professional_skills);
+								foreach($data as $pf_skill)
+								{
+								
+								?>
+								   
+								   <span class="bc_mail_ids" id="<?php echo $pf_skill; ?>"><?php echo $pf_skill;?><a onclick="removeskills('<?php echo $pf_skill; ?>')" ><img class="as_close_btn" src="<?php echo base_url('images/close_post.png'); ?>" /></a></span>
+								
+                                <?php } } ?>   
+								  </div>
                                   <label for="exampleInputName2">Professional Skills</label>
-                                  <input type="text"placeholder="">
+                                  <input type="text" placeholder="" id="professional_skils">
+                                  <input type="text" id="addedskills" name="addedskills" value="<?php if($result[0]->professional_skills){ echo $result[0]->languages; } ?>"></input>
                                 </div>
                                 <div class="clearfix"></div>
                               </form>
@@ -263,8 +301,12 @@
                                   <button aria-expanded="false" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">Public <span class="caret"></span></button>
                                 </div>
                                 <div class="col-md-8 skil_box">
-                                  <div class="btn3 btn-black">Cancel</div>
-                                  <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save Changes</div>
+                               <div class="btn3 btn-green" onclick="add_all_skills()">Save Changes</div>
+                                <?php if($result[0]->professional_skills) { ?>
+                              <div class="btn3 btn-black" onclick="close_pf_skills()">Cancel</div>
+                              <?php } else { ?>
+                              <div class="btn3 btn-black" onclick="close_pfskills()">Cancel</div>
+                            <?php } ?>
                                 </div>
                                 <div class="clearfix"></div>
                               </div>
@@ -765,22 +807,53 @@
                         <div class="clearfix"></div>
                       </li>
                       <li id="address-li"> 
-                        <!--<div class="tophead">Add your address</div>-->
-                        <div class="iner_boxleft" id="address1"><a href="javascript:void(0)" id="add_address"><i class="fa fa-plus"></i>Add your address</a></div>
+                        <div class="tophead">Add your address</div>
+                       
+                         <?php if(empty($result[0]->address)) { ?>
+      <div class="iner_boxleft" id="address1"><a href="javascript:void(0)" id="add_address"><i class="fa fa-plus"></i>Add your address</a></div> 
+                        <?php } else {
+							
+							$data = explode('|++|',$result[0]->address);
+							//print_r($data);
+							
+							 ?>
+                        
+                        <div id="address_val_display">
+                        <div class="sm_leftbox"></div>
+                        <div class="sm_rightbox"><h3><a href="#">Address</a></h3>
+                        <p><?php echo $data[0]; ?></p>
+                        <p><?php echo $data[1]; ?></p>
+						<p><?php echo $data[2]; ?></p>
+                        <p><?php echo $data[3]; ?></p>
+                        </div>
+                        <div class="sm_rightside">
+                        <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
+                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="address_edit()"><i class="fa fa-pencil"></i> Edit</a></div>
+                        <div class="col-md-3 com_rig"><a href="#"><i class="fa fa-times"></i></a></div>
+                        </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        
+                        
+                        <?php } ?>
+                        
+                        
+                        
+                        
                         <div class="inner_rights boxs" id="address_disp" style="display:none;">
                           <div id="Address" class="col-md-12">
                             <form class="form-inline Address">
                               <label for="exampleInputName2">Address</label>
-                              <input type="text" placeholder="" id="address">
+                              <input type="text" placeholder="" id="address" value="<?php if($data[0]) { echo $data[0]; }?>">
                               <div class="clearfix"></div>
                               <label for="exampleInputName2">City/Town</label>
-                              <input type="text" placeholder="" id="ad_city">
+                              <input type="text" placeholder="" id="ad_city" value="<?php if($data[1]) { echo $data[1]; }?>">
                               <div class="clearfix"></div>
                               <label for="exampleInputName2">Zip</label>
-                              <input type="text" placeholder="" id"zip_code">
+                              <input type="text" placeholder="" id="zip_code" value="<?php if($data[2]) { echo $data[2]; }?>">
                               <div class="clearfix"></div>
                               <label for="exampleInputName2">Neighborhood</label>
-                              <input type="text" placeholder="" id="neighborhood">
+                              <input type="text" placeholder="" id="neighborhood" value="<?php if($data[3]) { echo $data[3]; }?>">
                               <div class="clearfix"></div>
                             
                             <div class="clearfix"></div>
@@ -789,8 +862,12 @@
                                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Friends <span class="caret"></span></button>
                               </div>
                               <div class="col-md-9 skil_box">
+                                        <div class="btn3 btn-green" onclick="add_address()">Save Changes</div>
+                                        <?php if($result[0]->address) { ?>
+                                <div class="btn3 btn-black" onclick="close_address_block()">Cancel</div>
+                      			<?php }else{  ?>
                                 <div class="btn3 btn-black" onclick="close_address()">Cancel</div>
-                                <div class="btn3 btn-green" onclick="add_address()">Save Changes</div>
+                                <?php } ?>
                               </div>
                               <div class="clearfix"></div>
                             </div>
@@ -813,7 +890,10 @@
                               </div>
                               <div class="col-md-3">
                                 <select>
-                                  <option>Instagram</option>
+                                  <option value="facebook">facebook</option>
+                                  <option value="twitter">twitter</option>
+                                  <option value="pinterest">pinterest</option>
+                                  <option value="linked_in">LinkedIn</option>
                                 </select>
                               </div>
                               <div class="clearfix"></div>
@@ -886,10 +966,73 @@
                         </div>
                         <div class="clearfix"></div>
                       </li>
-                      <li> 
-                        <!--<div class="tophead">Basic Information</div>-->
-                        <div class="iner_boxleft"><a href="#"><i class="fa fa-plus"></i>Add who you're interested in</a></div>
-                        <div class="inner_rights boxs">
+                      <li id="interest-li"> 
+                       <!-- <div class="tophead">Basic Information</div> -->
+                       <?php if(empty($result[0]->interests)) { ?>
+                        <div class="iner_boxleft" id="interest">
+                        <a href="javascript:void(0)" id="add_interest"><i class="fa fa-plus"></i>Add who you're interested in</a></div>
+                       <?php } else { ?>
+                        <div id="interest_val_disp">
+                        <div class="sm_leftbox"></div>
+                        <div class="sm_rightbox"><h3><a href="#">
+						<?php $data = explode(",",$result[0]->interests); 
+						$i = 1;
+						foreach($data as $data)
+						{
+							if($i == 2)
+						{
+							echo " and ";
+						}
+						
+						echo $data;
+						
+						$i++;
+					
+						}
+						
+						 ?></a></h3>
+                        
+                        </div>
+                        <div class="sm_rightside">
+                        <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
+                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="interests_edit()"><i class="fa fa-pencil"></i> Edit</a></div>
+                        <div class="col-md-3 com_rig"><a href="#"><i class="fa fa-times"></i></a></div>
+                        </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        
+                        <?php } ?> 
+                        
+                        <div class="birth birt_bottom col-md-12" id="interest_disp" style="display:none;">
+                            <div class="interested col-md-3">Interested In</div>
+                            <div class="col-md-4 ">
+                              <input type="checkbox" name="interest[]" class="boxsmal" value="women" >
+                              women</div>
+                            <div class="col-md-4">
+                              <input type="checkbox" name="interest[]" class="boxsmal" value="men">
+                              Men</div>
+                         
+                          <div class="box_bottom">
+                            <div class="publics col-md-3">
+                              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Public <span class="caret"></span></button>
+                            </div>
+                            <div class="col-md-8 skil_box">
+                              
+                              <div class="btn3 btn-green" onclick="add_interest()">Save Changes</div>
+                              <?php if($result[0]->interests) { ?>
+                              <div class="btn3 btn-black" onclick="close_interested_in()">Cancel</div>
+                              <?php } else { ?>
+                              <div class="btn3 btn-black" onclick="close_interest()">Cancel</div>
+                              <?php } ?>
+                            </div>
+                            <div class="clearfix"></div>
+                             </div>
+                          </div>
+                        
+                        <div class="clearfix"></div>
+                      </li>
+                      <li>
+                      <div class="inner_rights boxs">
                           <div class="birth col-md-12">
                             <div class="birth_left col-md-6">Birth Date</div>
                             <div class="birth_right col-md-6">June 15</div>
@@ -902,38 +1045,59 @@
                             <div class="birth_left col-md-6">Gender</div>
                             <div class="birth_right col-md-6">Male</div>
                           </div>
-                          <div class="birth birt_bottom col-md-12">
-                            <div class="interested col-md-3">Interested In</div>
-                            <div class="col-md-4 ">
-                              <input type="checkbox" class="boxsmal">
-                              women</div>
-                            <div class="col-md-4">
-                              <input type="checkbox" class="boxsmal">
-                              Men</div>
-                          </div>
-                          <div class="box_bottom">
-                            <div class="publics col-md-3">
-                              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Public <span class="caret"></span></button>
-                            </div>
-                            <div class="col-md-8 skil_box">
-                              <div class="btn3 btn-black">Cancel</div>
-                              <div class="btn3 btn-green" data-toggle="modal" data-target="#AddCompany">Save Changes</div>
-                            </div>
-                            <div class="clearfix"></div>
-                          </div>
+                          
+                        </div>
+                      </li>
+                      <li id="language-li"> 
+                        
+ 						 <div class="tophead">Languages</div>
+                        <?php if(empty($result[0]->languages)) { ?>
+                        <div class="iner_boxleft" id="lang1"><a href="javascript:void(0)" id="add_language"><i class="fa fa-plus"></i>Add a language</a></div> <?php } else { ?>
+                        
+                        <div id="language_val_display">
+                        <div class="sm_leftbox"></div>
+                        <div class="sm_rightbox"><h3><a href="#">
+						<?php 
+						$data = explode(',',$result[0]->languages);
+						foreach($data as $lang)
+						{
+						 echo $lang." . ";
+						}
+						?>
+                        </a></h3>
+                        </div>
+                        <div class="sm_rightside">
+                        <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
+                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="languages_edit()"><i class="fa fa-pencil"></i> Edit</a></div>
+                        <div class="col-md-3 com_rig"><a href="#"><i class="fa fa-times"></i></a></div>
+                        </div>
                         </div>
                         <div class="clearfix"></div>
-                      </li>
-                      <li> 
-                        <!--<div class="tophead">Basic Information</div>-->
-                        <div class="iner_boxleft"><a href="#"><i class="fa fa-plus"></i>Add a language</a></div>
-                        <div class="inner_rights boxs">
+                        
+                        
+                        
+                        <?php } ?>
+                        <div class="inner_rights boxs" id="language_disp" style="display:none;">
                          
                           <div class="birth birt_bottom col-md-12">
                             <form class="form-inline ">
                               <div class="form-group birth_ins">
+                               <div id="selected_langauges">
+							   <?php 
+							    if($result[0]->languages){ 
+							    $data = explode(',',$result[0]->languages);
+								foreach($data as $lang)
+								{
+								
+								?>
+								   
+								   <span class="bc_mail_ids" id="<?php echo $lang; ?>"><?php echo $lang;?><a onclick="removelanguage('<?php echo $lang; ?>')" ><img class="as_close_btn" src="<?php echo base_url('images/close_post.png'); ?>" /></a></span>
+								
+                                <?php } } ?>   
+								  </div>
                                 <label for="exampleInputName2">Languages</label>
-                                <input type="text">
+                                <input type="text" id="lang_box" />
+                                <input type="text" id="addedlangs" name="addedlangs" value="<?php if($result[0]->languages){ echo $result[0]->languages; } ?>"></input>
                               </div>
                               <div class="clearfix"></div>
                             </form>
@@ -943,79 +1107,137 @@
                               <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Public <span class="caret"></span></button>
                             </div>
                             <div class="col-md-8 skil_box">
-                              <div class="btn3 btn-black">Cancel</div>
-                              <div class="btn3 btn-green" data-toggle="modal" data-target="#AddCompany">Save Changes</div>
+                              
+                              <div class="btn3 btn-green" onclick="add_all_languges()">Save Changes</div>
+                                <?php if($result[0]->languages) { ?>
+                              <div class="btn3 btn-black" onclick="close_language()">Cancel</div>
+                              <?php } else { ?>
+                              <div class="btn3 btn-black" onclick="close_lang()">Cancel</div>
+                            <?php } ?>
                             </div>
                             <div class="clearfix"></div>
                           </div>
                         </div>
                         <div class="clearfix"></div>
                       </li>
-                      <li> 
+                      <li id="relegion-li"> 
                         <!--<div class="tophead">Basic Information</div>-->
-                        <div class="iner_boxleft"><a href="#"><i class="fa fa-plus"></i>Add your religious views</a></div>
+                       
+                        <?php if(empty($result[0]->religious)) {?>
+                         <div class="iner_boxleft" id="relegious"><a href="javascript:void(0)" id="add_relegious"><i class="fa fa-plus"></i>Add your religious views</a></div>
+                        
+                        
+                        <?php } else { ?>
+                        
+                          <div id="relegious_val_disp">
+                        <div class="sm_leftbox"></div>
+                        <div class="sm_rightbox"><h3><a href="#">
+						<?php  
+						$data = explode('|@|',$result[0]->religious);
+						echo $data[0];
+						 ?></a></h3>
+                        <p><?php echo $data[1]; ?></p>
+                        </div>
+                        <div class="sm_rightside">
+                        <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
+                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="relegious_edit()"><i class="fa fa-pencil"></i> Edit</a></div>
+                        <div class="col-md-3 com_rig"><a href="#"><i class="fa fa-times"></i></a></div>
+                        </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        
+                         <?php } ?>
+                        
                         <div class="inner_rights boxs">
-                          
-                          
-                          
-                          <div class="birth birt_bottom col-md-12">
+                        
+                          <div class="birth birt_bottom col-md-12" id="relegious_disp" style="display:none;">
                             <form class="form-inline ">
                               <div class="form-group birth_ins">
                                 <label for="exampleInputName2">Religious Views</label>
-                                <input type="text" placeholder="What are your religious beliefs?">
+                                <input type="text" placeholder="What are your religious beliefs?" id="rel_belief" value="<?php if($data[0]) { echo $data[0]; } ?>">
                               </div>
                               <div class="clearfix"></div>
                               <div class="form-group birth_ins">
                                 <label for="exampleInputName2">Description</label>
-                                <textarea rows="4"></textarea>
+                                <textarea rows="4" id="rel_description"><?php if($data[1]) { echo $data[1]; } ?></textarea>
                               </div>
                               <div class="clearfix"></div>
                             </form>
-                          </div>
+                          
                           <div class="box_bottom">
                             <div class="publics col-md-3">
                               <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Friends of Friends <span class="caret"></span></button>
                             </div>
                             <div class="col-md-8 skil_box">
-                              <div class="btn3 btn-black">Cancel</div>
-                              <div class="btn3 btn-green" data-toggle="modal" data-target="#AddCompany">Save Changes</div>
+                         
+                              <div class="btn3 btn-green" onclick="add_relegious_belief()">Save Changes</div>
+                              <?php if($result[0]->religious) { ?>
+                              <div class="btn3 btn-black" onclick="close_relegious()">Cancel</div>
+                              <?php }else { ?>
+                              <div class="btn3 btn-black" onclick="close_relegious_belief()">Cancel</div>
+                              <?php } ?>
                             </div>
                             <div class="clearfix"></div>
+                          </div>
                           </div>
                         </div>
                         <div class="clearfix"></div>
                       </li>
-                      <li> 
+                      <li id="political-li"> 
                         <!--<div class="tophead">Basic Information</div>-->
-                        <div class="iner_boxleft"><a href="#"><i class="fa fa-plus"></i>Add your political views</a></div>
+                               <?php if(empty($result[0]->political)) { ?>
+                        <div class="iner_boxleft" id="political"><a href="javascript:void(0)" id="add_political"><i class="fa fa-plus"></i>Add your political views</a></div>
+                        
+                        <?php } else { ?>
+                        
+                        <div id="political_val_disp">
+                        <div class="sm_leftbox"></div>
+                        <div class="sm_rightbox"><h3><a href="#">
+						<?php  
+						$data = explode('|@|',$result[0]->political);
+						echo $data[0];
+						 ?></a></h3>
+                        <p><?php echo $data[1]; ?></p>
+                        </div>
+                        <div class="sm_rightside">
+                        <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
+                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="political_edit()"><i class="fa fa-pencil"></i> Edit</a></div>
+                        <div class="col-md-3 com_rig"><a href="#"><i class="fa fa-times"></i></a></div>
+                        </div>
+                        </div>
+                        <?php } ?>
                         <div class="inner_rights boxs">
-                          
-                          
-                          
-                          <div class="birth birt_bottom col-md-12">
+                                                     
+                          <div class="birth birt_bottom col-md-12" id="political_disp" style="display:none;">
                             <form class="form-inline ">
                               <div class="form-group birth_ins">
                                 <label for="exampleInputName2">Political Views</label>
-                                <input type="text" placeholder="What are your political beliefs?">
+                                <input type="text" placeholder="What are your political beliefs?" id="political_belief" value="<?php if($data[0]) { echo $data[0]; }?>">
                               </div>
                               <div class="clearfix"></div>
                               <div class="form-group birth_ins">
-                                <label for="exampleInputName2">Description</label>
-                                <textarea rows="4"></textarea>
+                                <label for="exampleInputName2" >Description</label>
+                                <textarea rows="4" id="pol_description"><?php if($data[1]) { echo $data[1]; }?></textarea>
                               </div>
                               <div class="clearfix"></div>
                             </form>
-                          </div>
+                          
                           <div class="box_bottom">
                             <div class="publics col-md-3">
                               <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Friends of Friends <span class="caret"></span></button>
                             </div>
                             <div class="col-md-8 skil_box">
-                              <div class="btn3 btn-black">Cancel</div>
-                              <div class="btn3 btn-green" data-toggle="modal" data-target="#AddCompany">Save Changes</div>
+                              
+                              <div class="btn3 btn-green" onclick="add_political()">Save Changes</div>
+							  <?php if($result[0]->political) { ?>
+                              <div class="btn3 btn-black" onclick="close_political_belief()">Cancel</div>
+                              <?php  } else { ?>
+                              <div class="btn3 btn-black" onclick="close_political()">Cancel</div>
+                              <?php } ?>
                             </div>
                             <div class="clearfix"></div>
                           </div>
+                        </div>
                         </div>
                         <div class="clearfix"></div>
                       </li>

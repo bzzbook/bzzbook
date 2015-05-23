@@ -2729,7 +2729,7 @@ function close_address()
 	$('#address_disp').hide();
 }
 
-public function close_address()
+function add_address()
 {
 
 var address = $('#address').val();
@@ -2744,16 +2744,29 @@ var neighborhood = $('#neighborhood').val();
 		url : url,
 		success : function(html)
 		{
-			$('#website_disp').hide();
-	      	$('ul.basic_info > #website-li').html(html);		
+			$('#address_disp').hide();
+	      	$('ul.basic_info > #address-li').html(html);		
 		
 		
 		}
 	});
 	
+
+
+
+}
+
+
+ function address_edit()
+{
+	$('#address_val_display').hide();
+	$('#address_disp').show();
+}
 	
-
-
+function close_address_block()
+{
+	$('#address_val_display').show();
+	$('#address_disp').hide();
 }
 </script>
 
@@ -3542,6 +3555,356 @@ function school_edit()
 }
 
 </script>
+
+<script> //aboutme languages
+//$('#addedlangs').val("");
+$('#lang_box').keypress(function(e) {
+	
+    if(e.which == 32) {
+	var cur_content = $('#selected_langauges').html();
+	
+	var language = $.trim($(this).val());
+
+	
+	
+	var new_content  =  "<span class='bc_mail_ids' id='"+language+"'>"+language+"<a onclick='removelanguage(&#39"+language+"&#39)'><img class='as_close_btn' src='<?php echo base_url().'images/close_post.png'; ?>'/></a></span>";
+	$('#selected_langauges').html(new_content+cur_content);
+	$('#selected_langauges').show();
+	$(this).val('').focus();
+	
+	 var added_languages = $('#addedlangs').val()
+if(added_languages!='')
+$('#addedlangs').val(added_languages+','+language)
+else
+$('#addedlangs').val(language)
+
+    }
+
+});
+
+
+
+function removelanguage(language){
+
+	var added_languages = $('#addedlangs').val();
+	var len = added_languages.length;
+	var newval = '';
+	if(len==1)
+	{ 
+		newval = '';
+	}
+	else if(added_languages.indexOf(language)==(len-1)){
+	newval = added_languages.replace(','+language,'');
+	}
+	else if(added_languages.indexOf(language)==0)
+	newval = added_languages.replace(language+',','');
+	else
+	newval = added_languages.replace(language+',','');
+	$('#addedlangs').val(newval);
+	$('#'+language).remove();
+}
+
+
+function add_all_languges()
+{
+	var lang_data = $('#addedlangs').val();
+
+	url = "<?php echo base_url(); ?>profile/addlanguages/";
+	$.ajax({
+		type: "POST",
+		data: { lang_data : lang_data},
+		url : url,
+		success : function(html)
+		{
+			$('#language_disp').hide();
+	      	$('ul.basic_info > #language-li').html(html);		
+		
+		
+		}
+	});
+	
+	
+
+}
+
+$('#add_language').click( function()
+{
+	$('#lang1').hide();
+	$('#language_disp').show();
+});
+
+
+function languages_edit()
+{
+	$('#language_val_display').hide();
+	$('#language_disp').show();
+}
+
+function close_language()
+{
+$('#language_disp').hide();
+$('#language_val_display').show();
+	
+}
+function close_lang()
+{
+$('#language_disp').hide();
+$('#lang1').show();	
+}
+</script>
+<script> //about me interest
+
+$('#add_interest').click(function()
+{
+	$('#interest').hide();
+	$('#interest_disp').show();
+});
+
+function close_interest()
+{
+	$('#interest').show();
+	$('#interest_disp').hide();
+}
+function close_interested_in()
+{
+	$('#interest_val_disp').show();
+	$('#interest_disp').hide();
+}
+
+function add_interest()
+{
+	
+var interested_in = [];
+        $(':checkbox:checked').each(function(i){
+          interested_in[i] = $(this).val();
+        });
+
+
+	url="<?php echo base_url();?>profile/addinterest/";
+	 $.ajax({
+		type: "POST",
+		url: url,
+		data: { interested_in:interested_in } ,
+		success: function(html)
+		{   					
+			
+			$('#interest_disp').hide();
+			$('ul.basic_info > #interest-li').html(html);	
+		}
+		
+	   });		
+}
+
+
+function interests_edit()
+{
+	$('#interest_val_display').hide();
+	$('#interest_disp').show();
+}
+</script>
+<script>//aboutme political aspects
+
+$('#add_political').click(function()
+{
+	$('#political').hide();
+	$('#political_disp').show();
+});
+
+function add_political()
+{
+	var political = $('#political_belief').val();
+	var description = $('#pol_description').val();
+	
+	url="<?php echo base_url();?>profile/addpolitical/";
+	 $.ajax({
+		type: "POST",
+		url: url,
+		data: { political:political , description:description } ,
+		success: function(html)
+		{   					
+			
+			$('#political_disp').hide();
+			$('ul.basic_info > #political-li').html(html);	
+		}
+		
+	   });	
+}
+
+function close_political_belief()
+{
+	$('#political_val_disp').show();
+	$('#political_disp').hide();
+}
+function close_political()
+{
+	$('#political').show();
+	$('#political_disp').hide();
+}
+
+function political_edit()
+{
+	$('#political_val_disp').hide();
+	$('#political_disp').show();
+}
+</script>
+<script>//aboutme relegious aspects
+
+$('#add_relegious').click(function()
+{
+	$('#relegious').hide();
+	$('#relegious_disp').show();
+});
+
+function add_relegious_belief()
+{
+	var relegion = $('#rel_belief').val();
+	var description = $('#rel_description').val();
+	url="<?php echo base_url();?>profile/addrelegious/";
+	 $.ajax({
+		type: "POST",
+		url: url,
+		data: { relegion:relegion , description:description } ,
+		success: function(html)
+		{   					
+			
+			$('#relegious_disp').hide();
+			$('ul.basic_info > #relegion-li').html(html);	
+		}
+		
+	   });	
+}
+
+function close_relegious_belief()
+{
+	$('#relegious').show();
+	$('#relegious_disp').hide();
+}
+function close_relegious()
+{
+	$('#relegious').show();
+	$('#relegious_disp').hide();
+}
+
+function relegious_edit()
+{
+	$('#relegious_val_disp').hide();
+	$('#relegious_disp').show();
+}
+</script>
+<script>
+
+$('#add_oth_acc').click( function()
+{
+	$('#oth_acc').hide();
+	$('#other_accounts').show();
+});
+</script>
+
+
+
+
+
+
+
+<script> //aboutme professional skills
+
+$('#professional_skils').keypress(function(e) {
+	
+    if(e.which == 32) {
+	var cur_content = $('#selected_skills').html();
+	
+	var skill = $.trim($(this).val());
+
+	
+	
+	var new_content  =  "<span class='bc_mail_ids' id='"+skill+"'>"+skill+"<a onclick='removeskills(&#39"+skill+"&#39)'><img class='as_close_btn' src='<?php echo base_url().'images/close_post.png'; ?>'/></a></span>";
+	$('#selected_skills').html(new_content+cur_content);
+	$('#selected_skills').show();
+	$(this).val('').focus();
+	
+	 var added_skills = $('#addedskills').val()
+if(added_skills!='')
+$('#addedskills').val(added_skills+','+skill)
+else
+$('#addedskills').val(skill)
+
+    }
+
+});
+
+
+
+function removeskills(skill){
+
+	var added_skills = $('#addedskills').val();
+	var len = added_skills.length;
+	var newval = '';
+	if(len==1)
+	{ 
+		newval = '';
+	}
+	else if(added_skills.indexOf(skill)==(len-1)){
+	newval = added_skills.replace(','+skill,'');
+	}
+	else if(added_skills.indexOf(skill)==0)
+	newval = added_skills.replace(skill+',','');
+	else
+	newval = added_skills.replace(skill+',','');
+	$('#addedskills').val(newval);
+	$('#'+skill).remove();
+}
+
+
+function add_all_skills()
+{
+	var skill_data = $('#addedskills').val();
+
+	url = "<?php echo base_url(); ?>profile/addpfskills/";
+	$.ajax({
+		type: "POST",
+		data: { skill_data : skill_data},
+		url : url,
+		success : function(html)
+		{
+			$('#skills_disp').hide();
+	      	$('ul.backgrounds > #pfskills-li').html(html);		
+		
+		}
+	});
+	
+	
+
+}
+
+$('#add_pf_skills').click( function()
+{
+	$('#prof_skills1').hide();
+	$('#prof_skills2').hide();
+	$('#skills_disp').show();
+});
+
+
+function pf_skills_edit()
+{
+	$('#pf_skills_val_display').hide();
+	$('#skills_disp').show();
+}
+
+function close_pf_skills()
+{
+$('#skills_disp').hide();
+$('#pf_skills_val_display').show();
+	
+}
+function close_pfskills()
+{
+$('#skills_disp').hide();
+$('#prof_skills1').show();
+$('#prof_skills2').show();	
+}
+</script>
+
+
 
 
 <?php $this->load->view('profile_models'); ?>
