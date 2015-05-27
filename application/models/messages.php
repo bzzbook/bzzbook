@@ -20,6 +20,7 @@ class Messages extends CI_Model {
 			 $content['recieved_by'] = $id;
 			 $content['sent_by'] = $data['sent_by'];
 			 $content['subject'] = $data['subject'];
+			 $content['uploaded_files'] = $data['uploaded_files'];
 			 if($this->db->insert('bzz_messages',$content))
 			 $i++;
 		 }
@@ -45,8 +46,11 @@ class Messages extends CI_Model {
 		{
 			$message_data['msg_id'] = $message['msg_id'];
 			$message_data['content'] = $message['message'];
+			$message_data['subject'] = $message['subject'];
+
 			$message_data['sent_by'] = $message['sent_by'];
 			$message_data['sent_date'] = $message['sent_date'];
+			$message_data['read_status'] = $message['read_status'];
 			$condition = "user_id = '".$message['sent_by']."'";
 			$this->db->select('*');
 			$this->db->from('bzz_user_images');
@@ -102,6 +106,7 @@ class Messages extends CI_Model {
 		{
 			$message_data['msg_id'] = $message['msg_id'];
 			$message_data['content'] = $message['message'];
+			$message_data['subject'] = $message['subject'];
 			$message_data['recieved_by'] = $message['recieved_by'];
 			$message_data['sent_date'] = $message['sent_date'];
 			$condition = "user_id ='".$message['sent_by']."'";
@@ -142,7 +147,7 @@ class Messages extends CI_Model {
    }
    public function getTrashMessages(){
     $reciever_id = $this->session->userdata('logged_in')['account_id'];  
-	$condition = "recieved_by =" . "'" . $reciever_id .  "'AND rec_move_to_trash ='Y'";
+	$condition = "( recieved_by =" . "'" . $reciever_id .  "'AND rec_move_to_trash ='Y' ) OR (sent_by =".$reciever_id." AND sent_move_to_trash='Y' )";
 	$this->db->select('*');
 	$this->db->from('bzz_messages');
 	$this->db->where($condition);
@@ -157,6 +162,7 @@ class Messages extends CI_Model {
 		{
 			$message_data['msg_id'] = $message['msg_id'];
 			$message_data['content'] = $message['message'];
+			$message_data['subject'] = $message['subject'];
 			$message_data['sent_by'] = $message['sent_by'];
 			$message_data['sent_date'] = $message['sent_date'];
 			$condition = "user_id = '".$message['sent_by']."'";
@@ -198,6 +204,28 @@ class Messages extends CI_Model {
    {
 	   $data = array(
                'rec_move_to_trash' => 'Y'              
+            );
+		$this->db->where('msg_id', $msg_id);
+		if($this->db->update('bzz_messages', $data))
+		return true;
+		else 
+		return false; 
+   }
+    public function markasread($msg_id)
+   {
+	   $data = array(
+               'read_status' => 'Y'              
+            );
+		$this->db->where('msg_id', $msg_id);
+		if($this->db->update('bzz_messages', $data))
+		return true;
+		else 
+		return false; 
+   }
+    public function markasunread($msg_id)
+   {
+	   $data = array(
+               'read_status' => 'N'              
             );
 		$this->db->where('msg_id', $msg_id);
 		if($this->db->update('bzz_messages', $data))
@@ -316,6 +344,13 @@ class Messages extends CI_Model {
    
    public function disp_msg_by_id($msgid)
    {
+	   if($msgid!=''){
+	   $data = array(
+               'read_status' => 'Y',
+            );
+		$this->db->where('msg_id', $msgid);
+		$this->db->update('bzz_messages', $data); 
+	   }
 	   $this->db->select('*');
 	   $this->db->from('bzz_messages');
 	   $this->db->where('msg_id',$msgid);

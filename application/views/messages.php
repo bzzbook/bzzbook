@@ -3,48 +3,15 @@
         <div role="tabpanel"> 
           <!-- Nav tabs -->
           <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation"><a href="#compose" aria-controls="profile" role="tab" data-toggle="tab">Compose</a></li>
-            <li role="presentation" class="active"><a href="#inbox" aria-controls="messages" role="tab" data-toggle="tab">Inbox</a></li>
-            <li role="presentation"><a href="#sent" aria-controls="settings" role="tab" data-toggle="tab">Sent</a></li>
-            <li role="presentation"><a href="#trash" aria-controls="messages" role="tab" data-toggle="tab">Trash</a></li>
+            <li role="presentation"><a href="<?php echo base_url(); ?>profile/compose" >Compose</a></li>
+            <li role="presentation" class="active"><a href="<?php echo base_url(); ?>profile/message">Inbox</a></li>
+            <li role="presentation"><a href="<?php echo base_url(); ?>profile/sent">Sent</a></li>
+            <li role="presentation"><a href="<?php echo base_url(); ?>profile/trash">Trash</a></li>
           </ul>
           
           <!-- Tab panes -->
           <div class="tab-content">
-            <p style="color:green; padding-left:78px;"><?php if($this->session->flashdata('send_msg'))
-			 echo $this->session->flashdata('send_msg'); ?></p>
-            <div role="tabpanel" class="tab-pane" id="compose">
-              <div class="bott_replys col-md-5 col-md-offset-1">
-                        <form action="<?php echo base_url(); ?>message/send_msg" method="post"> 
-                        <div class="adres_box"><label style="float:left; font-weight:normal">To</label><div id="selectedfriends" style="display:block; border:none; padding-left:25px;"><div id="search_frnd_wrapper"><input type="text" name="txtsearch" id="searchfriends" onkeyup="keyupevent();" /><input type="hidden" id="addedusers" name="addedusers" /><div id="autosuggest"></div></div></div></div>
-                       
-                       
-                      </div>
-                       <div class="bott_replys col-md-5 col-md-offset-1" style="border: 1px solid #d7d7d7;"><input style="border:none;" type="text" name="subject" placeholder="Subject" /></div>
-                      <div class="bott_replys ad_box col-md-5 col-md-offset-1">
-                      <textarea name="message_content" name="message_content" style="  background-color: transparent;
-  resize: none; border:none;"  ></textarea>
-                      <div id="uploadPhotosdvPreview"></div>
-		<input id="uploadPhotos" name="uploadPhotos[]" type="file" multiple="true" style="display:none;">
-                      </div>
-                      <div class="bott_replys bott_boxcolor col-md-5 col-md-offset-1">
-                        <div class="col-md-1">
-                        <button class="btn3 btn-yellow ad_ing" type="submit" >Sent</button>
-                        </div>
-                        </form>
-                        <div class="adres_box"><img onclick="document.getElementById('uploadPhotos').click();" src="<?php echo base_url(); ?>images/paper_clip.png" alt=""></span></div>
-                        <div class="adres_right_ad">
-                          <div class="ad_lefts">
-                            <div class="bott_top">
-                              <button id="btnGroupVerticalDrop2" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> 
-                              <span class="caret"></span> </button>
-                            </div>
-                          </div>
-                          <div class="ad_lefts ri_ght"><a href="#"><i class="fa fa-trash-o"></i></a></div>
-                          <div class="ad_lefts"><a href="#">Saved</a></div>
-                        </div>
-                      </div>
-            </div>
+            
             <div role="tabpanel" class="tab-pane active" id="inbox">
             <?php  $messages = $this->messages->getRecievedMessages();?>
               <table class="table">
@@ -54,7 +21,7 @@
                     </th>
                     <th scope="row"><div class="move"><a href="<?php echo base_url().'profile/message' ?>"><span aria-hidden="true" class="glyphicon glyphicon-refresh"></span></a></div></th><th scope="row"><a id='delmsgbtn' href="javascript:void(0);"><i class="fa fa-trash-o"></i></a>
                     </th>
-                    <th scope="row"><select class="move" id="more">
+                    <th scope="row"><select class="move" id="more" onchange="onchangeMore();">
                         <option value="0">More</option>
                         <option value="1">Mark as read</option>
                         <option value="2">Mark as unread</option>
@@ -64,20 +31,20 @@
                         <option value="1">Move to trash</option>
                         <option value="2">Delete from trash </option>
                       </select></th>-->
-                    <th class="ad_right"><div class="move"><span id="start">1</span><span id="hyphen">-</span><span id="last">2</span> of <?php echo count($messages); ?><a class='previous'><span aria-hidden="true" class="glyphicon glyphicon-chevron-left" id="previous"></span></a> <a class='next'><span id="next" aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span></a></div></th>
+                    <th class="ad_right"><div class="move"><?php /*?><span id="start">1</span><span id="hyphen">-</span><span id="last">2</span> of <?php echo count($messages); ?><?php */?><a class='previous'><span aria-hidden="true" class="glyphicon glyphicon-chevron-left" id="previous"></span></a> <a class='next'><span id="next" aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span></a></div></th>
                   </tr>
                 </thead>
                 </table>
                 <table id="inbox-message" class="table">
                  <tbody>
                   <?php if($messages){ foreach($messages as $message): ?>
-                  <tr>
+                  <tr <?php if($message['read_status']=='Y') { echo "class='read'"; } ?>>
                    
                     <th scope="row"><input type="checkbox" name="btSelectAll" class="all_inbox_msgs" value="<?php echo $message['msg_id']; ?>"></th>
                     
                     <td><span aria-hidden="true" class="glyphicon glyphicon-star"></span></td>
                     <td> <a href="<?php echo base_url("profile/messageview/".$message['msg_id']); ?>"><?php echo $message['name']; ?></a></td>
-                    <td> <?php echo $message['content']; ?></td>
+                    <td> <?php echo substr($message['subject'],0,50).'...'; ?></td>
                     <td class="ad_right"> <?php echo $message['sent_date']; ?></td>
                    
                   </tr>
@@ -86,92 +53,10 @@
                 
               </table>
               <input type="hidden" id="hdnActivePage" value="1" />
+              <input type="hidden" id="totalmsgs" value="<?php echo count($messages); ?>" />
             </div>
-            <div role="tabpanel" class="tab-pane" id="sent">
-               <?php  $messages = $this->messages->getSentMessages();?>
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="row"> <input type="checkbox" name="btSelectAll" id="select_sent_msgs">
-                    </th>
-                    <th scope="row"><div class="move"><a href="<?php echo base_url().'profile/message' ?>"><span aria-hidden="true" class="glyphicon glyphicon-refresh"></span></a></div></th><th scope="row"><a id='delsentselect' href="javascript:void(0);"><i class="fa fa-trash-o"></i></a>
-                    </th>
-                    <th scope="row"><select class="move" id="more">
-                        <option value="0">More</option>
-                        <option value="1">Mark as read</option>
-                        <option value="2">Mark as unread</option>
-                      </select></th>
-                   <!-- <th scope="row"><select class="move" id="move" onchange="selectedChangeMove();">
-                        <option value="0">Move to</option>
-                        <option value="1">Move to trash</option>
-                        <option value="2">Delete from trash </option>
-                      </select></th>-->
-                    <th class="ad_right"><div class="move"><span id="start">1</span>-<span id="last">2</span> of <?php echo count($messages); ?><a class='previous'><span aria-hidden="true" class="glyphicon glyphicon-chevron-left" id="previous"></span></a> <a class='next'><span id="next" aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span></a></div></th>
-                  </tr>
-                </thead>
-                </table>
-                <table id="inbox-message" class="table">
-                 <tbody>
-                  <?php if($messages){ foreach($messages as $message): ?>
-                  <tr>
-                   
-                    <th scope="row"><input type="checkbox" name="btSelectAll" class="all_sent_msgs" value="<?php echo $message['msg_id']; ?>"></th>
-                    
-                    <td><span aria-hidden="true" class="glyphicon glyphicon-star"></span></td>
-                    <td> <a href="<?php echo base_url("profile/messageview/".$message['msg_id']); ?>"><?php echo $message['name']; ?></a></td>
-                    <td> <?php echo $message['content']; ?></td>
-                    <td class="ad_right"> <?php echo $message['sent_date']; ?></td>
-                   
-                  </tr>
-                  <?php endforeach; } else echo "Inbox Empty"?>
-                </tbody>
-                
-              </table>
-              <input type="hidden" id="hdnActivePage" value="1" />
-            </div>
-            <div role="tabpanel" class="tab-pane" id="trash">
-               <?php  $messages = $this->messages->getTrashMessages();?>
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="row"> <input type="checkbox" name="btSelectAll" id="select_trash_msgs">
-                    </th>
-                    <th scope="row"><div class="move"><a href="<?php echo base_url().'profile/message' ?>"><span aria-hidden="true" class="glyphicon glyphicon-refresh"></span></a></div></th><th scope="row"><a id='deletetrash' href="javascript:void(0);"><i class="fa fa-trash-o"></i></a>
-                    </th>
-                    <th scope="row"><select class="move" id="more">
-                        <option value="0">More</option>
-                        <option value="1">Mark as read</option>
-                        <option value="2">Mark as unread</option>
-                      </select></th>
-                   <!-- <th scope="row"><select class="move" id="move" onchange="selectedChangeMove();">
-                        <option value="0">Move to</option>
-                        <option value="1">Move to trash</option>
-                        <option value="2">Delete from trash </option>
-                      </select></th>-->
-                    <th class="ad_right"><div class="move"><span id="start">1</span>-<span id="last">2</span> of <?php echo count($messages); ?><a class='previous'><span aria-hidden="true" class="glyphicon glyphicon-chevron-left" id="previous"></span></a> <a class='next'><span id="next" aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span></a></div></th>
-                  </tr>
-                </thead>
-                </table>
-                <table id="inbox-message" class="table">
-                 <tbody>
-                  <?php if($messages){ foreach($messages as $message): ?>
-                  <tr>
-                   
-                    <th scope="row"><input type="checkbox" name="btSelectAll" class="all_trash_msgs" value="<?php echo $message['msg_id']; ?>"></th>
-                    
-                    <td><span aria-hidden="true" class="glyphicon glyphicon-star"></span></td>
-                    <td> <a href="<?php echo base_url("profile/messageview/".$message['msg_id']); ?>"><?php echo $message['name']; ?></a></td>
-                    <td> <?php echo $message['content']; ?></td>
-                    <td class="ad_right"> <?php echo $message['sent_date']; ?></td>
-                   
-                  </tr>
-                  <?php endforeach; } else echo "Inbox Empty"?>
-                </tbody>
-                
-              </table>
-              <input type="hidden" id="hdnActivePage" value="1" />
-
-            </div>
+            
+            
           </div>
         </div>
       </div>
