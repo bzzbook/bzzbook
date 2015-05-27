@@ -7,6 +7,8 @@
 			         $data = $this->profile_set->get_userinfo(); 
 					 $result = $this->profile_set->save_settings();
 					 $organization_details = $this->profile_set->getorganizationDetails();
+					 $user_college_info = $this->profile_set->get_college_details();
+					 $user_school_info = $this->profile_set->get_school_details();
 					 ?>
             <div class="profileLogo">
               <figure class="cmplogo"><a href="#"><span class="glyphicon glyphicon-camera change-photo fileinput-button" aria-hidden="true"><em>Change Picture</em> <input type="file" name="userfile" id="userfile" size="20" required/></span></a><img src="<?php echo base_url();?>uploads/<?php if(!empty($image[0]->user_img_thumb)) echo $image[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" alt="<?php echo base_url();?>uploads/<?php if(!empty($image[0]->user_img_thumb)) echo $image[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>"></figure>
@@ -107,29 +109,37 @@
                         </div>
                        
 						
-						 <div id="work_val_disp">
+					<div id="work_val_disp">	
+                       
    	<?php 
-				if(sizeof($organization_details)>0):
-				foreach($organization_details as $orgdetails):
-			?>
-                      
-                        <div class="sm_rightbox"><h3><a href="#"><?php echo $orgdetails->org_name;?></a></h3>
+				if(sizeof($organization_details)>0){
+				foreach($organization_details as $orgdetails){
+			?> 
+           
+                        <div class="latest_works" id="work_<?php echo $orgdetails->organization_id; ?>">
+                        <div class="sm_rightbox">
+                        <h3><a href="#"><?php echo $orgdetails->org_name;?></a></h3>
                         <p><?php echo $orgdetails->position;?></p>
                         </div>
-                        <div class="sm_rightside">
+                        <div class="sm_rightside" >
                         <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
-                        <div class="col-md-6 com_mid"><a class="work_edit" href="javascript:void(0)" onclick="work_edit()" id="work_edit<?php echo $orgdetails->organization_id; ?>"><i class="fa fa-pencil"></i> Edit</a></div>
+                        <div class="col-md-6 com_mid">
+                        <a class="work_edit" href="javascript:void(0)" onclick="work_edit()" id="work_edit<?php echo $orgdetails->organization_id; ?>"><i class="fa fa-pencil"></i>Edit</a></div>
                         <div class="col-md-3 com_rig"><a href="#"><i class="fa fa-times"></i></a></div>
                         </div>
-                         <?php endforeach;?>
-            <?php endif;?>
-            <div class="clearfix"></div>
-                        </div>
                         
+                        <div class="clearfix" id="clearfix"></div>
+                        </div>
+                    
+                         <?php } }?>
+            
+             
+          
+                        </div>
                    
                     <!-- $this->load->view('aboutme/work_inner'); -->
                        
-                        <div id="allbox" >
+                        <div id="allbox">
                             <div id="work_place" class="workplace col-md-12" style="display:none;">
                               <div class="col-md-9">
                                 <form class="form-inline" id="work_form">
@@ -151,7 +161,7 @@
                                   </div>
                                   <div class="form-group">
                                     <label for="exampleInputName2">Time Period</label>
-                                    <input type="checkbox" class="outside" name="curent_status" id="curent_status">
+                                    <input type="checkbox" class="outside" name="curent_status" id="curent_status" value="working">
                                     I currently work </div>
                                   <div class="col-md-12">
                                     <div class="col-md-6 yearadd" id="add_years" style="display:none;"><a href="javascript:void(0)" onclick="add_year()" ><i class="fa fa-plus"></i>Add year</a></div>
@@ -180,7 +190,7 @@
                                   </select>
                                    <div id="to" style="display:none;">to </div>
                                     <div id="to_present" style="display:none;">to present</div>
-                                  <a href="javascript:void(0)" id="to_years_link"  style="display:none;" ><i class="fa fa-plus"></i>Add years</a>
+                                  <a href="javascript:void(0)" id="to_years_link"  style="display:none;" ><i class="fa fa-plus"></i>Add year</a>
                                                        
                                    
                                   </div>
@@ -191,7 +201,7 @@
                                   <select id="to_years" style="display:none;" name="to_years">
                                   <option value="0"> --- </option>
                                    <?php for($i=1950;$i<=date(Y);$i++){?>
-                                	<option value="<?php echo $i;?>" selected="selected"><?php echo $i;?></option>
+                                	<option value="<?php echo $i;?>"><?php echo $i;?></option>
                               	  <?php }?>
                                   </select>
                                   <a href="javascript:void(0)" id="to_months_link"  style="display:none;" ><i class="fa fa-plus"></i>Add month</a>
@@ -210,15 +220,17 @@
                                   </select>
                                                       
                                   </div>
+                                    <input type="hidden" name="work_action" id="work_action" value="add">
+                       				  <input type="hidden" value="" name="work_disp_id" >
                                   <!---  ---->
                                   <div class="clearfix"></div>
                                   <div class="box_bottom">
                                     <div class="publics col-md-4">
                                       <button aria-expanded="false" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">Public <span class="caret"></span></button>
                                     </div>
-                                    <div class="col-md-8">
+                                    <div class="col-md-8 add_new">
                                       <div class="btn3 btn-black" onclick="close_work()">Cancel</div>
-                                      <input type="submit" class="btn3 btn-green" value="save Changes" />
+                                      <input type="submit" class="btn3 btn-green " value="Save Changes" />
                                     </div>
                                     <div class="clearfix"></div>
                                   </div>
@@ -227,20 +239,60 @@
                               <div class="col-md-3 rightblock"><a href="javascript:void(0)" onclick="close_work()"><i class="fa fa-times"></i>close</a></div>
                             </div>
                             <div class="graphic"></div>
+                            <div class="clearfix"></div>
                           </div>
                       </li>
                       <div class="clearfix"></div>
-                      <li>
+                      <li id="pfskills-li">
                         <div class="tophead">Professional Skills</div>
-                        <div class="iner_lefts"><a href="#"><i class="fa fa-plus"></i></a></div>
-                        <div class="inner_rights boxs">
-                          <h3><a href="#">Add a professional skill</a></h3>
-                          <div id="skills" >
+                           <?php if(empty($result[0]->professional_skills)) { ?>
+                        <div class="iner_lefts" id="prof_skills1"><a href="javascript:void(0)"><i class="fa fa-plus"></i></a></div>
+                        <div class="inner_rights boxs" id="prof_skills2">
+                          <h3><a href="javascript:void(0)" id="add_pf_skills">Add a professional skill</a></h3>
+                          </div>
+                          <?php } else { ?>
+                          
+                          <div id="pf_skills_val_display">
+                        <div class="sm_leftbox"></div>
+                        <div class="sm_rightbox"><h3><a href="javascript:void(0)">
+						<?php 
+						$data = explode(',',$result[0]->professional_skills);
+						foreach($data as $lang)
+						{
+						 echo $lang." . ";
+						}
+						?>
+                        </a></h3>
+                        </div>
+                        <div class="sm_rightside">
+                        <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
+                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="pf_skills_edit()"><i class="fa fa-pencil"></i> Edit</a></div>
+                        <div class="col-md-3 com_rig"><a href="#"><i class="fa fa-times"></i></a></div>
+                        </div>
+                        </div>
+                          <div class="clearfix"></div>
+                         <?php } ?> 
+                          
+                          <div id="skills_disp" style="display:none;">
                             <div id="skil_place" class="workplace col-md-12">
-                              <form class="form-inline ">
+                              <form class="form-inline">
                                 <div class="form-group skils">
+                                <div id="selected_skills">
+							   <?php 
+							    if($result[0]->professional_skills){ 
+							    $data = explode(',',$result[0]->professional_skills);
+								foreach($data as $pf_skill)
+								{
+								
+								?>
+								   
+								   <span class="bc_mail_ids" id="<?php echo $pf_skill; ?>"><?php echo $pf_skill;?><a onclick="removeskills('<?php echo $pf_skill; ?>')" ><img class="as_close_btn" src="<?php echo base_url('images/close_post.png'); ?>" /></a></span>
+								
+                                <?php } } ?>   
+								  </div>
                                   <label for="exampleInputName2">Professional Skills</label>
-                                  <input type="text"placeholder="">
+                                  <input type="text" placeholder="" id="professional_skils">
+                                  <input type="text" id="addedskills" name="addedskills" value="<?php if($result[0]->professional_skills){ echo $result[0]->languages; } ?>"></input>
                                 </div>
                                 <div class="clearfix"></div>
                               </form>
@@ -249,70 +301,155 @@
                                   <button aria-expanded="false" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">Public <span class="caret"></span></button>
                                 </div>
                                 <div class="col-md-8 skil_box">
-                                  <div class="btn3 btn-black">Cancel</div>
-                                  <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save Changes</div>
+                               <div class="btn3 btn-green" onclick="add_all_skills()">Save Changes</div>
+                                <?php if($result[0]->professional_skills) { ?>
+                              <div class="btn3 btn-black" onclick="close_pf_skills()">Cancel</div>
+                              <?php } else { ?>
+                              <div class="btn3 btn-black" onclick="close_pfskills()">Cancel</div>
+                            <?php } ?>
                                 </div>
                                 <div class="clearfix"></div>
                               </div>
                             </div>
                           </div>
-                        </div>
+                        
                       </li>
                       <div class="clearfix"></div>
-                      <li>
+                      <li id="college-li">
                         <div class="tophead"> College</div>
-                        <div class="iner_lefts"><a href="#"><i class="fa fa-plus"></i></a></div>
-                        <div class="inner_rights boxs">
-                          <h3><a href="#">Add a college</a></h3>
-                          <div id="College" >
+                        <div class="iner_lefts" id="college1"><a href="#"><i class="fa fa-plus"></i></a></div>
+                        <div class="inner_rights boxs" id="college2">
+                          <h3><a href="javascript:void(0)" id="add_college">Add a college</a></h3>
+                          </div>
+                          
+                          
+                          
+                          <div id="college_val_disp">
+   	<?php 
+				if(!empty($user_college_info)){
+				foreach($user_college_info as $clgdetails){
+			?>
+                      <div class="latest_works">
+                        <div class="sm_rightbox"><h3><a href="#"><?php echo $clgdetails->college_name;?></a></h3>
+                        <p><?php echo $clgdetails->concentration1;?> <?php echo $clgdetails->concentration2;?> <?php echo $clgdetails->concentration3;?></p>
+                        </div>
+                        <div class="sm_rightside">
+                        <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
+                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" class="college_edit" id="college_edit<?php echo $clgdetails->college_id; ?>" onclick="college_edit()"><i class="fa fa-pencil"></i>Edit</a></div>
+                        <div class="col-md-3 com_rig"><a href="#"><i class="fa fa-times"></i></a></div>
+                        </div>
+                           <div class="clearfix"></div>
+                        </div>
+                         <?php } } ?>
+            
+                        </div>
+                          
+                         
+                          
+                          <div id="college_disp" style="display:none;">
                             <div class="College_box col-md-12">
                               <div class="col-md-9">
-                                <form class="form-inline">
+                                <form class="form-inline" id="college_form">
                                   <div class="form-group">
                                     <label for="exampleInputName2">School</label>
-                                    <input type="text"placeholder="What school did you attend?">
+                                    <input type="text" placeholder="What school did you attend?" name="college_name">
                                   </div>
                                   <div class="form-group period">
                                     <label for="exampleInputName2">Time Period</label>
-                                    <a href="#"> <i class="fa fa-plus"></i></a><a href="#">Add year</a><span class="to">to</span></div>
+                                     <a href="javascript:void(0)" id="clg_add_year"><i class="fa fa-plus"></i>Add year</a></div>
+                                     <span class="to" id="clg_to">to</span>
                                   <div class="col-md-12">
                                     <div class="col-md-4"></div>
-                                    <div class="col-md-8 yearto"><a href="#">Add year</a></div>
+                                    <div class="col-md-8 yearto"><a href="javascript:void(0)" id="to_years_clg"><i class="fa fa-plus"></i>Add year</a></div>
                                   </div>
+                                  
+                                  
+                                   <select id="frm_years_college" style="display:none;" name="frm_years" >
+                                  <option value="0"> --- </option>
+                                   <option value="1950" selected="selected">1950</option>
+                                   <?php for($i=1951;$i<=date(Y);$i++){?>
+                                	<option value="<?php echo $i;?>"><?php echo $i;?></option>
+                              	  <?php }?>
+                                  </select>
+                        
+                          <a href="javascript:void(0)" id="frm_months_clg" style="display:none;"> <i class="fa fa-plus"></i>Add Month</a>
+                         
+                          <select id="frm_months_college" style="display:none;" name="frm_months"> 
+                                  <option value="0"> --- </option>
+                                   <option value="1" selected="selected">1</option>
+                                   <?php for($i=2;$i<=12;$i++){?>
+                                	<option value="<?php echo $i;?>" ><?php echo $i;?></option>
+                              	  <?php }?>
+                                  </select>
+                              <a href="javascript:void(0)" id="frm_days_clg" style="display:none;"> <i class="fa fa-plus"></i>Add Day</a>
+                                  <select id="frm_days_college" style="display:none;" name="frm_days">
+                                  <option value="0"> --- </option>
+                                  <option value="1" selected="selected">1</option>
+                                   <?php for($i=2;$i<=31;$i++){?>
+                                	<option value="<?php echo $i;?>" ><?php echo $i;?></option>
+                              	  <?php }?>
+                                  </select>
+                         
+                        
+                        <div class="col-md-12" id="clg_todates_dropdowns">
+                                    
+                                  <select id="to_years_college" style="display:none;" name="to_years">
+                                  <option value="0"> --- </option>
+                                   <?php for($i=1950;$i<=date(Y);$i++){?>
+                                	<option value="<?php echo $i;?>"><?php echo $i;?></option>
+                              	  <?php }?>
+                                  </select>
+                                  <a href="javascript:void(0)" id="to_months_clg" style="display:none;"> <i class="fa fa-plus"></i>Add Month</a>
+                                  <select id="to_months_college" style="display:none;" name="to_months">
+                                  <option value="0"> --- </option>
+                                   <?php for($i=1;$i<=12;$i++){?>
+                                	<option value="<?php echo $i;?>" selected="selected"><?php echo $i;?></option>
+                              	  <?php }?>
+                                  </select>
+                                 <a href="javascript:void(0)" id="to_days_clg" style="display:none;"> <i class="fa fa-plus"></i>Add Day</a>
+                                  <select id="to_days_college" style="display:none;" name="to_days">
+                                  <option value="0"> --- </option>
+                                   <?php for($i=1;$i<=31;$i++){?>
+                                	<option value="<?php echo $i;?>" selected="selected"><?php echo $i;?></option>
+                              	  <?php }?>
+                                  </select>
+                                                      
+                                  </div>
+                        
                                   <div class="clearfix"></div>
                                   <div class="form-group">
                                     <label for="exampleInputName2">Graduated</label>
-                                    <input class="boxsmal" type="checkbox">
+                                    <input class="boxsmal" type="checkbox" name="edu_status" id="edu_status" value="graduate">
                                   </div>
                                   <div class="clearfix"></div>
                                   <div class="form-group description">
                                     <label for="exampleInputName2">Description</label>
-                                    <textarea rows="3"></textarea>
+                                    <textarea rows="3" name="description"></textarea>
                                   </div>
                                   <div class="clearfix"></div>
                                   <div class="form-group">
                                     <label for="exampleInputName2">School</label>
-                                    <input type="text">
+                                    <input type="text" name="concentration1">
                                   </div>
                                   <div class="form-group">
                                     <label for="exampleInputName2"></label>
-                                    <input type="text">
+                                    <input type="text" name="concentration2">
                                   </div>
                                   <div class="form-group">
                                     <label for="exampleInputName2"></label>
-                                    <input type="text">
+                                    <input type="text" name="concentration3">
                                   </div>
                                   <div class="form-group">
                                     <label for="exampleInputName2">Attended for</label>
                                     <label class="add_new">
-                                      <input type="radio" checked="" value="option1" id="optionsRadios1" name="optionsRadios">
-                                      Option </label>
+                                      <input type="radio" checked="" value="college" id="optionsRadios1" name="optionsRadios">
+                                      college </label>
                                   </div>
                                   <div class="clearfix"></div>
                                   <div class="form-group">
                                     <label for="exampleInputName2"></label>
                                     <label class="add_new">
-                                      <input type="radio" checked="" value="option1" id="optionsRadios1" name="optionsRadios">
+                                      <input type="radio" checked="" value="graduate" id="optionsRadios1" name="optionsRadios">
                                       Graduate School </label>
                                   </div>
                                   <div class="clearfix"></div>
@@ -320,50 +457,132 @@
                                     <div class="publics col-md-4">
                                       <button aria-expanded="false" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">Public <span class="caret"></span></button>
                                     </div>
+                                      <input type="hidden" name="clg_action" id="clg_action" value="add">
+                       				  <input type="hidden" value="" name="college_disp_id" >
                                     <div class="col-md-8">
-                                      <div class="btn3 btn-black">Cancel</div>
-                                      <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save Changes</div>
+                                      <div class="btn3 btn-black" onclick="close_college()">Cancel</div>
+                                      <input type="submit"  class="btn3 btn-green" value="Save Changes" />
                                     </div>
                                     <div class="clearfix"></div>
                                   </div>
                                 </form>
                               </div>
-                              <div class="col-md-3 rightblock "><a href="#"><i class="fa fa-times"></i></a><a href="#">close</a></div>
+                              <div class="col-md-3 rightblock "><a href="javascript:void(0)" onclick="close_college()"><i class="fa fa-times"></i>close</a></div>
                             </div>
                             <div class="graphic"></div>
                           </div>
-                        </div>
                       </li>
                       <div class="clearfix"></div>
-                      <li>
+                      
+                      
+                      
+                      <li id="school-li">
                         <div class="tophead"> High School</div>
-                        <div class="iner_lefts"><a href="#"><i class="fa fa-plus"></i></a></div>
-                        <div class="inner_rights boxs">
-                          <h3><a href="#">Add a High School</a></h3>
-                          <div id="highschool" >
+                        <div class="iner_lefts" id="school1"><a href="#"><i class="fa fa-plus"></i></a></div>
+                        <div class="inner_rights boxs" id="school2">
+                          <h3><a href="javascript:void(0)" id="add_school">Add a High School</a></h3>
+                          </div>
+                          
+                          <div id="school_val_disp">
+   	<?php 
+				if(!empty($user_school_info)){
+				foreach($user_school_info as $schdetails){
+			?>
+                      <div class="latest_works">
+                        <div class="sm_rightbox"><h3><a href="#"><?php echo $schdetails->school_name;?></a></h3>
+                        <p> </p>
+                        </div>
+                         <div class="sm_rightside">
+                        <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
+                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" class="school_edit" id="school_edit<?php echo $schdetails->school_id; ?>" onclick="school_edit()"><i class="fa fa-pencil"></i>Edit</a></div>
+                        <div class="col-md-3 com_rig"><a href="#"><i class="fa fa-times"></i></a></div>
+                        </div>
+                        <div class="clearfix"></div>
+                        </div>
+                         <?php } } ?>
+            
+                        </div>
+                          
+                                                
+                          
+                           <div id="highschool" style="display:none;">
                             <div class="College_box col-md-12">
                               <div class="col-md-9">
-                                <form class="form-inline">
+                                <form class="form-inline" name="school_form" id="school_form">
                                   <div class="form-group">
                                     <label for="exampleInputName2">School</label>
-                                    <input type="text"placeholder="What school did you attend?">
+                                    <input type="text" name="school_name" placeholder="What school did you attend?">
                                   </div>
                                   <div class="form-group period">
                                     <label for="exampleInputName2">Time Period</label>
-                                    <a href="#"> <i class="fa fa-plus"></i></a><a href="#">Add year</a><span class="to">to</span></div>
+                                <a href="javascript:void(0)" id="frm_years_sch"> <i class="fa fa-plus"></i>Add year</a></div>
+                                    <span class="to" id="sch_to">to</span>
                                   <div class="col-md-12">
                                     <div class="col-md-4"></div>
-                                    <div class="col-md-8 yearto"><a href="#">Add year</a></div>
+                                    <div class="col-md-8 yearto"><a href="javascript:void(0)" id="to_years_sch"> <i class="fa fa-plus"></i>Add year</a></div>
                                   </div>
+                                   <select id="frm_years_school" style="display:none;" name="frm_years" >
+                                  <option value="0"> --- </option>
+                                   <option value="1950" selected="selected">1950</option>
+                                   <?php for($i=1951;$i<=date(Y);$i++){?>
+                                	<option value="<?php echo $i;?>"><?php echo $i;?></option>
+                              	  <?php }?>
+                                  </select>
+                        
+                          <a href="javascript:void(0)" id="frm_months_sch" style="display:none;"> <i class="fa fa-plus"></i>Add Month</a>
+                         
+                          <select id="frm_months_school" style="display:none;" name="frm_months"> 
+                                  <option value="0"> --- </option>
+                                   <option value="1" selected="selected">1</option>
+                                   <?php for($i=2;$i<=12;$i++){?>
+                                	<option value="<?php echo $i;?>" ><?php echo $i;?></option>
+                              	  <?php }?>
+                                  </select>
+                              <a href="javascript:void(0)" id="frm_days_sch" style="display:none;"> <i class="fa fa-plus"></i>Add Day</a>
+                                  <select id="frm_days_school" style="display:none;" name="frm_days">
+                                  <option value="0"> --- </option>
+                                  <option value="1" selected="selected">1</option>
+                                   <?php for($i=2;$i<=31;$i++){?>
+                                	<option value="<?php echo $i;?>" ><?php echo $i;?></option>
+                              	  <?php }?>
+                                  </select>
+                         
+                        
+                    
+                                    
+                                  <select id="to_years_school" style="display:none;" name="to_years">
+                                  <option value="0"> --- </option>
+                                   <?php for($i=1950;$i<=date(Y);$i++){?>
+                                	<option value="<?php echo $i;?>"><?php echo $i;?></option>
+                              	  <?php }?>
+                                  </select>
+                                  <a href="javascript:void(0)" id="to_months_sch" style="display:none;"> <i class="fa fa-plus"></i>Add Month</a>
+                                  <select id="to_months_school" style="display:none;" name="to_months">
+                                  <option value="0"> --- </option>
+                                   <?php for($i=1;$i<=12;$i++){?>
+                                	<option value="<?php echo $i;?>" selected="selected"><?php echo $i;?></option>
+                              	  <?php }?>
+                                  </select>
+                                 <a href="javascript:void(0)" id="to_days_sch" style="display:none;"> <i class="fa fa-plus"></i>Add Day</a>
+                                  <select id="to_days_school" style="display:none;" name="to_days">
+                                  <option value="0"> --- </option>
+                                   <?php for($i=1;$i<=31;$i++){?>
+                                	<option value="<?php echo $i;?>" selected="selected"><?php echo $i;?></option>
+                              	  <?php }?>
+                                  </select>
+                                                      
+                                    <input type="hidden" name="sch_action" id="sch_action" value="add">
+                       				  <input type="hidden" value="" name="school_disp_id" >
+                                  
                                   <div class="clearfix"></div>
                                   <div class="form-group">
                                     <label for="exampleInputName2">Graduated</label>
-                                    <input class="boxsmal" type="checkbox">
+                                    <input class="boxsmal" type="checkbox" name="sch_status" value="graduate">
                                   </div>
                                   <div class="clearfix"></div>
                                   <div class="form-group description">
                                     <label for="exampleInputName2">Description</label>
-                                    <textarea rows="3"></textarea>
+                                    <textarea rows="3" name="description"></textarea>
                                   </div>
                                   <div class="clearfix"></div>
                                   <div class="clearfix"></div>
@@ -372,18 +591,17 @@
                                       <button aria-expanded="false" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">Public <span class="caret"></span></button>
                                     </div>
                                     <div class="col-md-8">
-                                      <div class="btn3 btn-black">Cancel</div>
-                                      <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save Changes</div>
+                                      <div class="btn3 btn-black" onclick="close_school()">Cancel</div>
+                                      <input type="submit" class="btn3 btn-green" value="Save Changes" />
                                     </div>
                                     <div class="clearfix"></div>
                                   </div>
                                 </form>
                               </div>
-                              <div class="col-md-3 rightblock "><a href="#"><i class="fa fa-times"></i></a><a href="#">close</a></div>
+                              <div class="col-md-3 rightblock "><a href="javascript:void(0)" onclick="close_school()"><i class="fa fa-times"></i>close</a></div>
                             </div>
                             <div class="graphic"></div>
                           </div>
-                        </div>
                       </li>
                       <div class="clearfix"></div>
                     </ul>
@@ -588,23 +806,54 @@
                         </div>
                         <div class="clearfix"></div>
                       </li>
-                      <li> 
-                        <!--<div class="tophead">Add your address</div>-->
-                        <div class="iner_boxleft"><a href="#"><i class="fa fa-plus"></i>Add your address</a></div>
+                      <li id="address-li"> 
+                        <div class="tophead">Add your address</div>
+                       
+                         <?php if(empty($result[0]->address)) { ?>
+      <div class="iner_boxleft" id="address1"><a href="javascript:void(0)" id="add_address"><i class="fa fa-plus"></i>Add your address</a></div> 
+                        <?php } else {
+							
+							$data = explode('|++|',$result[0]->address);
+							//print_r($data);
+							
+							 ?>
+                        
+                        <div id="address_val_display">
+                        <div class="sm_leftbox"></div>
+                        <div class="sm_rightbox"><h3><a href="#">Address</a></h3>
+                        <p><?php echo $data[0]; ?></p>
+                        <p><?php echo $data[1]; ?></p>
+						<p><?php echo $data[2]; ?></p>
+                        <p><?php echo $data[3]; ?></p>
+                        </div>
+                        <div class="sm_rightside">
+                        <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
+                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="address_edit()"><i class="fa fa-pencil"></i> Edit</a></div>
+                        <div class="col-md-3 com_rig"><a href="#"><i class="fa fa-times"></i></a></div>
+                        </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        
+                        
+                        <?php } ?>
+                        
+                        
+                        
+                        
                         <div class="inner_rights boxs" id="address_disp" style="display:none;">
                           <div id="Address" class="col-md-12">
                             <form class="form-inline Address">
                               <label for="exampleInputName2">Address</label>
-                              <input type="text" placeholder="">
+                              <input type="text" placeholder="" id="address" value="<?php if($data[0]) { echo $data[0]; }?>">
                               <div class="clearfix"></div>
                               <label for="exampleInputName2">City/Town</label>
-                              <input type="text" placeholder="">
+                              <input type="text" placeholder="" id="ad_city" value="<?php if($data[1]) { echo $data[1]; }?>">
                               <div class="clearfix"></div>
                               <label for="exampleInputName2">Zip</label>
-                              <input type="text" placeholder="">
+                              <input type="text" placeholder="" id="zip_code" value="<?php if($data[2]) { echo $data[2]; }?>">
                               <div class="clearfix"></div>
                               <label for="exampleInputName2">Neighborhood</label>
-                              <input type="text" placeholder="">
+                              <input type="text" placeholder="" id="neighborhood" value="<?php if($data[3]) { echo $data[3]; }?>">
                               <div class="clearfix"></div>
                             
                             <div class="clearfix"></div>
@@ -613,8 +862,12 @@
                                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Friends <span class="caret"></span></button>
                               </div>
                               <div class="col-md-9 skil_box">
-                                <div class="btn3 btn-black">Cancel</div>
-                                <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save Changes</div>
+                                        <div class="btn3 btn-green" onclick="add_address()">Save Changes</div>
+                                        <?php if($result[0]->address) { ?>
+                                <div class="btn3 btn-black" onclick="close_address_block()">Cancel</div>
+                      			<?php }else{  ?>
+                                <div class="btn3 btn-black" onclick="close_address()">Cancel</div>
+                                <?php } ?>
                               </div>
                               <div class="clearfix"></div>
                             </div>
@@ -637,7 +890,10 @@
                               </div>
                               <div class="col-md-3">
                                 <select>
-                                  <option>Instagram</option>
+                                  <option value="facebook">facebook</option>
+                                  <option value="twitter">twitter</option>
+                                  <option value="pinterest">pinterest</option>
+                                  <option value="linked_in">LinkedIn</option>
                                 </select>
                               </div>
                               <div class="clearfix"></div>
@@ -656,22 +912,52 @@
                         </div>
                         <div class="clearfix"></div>
                       </li>
-                      <li> 
+                      <li id="website-li"> 
                         <!--<div class="tophead">Add a website</div>-->
-                        <div class="iner_boxleft" id="add_web_site"><a href="javascript:void(0)" id="add_website"><i class="fa fa-plus"></i>Add a website</a></div>
+                        
+                        <?php if(empty($result[0]->website)) { ?>
+                        <div class="iner_boxleft" id="add_web_site">
+                        <a href="javascript:void(0)" id="add_website"><i class="fa fa-plus"></i>Add a website</a>
+                        </div>
+                        
+                              <?php } else { ?>
+                        
+                        <div id="website_val_display">
+                        <div class="sm_leftbox"></div>
+                        <div class="sm_rightbox"><h3><a href="#"><?php echo $result[0]->website; ?></a></h3>
+                        <p>website</p>
+                        </div>
+                        <div class="sm_rightside">
+                        <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
+                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="website_edit()"><i class="fa fa-pencil"></i> Edit</a></div>
+                        <div class="col-md-3 com_rig"><a href="#"><i class="fa fa-times"></i></a></div>
+                        </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        
+                        
+                        <?php } ?>
+                        
+                        
+                        
                         <div class="inner_rights boxs" id="website_disp" style="display:none;">
                           <div id="Website" class="col-md-12">
                             <form class="form-inline  Website">
                               <div class="form-group Website">
                                 <label for="exampleInputName2">Website</label>
-                                <textarea rows="4" placeholder="Enter your website"></textarea>
+                                <textarea rows="4" placeholder="Enter your website" id="website_data"><?php if($result[0]->website) { echo $result[0]->website; } ?></textarea>
                               </div>
                               <div class="clearfix"></div>
                               <div class="box_bottom">
                                 <div class="publics col-md-3"> </div>
                                 <div class="col-md-9 skil_box">
-                                  <div class="btn3 btn-black">Cancel</div>
-                                  <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save Changes</div>
+                                  
+                                  <div class="btn3 btn-green" onclick="add_website()">Save Changes</div>
+                                   <?php if($result[0]->website) { ?>
+                                   <div class="btn3 btn-black" onclick="close_web_site()">Cancel</div>
+                                   <?php } else { ?>
+                                   <div class="btn3 btn-black" onclick="close_website()">Cancel</div>
+                                   <?php } ?>
                                 </div>
                                 <div class="clearfix"></div>
                               </div>
@@ -680,10 +966,73 @@
                         </div>
                         <div class="clearfix"></div>
                       </li>
-                      <li> 
-                        <!--<div class="tophead">Basic Information</div>-->
-                        <div class="iner_boxleft"><a href="#"><i class="fa fa-plus"></i>Add who you're interested in</a></div>
-                        <div class="inner_rights boxs">
+                      <li id="interest-li"> 
+                       <!-- <div class="tophead">Basic Information</div> -->
+                       <?php if(empty($result[0]->interests)) { ?>
+                        <div class="iner_boxleft" id="interest">
+                        <a href="javascript:void(0)" id="add_interest"><i class="fa fa-plus"></i>Add who you're interested in</a></div>
+                       <?php } else { ?>
+                        <div id="interest_val_disp">
+                        <div class="sm_leftbox"></div>
+                        <div class="sm_rightbox"><h3><a href="#">
+						<?php $data = explode(",",$result[0]->interests); 
+						$i = 1;
+						foreach($data as $data)
+						{
+							if($i == 2)
+						{
+							echo " and ";
+						}
+						
+						echo $data;
+						
+						$i++;
+					
+						}
+						
+						 ?></a></h3>
+                        
+                        </div>
+                        <div class="sm_rightside">
+                        <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
+                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="interests_edit()"><i class="fa fa-pencil"></i> Edit</a></div>
+                        <div class="col-md-3 com_rig"><a href="#"><i class="fa fa-times"></i></a></div>
+                        </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        
+                        <?php } ?> 
+                        
+                        <div class="birth birt_bottom col-md-12" id="interest_disp" style="display:none;">
+                            <div class="interested col-md-3">Interested In</div>
+                            <div class="col-md-4 ">
+                              <input type="checkbox" name="interest[]" class="boxsmal" value="women" >
+                              women</div>
+                            <div class="col-md-4">
+                              <input type="checkbox" name="interest[]" class="boxsmal" value="men">
+                              Men</div>
+                         
+                          <div class="box_bottom">
+                            <div class="publics col-md-3">
+                              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Public <span class="caret"></span></button>
+                            </div>
+                            <div class="col-md-8 skil_box">
+                              
+                              <div class="btn3 btn-green" onclick="add_interest()">Save Changes</div>
+                              <?php if($result[0]->interests) { ?>
+                              <div class="btn3 btn-black" onclick="close_interested_in()">Cancel</div>
+                              <?php } else { ?>
+                              <div class="btn3 btn-black" onclick="close_interest()">Cancel</div>
+                              <?php } ?>
+                            </div>
+                            <div class="clearfix"></div>
+                             </div>
+                          </div>
+                        
+                        <div class="clearfix"></div>
+                      </li>
+                      <li>
+                      <div class="inner_rights boxs">
                           <div class="birth col-md-12">
                             <div class="birth_left col-md-6">Birth Date</div>
                             <div class="birth_right col-md-6">June 15</div>
@@ -696,38 +1045,59 @@
                             <div class="birth_left col-md-6">Gender</div>
                             <div class="birth_right col-md-6">Male</div>
                           </div>
-                          <div class="birth birt_bottom col-md-12">
-                            <div class="interested col-md-3">Interested In</div>
-                            <div class="col-md-4 ">
-                              <input type="checkbox" class="boxsmal">
-                              women</div>
-                            <div class="col-md-4">
-                              <input type="checkbox" class="boxsmal">
-                              Men</div>
-                          </div>
-                          <div class="box_bottom">
-                            <div class="publics col-md-3">
-                              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Public <span class="caret"></span></button>
-                            </div>
-                            <div class="col-md-8 skil_box">
-                              <div class="btn3 btn-black">Cancel</div>
-                              <div class="btn3 btn-green" data-toggle="modal" data-target="#AddCompany">Save Changes</div>
-                            </div>
-                            <div class="clearfix"></div>
-                          </div>
+                          
+                        </div>
+                      </li>
+                      <li id="language-li"> 
+                        
+ 						 <div class="tophead">Languages</div>
+                        <?php if(empty($result[0]->languages)) { ?>
+                        <div class="iner_boxleft" id="lang1"><a href="javascript:void(0)" id="add_language"><i class="fa fa-plus"></i>Add a language</a></div> <?php } else { ?>
+                        
+                        <div id="language_val_display">
+                        <div class="sm_leftbox"></div>
+                        <div class="sm_rightbox"><h3><a href="#">
+						<?php 
+						$data = explode(',',$result[0]->languages);
+						foreach($data as $lang)
+						{
+						 echo $lang." . ";
+						}
+						?>
+                        </a></h3>
+                        </div>
+                        <div class="sm_rightside">
+                        <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
+                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="languages_edit()"><i class="fa fa-pencil"></i> Edit</a></div>
+                        <div class="col-md-3 com_rig"><a href="#"><i class="fa fa-times"></i></a></div>
+                        </div>
                         </div>
                         <div class="clearfix"></div>
-                      </li>
-                      <li> 
-                        <!--<div class="tophead">Basic Information</div>-->
-                        <div class="iner_boxleft"><a href="#"><i class="fa fa-plus"></i>Add a language</a></div>
-                        <div class="inner_rights boxs">
+                        
+                        
+                        
+                        <?php } ?>
+                        <div class="inner_rights boxs" id="language_disp" style="display:none;">
                          
                           <div class="birth birt_bottom col-md-12">
                             <form class="form-inline ">
                               <div class="form-group birth_ins">
+                               <div id="selected_langauges">
+							   <?php 
+							    if($result[0]->languages){ 
+							    $data = explode(',',$result[0]->languages);
+								foreach($data as $lang)
+								{
+								
+								?>
+								   
+								   <span class="bc_mail_ids" id="<?php echo $lang; ?>"><?php echo $lang;?><a onclick="removelanguage('<?php echo $lang; ?>')" ><img class="as_close_btn" src="<?php echo base_url('images/close_post.png'); ?>" /></a></span>
+								
+                                <?php } } ?>   
+								  </div>
                                 <label for="exampleInputName2">Languages</label>
-                                <input type="text">
+                                <input type="text" id="lang_box" />
+                                <input type="text" id="addedlangs" name="addedlangs" value="<?php if($result[0]->languages){ echo $result[0]->languages; } ?>"></input>
                               </div>
                               <div class="clearfix"></div>
                             </form>
@@ -737,79 +1107,137 @@
                               <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Public <span class="caret"></span></button>
                             </div>
                             <div class="col-md-8 skil_box">
-                              <div class="btn3 btn-black">Cancel</div>
-                              <div class="btn3 btn-green" data-toggle="modal" data-target="#AddCompany">Save Changes</div>
+                              
+                              <div class="btn3 btn-green" onclick="add_all_languges()">Save Changes</div>
+                                <?php if($result[0]->languages) { ?>
+                              <div class="btn3 btn-black" onclick="close_language()">Cancel</div>
+                              <?php } else { ?>
+                              <div class="btn3 btn-black" onclick="close_lang()">Cancel</div>
+                            <?php } ?>
                             </div>
                             <div class="clearfix"></div>
                           </div>
                         </div>
                         <div class="clearfix"></div>
                       </li>
-                      <li> 
+                      <li id="relegion-li"> 
                         <!--<div class="tophead">Basic Information</div>-->
-                        <div class="iner_boxleft"><a href="#"><i class="fa fa-plus"></i>Add your religious views</a></div>
+                       
+                        <?php if(empty($result[0]->religious)) {?>
+                         <div class="iner_boxleft" id="relegious"><a href="javascript:void(0)" id="add_relegious"><i class="fa fa-plus"></i>Add your religious views</a></div>
+                        
+                        
+                        <?php } else { ?>
+                        
+                          <div id="relegious_val_disp">
+                        <div class="sm_leftbox"></div>
+                        <div class="sm_rightbox"><h3><a href="#">
+						<?php  
+						$data = explode('|@|',$result[0]->religious);
+						echo $data[0];
+						 ?></a></h3>
+                        <p><?php echo $data[1]; ?></p>
+                        </div>
+                        <div class="sm_rightside">
+                        <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
+                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="relegious_edit()"><i class="fa fa-pencil"></i> Edit</a></div>
+                        <div class="col-md-3 com_rig"><a href="#"><i class="fa fa-times"></i></a></div>
+                        </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        
+                         <?php } ?>
+                        
                         <div class="inner_rights boxs">
-                          
-                          
-                          
-                          <div class="birth birt_bottom col-md-12">
+                        
+                          <div class="birth birt_bottom col-md-12" id="relegious_disp" style="display:none;">
                             <form class="form-inline ">
                               <div class="form-group birth_ins">
                                 <label for="exampleInputName2">Religious Views</label>
-                                <input type="text" placeholder="What are your religious beliefs?">
+                                <input type="text" placeholder="What are your religious beliefs?" id="rel_belief" value="<?php if($data[0]) { echo $data[0]; } ?>">
                               </div>
                               <div class="clearfix"></div>
                               <div class="form-group birth_ins">
                                 <label for="exampleInputName2">Description</label>
-                                <textarea rows="4"></textarea>
+                                <textarea rows="4" id="rel_description"><?php if($data[1]) { echo $data[1]; } ?></textarea>
                               </div>
                               <div class="clearfix"></div>
                             </form>
-                          </div>
+                          
                           <div class="box_bottom">
                             <div class="publics col-md-3">
                               <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Friends of Friends <span class="caret"></span></button>
                             </div>
                             <div class="col-md-8 skil_box">
-                              <div class="btn3 btn-black">Cancel</div>
-                              <div class="btn3 btn-green" data-toggle="modal" data-target="#AddCompany">Save Changes</div>
+                         
+                              <div class="btn3 btn-green" onclick="add_relegious_belief()">Save Changes</div>
+                              <?php if($result[0]->religious) { ?>
+                              <div class="btn3 btn-black" onclick="close_relegious()">Cancel</div>
+                              <?php }else { ?>
+                              <div class="btn3 btn-black" onclick="close_relegious_belief()">Cancel</div>
+                              <?php } ?>
                             </div>
                             <div class="clearfix"></div>
+                          </div>
                           </div>
                         </div>
                         <div class="clearfix"></div>
                       </li>
-                      <li> 
+                      <li id="political-li"> 
                         <!--<div class="tophead">Basic Information</div>-->
-                        <div class="iner_boxleft"><a href="#"><i class="fa fa-plus"></i>Add your political views</a></div>
+                               <?php if(empty($result[0]->political)) { ?>
+                        <div class="iner_boxleft" id="political"><a href="javascript:void(0)" id="add_political"><i class="fa fa-plus"></i>Add your political views</a></div>
+                        
+                        <?php } else { ?>
+                        
+                        <div id="political_val_disp">
+                        <div class="sm_leftbox"></div>
+                        <div class="sm_rightbox"><h3><a href="#">
+						<?php  
+						$data = explode('|@|',$result[0]->political);
+						echo $data[0];
+						 ?></a></h3>
+                        <p><?php echo $data[1]; ?></p>
+                        </div>
+                        <div class="sm_rightside">
+                        <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
+                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="political_edit()"><i class="fa fa-pencil"></i> Edit</a></div>
+                        <div class="col-md-3 com_rig"><a href="#"><i class="fa fa-times"></i></a></div>
+                        </div>
+                        </div>
+                        <?php } ?>
                         <div class="inner_rights boxs">
-                          
-                          
-                          
-                          <div class="birth birt_bottom col-md-12">
+                                                     
+                          <div class="birth birt_bottom col-md-12" id="political_disp" style="display:none;">
                             <form class="form-inline ">
                               <div class="form-group birth_ins">
                                 <label for="exampleInputName2">Political Views</label>
-                                <input type="text" placeholder="What are your political beliefs?">
+                                <input type="text" placeholder="What are your political beliefs?" id="political_belief" value="<?php if($data[0]) { echo $data[0]; }?>">
                               </div>
                               <div class="clearfix"></div>
                               <div class="form-group birth_ins">
-                                <label for="exampleInputName2">Description</label>
-                                <textarea rows="4"></textarea>
+                                <label for="exampleInputName2" >Description</label>
+                                <textarea rows="4" id="pol_description"><?php if($data[1]) { echo $data[1]; }?></textarea>
                               </div>
                               <div class="clearfix"></div>
                             </form>
-                          </div>
+                          
                           <div class="box_bottom">
                             <div class="publics col-md-3">
                               <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Friends of Friends <span class="caret"></span></button>
                             </div>
                             <div class="col-md-8 skil_box">
-                              <div class="btn3 btn-black">Cancel</div>
-                              <div class="btn3 btn-green" data-toggle="modal" data-target="#AddCompany">Save Changes</div>
+                              
+                              <div class="btn3 btn-green" onclick="add_political()">Save Changes</div>
+							  <?php if($result[0]->political) { ?>
+                              <div class="btn3 btn-black" onclick="close_political_belief()">Cancel</div>
+                              <?php  } else { ?>
+                              <div class="btn3 btn-black" onclick="close_political()">Cancel</div>
+                              <?php } ?>
                             </div>
                             <div class="clearfix"></div>
                           </div>
+                        </div>
                         </div>
                         <div class="clearfix"></div>
                       </li>

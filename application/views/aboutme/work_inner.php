@@ -20,7 +20,7 @@
                         </div>
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
-                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" id="work_edit<?php echo $orgdetails->organization_id; ?>" onclick="work_edit()"><i class="fa fa-pencil"></i> Edit</a></div>
+                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" class="work_edit" id="work_edit<?php echo $orgdetails->organization_id; ?>" onclick="work_edit()"><i class="fa fa-pencil"></i> Edit</a></div>
                         <div class="col-md-3 com_rig"><a href="#"><i class="fa fa-times"></i></a></div>
                         </div>
                          <?php endforeach;?>

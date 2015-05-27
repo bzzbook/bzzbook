@@ -526,6 +526,25 @@ public function get_mn_cmp_list()
 		return false;
 	}
 	
+	
+	public function user_cr_companies()
+	{
+		
+		$id = $this->session->userdata('logged_in')['account_id'];
+		$this->db->select('companyinfo_id');
+		$this->db->from('bzz_companyinfo');
+		$this->db->where('user_id',$id);
+		$query = $this->db->get();
+		if($query->num_rows() > 0)
+		{
+			return $query->result_array();
+		
+		}else{
+			
+			return false;
+		}
+		
+	}
 	public function getPendingFollowRequests()
 	{
 		$user_id =  $this->session->userdata('logged_in')['account_id'];

@@ -270,9 +270,47 @@ public function showfavs()
 		$org_data['start_date'] = $result->start_date;
 		$org_data['end_date'] = $result->end_date;
 		$org_data['emp_status'] = $result->emp_status;
-	
+		$org_edit['city'] = $result->city;	
 		endforeach;
 		echo json_encode($org_data);
+	
+  }
+  
+  public function collegeEdit()
+  {
+	 $data = $this->profile_set->editCollegeDetails($_POST['college_id']);
+	 
+	 foreach( $data as $result):
+	 	$clg_data['college_name'] = $result->college_name;
+		
+		$clg_data['description'] = $result->description;
+		$clg_data['start_date'] = $result->start_date;
+		$clg_data['end_date'] = $result->end_date;
+		$clg_data['edu_status'] = $result->edu_status;
+		$clg_data['concentration1'] = $result->concentration1;
+		$clg_data['concentration2'] = $result->concentration2;
+		$clg_data['concentration3'] = $result->concentration3;
+		$clg_data['attended'] = $result->attended;
+	
+		endforeach;
+		echo json_encode($clg_data);
+	
+  }
+  
+  
+    public function schoolEdit()
+  {
+	 $data = $this->profile_set->editSchoolDetails($_POST['school_id']);
+	 
+	 foreach( $data as $result):
+	 	$sch_data['school_name'] = $result->school_name;
+		$sch_data['description'] = $result->description;
+		$sch_data['start_date'] = $result->start_date;
+		$sch_data['end_date'] = $result->end_date;
+		$sch_data['sch_status'] = $result->sch_status;
+		
+		endforeach;
+		echo json_encode($sch_data);
 	
   }
   
@@ -293,7 +331,6 @@ public function showfavs()
 	
   }
   
- 
 	 function do_upload()
 	{
 		$config['upload_path'] = './uploads/';
@@ -1043,6 +1080,91 @@ public function addmobile()
   
 	
 }
+public function addwebsite()
+{
+	//$insert_id =  $this->profile_set->add_about_me($_POST['about_me']);
+    $result = $this->profile_set->save_settings();
+	if($this->profile_set->add_website($_POST['website']))
+	$this->load->view('aboutme/website_inner');
+	else
+	return false;
+  
+	
+}
+
+public function addaddress()
+{
+	//$insert_id =  $this->profile_set->add_about_me($_POST['about_me']);
+    $result = $this->profile_set->save_settings();
+	if($this->profile_set->add_address($_POST['address'],$_POST['city'],$_POST['zipcode'],$_POST['neighborhood']))
+	$this->load->view('aboutme/address_inner');
+	else
+	return false;
+  
+	
+}
+
+public function addlanguages()
+{
+	//$insert_id =  $this->profile_set->add_about_me($_POST['about_me']);
+    $result = $this->profile_set->save_settings();
+	if($this->profile_set->add_languages($_POST['lang_data']))
+	$this->load->view('aboutme/languages_inner');
+	else
+	return false;
+  
+	
+}
+
+public function addpfskills()
+{
+	//$insert_id =  $this->profile_set->add_about_me($_POST['about_me']);
+    $result = $this->profile_set->save_settings();
+	if($this->profile_set->add_professional_skills($_POST['skill_data']))
+	$this->load->view('aboutme/pfskills_inner');
+	else
+	return false;
+  
+	
+}
+
+public function addinterest()
+{
+	//$insert_id =  $this->profile_set->add_about_me($_POST['about_me']);
+    $result = $this->profile_set->save_settings();
+	if($this->profile_set->add_interested_in($_POST['interested_in']))
+	$this->load->view('aboutme/interests_inner');
+	else
+	return false;
+  
+	
+}
+
+public function addrelegious()
+{
+	//$insert_id =  $this->profile_set->add_about_me($_POST['about_me']);
+    $result = $this->profile_set->save_settings();
+	if($this->profile_set->add_relegious_belief($_POST['relegion'],$_POST['description']))
+	$this->load->view('aboutme/relegious_inner');
+	else
+	return false;
+  
+	
+}
+
+
+public function addpolitical()
+{
+	//$insert_id =  $this->profile_set->add_about_me($_POST['about_me']);
+    $result = $this->profile_set->save_settings();
+	if($this->profile_set->add_political_belief($_POST['political'],$_POST['description']))
+	$this->load->view('aboutme/political_inner');
+	else
+	return false;
+  
+	
+}
+
 
 public function add_work()
 {
@@ -1052,6 +1174,38 @@ public function add_work()
 	  if($returninfo != false):
 	  	$organization_info['inserted_id'] = $returninfo;
 	  	echo $this->load->view('aboutme/work_inner');
+	 else:
+	 	return false;
+	 endif;
+	  
+}
+
+
+
+public function add_college()
+{
+	  
+	  parse_str($_POST['formdata'],$college_info);
+	  $returninfo = $this->profile_set->add_college_info($college_info);
+	  
+	  if($returninfo != false):
+	  	$organization_info['inserted_id'] = $returninfo;
+	  	echo $this->load->view('aboutme/college_inner');
+	 else:
+	 	return false;
+	 endif;
+	  
+}
+
+public function add_school()
+{
+	  
+	  parse_str($_POST['formdata'],$school_info);
+	  $returninfo = $this->profile_set->add_school_info($school_info);
+	  
+	  if($returninfo != false):
+	  	//$organization_info['inserted_id'] = $returninfo;
+	  	echo $this->load->view('aboutme/school_inner');
 	 else:
 	 	return false;
 	 endif;

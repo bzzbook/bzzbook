@@ -27,7 +27,7 @@
 	
         <form id="pwd_reset" action="<?php echo base_url(); ?>signg_in/reset_pwd" method="post">
           <div class="field">
-          <input type="hidden" value="<?php $user_email; ?>" name="usermail" id="usermail"/>
+          <input type="hidden" value="<?php echo $usermail; ?>" name="usermail" id="usermail"/>
             <label>password</label>
            <input type="password" name="password" id="password" class="form-control" placeholder="Password" 
             data-rule-required="true" 
