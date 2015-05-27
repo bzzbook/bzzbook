@@ -2,7 +2,9 @@
 	 $result = $this->profile_set->save_settings();
 ?>
   
-  
+   <div class="iner_boxleft" id="add_web_site" style="display:none;">
+                        <a href="javascript:void(0)" id="add_website"><i class="fa fa-plus"></i>Add a website</a>
+                        </div>
    
                        
                         <div id="website_val_display">
@@ -12,8 +14,8 @@
                         </div>
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
-                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="mbl_edit()"><i class="fa fa-pencil"></i> Edit</a></div>
-                        <div class="col-md-3 com_rig"><a href="#"><i class="fa fa-times"></i></a></div>
+                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="website_edit()"><i class="fa fa-pencil"></i> Edit</a></div>
+                        <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_website()"><i class="fa fa-times"></i></a></div>
                         </div>
                         </div>
                         <div class="clearfix"></div>

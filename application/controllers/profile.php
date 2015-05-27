@@ -71,6 +71,22 @@ public function message()
 	$this->load->view('full_content_view',$data);
    //$this->load->view('messages');
 }
+public function compose()
+  { 
+  	$data['content']='compose';
+	$this->load->view('full_content_view',$data);
+   //$this->load->view('messages');
+}
+public function sent()
+  { 
+  	$data['content']='sent';
+	$this->load->view('full_content_view',$data);
+   //$this->load->view('messages');
+}
+public function trash(){
+	$data['content']='trash';
+	$this->load->view('full_content_view',$data);
+}
 public function messageview($msgid)
   {
 	$data['messages'] = $this->messages->disp_msg_by_id($msgid);
@@ -889,29 +905,13 @@ public function send_business_card()
 
    public function addhometown()
   {
-	  //parse_str($_POST['form_data'],$field_info);
+	
 	$insert_id =  $this->profile_set->add_home_town($_POST['home_town']);
-$result = $this->profile_set->save_settings();
+	$result = $this->profile_set->save_settings();
 	if($this->profile_set->add_home_town($_POST['home_town']))
 		
-	
-	/*echo "<p id='paragraph".$insert_id."'>".$_POST['position']." at ".$_POST['org_name']." <a href='javascript:void(0)' onclick='editWorkPlace(".$insert_id.")' >edit</a></p>";*/
-	$this->load->view('home_town');
- /* echo"<div id='hometown_val_disp' style='background-color:#FC9;' class='inner_rights'>  
-                        <h4 style='color:white;'>".$result[0]->hometown."<i class='fa fa-pencil'></i><a  onclick='home_town_edit()' href='javascript:void(0)'>edit</a></h4>
-                        </div>
-						
-						 <div id='hme_town' class='inner_rights' style='display:none'>
-                          <h3>Home Town</h3>
-                           <a href='javascript:void(0)' id='hometown'>Add a home town</a>
-                            </div>
-							
-		
-		    	<div id='hometown_disp' class='inner_rights' style='display:none;'>
-              <input type='text' name='home_town' id='home_town' value=".$result[0]->hometown.">
-              <input type='button' id='add_hometown' onclick='add_home_town()' value='submit'/>
-              <input type='button' id='close_hometown' value='cancel' onclick='close_home()'/>
-                        </div>"; */
+		$this->load->view('home_town');
+
 	else
 	return false;
   }
@@ -920,80 +920,50 @@ $result = $this->profile_set->save_settings();
   
    public function addlocation()
   {
-	  //parse_str($_POST['form_data'],$field_info);
+	 
 	$insert_id =  $this->profile_set->add_location($_POST['current_city']);
-$result = $this->profile_set->save_settings();
+	$result = $this->profile_set->save_settings();
 	if($this->profile_set->add_location($_POST['current_city']))
 		
-	
-	/*echo "<p id='paragraph".$insert_id."'>".$_POST['position']." at ".$_POST['org_name']." <a href='javascript:void(0)' onclick='editWorkPlace(".$insert_id.")' >edit</a></p>";*/
-	
-	echo"    			
-	<div class='tophead'>Current City and Hometown</div>
-	<div id='currentcity_val_disp'>
-                        <div class='sm_leftbox'></div>
-                        <div class='sm_rightbox'><h3><a href='#'>".$result[0]->location."</a></h3>
-                        <p>Current city</p>
-                        </div>
-                        <div class='sm_rightside'>
-                        <div class='col-md-3 com_le'><i class='fa fa-globe'></i></div>
-                        <div class='col-md-6 com_mid'><a href='javascript:void(0)' onclick='current_city_edit()'><i class='fa fa-pencil'></i> Edit</a></div>
-                        <div class='col-md-3 com_rig'><a href='#'><i class='fa fa-times'></i></a></div>
-                        </div>
-						       <div class='clearfix'></div>
-                        </div>
-					
-					
-					
-					
-					 <div class='iner_lefts' id='add_currentcity1' style='display:none;'><i class='fa fa-plus'></i></div>
-                        <div class='inner_rights boxs' id='add_currentcity2' style='display:none;'>
-                        <a href='javascript:void(0)' id='add_currentcity' ><h3>Add your current city</h3> </a>
-                          
-                        </div>
-					
-										
-						
-						<div id='currentcity_disp' style='display:none;'>
-                            <div class='col-md-12' id='city_place'>
-                              <form class='form-inline'>
-                                <div class='form-group citys'>
-                                  <label for='exampleInputName2'>Current City</label>
-                                  <input type='text' id='current_location' value=".$result[0]->location.">
-                                </div>
-                                <div class='clearfix'></div>
-                              </form>
-                              <div class='box_bottom'>
-                                <div class='publics col-md-4'>
-                    <button type='button' class='btn btn-default dropdown-toggle' data-toggle='dropdown'
-					 aria-expanded='false'>Public <span class='caret'></span></button>
-                                </div>
-                                <div class='col-md-8 skil_box'>
-                                 <div class='btn3 btn-green' onclick='add_current_city()'>Save Changes</div>
-                                      
-                               <div class='btn3 btn-black' onclick='close_currentcity()'>Cancel</div>
-                               
-                                </div>
-                                <div class='clearfix'></div>
-                              </div>
-                            </div>
-							       <div class='clearfix'></div>
-                          </div> ";
-						
-					
-						
-						
-						
+		$this->load->view('aboutme/location_inner');
+				
 	else
 	return false;
   }
 
+
+public function deletelocation()
+{
+		$id = $this->session->userdata('logged_in')['account_id'];
+		$up_data = array('location'=>'');
+		$this->db->where('user_id',$id);
+		if($this->db->update('bzz_userinfo',$up_data))
+		$this->load->view('aboutme/location_inner');
+		else
+		echo false;
+}
+public function deletehometown()
+{
+		$id = $this->session->userdata('logged_in')['account_id'];
+		$up_data = array('hometown'=>'');
+		$this->db->where('user_id',$id);
+		if($this->db->update('bzz_userinfo',$up_data))
+		$this->load->view('home_town');
+		else
+		echo false;
+}
  public function add_fam_members()
   {
-	
-	  //parse_str($_POST['form_data'],$field_info);
-	//$insert_id =  $this->profile_set->add_family_members($_POST['member_name'],$_POST['member_relation']);
 	if( $this->profile_set->add_family_members($_POST['member_name'],$_POST['member_relation']))
+	$this->load->view('family_members_inner');
+	else
+	return false;
+	
+  }
+  
+   public function delete_fam_member()
+  {
+	if( $this->profile_set->delete_family_member($_POST['family_member']))
 	$this->load->view('family_members_inner');
 	else
 	return false;
@@ -1015,7 +985,27 @@ $result = $this->profile_set->save_settings();
   
 	  
   }
+    public function deleteaboutme()
+{
+		$id = $this->session->userdata('logged_in')['account_id'];
+		$up_data = array('aboutme'=>'');
+		$this->db->where('user_id',$id);
+		if($this->db->update('bzz_userinfo',$up_data))
+		$this->load->view('about_me_inner');
+		else
+		echo false;
+}
   
+      public function deletemobile()
+{
+		$id = $this->session->userdata('logged_in')['account_id'];
+		$up_data = array('mobile'=>'');
+		$this->db->where('user_id',$id);
+		if($this->db->update('bzz_userinfo',$up_data))
+		$this->load->view('aboutme/mobile_inner');
+		else
+		echo false;
+}
     public function addfavquotes()
   {
 	  
@@ -1031,7 +1021,16 @@ $result = $this->profile_set->save_settings();
 	  
   }
   
-  
+  public function deletefavquotes()
+{
+		$id = $this->session->userdata('logged_in')['account_id'];
+		$up_data = array('favquotes'=>'');
+		$this->db->where('user_id',$id);
+		if($this->db->update('bzz_userinfo',$up_data))
+		$this->load->view('fav_quotes_inner');
+		else
+		echo false;
+}
     
     public function addrelation()
   {
@@ -1068,6 +1067,28 @@ public function add_nicnames()
 	
 }
 
+  
+   public function delete_nic_names()
+  {
+	if( $this->profile_set->delete_nick_name($_POST['nickname']))
+	$this->load->view('nick_names_inner');
+	else
+	return false;
+	
+  }
+  
+   
+   public function delete_org()
+  {
+	if($this->profile_set->del_Organization_Details($_POST['org_id']))
+	$this->load->view('aboutme/work_inner');
+	else
+	return false;
+	
+  }
+  
+
+  
 public function addmobile()
 {
 	//$insert_id =  $this->profile_set->add_about_me($_POST['about_me']);
@@ -1091,7 +1112,16 @@ public function addwebsite()
   
 	
 }
-
+      public function deletewebsite()
+{
+		$id = $this->session->userdata('logged_in')['account_id'];
+		$up_data = array('website'=>'');
+		$this->db->where('user_id',$id);
+		if($this->db->update('bzz_userinfo',$up_data))
+		$this->load->view('aboutme/website_inner');
+		else
+		echo false;
+}
 public function addaddress()
 {
 	//$insert_id =  $this->profile_set->add_about_me($_POST['about_me']);
@@ -1104,6 +1134,16 @@ public function addaddress()
 	
 }
 
+      public function deleteaddress()
+{
+		$id = $this->session->userdata('logged_in')['account_id'];
+		$up_data = array('address'=>'');
+		$this->db->where('user_id',$id);
+		if($this->db->update('bzz_userinfo',$up_data))
+		$this->load->view('aboutme/address_inner');
+		else
+		echo false;
+}
 public function addlanguages()
 {
 	//$insert_id =  $this->profile_set->add_about_me($_POST['about_me']);
@@ -1114,6 +1154,16 @@ public function addlanguages()
 	return false;
   
 	
+}
+      public function deletelanguages()
+{
+		$id = $this->session->userdata('logged_in')['account_id'];
+		$up_data = array('languages'=>'');
+		$this->db->where('user_id',$id);
+		if($this->db->update('bzz_userinfo',$up_data))
+		$this->load->view('aboutme/languages_inner');
+		else
+		echo false;
 }
 
 public function addpfskills()
@@ -1139,6 +1189,16 @@ public function addinterest()
   
 	
 }
+      public function deleteinterests()
+{
+		$id = $this->session->userdata('logged_in')['account_id'];
+		$up_data = array('interests'=>'');
+		$this->db->where('user_id',$id);
+		if($this->db->update('bzz_userinfo',$up_data))
+		$this->load->view('aboutme/interests_inner');
+		else
+		echo false;
+}
 
 public function addrelegious()
 {
@@ -1152,6 +1212,16 @@ public function addrelegious()
 	
 }
 
+  public function delete_relegion_belief()
+{
+		$id = $this->session->userdata('logged_in')['account_id'];
+		$up_data = array('religious'=>'');
+		$this->db->where('user_id',$id);
+		if($this->db->update('bzz_userinfo',$up_data))
+		$this->load->view('aboutme/relegious_inner');
+		else
+		echo false;
+}
 
 public function addpolitical()
 {
@@ -1161,8 +1231,18 @@ public function addpolitical()
 	$this->load->view('aboutme/political_inner');
 	else
 	return false;
-  
-	
+ 
+}    
+
+  public function delete_political_belief()
+{
+		$id = $this->session->userdata('logged_in')['account_id'];
+		$up_data = array('political'=>'');
+		$this->db->where('user_id',$id);
+		if($this->db->update('bzz_userinfo',$up_data))
+		$this->load->view('aboutme/political_inner');
+		else
+		echo false;
 }
 
 
@@ -1197,6 +1277,16 @@ public function add_college()
 	  
 }
 
+   public function delete_college()
+  {
+	if($this->profile_set->del_college_Details($_POST['clg_id']))
+	$this->load->view('aboutme/college_inner');
+	else
+	return false;
+	
+  }
+  
+  
 public function add_school()
 {
 	  
@@ -1211,5 +1301,15 @@ public function add_school()
 	 endif;
 	  
 }
+
+ public function delete_school()
+  {
+	if($this->profile_set->del_school_Details($_POST['sch_id']))
+	$this->load->view('aboutme/school_inner');
+	else
+	return false;
+	
+  }
+
 }
 ?>

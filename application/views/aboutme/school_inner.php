@@ -10,8 +10,8 @@
 
   <div id="school_val_disp">
    	<?php 
-				if(sizeof($user_school_info)>0):
-				foreach($user_school_info as $schdetails):
+				if(!empty($user_school_info)){
+				foreach($user_school_info as $schdetails){
 			?>
                       
                         <div class="sm_rightbox"><h3><a href="#"><?php echo $schdetails->school_name;?></a></h3>
@@ -22,8 +22,8 @@
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" class="school_edit" id="school_edit<?php echo $schdetails->school_id; ?>" onclick="school_edit()"><i class="fa fa-pencil"></i>Edit</a></div>
                         <div class="col-md-3 com_rig"><a href="#"><i class="fa fa-times"></i></a></div>
                         </div>
-                         <?php endforeach;?>
-            <?php endif;?>
+                         <?php } }?>
+           
                         </div>
                         
   <div id="highschool" style="display:none;">

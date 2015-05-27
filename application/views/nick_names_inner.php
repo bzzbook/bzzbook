@@ -8,7 +8,8 @@
 
 <?php
  $response = $this->profile_set->save_settings();
- 
+if($response[0]->nickname)
+{ 
 
  $result = rtrim($response[0]->nickname,' ');
 	//echo $result;
@@ -36,14 +37,14 @@
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)"><i class="fa fa-pencil"></i> Edit</a></div>
-                        <div class="col-md-3 com_rig"><a href="#"><i class="fa fa-times"></i></a></div>
+                        <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_oth_names('<?php echo $data[0]."-".$data[1]." "; ?>')"><i class="fa fa-times"></i></a></div>
                         </div>
                         
                         <div class="clearfix"></div>
                      </li>
         
         
-        <?php }} ?>
+        <?php }} } ?>
         
         
         

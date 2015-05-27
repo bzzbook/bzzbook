@@ -11,8 +11,8 @@
                         </div>
   <div id="work_val_disp">
    	<?php 
-				if(sizeof($organization_details)>0):
-				foreach($organization_details as $orgdetails):
+				if(!empty($organization_details)){
+				foreach($organization_details as $orgdetails){
 			?>
                       
                         <div class="sm_rightbox"><h3><a href="#"><?php echo $orgdetails->org_name;?></a></h3>
@@ -21,10 +21,10 @@
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" class="work_edit" id="work_edit<?php echo $orgdetails->organization_id; ?>" onclick="work_edit()"><i class="fa fa-pencil"></i> Edit</a></div>
-                        <div class="col-md-3 com_rig"><a href="#"><i class="fa fa-times"></i></a></div>
+                        <div class="col-md-3 com_rig"><a href="javascript:void(0)" class="work_delete" id="work_delete<?php echo $orgdetails->organization_id; ?>" onclick="work_delete()"><i class="fa fa-times"></i></a></div>
                         </div>
-                         <?php endforeach;?>
-            <?php endif;?>
+                         <?php } }?>
+           
                         </div>
                         
                         

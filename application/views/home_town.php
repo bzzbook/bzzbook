@@ -1,13 +1,20 @@
 <?php 
 	 $result = $this->profile_set->save_settings();
 ?>
-    
+     <div class="tophead">Hometown</div>
+   
+    <div class="iner_lefts" id="hme_town" style="display:none;"><i class="fa fa-plus"></i></div>
+                        <div class="inner_rights boxs"  id="hme_town1" style="display:none;">
+                          
+ <a href="javascript:void(0)" id="hometown"><h3>Add your hometown</h3></a>      
+   
+   </div>
      <div id="hometown_disp" style="display:none;">
                           <div class="col-md-12" id="city_place">
                               <form class="form-inline ">
                                 <div class="form-group citys">
                                   <label for="exampleInputName2">Home Town</label>
-                                  <input type="text" placeholder="" id="home_town" value="<?php if($result[0]->hometown) { echo $result[0]->location ; } ?>">
+                                  <input type="text" placeholder="" id="home_town" value="<?php if($result[0]->hometown) { echo $result[0]->hometown ; } ?>">
                                 </div>
                                 <div class="clearfix"></div>
                               </form>
@@ -30,8 +37,9 @@
                           </div>
                           
                           
-                           <div class="tophead">Hometown</div>
+                           
                           <div id="hometown_val_disp">
+                     
                         <div class="sm_leftbox"></div>
                         <div class="sm_rightbox"><h3><a href="#"><?php echo $result[0]->hometown; ?></a></h3>
                         <p>Home Town</p>
@@ -39,7 +47,7 @@
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="home_town_edit()"><i class="fa fa-pencil"></i> Edit</a></div>
-                        <div class="col-md-3 com_rig"><a href="#"><i class="fa fa-times"></i></a></div>
+                        <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="delete_hometown()"><i class="fa fa-times"></i></a></div>
                         </div>
                         </div>
                                        

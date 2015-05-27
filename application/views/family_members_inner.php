@@ -1,13 +1,14 @@
  <div class="tophead">Family Members</div>
-  <div class="iner_lefts" id="hme_town"><i class="fa fa-plus"></i></div>
-                        <div class="inner_rights boxs"  id="hme_town1">
-                          
- <a href="javascript:void(0)" id="hometown"><h3>Add your hometown</h3></a>                          
+  <div class="iner_lefts" id="add_f_member1"><i class="fa fa-plus"></i></div>
+                        <div class="inner_rights boxs" id="add_f_member">
+                          <a href="javascript:void(0)"  id="familymembers"> <h3>Add a family member</h3></a>
                         </div>
-                      
  
         <?php    
 		  $result = $this->profile_set->save_settings();
+		 
+		  if(!empty($result[0]->familymembers))
+		  {
 		 $trimmed = rtrim($result[0]->familymembers,',');
 	//echo $result;
 	 //echo $result[0]->familymembers;
@@ -31,25 +32,20 @@
                      <li>
                         <!--<div class="tophead">All comman Headings styles</div>-->
                         <div class="sm_leftbox"></div>
-                        <div class="sm_rightbox"><h3><a href="#"><?php echo $data[0]; ?> </a></h3>
-                        <p><?php echo $data[1]; ?></p>
+                        <div class="sm_rightbox">
+                        <h3><a href="#"><?php if($data[0]) { echo $data[0]; }?> </a></h3>
+                        <p><?php if($data[1]) {echo $data[1]; }?></p>
                         </div>
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
-                        <div class="col-md-6 com_mid"><a href="#"><i class="fa fa-pencil"></i> Edit</a></div>
-                        <div class="col-md-3 com_rig"><a href="#"><i class="fa fa-times"></i></a></div>
+                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="edit_fam_member('<?php echo $data[0]."-".$data[1].","; ?>')"><i class="fa fa-pencil"></i> Edit</a></div>
+                        <div class="col-md-3 com_rig"><a  href="javascript:void(0)" onclick="del_fam_member('<?php echo $data[0]."-".$data[1].","; ?>')"><i class="fa fa-times"></i></a></div>
                         </div>
                         
                         <div class="clearfix"></div>
                       </li>
-                      <?php }?>
+                      <?php } }?>
                      
-        
-        
-        
-        
-        
-        
         
         
         
@@ -77,8 +73,11 @@
                                     <div class="col-md-8">
                                       
                                       <div class="btn3 btn-green" onclick="add_fam_member()">Save Changes</div>
+                                      <?php if($result[0]->familymembers) {?>
                                       <div class="btn3 btn-black" onclick="close_family()">Cancel</div>
+                                      <?php } else { ?>
                                       <div class="btn3 btn-black" onclick="close_family_member()">Cancel</div>
+                                    <?php } ?>
                                     </div>
                                     <div class="clearfix"></div>
                                   </div>

@@ -15,6 +15,8 @@ $thumb_height = "150";
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
 <script src="<?php echo base_url(); ?>js/jquery-1.11.1.min.js"></script> 
+<script src="<?php echo base_url(); ?>javascripts/jquery.attach.js"></script> 
+<script src="<?php echo base_url(); ?>javascripts/example.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed --> 
 <script src="<?php echo base_url(); ?>js/bootstrap.min.js"></script> 
 <?php
@@ -1212,6 +1214,41 @@ function getPostComments(post_id)
   cache: false
   });
 }
+
+/* fuction to mark as read and mark un-read */
+
+function  onchangeMore(){
+	var val = [];
+        $(':checkbox:checked').each(function(i){
+          val[i] = $(this).val();
+        });
+		var text='';
+		for	(index = 0; index < val.length; index++) {
+		text += val[index]+'-';
+		} 
+		var selectedval = $('#more').val();
+		if(text!='' && selectedval!=0){
+		
+		if(selectedval==1)
+		url="<?php echo base_url(); ?>message/markasreadselectedmsgs/"+text;
+		else if(selectedval == 2)
+		url="<?php echo base_url(); ?>message/markasunreadselectedmsgs/"+text;
+
+		  $.ajax({
+				type: "POST",
+				url: url,
+				success: function(data)
+				{   
+		   	var redirect_url = "<?php echo base_url(); ?>"+'profile/message';
+			window.location.replace(redirect_url);
+		  },
+		  cache: false
+		  });
+		}
+		else{
+			alert('Please select the checkbox to apply action')
+		}
+}
    /*	 
 	 $.post( url, { formdata: $(this).serialize() })
      
@@ -1232,6 +1269,7 @@ function getPostComments(post_id)
 //	$("#eduformerrors").html("Fields with '*' are mandatory, Please fill them...");
 //	}
 //}
+
  $(function(){
       $('#delmsgbtn').click(function(){
         var val = [];
@@ -1242,6 +1280,7 @@ function getPostComments(post_id)
 		for	(index = 0; index < val.length; index++) {
 		text += val[index]+'-';
 		} 
+		if(text!=''){
 		 url="<?php echo base_url(); ?>message/deleteselectedmsgs/"+text;
 		  $.ajax({
 				type: "POST",
@@ -1253,6 +1292,10 @@ function getPostComments(post_id)
 		  },
 		  cache: false
 		  });
+		}
+		else{
+		alert('Please select the checkbox you wish to delete')
+		}
       });
     });
 	 $(function(){
@@ -1271,7 +1314,7 @@ function getPostComments(post_id)
 				url: url,
 				success: function(data)
 				{   
-		   	var redirect_url = "<?php echo base_url(); ?>"+'profile/message';
+		   	var redirect_url = "<?php echo base_url(); ?>"+'profile/sent';
 			window.location.replace(redirect_url);
 		  },
 		  cache: false
@@ -1294,7 +1337,7 @@ function getPostComments(post_id)
 				url: url,
 				success: function(data)
 				{   
-		   	var redirect_url = "<?php echo base_url(); ?>"+'profile/message';
+		   	var redirect_url = "<?php echo base_url(); ?>"+'profile/trash';
 			window.location.replace(redirect_url);
 		  },
 		  cache: false
@@ -1908,11 +1951,13 @@ $('#select_all_msgs').click(function(event)
 	{
 		$('.all_inbox_msgs').each(function(event)
 		{
+			if($(this).parent().parent().css("display")!="none")
 			this.checked = true;
 		});
 	}else{
 		$('.all_inbox_msgs').each(function(event)
 		{
+			if($(this).parent().parent().css("display")!="none")
 			this.checked = false;
 	
 		});
@@ -1924,11 +1969,13 @@ $('#select_sent_msgs').click(function(event)
 	{
 		$('.all_sent_msgs').each(function(event)
 		{
+			if($(this).parent().parent().css("display")!="none")
 			this.checked = true;
 		});
 	}else{
 		$('.all_sent_msgs').each(function(event)
 		{
+			if($(this).parent().parent().css("display")!="none")
 			this.checked = false;
 	
 		});
@@ -1940,11 +1987,13 @@ $('#select_trash_msgs').click(function(event)
 	{
 		$('.all_trash_msgs').each(function(event)
 		{
+			if($(this).parent().parent().css("display")!="none")
 			this.checked = true;
 		});
 	}else{
 		$('.all_sent_msgs').each(function(event)
 		{
+			if($(this).parent().parent().css("display")!="none")
 			this.checked = false;
 	
 		});
@@ -2107,11 +2156,20 @@ $('#searchbar_category li').click(function()
         // calculate number of pages
         var numberOfPages = $('#inbox-message tr').length / pageSize;
         numberOfPages = numberOfPages.toFixed();
-		
+		if(numberOfPages<1){
+			$("a.next").hide();
+            $("#next").hide();
+		}
         // action on 'next' click
         $("a.next").on('click', function () {
 			$('#start').text(parseInt($('#start').text())+pageSize);
-			$('#last').text(parseInt($('#last').text())+pageSize);
+			var totalmsgs = $('#totalmsgs').val();
+		
+			if(parseInt($('#last').text())>totalmsgs)
+			var last = totalmsgs;
+			else
+			var last = parseInt($('#last').text())+1;
+			$('#last').text(last);
             // show only the necessary rows based upon activePage and Pagesize
             $("#inbox-message tr:nth-child(-n+" + (($("#hdnActivePage").val() * pageSize) + pageSize) + ")").show();
             $("#inbox-message tr:nth-child(-n+" + $("#hdnActivePage").val() * pageSize + ")").hide();
@@ -2153,7 +2211,7 @@ $('#searchbar_category li').click(function()
                 $("#next").show();
             } 
             if ($("#hdnActivePage").val() == 1) {
-               //$("#previous").hide();
+               $("#previous").hide();
             }
         });
     });    
@@ -2252,7 +2310,9 @@ color:red;
 
 </style><?php */?>
 <script> //current location script
-$('#add_currentcity').click(function(){
+
+	$('body').delegate('#add_currentcity','click',function()
+	{
 	$('#add_currentcity2').hide();
 	$('#add_currentcity1').hide();
 	$('ul.home > #location-li').append($('#currentcity_disp').show());
@@ -2307,9 +2367,32 @@ function close_currentcity() {
 	$('#currentcity_val_disp').show();
 	
 }
+
+function delete_current_city()
+{
+	
+	   if (confirm("Delete Your Current City from bZZBook") == true) {
+		   	url="<?php echo base_url();?>profile/deletelocation/";
+	 $.ajax({
+		url: url,
+		success: function(html)
+		{   					
+			
+			$('ul.home > #location-li').html(html);
+			$('#add_currentcity2').show();
+			$('#add_currentcity1').show();
+			$('#currentcity_val_disp').hide();
+		}
+		
+	   });
+       
+    } 
+	
+	
+}
 </script>
 <script> // hometown script
-$('#hometown').click(function(){
+$('body').delegate('#hometown','click',function(){
 	$('#hme_town').hide();
 	$('#hme_town1').hide();
 	$('ul.home > #hometown-li').append($('#hometown_disp').show());
@@ -2326,9 +2409,10 @@ function add_home_town()
 		data: { home_town:hometown } ,
 		success: function(html)
 		{   					
-			$('#hometown-li #hometown_disp').hide();
-			$('#hme_town').hide();
-			$('#hometown-li').html(html);
+		//	$('#hometown-li #hometown_disp').hide();
+		  // $('#hometown_val_disp').show();
+		//	$('#hme_town').hide();
+			$('ul.home > #hometown-li').html(html);
 		}
 		
 	   });			
@@ -2355,10 +2439,33 @@ function close_home() {
 	$('#hometown_val_disp').show();
 	
 }
+
+function delete_hometown()
+{
+	
+	   if (confirm("Delete Your Hometown from bZZBook") == true) {
+		   	url="<?php echo base_url();?>profile/deletehometown/";
+	 $.ajax({
+		url: url,
+		success: function(html)
+		{   					
+			
+			$('ul.home > #hometown-li').html(html);
+			$('#hometown_val_disp').hide();
+			$('#hme_town1').show();
+			$('#hme_town').show();
+		}
+		
+	   });
+       
+    } 
+	
+	
+}
 </script>
 <script> //family member relations script
 
-$('#familymembers').click(function()
+$('body').delegate('#familymembers','click',function()
 {
 	$('#add_f_member').hide();
 	$('#add_f_member1').hide();
@@ -2380,10 +2487,10 @@ function add_fam_member()
 		success: function(html)
 		{   		
 					
-		
+			$('#old_fam_members').hide();
 			$('#add_f_member').show();
 			$('#add_f_member1').show();	
-			$('#familymembers-li').html(html);
+			$('ul.relations > #familymembers-li').html(html);
 			
 		}
 		
@@ -2411,10 +2518,67 @@ function add_fam_member()
 		$('#add_f_member1').show();	
 	}
 
+function del_fam_member(family_member)
+{
+
+	
+	url="<?php echo base_url();?>profile/delete_fam_member/";
+	 $.ajax({
+		type: "POST",
+		url: url,
+		data: { family_member:family_member } ,
+		success: function(html)
+		{   		
+					
+		
+			$('#add_f_member').show();
+			$('#add_f_member1').show();	
+			$('ul.relations > #familymembers-li').html(html);
+			
+		}
+		
+	   });			
+			
+	
+	
+	
+	
+}
+
+function edit_fam_member(family_member)
+{
+
+   $('#family_relation').show()
+   
+	alert(family_member);
+	url="<?php echo base_url();?>profile/edit_fam_member/";
+	 $.ajax({
+		type: "POST",
+		url: url,
+		data: { family_member:family_member } ,
+		success: function(html)
+		{   		
+					
+		
+			$('#add_f_member').show();
+			$('#add_f_member1').show();	
+			$('ul.relations > #familymembers-li').html(html);
+			
+		}
+		
+	   });			
+			
+	
+	
+	
+	
+}
+
 </script>
 
 <script> //about me script
-$('#aboutme_a').click(function(){
+$('body').delegate('#aboutme_a','click',function()
+{
 	//alert('hai');
 	$(this).hide();
 	$('ul.details_about > #aboutme-li').append($('#aboutme_disp').show());
@@ -2441,7 +2605,7 @@ function add_aboutme()
 		{   
 		
 			$('#aboutme_disp').hide();
-			$('#aboutme_a').hide();
+			$('#about_me_add').show();
 			$('ul.details_about > #aboutme-li').html(html);					
 			
 		}
@@ -2462,10 +2626,37 @@ function close_aboutme()
 	$('#aboutme_val_disp').show();
 }
 
+function del_about_me()
+{
+	
+	
+	   if(confirm("Delete Abouy You from bZZBook") == true) {
+		url="<?php echo base_url();?>profile/deleteaboutme/";
+	 	$.ajax({
+		url: url,
+		success: function(html)
+		{   					
+			
+			$('ul.details_about > #aboutme-li').html(html);
+			$('#aboutme_val_disp').hide();
+			$('#about_me_add').show();
+		
+		}
+		
+	   });
+       
+    } 
+	
+	
+
+}
 </script>
 <script> //favorite quotes sript
-$('#fav_quotes').click(function(){
-	//alert('hai');
+
+	
+$('body').delegate('#fav_quotes','click',function()
+
+	{//alert('hai');
 	$(this).hide();
 	$('ul.details_about > #favquotes-li').append($('#fav_quotes_disp').show());
 
@@ -2511,6 +2702,32 @@ function close_fav_quotes()
 {
 	$('#fav_quotes_disp').hide();
 	$('#fav_quotes').show();
+}
+
+function del_fav_quotes()
+{
+	
+	
+	   if (confirm("Delete Your Favorite Quotes from bZZBook") == true) {
+		   	url="<?php echo base_url();?>profile/deletefavquotes/";
+	 $.ajax({
+		url: url,
+		success: function(html)
+		{   					
+			
+			$('ul.details_about > #favquotes-li').html(html);
+			$('#favquotes_val_disp').hide();
+			$('#add_fav_quotes').show();
+			//$('#fav_quotes').show();
+			
+		}
+		
+	   });
+       
+    } 
+	
+	
+
 }
 
 </script>
@@ -2602,8 +2819,6 @@ function add_othernames()
 		data: { name:name, name_type:name_type } ,
 		success: function(html)
 		{   		
-					
-		
 			$('#other_names').hide();
 		    //$('#oth_name').show();
 			$('#nic_names-li').html(html);
@@ -2619,10 +2834,37 @@ function close_other_names()
 	
 }
 
+
+function del_oth_names(nickname)
+{
+	
+	url="<?php echo base_url();?>profile/delete_nic_names/";
+	 $.ajax({
+		type: "POST",
+		url: url,
+		data: { nickname:nickname } ,
+		success: function(html)
+		{   		
+					
+		
+			$('#other_name').show();
+			$('#oth_name').show();	
+			$('ul.details_about > #nic_names-li').html(html);
+			
+		}
+		
+	   });			
+			
+	
+	
+	
+	
+}
 </script>
 <script>
 
-$('#add_mbl').click(function()
+$('body').delegate('#add_mbl','click',function()
+
 {
 	$('#add_mbl_block').hide();
 	$('#add_mbl_disp').show();
@@ -2634,6 +2876,13 @@ function close_mobile()
 	$('#add_mbl_block').show();
 	
 }
+
+function close_mbl()
+{
+	$('#add_mbl_disp').hide();
+	$('#mobile_val_display').show();
+}
+
 
 function add_mbl()
 {
@@ -2649,7 +2898,6 @@ function add_mbl()
 			$('#add_mbl_disp').hide();
 	      	$('ul.basic_info > #mobile-li').html(html);		
 		
-		
 		}
 	});
 	
@@ -2661,14 +2909,33 @@ function add_mbl()
 	$('#add_mbl_disp').show();
 }
 
-function close_mbl()
+
+
+
+function del_mobile()
 {
-	$('#add_mbl_disp').hide();
-	$('#mobile_val_display').show();
+	if (confirm("Delete Your Mobile No from bZZBook") == true) {
+	url="<?php echo base_url();?>profile/deletemobile/";
+	 $.ajax({
+		url: url,
+		success: function(html)
+		{   					
+			
+			$('ul.basic_info > #mobile-li').html(html);
+		    $('#mobile_val_display').hide();
+			$('#add_mbl_block').show();
+			
+		
+		}
+		
+	   });
+       
+    } 
+	
 }
 </script>
 <script>//add_web_site
-$('#add_website').click(function()
+$('body').delegate('#add_website','click',function()
 {
 	$('#website').hide();
 	$('#website_disp').show();
@@ -2713,10 +2980,32 @@ function close_web_site()
 	$('#website_disp').hide();
 }
 
+function del_website()
+{
+	   if (confirm("Delete Your Website from bZZBook") == true) {
+		   	url="<?php echo base_url();?>profile/deletewebsite/";
+	 $.ajax({
+		url: url,
+		success: function(html)
+		{   					
+			
+			$('ul.basic_info > #website-li').html(html);
+		  
+			$('#add_web_site').show();
+			$('#website_val_display').hide();
+		
+		}
+		
+	   });
+       
+    } 
+	
+	
+}
 </script>
 <script>// aboutme address 
 
-$('#add_address').click(function()
+$('body').delegate('#add_address','click',function()
 {
 	$('#address1').hide();
 	$('#address_disp').show();
@@ -2768,13 +3057,43 @@ function close_address_block()
 	$('#address_val_display').show();
 	$('#address_disp').hide();
 }
+
+function del_address()
+{
+	   if (confirm("Delete Your address from bZZBook") == true) {
+		   	url="<?php echo base_url();?>profile/deleteaddress/";
+	 $.ajax({
+		url: url,
+		success: function(html)
+		{   					
+			
+			$('ul.basic_info > #address-li').html(html);
+		  	$('#address1').show();
+			$('#address_val_display').hide();
+		
+		}
+		
+	   });
+       
+    } 
+	
+	
+}
+
+
+
+
+
+
+
 </script>
 
 
 <script> // about me workplace
 work_edit();
 curent_status();
-$('#add_workplace').click(function()
+work_delete();
+$('body').delegate('#add_workplace','click',function()
 {
 	$('#work_head1').hide();
 	$('#work_head2').hide();
@@ -2805,13 +3124,7 @@ function close_work()
 						$('#work_head1').hide();
 						$('#work_head2').hide();
 						$('ul.backgrounds > #workplace-li').html(data);		
-						//$(".groupMainBlock2").html(data);
-						
-							//$('#organization_form').trigger("reset");
-						//	$('#orgModal').modal('toggle');
-							//organization_edit();
-						
-						
+					
 					  });
 					
 				event.preventDefault();
@@ -2823,6 +3136,7 @@ function work_edit()
 	$('.work_edit').click(function(){
 		
 		organization_id = $(this).attr("id").substr(9);
+		alert(organization_id);
 		$("input[name=work_disp_id]").val(organization_id)
 		url="<?php echo base_url(); ?>profile/orgEdit/";
 		$.post( url, { organization_id: organization_id})
@@ -2842,18 +3156,10 @@ function work_edit()
 			$("select[name=to_months]").val(to_date[1]);
 			$("select[name=to_days]").val(to_date[2]);
 			
-			//start_date = info.start_date.split('-')
-			//$("select[name=year_attended_from]").val(start_date[0]);
-			//$("select[name=month_attended_from]").val(start_date[1]);
-			//end_date = info.end_date.split('-')
-		//$("select[name=year_attended_to]").val(end_date[0]);
-		//$("select[name=month_attended_to]").val(end_date[1]);
-			//$("select[name=curent_status]").val(info.emp_status);	
 			$("input[name=work_action]").val("update");
-			//$('#sm_rightside_'+organization_id).hide();
-			//$('#work_'+organization_id).find('#clearfix').hide();
+			
 			$('#work_'+organization_id).append($('#work_place').show());
-			//$('#work_place').show();
+			
 		});
 		return false;
 
@@ -2863,6 +3169,33 @@ function work_edit()
 	
 }
 
+function work_delete()
+{
+	$('.work_delete').click(function(){
+	org_id = $(this).attr("id").substr(11);
+	//alert(org_id);
+	   if(confirm("Delete Your Organization from bZZBook") == true) {
+		url="<?php echo base_url();?>profile/delete_org/";
+		$.ajax({
+		url: url,
+		type: "POST",
+		data: { org_id:org_id } ,
+		success: function(html)
+		{   					
+			
+			$('ul.backgrounds > #workplace-li').html(html);
+		  	//$('#work_head1').show();
+			//$('#work_head2').show();
+			//$('#address_val_display').hide();
+		
+		}
+		
+	   });
+       
+    } 
+	
+	});
+}
 
 function add_year()
 {
@@ -3104,9 +3437,10 @@ function add_year()
 </script>
 
 <script> // education in aboutme
-
 college_edit();
-$('#add_college').click( function()
+college_delete();
+
+$('body').delegate('#add_college','click',function()
 {
 	$('#college1').hide();
 	$('#college2').hide();
@@ -3119,6 +3453,36 @@ function close_college()
 	$('#college1').show();
 	$('#college2').show();
 	
+}
+
+
+
+function college_delete()
+{
+	$('.college_delete').click(function(){
+	clg_id = $(this).attr("id").substr(14);
+	//alert(clg_id);
+	   if(confirm("Delete Your College Details from bZZBook") == true) {
+		url="<?php echo base_url();?>profile/delete_college/";
+		$.ajax({
+		url: url,
+		type: "POST",
+		data: { clg_id:clg_id } ,
+		success: function(html)
+		{   					
+			
+			$('ul.backgrounds > #college-li').html(html);
+		  	//$('#work_head1').show();
+			//$('#work_head2').show();
+			//$('#address_val_display').hide();
+		
+		}
+		
+	   });
+       
+    } 
+	
+	});
 }
 
 
@@ -3334,8 +3698,10 @@ function college_edit()
 
 </script>
 <script>// aboutme highschool functionality
+school_edit();
+school_delete();
 
-$('#add_school').click( function()
+$('body').delegate('#add_school','click',function()
 {
 	$('#school1').hide();
 	$('#school2').hide();
@@ -3349,6 +3715,38 @@ function close_school()
 	$('#school2').show();
 	
 }
+
+
+
+
+function school_delete()
+{
+	$('.school_delete').click(function(){
+	sch_id = $(this).attr("id").substr(13);
+	//alert(sch_id);
+	   if(confirm("Delete Your College Details from bZZBook") == true) {
+		url="<?php echo base_url();?>profile/delete_school/";
+		$.ajax({
+		url: url,
+		type: "POST",
+		data: { sch_id:sch_id } ,
+		success: function(html)
+		{   					
+			
+			$('ul.backgrounds > #school-li').html(html);
+		  	//$('#work_head1').show();
+			//$('#work_head2').show();
+			//$('#address_val_display').hide();
+		
+		}
+		
+	   });
+       
+    } 
+	
+	});
+}
+
 
 
 
@@ -3627,7 +4025,7 @@ function add_all_languges()
 
 }
 
-$('#add_language').click( function()
+$('body').delegate('#add_language','click',function()
 {
 	$('#lang1').hide();
 	$('#language_disp').show();
@@ -3651,10 +4049,34 @@ function close_lang()
 $('#language_disp').hide();
 $('#lang1').show();	
 }
+
+
+function del_language()
+{
+	   if (confirm("Delete Your Languages from bZZBook") == true) {
+		   	url="<?php echo base_url();?>profile/deletelanguages/";
+	 $.ajax({
+		url: url,
+		success: function(html)
+		{   					
+			
+			$('ul.basic_info > #language-li').html(html);
+		  	$('#lang1').show();
+			$('#language_val_display').hide();
+		
+		}
+		
+	   });
+       
+    } 
+	
+	
+}
+
 </script>
 <script> //about me interest
 
-$('#add_interest').click(function()
+$('body').delegate('#add_interest','click',function()
 {
 	$('#interest').hide();
 	$('#interest_disp').show();
@@ -3701,10 +4123,36 @@ function interests_edit()
 	$('#interest_val_display').hide();
 	$('#interest_disp').show();
 }
+
+
+
+
+function del_interestedin()
+{
+	   if (confirm("Delete Your interests from bZZBook") == true) {
+		   	url="<?php echo base_url();?>profile/deleteinterests/";
+	 $.ajax({
+		url: url,
+		success: function(html)
+		{   					
+			
+			$('ul.basic_info > #interest-li').html(html);
+		  	$('#interest').show();
+			$('#interest_val_disp').hide();
+		
+		}
+		
+	   });
+       
+    } 
+	
+	
+}
+
 </script>
 <script>//aboutme political aspects
 
-$('#add_political').click(function()
+$('body').delegate('#add_political','click',function()
 {
 	$('#political').hide();
 	$('#political_disp').show();
@@ -3746,10 +4194,32 @@ function political_edit()
 	$('#political_val_disp').hide();
 	$('#political_disp').show();
 }
+
+
+function del_political_belief()
+{
+	   if (confirm("Delete Your political belief from bZZBook") == true) {
+		   	url="<?php echo base_url();?>profile/delete_political_belief/";
+	 $.ajax({
+		url: url,
+		success: function(html)
+		{   					
+			
+			$('ul.basic_info > #political-li').html(html);
+		  	$('#political').show();
+			$('#political_val_disp').hide();
+		
+		}
+		
+	   });
+       
+    } 
+	
+}
 </script>
 <script>//aboutme relegious aspects
 
-$('#add_relegious').click(function()
+$('body').delegate('#add_relegious','click',function()
 {
 	$('#relegious').hide();
 	$('#relegious_disp').show();
@@ -3790,6 +4260,29 @@ function relegious_edit()
 	$('#relegious_val_disp').hide();
 	$('#relegious_disp').show();
 }
+
+
+function del_relegion_belief()
+{
+	   if (confirm("Delete Your political belief from bZZBook") == true) {
+		   	url="<?php echo base_url();?>profile/delete_relegion_belief/";
+	 $.ajax({
+		url: url,
+		success: function(html)
+		{   					
+			
+			$('ul.basic_info > #relegion-li').html(html);
+		  	$('#relegious').show();
+			$('#relegious_val_disp').hide();
+		
+		}
+		
+	   });
+       
+    } 
+	
+}
+
 </script>
 <script>
 
@@ -3904,6 +4397,40 @@ $('#prof_skills2').show();
 }
 </script>
 
+<script>
+$('#move_to_places').click(function()
+{
+	$('#overview_tab').removeClass("active");
+	$('#overview').removeClass("active");
+	$('#place_tab').addClass("active");
+	$('#place').addClass("active");
+});
+
+function mov_to_work_edu()
+{
+	$('#overview_tab').removeClass("active");
+	$('#overview').removeClass("active");
+	$('#education_tab').addClass("active");
+	$('#education').addClass("active");
+}
+
+$('#move_to_relation').click(function()
+{
+	$('#overview_tab').removeClass("active");
+	$('#overview').removeClass("active");
+	$('#life_tab').addClass("active");
+	$('#life').addClass("active");
+});
+
+$('#move_to_contact').click(function()
+{
+	$('#overview_tab').removeClass("active");
+	$('#overview').removeClass("active");
+	$('#contact_tab').addClass("active");
+	$('#contact').addClass("active");
+});
+
+</script>
 
 
 

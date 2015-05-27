@@ -11,8 +11,8 @@
 
   <div id="college_val_disp">
    	<?php 
-				if(sizeof($user_college_info)>0):
-				foreach($user_college_info as $clgdetails):
+				if(!empty($user_college_info)){
+				foreach($user_college_info as $clgdetails){
 			?>
                       
                         <div class="sm_rightbox"><h3><a href="#"><?php echo $clgdetails->college_name;?></a></h3>
@@ -21,10 +21,10 @@
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" class="college_edit" id="college_edit<?php echo $clgdetails->college_id; ?>" onclick="college_edit()"><i class="fa fa-pencil"></i>Edit</a></div>
-                        <div class="col-md-3 com_rig"><a href="#"><i class="fa fa-times"></i></a></div>
+                        <div class="col-md-3 com_rig"><a href="javascript:void(0)" class="college_delete" id="college_delete<?php echo $clgdetails->college_id; ?>" onclick="college_delete()"><i class="fa fa-times"></i></a></div>
                         </div>
-                         <?php endforeach;?>
-            <?php endif;?>
+                         <?php } }?>
+          
                         </div>
                         
   <div id="college_disp" style="display:none;">

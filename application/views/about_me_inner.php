@@ -2,6 +2,8 @@
 	 $result = $this->profile_set->save_settings();
 ?>
     <div class="tophead">About You</div>
+     <div class="iner_boxleft" id="about_me_add" style="display:none;"><a href="javascript:void(0)" id="aboutme_a"><i class="fa fa-plus"></i>Write some details about yourself</a></div>
+     <div class="clearfix"></div>
    <div id="aboutme_val_disp">
                       
                         <div class="sm_rightbox"><h3><a href="#"><?php echo $result[0]->aboutme ; ?></a></h3>
@@ -10,7 +12,7 @@
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="about_me_edit()"><i class="fa fa-pencil"></i> Edit</a></div>
-                        <div class="col-md-3 com_rig"><a href="#"><i class="fa fa-times"></i></a></div>
+                        <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_about_me()"><i class="fa fa-times"></i></a></div>
                         </div>
                         <div class="clearfix"></div>
                         </div>

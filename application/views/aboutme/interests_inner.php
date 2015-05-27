@@ -3,6 +3,9 @@
 ?>
   
   
+   						<div class="iner_boxleft" id="interest" style="display:none;">
+                        <a href="javascript:void(0)" id="add_interest"><i class="fa fa-plus"></i>Add who you're interested in</a></div>
+  
                        <div id="interest_val_disp">
                         <div class="sm_leftbox"></div>
                         <div class="sm_rightbox"><h3><a href="#">
@@ -27,7 +30,7 @@
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="interests_edit()"><i class="fa fa-pencil"></i> Edit</a></div>
-                        <div class="col-md-3 com_rig"><a href="#"><i class="fa fa-times"></i></a></div>
+                        <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_interestedin()"><i class="fa fa-times"></i></a></div>
                         </div>
                         </div>
                         

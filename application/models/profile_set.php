@@ -271,6 +271,14 @@ class Profile_set extends CI_Model {
        $this->db->delete('bzz_organizationinfo'); 
    }
    
+     public function del_Organization_Details($id)
+   {	  
+	$this->db->where('organization_id',$id);
+	if( $this->db->delete('bzz_organizationinfo'))
+	return true;
+	else
+	return false;
+   }
    public function delGrpDetails($id)
    {
 	   $this->db->where('groupinfo_id', $id);
@@ -771,6 +779,43 @@ public function add_family_members($member_name,$member_relation)
 	
 	
 	
+	public function delete_family_member($fam_member)
+	{
+		$id = $this->session->userdata('logged_in')['account_id'];
+		
+		$this->db->select('familymembers');
+		$this->db->from('bzz_userinfo');
+		$this->db->where('user_id',$id);
+		$query = $this->db->get();
+		$data = $query->result_array();
+		
+		if($data)
+		{
+		
+		$data = $data[0]['familymembers'];
+		
+		
+		$pos = strpos($data,$fam_member);
+		if($pos !== false)
+		{
+		$rest_of_fam_members = substr_replace($data,'',$pos,strlen($fam_member));
+		}
+	
+		$up_data = array('familymembers'=>$rest_of_fam_members);
+		$this->db->where('user_id',$id);
+		if($this->db->update('bzz_userinfo',$up_data))
+		return true;
+		else
+		return false;
+		}
+	return false;	
+		
+	}
+	
+	
+	
+	
+	
 public function add_about_me($aboutme)
 	{
 		$id = $this->session->userdata('logged_in')['account_id'];
@@ -846,6 +891,44 @@ public function add_fav_quotes($favquotes)
 		}
 		
 	}
+	
+	
+		public function delete_nick_name($nickname)
+	{
+		
+		$id = $this->session->userdata('logged_in')['account_id'];
+		
+		$this->db->select('nickname');
+		$this->db->from('bzz_userinfo');
+		$this->db->where('user_id',$id);
+		$query = $this->db->get();
+		$data = $query->result_array();
+		
+		if($data)
+		{
+		
+		$data = $data[0]['nickname'];
+		
+		
+		$pos = strpos($data,$nickname);
+		if($pos !== false)
+		{
+		$rest_of_nick_names = substr_replace($data,'',$pos,strlen($nickname));
+		}
+	
+		$up_data = array('nickname'=>$rest_of_nick_names);
+		$this->db->where('user_id',$id);
+		if($this->db->update('bzz_userinfo',$up_data))
+		return true;
+		else
+		return false;
+		}
+	return false;	
+		
+	}
+	
+	
+	
 	
 	public function add_mobile($mobile)
 	{
@@ -1055,7 +1138,15 @@ public function add_fav_quotes($favquotes)
 		  
 	}
 	
-	
+	 
+     public function del_college_Details($id)
+   {	  
+	$this->db->where('college_id',$id);
+	if( $this->db->delete('bzz_user_college'))
+	return true;
+	else
+	return false;
+   }
 	
 	
 	public function add_school_info($data)
@@ -1107,6 +1198,15 @@ public function add_fav_quotes($favquotes)
 		
 		  
 	}
+	
+  public function del_school_Details($id)
+   {	  
+	$this->db->where('school_id',$id);
+	if( $this->db->delete('bzz_user_school'))
+	return true;
+	else
+	return false;
+   }
 
 }
 

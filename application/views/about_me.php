@@ -27,13 +27,13 @@
             <div class="posts">
               <div class="col-md-4">
                 <ul class="nav-tabs" role="tablist" id="myTab">
-                  <li role="presentation" class="active"><a href="#overview" aria-controls="home" role="tab" data-toggle="tab">Overview</a></li>
-                  <li role="presentation"><a href="#education" aria-controls="profile" role="tab" data-toggle="tab">Work and Education </a></li>
-                  <li role="presentation"><a href="#place" aria-controls="messages" role="tab" data-toggle="tab">Places You've Lived </a></li>
-                  <li role="presentation"><a href="#contact" aria-controls="messages" role="tab" data-toggle="tab">Contact and Basic Info</a></li>
-                  <li role="presentation"><a href="#family" aria-controls="profile" role="tab" data-toggle="tab">Family and Relationships </a></li>
-                  <li role="presentation"><a href="#details" aria-controls="profile" role="tab" data-toggle="tab">Details About You </a></li>
-                  <li role="presentation"><a href="#life" aria-controls="profile" role="tab" data-toggle="tab">Life Events</a></li>
+                  <li role="presentation" class="active" id="overview_tab"><a href="#overview" aria-controls="home" role="tab" data-toggle="tab">Overview</a></li>
+                  <li role="presentation" id="education_tab"><a href="#education" aria-controls="profile" role="tab" data-toggle="tab">Work and Education </a></li>
+                  <li role="presentation" id="place_tab"><a href="#place" aria-controls="messages" role="tab" data-toggle="tab">Places You've Lived </a></li>
+                  <li role="presentation" id="contact_tab"><a href="#contact" aria-controls="messages" role="tab" data-toggle="tab">Contact and Basic Info</a></li>
+                  <li role="presentation" id="family_tab"><a href="#family" aria-controls="profile" role="tab" data-toggle="tab">Family and Relationships </a></li>
+                  <li role="presentation" id="details_tab"><a href="#details" aria-controls="profile" role="tab" data-toggle="tab">Details About You </a></li>
+                  <li role="presentation" id="life_tab"><a href="#life" aria-controls="profile" role="tab" data-toggle="tab">Life Events</a></li>
                 </ul>
               </div>
               <div class="tab-content col-md-8">
@@ -43,7 +43,7 @@
                       <li>
                         <div class="iner_lefts"><i class="fa fa-plus"></i></div>
                         <div class="inner_rights boxs">
-                          <h3><a href="#">Add a workplace</a></h3>
+                          <h3><a href="javascript:void(0)" onclick="mov_to_work_edu()">Add a workplace</a></h3>
                           <div class="graphic"></div>
                         </div>
                         <div class="clearfix"></div>
@@ -53,23 +53,23 @@
                         <div class="inner_rights boxs">
                           <h5>Studied at <a href="#">Göteborgs Universitet</a></h5>
                           <p><span>Past:</span><a href="#">ZPH School</a></p>
-                          <div class="edu_cation"><a href="#">Edit your education</a></div>
+                          <div class="edu_cation"><a href="javascript:void(0)" onclick="mov_to_work_edu()">Edit your education</a></div>
                         </div>
                         <div class="clearfix"></div>
                       </li>
                       <li>
                         <div class="iner_lefts"></div>
                         <div class="inner_rights boxs">
-                          <h5>Lives in <a href="#"> Vizag</a></h5>
-                          <p><span>From </span><a href="#">Visakhapatnam</a></p>
-                          <div class="edu_cation"><a href="#">Edit the places you've lived</a></div>
+                          <h5>Lives in <a href="#"><?php echo $result[0]->location; ?></a></h5>
+                          <p><span>From </span><a href="#"><?php echo $result[0]->hometown; ?></a></p>
+                          <div class="edu_cation"><a href="javascript:void(0)" id="move_to_places">Edit the places you've lived</a></div>
                         </div>
                         <div class="clearfix"></div>
                       </li>
                       <li>
                         <div class="iner_lefts"><i class="fa fa-plus"></i></div>
                         <div class="inner_rights boxs">
-                          <h3><a href="#">Add a relationship</a></h3>
+                          <h3><a  href="javascript:void(0)" id="move_to_relation">Add a relationship</a></h3>
                           <div class="graphic"></div>
                         </div>
                         <div class="clearfix"></div>
@@ -91,7 +91,7 @@
                         <div class="boxicon"><img src="images/printicon.png" alt=""></div>
                         <div class="boxicon_text">December 13, 1994</div>
                         <br>
-                        <a href="#">Edit your basic info</a> </li>
+                        <a  href="javascript:void(0)" id="move_to_contact">Edit your basic info</a> </li>
                     </ul>
                   </div>
                 </div>
@@ -112,7 +112,7 @@
 					<div id="work_val_disp">	
                        
    	<?php 
-				if(sizeof($organization_details)>0){
+				if(!empty($organization_details)){
 				foreach($organization_details as $orgdetails){
 			?> 
            
@@ -125,7 +125,7 @@
                         <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid">
                         <a class="work_edit" href="javascript:void(0)" onclick="work_edit()" id="work_edit<?php echo $orgdetails->organization_id; ?>"><i class="fa fa-pencil"></i>Edit</a></div>
-                        <div class="col-md-3 com_rig"><a href="#"><i class="fa fa-times"></i></a></div>
+                        <div class="col-md-3 com_rig"><a href="javascript:void(0)" class="work_delete" id="work_delete<?php echo $orgdetails->organization_id; ?>" onclick="work_delete()"><i class="fa fa-times"></i></a></div>
                         </div>
                         
                         <div class="clearfix" id="clearfix"></div>
@@ -336,7 +336,7 @@
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" class="college_edit" id="college_edit<?php echo $clgdetails->college_id; ?>" onclick="college_edit()"><i class="fa fa-pencil"></i>Edit</a></div>
-                        <div class="col-md-3 com_rig"><a href="#"><i class="fa fa-times"></i></a></div>
+                        <div class="col-md-3 com_rig"><a  href="javascript:void(0)" class="college_delete" id="college_delete<?php echo $clgdetails->college_id; ?>" onclick="college_delete()"><i class="fa fa-times"></i></a></div>
                         </div>
                            <div class="clearfix"></div>
                         </div>
@@ -495,7 +495,7 @@
                          <div class="sm_rightside">
                         <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" class="school_edit" id="school_edit<?php echo $schdetails->school_id; ?>" onclick="school_edit()"><i class="fa fa-pencil"></i>Edit</a></div>
-                        <div class="col-md-3 com_rig"><a href="#"><i class="fa fa-times"></i></a></div>
+                        <div class="col-md-3 com_rig"><a href="javascript:void(0)" class="school_delete" id="school_delete<?php echo $schdetails->school_id; ?>" onclick="school_delete()"><i class="fa fa-times"></i></a></div>
                         </div>
                         <div class="clearfix"></div>
                         </div>
@@ -631,7 +631,7 @@
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="current_city_edit()"><i class="fa fa-pencil"></i> Edit</a></div>
-                        <div class="col-md-3 com_rig"><a href="#"><i class="fa fa-times"></i></a></div>
+                        <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="delete_current_city()"><i class="fa fa-times"></i></a></div>
                         </div>
                         </div>
                         <div class="clearfix"></div>
@@ -695,7 +695,7 @@
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="home_town_edit()"><i class="fa fa-pencil"></i> Edit</a></div>
-                        <div class="col-md-3 com_rig"><a href="#"><i class="fa fa-times"></i></a></div>
+                        <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="delete_hometown()"><i class="fa fa-times"></i></a></div>
                         </div>
                         </div>
                         <div class="clearfix"></div>
@@ -763,7 +763,7 @@
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="mbl_edit()"><i class="fa fa-pencil"></i> Edit</a></div>
-                        <div class="col-md-3 com_rig"><a href="#"><i class="fa fa-times"></i></a></div>
+                        <div class="col-md-3 com_rig"><a  href="javascript:void(0)" onclick="del_mobile()"><i class="fa fa-times"></i></a></div>
                         </div>
                         </div>
                         <div class="clearfix"></div>
@@ -809,27 +809,31 @@
                       <li id="address-li"> 
                         <div class="tophead">Add your address</div>
                        
-                         <?php if(empty($result[0]->address)) { ?>
+                         <?php 
+							   if(!empty($result[0]->address))
+							 {
+								$data = explode('|++|',$result[0]->address);
+							 }else
+							 {
+								 $data ='';
+							 }
+                          ?>      
+                          <?php if(empty($data)) {  ?>
       <div class="iner_boxleft" id="address1"><a href="javascript:void(0)" id="add_address"><i class="fa fa-plus"></i>Add your address</a></div> 
-                        <?php } else {
-							
-							$data = explode('|++|',$result[0]->address);
-							//print_r($data);
-							
-							 ?>
+                        <?php } else { ?>
                         
                         <div id="address_val_display">
                         <div class="sm_leftbox"></div>
                         <div class="sm_rightbox"><h3><a href="#">Address</a></h3>
-                        <p><?php echo $data[0]; ?></p>
-                        <p><?php echo $data[1]; ?></p>
-						<p><?php echo $data[2]; ?></p>
-                        <p><?php echo $data[3]; ?></p>
+                        <p><?php if($data) { if($data[0]) {  echo $data[0]; } } ?></p>
+                        <p><?php if($data) { if($data[1]) {  echo $data[1]; } } ?></p>
+						<p><?php if($data) { if($data[2]) {  echo $data[2]; } } ?></p>
+                        <p><?php if($data) { if($data[3]) {  echo $data[3]; } } ?></p>
                         </div>
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="address_edit()"><i class="fa fa-pencil"></i> Edit</a></div>
-                        <div class="col-md-3 com_rig"><a href="#"><i class="fa fa-times"></i></a></div>
+                        <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_address()"><i class="fa fa-times"></i></a></div>
                         </div>
                         </div>
                         <div class="clearfix"></div>
@@ -844,16 +848,16 @@
                           <div id="Address" class="col-md-12">
                             <form class="form-inline Address">
                               <label for="exampleInputName2">Address</label>
-                              <input type="text" placeholder="" id="address" value="<?php if($data[0]) { echo $data[0]; }?>">
+                              <input type="text" placeholder="" id="address" value="<?php if($data) { if($data[0]) {  echo $data[0]; } } ?>">
                               <div class="clearfix"></div>
                               <label for="exampleInputName2">City/Town</label>
-                              <input type="text" placeholder="" id="ad_city" value="<?php if($data[1]) { echo $data[1]; }?>">
+                              <input type="text" placeholder="" id="ad_city" value="<?php if($data) { if($data[1]) {  echo $data[1]; } } ?>">
                               <div class="clearfix"></div>
                               <label for="exampleInputName2">Zip</label>
-                              <input type="text" placeholder="" id="zip_code" value="<?php if($data[2]) { echo $data[2]; }?>">
+                              <input type="text" placeholder="" id="zip_code" value="<?php if($data) { if($data[2]) {  echo $data[2]; } } ?>">
                               <div class="clearfix"></div>
                               <label for="exampleInputName2">Neighborhood</label>
-                              <input type="text" placeholder="" id="neighborhood" value="<?php if($data[3]) { echo $data[3]; }?>">
+                              <input type="text" placeholder="" id="neighborhood" value="<?php if($data) { if($data[3]) {  echo $data[3]; } } ?>">
                               <div class="clearfix"></div>
                             
                             <div class="clearfix"></div>
@@ -930,7 +934,7 @@
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="website_edit()"><i class="fa fa-pencil"></i> Edit</a></div>
-                        <div class="col-md-3 com_rig"><a href="#"><i class="fa fa-times"></i></a></div>
+                        <div class="col-md-3 com_rig"><a  href="javascript:void(0)" onclick="del_website()"><i class="fa fa-times"></i></a></div>
                         </div>
                         </div>
                         <div class="clearfix"></div>
@@ -996,7 +1000,7 @@
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="interests_edit()"><i class="fa fa-pencil"></i> Edit</a></div>
-                        <div class="col-md-3 com_rig"><a href="#"><i class="fa fa-times"></i></a></div>
+                        <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_interestedin()"><i class="fa fa-times"></i></a></div>
                         </div>
                         </div>
                         <div class="clearfix"></div>
@@ -1069,7 +1073,7 @@
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="languages_edit()"><i class="fa fa-pencil"></i> Edit</a></div>
-                        <div class="col-md-3 com_rig"><a href="#"><i class="fa fa-times"></i></a></div>
+                        <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_language()"><i class="fa fa-times"></i></a></div>
                         </div>
                         </div>
                         <div class="clearfix"></div>
@@ -1141,7 +1145,7 @@
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="relegious_edit()"><i class="fa fa-pencil"></i> Edit</a></div>
-                        <div class="col-md-3 com_rig"><a href="#"><i class="fa fa-times"></i></a></div>
+                        <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_relegion_belief()"><i class="fa fa-times"></i></a></div>
                         </div>
                         </div>
                         <div class="clearfix"></div>
@@ -1154,12 +1158,12 @@
                             <form class="form-inline ">
                               <div class="form-group birth_ins">
                                 <label for="exampleInputName2">Religious Views</label>
-                                <input type="text" placeholder="What are your religious beliefs?" id="rel_belief" value="<?php if($data[0]) { echo $data[0]; } ?>">
+                                <input type="text" placeholder="What are your religious beliefs?" id="rel_belief" value="<?php  if(!empty($result[0]->religious)) {  $data = explode('|@|',$result[0]->religious); if($data[0]) { echo $data[0]; }} ?>">
                               </div>
                               <div class="clearfix"></div>
                               <div class="form-group birth_ins">
                                 <label for="exampleInputName2">Description</label>
-                                <textarea rows="4" id="rel_description"><?php if($data[1]) { echo $data[1]; } ?></textarea>
+                                <textarea rows="4" id="rel_description"><?php if(!empty($result[0]->religious)) {  $data = explode('|@|',$result[0]->religious);  if($data[1]) { echo $data[1]; } }?></textarea>
                               </div>
                               <div class="clearfix"></div>
                             </form>
@@ -1194,15 +1198,15 @@
                         <div class="sm_leftbox"></div>
                         <div class="sm_rightbox"><h3><a href="#">
 						<?php  
-						$data = explode('|@|',$result[0]->political);
-						echo $data[0];
+						$p_data = explode('|@|',$result[0]->political);
+						echo $p_data[0];
 						 ?></a></h3>
-                        <p><?php echo $data[1]; ?></p>
+                        <p><?php echo $p_data[1]; ?></p>
                         </div>
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="political_edit()"><i class="fa fa-pencil"></i> Edit</a></div>
-                        <div class="col-md-3 com_rig"><a href="#"><i class="fa fa-times"></i></a></div>
+                        <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_political_belief()"><i class="fa fa-times"></i></a></div>
                         </div>
                         </div>
                         <?php } ?>
@@ -1212,12 +1216,12 @@
                             <form class="form-inline ">
                               <div class="form-group birth_ins">
                                 <label for="exampleInputName2">Political Views</label>
-                                <input type="text" placeholder="What are your political beliefs?" id="political_belief" value="<?php if($data[0]) { echo $data[0]; }?>">
+                                <input type="text" placeholder="What are your political beliefs?" id="political_belief" value="<?php   if(!empty($result[0]->political)) { $p_data = explode('|@|',$result[0]->political); if($p_data[0]) { echo $p_data[0]; }}?>">
                               </div>
                               <div class="clearfix"></div>
                               <div class="form-group birth_ins">
                                 <label for="exampleInputName2" >Description</label>
-                                <textarea rows="4" id="pol_description"><?php if($data[1]) { echo $data[1]; }?></textarea>
+                                <textarea rows="4" id="pol_description"><?php  if(!empty($result[0]->political)) { $p_data = explode('|@|',$result[0]->political); if($p_data[1]) { echo $p_data[1]; } }?></textarea>
                               </div>
                               <div class="clearfix"></div>
                             </form>
@@ -1320,19 +1324,17 @@
                                           
                       
                       <li id="familymembers-li">
-                       <?php if(empty($result[0]->familymembers)) { ?>
-                        <div class="tophead">Family Members</div>
+                      
+                         <div class="tophead">Family Members</div>
                         <div class="iner_lefts" id="add_f_member1"><i class="fa fa-plus"></i></div>
                         <div class="inner_rights boxs" id="add_f_member">
                           <a href="javascript:void(0)"  id="familymembers"> <h3>Add a family member</h3></a>
                         </div>
-                          <?php }else { ?>
-                           <div class="tophead">Family Members</div>
-                        <div class="iner_lefts" id="add_f_member1"><i class="fa fa-plus"></i></div>
-                        <div class="inner_rights boxs" id="add_f_member">
-                          <a href="javascript:void(0)"  id="familymembers"> <h3>Add a family member</h3></a>
-                        </div>
-                        
+                      
+                      
+                       <?php if(!empty($result[0]->familymembers)) { ?>
+                   
+                                               
                    <?php    $trimmed = rtrim($result[0]->familymembers,',');
 	//echo $result;
 	 //echo $result[0]->familymembers;
@@ -1353,7 +1355,7 @@
 	?> 
                    
                      
-                     <li>
+                 
                         <!--<div class="tophead">All comman Headings styles</div>-->
                         <div class="sm_leftbox"></div>
                         <div class="sm_rightbox"><h3><a href="#"><?php echo $data[0]; ?> </a></h3>
@@ -1361,12 +1363,12 @@
                         </div>
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
-                        <div class="col-md-6 com_mid"><a href="#"><i class="fa fa-pencil"></i> Edit</a></div>
-                        <div class="col-md-3 com_rig"><a href="#"><i class="fa fa-times"></i></a></div>
+                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="edit_fam_member('<?php echo $data[0]."-".$data[1].","; ?>')"><i class="fa fa-pencil"></i> Edit</a></div>
+                        <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_fam_members('<?php echo $data[0]."-".$data[1].","; ?>')"><i class="fa fa-times"></i></a></div>
                         </div>
                         
                         <div class="clearfix"></div>
-                      </li>
+                   
                       <?php } }?>
                      
                        
@@ -1447,7 +1449,7 @@
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="about_me_edit()"><i class="fa fa-pencil"></i> Edit</a></div>
-                        <div class="col-md-3 com_rig"><a href="#"><i class="fa fa-times"></i></a></div>
+                        <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_about_me()"><i class="fa fa-times"></i></a></div>
                         </div>
                         </div>
                         <div class="clearfix"></div>
@@ -1459,14 +1461,6 @@
                         <div class="clearfix"></div>
                      
                       </li>
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
                       
                       
                       <!----------------------   Aboutme start  ------------------------>
@@ -1516,20 +1510,11 @@
                       
                       
                       <li id="nic_names-li">
-                        
-                        <?php if(empty($result[0]->nickname)) { ?>
                         <div class="tophead">Other Names</div>
-         <div class="iner_boxleft" ><a href="javascript:void(0)" id="oth_name"><i class="fa fa-plus"></i>Add a nickname, a birth name...</a></div>
-                  <?php } else { ?>
-                      <div class="tophead">Other Names</div>   
-      <div class="iner_boxleft" ><a href="javascript:void(0)" id="oth_name"><i class="fa fa-plus"></i>Add a nickname, a birth name...</a></div>
-      <div class="clearfix"></div>
-
-
-				<?php 
-	 
-
-
+                                               
+         <div class="iner_boxleft" id="other_name"><a href="javascript:void(0)" id="oth_name"><i class="fa fa-plus"></i>Add a nickname, a birth name...</a></div>
+                        <?php if(!empty($result[0]->nickname)) {
+			
  $result1 = rtrim($result[0]->nickname,' ');
 	//echo $result;
 	 //echo $result[0]->familymembers;
@@ -1548,8 +1533,7 @@
 	?>
 		
         
-     
-                     <li>   <!--<div class="tophead">All comman Headings styles</div>-->
+        <!--<div class="tophead">All comman Headings styles</div>-->
                         <div class="sm_leftbox"></div>
                         <div class="sm_rightbox"><h3><a href="#"><?php echo $data[0]; ?> </a></h3>
                         <p><?php echo $data[1]; ?></p>
@@ -1557,14 +1541,13 @@
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)"><i class="fa fa-pencil"></i> Edit</a></div>
-                        <div class="col-md-3 com_rig"><a href="#"><i class="fa fa-times"></i></a></div>
+                        <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_oth_names('<?php echo $data[0]."-".$data[1]." "; ?>')"><i class="fa fa-times"></i></a></div>
                         </div>
                         
                         <div class="clearfix"></div>
-                     </li>
+                  
         
-        
-        <?php }} }?>
+        <?php }} } ?>
         
         
 
@@ -1631,7 +1614,7 @@
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="fav_quotes_edit()"><i class="fa fa-pencil"></i> Edit</a></div>
-                        <div class="col-md-3 com_rig"><a href="#"><i class="fa fa-times"></i></a></div>
+                        <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_fav_quotes()"><i class="fa fa-times"></i></a></div>
                         </div>
                         
                         </div>
