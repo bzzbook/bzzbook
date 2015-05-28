@@ -79,18 +79,19 @@
                   <div class="addresbox col-lg-5 col-md-5 ">
                     <ul>
                       <li>
-                        <div class="boxicon"><img src="images/phoneicon.png" alt=""></div>
-                        <div class="boxicon_text">9876543210</div>
+                        <div class="boxicon"><img src="<?php echo base_url(); ?>images/phoneicon.png" alt=""></div>
+                        <div class="boxicon_text"><?php if($result[0]->user_phoneno) { echo $result[0]->user_phoneno; }else echo"mobile no not Available"; ?></div>
                       </li>
                       <li>
-                        <div class="boxicon"><img src="images/mailicon.png" alt=""></div>
-                        <div class="boxicon_text">987654321@bzzbook<br>
-                          .com</div>
+                        <div class="boxicon"><img src="<?php echo base_url(); ?>images/mailicon.png" alt=""></div>
+                        <div class="boxicon_text"><?php if($result[0]->email) { echo $result[0]->email; }else echo"email not Available";?>
+                         </div>
                       </li>
                       <li>
-                        <div class="boxicon"><img src="images/printicon.png" alt=""></div>
-                        <div class="boxicon_text">December 13, 1994</div>
-                        <br>
+                        <div class="boxicon"><img src="<?php echo base_url(); ?>images/printicon.png" alt=""></div>
+                        <div class="boxicon_text"><?php $unixTimestamp = strtotime($result[0]->user_dob);
+				 echo date('d',$unixTimestamp)."th ".date('F',$unixTimestamp).", ".date('Y',$unixTimestamp); ?>
+                        </div><br>
                         <a  href="javascript:void(0)" id="move_to_contact">Edit your basic info</a> </li>
                     </ul>
                   </div>
@@ -165,7 +166,7 @@
                                     I currently work </div>
                                   <div class="col-md-12">
                                     <div class="col-md-6 yearadd" id="add_years" style="display:none;"><a href="javascript:void(0)" onclick="add_year()" ><i class="fa fa-plus"></i>Add year</a></div>
-                                  <select id="frm_years" style="display:none;" name="frm_years" >
+                                  <select id="frm_years" style="display:none;" name="frm_years" class="frm_years" >
                                   <option value="0"> --- </option>
                                    <option value="1950" selected="selected">1950</option>
                                    <?php for($i=1951;$i<=date(Y);$i++){?>
@@ -188,17 +189,17 @@
                                 	<option value="<?php echo $i;?>" ><?php echo $i;?></option>
                               	  <?php }?>
                                   </select>
-                                   <div id="to" style="display:none;">to </div>
+                                   <div id="to" style="display:none;" class="to">to </div>
                                     <div id="to_present" style="display:none;">to present</div>
-                                  <a href="javascript:void(0)" id="to_years_link"  style="display:none;" ><i class="fa fa-plus"></i>Add year</a>
+                                  <a href="javascript:void(0)" id="to_years_link"  style="display:none;" class="to_years_link"><i class="fa fa-plus"></i>Add year</a>
                                                        
                                    
                                   </div>
                                   
                                   <!---  ---->
-                                  <div class="col-md-12" id="todates_dropdowns">
+                                  <div class="col-md-12 todates_dropdown" id="todates_dropdowns">
                                     
-                                  <select id="to_years" style="display:none;" name="to_years">
+                                  <select id="to_years" style="display:none;" name="to_years" class="to_years">
                                   <option value="0"> --- </option>
                                    <?php for($i=1950;$i<=date(Y);$i++){?>
                                 	<option value="<?php echo $i;?>"><?php echo $i;?></option>
@@ -292,7 +293,7 @@
 								  </div>
                                   <label for="exampleInputName2">Professional Skills</label>
                                   <input type="text" placeholder="" id="professional_skils">
-                                  <input type="text" id="addedskills" name="addedskills" value="<?php if($result[0]->professional_skills){ echo $result[0]->languages; } ?>"></input>
+                                  <input type="hidden" id="addedskills" name="addedskills" value="<?php if($result[0]->professional_skills){ echo $result[0]->professional_skills; } ?>"></input>
                                 </div>
                                 <div class="clearfix"></div>
                               </form>
@@ -357,14 +358,14 @@
                                   <div class="form-group period">
                                     <label for="exampleInputName2">Time Period</label>
                                      <a href="javascript:void(0)" id="clg_add_year"><i class="fa fa-plus"></i>Add year</a></div>
-                                     <span class="to" id="clg_to">to</span>
+                                     
                                   <div class="col-md-12">
                                     <div class="col-md-4"></div>
-                                    <div class="col-md-8 yearto"><a href="javascript:void(0)" id="to_years_clg"><i class="fa fa-plus"></i>Add year</a></div>
+                                    <div class="col-md-8 yearto"><a href="javascript:void(0)" id="to_years_clg" class="to_years_clg"><i class="fa fa-plus"></i>Add year</a></div>
                                   </div>
                                   
                                   
-                                   <select id="frm_years_college" style="display:none;" name="frm_years" >
+                                   <select id="frm_years_college" style="display:none;" name="frm_years" class="frm_clg_years">
                                   <option value="0"> --- </option>
                                    <option value="1950" selected="selected">1950</option>
                                    <?php for($i=1951;$i<=date(Y);$i++){?>
@@ -390,10 +391,10 @@
                               	  <?php }?>
                                   </select>
                          
-                        
+                        <span class="to" id="clg_to">to</span>
                         <div class="col-md-12" id="clg_todates_dropdowns">
                                     
-                                  <select id="to_years_college" style="display:none;" name="to_years">
+                                  <select id="to_years_college" style="display:none;" name="to_years" class="to_clg_years">
                                   <option value="0"> --- </option>
                                    <?php for($i=1950;$i<=date(Y);$i++){?>
                                 	<option value="<?php echo $i;?>"><?php echo $i;?></option>
@@ -428,29 +429,34 @@
                                   </div>
                                   <div class="clearfix"></div>
                                   <div class="form-group">
-                                    <label for="exampleInputName2">School</label>
+                                    <label for="exampleInputName2">conentration1</label>
                                     <input type="text" name="concentration1">
                                   </div>
                                   <div class="form-group">
-                                    <label for="exampleInputName2"></label>
+                                    <label for="exampleInputName2">conentration2</label>
                                     <input type="text" name="concentration2">
                                   </div>
                                   <div class="form-group">
-                                    <label for="exampleInputName2"></label>
+                                    <label for="exampleInputName2">conentration3</label>
                                     <input type="text" name="concentration3">
                                   </div>
-                                  <div class="form-group">
+                                  <div class="form-group newone11">
+                                  
                                     <label for="exampleInputName2">Attended for</label>
-                                    <label class="add_new">
-                                      <input type="radio" checked="" value="college" id="optionsRadios1" name="optionsRadios">
-                                      college </label>
+                                   
+                                      <input type="radio" checked="" value="college" id="optionsRadios1" name="optionsRadios" class="college_radio" />
+                                      college 
+                                    
                                   </div>
                                   <div class="clearfix"></div>
-                                  <div class="form-group">
+                                  <div class="form-group newone11">
+                                   
                                     <label for="exampleInputName2"></label>
-                                    <label class="add_new">
-                                      <input type="radio" checked="" value="graduate" id="optionsRadios1" name="optionsRadios">
-                                      Graduate School </label>
+                                    
+                                     <input type="radio" checked="" value="graduate" id="optionsRadios1" name="optionsRadios">
+                                     
+                                      Graduate School 
+                            
                                   </div>
                                   <div class="clearfix"></div>
                                   <div class="box_bottom">
@@ -516,12 +522,12 @@
                                   <div class="form-group period">
                                     <label for="exampleInputName2">Time Period</label>
                                 <a href="javascript:void(0)" id="frm_years_sch"> <i class="fa fa-plus"></i>Add year</a></div>
-                                    <span class="to" id="sch_to">to</span>
+                                   
                                   <div class="col-md-12">
                                     <div class="col-md-4"></div>
                                     <div class="col-md-8 yearto"><a href="javascript:void(0)" id="to_years_sch"> <i class="fa fa-plus"></i>Add year</a></div>
                                   </div>
-                                   <select id="frm_years_school" style="display:none;" name="frm_years" >
+                                   <select id="frm_years_school" style="display:none;" name="frm_years" class="frm_sch_years">
                                   <option value="0"> --- </option>
                                    <option value="1950" selected="selected">1950</option>
                                    <?php for($i=1951;$i<=date(Y);$i++){?>
@@ -548,9 +554,9 @@
                                   </select>
                          
                         
-                    
+                     <span class="to" id="sch_to">to</span>
                                     
-                                  <select id="to_years_school" style="display:none;" name="to_years">
+                                  <select id="to_years_school" style="display:none;" name="to_years" class="to_sch_years">
                                   <option value="0"> --- </option>
                                    <?php for($i=1950;$i<=date(Y);$i++){?>
                                 	<option value="<?php echo $i;?>"><?php echo $i;?></option>
@@ -750,7 +756,7 @@
                   <div class="smallboxes">
                     <ul class="basic_info">
                       <li id="mobile-li">
-                        <div class="tophead">Contact Information</div>
+                       <!-- <div class="tophead">Contact Information</div> -->
                         <?php if(empty($result[0]->mobile)) { ?>
                         <div class="iner_boxleft" id="add_mbl_block"><a href="javascript:void(0)" id="add_mbl"><i class="fa fa-plus"></i>Add a mobile phone</a></div>
                         <?php } else { ?>
@@ -807,7 +813,7 @@
                         <div class="clearfix"></div>
                       </li>
                       <li id="address-li"> 
-                        <div class="tophead">Add your address</div>
+                       <!-- <div class="tophead">Add your address</div> -->
                        
                          <?php 
 							   if(!empty($result[0]->address))
@@ -1039,22 +1045,24 @@
                       <div class="inner_rights boxs">
                           <div class="birth col-md-12">
                             <div class="birth_left col-md-6">Birth Date</div>
-                            <div class="birth_right col-md-6">June 15</div>
+                            <div class="birth_right col-md-6"><?php $unixTimestamp = strtotime($result[0]->user_dob);
+				 echo date('d',$unixTimestamp).", ".date('F',$unixTimestamp); ?></div>
                           </div>
                           <div class="birth col-md-12">
                             <div class="birth_left col-md-6">Birth Year</div>
-                            <div class="birth_right col-md-6">1979</div>
+                            <div class="birth_right col-md-6"><?php $unixTimestamp = strtotime($result[0]->user_dob);
+				 echo date('Y',$unixTimestamp); ?></div>
                           </div>
                           <div class="birth col-md-12">
                             <div class="birth_left col-md-6">Gender</div>
-                            <div class="birth_right col-md-6">Male</div>
+                            <div class="birth_right col-md-6"><?php if($result[0]->user_gender){ if($result[0]->user_gender == 'm'){ echo "male"; } else echo "female";  }?></div>
                           </div>
                           
                         </div>
                       </li>
                       <li id="language-li"> 
                         
- 						 <div class="tophead">Languages</div>
+ 						<!-- <div class="tophead">Languages</div> -->
                         <?php if(empty($result[0]->languages)) { ?>
                         <div class="iner_boxleft" id="lang1"><a href="javascript:void(0)" id="add_language"><i class="fa fa-plus"></i>Add a language</a></div> <?php } else { ?>
                         
@@ -1101,7 +1109,7 @@
 								  </div>
                                 <label for="exampleInputName2">Languages</label>
                                 <input type="text" id="lang_box" />
-                                <input type="text" id="addedlangs" name="addedlangs" value="<?php if($result[0]->languages){ echo $result[0]->languages; } ?>"></input>
+                                <input type="hidden" id="addedlangs" name="addedlangs" value="<?php if($result[0]->languages){ echo $result[0]->languages; } ?>"></input>
                               </div>
                               <div class="clearfix"></div>
                             </form>
@@ -1169,7 +1177,7 @@
                             </form>
                           
                           <div class="box_bottom">
-                            <div class="publics col-md-3">
+                            <div class="publics col-md-4">
                               <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Friends of Friends <span class="caret"></span></button>
                             </div>
                             <div class="col-md-8 skil_box">
@@ -1227,7 +1235,7 @@
                             </form>
                           
                           <div class="box_bottom">
-                            <div class="publics col-md-3">
+                            <div class="publics col-md-4">
                               <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Friends of Friends <span class="caret"></span></button>
                             </div>
                             <div class="col-md-8 skil_box">
@@ -1364,7 +1372,7 @@
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="edit_fam_member('<?php echo $data[0]."-".$data[1].","; ?>')"><i class="fa fa-pencil"></i> Edit</a></div>
-                        <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_fam_members('<?php echo $data[0]."-".$data[1].","; ?>')"><i class="fa fa-times"></i></a></div>
+                        <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_fam_member('<?php echo $data[0]."-".$data[1].","; ?>')"><i class="fa fa-times"></i></a></div>
                         </div>
                         
                         <div class="clearfix"></div>
@@ -1392,9 +1400,9 @@
                                   <div class="form-group Familys">
                                   <div class="col-md-6 col-md-offset-3">
                                   <select name="family_member_type" id="family_member_type">
-                                      <option value="relation,">relation</option>
-                                      <option value="lover,">lover</option>
-                                      <option value="frnd,">frnd</option>
+                                      <option value="relation">relation</option>
+                                      <option value="lover">lover</option>
+                                      <option value="frnd">frnd</option>
                                   </select>
                                   </div>
                                   </div>

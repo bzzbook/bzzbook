@@ -3,7 +3,7 @@
 ?>
   
   
-  <div class="tophead">Languages</div>
+ <!-- <div class="tophead">Languages</div> -->
                         <div class="iner_boxleft" id="lang1" style="display:none;"><a href="javascript:void(0)" id="add_language"><i class="fa fa-plus"></i>Add a language</a></div>
                         
                        <div id="language_val_display">

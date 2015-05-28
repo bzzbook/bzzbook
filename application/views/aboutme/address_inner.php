@@ -10,7 +10,7 @@
 ?>
   
   
-   <div class="tophead">Add your address</div>
+  <!-- <div class="tophead">Add your address</div> -->
     <div class="iner_boxleft" id="address1" style="display:none;"><a href="javascript:void(0)" id="add_address"><i class="fa fa-plus"></i>Add your address</a></div> 
                        
                                                

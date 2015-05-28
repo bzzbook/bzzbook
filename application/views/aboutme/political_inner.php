@@ -43,7 +43,7 @@
                             </form>
                          
                           <div class="box_bottom">
-                            <div class="publics col-md-3">
+                            <div class="publics col-md-4">
                               <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Friends of Friends <span class="caret"></span></button>
                             </div>
                             <div class="col-md-8 skil_box">

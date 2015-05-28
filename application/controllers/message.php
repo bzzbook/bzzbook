@@ -34,7 +34,7 @@ public function send_msg($msg_id ='')
 		if(!empty($msg_id))
 		redirect('/profile/messageview/'.$msg_id);
 		else
-	    redirect('/profile/compose');
+	    redirect('/profile/message');
 		}
 		else{
 			$this->session->set_flashdata('send_msg', 'Please input to field');

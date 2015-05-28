@@ -5,32 +5,12 @@
                         </div>
  
         <?php    
-		  $result = $this->profile_set->save_settings();
+		  $result = $this->profile_set->get_family_members();
+		
 		 
-		  if(!empty($result[0]->familymembers))
-		  {
-		 $trimmed = rtrim($result[0]->familymembers,',');
-	//echo $result;
-	 //echo $result[0]->familymembers;
-	$devided_names = explode(',',$trimmed);
-	$data = array();
-	foreach($devided_names as $name)
-	{
-		$cat_names = explode('-',$name);
-		$data[] = $cat_names;
-	}
-	//print_r($data);
-
-	foreach($data as $data)
-	{
-		//print_r($data);
-		//echo '<br>';
-	//	echo $data[0] ." is ". $data[1];
-	?> 
-                   
-                     
+       ?>
                      <li>
-                        <!--<div class="tophead">All comman Headings styles</div>-->
+                        <!-- <div class="tophead">All comman Headings styles</div>-->
                         <div class="sm_leftbox"></div>
                         <div class="sm_rightbox">
                         <h3><a href="#"><?php if($data[0]) { echo $data[0]; }?> </a></h3>

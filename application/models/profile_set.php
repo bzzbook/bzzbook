@@ -742,38 +742,38 @@ public function add_home_town($hometown)
 	
 public function add_family_members($member_name,$member_relation)
 	{
-		$id = $this->session->userdata('logged_in')['account_id'];
-		
-		$this->db->select('familymembers');
-		$this->db->from('bzz_userinfo');
-		$this->db->where('user_id',$id);
-		$query = $this->db->get();
-		$data = $query->result_array();
-		
-		if(empty($data))
-		{
-			$fam_member_relation = $member_name."-".$member_relation;
-			$this->db->where('user_id',$id);
-			$this->db->insert('bzz_userinfo',$up_data);
-			if($this->db->insert('bzz_userinfo',$up_data))
-		return true;
-		else
-		return false;
-		
-		}else
-		{
-			$fam_member_relation = $member_name."-".$member_relation ;
-			$data = $data[0]['familymembers'];
-			$data .=$fam_member_relation;
+	
+			$up_data = array(
+			'member_name'=>$member_name,
+			'member_relation' =>$member_relation,
+			'user_id'=>$this->session->userdata('logged_in')['account_id']
+			);
 			
-			$up_data = array('familymembers'=>$data);
-		$this->db->where('user_id',$id);
-		if($this->db->update('bzz_userinfo',$up_data))
+			if($this->db->insert('bzz_family_members',$up_data))
+			{
 		return true;
-		else
+			}else{
 		return false;
+		
 		}
 		
+	}
+	
+	public function get_family_members()
+	{
+		$id = $this->session->userdata('logged_in')['account_id']
+		$this->db->select('*');
+		$this->db->from('bzz_family_members');
+		$this->db->where('user_id',$id);
+		$this->db->order_by('fam_member_id','desc');
+		$query = $this->db->get();
+		if($query->num_rows() > 0)
+		{
+			return $query->result_array();
+		}else 
+		{
+			return false;
+		}
 		
 	}
 	
@@ -1039,6 +1039,14 @@ public function add_fav_quotes($favquotes)
 	
 	public function add_work_info($data)
 	{
+		if(isset($data['curent_status']))
+		{
+			$current_status = $data['curent_status'];
+			
+		}else
+		{
+			$current_status = "N";
+		}
 		
 		if(empty($data['to_years']))
 		{	
@@ -1054,7 +1062,7 @@ public function add_fav_quotes($favquotes)
 	   	$workInfo = array(
 		'org_name'=>$data['company'],
 		'position'=>$data['position'],
-		'emp_status'=>$data['curent_status'],
+		'emp_status'=>$current_status,
 		'start_date'=>$data['frm_years'].'-'.$data['frm_months'].'-'.$data['frm_days'],
 		'end_date'=>$end_date,
 		'org_desc'=>$data['description'],

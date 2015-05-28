@@ -13,7 +13,7 @@
 				if(!empty($user_school_info)){
 				foreach($user_school_info as $schdetails){
 			?>
-                      
+                      <div class="latest_works">
                         <div class="sm_rightbox"><h3><a href="#"><?php echo $schdetails->school_name;?></a></h3>
                         <p></p>
                         </div>
@@ -21,6 +21,7 @@
                         <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" class="school_edit" id="school_edit<?php echo $schdetails->school_id; ?>" onclick="school_edit()"><i class="fa fa-pencil"></i>Edit</a></div>
                         <div class="col-md-3 com_rig"><a href="#"><i class="fa fa-times"></i></a></div>
+                        </div>
                         </div>
                          <?php } }?>
            

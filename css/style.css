@@ -298,8 +298,6 @@ margin-top: 5px;
 padding: 5px;
 border: 0px solid gainsboro;}
 .aboutme .tab-content{ border-left:1px solid #eeeeee; min-height:200px;}
-
-
 .aboutme .nav-tabs li.active:before { border-left: 3px solid #fbc436;  content: "";   height: 47px;   left: 0;  position: absolute;}
 
 
@@ -694,7 +692,7 @@ float:right; margin-top:10px;
 }
 .btn-green {
     background-color: #609b34;
-      color: #fff; margin-right:10px;
+      color: #fff; margin-right:10px; float:left;
 }
 .btn-yellow{background-color: #fcc434;
        color: #242424;}
@@ -942,7 +940,7 @@ width: 73.7%; !important;}
 .move{ font-size:14px; color:#bababa; font-family: "Roboto",sans-serif; font-weight:300;}
 .inbox.pfSettings .tab-pane .table .move .glyphicon{ color:#bababa; padding:2px; border:1px solid #bababa; }
 .ad_right{ text-align:right; color:#bababa;}
-.form-group > label {font-weight: 300;}
+.form-group > label {font-weight: 300; padding-right: 8px;}
 .when_box{ font-weight: 300;}
 .newevent {border-top: 1px solid #ccc; margin: 15px 0px;}
 
@@ -1025,13 +1023,13 @@ width:100%; }
 .mod_test{ color:#a1a1a1; font-weight:300;}
 .tex_testbox{ font-size:12px; color:#9b9b9b; font-weight:300;}
 .replys{ font-weight:bold;}
-.mod_text{  font-size:16px; color:#000;  font-family: 'Roboto', sans-serif; font-weight:300; width:45%; float:left;}
+.mod_text{  font-size:14px; color:#000;  font-family: 'Roboto', sans-serif; font-weight:300; width:45%; float:left;}
 .mod_text span{ font-size:12px; color:#9b9b9b;}
 .mod_rights{ float:left; color:#a1a1a1; font-weight:300;}
 .mod_rights span{ padding:0 10px; }
 .mod_rights a{ color:#a1a1a1; font-weight:300;}
 .mod_rights a:hover{ color:#a1a1a1;}
-.right_side{ float:right; font-size:12px; color:#161616;}
+.right_side{ float:right; font-size:11px; color:#161616;}
 .right_side a{ color:#161616;}
 .right_side a:hover{ color:#161616;}
 .ico_ns .fa{ border:none;}
@@ -1045,7 +1043,7 @@ width:100%; }
 .midle_box{ font-weight:300;}
 .midle_box p{ padding:10px 0; line-height:25px;}
 .bott_boxes{ border-bottom:1px solid #ccc !important; font-weight:300; }
-.bott_replys{ width:97%; padding:6px 5px; border:1px solid #d7d7d7; font-weight:300; margin-left:12px;}
+.bott_replys{ width:100%; padding:6px 5px; border:1px solid #d7d7d7; font-weight:300;}
 .bott_replys a{color:#a4a4a4;}
 .bott_replys a:hover{color:#a4a4a4;}
 
@@ -1173,9 +1171,9 @@ footer{ color:#acacac; font-size:20px; color:#acacac; text-align:center; padding
 .smallboxes ul li:last-child { border-bottom:none; }
 #education .small_boxes { border-bottom:none; }
 #education .small_boxes ul { list-style:none; }
-.tophead { font-size:14px; font-weight:300; text-transform: uppercase; color:#737373; width:100%;/* line-height:35px; */ border-bottom:1px solid #ececec; margin-bottom:10px; }
-.workplace { font-size:13px; font-weight:300; padding:0; margin: 15px 0 0;}
-.workplace label { width:102px; text-align:right; margin-bottom:8px; }
+.tophead { font-size:14px; font-weight:300; text-transform: uppercase; color:#737373; width:100%;margin-top: 15px; border-bottom:1px solid #ececec; margin-bottom:10px; }
+.workplace { font-size:13px; font-weight:300; padding:0; margin: 15px 0 5px;  border-bottom: 1px solid #ececec;}
+.workplace label {/* width:102px;*/ text-align:right; margin-bottom:8px; vertical-align:top; }
 .workplace input { width:210px; border:1px solid #ececec; font-size:13px; padding:5px; margin-bottom:8px; }
 *::-moz-placeholder, *:-moz-placeholder {
  color: #9197a3;
@@ -1183,7 +1181,7 @@ footer{ color:#acacac; font-size:20px; color:#acacac; text-align:center; padding
 /*#education .fa{ padding:0 10px 0 15px;}*/
 .rightblock a { color:#9197a3; margin-left:10px; }
 .rightblock a:hover { color:#9197a3; }
-.workplace textarea { width:210px; }
+.workplace textarea { width:210px; border: 1px solid #ececec; }
 .addyear { float:left; text-align:right }
 .outside { width:20px !important; }
 .yearadd { text-align:right; }
@@ -1195,7 +1193,7 @@ footer{ color:#acacac; font-size:20px; color:#acacac; text-align:center; padding
 
 #skills label { width:150px; }
 #skills input { width:300px; padding: 5px; }
-.skil_box { width:37%; }
+.skil_box { width:37%; padding:0px; }
 .College { font-size:13px; font-weight:300; padding:0; margin:0; }
 #College label { width:102px; text-align:right; margin-bottom:8px; font-size:13px; }
 #College input { width:210px; border:1px solid #ececec; font-size:13px; padding:5px; margin-bottom:8px; }
@@ -1204,17 +1202,17 @@ footer{ color:#acacac; font-size:20px; color:#acacac; text-align:center; padding
 #College .rightblock a { color:#9197a3; font-size:13px; }
 .schools label { width:60px; }
 .form-group.period a { font-size:13px; color:#337ab7; text-align:left; }
-.yearto { text-align:left; }
+.yearto { text-align:left; margin-left:76px;}
 .yearto a { font-size:13px; }
 .to { font-size:13px; padding-left:15px; }
 .boxsmal { width:20px !important; }
-.description textarea { width:210px; }
+.description textarea { width:210px;  border: 1px solid #ececec; margin-bottom: 10px; }
 .description label { width:100px; vertical-align:top; }
-.add_new input { width:100px !important; }
-.add_new { width:150px !important; }
+.add_new input { width:116px !important; }
+/*.add_new { width:150px !important; }*/
 .highschool { font-size:13px; font-weight:300; padding:0; margin:0; }
 #highschool label { width:102px; text-align:right; margin-bottom:8px; font-size:13px; }
-#highschool input { width:210px; border:1px solid #ececec; font-size:13px; padding:5px; margin-bottom:8px; }
+#highschool input {/* width:210px;*/ border:1px solid #ececec; font-size:13px; padding:5px; margin-bottom:8px; }
 .highschool_box { width:42%; }
 .highschool_box textarea { width:100px; }
 #highschool .rightblock a { color:#9197a3; font-size:13px; }
@@ -1227,7 +1225,7 @@ footer{ color:#acacac; font-size:20px; color:#acacac; text-align:center; padding
 .Familys select{ font-size:13px; border: 1px solid #ececec; width:210px;}
 
 .city { font-size:13px; font-weight:300; padding:0; margin:0; }
-.citys input{border: 1px solid #ececec;}
+.citys input{border: 1px solid #ececec; font-size: 14px; font-weight: 300; width: 242px;}
 .citys label { width:102px; text-align:right; margin-bottom:8px; font-size:13px; }
 
 .town { font-size:13px; font-weight:300; padding:0; margin:0; }
@@ -1251,12 +1249,13 @@ footer{ color:#acacac; font-size:20px; color:#acacac; text-align:center; padding
 .iner_boxleft .fa{ margin-right:15px;}
 .aboutyou { font-size:13px; font-weight:300; padding:0; margin:0; }
 .aboutyou label { font-size: 13px; margin-bottom: 8px;padding-right: 10px;text-align: right;width: 102px;}
-.aboutu textarea { border: 1px solid #ececec; vertical-align:top;  }
+.aboutu textarea { border: 1px solid #ececec; vertical-align:top; font-size: 14px;font-weight: 300;  }
 .aboutu label { width:102px; text-align:right; margin-bottom:8px; font-size:13px; padding-right: 10px; }
 .others { font-size:13px; font-weight:300; padding:0; margin:0; }
 .others label { font-size: 13px; margin-bottom: 8px;padding-right: 10px;text-align: right;width: 102px;}
 .others select { border: 1px solid #ececec; width:159px;}
 .others label { width:102px; text-align:right; margin-bottom:8px; font-size:13px; padding-right: 10px; }
+.others input{ border: 1px solid #ececec;}
 .show_prof{ font-size: 13px;padding-left: 21%; font-weight:300;}
 .profil_sho p{ font-size:13px !important; font-weight:300;}
 
@@ -1267,7 +1266,7 @@ footer{ color:#acacac; font-size:20px; color:#acacac; text-align:center; padding
 .mobile { font-size:13px; font-weight:300; padding:0; margin:0; }
 .mobile label { width:102px; text-align:right; margin-bottom:8px; font-size:13px; padding-right: 10px; }
 #mobile select { width:127px; text-align:left; margin-bottom:8px; font-size:13px; border: 1px solid #ececec; font-weight:300;}
-.box-rig_box input{ float:right; width:83px; height:23px; border: 1px solid #ececec;}
+.box-rig_box input{ float:right; width:83px; height:23px; border: 1px solid #ececec; font-size:13px;}
 .inside_drop a{ color:#9197a3;}
 .iner_boxleft_bottom { float: left; margin-left:30%; font-weight:300; color:#337ab7; font-size:12px;  }
 .iner_boxleft_bottom .fa{ padding-right:8px;}
@@ -1288,14 +1287,15 @@ footer{ color:#acacac; font-size:20px; color:#acacac; text-align:center; padding
 .birth_left{ width:30%; float:left; font-size:13px; font-weight:300;}
 .birth_right{ width:70%; float:right; font-size:13px; font-weight:300; color:#333;}
 .interested{ text-align:right; }
-.birt_bottom{ border-bottom:1px solid #dcdee3;}
+.birt_bottom{ border-bottom:1px solid #dcdee3; margin-top: 10px;}
 .birth_ins label{ width:150px; text-align:right; padding-right:10px;}
 .birth_ins input{ width:210px; border: 1px solid #ececec; margin-bottom:8px; padding:3px;}
 .birth_ins textarea{ width:210px; vertical-align:top; border: 1px solid #ececec;}
-.latest_works{  border-bottom: 1px solid #ececec; margin-bottom:10px; }
+.latest_works{  border-bottom: 1px solid #ececec; margin-bottom:10px; padding-top: 18px; }
 .inner_rights { margin-bottom:15px;}
 
-
+.to_years_link
+/*26-05-2015*/
 .rightblock .fa{ padding-right:10px;}
 #selected_skills label { width:130px; text-align:right; margin-bottom:8px; }
 .College_box #college_form .form-group label {
@@ -1357,4 +1357,18 @@ margin-bottom: 5px;}
     float: right;
     font-size: 14px;
       padding: 5px 11px 0 10px;
+}
+.to_years_link{margin-left:69px;}
+.newone11 > input {width:20px !important; }
+.frm_years {
+    margin-left: 76px;
+}
+.to_years {
+    margin-left: 76px;
+}
+.to_clg_years {
+    margin-left: 90px;
+}
+.to_sch_years {
+    margin-left: 106px;
 }

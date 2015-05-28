@@ -2371,7 +2371,7 @@ function close_currentcity() {
 function delete_current_city()
 {
 	
-	   if (confirm("Delete Your Current City from bZZBook") == true) {
+	   if (confirm("Delete Your Current City from Bzzbook") == true) {
 		   	url="<?php echo base_url();?>profile/deletelocation/";
 	 $.ajax({
 		url: url,
@@ -2443,7 +2443,7 @@ function close_home() {
 function delete_hometown()
 {
 	
-	   if (confirm("Delete Your Hometown from bZZBook") == true) {
+	   if (confirm("Delete Your Hometown from Bzzbook") == true) {
 		   	url="<?php echo base_url();?>profile/deletehometown/";
 	 $.ajax({
 		url: url,
@@ -2504,7 +2504,7 @@ function add_fam_member()
 		$('#add_f_member').show();
 	}
 	
-	function close_add_family()
+	function close_family_member()
 	{
 		$('#family_relation').hide();
 		$('#add_f_member').show();
@@ -2520,8 +2520,8 @@ function add_fam_member()
 
 function del_fam_member(family_member)
 {
-
-	
+	if (confirm("Delete Your family member from Bzzbook") == true) {
+		   	
 	url="<?php echo base_url();?>profile/delete_fam_member/";
 	 $.ajax({
 		type: "POST",
@@ -2541,7 +2541,7 @@ function del_fam_member(family_member)
 			
 	
 	
-	
+	}
 	
 }
 
@@ -2550,7 +2550,7 @@ function edit_fam_member(family_member)
 
    $('#family_relation').show()
    
-	alert(family_member);
+	//alert(family_member);
 	url="<?php echo base_url();?>profile/edit_fam_member/";
 	 $.ajax({
 		type: "POST",
@@ -2630,7 +2630,7 @@ function del_about_me()
 {
 	
 	
-	   if(confirm("Delete Abouy You from bZZBook") == true) {
+	   if(confirm("Delete Abouy You from Bzzbook") == true) {
 		url="<?php echo base_url();?>profile/deleteaboutme/";
 	 	$.ajax({
 		url: url,
@@ -2708,7 +2708,7 @@ function del_fav_quotes()
 {
 	
 	
-	   if (confirm("Delete Your Favorite Quotes from bZZBook") == true) {
+	   if (confirm("Delete Your Favorite Quotes from Bzzbook") == true) {
 		   	url="<?php echo base_url();?>profile/deletefavquotes/";
 	 $.ajax({
 		url: url,
@@ -2837,7 +2837,8 @@ function close_other_names()
 
 function del_oth_names(nickname)
 {
-	
+	 if (confirm("Delete Your nick name from Bzzbook") == true) {
+		   	url="<?php echo base_url();?>profile/deletefavquotes/";
 	url="<?php echo base_url();?>profile/delete_nic_names/";
 	 $.ajax({
 		type: "POST",
@@ -2857,7 +2858,7 @@ function del_oth_names(nickname)
 			
 	
 	
-	
+	 }
 	
 }
 </script>
@@ -2914,7 +2915,7 @@ function add_mbl()
 
 function del_mobile()
 {
-	if (confirm("Delete Your Mobile No from bZZBook") == true) {
+	if (confirm("Delete Your Mobile No from Bzzbook") == true) {
 	url="<?php echo base_url();?>profile/deletemobile/";
 	 $.ajax({
 		url: url,
@@ -2982,7 +2983,7 @@ function close_web_site()
 
 function del_website()
 {
-	   if (confirm("Delete Your Website from bZZBook") == true) {
+	   if (confirm("Delete Your Website from Bzzbook") == true) {
 		   	url="<?php echo base_url();?>profile/deletewebsite/";
 	 $.ajax({
 		url: url,
@@ -3060,7 +3061,7 @@ function close_address_block()
 
 function del_address()
 {
-	   if (confirm("Delete Your address from bZZBook") == true) {
+	   if (confirm("Delete Your address from Bzzbook") == true) {
 		   	url="<?php echo base_url();?>profile/deleteaddress/";
 	 $.ajax({
 		url: url,
@@ -3136,7 +3137,7 @@ function work_edit()
 	$('.work_edit').click(function(){
 		
 		organization_id = $(this).attr("id").substr(9);
-		alert(organization_id);
+		//alert(organization_id);
 		$("input[name=work_disp_id]").val(organization_id)
 		url="<?php echo base_url(); ?>profile/orgEdit/";
 		$.post( url, { organization_id: organization_id})
@@ -3174,7 +3175,7 @@ function work_delete()
 	$('.work_delete').click(function(){
 	org_id = $(this).attr("id").substr(11);
 	//alert(org_id);
-	   if(confirm("Delete Your Organization from bZZBook") == true) {
+	   if(confirm("Delete Your Organization from Bzzbook") == true) {
 		url="<?php echo base_url();?>profile/delete_org/";
 		$.ajax({
 		url: url,
@@ -3462,7 +3463,7 @@ function college_delete()
 	$('.college_delete').click(function(){
 	clg_id = $(this).attr("id").substr(14);
 	//alert(clg_id);
-	   if(confirm("Delete Your College Details from bZZBook") == true) {
+	   if(confirm("Delete Your College Details from Bzzbook") == true) {
 		url="<?php echo base_url();?>profile/delete_college/";
 		$.ajax({
 		url: url,
@@ -3724,7 +3725,7 @@ function school_delete()
 	$('.school_delete').click(function(){
 	sch_id = $(this).attr("id").substr(13);
 	//alert(sch_id);
-	   if(confirm("Delete Your College Details from bZZBook") == true) {
+	   if(confirm("Delete Your College Details from Bzzbook") == true) {
 		url="<?php echo base_url();?>profile/delete_school/";
 		$.ajax({
 		url: url,
@@ -4053,7 +4054,7 @@ $('#lang1').show();
 
 function del_language()
 {
-	   if (confirm("Delete Your Languages from bZZBook") == true) {
+	   if (confirm("Delete Your Languages from Bzzbook") == true) {
 		   	url="<?php echo base_url();?>profile/deletelanguages/";
 	 $.ajax({
 		url: url,
@@ -4129,7 +4130,7 @@ function interests_edit()
 
 function del_interestedin()
 {
-	   if (confirm("Delete Your interests from bZZBook") == true) {
+	   if (confirm("Delete Your interests from Bzzbook") == true) {
 		   	url="<?php echo base_url();?>profile/deleteinterests/";
 	 $.ajax({
 		url: url,
@@ -4198,7 +4199,7 @@ function political_edit()
 
 function del_political_belief()
 {
-	   if (confirm("Delete Your political belief from bZZBook") == true) {
+	   if (confirm("Delete Your political belief from Bzzbook") == true) {
 		   	url="<?php echo base_url();?>profile/delete_political_belief/";
 	 $.ajax({
 		url: url,
@@ -4264,7 +4265,7 @@ function relegious_edit()
 
 function del_relegion_belief()
 {
-	   if (confirm("Delete Your political belief from bZZBook") == true) {
+	   if (confirm("Delete Your political belief from Bzzbook") == true) {
 		   	url="<?php echo base_url();?>profile/delete_relegion_belief/";
 	 $.ajax({
 		url: url,

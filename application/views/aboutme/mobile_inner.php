@@ -3,7 +3,7 @@
 ?>
   
   
-     <div class="tophead">Contact Information</div>
+     <!-- <div class="tophead">Contact Information</div> -->
      
      <div class="iner_boxleft" id="add_mbl_block" style="display:none;"><a href="javascript:void(0)" id="add_mbl"><i class="fa fa-plus"></i>Add a mobile phone</a></div>
                        
