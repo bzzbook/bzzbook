@@ -2524,39 +2524,39 @@ function delete_hometown()
 }
 </script>
 <script> //family member relations script
-
+family_edit();
 $('body').delegate('#familymembers','click',function()
 {
+	$('#tpfam').hide();
 	$('#add_f_member').hide();
 	$('#add_f_member1').hide();
-	$('ul.relations > #familymembers-li').append($('#family_relation').show());
+	$('ul.relations > #familymembers-li:first').prepend($('#family_relation').show());
 //	$('#relation').show();
 });
 
-function add_fam_member()
-{
 
-	var membername = $('#family_member').val();
-	var relation = $('#family_member_type').val();
-
-	url="<?php echo base_url();?>profile/add_fam_members/";
-	 $.ajax({
-		type: "POST",
-		url: url,
-		data: { member_name:membername, member_relation:relation } ,
-		success: function(html)
-		{   		
+		$('body').delegate('#add_family_member','submit',function( event){
+			
+					url="<?php echo base_url();?>profile/add_fam_members/";
+					$.post( url, { formdata: $(this).serialize() })
+					.done(function( data ) {
+					   	if(data == false)
+							alert("Please Enter Valid Details");
+						else
+						
+						$('#old_fam_members').hide();
+						$('#add_f_member').show();
+						$('#add_f_member1').show();	
+						$('ul.relations > #familymembers-li').html(data);	
 					
-			$('#old_fam_members').hide();
-			$('#add_f_member').show();
-			$('#add_f_member1').show();	
-			$('ul.relations > #familymembers-li').html(html);
-			
-		}
-		
-	   });			
-			
-	}
+					  });
+					
+				event.preventDefault();
+				});	
+
+
+	
+	
 	
 	function disp_add_member()
 	{
@@ -2578,19 +2578,19 @@ function add_fam_member()
 		$('#add_f_member1').show();	
 	}
 
-function del_fam_member(family_member)
+function del_fam_member(family_member_id)
+
 {
+	
 	if (confirm("Delete Your family member from Bzzbook") == true) {
 		   	
 	url="<?php echo base_url();?>profile/delete_fam_member/";
 	 $.ajax({
 		type: "POST",
 		url: url,
-		data: { family_member:family_member } ,
+		data: { family_member_id:family_member_id } ,
 		success: function(html)
-		{   		
-					
-		
+		{  
 			$('#add_f_member').show();
 			$('#add_f_member1').show();	
 			$('ul.relations > #familymembers-li').html(html);
@@ -2605,34 +2605,31 @@ function del_fam_member(family_member)
 	
 }
 
-function edit_fam_member(family_member)
+function family_edit()
 {
+	
 
-   $('#family_relation').show()
-   
-	//alert(family_member);
-	url="<?php echo base_url();?>profile/edit_fam_member/";
-	 $.ajax({
-		type: "POST",
-		url: url,
-		data: { family_member:family_member } ,
-		success: function(html)
-		{   		
-					
+	$('.family_edit').click(function(){
 		
-			$('#add_f_member').show();
-			$('#add_f_member1').show();	
-			$('ul.relations > #familymembers-li').html(html);
-			
-		}
+		fam_member_id = $(this).attr("id").substr(11);
 		
-	   });			
-			
-	
-	
+		$("input[name=family_disp_id]").val(fam_member_id)
+		url="<?php echo base_url(); ?>profile/familyedit/";
+		$.post( url, { fam_member_id: fam_member_id})
+		.done(function( data ) {			
+			info = JSON.parse(data);			
+			$("input[name=family_member]").val(info.member_name);
+			$("select[name=family_member_type]").val(info.member_relation);
+			$("input[name=family_action]").val("update");
+		    $('#family_'+fam_member_id).append($('#family_relation').show());	
+		});
+		return false;
+
+	});
 	
 	
 }
+
 
 </script>
 
@@ -2843,7 +2840,7 @@ function close_relation()
 }
 </script>
 <script>
-
+nick_edit();
 $('#nic_oth_names').change(function()
 {
 	var name = $(this).val();
@@ -2853,11 +2850,12 @@ $('#nic_oth_names').change(function()
 
 });
 
-$('#oth_name').click(function()
+$('body').delegate('#oth_name','click',function()
 {
-	$(this).hide();
+	$('#oth_name').hide();
+	$('#111').hide();
 	//$('#other_names').show();
-	$('ul.details_about > #nic_names-li').append($('#other_names').show());
+	$('ul.details_about > #nic_names-li').prepend($('#other_names').show());
 });
 
 function close_othernames()
@@ -2866,26 +2864,25 @@ function close_othernames()
 	$('#oth_name').show();
 }
 
-function add_othernames()
-{
-	var name_type = $('#nic_oth_names').val();
-	var name = $('#nic_name').val();
-	
-	
-		url="<?php echo base_url(); ?>profile/add_nicnames/";
-	    $.ajax({
-		type: "POST",
-		url: url,
-		data: { name:name, name_type:name_type } ,
-		success: function(html)
-		{   		
-			$('#other_names').hide();
-		    //$('#oth_name').show();
-			$('#nic_names-li').html(html);
-		}
+
+
+$('body').delegate('#add_nick_name','submit',function( event){
+
+	url="<?php echo base_url();?>profile/add_nicnames/";
+	$.post( url, { formdata: $(this).serialize() })
+	.done(function( data ) {
+		if(data == false)
+			alert("Please Enter Valid Details");
+		else
 		
-	   });
-}
+			
+		   	$('#nic_names-li').html(data);
+	
+	  });
+	event.preventDefault();
+});	
+
+
 
 function close_other_names()
 {
@@ -2895,30 +2892,54 @@ function close_other_names()
 }
 
 
-function del_oth_names(nickname)
+
+function del_nic_name(nick_name_id)
 {
-	 if (confirm("Delete Your nick name from Bzzbook") == true) {
-		   	url="<?php echo base_url();?>profile/deletefavquotes/";
-	url="<?php echo base_url();?>profile/delete_nic_names/";
+	//alert(nick_name_id)
+	
+	if (confirm("Delete Your nic name from Bzzbook") == true) {
+		   	
+	url="<?php echo base_url();?>profile/delete_nic_name/";
 	 $.ajax({
 		type: "POST",
 		url: url,
-		data: { nickname:nickname } ,
+		data: { nick_name_id:nick_name_id } ,
 		success: function(html)
 		{   		
-					
-		
-			$('#other_name').show();
-			$('#oth_name').show();	
+			
 			$('ul.details_about > #nic_names-li').html(html);
 			
 		}
 		
 	   });			
-			
+	}
 	
+}
+
+
+
+function nick_edit()
+{
 	
-	 }
+
+	$('.nick_edit').click(function(){
+		
+		nick_name_id = $(this).attr("id").substr(9);
+		alert(nick_name_id);
+		$("input[name=nickname_disp_id]").val(nick_name_id)
+		url="<?php echo base_url(); ?>profile/nicnameedit/";
+		$.post( url, { nick_name_id: nick_name_id})
+		.done(function( data ) {			
+			info = JSON.parse(data);			
+			$("input[name=nic_name]").val(info.nic_name);
+			$("select[name=nic_oth_names]").val(info.nic_name_type);
+			$("input[name=nickname_action]").val("update");
+		    $('#nick_'+nick_name_id).append($('#other_names').show());	
+		});
+		return false;
+
+	});
+	
 	
 }
 </script>
@@ -3173,7 +3194,7 @@ function close_work()
 }
 
 
-		$("#work_form").submit(function( event){
+		$('body').delegare('#work_form','submit',function( event){
 			
 					url="<?php echo base_url();?>profile/add_work/";
 					$.post( url, { formdata: $(this).serialize() })
@@ -3699,7 +3720,7 @@ $('#frm_days_college').change(function()
 
 
 
-$("#college_form").submit(function( event){
+$('body').delegate('#college_form','submit',function( event){
 
 url="<?php echo base_url();?>profile/add_college/";
 $.post( url, { formdata: $(this).serialize() })
@@ -3959,7 +3980,7 @@ $('#frm_days_school').change(function()
 	});
 
 
-$("#school_form").submit(function( event){
+$('body').delegate('#school_form','submit',function( event){
 
 url="<?php echo base_url();?>profile/add_school/";
 $.post( url, { formdata: $(this).serialize() })

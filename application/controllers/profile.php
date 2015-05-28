@@ -954,19 +954,39 @@ public function deletehometown()
 }
  public function add_fam_members()
   {
-	if( $this->profile_set->add_family_members($_POST['member_name'],$_POST['member_relation']))
+	
+	 parse_str($_POST['formdata'],$family_members_info);
+	  $returninfo = $this->profile_set->add_family_members($family_members_info);
+	  if($returninfo != false):
+	  	$organization_info['inserted_id'] = $returninfo;
+	  	echo $this->load->view('family_members_inner');
+	 else:
+	 	return false;
+	 endif;
+
+  }
+  
+   public function delete_fam_member()
+  {
+	if( $this->profile_set->delete_family_member($_POST['family_member_id']))
 	$this->load->view('family_members_inner');
 	else
 	return false;
 	
   }
   
-   public function delete_fam_member()
+  public function familyedit()
   {
-	if( $this->profile_set->delete_family_member($_POST['family_member']))
-	$this->load->view('family_members_inner');
-	else
-	return false;
+	  
+	 $data = $this->profile_set->edit_family_members($_POST['fam_member_id']);
+	 
+	 foreach($data as $result):
+	 
+	 	$family_data['member_name'] = $result->member_name;
+		$family_data['member_relation'] = $result->member_relation;
+		
+		endforeach;
+		echo json_encode($family_data);
 	
   }
   
@@ -1051,32 +1071,40 @@ public function deletehometown()
   
 public function add_nicnames()
 {	
-	  //parse_str($_POST['form_data'],$field_info);
-//	$insert_id =  $this->profile_set->add_nic_names($_POST['name'],$_POST['name_type']);
-	
-	if( $this->profile_set->add_nic_names($_POST['name'],$_POST['name_type']))
-	{
-		//print_r($data);
-		//echo '<br>';
-		//echo $data[0] ." is ". $data[1];
-		
-		$this->load->view('nick_names_inner');
+	 parse_str($_POST['formdata'],$nic_name_info);
+	  $returninfo = $this->profile_set->add_nic_names($nic_name_info);
+	  if($returninfo != false):
+	  	$organization_info['inserted_id'] = $returninfo;
+	  	echo $this->load->view('nick_names_inner');
+	 else:
+	 	return false;
+	 endif;
 	}
-	else
-	return false;
-	
-}
 
   
-   public function delete_nic_names()
+   public function delete_nic_name()
   {
-	if( $this->profile_set->delete_nick_name($_POST['nickname']))
+	if( $this->profile_set->delete_nick_name($_POST['nick_name_id']))
 	$this->load->view('nick_names_inner');
 	else
 	return false;
 	
   }
   
+   public function nicnameedit()
+  {
+	  
+	 $data = $this->profile_set->edit_nick_name($_POST['nick_name_id']);
+	 
+	 foreach($data as $result):
+	 
+	 	$nicname_data['nic_name'] = $result->nic_name;
+		$nicname_data['nic_name_type'] = $result->nic_name_type;
+		
+		endforeach;
+		echo json_encode($nicname_data);
+	
+  }
    
    public function delete_org()
   {

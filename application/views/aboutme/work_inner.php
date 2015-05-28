@@ -51,27 +51,76 @@
                                   </div>
                                   <div class="form-group">
                                     <label for="exampleInputName2">Time Period</label>
-                                    <input type="checkbox" class="outside" name="curent_status">
+                                    <input type="checkbox" class="outside" name="curent_status" id="curent_status" value="working">
                                     I currently work </div>
                                   <div class="col-md-12">
-                                    <div class="col-md-6 yearadd" id="add_years"><a href="javascript:void(0)" onclick="add_year()" ><i class="fa fa-plus"></i>Add year</a></div>
-                                  <select id="frm_years" style="display:none">
-                                  <option value=""> --- </option>
+                                    <div class="col-md-6 yearadd" id="add_years" style="display:none;"><a href="javascript:void(0)" onclick="add_year()" class="frm_years_link" ><i class="fa fa-plus"></i>Add year</a></div>
+                                  <select id="frm_years" style="display:none;" name="frm_years" class="frm_years" >
+                                  <option value="0"> --- </option>
+                                   <option value="1950" selected="selected">1950</option>
+                                   <?php for($i=1951;$i<=date(Y);$i++){?>
+                                	<option value="<?php echo $i;?>"><?php echo $i;?></option>
+                              	  <?php }?>
+                                  </select>
+                                  <a href="javascript:void(0)" id="frm_months_link"  style="display:none;" ><i class="fa fa-plus"></i>Add month</a>
+                                  <select id="frm_months" style="display:none;" name="frm_months"> 
+                                  <option value="0"> --- </option>
+                                   <option value="1" selected="selected">1</option>
+                                   <?php for($i=2;$i<=12;$i++){?>
+                                	<option value="<?php echo $i;?>" ><?php echo $i;?></option>
+                              	  <?php }?>
+                                  </select>
+                                  <a href="javascript:void(0)" id="frm_days_link"  style="display:none;"><i class="fa fa-plus"></i>Add day</a>
+                                  <select id="frm_days" style="display:none;" name="frm_days">
+                                  <option value="0"> --- </option>
+                                  <option value="1" selected="selected">1</option>
+                                   <?php for($i=2;$i<=31;$i++){?>
+                                	<option value="<?php echo $i;?>" ><?php echo $i;?></option>
+                              	  <?php }?>
+                                  </select>
+                                   <div id="to" style="display:none;" class="to">to </div>
+                                    <div id="to_present" style="display:none;">to present</div>
+                                  <a href="javascript:void(0)" id="to_years_link"  style="display:none;" class="to_years_link"><i class="fa fa-plus"></i>Add year</a>
+                                                       
+                                   
+                                  </div>
+                                  
+                                  <!---  ---->
+                                  <div class="col-md-12 todates_dropdown" id="todates_dropdowns">
+                                    
+                                  <select id="to_years" style="display:none;" name="to_years" class="to_years">
+                                  <option value="0"> --- </option>
                                    <?php for($i=1950;$i<=date(Y);$i++){?>
                                 	<option value="<?php echo $i;?>"><?php echo $i;?></option>
                               	  <?php }?>
                                   </select>
-                                    
-                                    <div class="col-md-6">to present</div>
+                                  <a href="javascript:void(0)" id="to_months_link"  style="display:none;" ><i class="fa fa-plus"></i>Add month</a>
+                                  <select id="to_months" style="display:none;" name="to_months">
+                                  <option value="0"> --- </option>
+                                   <?php for($i=1;$i<=12;$i++){?>
+                                	<option value="<?php echo $i;?>" selected="selected"><?php echo $i;?></option>
+                              	  <?php }?>
+                                  </select>
+                                  <a href="javascript:void(0)" id="to_days_link"  style="display:none;"><i class="fa fa-plus"></i>Add day</a>
+                                  <select id="to_days" style="display:none;" name="to_days">
+                                  <option value="0"> --- </option>
+                                   <?php for($i=1;$i<=31;$i++){?>
+                                	<option value="<?php echo $i;?>" selected="selected"><?php echo $i;?></option>
+                              	  <?php }?>
+                                  </select>
+                                                      
                                   </div>
+                                    <input type="hidden" name="work_action" id="work_action" value="add">
+                       				<input type="hidden" value="" name="work_disp_id" >
+                                  <!---  ---->
                                   <div class="clearfix"></div>
                                   <div class="box_bottom">
                                     <div class="publics col-md-4">
                                       <button aria-expanded="false" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">Public <span class="caret"></span></button>
                                     </div>
-                                    <div class="col-md-8">
+                                    <div class="col-md-8 add_new">
                                       <div class="btn3 btn-black" onclick="close_work()">Cancel</div>
-                                      <input type="submit" class="btn3 btn-green" value="save Changes" />
+                                      <input type="submit" class="btn3 btn-green " value="Save Changes" />
                                     </div>
                                     <div class="clearfix"></div>
                                   </div>

@@ -37,15 +37,10 @@
                                   </div>
                                   <div class="form-group period">
                                     <label for="exampleInputName2">Time Period</label>
-                                     <a href="javascript:void(0)" id="clg_add_year"><i class="fa fa-plus"></i>Add year</a></div>
-                                     <span class="to" id="clg_to">to</span>
-                                  <div class="col-md-12">
-                                    <div class="col-md-4"></div>
-                                    <div class="col-md-8 yearto"><a href="javascript:void(0)" id="to_years_clg"><i class="fa fa-plus"></i>Add year</a></div>
-                                  </div>
-                                  
-                                  
-                                   <select id="frm_years_college" style="display:none;" name="frm_years" >
+                                     <a href="javascript:void(0)" id="clg_add_year"><i class="fa fa-plus"></i>Add year</a>
+                                     </div>
+                                     
+                                   <select id="frm_years_college" style="display:none;" name="frm_years" class="frm_clg_years">
                                   <option value="0"> --- </option>
                                    <option value="1950" selected="selected">1950</option>
                                    <?php for($i=1951;$i<=date(Y);$i++){?>
@@ -70,11 +65,15 @@
                                 	<option value="<?php echo $i;?>" ><?php echo $i;?></option>
                               	  <?php }?>
                                   </select>
-                         
-                        
-                        <div class="col-md-12" id="clg_todates_dropdowns">
+                                          <div id="clg_to">to</div>
+                                  <div class="col-md-12">
+                                    <div class="col-md-4"></div>
+                                    <div class="col-md-8 yearto"><a href="javascript:void(0)" id="to_years_clg" class="to_years_clg"><i class="fa fa-plus"></i>Add year</a></div>
+                                  </div>
+                                  
+                                  <div class="col-md-12" id="clg_todates_dropdowns">
                                     
-                                  <select id="to_years_college" style="display:none;" name="to_years">
+                                  <select id="to_years_college" style="display:none;" name="to_years" class="to_clg_years">
                                   <option value="0"> --- </option>
                                    <?php for($i=1950;$i<=date(Y);$i++){?>
                                 	<option value="<?php echo $i;?>"><?php echo $i;?></option>
@@ -109,35 +108,42 @@
                                   </div>
                                   <div class="clearfix"></div>
                                   <div class="form-group">
-                                    <label for="exampleInputName2">School</label>
+                                    <label for="exampleInputName2">conentration1</label>
                                     <input type="text" name="concentration1">
                                   </div>
                                   <div class="form-group">
-                                    <label for="exampleInputName2"></label>
+                                    <label for="exampleInputName2">conentration2</label>
                                     <input type="text" name="concentration2">
                                   </div>
                                   <div class="form-group">
-                                    <label for="exampleInputName2"></label>
+                                    <label for="exampleInputName2">conentration3</label>
                                     <input type="text" name="concentration3">
                                   </div>
-                                  <div class="form-group">
+                                  <div class="form-group newone11">
+                                  
                                     <label for="exampleInputName2">Attended for</label>
-                                    <label class="add_new">
-                                      <input type="radio" checked="" value="college" id="optionsRadios1" name="optionsRadios">
-                                      college </label>
+                                   
+                                      <input type="radio" checked="" value="college" id="optionsRadios1" name="optionsRadios" class="college_radio" />
+                                      college 
+                                    
                                   </div>
                                   <div class="clearfix"></div>
-                                  <div class="form-group">
+                                  <div class="form-group newone11">
+                                   
                                     <label for="exampleInputName2"></label>
-                                    <label class="add_new">
-                                      <input type="radio" checked="" value="graduate" id="optionsRadios1" name="optionsRadios">
-                                      Graduate School </label>
+                                    
+                                     <input type="radio" checked="" value="graduate" id="optionsRadios1" name="optionsRadios">
+                                     
+                                      Graduate School 
+                            
                                   </div>
                                   <div class="clearfix"></div>
                                   <div class="box_bottom">
                                     <div class="publics col-md-4">
                                       <button aria-expanded="false" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">Public <span class="caret"></span></button>
                                     </div>
+                                      <input type="hidden" name="clg_action" id="clg_action" value="add">
+                       				  <input type="hidden" value="" name="college_disp_id" >
                                     <div class="col-md-8">
                                       <div class="btn3 btn-black" onclick="close_college()">Cancel</div>
                                       <input type="submit"  class="btn3 btn-green" value="Save Changes" />

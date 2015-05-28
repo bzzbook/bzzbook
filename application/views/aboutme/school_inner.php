@@ -38,12 +38,7 @@
                                   <div class="form-group period">
                                     <label for="exampleInputName2">Time Period</label>
                                 <a href="javascript:void(0)" id="frm_years_sch"> <i class="fa fa-plus"></i>Add year</a></div>
-                                    <span class="to" id="sch_to">to</span>
-                                  <div class="col-md-12">
-                                    <div class="col-md-4"></div>
-                                    <div class="col-md-8 yearto"><a href="javascript:void(0)" id="to_years_sch"> <i class="fa fa-plus"></i>Add year</a></div>
-                                  </div>
-                                   <select id="frm_years_school" style="display:none;" name="frm_years" >
+                                 <select id="frm_years_school" style="display:none;" name="frm_years" class="frm_sch_years">
                                   <option value="0"> --- </option>
                                    <option value="1950" selected="selected">1950</option>
                                    <?php for($i=1951;$i<=date(Y);$i++){?>
@@ -71,8 +66,14 @@
                          
                         
                     
+                                    <div id="sch_to">TO</div>
+                                  <div class="col-md-12">
+                                    <div class="col-md-4"></div>
+                                    <div class="col-md-8 yearto"><a href="javascript:void(0)" id="to_years_sch"> <i class="fa fa-plus"></i>Add year</a></div>
+                                  </div>
+                                  
                                     
-                                  <select id="to_years_school" style="display:none;" name="to_years">
+                                  <select id="to_years_school" style="display:none;" name="to_years" class="to_sch_years">
                                   <option value="0"> --- </option>
                                    <?php for($i=1950;$i<=date(Y);$i++){?>
                                 	<option value="<?php echo $i;?>"><?php echo $i;?></option>

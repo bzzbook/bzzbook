@@ -9,6 +9,8 @@
 					 $organization_details = $this->profile_set->getorganizationDetails();
 					 $user_college_info = $this->profile_set->get_college_details();
 					 $user_school_info = $this->profile_set->get_school_details();
+					 $family_members = $this->profile_set->get_family_members();
+					 $nick_names = $this->profile_set->get_nick_names();
 					 ?>
             <div class="profileLogo">
               <figure class="cmplogo"><a href="#"><span class="glyphicon glyphicon-camera change-photo fileinput-button" aria-hidden="true"><em>Change Picture</em> <input type="file" name="userfile" id="userfile" size="20" required/></span></a><img src="<?php echo base_url();?>uploads/<?php if(!empty($image[0]->user_img_thumb)) echo $image[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" alt="<?php echo base_url();?>uploads/<?php if(!empty($image[0]->user_img_thumb)) echo $image[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>"></figure>
@@ -109,7 +111,7 @@
                           <div class="clearfix"></div>
                         </div>
                        
-						
+						<div class="clearfix"></div>
 					<div id="work_val_disp">	
                        
    	<?php 
@@ -165,7 +167,7 @@
                                     <input type="checkbox" class="outside" name="curent_status" id="curent_status" value="working">
                                     I currently work </div>
                                   <div class="col-md-12">
-                                    <div class="col-md-6 yearadd" id="add_years" style="display:none;"><a href="javascript:void(0)" onclick="add_year()" ><i class="fa fa-plus"></i>Add year</a></div>
+                                    <div class="col-md-6 yearadd" id="add_years" style="display:none;"><a href="javascript:void(0)" onclick="add_year()" class="frm_years_link" ><i class="fa fa-plus"></i>Add year</a></div>
                                   <select id="frm_years" style="display:none;" name="frm_years" class="frm_years" >
                                   <option value="0"> --- </option>
                                    <option value="1950" selected="selected">1950</option>
@@ -222,7 +224,7 @@
                                                       
                                   </div>
                                     <input type="hidden" name="work_action" id="work_action" value="add">
-                       				  <input type="hidden" value="" name="work_disp_id" >
+                       				<input type="hidden" value="" name="work_disp_id" >
                                   <!---  ---->
                                   <div class="clearfix"></div>
                                   <div class="box_bottom">
@@ -357,14 +359,9 @@
                                   </div>
                                   <div class="form-group period">
                                     <label for="exampleInputName2">Time Period</label>
-                                     <a href="javascript:void(0)" id="clg_add_year"><i class="fa fa-plus"></i>Add year</a></div>
+                                     <a href="javascript:void(0)" id="clg_add_year"><i class="fa fa-plus"></i>Add year</a>
+                                     </div>
                                      
-                                  <div class="col-md-12">
-                                    <div class="col-md-4"></div>
-                                    <div class="col-md-8 yearto"><a href="javascript:void(0)" id="to_years_clg" class="to_years_clg"><i class="fa fa-plus"></i>Add year</a></div>
-                                  </div>
-                                  
-                                  
                                    <select id="frm_years_college" style="display:none;" name="frm_years" class="frm_clg_years">
                                   <option value="0"> --- </option>
                                    <option value="1950" selected="selected">1950</option>
@@ -390,9 +387,13 @@
                                 	<option value="<?php echo $i;?>" ><?php echo $i;?></option>
                               	  <?php }?>
                                   </select>
-                         
-                        <span class="to" id="clg_to">to</span>
-                        <div class="col-md-12" id="clg_todates_dropdowns">
+                                          <div id="clg_to">to</div>
+                                  <div class="col-md-12">
+                                    <div class="col-md-4"></div>
+                                    <div class="col-md-8 yearto"><a href="javascript:void(0)" id="to_years_clg" class="to_years_clg"><i class="fa fa-plus"></i>Add year</a></div>
+                                  </div>
+                                  
+                                  <div class="col-md-12" id="clg_todates_dropdowns">
                                     
                                   <select id="to_years_college" style="display:none;" name="to_years" class="to_clg_years">
                                   <option value="0"> --- </option>
@@ -522,12 +523,7 @@
                                   <div class="form-group period">
                                     <label for="exampleInputName2">Time Period</label>
                                 <a href="javascript:void(0)" id="frm_years_sch"> <i class="fa fa-plus"></i>Add year</a></div>
-                                   
-                                  <div class="col-md-12">
-                                    <div class="col-md-4"></div>
-                                    <div class="col-md-8 yearto"><a href="javascript:void(0)" id="to_years_sch"> <i class="fa fa-plus"></i>Add year</a></div>
-                                  </div>
-                                   <select id="frm_years_school" style="display:none;" name="frm_years" class="frm_sch_years">
+                                 <select id="frm_years_school" style="display:none;" name="frm_years" class="frm_sch_years">
                                   <option value="0"> --- </option>
                                    <option value="1950" selected="selected">1950</option>
                                    <?php for($i=1951;$i<=date(Y);$i++){?>
@@ -554,7 +550,13 @@
                                   </select>
                          
                         
-                     <span class="to" id="sch_to">to</span>
+                    
+                                    <div id="sch_to">TO</div>
+                                  <div class="col-md-12">
+                                    <div class="col-md-4"></div>
+                                    <div class="col-md-8 yearto"><a href="javascript:void(0)" id="to_years_sch"> <i class="fa fa-plus"></i>Add year</a></div>
+                                  </div>
+                                  
                                     
                                   <select id="to_years_school" style="display:none;" name="to_years" class="to_sch_years">
                                   <option value="0"> --- </option>
@@ -1302,6 +1304,7 @@
                                       <option value="lover">lover</option>
                                       <option value="frnd">frnd</option>
                                   </select>
+                                  
                                   </div>
                                   </div>
                                   <div class="box_bottom">
@@ -1333,54 +1336,43 @@
                       
                       <li id="familymembers-li">
                       
-                         <div class="tophead">Family Members</div>
+                         <div id="tpfam" class="tophead">Family Members</div>
                         <div class="iner_lefts" id="add_f_member1"><i class="fa fa-plus"></i></div>
                         <div class="inner_rights boxs" id="add_f_member">
                           <a href="javascript:void(0)"  id="familymembers"> <h3>Add a family member</h3></a>
                         </div>
+                      <div class="clearfix"></div>
                       
                       
-                       <?php if(!empty($result[0]->familymembers)) { ?>
+                      
+                      <div id="family_val_disp">
+   				
+         
+                       <?php 
+					   
+					   if(!empty($family_members))
+                    {
+                        foreach($family_members as $family)
+                        { 
+						?>
                    
-                                               
-                   <?php    $trimmed = rtrim($result[0]->familymembers,',');
-	//echo $result;
-	 //echo $result[0]->familymembers;
-	$devided_names = explode(',',$trimmed);
-	$data = array();
-	foreach($devided_names as $name)
-	{
-		$cat_names = explode('-',$name);
-		$data[] = $cat_names;
-	}
-	//print_r($data);
-
-	foreach($data as $data)
-	{
-		//print_r($data);
-		//echo '<br>';
-	//	echo $data[0] ." is ". $data[1];
-	?> 
-                   
-                     
-                 
-                        <!--<div class="tophead">All comman Headings styles</div>-->
-                        <div class="sm_leftbox"></div>
-                        <div class="sm_rightbox"><h3><a href="#"><?php echo $data[0]; ?> </a></h3>
-                        <p><?php echo $data[1]; ?></p>
+                      <div class="latest_works" id="family_<?php echo $family['fam_member_id']; ?>">
+                          <div class="sm_leftbox"></div>
+                        <div class="sm_rightbox"><h3><a href="#"><?php echo $family['member_name']; ?> </a></h3>
+                        <p><?php echo $family['member_relation']; ?></p>
                         </div>
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
-                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="edit_fam_member('<?php echo $data[0]."-".$data[1].","; ?>')"><i class="fa fa-pencil"></i> Edit</a></div>
-                        <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_fam_member('<?php echo $data[0]."-".$data[1].","; ?>')"><i class="fa fa-times"></i></a></div>
+                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" class="family_edit" id="family_edit<?php echo $family['fam_member_id']; ?>"><i class="fa fa-pencil"></i> Edit</a></div>
+                        <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_fam_member('<?php echo $family['fam_member_id']; ?>')"><i class="fa fa-times"></i></a></div>
                         </div>
-                        
-                        <div class="clearfix"></div>
+                        </div>
+                         <div class="clearfix"></div>
+                         <?php } }?>
+           
+                        </div>
                    
-                      <?php } }?>
-                     
-                       
-                        <div class="clearfix"></div>
+                    
                       </li>
                 
                      
@@ -1390,9 +1382,10 @@
                       
                       
                       <div id="family_relation" style="display:none;">
+                      <div class="tophead">Family Members</div>
                             <div class="relation_box col-md-12">
                               <div class="col-md-9">
-                                <form class="form-inline">
+                                <form class="form-inline" id="add_family_member">
                                   <div class="form-group Familys">
                                     <label for="exampleInputName2">Family Member</label>
                                     <input class="boderbox" type="text" name="family_member" id="family_member">
@@ -1404,6 +1397,8 @@
                                       <option value="lover">lover</option>
                                       <option value="frnd">frnd</option>
                                   </select>
+                                  <input type="hidden" name="family_action" id="family_action" value="add">
+                       			  <input type="hidden" value="" name="family_disp_id" >
                                   </div>
                                   </div>
                                   <div class="box_bottom">
@@ -1412,8 +1407,8 @@
                                     </div>
                                     <div class="col-md-8">
                                       
-                                      <div class="btn3 btn-green" onclick="add_fam_member()">Save Changes</div>
-                                      <?php if($result[0]->familymembers) { ?>
+                                      <input type="submit" class="btn3 btn-green" value="Save Changes" />
+                                      <?php if($family_members) { ?>
                                       <div class="btn3 btn-black" onclick="close_family()">Cancel</div>
                                       <?php } else { ?>
                                       <div class="btn3 btn-black" onclick="close_family_member()">Cancel</div>
@@ -1515,57 +1510,47 @@
                       
                       
                       
-                      
-                      
                       <li id="nic_names-li">
-                        <div class="tophead">Other Names</div>
+                        <div id="111" class="tophead">Other Names</div>
                                                
-         <div class="iner_boxleft" id="other_name"><a href="javascript:void(0)" id="oth_name"><i class="fa fa-plus"></i>Add a nickname, a birth name...</a></div>
-                        <?php if(!empty($result[0]->nickname)) {
-			
- $result1 = rtrim($result[0]->nickname,' ');
-	//echo $result;
-	 //echo $result[0]->familymembers;
-	$result2 = explode(' ',$result1);
-	$data = array();
-	foreach($result2 as $res)
-	{
-		$result3 = explode('-',$res);
-		$data[] = $result3;
-	}
-	//print_r($data);
-	if($data)
-	{
-	foreach($data as $data)
-	{
-	?>
-		
-        
-        <!--<div class="tophead">All comman Headings styles</div>-->
-                        <div class="sm_leftbox"></div>
-                        <div class="sm_rightbox"><h3><a href="#"><?php echo $data[0]; ?> </a></h3>
-                        <p><?php echo $data[1]; ?></p>
+         <div class="iner_boxleft othnames" id="other_name"><a href="javascript:void(0)" id="oth_name"><i class="fa fa-plus"></i>Add a nickname, a birth name...</a></div>
+            <div class="clearfix"></div>
+            
+            
+            
+              <div id="nicnames_val_disp">
+   				  <?php 
+					   
+					   if(!empty($nick_names))
+                    {
+                        foreach($nick_names as $nicname)
+                        { 
+						?>
+                       <div class="latest_works" id="nick_<?php echo $nicname['nic_name_id']; ?>">
+                          <div class="sm_leftbox"></div>
+                        <div class="sm_rightbox"><h3><a href="#"><?php echo $nicname['nic_name']; ?></a></h3>
+                        <p><?php echo $nicname['nic_name_type']; ?></p>
                         </div>
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
-                        <div class="col-md-6 com_mid"><a href="javascript:void(0)"><i class="fa fa-pencil"></i> Edit</a></div>
-                        <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_oth_names('<?php echo $data[0]."-".$data[1]." "; ?>')"><i class="fa fa-times"></i></a></div>
+                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" class="nick_edit" id="nick_edit<?php echo $nicname['nic_name_id']; ?>"><i class="fa fa-pencil"></i> Edit</a></div>
+                        <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_nic_name('<?php echo $nicname['nic_name_id'] ?>')"><i class="fa fa-times"></i></a></div>
+                        </div>
+                        </div>
+                         <div class="clearfix"></div>
+                         <?php } }?>
+           
                         </div>
                         
-                        <div class="clearfix"></div>
-                  
-        
-        <?php }} } ?>
-        
-        
-
+              
                         <div class="inner_rights boxs" id="other_names" style="display:none;">
+                     
                           <div id="others">
                             <div id="others_place" class="col-md-12">
-                              <form class="form-inline ">
+                              <form class="form-inline" id="add_nick_name">
                                 <div class="form-group others">
                                   <label for="exampleInputName2">Name Type</label>
-                                  <select id="nic_oth_names">
+                                  <select id="nic_oth_names" name="nic_oth_names">
                                     <option value="nickname ">Nickname</option>
                                     <option value="firstname ">firstname</option>
                                     <option value="lastname ">lastname</option>
@@ -1575,8 +1560,10 @@
                                 </div>
                                 <div class="form-group others">
                                   <label for="exampleInputName2">Name</label>
-                                  <input type="text" placeholder="" id="nic_name">
+                                  <input type="text" placeholder="" id="nic_name" name="nic_name">
                                 </div>
+                                   <input type="hidden" name="nickname_action" id="nickname_action" value="add">
+                       			  <input type="hidden" value="" name="nickname_disp_id" >
                                 <div class="clearfix"></div>
                                 <div class="form-group show_prof">
                                   <label for="exampleInputName2"></label>
@@ -1592,8 +1579,12 @@
                                   </div>
                                   <div class="col-md-10 skil_box">
                               
-                                    <div class="btn3 btn-green" onclick="add_othernames()">Save Changes</div>
-                                          <div class="btn3 btn-black" onclick="close_othernames()">Cancel</div>
+                                    <input type="submit" class="btn3 btn-green" value="Save Changes" />
+                                        <?php if($nick_names) { ?>  
+                                       <div class="btn3 btn-black" onclick="close_othernames()">Cancel</div>
+                                      <?php } else { ?>
+                                      <div class="btn3 btn-black" onclick="close_other_names()">Cancel</div>
+                                      <?php } ?>
                                   </div>
                                   <div class="clearfix"></div>
                                 </div>

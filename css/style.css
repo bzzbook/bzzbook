@@ -1195,11 +1195,12 @@ footer{ color:#acacac; font-size:20px; color:#acacac; text-align:center; padding
 #education .small_boxes ul { list-style:none; }
 .tophead { font-size:14px; font-weight:300; text-transform: uppercase; color:#737373; width:100%;margin-top: 15px; border-bottom:1px solid #ececec; margin-bottom:10px; }
 .workplace { font-size:13px; font-weight:300; padding:0; margin: 15px 0 5px;  border-bottom: 1px solid #ececec;}
-.workplace label {/* width:102px;*/ text-align:right; margin-bottom:8px; vertical-align:top; }
-.workplace input { width:210px; border:1px solid #ececec; font-size:13px; padding:5px; margin-bottom:8px; }
+.workplace label { width:102px; text-align:right; margin-bottom:8px; /*vertical-align:top;*/ }
+.workplace input { width:210px; border:1px solid #ececec; font-size:13px; padding:5px; margin-bottom:8px; } 
 *::-moz-placeholder, *:-moz-placeholder {
  color: #9197a3;
 }
+
 /*#education .fa{ padding:0 10px 0 15px;}*/
 .rightblock a { color:#9197a3; margin-left:10px; }
 .rightblock a:hover { color:#9197a3; }
@@ -1226,7 +1227,7 @@ footer{ color:#acacac; font-size:20px; color:#acacac; text-align:center; padding
 .form-group.period a { font-size:13px; color:#337ab7; text-align:left; }
 .yearto { text-align:left; margin-left:76px;}
 .yearto a { font-size:13px; }
-.to { font-size:13px; padding-left:15px; }
+.to { font-size:13px; padding-left:15px; margin-left: 75px; }
 .boxsmal { width:20px !important; }
 .description textarea { width:210px;  border: 1px solid #ececec; margin-bottom: 10px; }
 .description label { width:100px; vertical-align:top; }
@@ -1244,7 +1245,7 @@ footer{ color:#acacac; font-size:20px; color:#acacac; text-align:center; padding
 .family .fa { border-right:1px solid #737373; padding-right:5px; }
 .Familys { font-size:13px; font-weight:300; font-family:"Roboto", sans-serif; }
 .Familys input{ border: 1px solid #ececec;}
-.Familys select{ font-size:13px; border: 1px solid #ececec; width:210px;}
+.Familys select{ border: 1px solid #ececec; font-size: 13px; margin-left: 16px; width: 161px;}
 
 .city { font-size:13px; font-weight:300; padding:0; margin:0; }
 .citys input{border: 1px solid #ececec; font-size: 14px; font-weight: 300; width: 242px;}
@@ -1383,10 +1384,10 @@ margin-bottom: 5px;}
 .to_years_link{margin-left:69px;}
 .newone11 > input {width:20px !important; }
 .frm_years {
-    margin-left: 76px;
+    margin-left: 90px;
 }
 .to_years {
-    margin-left: 76px;
+    margin-left: 90px;
 }
 .to_clg_years {
     margin-left: 90px;
@@ -1394,14 +1395,13 @@ margin-bottom: 5px;}
 .to_sch_years {
     margin-left: 106px;
 }
-
-/* style for person tagging icon 28-15-2015(created)  */
-.tagging{
-position:absolute;
-width:25px;
-height:25px;
-right:290px;	
+#to_present {
+    margin-left: 90px;
 }
+#clg_to { font-size:13px; padding-left:15px; margin-left: 90px; }
+#sch_to { font-size:13px; padding-left:15px; margin-left: 90px; }
+
+
 
 div#links a span {display: none;}
 div#links a span a { display:none;}

@@ -740,21 +740,30 @@ public function add_home_town($hometown)
 	
 	
 	
-public function add_family_members($member_name,$member_relation)
+public function add_family_members($data)
 	{
 	
 			$up_data = array(
-			'member_name'=>$member_name,
-			'member_relation' =>$member_relation,
+			'member_name'=>$data['family_member'],
+			'member_relation' =>$data['family_member_type'],
 			'user_id'=>$this->session->userdata('logged_in')['account_id']
 			);
 			
-			if($this->db->insert('bzz_family_members',$up_data))
-			{
-		return true;
-			}else{
-		return false;
-		
+		if($data['family_action']=='add')
+		{
+		if($this->db->insert('bzz_family_members', $up_data))
+			return $this->db->insert_id();
+		else
+			return false;
+		}
+		elseif($data['family_action']=='update')
+		{
+			
+			$this->db->where('fam_member_id', $data['family_disp_id']);
+			if($this->db->update('bzz_family_members', $up_data))
+			return true;
+			else 
+			return false; 
 		}
 		
 	}
@@ -777,43 +786,31 @@ public function add_family_members($member_name,$member_relation)
 		
 	}
 	
-	
-	
-	public function delete_family_member($fam_member)
+	public function edit_family_members($id)
 	{
-		$id = $this->session->userdata('logged_in')['account_id'];
-		
-		$this->db->select('familymembers');
-		$this->db->from('bzz_userinfo');
-		$this->db->where('user_id',$id);
+		//$id = $this->session->userdata('logged_in')['account_id'];
+		$this->db->select('*');
+		$this->db->from('bzz_family_members');
+		$this->db->where('fam_member_id', $id);
 		$query = $this->db->get();
-		$data = $query->result_array();
-		
-		if($data)
-		{
-		
-		$data = $data[0]['familymembers'];
-		
-		
-		$pos = strpos($data,$fam_member);
-		if($pos !== false)
-		{
-		$rest_of_fam_members = substr_replace($data,'',$pos,strlen($fam_member));
-		}
-	
-		$up_data = array('familymembers'=>$rest_of_fam_members);
-		$this->db->where('user_id',$id);
-		if($this->db->update('bzz_userinfo',$up_data))
-		return true;
-		else
+		if ($query->num_rows() > 0) {
+			return $query->result();
+		} else {
 		return false;
 		}
-	return false;	
-		
+	
+	
 	}
 	
-	
-	
+	public function delete_family_member($family_member_id)
+	{
+			  
+	$this->db->where('fam_member_id',$family_member_id);
+	if( $this->db->delete('bzz_family_members'))
+	return true;
+	else
+	return false;
+	}
 	
 	
 public function add_about_me($aboutme)
@@ -853,81 +850,79 @@ public function add_fav_quotes($favquotes)
 	}
 	
 	
-	public function add_nic_names($name,$name_type)
+	public function add_nic_names($data)
+	{
+		
+			$up_data = array(
+			'nic_name'=>$data['nic_name'],
+			'nic_name_type'=>$data['nic_oth_names'],
+			'user_id'=>$this->session->userdata('logged_in')['account_id']
+			);
+			
+		if($data['nickname_action']=='add')
+		{
+		if($this->db->insert('bzz_nicknames', $up_data))
+			return $this->db->insert_id();
+		else
+			return false;
+		}
+		elseif($data['nickname_action']=='update')
+		{
+			
+			$this->db->where('nic_name_id', $data['nickname_disp_id']);
+			if($this->db->update('bzz_nicknames', $up_data))
+			return true;
+			else 
+			return false; 
+		}
+	}
+	
+	
+		
+	public function delete_nick_name($nickname_id)
+	{
+	$this->db->where('nic_name_id',$nickname_id);
+	if($this->db->delete('bzz_nicknames'))
+	return true;
+	else
+	return false;
+	}
+	
+	
+	
+	public function get_nick_names()
 	{
 		$id = $this->session->userdata('logged_in')['account_id'];
-		
-		$this->db->select('nickname');
-		$this->db->from('bzz_userinfo');
+		$this->db->select('*');
+		$this->db->from('bzz_nicknames');
 		$this->db->where('user_id',$id);
+		$this->db->order_by('nic_name_id','desc');
 		$query = $this->db->get();
-		$data = $query->result_array();
-		
-		if(empty($data))
+		if($query->num_rows() > 0)
 		{
-			$nick_name_data = $name."-".$name_type;
-			$this->db->where('user_id',$id);
-			$up_data = array('nickname'=>$nick_name_data);
-			$this->db->insert('bzz_userinfo',$up_data);
-			
-			if($this->db->insert('bzz_userinfo',$up_data))
-		return true;
-		else
-		return false;
-		
-		}else
+			return $query->result_array();
+		}else 
 		{
-			$nick_name_data = $name."-".$name_type ;
-			$data = $data[0]['nickname'];
-			$data .=$nick_name_data;
-			
-			
-		 $up_data = array('nickname'=>$data);
-		$this->db->where('user_id',$id);
-		if($this->db->update('bzz_userinfo',$up_data))
-		return true;
-		else
-		return false;
+			return false;
 		}
 		
 	}
 	
-	
-		public function delete_nick_name($nickname)
+	public function edit_nick_name($id)
 	{
-		
-		$id = $this->session->userdata('logged_in')['account_id'];
-		
-		$this->db->select('nickname');
-		$this->db->from('bzz_userinfo');
-		$this->db->where('user_id',$id);
+		//$id = $this->session->userdata('logged_in')['account_id'];
+		$this->db->select('*');
+		$this->db->from('bzz_nicknames');
+		$this->db->where('nic_name_id', $id);
 		$query = $this->db->get();
-		$data = $query->result_array();
-		
-		if($data)
-		{
-		
-		$data = $data[0]['nickname'];
-		
-		
-		$pos = strpos($data,$nickname);
-		if($pos !== false)
-		{
-		$rest_of_nick_names = substr_replace($data,'',$pos,strlen($nickname));
-		}
-	
-		$up_data = array('nickname'=>$rest_of_nick_names);
-		$this->db->where('user_id',$id);
-		if($this->db->update('bzz_userinfo',$up_data))
-		return true;
-		else
+		if ($query->num_rows() > 0) {
+			return $query->result();
+		} else {
 		return false;
 		}
-	return false;	
-		
+	
+	
 	}
-	
-	
 	
 	
 	public function add_mobile($mobile)
