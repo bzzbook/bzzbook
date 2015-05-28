@@ -102,6 +102,16 @@ public function getfriendsuggestion($name,$addeduser=''){
 	else
 	echo 'No match found';
 }
+public function getfriendsfortagging($name,$addeduser=''){
+	$suggestions = $this->friendsmodel->getfriends($name,$addeduser);
+	if($suggestions){
+	foreach($suggestions as $suggestion){
+	echo "<div class='as_frnd_container' onclick='addfrndfortagging(".$suggestion['id'].",&#39;".$suggestion['name']."&#39;)'><div class='as_frnd_img'><img src='".base_url().'uploads/'.$suggestion['image']."'/></div><div class='as_frnd_name'>".$suggestion['name']."</div><div class='clearfix' ></div></div>";
+	}
+	}
+	else
+	echo 'No match found';
+}
 public function getfriend_bc_suggestion($name,$addeduser=''){
 	$suggestions = $this->friendsmodel->getfriends($name,$addeduser);
 	if($suggestions){

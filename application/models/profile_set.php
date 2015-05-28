@@ -761,7 +761,7 @@ public function add_family_members($member_name,$member_relation)
 	
 	public function get_family_members()
 	{
-		$id = $this->session->userdata('logged_in')['account_id']
+		$id = $this->session->userdata('logged_in')['account_id'];
 		$this->db->select('*');
 		$this->db->from('bzz_family_members');
 		$this->db->where('user_id',$id);

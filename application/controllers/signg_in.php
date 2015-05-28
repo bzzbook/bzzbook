@@ -98,11 +98,15 @@ class Signg_in extends CI_Controller {
 	 if($this->input->post('addedusers')!='')
 	 {
 		 $data['posted_to'] = $this->input->post('addedusers');
+		  if($this->input->post('tagaddedusers')!='')
+		  $data['tagged_friends'] = $this->input->post('tagaddedusers');
 		 $this->customermodel->post_buzz($data); 
 	 }
 	 else if($this->input->post('post_group')==0)
 	 {
 		  $data['posted_to']='';
+		  if($this->input->post('tagaddedusers')!='')
+		  $data['tagged_friends'] = $this->input->post('tagaddedusers');
 		   $this->customermodel->post_buzz($data);
 		   echo "post saved successfully..."; 
 		   redirect('profiles');
@@ -111,6 +115,8 @@ class Signg_in extends CI_Controller {
 	 {
 		 $result = $this->profile_set->get_groupmembers($this->input->post('post_group'));
 		 $data['posted_to'] = $result[0]['group_members'];
+		 if($this->input->post('tagaddedusers')!='')
+		 $data['tagged_friends'] = $this->input->post('tagaddedusers');
 		 $this->customermodel->post_buzz($data);
 	 }
 	 echo "post saved successfully..."; 

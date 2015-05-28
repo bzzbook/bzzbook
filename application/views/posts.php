@@ -15,7 +15,8 @@
         <input type="file" name="uploadPhotos[]" id="uploadPhotos" multiple="multiple" style="display:none;" />
         <textarea cols="" rows="" name="posts" id="posts" class="form-control" placeholder="What's Buzzing?"></textarea>
         <div id="selectedfriends"><div id="search_frnd_wrapper"><input type="text" name="txtsearch" id="searchfriends" onkeyup="keyupevent();" /><input type="hidden" id="addedusers" name="addedusers" /><div id="autosuggest"></div></div></div>
-        <div class="updateControls" id="updateControls"><img class="ghost" onclick="showghostinput();" src='<?php echo base_url().'images/haunted.png';?>' /> <select name="post_group" id="post_group"><option value="0">Public</option> <?php $groups = $this->profile_set->get_user_groups(); if($groups) { 
+        <div id="taggedfriends"><div id="tag_frnd_wrapper"><input type="text" name="tagsearch" id="tagsearchfriends" onkeyup="tagkeyupevent();" /><input type="hidden" id="tagaddedusers" name="tagaddedusers" /><div id="tagautosuggest"></div></div></div>
+        <div class="updateControls" id="updateControls"><img class="tagging" onclick="showtaginput();" src='<?php echo base_url().'images/person-tagging.png';?>' /><img class="ghost" onclick="showghostinput();" src='<?php echo base_url().'images/haunted.png';?>' /> <select name="post_group" id="post_group"><option value="0">Public</option> <?php $groups = $this->profile_set->get_user_groups(); if($groups) { 
 		foreach($groups as $group)
 		{
 			echo "<option value='".$group['group_id']."'>".$group['group_name']."</option>";
@@ -38,6 +39,27 @@
 	  $hrsago = $this->customermodel->get_time_difference_php($row->posted_on);
       $posted_id=$row->posted_by;
 	  $get_profiledata = $this->customermodel->profiledata($posted_id);
+	  if($row->tagged_friends!='')
+	  {
+		  $tags = array();
+		  $taggedusers = explode(',',$row->tagged_friends);
+		  foreach($taggedusers as $taggeduser){
+		  $tagusers = $this->customermodel->profiledata($taggeduser);
+		  $tags[] = $tagusers[0];
+		  }
+		  $s=1;
+		  $ltags = $tags;
+		  foreach($ltags as $ltag){
+		  $tagslist ='';
+		  if($s<3){
+		  }
+		  else{
+			  $tagslist .='<label>'.ucfirst($ltag->user_firstname)."&nbsp;".ucfirst($ltag->user_lastname).'</label>';
+		  }
+		  $s++;
+		  }
+		 
+	  }
 	  if(empty($user_id))
 	  $user_id=$this->session->userdata('logged_in')['account_id'];
 	  else
@@ -46,7 +68,23 @@
       <article>
           <div class="pfInfo"> <a href="<?php echo base_url().'profile/post/'.$get_profiledata[0]->user_id; ?>" class="pfImg"><img src="<?php echo base_url(); ?>uploads/<?php if(!empty($get_profiledata[0]->user_img_thumb)) echo $get_profiledata[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" alt=""></a>
             <div class="pfInfoDetails">
-              <h5><span class="pfname"><a href="<?php echo base_url().'profile/post/'.$get_profiledata[0]->user_id; ?>"><?php echo ucfirst($get_profiledata[0]->user_firstname)."&nbsp;".ucfirst($get_profiledata[0]->user_lastname);?></a><?php if($row->shared==1) echo " shared a post "; ?> </span></h5>
+              <h5><span class="pfname"><a href="<?php echo base_url().'profile/post/'.$get_profiledata[0]->user_id; ?>"><?php echo ucfirst($get_profiledata[0]->user_firstname)."&nbsp;".ucfirst($get_profiledata[0]->user_lastname);?></a>
+			  
+			  <?php if($row->tagged_friends!='') { 
+			  echo ' With'; $tagcount=1;
+			  foreach($tags as $tag){ 
+			  
+			  if($tagcount>2){ 
+			  echo ' AND '.(count($tags)-2).' <div id="links"><a href="#">Others<span>'.$tagslist.'</span></a></div>';
+			  break;
+			  }
+			  ?>
+              <a href="<?php echo base_url().'profile/post/'.$tag->user_id; ?>"><?php echo ucfirst($tag->user_firstname)."&nbsp;".ucfirst($tag->user_lastname);?></a> 
+			  <?php if($tagcount<2) echo ', ';  
+			  $tagcount++; 
+			  } 
+			  }?> 
+			  <?php if($row->shared==1) echo " shared a post "; ?> </span></h5>
               <a href="#" class="date"><?php  echo $hrsago; ?></a> </div>
           </div>
           <?php if(!empty($row->share_post_content)) echo "<div>".$row->share_post_content."</div>"; ?>

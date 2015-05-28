@@ -1809,6 +1809,19 @@ else
 $('#addedusers').val(user_id)
 
 }
+function addfrndfortagging(user_id,name){
+var cur_content = $('#taggedfriends').html();
+var new_content = "<span id='"+user_id+"'>"+name+"<a onclick='removefrndfromtagging("+user_id+")'><img class='as_close_btn' src='<?php echo base_url().'images/close_btn.png'; ?>'/></a></span>";
+ $('#taggedfriends').html(new_content+cur_content);
+ $('#tagsearchfriends').focus();
+ $('#tagautosuggest').hide();
+var addedusers = $('#tagaddedusers').val()
+if(addedusers!='')
+$('#tagaddedusers').val(addedusers+','+user_id)
+else
+$('#tagaddedusers').val(user_id)
+
+}
 function removefrnd(user_id){
 	var addedusers = $('#addedusers').val();
 	var len = addedusers.length;
@@ -1827,6 +1840,25 @@ function removefrnd(user_id){
 	$('#addedusers').val(newval);
 	$('#'+user_id).remove();
 }
+function removefrndfromtagging(user_id){
+	var addedusers = $('#tagaddedusers').val();
+	var len = addedusers.length;
+	var newval = '';
+	if(len==1)
+	{ 
+		newval = '';
+	}
+	else if(addedusers.indexOf(user_id)==(len-1)){
+	newval = addedusers.replace(','+user_id,'');
+	}
+	else if(addedusers.indexOf(user_id)==0)
+	newval = addedusers.replace(user_id+',','');
+	else
+	newval = addedusers.replace(user_id+',','');
+	$('#tagaddedusers').val(newval);
+	$('#'+user_id).remove();
+}
+
 function keyupevent(){
 	var value = $('#searchfriends').val();
 	var addedusers = $('#addedusers').val();
@@ -1848,10 +1880,38 @@ function keyupevent(){
 	}
 	else{ $('#autosuggest').hide(); }
 }
+function tagkeyupevent(){
+	var value = $('#tagsearchfriends').val();
+	var addedusers = $('#tagaddedusers').val();
+	if(value!='')
+	{	
+	url="<?php echo base_url(); ?>friends/getfriendsfortagging/"+value+"/"+addedusers;
+		$.ajax({
+        type: "POST",
+        url: url,
+        success: function(data)
+        {   
+			if(data){
+			$('#tagautosuggest').html(data);
+			$('#tagautosuggest').show();
+			}
+		},
+		cache: false
+		});
+	}
+	else{ $('#tagautosuggest').hide(); }
+}
 function showghostinput(){
+	$('#taggedfriends').hide(500);
 	$('#selectedfriends').toggle();
 	$('#searchfriends').focus();
 }
+function showtaginput(){
+	$('#selectedfriends').hide(500);
+	$('#taggedfriends').toggle();
+	$('#tagsearchfriends').focus();
+}
+
 // ghost post functionality end
 
 //business card ghostpost

@@ -958,6 +958,10 @@ width: 73.7%; !important;}
 min-height:20px;
 width:100%; display:none;
 }
+#taggedfriends{border-top:1px dashed grey;
+min-height:20px;
+width:100%; display:none;
+}
 #selected_emails{
 min-height:20px;
 width:100%; display:none;}
@@ -973,15 +977,26 @@ width:100%; }
     height: 20px;
     padding-left: 5px;
 }
+#tagsearchfriends{
+ background: none repeat scroll 0 0 transparent;
+    border: medium none;
+    font-size: 13px;
+    height: 20px;
+    padding-left: 5px;
+}
 
 #search_bc_frnd_wrapper{ position:relative;}
 
 #search_frnd_wrapper{position:relative; }
+#tag_frnd_wrapper{position:relative; }
 
 #autosuggest{position:absolute;	width:200px; z-index:111; background-color:white; display:none; padding:5px; border:1px solid #f1f1f1;}
 #auto_bc_suggest{position:absolute;width:200px; z-index:111; background-color:white; display:none; padding:5px; border:1px solid #f1f1f1;}
 #auto_suggest_company{ background-color: white; border: 1px solid #f1f1f1; border-radius: 8px; display: none; margin-left: 13px; margin-top: 33px; padding: 5px; position: absolute; width: 234px; z-index: 111;}
 #auto_suggest_company .as_frnd_container{  background:#fbc436; color:#000;line-height:30px;}
+
+#tagautosuggest{position:absolute;	width:200px; z-index:111; background-color:white; display:none; padding:5px; border:1px solid #f1f1f1;}
+
 
 .as_frnd_container{ width:100%; margin-bottom:2px;}
 .as_frnd_container:hover{ cursor:pointer; cursor:hand; }
@@ -991,10 +1006,17 @@ width:100%; }
 .as_close_btn{ vertical-align:middle; }
 
 #autosuggest .as_frnd_container{  background:#fbc436; color:#000;line-height:30px;}
+#tagautosuggest .as_frnd_container{  background:#fbc436; color:#000;line-height:30px;}
+
 #updateControls{ text-align:right; line-height:24px; position:relative; } 
 #autosuggest .as_frnd_img img{ width:16%; margin-right:10px;}
+#tagautosuggest .as_frnd_img img{ width:16%; margin-right:10px;}
+
 #selectedfriends > span {   float: left;  font-size: 13px;  margin-right: 5px;}
+#taggedfriends > span {   float: left;  font-size: 13px;  margin-right: 5px;}
+
 #search_frnd_wrapper{ float:left;}
+#tag_frnd_wrapper{ float:left;}
 
 
 #auto_bc_suggest .as_frnd_container{  background:#fbc436; color:#000;line-height:30px;}
@@ -1372,3 +1394,19 @@ margin-bottom: 5px;}
 .to_sch_years {
     margin-left: 106px;
 }
+
+/* style for person tagging icon 28-15-2015(created)  */
+.tagging{
+position:absolute;
+width:25px;
+height:25px;
+right:290px;	
+}
+
+div#links a span {display: none;}
+div#links a span a { display:none;}
+div#links a:hover span {display: block;
+   position: relative; top: 1px; left: 0; width: 125px;
+   padding: 5px;z-index: 1990; 
+   color: #AAA; background: black;
+    text-align: center;}
