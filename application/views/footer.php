@@ -2925,7 +2925,7 @@ function nick_edit()
 	$('.nick_edit').click(function(){
 		
 		nick_name_id = $(this).attr("id").substr(9);
-		alert(nick_name_id);
+		//alert(nick_name_id);
 		$("input[name=nickname_disp_id]").val(nick_name_id)
 		url="<?php echo base_url(); ?>profile/nicnameedit/";
 		$.post( url, { nick_name_id: nick_name_id})

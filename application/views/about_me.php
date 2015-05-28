@@ -1382,7 +1382,7 @@
                       
                       
                       <div id="family_relation" style="display:none;">
-                      <div class="tophead">Family Members</div>
+
                             <div class="relation_box col-md-12">
                               <div class="col-md-9">
                                 <form class="form-inline" id="add_family_member">

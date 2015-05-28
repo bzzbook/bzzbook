@@ -71,15 +71,15 @@
               <h5><span class="pfname"><a href="<?php echo base_url().'profile/post/'.$get_profiledata[0]->user_id; ?>"><?php echo ucfirst($get_profiledata[0]->user_firstname)."&nbsp;".ucfirst($get_profiledata[0]->user_lastname);?></a>
 			  
 			  <?php if($row->tagged_friends!='') { 
-			  echo ' With'; $tagcount=1;
+			  echo ' with '; $tagcount=1;
 			  foreach($tags as $tag){ 
 			  
 			  if($tagcount>2){ 
-			  echo ' AND '.(count($tags)-2).' <div id="links"><a href="#">Others<span>'.$tagslist.'</span></a></div>';
+			  echo ' and '.(count($tags)-2).' <div id="links"><a href="#" class="taggednames">others<span>'.$tagslist.'</span></a></div>';
 			  break;
 			  }
 			  ?>
-              <a href="<?php echo base_url().'profile/post/'.$tag->user_id; ?>"><?php echo ucfirst($tag->user_firstname)."&nbsp;".ucfirst($tag->user_lastname);?></a> 
+            <span class="taggednames"><a href="<?php echo base_url().'profile/post/'.$tag->user_id; ?>"><?php echo ucfirst($tag->user_firstname)."&nbsp;".ucfirst($tag->user_lastname);?></a> </span>
 			  <?php if($tagcount<2) echo ', ';  
 			  $tagcount++; 
 			  } 

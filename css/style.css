@@ -1023,7 +1023,7 @@ width:100%; }
 
 
 
-.ghost{ position: absolute; right: 175px; top: -2px;}
+.ghost{ position: absolute; right: 182px; top: -2px;}
 .ghost:hover{ cursor:pointer; cursor:hand;}
 
 
@@ -1410,3 +1410,10 @@ div#links a:hover span {display: block;
    padding: 5px;z-index: 1990; 
    color: #AAA; background: black;
     text-align: center;}
+.tagging {
+    padding-top: 1px;
+    position: absolute;
+    right: 161px;
+    width: 23px;
+}
+.taggednames{ font-size:13px; font-weight:400;  }
