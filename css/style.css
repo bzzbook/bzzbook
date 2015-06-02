@@ -296,8 +296,8 @@ footer.home h3 em{ color:#fdc70f; font-style:normal;}
 /*.aboutme .tab-pane{ padding:15px 0;}*/
 .aboutme .tab-pane h4{ color:#fbc436; padding-bottom:8px;}
 .aboutme .tab-pane p{ color:#737373; font-size:14px; /*padding-bottom:25px;*/ font-weight:300; background-color: #FFF;
-margin-left: 15px;
-margin-top: 5px;
+ margin-left: -5px;
+    margin-top: 0;
 padding: 5px;
 border: 0px solid gainsboro;}
 .aboutme .tab-content{ border-left:1px solid #eeeeee; min-height:200px;}
@@ -1026,7 +1026,7 @@ width:100%; }
 
 
 
-.ghost{ position: absolute; right: 182px; top: -2px;}
+.ghost{ position: absolute; right: 195px; top: -2px;}
 .ghost:hover{ cursor:pointer; cursor:hand;}
 
 
@@ -1416,7 +1416,7 @@ div#links a:hover span {display: block;
 .tagging {
     padding-top: 1px;
     position: absolute;
-    right: 161px;
+    right: 177px;
     width: 23px;
 }
 .taggednames{ font-size:13px; font-weight:400;  }
