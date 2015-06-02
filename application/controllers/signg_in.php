@@ -98,6 +98,7 @@ class Signg_in extends CI_Controller {
 	 if($this->input->post('addedusers')!='')
 	 {
 		 $data['posted_to'] = $this->input->post('addedusers');
+		 $data['isGhostpost'] = 1;
 		  if($this->input->post('tagaddedusers')!='')
 		  $data['tagged_friends'] = $this->input->post('tagaddedusers');
 		 $this->customermodel->post_buzz($data); 
@@ -235,6 +236,75 @@ class Signg_in extends CI_Controller {
 					$this->db->insert('testtable',$db_data);
 					*/	return $names;
 }
+
+//function temp_upload($filename='') {
+//					$name_array = array();
+//					if($filename=='')
+//					$count = count($_FILES['uploadPhotos']['size']);
+//					else
+//					$count = count($_FILES[$filename]['size']);
+//					foreach($_FILES as $key=>$value)
+//					for($s=0; $s<=$count-1; $s++) {
+//					$_FILES['userfile']['name']=$value['name'][$s];
+//					$_FILES['userfile']['type']    = $value['type'][$s];
+//					$_FILES['userfile']['tmp_name'] = $value['tmp_name'][$s];
+//					$_FILES['userfile']['error']       = $value['error'][$s];
+//					$_FILES['userfile']['size']    = $value['size'][$s];  
+//						$config['upload_path'] = './uploads/';
+//						$type = $_FILES['userfile']['type'];
+//						$config['allowed_types'] = 'gif|jpg|png';
+//						
+//						//switch ($type) {
+////						   case 'gif':
+////						   case 'jpg':
+////						   case 'png':
+////						     // do img config setup
+////							  					$config['allowed_types'] = 'gif|jpg|png';
+////
+////							  break;
+////						   case 'avi':
+////						   case 'flv':
+////						   case 'wmv':
+////						   case 'mp3':
+////						   case 'wma':
+////							  // do video config
+////							  					$config['allowed_types'] = 'mp4';
+////
+////							  break;
+////						}
+//						
+//						
+//					$config['max_size']	= '';
+//					$config['max_width']  = '';
+//					$config['max_height']  = '';
+//					$this->load->library('upload', $config);
+//					
+//					if ( ! $this->upload->do_upload())
+//					{
+//						$error = array('error' => $this->upload->display_errors());
+//						//$this->load->view('uploadform', $error);
+//					}
+//					else
+//					{
+//						$data = $this->upload->data();
+//						$name_array[] = $data['file_name'];
+//					}
+//					
+//					
+//					
+//					//$this->upload->do_upload();
+////					$data = $this->upload->data();
+////					$name_array[] = $data['file_name'];
+//					}
+//					$names = implode(',', $name_array);
+//					/* $this->load->database();
+//					$db_data = array('id'=> NULL,
+//					'name'=> $names);
+//					$this->db->insert('testtable',$db_data);
+//					*/	
+//					$this->customermodel->temp_upload_images($names); 
+//					echo json_encode($names);
+//}
 
    function insertlinks($pid,$uid){
 	   $data=array(

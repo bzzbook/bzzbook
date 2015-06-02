@@ -65,7 +65,7 @@
 	  else
 	  $user_id = $user_id;
 	  ?>
-      <article>
+      <article <?php if($row->isGhostpost==1) echo 'class="ghostpost"' ?> >
           <div class="pfInfo"> <a href="<?php echo base_url().'profile/post/'.$get_profiledata[0]->user_id; ?>" class="pfImg"><img src="<?php echo base_url(); ?>uploads/<?php if(!empty($get_profiledata[0]->user_img_thumb)) echo $get_profiledata[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" alt=""></a>
             <div class="pfInfoDetails">
               <h5><span class="pfname"><a href="<?php echo base_url().'profile/post/'.$get_profiledata[0]->user_id; ?>"><?php echo ucfirst($get_profiledata[0]->user_firstname)."&nbsp;".ucfirst($get_profiledata[0]->user_lastname);?></a>

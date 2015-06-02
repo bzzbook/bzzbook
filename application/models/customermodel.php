@@ -12,6 +12,18 @@ class Customermodel extends CI_Model {
 		 $this->db->insert('bzz_posts',$data);
 		 return $this->db->insert_id();
 	}
+	/*function temp_upload_images($data){
+		$images = explode(',',$data);
+		if(count($images)){
+		foreach($images as $image){
+		 $data['pic_name'] = $image;
+		 $this->db->insert('bzz_image_tags',$data);
+		}
+		return true;
+		}
+		else
+		return false;
+	}*/
 	function post_cmp_buzz($data){
 		 $this->db->insert('bzz_cmp_posts',$data);
 		 return $this->db->insert_id();

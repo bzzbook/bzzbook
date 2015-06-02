@@ -1527,6 +1527,8 @@ $('#pfpic').change(function()
 </script>
 
 <script language="javascript" type="text/javascript">
+// file upload preview while posting
+
 window.onload = function () {
     var fileUpload = document.getElementById("uploadPhotos");
     fileUpload.onchange = function () {
@@ -1557,6 +1559,36 @@ window.onload = function () {
         }
     }
 };
+
+
+/*$('#uploadPhotos').change(function(){
+  startUpload();
+});
+
+function startUpload(){
+  $.ajaxFileUpload({
+    url:'<?php echo base_url();?>signg_in/temp_upload/',
+    secureuri:false,
+    fileElementId:'uploadPhotos',
+    dataType: 'json',
+    success: function(data,status){
+		alert(data);
+		console.log(data);
+        if(typeof(data.error) != 'undefined'){
+            if(data.error){
+                console.log(data.error);
+            }else{
+                console.log("Image uploaded")
+            }
+        }
+    },
+    error: function(data,status,e){
+        console.log(e)
+    }
+  });
+  return false;
+}
+*/
 
 // share post function START - by vijay on 02-04-15 
 

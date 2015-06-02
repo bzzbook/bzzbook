@@ -109,6 +109,9 @@ header .search .input-group .input-group-btn ul li a:hover{ background:url(../im
 .midbody .coloumn2 .updateStatus .updateControls a+a{ background:#2f2f2f;}
 .midbody .coloumn2 .posts{ margin-bottom:15px; }
 .midbody .coloumn2 .posts article{background: #fff; border: 1px solid; border-color: #e5e6e9 #dfe0e4 #d0d1d5; border-radius: 2px; margin-bottom:15px; padding:15px 15px 0 15px;}
+.coloumn2 .posts article.ghostpost {
+    background: #B9FFFF none repeat scroll 0 0 !important;
+}
 .posts article .pfInfo{ display:flex; margin-bottom:15px;}
 .posts article .pfInfo .pfImg{ border:1px solid #ccc; margin-right:10px;}
 .posts article .pfInfo .pfImg{ width:50px; height:50px;}
@@ -119,7 +122,7 @@ header .search .input-group .input-group-btn ul li a:hover{ background:url(../im
 .posts article .pfInfo .pfInfoDetails .date{ color:#606060; margin-top:6px; display:block;   font-size: 11px;
   font-weight: 300;
   font-style: normal;}
-.posts article .userContent{ border:1px solid #ccc; border-radius: 3px; padding:5px;   font-size: 14px;
+.posts article .userContent{ /*border:1px solid #ccc;*/ border-radius: 3px; padding:5px;   font-size: 14px;
   font-weight: 300;
   font-style: normal;}
 .posts article .userContent figure img{ width:100%;}
