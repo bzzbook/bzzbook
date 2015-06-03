@@ -86,7 +86,7 @@ $(function () {
    $('#pf_pwd_change').validate();
    $(".message").fadeOut(6000);
  
-  $('#posts').focusin(function() 
+  $('#dummypost').focusin(function() 
    {
    $('#updateControls').show();
   
@@ -1842,17 +1842,44 @@ $('#addedusers').val(user_id)
 
 }
 function addfrndfortagging(user_id,name){
+	
 var cur_content = $('#taggedfriends').html();
 var new_content = "<span id='"+user_id+"'>"+name+"<a onclick='removefrndfromtagging("+user_id+")'><img class='as_close_btn' src='<?php echo base_url().'images/close_btn.png'; ?>'/></a></span>";
  $('#taggedfriends').html(new_content+cur_content);
  $('#tagsearchfriends').focus();
  $('#tagautosuggest').hide();
-var addedusers = $('#tagaddedusers').val()
+var addedusers = $('#tagaddedusers').val();
 if(addedusers!='')
 $('#tagaddedusers').val(addedusers+','+user_id)
 else
-$('#tagaddedusers').val(user_id)
+$('#tagaddedusers').val(user_id);
 
+	
+	
+	var nooftags = $('#tagaddedusers').val();
+	
+	var countTags = nooftags.split(',').length;
+	
+	var remains = countTags-2;
+	
+	if(countTags == 1)
+	$("#withTokens").append("<a id='token"+user_id+"' href='<?php echo base_url()."profile/post/"; ?>"+user_id+"'>"+name+"</a>");
+	else if(countTags==2)
+	$("#withTokens").append(" and <a id='token"+user_id+"' href='<?php echo base_url()."profile/post/"; ?>"+user_id+"'>"+name+"</a>");
+	else if(countTags>=3)
+	{
+	var cur_tokens = $("#withTokens").html();
+	var new_cont = cur_tokens.replace(' and',',');
+	$("#withTokens").html(new_cont);
+	if(countTags>1){ 
+	$("#hiddentokens").append(", <a id='token"+user_id+"' href='<?php echo base_url()."profile/post/"; ?>"+user_id+"'>"+name+"</a>");}	
+	else{ 
+	$("#hiddentokens").append("<a id='token"+user_id+"' href='<?php echo base_url()."profile/post/"; ?>"+user_id+"'>"+name+"</a>");	}
+	cur_cont = $("#withTokens").html();
+	var req = cur_cont.split(',');
+	$("#withTokens").html(req[0]+', '+req[1]+" and "+remains+" others");
+	}
+	$("#withTokens").show();
 }
 function removefrnd(user_id){
 	var addedusers = $('#addedusers').val();
@@ -1873,6 +1900,15 @@ function removefrnd(user_id){
 	$('#'+user_id).remove();
 }
 function removefrndfromtagging(user_id){
+	
+	
+	//var cur_cont = $('#withTokens').html();
+//	var new_cont = cur_cont.replace(', ','');
+//	new_cont = cur_cont.replace('and ','');
+//	if(new_cont.indexOf('<a')===-1)
+//	$('#withTokens').hide();
+//	$('#withTokens').html(new_cont);
+		
 	var addedusers = $('#tagaddedusers').val();
 	var len = addedusers.length;
 	var newval = '';
@@ -1889,6 +1925,38 @@ function removefrndfromtagging(user_id){
 	newval = addedusers.replace(user_id+',','');
 	$('#tagaddedusers').val(newval);
 	$('#'+user_id).remove();
+	
+	$('#token'+user_id).remove();	
+	$('#withTokens').hide();
+	var nooftags = $('#tagaddedusers').val();	
+	if(nooftags=='')
+	return true;
+	var countTags = nooftags.split(',').length;
+	var tags = nooftags.split(',');
+	var get_content = ''; var put_content = '';
+	if(countTags==1)
+	{
+	get_content = $("#token"+tags).html();
+	put_content = "-With "+"<a id='token"+tags+"' href='<?php echo base_url()."profile/post/"; ?>"+tags+"'>"+get_content+"</a>";
+	$('#withTokens').html(put_content);
+	$('#withTokens').show();	
+	}
+	else if(countTags==2){
+	
+	get_content = $("#token"+tags[0]).html(); get_content2 = $("#token"+tags[1]).html();
+	put_content = "-With "+"<a id='token"+tags[0]+"' href='<?php echo base_url()."profile/post/"; ?>"+tags[0]+"'>"+get_content+"</a> and <a id='token"+tags[1]+"' href='<?php echo base_url()."profile/post/"; ?>"+tags[1]+"'>"+get_content2+"</a>";
+	$('#withTokens').html(put_content);	
+	$('#withTokens').show();
+	}
+	else if(countTags>=3){
+	remains = countTags-2;
+	get_content = $("#token"+tags[0]).html(); get_content2 = $("#token"+tags[1]).html();
+	put_content = "-With "+"<a id='token"+tags[0]+"' href='<?php echo base_url()."profile/post/"; ?>"+tags[0]+"'>"+get_content+"</a>, <a id='token"+tags[1]+"' href='<?php echo base_url()."profile/post/"; ?>"+tags[1]+"'>"+get_content2+"</a> and "+remains+" others";
+	$('#withTokens').html(put_content);	
+	$('#withTokens').show();	
+	}
+	//if(nooftags=='')
+//	$("#withTokens").html('--With ');$("#withTokens").hide();
 }
 
 function keyupevent(){
@@ -1913,6 +1981,7 @@ function keyupevent(){
 	else{ $('#autosuggest').hide(); }
 }
 function tagkeyupevent(){
+
 	var value = $('#tagsearchfriends').val();
 	var addedusers = $('#tagaddedusers').val();
 	if(value!='')

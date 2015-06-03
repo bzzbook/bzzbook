@@ -47,6 +47,7 @@ class Customermodel extends CI_Model {
   	    $id = $this->session->userdata('logged_in')['account_id'];
 		else
 		$id = $pst_usr_id;
+		$cur_usr_id = $this->session->userdata('logged_in')['account_id'];
 	    $condition = "(user_id ='" . $id . "' OR friend_id ='".$id."') AND request_status = 'Y'";
 		$this->db->select('*');
 		$this->db->from('bzz_userfriends');
@@ -76,7 +77,7 @@ class Customermodel extends CI_Model {
 			$posts = array();
 			foreach($result as $res){
 		    $friend_ids = explode(',',$res->posted_to);
-			if(($res->posted_to==0 && in_array($res->posted_by,$friends))|| $res->posted_by==$id || in_array($id, $friend_ids))
+			if(($res->posted_to==0 && in_array($res->posted_by,$friends))|| ($res->posted_by==$id && $id==$cur_usr_id) || (in_array($id, $friend_ids) && $id==$cur_usr_id) ||  in_array($pst_usr_id, $friend_ids) || ($res->posted_by==$id && in_array($cur_usr_id, $friend_ids)))
 			{
 				$posts[] = $res;
 			}

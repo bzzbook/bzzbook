@@ -10,6 +10,10 @@ class Friendsmodel extends CI_Model {
   {
 	    $id = $this->session->userdata('logged_in')['account_id'];
 	    $condition = "(user_id ='".$id."' OR friend_id='".$id."') AND request_status='Y'";
+		if($addedusers!='')
+		$condition.= " AND (user_id NOT IN (".$addedusers.") AND friend_id NOT IN (".$addedusers.") )";
+		
+		//echo $condition ; exit;
 		$this->db->select('*');
 		$this->db->from('bzz_userfriends');
 		$this->db->where($condition);
@@ -28,7 +32,7 @@ class Friendsmodel extends CI_Model {
 					$condition.= " AND (user_firstname LIKE '%".$name."%' OR user_lastname LIKE '%".$name."%' )"; 
 				}
 				if($addedusers!=''){
-					$condition.= " AND user_id NOT IN ('".$addedusers."')";
+					$condition.= " AND user_id NOT IN (".$addedusers.")";
 				}
 				
 				$this->db->select('*');
