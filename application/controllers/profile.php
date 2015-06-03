@@ -1016,20 +1016,22 @@ public function deletehometown()
 		echo false;
 }
   
-      public function deletemobile()
+   public function deletemobile()
 {
-		$id = $this->session->userdata('logged_in')['account_id'];
-		$up_data = array('mobile'=>'');
-		$this->db->where('user_id',$id);
-		if($this->db->update('bzz_userinfo',$up_data))
-		$this->load->view('aboutme/mobile_inner');
-		else
-		echo false;
+	if($this->profile_set->del_mobile_by_id($_POST['mbl_id']))
+	$this->load->view('aboutme/mobile_inner');
+	else
+	return false;
+}
+   public function deleteothaccount()
+{
+	if($this->profile_set->del_oth_acc_by_id($_POST['account_id']))
+	$this->load->view('aboutme/accounts_inner');
+	else
+	return false;
 }
     public function addfavquotes()
   {
-	  
-	 
 	$insert_id =  $this->profile_set->add_fav_quotes($_POST['fav_quotes']);
     $result = $this->profile_set->save_settings();
 	if($this->profile_set->add_fav_quotes($_POST['fav_quotes']))
@@ -1120,10 +1122,77 @@ public function add_nicnames()
 public function addmobile()
 {
 	//$insert_id =  $this->profile_set->add_about_me($_POST['about_me']);
-    $result = $this->profile_set->save_settings();
-	if($this->profile_set->add_mobile($_POST['mobile']))
+   // $result = $this->profile_set->save_settings();
+	if($this->profile_set->add_mobile($_POST['mbl_no'],$_POST['country']))
 	
 	$this->load->view('aboutme/mobile_inner');
+	else
+	return false;
+  
+	
+}
+
+  
+public function addaccounts()
+{
+	//$insert_id =  $this->profile_set->add_about_me($_POST['about_me']);
+  //  $result = $this->profile_set->save_settings();
+	if($this->profile_set->add_oth_accounts($_POST['acc_name'],$_POST['acc_type']))
+	
+	$this->load->view('aboutme/accounts_inner');
+	else
+	return false;
+  
+	
+}
+   public function mobileEdit()
+  {
+	 $data = $this->profile_set->editmobileDetails($_POST['mobile_id']);
+	 foreach( $data as $result):
+	 	$mbl_data['mobile_no'] = $result->mobile_no;
+		$mbl_data['country_code'] = $result->country_code;
+		
+		endforeach;
+		echo json_encode($mbl_data);
+	
+  }
+  
+     public function accountEdit()
+  {
+	 $data = $this->profile_set->editaccountDetails($_POST['account_id']);
+	 foreach( $data as $result):
+	 	$acc_data['account_name'] = $result->account_name;
+		$acc_data['account_type'] = $result->account_type;
+		
+		endforeach;
+		echo json_encode($acc_data);
+	
+  }
+  public function editmobilebyid()
+  {
+	 if($this->profile_set->edit_mobile_no_by_id($_POST['mobile_no'],$_POST['con_code'],$_POST['mobile_id']))
+	
+	$this->load->view('aboutme/mobile_inner');
+	else
+	return false;
+	  
+  }
+  
+   public function editaccountbyid()
+  {
+	 if($this->profile_set->edit_account_by_id($_POST['account_name'],$_POST['account_type'],$_POST['account_id']))
+	
+	$this->load->view('aboutme/accounts_inner');
+	else
+	return false;
+	  
+  }
+public function add_other_accounts()
+{
+
+	if($this->profile_set->add_other_accounts_data($_POST['account_name'],$_POST['account_type']))
+	
+	$this->load->view('aboutme/oth_accounts_inner');
 	else
 	return false;
   
@@ -1209,12 +1278,17 @@ public function addpfskills()
 public function addinterest()
 {
 	//$insert_id =  $this->profile_set->add_about_me($_POST['about_me']);
-    $result = $this->profile_set->save_settings();
+   // $result = $this->profile_set->save_settings();
+   if(isset($_POST['interested_in']))
+   {
 	if($this->profile_set->add_interested_in($_POST['interested_in']))
+	{
 	$this->load->view('aboutme/interests_inner');
-	else
+	}
+	
+   }
+   else
 	return false;
-  
 	
 }
       public function deleteinterests()
@@ -1338,6 +1412,8 @@ public function add_school()
 	return false;
 	
   }
+
+
 
 }
 ?>

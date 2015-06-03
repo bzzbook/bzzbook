@@ -42,15 +42,15 @@
                           
                           <div id="relation">
                             <div class="relation_box col-md-12">
-                              <div class="col-md-8">
+                              <div class="col-md-8"  style="margin-left:-40px;">
                                 <div class="col-md-2 relationss"> <i class="fa fa-heart"></i></div>
                                 <div class="col-md-10">
                                   <h3><?php echo $result[0]->relationshipstatus; ?></h3>
                                 </div>
                               </div>
                               <div class="col-md-4 rightblock ">
-                                <div class="col-md-3 family"><a href="#"><i class="fa fa-globe"></i></a></div>
-                                <div class="col-md-9"> <a href="javascript:void(0)"><i class="fa fa-pencil"></i></a><a href="javascript:void(0)" onclick="edit_relation()">Edit</a> </div>
+                                <div class="col-md-3 family" style="display:none;"><a href="#"><i class="fa fa-globe"></i></a></div>
+                                <div class="col-md-9"> <a href="javascript:void(0)"><i class="fa fa-pencil"></i></a><a href="javascript:void(0)" onclick="edit_relation()"></a> </div>
                               </div>
                             </div>
                             <div class="clearfix"></div>

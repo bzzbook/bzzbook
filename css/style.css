@@ -742,7 +742,7 @@ border-radius: 90px 90px 90px 90px; height: 110px; width: 110px; overflow: hidde
 .smallboxes ul { list-style:none; }
 .smallboxes ul li{ border-bottom:1px solid #efefef; padding-bottom:15px; margin-bottom:15px;}
 .iner_lefts{ float: left; width:43px; height:39px; background:#ececec;  margin-right:9px; margin-top:2px;  padding: 7px 0 0 15px; color:#337ab7;}
-
+.smallboxes .aboutme-overview li{ border-bottom:0px solid #efefef; padding-bottom:15px; margin-bottom:15px;}
 .iner_mail{ float: left; padding-right:15px; float:left; margin-right:9px;}
 
 .iner_lefts img{ padding: 11px 0 0 14px;}
@@ -755,7 +755,8 @@ border-radius: 90px 90px 90px 90px; height: 110px; width: 110px; overflow: hidde
 .addresbox li{ padding:0; margin:0; float:left; font-size:14px; font-family: 'Roboto', sans-serif; font-weight:300; color:#646464; line-height:22px;}
 .addresbox .boxicon{ float:left; padding-right:5px;}
 .addresbox .boxicon_text{ float:right;}
-
+.boxicon{ float: left; margin-left: -30px;}
+.boxicon_text{ float:left; line-height: 15px; margin-bottom:15px;}
 .my_companys ul{ list-style:none;}
 .my_companys li{ border: 1px solid #eee;  font-size:14px; font-family: 'Roboto', sans-serif; font-weight:300; color:#646464; line-height:22px; margin-bottom:15px;}
 .my_companys .company_box_img{ width:143px; height:157px; overflow:hidden; float:left;}
@@ -1189,13 +1190,13 @@ footer{ color:#acacac; font-size:20px; color:#acacac; text-align:center; padding
 
 /*12-05-2015*/
 .boxs h3 { padding-top:10px; font-size:17px; font-weight:300; }
-.boxs h5 { font-size:14px; font-weight: 300; }
+.boxs h5 { font-size:17px; font-weight: 300; }
 .boxs p { padding:0!important; margin:0 !important; }
 .boxs .edu_cation { font-size:14px; font-weight:300; }
 .smallboxes ul li:last-child { border-bottom:none; }
 #education .small_boxes { border-bottom:none; }
 #education .small_boxes ul { list-style:none; }
-.tophead { font-size:14px; font-weight:300; text-transform: uppercase; color:#737373; width:100%;margin-top: 15px; border-bottom:1px solid #ececec; margin-bottom:10px; }
+.tophead { font-size:14px; font-weight:500; text-transform: uppercase; color:#737373; width:100%;margin-top: 15px; border-bottom:1px solid #ececec; margin-bottom:10px; }
 .workplace { font-size:13px; font-weight:300; padding:0; margin: 15px 0 5px;  border-bottom: 1px solid #ececec;}
 .workplace label { width:102px; text-align:right; margin-bottom:8px; /*vertical-align:top;*/ }
 .workplace input { width:210px; border:1px solid #ececec; font-size:13px; padding:5px; margin-bottom:8px; } 
@@ -1204,6 +1205,7 @@ footer{ color:#acacac; font-size:20px; color:#acacac; text-align:center; padding
 }
 
 /*#education .fa{ padding:0 10px 0 15px;}*/
+.col-md-4.rightblock {float: right;  margin-right: -45px;}
 .rightblock a { color:#9197a3; margin-left:10px; }
 .rightblock a:hover { color:#9197a3; }
 .workplace textarea { width:210px; border: 1px solid #ececec; }
@@ -1218,7 +1220,7 @@ footer{ color:#acacac; font-size:20px; color:#acacac; text-align:center; padding
 
 #skills label { width:150px; }
 #skills input { width:300px; padding: 5px; }
-.skil_box { width:37%; padding:0px; }
+.skil_box { width:37%; padding:0px; margin-left: 160px;}
 .College { font-size:13px; font-weight:300; padding:0; margin:0; }
 #College label { width:102px; text-align:right; margin-bottom:8px; font-size:13px; }
 #College input { width:210px; border:1px solid #ececec; font-size:13px; padding:5px; margin-bottom:8px; }
@@ -1263,8 +1265,9 @@ footer{ color:#acacac; font-size:20px; color:#acacac; text-align:center; padding
 .sm_rightbox h3{ font-size:14px; }
 .sm_rightside{ width:30%; float:right; }
 .com_le .fa { border-right: 1px solid #737373; padding-right: 5px; font-size:15px;}
-.com_mid {  border-right: 1px solid #737373;  padding-right: 3px; font-size:13px;  margin-top: 5px; line-height: 19px;}
-.com_mid  a{ color:#337ab7;}
+.com_mid {  border-right: 1px solid #737373;  padding-right: 3px; font-size:13px;  margin-top: 5px; line-height: 19px; margin-left:35px;}
+.com_mid  a{ color:#737373; margin-left:32px;}
+.com_rig {float:right;}
 .com_rig a{ color:#737373; font-size:13px;}
 .sm_rightbox h3{ font-size:16px;}
 
@@ -1274,8 +1277,8 @@ footer{ color:#acacac; font-size:20px; color:#acacac; text-align:center; padding
 .iner_boxleft .fa{ margin-right:15px;}
 .aboutyou { font-size:13px; font-weight:300; padding:0; margin:0; }
 .aboutyou label { font-size: 13px; margin-bottom: 8px;padding-right: 10px;text-align: right;width: 102px;}
-.aboutu textarea { border: 1px solid #ececec; vertical-align:top; font-size: 14px;font-weight: 300;  }
-.aboutu label { width:102px; text-align:right; margin-bottom:8px; font-size:13px; padding-right: 10px; }
+.aboutu textarea { border: 1px solid #ececec; vertical-align:top; font-size: 14px;font-weight: 300;   margin-left: 15px; }
+.aboutu label { width:102px; text-align:right; margin-bottom:8px; font-size:13px; padding-right: 10px; margin-left: 34px;}
 .others { font-size:13px; font-weight:300; padding:0; margin:0; }
 .others label { font-size: 13px; margin-bottom: 8px;padding-right: 10px;text-align: right;width: 102px;}
 .others select { border: 1px solid #ececec; width:159px;}
@@ -1285,12 +1288,13 @@ footer{ color:#acacac; font-size:20px; color:#acacac; text-align:center; padding
 .profil_sho p{ font-size:13px !important; font-weight:300;}
 
 .favorite { font-size:13px; font-weight:300; padding:0; margin:0; }
-.favorite textarea { border: 1px solid #ececec; vertical-align:top; width:210px;  }
+.favorite label { width:102px; text-align:right; margin-bottom:8px; font-size:13px; padding-right: 10px; margin-left: 34px;}
+.favorite textarea { border: 1px solid #ececec; vertical-align:top; width:210px; margin-left: 15px; }
 
 /*15-05-2015*/
 .mobile { font-size:13px; font-weight:300; padding:0; margin:0; }
 .mobile label { width:102px; text-align:right; margin-bottom:8px; font-size:13px; padding-right: 10px; }
-#mobile select { width:127px; text-align:left; margin-bottom:8px; font-size:13px; border: 1px solid #ececec; font-weight:300;}
+.mobileone select { width:127px; text-align:left; margin-bottom:8px; font-size:13px; border: 1px solid #ececec; font-weight:300;}
 .box-rig_box input{ float:right; width:83px; height:23px; border: 1px solid #ececec; font-size:13px;}
 .inside_drop a{ color:#9197a3;}
 .iner_boxleft_bottom { float: left; margin-left:30%; font-weight:300; color:#337ab7; font-size:12px;  }
@@ -1317,8 +1321,8 @@ footer{ color:#acacac; font-size:20px; color:#acacac; text-align:center; padding
 .birth_ins input{ width:210px; border: 1px solid #ececec; margin-bottom:8px; padding:3px;}
 .birth_ins textarea{ width:210px; vertical-align:top; border: 1px solid #ececec;}
 .latest_works{  border-bottom: 1px solid #ececec; margin-bottom:10px; padding-top: 18px; }
-.inner_rights { margin-bottom:15px;}
-
+.inner_rights { /*margin-bottom:15px;*/}
+.work_inner_data{  border-bottom: 1px solid #ececec; margin-bottom:0px; padding-top: 18px; }
 .to_years_link
 /*26-05-2015*/
 .rightblock .fa{ padding-right:10px;}
@@ -1420,4 +1424,20 @@ div#links a:hover span {display: block;
 }
 .taggednames{ font-size:13px; font-weight:400;  }
 .post-content{ font-family:Verdana, Geneva, sans-serif; font-size:12px; }
-
+.overviewicons{ color: #d0d0d0;}
+.boxicon_text.col-md-8 > p {
+    font-size: 16px;
+    font-weight: 400;
+}
+.aboutme_clg {
+    font-size: 15px;
+}
+school_inner {
+    margin-bottom: 34px;
+}
+.work_edu_side_links {
+    color: #9b9b9b;
+    float: right;
+    font-size: 15px;
+    margin-top: -7px;
+}

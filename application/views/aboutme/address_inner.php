@@ -17,14 +17,14 @@
                         <div id="address_val_display">
                         <div class="sm_leftbox"></div>
                         <div class="sm_rightbox"><h3><a href="#">Address</a></h3>
-                        <p><?php if($data) { if($data[0]) {  echo $data[0]; } } ?></p>
-                        <p><?php if($data) { if($data[1]) {  echo $data[1]; } } ?></p>
-						<p><?php if($data) { if($data[2]) {  echo $data[2]; } } ?></p>
-                        <p><?php if($data) { if($data[3]) {  echo $data[3]; } } ?></p>
+                        <p><?php if($data) { if($data[0]) {  echo $data[0].','; } } ?>
+                        <?php if($data) { if($data[1]) {  echo $data[1].','; } } ?>
+						<?php if($data) { if($data[2]) {  echo $data[2].'.'; } } ?></p>
+                        
                         </div>
                         <div class="sm_rightside">
-                        <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
-                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="address_edit()"><i class="fa fa-pencil"></i> Edit</a></div>
+                        <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
+                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="address_edit()"><i class="fa fa-pencil"></i></a></div>
                         <div class="col-md-3 com_rig"><a  href="javascript:void(0)" onclick="del_address()"><i class="fa fa-times"></i></a></div>
                         </div>
                         </div>
@@ -49,7 +49,7 @@
                             
                             <div class="clearfix"></div>
                             <div class="box_bottom">
-                              <div class="publics col-md-3">
+                              <div class="publics col-md-3" style="display:none;">
                                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Friends <span class="caret"></span></button>
                               </div>
                               <div class="col-md-9 skil_box">

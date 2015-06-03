@@ -11,6 +11,13 @@
 					 $user_school_info = $this->profile_set->get_school_details();
 					 $family_members = $this->profile_set->get_family_members();
 					 $nick_names = $this->profile_set->get_nick_names();
+					 $mobile_data = $this->profile_set->get_mbl_nos();
+					 $accounts_data = $this->profile_set->get_other_accounts_by_id(); 
+					 $emp_working = $this->profile_set->get_org_details_by_status_work();
+					 $emp_work_ended = $this->profile_set->get_org_details_by_status_all();
+					 $college_details = $this->profile_set->get_clg_details_all();
+					 $user_log_data = $this->person->get_abtme_user();
+					 
 					 ?>
             <div class="profileLogo">
               <figure class="cmplogo"><a href="#"><span class="glyphicon glyphicon-camera change-photo fileinput-button" aria-hidden="true"><em>Change Picture</em> <input type="file" name="userfile" id="userfile" size="20" required/></span></a><img src="<?php echo base_url();?>uploads/<?php if(!empty($image[0]->user_img_thumb)) echo $image[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" alt="<?php echo base_url();?>uploads/<?php if(!empty($image[0]->user_img_thumb)) echo $image[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>"></figure>
@@ -40,63 +47,219 @@
               </div>
               <div class="tab-content col-md-8">
                 <div role="tabpanel" class="tab-pane active" id="overview">
-                  <div class="smallboxes col-lg-7">
-                    <ul>
+                  <div class="smallboxes col-lg-12">
+                    <ul class="aboutme-overview">
+                    
+           <li>
+                 		  <div class="tophead">Basic Info</div>
+                          <div class="col-md-12">
+                        <div class="boxicon col-md-1"><i class="fa fa-user overviewicons"></i></div>
+                        <div class="boxicon_text col-md-8"><?php echo $result[0]->user_firstname ." " .$result[0]->user_lastname; ?></div>
+                       </div>
+                   
+                   
+                		<div class="col-md-12">
+                        <div class="boxicon col-md-1"><img src="<?php echo base_url(); ?>images/phoneicon.png" alt=""></div>
+                        <div class="boxicon_text col-md-8"><?php if($result[0]->user_phoneno) { echo $result[0]->user_phoneno; }else echo"mobile no not Available"; ?></div>
+                       </div>
+                       <div class="col-md-12">
+                        <div class="boxicon col-md-1"><img src="<?php echo base_url(); ?>images/mailicon.png" alt=""></div>
+                        <div class="boxicon_text col-md-8"><?php if($user_log_data) { echo $user_log_data[0]['user_email']; } else echo"email not Available";?>
+                         </div>
+                    </div>
+                     <div class="col-md-12">
+                        <div class="boxicon col-md-1"><img src="<?php echo base_url(); ?>images/printicon.png" alt=""></div>
+                        <div class="boxicon_text col-md-8"><?php $unixTimestamp = strtotime($result[0]->user_dob);
+				 echo date('d',$unixTimestamp)."th ".date('F',$unixTimestamp).", ".date('Y',$unixTimestamp); ?>
+                        </div>
+                         </div>
+                         
+                              <div class="col-md-12 basic_address" id="basic_address">
+                        <div class="boxicon col-md-1"><i class="fa fa-home overviewicons"></i></div>                      
+                           <?php 
+							   if(!empty($result[0]->address))
+							 {
+								$data = explode('|++|',$result[0]->address);
+							 }else
+							 {
+								 $data ='';
+							 }
+                          ?>      
+                          <?php if(!empty($data)) {  ?>
+     
+                       
+                        <div class="boxicon_text col-md-8"> <p><?php if($data) { if($data[0]) {  echo $data[0].','; } }  ; ?>
+                         <?php if($data) { if($data[1]) {  echo $data[1].','; } } ; ?>
+						 <?php if($data) { if($data[2]) {  echo $data[2].'.'; } } ; ?>
+                         </p></div>
+                        
+                        <?php }else{ ?>
+                        <div class="boxicon_text col-md-8"> <p><?php echo "Address Not Available";?></p></div>
+                         <?php } ?>
+                         <div class="col-md-3">
+                           <a  href="javascript:void(0)" id="move_to_contact" style="float:right; display:none;">edit</a> 
+                         </div>
+                       </div> 
+                         
+                                                  
+                    <!--     <br>
+                        <a  href="javascript:void(0)" id="move_to_contact" >Edit your basic info</a> -->
+                                          
+  
+                   
+                    </li>
+                    
+                    
                       <li>
+                        <div class="tophead">WORK EXPERIENCE</div>
+                      <?php if(empty($organization_details)) { ?>
                         <div class="iner_lefts"><i class="fa fa-plus"></i></div>
                         <div class="inner_rights boxs">
                           <h3><a href="javascript:void(0)" onclick="mov_to_work_edu()">Add a workplace</a></h3>
                           <div class="graphic"></div>
                         </div>
                         <div class="clearfix"></div>
-                      </li>
-                      <li>
-                        <div class="iner_lefts"></div>
+                        <?php } else { 
+						?>
+                         <div class="iner_lefts"><i class="fa fa-briefcase"></i></div>
                         <div class="inner_rights boxs">
-                          <h5>Studied at <a href="#">Göteborgs Universitet</a></h5>
-                          <p><span>Past:</span><a href="#">ZPH School</a></p>
-                          <div class="edu_cation"><a href="javascript:void(0)" onclick="mov_to_work_edu()">Edit your education</a></div>
+                        <?php 	
+						if(!empty($emp_working))
+						{
+							foreach($emp_working as $working)
+							{
+						?>		
+						
+                          <h5><?php echo $working['position']; ?> at <a href="#"><?php echo $working['org_name']; ?></a></h5>
+                          
+                          <?php } } ?>
+                          <?php 	
+						  if(!empty($emp_work_ended))
+						{
+							 $i = 0;
+							 ?>
+                             <span class="aboutme_clg">Past:</span>
+                             <?php
+							foreach($emp_work_ended as $worked)
+							{
+							
+						?>
+                         <a href="#" class="aboutme_clg"><?php echo $worked['org_name']; ?></a>
+                          
+						  <?php 
+						  
+						  if($i < count($emp_work_ended))
+						  
+						  { 
+						  
+						  if($i == count($emp_work_ended)-1)
+						  {
+						  break;
+						  }
+						  elseif($i == count($emp_work_ended)-2)
+						  {
+							  
+						  ?>
+                          <span class="aboutme_clg">and</span>
+                          <?php }else{ ?>
+                          <span class="aboutme_clg">,</span>
+                          
+					<?php
+							}
+						  } $i++;} ?>
+                       <!--   <div class="edu_cation"><a href="javascript:void(0)" onclick="mov_to_work_edu()">Edit your education</a></div> -->
                         </div>
                         <div class="clearfix"></div>
+                        <?php } } ?>
                       </li>
                       <li>
-                        <div class="iner_lefts"></div>
+                      <div class="tophead">EDUCATION DETAILS</div>
+                      <?php if(empty($college_details)) { ?>
+                       <div class="iner_lefts"><i class="fa fa-plus"></i></div>
                         <div class="inner_rights boxs">
-                          <h5>Lives in <a href="#"><?php echo $result[0]->location; ?></a></h5>
-                          <p><span>From </span><a href="#"><?php echo $result[0]->hometown; ?></a></p>
-                          <div class="edu_cation"><a href="javascript:void(0)" id="move_to_places">Edit the places you've lived</a></div>
-                        </div>
-                        <div class="clearfix"></div>
-                      </li>
-                      <li>
-                        <div class="iner_lefts"><i class="fa fa-plus"></i></div>
-                        <div class="inner_rights boxs">
-                          <h3><a  href="javascript:void(0)" id="move_to_relation">Add a relationship</a></h3>
+                          <h3><a href="javascript:void(0)" onclick="mov_to_work_edu()">Add a College</a></h3>
                           <div class="graphic"></div>
                         </div>
                         <div class="clearfix"></div>
+                        <?php }else{ $j = 1; ?>
+						  <div class="iner_lefts"><i class="fa fa-graduation-cap"></i></div>
+                      
+                        <?php foreach($college_details as $college) {  ?>
+						    
+							
+                        <div class="inner_rights boxs">
+                        <?php if($j == 1) { ?>
+                          <h5>Studied at <a href="#"><?php echo $college['college_name']; ?></a></h5>
+                          <?php }else { ?>
+                        
+                          <span class="aboutme_clg">Past:</span> <a href="#" class="aboutme_clg"><?php echo $college['college_name']; ?></a>
+                          <?php if($j < count($college_details)) { 
+						  
+						    if($i == count($college_details)-1)
+						  {
+						  break;
+						  }
+						   elseif($j < count($college_details) - 2){ ?>
+                             
+                          <span class="aboutme_clg">and</span>
+                          <?php }else{ ?>
+                          <span class="aboutme_clg">,</span>
+                            
+                            <?php  }} } $j++; ?>
+                      
+                        <!--  <div class="edu_cation"><a href="javascript:void(0)" onclick="mov_to_work_edu()">Edit your education</a></div> -->
+                        </div>
+                        <?php  } } ?>
+                        <div class="clearfix"></div>
+                      </li>
+                      <li>
+                      <div class="tophead">PLACES YOU'VE LIVED</div>
+                     <?php  if(empty($result[0]->location) && empty($result[0]->hometown)) { ?>
+                     
+                     <div class="iner_lefts"><i class="fa fa-plus"></i></div>
+                        <div class="inner_rights boxs">
+                          <h3><a  href="javascript:void(0)" id="move_to_places">Add a Location</a></h3>
+                          <div class="graphic"></div>
+                        </div>
+                        <div class="clearfix"></div>
+                      
+                      <?php }else{ ?>
+                        <div class="iner_lefts"><i class="fa fa-globe"></i></div>
+                        <div class="inner_rights boxs">
+                          <h5>Lives in <a href="#"><?php if($result[0]->location){ echo $result[0]->location; } else echo "Not Available"; ?></a></h5>
+                          <p><span>From </span><a href="#"><?php  if($result[0]->hometown){ echo $result[0]->hometown; } else echo "Not Available"; ?></a></p>
+                          <div class="edu_cation"><a href="javascript:void(0)" id="move_to_places">Edit the places you've lived</a></div>
+                        </div>
+                        <div class="clearfix"></div>
+                        
+                        
+                        
+                        <?php } ?>
+                        
+                      </li>
+                      <li>
+                        <div class="tophead">YOUR FAMILY MEMBERS</div>
+                      <?php if(empty($family_members)) { ?> 
+                        <div class="iner_lefts"><i class="fa fa-plus"></i></div>
+                        <div class="inner_rights boxs">
+                          <h3><a href="javascript:void(0)" id="move_to_relation">Add a relationship</a></h3>
+                          <div class="graphic"></div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <?php }else{ ?>
+                         
+                         <div class="iner_lefts"><a  href="javascript:void(0)" id="move_to_relation"><i class="fa fa-users"></i></a></div>
+                        <div class="inner_rights boxs">
+                          <h3><a  href="javascript:void(0)" id="move_to_relation"><?php $count = count($family_members); echo $count; ?> Family Members</a></h3>
+                          <div class="graphic"></div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <?php } ?>
+                        
                       </li>
                     </ul>
                   </div>
-                  <div class="addresbox col-lg-5 col-md-5 ">
-                    <ul>
-                      <li>
-                        <div class="boxicon"><img src="<?php echo base_url(); ?>images/phoneicon.png" alt=""></div>
-                        <div class="boxicon_text"><?php if($result[0]->user_phoneno) { echo $result[0]->user_phoneno; }else echo"mobile no not Available"; ?></div>
-                      </li>
-                      <li>
-                        <div class="boxicon"><img src="<?php echo base_url(); ?>images/mailicon.png" alt=""></div>
-                        <div class="boxicon_text"><?php if($result[0]->email) { echo $result[0]->email; }else echo"email not Available";?>
-                         </div>
-                      </li>
-                      <li>
-                        <div class="boxicon"><img src="<?php echo base_url(); ?>images/printicon.png" alt=""></div>
-                        <div class="boxicon_text"><?php $unixTimestamp = strtotime($result[0]->user_dob);
-				 echo date('d',$unixTimestamp)."th ".date('F',$unixTimestamp).", ".date('Y',$unixTimestamp); ?>
-                        </div><br>
-                        <a  href="javascript:void(0)" id="move_to_contact">Edit your basic info</a> </li>
-                    </ul>
-                  </div>
+                
                 </div>
                 <div role="tabpanel" class="tab-pane" id="education">
                   <div class="small_boxes col-md-12">
@@ -104,13 +267,6 @@
                       <li id="workplace-li">
                         <div class="tophead">Work</div>
                          
-                        <div class="iner_lefts" id="work_head1"><a href="#"><i class="fa fa-plus"></i></a></div>
-                        <div class="inner_rights boxs" id="work_head2">
-                          <h3><a href="javascript:void(0)" id="add_workplace">Add a workplace</a></h3>
-                          
-                          <div class="clearfix"></div>
-                        </div>
-                       
 						<div class="clearfix"></div>
 					<div id="work_val_disp">	
                        
@@ -125,20 +281,27 @@
                         <p><?php echo $orgdetails->position;?></p>
                         </div>
                         <div class="sm_rightside" >
-                        <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
+                        <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid">
-                        <a class="work_edit" href="javascript:void(0)" onclick="work_edit()" id="work_edit<?php echo $orgdetails->organization_id; ?>"><i class="fa fa-pencil"></i>Edit</a></div>
+                        <a class="work_edit" href="javascript:void(0)" onclick="work_edit()" id="work_edit<?php echo $orgdetails->organization_id; ?>"><i class="fa fa-pencil"></i></a></div>
                         <div class="col-md-3 com_rig"><a href="javascript:void(0)" class="work_delete" id="work_delete<?php echo $orgdetails->organization_id; ?>" onclick="work_delete()"><i class="fa fa-times"></i></a></div>
                         </div>
                         
                         <div class="clearfix" id="clearfix"></div>
                         </div>
                     
-                         <?php } }?>
+                         <?php } ?>
+                         </div>
+                        <?php } else { ?>
             
              
-          
+                      <div class="iner_lefts" id="work_head1"><a href="#"><i class="fa fa-plus"></i></a></div>
+                        <div class="inner_rights boxs" id="work_head2">
+                          <h3><a href="javascript:void(0)" id="add_workplace">Add a workplace</a></h3>
+                          
+                          <div class="clearfix"></div>
                         </div>
+                        <?php } ?>
                    
                     <!-- $this->load->view('aboutme/work_inner'); -->
                        
@@ -164,20 +327,20 @@
                                   </div>
                                   <div class="form-group">
                                     <label for="exampleInputName2">Time Period</label>
-                                    <input type="checkbox" class="outside" name="curent_status" id="curent_status" value="working">
+                                    <input type="checkbox" class="outside" name="curent_status" id="curent_status" value="wor">
                                     I currently work </div>
                                   <div class="col-md-12">
-                                    <div class="col-md-6 yearadd" id="add_years" style="display:none;"><a href="javascript:void(0)" onclick="add_year()" class="frm_years_link" ><i class="fa fa-plus"></i>Add year</a></div>
+                                    <div class="col-md-6 yearadd" id="add_years"><a href="javascript:void(0)" onclick="add_year()" class="frm_years_link" ><i class="fa fa-plus"></i>Add year</a></div>
                                   <select id="frm_years" style="display:none;" name="frm_years" class="frm_years" >
-                                  <option value="0"> --- </option>
-                                   <option value="1950" selected="selected">1950</option>
-                                   <?php for($i=1951;$i<=date(Y);$i++){?>
+                                  <option value="0">yyyy</option>
+                                   
+                                   <?php for($i=1950;$i<=date(Y);$i++){?>
                                 	<option value="<?php echo $i;?>"><?php echo $i;?></option>
                               	  <?php }?>
                                   </select>
                                   <a href="javascript:void(0)" id="frm_months_link"  style="display:none;" ><i class="fa fa-plus"></i>Add month</a>
                                   <select id="frm_months" style="display:none;" name="frm_months"> 
-                                  <option value="0"> --- </option>
+                                  <option value="0">mm</option>
                                    <option value="1" selected="selected">1</option>
                                    <?php for($i=2;$i<=12;$i++){?>
                                 	<option value="<?php echo $i;?>" ><?php echo $i;?></option>
@@ -185,7 +348,7 @@
                                   </select>
                                   <a href="javascript:void(0)" id="frm_days_link"  style="display:none;"><i class="fa fa-plus"></i>Add day</a>
                                   <select id="frm_days" style="display:none;" name="frm_days">
-                                  <option value="0"> --- </option>
+                                  <option value="0">dd</option>
                                   <option value="1" selected="selected">1</option>
                                    <?php for($i=2;$i<=31;$i++){?>
                                 	<option value="<?php echo $i;?>" ><?php echo $i;?></option>
@@ -193,7 +356,7 @@
                                   </select>
                                    <div id="to" style="display:none;" class="to">to </div>
                                     <div id="to_present" style="display:none;">to present</div>
-                                  <a href="javascript:void(0)" id="to_years_link"  style="display:none;" class="to_years_link"><i class="fa fa-plus"></i>Add year</a>
+                                  <a href="javascript:void(0)" id="to_years_link"  class="to_years_link"><i class="fa fa-plus"></i>Add year</a>
                                                        
                                    
                                   </div>
@@ -202,23 +365,26 @@
                                   <div class="col-md-12 todates_dropdown" id="todates_dropdowns">
                                     
                                   <select id="to_years" style="display:none;" name="to_years" class="to_years">
-                                  <option value="0"> --- </option>
-                                   <?php for($i=1950;$i<=date(Y);$i++){?>
+                                  <option value="0">yyyy</option> 
+                                   <option value="1950" selected="selected">1950</option>
+                                   <?php for($i=1951;$i<=date(Y);$i++){?>
                                 	<option value="<?php echo $i;?>"><?php echo $i;?></option>
                               	  <?php }?>
                                   </select>
                                   <a href="javascript:void(0)" id="to_months_link"  style="display:none;" ><i class="fa fa-plus"></i>Add month</a>
                                   <select id="to_months" style="display:none;" name="to_months">
-                                  <option value="0"> --- </option>
-                                   <?php for($i=1;$i<=12;$i++){?>
-                                	<option value="<?php echo $i;?>" selected="selected"><?php echo $i;?></option>
+                                 <option value="0">mm</option> 
+                                   <option value="1" selected="selected">1</option>
+                                   <?php for($i=2;$i<=12;$i++){?>
+                                	<option value="<?php echo $i;?>"><?php echo $i;?></option>
                               	  <?php }?>
                                   </select>
                                   <a href="javascript:void(0)" id="to_days_link"  style="display:none;"><i class="fa fa-plus"></i>Add day</a>
                                   <select id="to_days" style="display:none;" name="to_days">
-                                  <option value="0"> --- </option>
-                                   <?php for($i=1;$i<=31;$i++){?>
-                                	<option value="<?php echo $i;?>" selected="selected"><?php echo $i;?></option>
+                                  <option value="0">dd</option> 
+                                    <option value="1" selected="selected">1</option>
+                                   <?php for($i=2;$i<=31;$i++){?>
+                                	<option value="<?php echo $i;?>"><?php echo $i;?></option>
                               	  <?php }?>
                                   </select>
                                                       
@@ -228,7 +394,7 @@
                                   <!---  ---->
                                   <div class="clearfix"></div>
                                   <div class="box_bottom">
-                                    <div class="publics col-md-4">
+                                    <div class="publics col-md-4" style="display:none;">
                                       <button aria-expanded="false" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">Public <span class="caret"></span></button>
                                     </div>
                                     <div class="col-md-8 add_new">
@@ -244,6 +410,9 @@
                             <div class="graphic"></div>
                             <div class="clearfix"></div>
                           </div>
+                           <?php if(!empty($organization_details)) { ?>
+                          <a href="javascript:void(0)" id="add_work_link_disp" class="work_edu_side_links">add work details</a>
+                          <?php } ?>
                       </li>
                       <div class="clearfix"></div>
                       <li id="pfskills-li">
@@ -268,8 +437,8 @@
                         </a></h3>
                         </div>
                         <div class="sm_rightside">
-                        <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
-                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="pf_skills_edit()"><i class="fa fa-pencil"></i> Edit</a></div>
+                        <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
+                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="pf_skills_edit()"><i class="fa fa-pencil"></i></a></div>
                         <div class="col-md-3 com_rig"><a href="#"><i class="fa fa-times"></i></a></div>
                         </div>
                         </div>
@@ -320,11 +489,7 @@
                       <div class="clearfix"></div>
                       <li id="college-li">
                         <div class="tophead"> College</div>
-                        <div class="iner_lefts" id="college1"><a href="#"><i class="fa fa-plus"></i></a></div>
-                        <div class="inner_rights boxs" id="college2">
-                          <h3><a href="javascript:void(0)" id="add_college">Add a college</a></h3>
-                          </div>
-                          
+                      
                           
                           
                           <div id="college_val_disp">
@@ -337,16 +502,22 @@
                         <p><?php echo $clgdetails->concentration1;?> <?php echo $clgdetails->concentration2;?> <?php echo $clgdetails->concentration3;?></p>
                         </div>
                         <div class="sm_rightside">
-                        <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
-                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" class="college_edit" id="college_edit<?php echo $clgdetails->college_id; ?>" onclick="college_edit()"><i class="fa fa-pencil"></i>Edit</a></div>
+                        <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
+                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" class="college_edit" id="college_edit<?php echo $clgdetails->college_id; ?>" onclick="college_edit()"><i class="fa fa-pencil"></i></a></div>
                         <div class="col-md-3 com_rig"><a  href="javascript:void(0)" class="college_delete" id="college_delete<?php echo $clgdetails->college_id; ?>" onclick="college_delete()"><i class="fa fa-times"></i></a></div>
                         </div>
                            <div class="clearfix"></div>
                         </div>
-                         <?php } } ?>
+                         <?php } ?>
+						 </div>
+						 <?php }else { ?>
             
-                        </div>
+                         <div class="iner_lefts" id="college1"><a href="#"><i class="fa fa-plus"></i></a></div>
+                        <div class="inner_rights boxs" id="college2">
+                          <h3><a href="javascript:void(0)" id="add_college">Add a college</a></h3>
+                          </div>
                           
+                          <?php } ?>
                          
                           
                           <div id="college_disp" style="display:none;">
@@ -362,28 +533,28 @@
                                      <a href="javascript:void(0)" id="clg_add_year"><i class="fa fa-plus"></i>Add year</a>
                                      </div>
                                      
-                                   <select id="frm_years_college" style="display:none;" name="frm_years" class="frm_clg_years">
-                                  <option value="0"> --- </option>
-                                   <option value="1950" selected="selected">1950</option>
-                                   <?php for($i=1951;$i<=date(Y);$i++){?>
+                                   <select id="frm_years_college" style="display:none;" name="frm_clg_years" class="frm_clg_years">
+                                  <option value="0">yyyy</option>
+                                   
+                                   <?php for($i=1950;$i<=date(Y);$i++){?>
                                 	<option value="<?php echo $i;?>"><?php echo $i;?></option>
                               	  <?php }?>
                                   </select>
                         
                           <a href="javascript:void(0)" id="frm_months_clg" style="display:none;"> <i class="fa fa-plus"></i>Add Month</a>
                          
-                          <select id="frm_months_college" style="display:none;" name="frm_months"> 
-                                  <option value="0"> --- </option>
-                                   <option value="1" selected="selected">1</option>
-                                   <?php for($i=2;$i<=12;$i++){?>
+                          <select id="frm_months_college" style="display:none;" name="frm_clg_months"> 
+                                  <option value="0">mm</option>
+                                   
+                                   <?php for($i=1;$i<=12;$i++){?>
                                 	<option value="<?php echo $i;?>" ><?php echo $i;?></option>
                               	  <?php }?>
                                   </select>
                               <a href="javascript:void(0)" id="frm_days_clg" style="display:none;"> <i class="fa fa-plus"></i>Add Day</a>
-                                  <select id="frm_days_college" style="display:none;" name="frm_days">
-                                  <option value="0"> --- </option>
-                                  <option value="1" selected="selected">1</option>
-                                   <?php for($i=2;$i<=31;$i++){?>
+                                  <select id="frm_days_college" style="display:none;" name="frm_clg_days">
+                                  <option value="0">dd</option>
+                                  
+                                   <?php for($i=1;$i<=31;$i++){?>
                                 	<option value="<?php echo $i;?>" ><?php echo $i;?></option>
                               	  <?php }?>
                                   </select>
@@ -395,22 +566,22 @@
                                   
                                   <div class="col-md-12" id="clg_todates_dropdowns">
                                     
-                                  <select id="to_years_college" style="display:none;" name="to_years" class="to_clg_years">
-                                  <option value="0"> --- </option>
+                                  <select id="to_years_college" style="display:none;" name="to_clg_years" class="to_clg_years">
+                                  <option value="0">yyyy</option>
                                    <?php for($i=1950;$i<=date(Y);$i++){?>
                                 	<option value="<?php echo $i;?>"><?php echo $i;?></option>
                               	  <?php }?>
                                   </select>
                                   <a href="javascript:void(0)" id="to_months_clg" style="display:none;"> <i class="fa fa-plus"></i>Add Month</a>
-                                  <select id="to_months_college" style="display:none;" name="to_months">
-                                  <option value="0"> --- </option>
+                                  <select id="to_months_college" style="display:none;" name="to_clg_months">
+                                  <option value="0">mm</option>
                                    <?php for($i=1;$i<=12;$i++){?>
                                 	<option value="<?php echo $i;?>" selected="selected"><?php echo $i;?></option>
                               	  <?php }?>
                                   </select>
                                  <a href="javascript:void(0)" id="to_days_clg" style="display:none;"> <i class="fa fa-plus"></i>Add Day</a>
-                                  <select id="to_days_college" style="display:none;" name="to_days">
-                                  <option value="0"> --- </option>
+                                  <select id="to_days_college" style="display:none;" name="to_clg_days">
+                                  <option value="0">dd</option>
                                    <?php for($i=1;$i<=31;$i++){?>
                                 	<option value="<?php echo $i;?>" selected="selected"><?php echo $i;?></option>
                               	  <?php }?>
@@ -461,7 +632,7 @@
                                   </div>
                                   <div class="clearfix"></div>
                                   <div class="box_bottom">
-                                    <div class="publics col-md-4">
+                                    <div class="publics col-md-4" style="display:none;">
                                       <button aria-expanded="false" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">Public <span class="caret"></span></button>
                                     </div>
                                       <input type="hidden" name="clg_action" id="clg_action" value="add">
@@ -478,6 +649,9 @@
                             </div>
                             <div class="graphic"></div>
                           </div>
+                          <?php if(!empty($user_college_info)) { ?>
+                           <a href="javascript:void(0)" id="add_college_link_disp" class="work_edu_side_links">add college details</a>
+                           <?php } ?>
                       </li>
                       <div class="clearfix"></div>
                       
@@ -485,10 +659,7 @@
                       
                       <li id="school-li">
                         <div class="tophead"> High School</div>
-                        <div class="iner_lefts" id="school1"><a href="#"><i class="fa fa-plus"></i></a></div>
-                        <div class="inner_rights boxs" id="school2">
-                          <h3><a href="javascript:void(0)" id="add_school">Add a High School</a></h3>
-                          </div>
+                      
                           
                           <div id="school_val_disp">
    	<?php 
@@ -500,16 +671,19 @@
                         <p> </p>
                         </div>
                          <div class="sm_rightside">
-                        <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
-                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" class="school_edit" id="school_edit<?php echo $schdetails->school_id; ?>" onclick="school_edit()"><i class="fa fa-pencil"></i>Edit</a></div>
+                        <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
+                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" class="school_edit" id="school_edit<?php echo $schdetails->school_id; ?>" onclick="school_edit()"><i class="fa fa-pencil"></i></a></div>
                         <div class="col-md-3 com_rig"><a href="javascript:void(0)" class="school_delete" id="school_delete<?php echo $schdetails->school_id; ?>" onclick="school_delete()"><i class="fa fa-times"></i></a></div>
                         </div>
                         <div class="clearfix"></div>
                         </div>
-                         <?php } } ?>
+                         <?php } ?></div><?php }else{ ?>
             
-                        </div>
-                          
+                          <div class="iner_lefts" id="school1"><a href="#"><i class="fa fa-plus"></i></a></div>
+                        <div class="inner_rights boxs" id="school2">
+                          <h3><a href="javascript:void(0)" id="add_school">Add a High School</a></h3>
+                          </div>
+                          <?php } ?>
                                                 
                           
                            <div id="highschool" style="display:none;">
@@ -523,28 +697,28 @@
                                   <div class="form-group period">
                                     <label for="exampleInputName2">Time Period</label>
                                 <a href="javascript:void(0)" id="frm_years_sch"> <i class="fa fa-plus"></i>Add year</a></div>
-                                 <select id="frm_years_school" style="display:none;" name="frm_years" class="frm_sch_years">
-                                  <option value="0"> --- </option>
-                                   <option value="1950" selected="selected">1950</option>
-                                   <?php for($i=1951;$i<=date(Y);$i++){?>
+                                 <select id="frm_years_school" style="display:none;" name="frm_sch_years" class="frm_sch_years">
+                                  <option value="0">yyyy</option>
+                                   
+                                   <?php for($i=1950;$i<=date(Y);$i++){?>
                                 	<option value="<?php echo $i;?>"><?php echo $i;?></option>
                               	  <?php }?>
                                   </select>
                         
                           <a href="javascript:void(0)" id="frm_months_sch" style="display:none;"> <i class="fa fa-plus"></i>Add Month</a>
                          
-                          <select id="frm_months_school" style="display:none;" name="frm_months"> 
-                                  <option value="0"> --- </option>
-                                   <option value="1" selected="selected">1</option>
-                                   <?php for($i=2;$i<=12;$i++){?>
+                          <select id="frm_months_school" style="display:none;" name="frm_sch_months"> 
+                                  <option value="0">mm</option>
+                                   
+                                   <?php for($i=1;$i<=12;$i++){?>
                                 	<option value="<?php echo $i;?>" ><?php echo $i;?></option>
                               	  <?php }?>
                                   </select>
                               <a href="javascript:void(0)" id="frm_days_sch" style="display:none;"> <i class="fa fa-plus"></i>Add Day</a>
-                                  <select id="frm_days_school" style="display:none;" name="frm_days">
-                                  <option value="0"> --- </option>
-                                  <option value="1" selected="selected">1</option>
-                                   <?php for($i=2;$i<=31;$i++){?>
+                                  <select id="frm_days_school" style="display:none;" name="frm_sch_days">
+                                  <option value="0">dd</option>
+                                  
+                                   <?php for($i=1;$i<=31;$i++){?>
                                 	<option value="<?php echo $i;?>" ><?php echo $i;?></option>
                               	  <?php }?>
                                   </select>
@@ -558,24 +732,24 @@
                                   </div>
                                   
                                     
-                                  <select id="to_years_school" style="display:none;" name="to_years" class="to_sch_years">
-                                  <option value="0"> --- </option>
+                                  <select id="to_years_school" style="display:none;" name="to_sch_years" class="to_sch_years">
+                                  <option value="0">yyyy</option>
                                    <?php for($i=1950;$i<=date(Y);$i++){?>
                                 	<option value="<?php echo $i;?>"><?php echo $i;?></option>
                               	  <?php }?>
                                   </select>
                                   <a href="javascript:void(0)" id="to_months_sch" style="display:none;"> <i class="fa fa-plus"></i>Add Month</a>
-                                  <select id="to_months_school" style="display:none;" name="to_months">
-                                  <option value="0"> --- </option>
+                                  <select id="to_months_school" style="display:none;" name="to_sch_months">
+                                  <option value="0">mm</option>
                                    <?php for($i=1;$i<=12;$i++){?>
-                                	<option value="<?php echo $i;?>" selected="selected"><?php echo $i;?></option>
+                                	<option value="<?php echo $i;?>"><?php echo $i;?></option>
                               	  <?php }?>
                                   </select>
                                  <a href="javascript:void(0)" id="to_days_sch" style="display:none;"> <i class="fa fa-plus"></i>Add Day</a>
-                                  <select id="to_days_school" style="display:none;" name="to_days">
-                                  <option value="0"> --- </option>
+                                  <select id="to_days_school" style="display:none;" name="to_sch_days">
+                                  <option value="0">dd</option>
                                    <?php for($i=1;$i<=31;$i++){?>
-                                	<option value="<?php echo $i;?>" selected="selected"><?php echo $i;?></option>
+                                	<option value="<?php echo $i;?>"><?php echo $i;?></option>
                               	  <?php }?>
                                   </select>
                                                       
@@ -595,7 +769,7 @@
                                   <div class="clearfix"></div>
                                   <div class="clearfix"></div>
                                   <div class="box_bottom">
-                                    <div class="publics col-md-4">
+                                    <div class="publics col-md-4" style="display:none;">
                                       <button aria-expanded="false" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">Public <span class="caret"></span></button>
                                     </div>
                                     <div class="col-md-8">
@@ -610,6 +784,9 @@
                             </div>
                             <div class="graphic"></div>
                           </div>
+                       <?php  if(!empty($user_school_info)){ ?>
+                           <a href="javascript:void(0)" id="add_school_link_disp" class="work_edu_side_links">add school details</a>
+                           <?php } ?>
                       </li>
                       <div class="clearfix"></div>
                     </ul>
@@ -632,13 +809,13 @@
                         </div>
                           <?php }else { ?>
               			<div id="currentcity_val_disp">
-                        <div class="sm_leftbox"></div>
+                        <div class="sm_leftbox"><i class="fa fa-globe"></i></div>
                         <div class="sm_rightbox"><h3><a href="#"><?php echo $result[0]->location; ?></a></h3>
                         <p>Current city</p>
                         </div>
                         <div class="sm_rightside">
-                        <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
-                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="current_city_edit()"><i class="fa fa-pencil"></i> Edit</a></div>
+                        <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
+                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="current_city_edit()"><i class="fa fa-pencil"></i></a></div>
                         <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="delete_current_city()"><i class="fa fa-times"></i></a></div>
                         </div>
                         </div>
@@ -648,9 +825,6 @@
                             <?php } ?>
                         <div class="clearfix"></div>
                       </li>
-                      
-                      
-                      
                       
                       
                       <!-------------current city ------------->
@@ -665,7 +839,7 @@
                                 <div class="clearfix"></div>
                               </form>
                               <div class="box_bottom">
-                                <div class="publics col-md-4">
+                                <div class="publics col-md-4" style="display:none;">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Public <span class="caret"></span></button>
                                 </div>
                                 <div class="col-md-8 skil_box">
@@ -696,13 +870,13 @@
                         </div>
                            <?php }else { ?>
                            <div id="hometown_val_disp">
-                        <div class="sm_leftbox"></div>
+                        <div class="sm_leftbox" ><i class="fa fa-globe"></i></div>
                         <div class="sm_rightbox"><h3><a href="#"><?php echo $result[0]->hometown; ?></a></h3>
                         <p>Home Town</p>
                         </div>
                         <div class="sm_rightside">
-                        <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
-                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="home_town_edit()"><i class="fa fa-pencil"></i> Edit</a></div>
+                        <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
+                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="home_town_edit()"><i class="fa fa-pencil"></i></a></div>
                         <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="delete_hometown()"><i class="fa fa-times"></i></a></div>
                         </div>
                         </div>
@@ -730,8 +904,8 @@
                                 </div>
                                 <div class="clearfix"></div>
                               </form>
-                              <div class="box_bottom">
-                                <div class="publics col-md-4">
+                              <div class="box_bottom" >
+                                <div class="publics col-md-4" style="display:none;">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Public <span class="caret"></span></button>
                                 </div>
                                 <div class="col-md-8 skil_box">
@@ -759,59 +933,116 @@
                     <ul class="basic_info">
                       <li id="mobile-li">
                        <!-- <div class="tophead">Contact Information</div> -->
-                        <?php if(empty($result[0]->mobile)) { ?>
+                        <?php if(empty($mobile_data)) { ?>
                         <div class="iner_boxleft" id="add_mbl_block"><a href="javascript:void(0)" id="add_mbl"><i class="fa fa-plus"></i>Add a mobile phone</a></div>
-                        <?php } else { ?>
-                        
+                        <?php } else {   foreach($mobile_data as $data) { ?>
                         <div id="mobile_val_display">
+                       <div class="latest_works" id="mobile_<?php echo $data['mobile_id']; ?>"> 
                         <div class="sm_leftbox"></div>
-                        <div class="sm_rightbox"><h3><a href="#"><?php echo $result[0]->mobile; ?></a></h3>
+                        <div class="sm_rightbox"><h3><a href="#"><?php echo $data['mobile_no']; ?></a></h3>
                         <p>mobile</p>
                         </div>
                         <div class="sm_rightside">
-                        <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
-                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="mbl_edit()"><i class="fa fa-pencil"></i> Edit</a></div>
-                        <div class="col-md-3 com_rig"><a  href="javascript:void(0)" onclick="del_mobile()"><i class="fa fa-times"></i></a></div>
+                        <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
+                       <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="mbl_edit()"  class="mobile_edit" id="mobile_edit<?php echo $data['mobile_id']; ?>"><i class="fa fa-pencil"></i></a></div>
+                        <div class="col-md-3 com_rig"><a  href="javascript:void(0)" onclick="del_mobile()" class="mobile_delete" id="mobile_delete<?php echo $data['mobile_id']; ?>"><i class="fa fa-times"></i></a></div>
                         </div>
-                        </div>
-                        <div class="clearfix"></div>
-                        
-                        
-                        <?php } ?>
+                            
+                       </div>
+                      <div class="clearfix"></div> 
+                      </div>
+                        <?php } }?> 
                         <div class="inner_rights boxs" id="add_mbl_disp" style="display:none;"> 
-                          <div id="mobile" class="col-md-12">
-                            <form class="form-inline ">
-                              <div class="form-group mobile col-md-3">
+                          <div id="mobile" class="col-md-12 mobileone">
+                            <form class="form-inline">
+                            <div class="add_mbl_append">
+                            <div class="adding_anothe_mbl mobile_values">
+                            <div id="individual_mbl_con0" class="get_mbl_divs">
+                            
+                            
+                            <div class="form-group mobile col-md-3">
                                 <label for="exampleInputName2">Mobile Phones</label>
                               </div>
                               <div class="col-md-3">
-                                <select>
+                                <select name="country_codes" id="country_codes0">
                                   <option>india(+91)</option>
+                                  <option>pakistan(+92)</option>
+                                  <option>srilanka(+93)</option>
                                 </select>
                               </div>
                               <div class="col-md-3 box-rig_box">
-                                <input type="text" id="mbl_no" value="<?php if($result[0]->mobile) { echo $result[0]->mobile; } ?>">
+                                <input type="text" id="mobile0" name="mobile_no" value="">
+                                 
                               </div>
-                              <div class="col-md-3 inside_drop"> <a aria-expanded="false" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#"> <i class="fa fa-fw"></i> <span class="fa fa-angle-down"></span></a> </div>
+                              <div class="col-md-3 inside_drop" style="display:none;"> <a aria-expanded="false" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#"> <i class="fa fa-fw"></i> <span class="fa fa-angle-down"></span></a> </div>
+                              </div>
+                           </div>
+                           </div>
                               <div class="clearfix"></div>
-                              <div class="iner_boxleft_bottom"><a href="#"><i class="fa fa-plus"></i>Add a mobile phone</a></div>
+                              <div class="iner_boxleft_bottom"><a href="javascript:void(0)" id="add_mbl_link"><i class="fa fa-plus"></i>Add a mobile phone</a></div>
                               <div class="clearfix"></div>
                               <div class="box_bottom">
                                 <div class="publics col-md-3"> </div>
                                 <div class="col-md-9 skil_box">
                                   
-                                  <div class="btn3 btn-green" onclick="add_mbl()">Save Changes</div>
-                                  <?php if($result[0]->mobile) { ?>
-                                  <div class="btn3 btn-black" onclick="close_mbl()">Cancel</div>
-                                  <?php } else { ?>
+                                  <div class="btn3 btn-green"  onclick="get_mbl_values()">Save Changes</div>
+                                 
                                   <div class="btn3 btn-black" onclick="close_mobile()">Cancel</div>
-                                <?php } ?>
+                                
                                 </div>
                                 <div class="clearfix"></div>
                               </div>
                             </form>
                           </div>
                         </div>
+                        
+                        
+                        <div class="inner_rights boxs" id="mbl_disp_edit" style="display:none;"> 
+                          <div id="mobile" class="col-md-12 mobileone">
+                            <form class="form-inline">
+                            <div class="add_mbl_appenffd">
+                              <div class="form-group mobile col-md-3">
+                                <label for="exampleInputName2">Mobile Phones</label>
+                              </div>
+                              <div class="col-md-3">
+                                <select name="country_codes" id="country_code_mbl">
+                                  <option>india(+91)</option>
+                                  <option>pakistan(+92)</option>
+                                  <option>srilanka(+93)</option>
+                                </select>
+                              </div>
+                              <div class="col-md-3 box-rig_box">
+                                <input type="text" id="mbl_no" name="mobile_no" value="">
+                                 <input type="hidden" name="mobile_action" id="mobile_action" value="add">
+                       				<input type="hidden" value="" name="mobile_disp_id" id="mobile_no_id"> 
+                              </div>
+                              <div class="col-md-3 inside_drop"  style="display:none;"> <a aria-expanded="false" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#"> <i class="fa fa-fw"></i> <span class="fa fa-angle-down"></span></a> </div>
+                              </div>
+                              <div class="clearfix"></div>
+                             
+                              <div class="clearfix"></div>
+                              <div class="box_bottom">
+                                <div class="publics col-md-3" style="display:none;"> </div>
+                                <div class="col-md-9 skil_box">
+                                  
+                                  <div class="btn3 btn-green"  onclick="edit_mobile_value()">Save Changes</div>
+                                 
+                                  <div class="btn3 btn-black" onclick="close_edit_mobile()">Cancel</div>
+                                
+                                </div>
+                                <div class="clearfix"></div>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                         <div class="clearfix"></div>
                       </li>
                       <li id="address-li"> 
@@ -833,14 +1064,13 @@
                         <div id="address_val_display">
                         <div class="sm_leftbox"></div>
                         <div class="sm_rightbox"><h3><a href="#">Address</a></h3>
-                        <p><?php if($data) { if($data[0]) {  echo $data[0]; } } ?></p>
-                        <p><?php if($data) { if($data[1]) {  echo $data[1]; } } ?></p>
-						<p><?php if($data) { if($data[2]) {  echo $data[2]; } } ?></p>
-                        <p><?php if($data) { if($data[3]) {  echo $data[3]; } } ?></p>
+                        <p><?php if($data) { if($data[0]) {  echo $data[0].','; } } ?>
+                        <?php if($data) { if($data[1]) {  echo $data[1].','; } } ?>
+						<?php if($data) { if($data[2]) {  echo $data[2].'.'; } } ?></p>
                         </div>
                         <div class="sm_rightside">
-                        <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
-                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="address_edit()"><i class="fa fa-pencil"></i> Edit</a></div>
+                        <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
+                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="address_edit()"><i class="fa fa-pencil"></i></a></div>
                         <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_address()"><i class="fa fa-times"></i></a></div>
                         </div>
                         </div>
@@ -870,7 +1100,7 @@
                             
                             <div class="clearfix"></div>
                             <div class="box_bottom">
-                              <div class="publics col-md-3">
+                              <div class="publics col-md-3" style="display:none;">
                                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Friends <span class="caret"></span></button>
                               </div>
                               <div class="col-md-9 skil_box">
@@ -888,34 +1118,99 @@
                         </div>
                         <div class="clearfix"></div>
                       </li>
-                      <li> 
+                      <li id="oth_accounts-li"> 
                         <!--<div class="tophead">Add other accounts</div>-->
-                        <div class="iner_boxleft"><a href="#"><i class="fa fa-plus"></i>Add other accounts</a></div>
+                        
+                        
+                           <?php if(empty($accounts_data)) { ?>
+                         <div class="iner_boxleft"  id="add_oth_acc1"><a href="javascript:void(0)" id="add_oth_acc"><i class="fa fa-plus"></i>Add other accounts</a></div>
+                        <?php } else { 
+						
+						 foreach($accounts_data as $data) {?>
+                        <div id="accounts_val_display">
+                          <div class="latest_works" id="accounts_<?php echo $data['account_id']; ?>"> 
+                        <div class="sm_leftbox"></div>
+                        <div class="sm_rightbox"><h3><a href="#"><?php echo $data['account_name']; ?></a></h3>
+                        <p><?php echo $data['account_type']; ?></p>
+                        </div>
+                        <div class="sm_rightside">
+                        <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
+                       <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="accounts_edit()"  class="account_edit" id="account_edit<?php echo $data['account_id']; ?>"><i class="fa fa-pencil"></i></a></div>
+                        <div class="col-md-3 com_rig"><a  href="javascript:void(0)" onclick="account_delete()" class="account_delete" id="account_delete<?php echo $data['account_id']; ?>"><i class="fa fa-times"></i></a></div>
+                        </div>
+                        </div>
+                      
+                        <div class="clearfix"></div>
+                        </div>
+                        
+                        <?php } }?>
+                        
+                                               
+                       
                         <div class="inner_rights boxs" id="other_accounts" style="display:none;">
                           <div id="account" class="col-md-12">
                             <form class="form-inline  account">
+                            <div class="other_acc_default account_values_div">
                               <div class="form-group col-md-4">
                                 <label for="exampleInputName2">Other Accounts</label>
                               </div>
                               <div class="col-md-4">
-                                <input type="text">
+                                <input type="text" id="account_name0" >
                               </div>
                               <div class="col-md-3">
-                                <select>
+                                <select id="account_type0">
                                   <option value="facebook">facebook</option>
                                   <option value="twitter">twitter</option>
                                   <option value="pinterest">pinterest</option>
                                   <option value="linked_in">LinkedIn</option>
                                 </select>
                               </div>
+                              </div>
+                              
                               <div class="clearfix"></div>
-                              <div class="iner_boxleft_bottom"><a href="#"><i class="fa fa-plus"></i> Add another account</a></div>
+                              <div class="iner_boxleft_bottom"><a href="javascript:void(0)" id="add_another_link"><i class="fa fa-plus"></i> Add another account</a></div>
                               <div class="clearfix"></div>
                               <div class="box_bottom">
-                                <div class="publics col-md-3"> </div>
+                                <div class="publics col-md-3" style="display:none;"> </div>
                                 <div class="col-md-9 skil_box">
-                                  <div class="btn3 btn-black">Cancel</div>
-                                  <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save Changes</div>
+                                  <div class="btn3 btn-black" onclick="close_other_accounts()">Cancel</div>
+                                  <div class="btn3 btn-green" onclick="add_other_accounts()">Save Changes</div>
+                                </div>
+                                <div class="clearfix"></div>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                        
+                        <div class="inner_rights boxs" id="accounts_disp_edit" style="display:none;">
+                          <div id="account" class="col-md-12">
+                            <form class="form-inline  account">
+                            <div class="other_acc_default account_values_div">
+                              <div class="form-group col-md-4">
+                                <label for="exampleInputName2">Other Accounts</label>
+                              </div>
+                              <div class="col-md-4">
+                                <input type="text" id="account_name" name="account_name">
+                              </div>
+                              <div class="col-md-3">
+                                <select id="account_type" name="account_type">
+                                  <option value="facebook">facebook</option>
+                                  <option value="twitter">twitter</option>
+                                  <option value="pinterest">pinterest</option>
+                                  <option value="linked_in">LinkedIn</option>
+                                </select>
+                              </div>
+                              </div>
+                               <input type="hidden" name="account_action" id="account_action" value="add">
+                       		  <input type="hidden" value="" name="account_disp_id" id="account_no_id"> 
+                              <div class="clearfix"></div>
+                             
+                              <div class="clearfix"></div>
+                              <div class="box_bottom">
+                                <div class="publics col-md-3" style="display:none;"> </div>
+                                <div class="col-md-9 skil_box">
+                                  <div class="btn3 btn-black" onclick="close_account_edit()">Cancel</div>
+                                  <div class="btn3 btn-green" onclick="edit_account_values()">Save Changes</div>
                                 </div>
                                 <div class="clearfix"></div>
                               </div>
@@ -940,8 +1235,8 @@
                         <p>website</p>
                         </div>
                         <div class="sm_rightside">
-                        <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
-                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="website_edit()"><i class="fa fa-pencil"></i> Edit</a></div>
+                        <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
+                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="website_edit()"><i class="fa fa-pencil"></i></a></div>
                         <div class="col-md-3 com_rig"><a  href="javascript:void(0)" onclick="del_website()"><i class="fa fa-times"></i></a></div>
                         </div>
                         </div>
@@ -961,7 +1256,7 @@
                               </div>
                               <div class="clearfix"></div>
                               <div class="box_bottom">
-                                <div class="publics col-md-3"> </div>
+                                <div class="publics col-md-3" style="display:none;"> </div>
                                 <div class="col-md-9 skil_box">
                                   
                                   <div class="btn3 btn-green" onclick="add_website()">Save Changes</div>
@@ -1006,8 +1301,8 @@
                         
                         </div>
                         <div class="sm_rightside">
-                        <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
-                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="interests_edit()"><i class="fa fa-pencil"></i> Edit</a></div>
+                        <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
+                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="interests_edit()"><i class="fa fa-pencil"></i></a></div>
                         <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_interestedin()"><i class="fa fa-times"></i></a></div>
                         </div>
                         </div>
@@ -1025,7 +1320,7 @@
                               Men</div>
                          
                           <div class="box_bottom">
-                            <div class="publics col-md-3">
+                            <div class="publics col-md-3" style="display:none;">
                               <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Public <span class="caret"></span></button>
                             </div>
                             <div class="col-md-8 skil_box">
@@ -1040,8 +1335,7 @@
                             <div class="clearfix"></div>
                              </div>
                           </div>
-                        
-                        <div class="clearfix"></div>
+                      
                       </li>
                       <li>
                       <div class="inner_rights boxs">
@@ -1081,8 +1375,8 @@
                         </a></h3>
                         </div>
                         <div class="sm_rightside">
-                        <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
-                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="languages_edit()"><i class="fa fa-pencil"></i> Edit</a></div>
+                        <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
+                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="languages_edit()"><i class="fa fa-pencil"></i></a></div>
                         <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_language()"><i class="fa fa-times"></i></a></div>
                         </div>
                         </div>
@@ -1111,13 +1405,13 @@
 								  </div>
                                 <label for="exampleInputName2">Languages</label>
                                 <input type="text" id="lang_box" />
-                                <input type="hidden" id="addedlangs" name="addedlangs" value="<?php if($result[0]->languages){ echo $result[0]->languages; } ?>"></input>
+                                <input type="text" id="addedlangs" name="addedlangs" value="<?php if($result[0]->languages){ echo $result[0]->languages; } ?>"></input>
                               </div>
                               <div class="clearfix"></div>
                             </form>
                           </div>
                           <div class="box_bottom">
-                            <div class="publics col-md-3">
+                            <div class="publics col-md-3" style="display:none;">
                               <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Public <span class="caret"></span></button>
                             </div>
                             <div class="col-md-8 skil_box">
@@ -1153,8 +1447,8 @@
                         <p><?php echo $data[1]; ?></p>
                         </div>
                         <div class="sm_rightside">
-                        <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
-                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="relegious_edit()"><i class="fa fa-pencil"></i> Edit</a></div>
+                        <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
+                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="relegious_edit()"><i class="fa fa-pencil"></i></a></div>
                         <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_relegion_belief()"><i class="fa fa-times"></i></a></div>
                         </div>
                         </div>
@@ -1179,7 +1473,7 @@
                             </form>
                           
                           <div class="box_bottom">
-                            <div class="publics col-md-4">
+                            <div class="publics col-md-4" style="display:none;">
                               <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Friends of Friends <span class="caret"></span></button>
                             </div>
                             <div class="col-md-8 skil_box">
@@ -1214,8 +1508,8 @@
                         <p><?php echo $p_data[1]; ?></p>
                         </div>
                         <div class="sm_rightside">
-                        <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
-                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="political_edit()"><i class="fa fa-pencil"></i> Edit</a></div>
+                        <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
+                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="political_edit()"><i class="fa fa-pencil"></i></a></div>
                         <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_political_belief()"><i class="fa fa-times"></i></a></div>
                         </div>
                         </div>
@@ -1237,7 +1531,7 @@
                             </form>
                           
                           <div class="box_bottom">
-                            <div class="publics col-md-4">
+                            <div class="publics col-md-4" style="display:none;">
                               <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Friends of Friends <span class="caret"></span></button>
                             </div>
                             <div class="col-md-8 skil_box">
@@ -1272,15 +1566,15 @@
                         <?php } else { ?>
                         <div id="relation">
                             <div class="relation_box col-md-12">
-                              <div class="col-md-8">
+                              <div class="col-md-8" style="margin-left:-40px;">
                                 <div class="col-md-2 relationss"> <i class="fa fa-heart"></i></div>
                                 <div class="col-md-10">
                                   <h3><?php echo $result[0]->relationshipstatus; ?></h3>
                                 </div>
                               </div>
-                              <div class="col-md-4 rightblock ">
-                                <div class="col-md-3 family"><a href="#"><i class="fa fa-globe"></i></a></div>
-                                <div class="col-md-9"> <a href="javascript:void(0)"><i class="fa fa-pencil"></i></a><a href="javascript:void(0)"  onclick="edit_relation()">Edit</a> </div>
+                              <div class="col-md-4 rightblock " >
+                                <div class="col-md-3 family" style="display:none;"><a href="#"><i class="fa fa-globe"></i></a></div>
+                                <div class="col-md-9 com_rig" ><a href="javascript:void(0)"  onclick="edit_relation()"><i class="fa fa-pencil"></i></a> </div>
                               </div>
                             </div>
                           </div>
@@ -1308,7 +1602,7 @@
                                   </div>
                                   </div>
                                   <div class="box_bottom">
-                                    <div class="publics col-md-4">
+                                    <div class="publics col-md-4" style="display:none;">
                                       <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Public <span class="caret"></span></button>
                                     </div>
                                     <div class="col-md-8">
@@ -1362,8 +1656,8 @@
                         <p><?php echo $family['member_relation']; ?></p>
                         </div>
                         <div class="sm_rightside">
-                        <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
-                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" class="family_edit" id="family_edit<?php echo $family['fam_member_id']; ?>"><i class="fa fa-pencil"></i> Edit</a></div>
+                        <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
+                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" class="family_edit" id="family_edit<?php echo $family['fam_member_id']; ?>"><i class="fa fa-pencil"></i></a></div>
                         <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_fam_member('<?php echo $family['fam_member_id']; ?>')"><i class="fa fa-times"></i></a></div>
                         </div>
                         </div>
@@ -1401,8 +1695,8 @@
                        			  <input type="hidden" value="" name="family_disp_id" >
                                   </div>
                                   </div>
-                                  <div class="box_bottom">
-                                    <div class="publics col-md-4">
+                                  <div class="box_bottom"> 
+                                    <div class="publics col-md-4" style="display:none;">
                                       <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Public <span class="caret"></span></button>
                                     </div>
                                     <div class="col-md-8">
@@ -1450,8 +1744,8 @@
                        
                         </div>
                         <div class="sm_rightside">
-                        <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
-                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="about_me_edit()"><i class="fa fa-pencil"></i> Edit</a></div>
+                        <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
+                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="about_me_edit()"><i class="fa fa-pencil"></i></a></div>
                         <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_about_me()"><i class="fa fa-times"></i></a></div>
                         </div>
                         </div>
@@ -1480,7 +1774,7 @@
                                 </div>
                                 <div class="clearfix"></div>
                                 <div class="box_bottom">
-                                  <div class="publics col-md-2">
+                                  <div class="publics col-md-2" style="display:none;">
                                     <button aria-expanded="false" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">Public <span class="caret"></span></button>
                                   </div>
                                   <div class="col-md-10 skil_box">
@@ -1532,8 +1826,8 @@
                         <p><?php echo $nicname['nic_name_type']; ?></p>
                         </div>
                         <div class="sm_rightside">
-                        <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
-                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" class="nick_edit" id="nick_edit<?php echo $nicname['nic_name_id']; ?>"><i class="fa fa-pencil"></i> Edit</a></div>
+                        <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
+                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="nick_edit()" class="nick_edit" id="nick_edit<?php echo $nicname['nic_name_id']; ?>"><i class="fa fa-pencil"></i></a></div>
                         <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_nic_name('<?php echo $nicname['nic_name_id'] ?>')"><i class="fa fa-times"></i></a></div>
                         </div>
                         </div>
@@ -1564,20 +1858,13 @@
                                 </div>
                                    <input type="hidden" name="nickname_action" id="nickname_action" value="add">
                        			  <input type="hidden" value="" name="nickname_disp_id" >
-                                <div class="clearfix"></div>
-                                <div class="form-group show_prof">
-                                  <label for="exampleInputName2"></label>
-                                  <input type="checkbox" class="outside">
-                                  Show at top of profile </div>
-                                <div class="col-md-9 col-md-offset-3 profil_sho">
-                                  <p>Other names are always public and help people find you on Facebook.</p>
-                                </div>
+                              
                                 <div class="clearfix"></div>
                                 <div class="box_bottom">
-                                  <div class="publics col-md-2">
+                                  <div class="publics col-md-2" style="display:none;">
                                     <button aria-expanded="false" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">Public <span class="caret"></span></button>
                                   </div>
-                                  <div class="col-md-10 skil_box">
+                                   <div class="col-md-5" style="margin-left:75px;">
                               
                                     <input type="submit" class="btn3 btn-green" value="Save Changes" />
                                         <?php if($nick_names) { ?>  
@@ -1611,8 +1898,8 @@
                        
                         </div>
                         <div class="sm_rightside">
-                        <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
-                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="fav_quotes_edit()"><i class="fa fa-pencil"></i> Edit</a></div>
+                        <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
+                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="fav_quotes_edit()"><i class="fa fa-pencil"></i></a></div>
                         <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_fav_quotes()"><i class="fa fa-times"></i></a></div>
                         </div>
                         
@@ -1635,7 +1922,7 @@
                                 </div>
                                 <div class="clearfix"></div>
                                 <div class="box_bottom">
-                                  <div class="publics col-md-2">
+                                  <div class="publics col-md-2" style="display:none;">
                                     <button aria-expanded="false" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">Public <span class="caret"></span></button>
                                   </div>
                                   <div class="col-md-10 skil_box">

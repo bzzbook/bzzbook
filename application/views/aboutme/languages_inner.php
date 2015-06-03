@@ -19,8 +19,8 @@
                         </a></h3>
                         </div>
                         <div class="sm_rightside">
-                        <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
-                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="languages_edit()"><i class="fa fa-pencil"></i> Edit</a></div>
+                        <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
+                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="languages_edit()"><i class="fa fa-pencil"></i></a></div>
                         <div class="col-md-3 com_rig"><a  href="javascript:void(0)" onclick="del_language()"><i class="fa fa-times"></i></a></div>
                         </div>
                         </div>
@@ -55,7 +55,7 @@
                             </form>
                           </div>
                           <div class="box_bottom">
-                            <div class="publics col-md-3">
+                            <div class="publics col-md-3" style="display:none;">
                               <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Public <span class="caret"></span></button>
                             </div>
                             <div class="col-md-8 skil_box">

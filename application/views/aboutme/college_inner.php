@@ -3,10 +3,7 @@
 ?>
 
 <div class="tophead"> College</div>
-                        <div class="iner_lefts" id="college1"><a href="#"><i class="fa fa-plus"></i></a></div>
-                        <div class="inner_rights boxs" id="college2">
-                          <h3><a href="javascript:void(0)" id="add_college">Add a college</a></h3>
-                          </div>
+                       
 
 
   <div id="college_val_disp">
@@ -14,18 +11,25 @@
 				if(!empty($user_college_info)){
 				foreach($user_college_info as $clgdetails){
 			?>
-                      
+            <div class="latest_works">
+                       <div class="clearfix"></div>
                         <div class="sm_rightbox"><h3><a href="#"><?php echo $clgdetails->college_name;?></a></h3>
                         <p><?php echo $clgdetails->concentration1;?> <?php echo $clgdetails->concentration2;?> <?php echo $clgdetails->concentration3;?></p>
                         </div>
                         <div class="sm_rightside">
-                        <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
-                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" class="college_edit" id="college_edit<?php echo $clgdetails->college_id; ?>" onclick="college_edit()"><i class="fa fa-pencil"></i>Edit</a></div>
+                        <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
+                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" class="college_edit" id="college_edit<?php echo $clgdetails->college_id; ?>" onclick="college_edit()"><i class="fa fa-pencil"></i></a></div>
                         <div class="col-md-3 com_rig"><a href="javascript:void(0)" class="college_delete" id="college_delete<?php echo $clgdetails->college_id; ?>" onclick="college_delete()"><i class="fa fa-times"></i></a></div>
                         </div>
-                         <?php } }?>
-          
                         </div>
+                         <?php }?>          
+                        </div>
+                        <?php }else { ?>
+                         <div class="iner_lefts" id="college1"><a href="#"><i class="fa fa-plus"></i></a></div>
+                        <div class="inner_rights boxs" id="college2">
+                          <h3><a href="javascript:void(0)" id="add_college">Add a college</a></h3>
+                          </div>
+                        <?php } ?>
                         
   <div id="college_disp" style="display:none;">
                             <div class="College_box col-md-12">
@@ -40,28 +44,28 @@
                                      <a href="javascript:void(0)" id="clg_add_year"><i class="fa fa-plus"></i>Add year</a>
                                      </div>
                                      
-                                   <select id="frm_years_college" style="display:none;" name="frm_years" class="frm_clg_years">
-                                  <option value="0"> --- </option>
-                                   <option value="1950" selected="selected">1950</option>
-                                   <?php for($i=1951;$i<=date(Y);$i++){?>
+                                   <select id="frm_years_college" style="display:none;" name="frm_clg_years" class="frm_clg_years">
+                                  <option value="0">yyyy</option>
+                                   
+                                   <?php for($i=1950;$i<=date(Y);$i++){?>
                                 	<option value="<?php echo $i;?>"><?php echo $i;?></option>
                               	  <?php }?>
                                   </select>
                         
                           <a href="javascript:void(0)" id="frm_months_clg" style="display:none;"> <i class="fa fa-plus"></i>Add Month</a>
                          
-                          <select id="frm_months_college" style="display:none;" name="frm_months"> 
-                                  <option value="0"> --- </option>
-                                   <option value="1" selected="selected">1</option>
-                                   <?php for($i=2;$i<=12;$i++){?>
+                          <select id="frm_months_college" style="display:none;" name="frm_clg_months"> 
+                                  <option value="0">mm</option>
+                                   
+                                   <?php for($i=1;$i<=12;$i++){?>
                                 	<option value="<?php echo $i;?>" ><?php echo $i;?></option>
                               	  <?php }?>
                                   </select>
                               <a href="javascript:void(0)" id="frm_days_clg" style="display:none;"> <i class="fa fa-plus"></i>Add Day</a>
-                                  <select id="frm_days_college" style="display:none;" name="frm_days">
-                                  <option value="0"> --- </option>
-                                  <option value="1" selected="selected">1</option>
-                                   <?php for($i=2;$i<=31;$i++){?>
+                                  <select id="frm_days_college" style="display:none;" name="frm_clg_days">
+                                  <option value="0"> dd </option>
+                                  
+                                   <?php for($i=1;$i<=31;$i++){?>
                                 	<option value="<?php echo $i;?>" ><?php echo $i;?></option>
                               	  <?php }?>
                                   </select>
@@ -73,24 +77,24 @@
                                   
                                   <div class="col-md-12" id="clg_todates_dropdowns">
                                     
-                                  <select id="to_years_college" style="display:none;" name="to_years" class="to_clg_years">
-                                  <option value="0"> --- </option>
+                                  <select id="to_years_college" style="display:none;" name="to_clg_years" class="to_clg_years">
+                                  <option value="0">yyyy</option>
                                    <?php for($i=1950;$i<=date(Y);$i++){?>
                                 	<option value="<?php echo $i;?>"><?php echo $i;?></option>
                               	  <?php }?>
                                   </select>
                                   <a href="javascript:void(0)" id="to_months_clg" style="display:none;"> <i class="fa fa-plus"></i>Add Month</a>
-                                  <select id="to_months_college" style="display:none;" name="to_months">
-                                  <option value="0"> --- </option>
+                                  <select id="to_months_college" style="display:none;" name="to_clg_months">
+                                  <option value="0">mm</option>
                                    <?php for($i=1;$i<=12;$i++){?>
-                                	<option value="<?php echo $i;?>" selected="selected"><?php echo $i;?></option>
+                                	<option value="<?php echo $i;?>" ><?php echo $i;?></option>
                               	  <?php }?>
                                   </select>
                                  <a href="javascript:void(0)" id="to_days_clg" style="display:none;"> <i class="fa fa-plus"></i>Add Day</a>
-                                  <select id="to_days_college" style="display:none;" name="to_days">
-                                  <option value="0"> --- </option>
+                                  <select id="to_days_college" style="display:none;" name="to_clg_days">
+                                  <option value="0">dd</option>
                                    <?php for($i=1;$i<=31;$i++){?>
-                                	<option value="<?php echo $i;?>" selected="selected"><?php echo $i;?></option>
+                                	<option value="<?php echo $i;?>" ><?php echo $i;?></option>
                               	  <?php }?>
                                   </select>
                                                       
@@ -139,7 +143,7 @@
                                   </div>
                                   <div class="clearfix"></div>
                                   <div class="box_bottom">
-                                    <div class="publics col-md-4">
+                                    <div class="publics col-md-4" style="display:none;">
                                       <button aria-expanded="false" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">Public <span class="caret"></span></button>
                                     </div>
                                       <input type="hidden" name="clg_action" id="clg_action" value="add">
@@ -156,3 +160,6 @@
                             </div>
                             <div class="graphic"></div>
                           </div>
+                            <?php if(!empty($user_college_info)) { ?>
+                           <a href="javascript:void(0)" id="add_college_link_disp" class="work_edu_side_links">add college details</a>
+                           <?php } ?>

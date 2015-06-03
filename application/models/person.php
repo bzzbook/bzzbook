@@ -96,6 +96,19 @@ class person extends CI_Model {
 			}
 			return false;
 		}
-	   		
+	   			
+				
+		public function get_abtme_user()
+		{
+		$id = $this->session->userdata('logged_in')['account_id'];
+			$this->db->select('*');
+			$this->db->from('bzz_users');
+			$this->db->where('user_id',$id);
+			$query = $this->db->get();
+			if($query->num_rows() == 1){
+			return $query->result_array();
+			}
+			return false;
+		}
 }
 ?>

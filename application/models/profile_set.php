@@ -271,6 +271,26 @@ class Profile_set extends CI_Model {
        $this->db->delete('bzz_organizationinfo'); 
    }
    
+   
+   
+    public function del_mobile_by_id($id)
+   {
+	   $this->db->where('mobile_id', $id);
+      if($this->db->delete('bzz_mobile_nos')) 
+	return true;
+	else
+	return false;
+   }
+   
+    public function del_oth_acc_by_id($id)
+   {
+	   $this->db->where('account_id', $id);
+      if($this->db->delete('bzz_other_accounts')) 
+	return true;
+	else
+	return false;
+   }
+   
      public function del_Organization_Details($id)
    {	  
 	$this->db->where('organization_id',$id);
@@ -925,18 +945,92 @@ public function add_fav_quotes($favquotes)
 	}
 	
 	
-	public function add_mobile($mobile)
+	public function add_mobile($mobile,$country_code)
 	{
 		$id = $this->session->userdata('logged_in')['account_id'];
-		$up_data = array('mobile'=>$mobile);
-		$this->db->where('user_id',$id);
-		
-		if($this->db->update('bzz_userinfo',$up_data))
+		$up_data = 
+		array(
+		'mobile_no'=>$mobile,
+		'country_code'=>$country_code,
+		'user_id'=>$id
+		);
+
+		if($this->db->insert('bzz_mobile_nos',$up_data))
 		return true;
 		else
 		return false;
 	}
 	
+	
+	public function add_oth_accounts($account,$account_type)
+	{
+		$id = $this->session->userdata('logged_in')['account_id'];
+		$up_data = 
+		array(
+		'account_name'=>$account,
+		'account_type'=>$account_type,
+		'user_id'=>$id
+		);
+
+		if($this->db->insert('bzz_other_accounts',$up_data))
+		return true;
+		else
+		return false;
+	}
+	
+	
+	public function add_other_accounts_data($account_name,$account_type)
+	{
+		
+	
+		$id = $this->session->userdata('logged_in')['account_id'];
+		$up_data = 
+		array(
+		'account_name'=>$account_name,
+		'account_type'=>$account_type,
+		'user_id'=>$id
+		);
+		if($this->db->insert('bzz_other_accounts',$up_data))
+		return true;
+		else
+		return false;
+	}
+	
+	public function get_mbl_nos()
+	{
+		$id = $this->session->userdata('logged_in')['account_id'];
+		$this->db->select('*');
+		$this->db->from('bzz_mobile_nos');
+		$this->db->where('user_id',$id);
+		$this->db->order_by('mobile_id');
+		$query = $this->db->get();
+		if($query->num_rows() > 0)
+		{
+			return $query->result_array();
+		}else 
+		{
+			return false;
+		}
+		
+	}
+		
+	public function get_other_accounts_by_id()
+	{
+		$id = $this->session->userdata('logged_in')['account_id'];
+		$this->db->select('*');
+		$this->db->from('bzz_other_accounts');
+		$this->db->where('user_id',$id);
+		$this->db->order_by('account_id');
+		$query = $this->db->get();
+		if($query->num_rows() > 0)
+		{
+			return $query->result_array();
+		}else 
+		{
+			return false;
+		}
+		
+	}
 		
 	public function add_website($website)
 	{
@@ -991,8 +1085,13 @@ public function add_fav_quotes($favquotes)
 	}
 	public function add_interested_in($interested_in)
 	{
+		if($interested_in)
+		{
 		
 		$data = implode(",",$interested_in);
+		}else{
+			$data='';
+		}
 		
 		$id = $this->session->userdata('logged_in')['account_id'];
 		$up_data = array('interests'=>$data);
@@ -1034,13 +1133,14 @@ public function add_fav_quotes($favquotes)
 	
 	public function add_work_info($data)
 	{
+		$id = $this->session->userdata('logged_in')['account_id'];
 		if(isset($data['curent_status']))
 		{
 			$current_status = $data['curent_status'];
 			
 		}else
 		{
-			$current_status = "N";
+			$current_status = "res";
 		}
 		
 		if(empty($data['to_years']))
@@ -1048,22 +1148,43 @@ public function add_fav_quotes($favquotes)
 			$dt = new DateTime();
 			$end_date = $dt->format('Y-m-d');
 			
-		}else
+		}
+		
+		if($data['frm_years'] == '0')
 		{
+			$start_date = '';
+		}else{
+			
+			$start_date = $data['frm_years'].'-'.$data['frm_months'].'-'.$data['frm_days'];
+		}
+		
+		if($data['to_years'] == '0')
+		{
+			$end_date = '';
+		}else{
+			
 			$end_date = $data['to_years'].'-'.$data['to_months'].'-'.$data['to_days'];
 		}
 
-
+		
 	   	$workInfo = array(
 		'org_name'=>$data['company'],
 		'position'=>$data['position'],
-		'emp_status'=>$current_status,
-		'start_date'=>$data['frm_years'].'-'.$data['frm_months'].'-'.$data['frm_days'],
-		'end_date'=>$end_date,
 		'org_desc'=>$data['description'],
 		'city'=>$data['city'],
+		'start_date'=>$start_date,
+		'emp_status'=>$current_status,
+		'end_date'=>$end_date,		
 		'user_id'=>$this->session->userdata('logged_in')['account_id']
 		);
+		
+			
+		if($current_status == 'wor')
+		{
+			$emp_status_change['emp_status'] = 'res';
+			$this->db->where('user_id',$id);
+			$this->db->update('bzz_organizationinfo', $emp_status_change);
+		}
 		
 		if($data['work_action']=='add')
 		{
@@ -1082,8 +1203,40 @@ public function add_fav_quotes($favquotes)
 			return false; 
 		}
 		
+	
 		  
 	}
+
+public function edit_mobile_no_by_id($mobile_no,$contry_code,$mobile_id)
+{
+	
+	 	$mobInfo = array(
+		'mobile_no'=>$mobile_no,
+		'country_code'=>$contry_code,	
+		//'user_id'=>$this->session->userdata('logged_in')['account_id']
+		);
+		
+		$this->db->where('mobile_id',$mobile_id);
+			if($this->db->update('bzz_mobile_nos', $mobInfo))
+			return true;
+			else 
+			return false; 
+}
+public function edit_account_by_id($account_name,$account_type,$account_id)
+{
+	
+	 	$accInfo = array(
+		'account_name'=>$account_name,
+		'account_type'=>$account_type,	
+		//'user_id'=>$this->session->userdata('logged_in')['account_id']
+		);
+		
+		$this->db->where('account_id',$account_id);
+			if($this->db->update('bzz_other_accounts', $accInfo))
+			return true;
+			else 
+			return false; 
+}
 
 
 
@@ -1099,19 +1252,33 @@ public function add_fav_quotes($favquotes)
 			$edu_status = "N";
 		}
 		
-		if(empty($data['to_years']))
+		if(empty($data['to_clg_years']))
 		{	
 			$dt = new DateTime();
 			$end_date = $dt->format('Y-m-d');
 			
 		}
-
+if($data['frm_clg_years'] == '0')
+		{
+			$start_date = '';
+		}else{
+			
+			$start_date = $data['frm_clg_years'].'-'.$data['frm_clg_months'].'-'.$data['frm_clg_days'];
+		}
+		
+		if($data['to_clg_years'] == '0')
+		{
+			$end_date = '';
+		}else{
+			
+			$end_date = $data['to_clg_years'].'-'.$data['to_clg_months'].'-'.$data['to_clg_days'];
+		}
 
 	   	$college_info = array(
 		'college_name'=>$data['college_name'],
 		'edu_status'=>$edu_status,
-		'start_date'=>$data['frm_years'].'-'.$data['frm_months'].'-'.$data['frm_days'],
-		'end_date'=>$data['to_years'].'-'.$data['to_months'].'-'.$data['to_days'],
+		'start_date'=>$start_date,
+		'end_date'=>$end_date,
 		'description'=>$data['description'],
 		'concentration1'=>$data['concentration1'],
 		'concentration2'=>$data['concentration2'],
@@ -1164,19 +1331,33 @@ public function add_fav_quotes($favquotes)
 			$sch_status = "N";
 		}
 		
-		if(empty($data['to_years']))
+		if(empty($data['to_sch_years']))
 		{	
 			$dt = new DateTime();
 			$end_date = $dt->format('Y-m-d');
 			
 		}
-
+		if($data['frm_sch_years'] == '0')
+		{
+			$start_date = '';
+		}else{
+			
+			$start_date = $data['frm_sch_years'].'-'.$data['frm_sch_months'].'-'.$data['frm_sch_days'];
+		}
+		
+		if($data['to_sch_years'] == '0')
+		{
+			$end_date = '';
+		}else{
+			
+			$end_date = $data['to_sch_years'].'-'.$data['to_sch_months'].'-'.$data['to_sch_days'];
+		}
 
 	   	$school_info = array(
 		'school_name'=>$data['school_name'],
 		'sch_status'=>$sch_status,
-		'start_date'=>$data['frm_years'].'-'.$data['frm_months'].'-'.$data['frm_days'],
-		'end_date'=>$data['to_years'].'-'.$data['to_months'].'-'.$data['to_days'],
+		'start_date'=>$start_date,
+		'end_date'=>$end_date,
 		'description'=>$data['description'],
 		'user_id'=>$this->session->userdata('logged_in')['account_id']
 		);
@@ -1211,6 +1392,88 @@ public function add_fav_quotes($favquotes)
 	return false;
    }
 
+	public function get_org_details_by_status_work()
+	{
+		$id = $this->session->userdata('logged_in')['account_id'];
+		$condition = "user_id =" . "'" . $id . "'" . " AND " . "emp_status = 'wor'";
+		$this->db->select('*');
+		$this->db->from('bzz_organizationinfo');
+		$this->db->where($condition);
+		$this->db->order_by('end_date','desc');
+		$query = $this->db->get();
+		if($query->num_rows() > 0)
+		{
+			return $query->result_array();
+		}else 
+		{
+			return false;
+		}
+		
+	}
+		public function get_org_details_by_status_all()
+	{
+		$id = $this->session->userdata('logged_in')['account_id'];
+		$condition = "user_id =" . "'" . $id . "'" . " AND " . "emp_status != 'wor'";
+		$this->db->select('*');
+		$this->db->from('bzz_organizationinfo');
+		$this->db->limit(4);
+		$this->db->where($condition);
+		$this->db->order_by('end_date','desc');
+		$query = $this->db->get();
+		if($query->num_rows() > 0)
+		{
+			return $query->result_array();
+		}else 
+		{
+			return false;
+		}
+		
+	}
+	
+	public function get_clg_details_all()
+	{
+		$id = $this->session->userdata('logged_in')['account_id'];
+		
+		$this->db->select('*');
+		$this->db->from('bzz_user_college');
+	//	$this->db->limit(4);
+		$this->db->where('user_id',$id);
+		$this->db->order_by('end_date','desc');
+		$query = $this->db->get();
+		if($query->num_rows() > 0)
+		{
+			return $query->result_array();
+		}else 
+		{
+			return false;
+		}
+		
+	}
+	
+		public function editmobileDetails($id)
+	{
+		$this->db->select('*');
+		$this->db->from('bzz_mobile_nos');
+		$this->db->where('mobile_id', $id);
+		$query = $this->db->get();
+		if ($query->num_rows() > 0) {
+			return $query->result();
+		} else {
+		return false;
+		}
+	}
+	
+	public function editaccountDetails($id)
+	{
+		$this->db->select('*');
+		$this->db->from('bzz_other_accounts');
+		$this->db->where('account_id', $id);
+		$query = $this->db->get();
+		if ($query->num_rows() > 0) {
+			return $query->result();
+		} else {
+		return false;
+		}
+	}
 }
-
 ?>

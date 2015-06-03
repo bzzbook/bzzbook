@@ -19,8 +19,8 @@
                         <p><?php echo $nicname['nic_name_type']; ?></p>
                         </div>
                         <div class="sm_rightside">
-                        <div class="col-md-3 com_le"><i class="fa fa-globe"></i></div>
-                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" class="nick_edit" id="nick_edit<?php echo $nicname['nic_name_id']; ?>"><i class="fa fa-pencil"></i> Edit</a></div>
+                        <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
+                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="nick_edit()" class="nick_edit" id="nick_edit<?php echo $nicname['nic_name_id']; ?>"><i class="fa fa-pencil"></i></a></div>
                         <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_nic_name('<?php echo $nicname['nic_name_id']; ?>')"><i class="fa fa-times"></i></a></div>
                         </div>
                         </div>
@@ -51,16 +51,9 @@
                                    <input type="hidden" name="nickname_action" id="nickname_action" value="add">
                        			  <input type="hidden" value="" name="nickname_disp_id" >
                                 <div class="clearfix"></div>
-                                <div class="form-group show_prof">
-                                  <label for="exampleInputName2"></label>
-                                  <input type="checkbox" class="outside">
-                                  Show at top of profile </div>
-                                <div class="col-md-9 col-md-offset-3 profil_sho">
-                                  <p>Other names are always public and help people find you on Facebook.</p>
-                                </div>
-                                <div class="clearfix"></div>
+                             
                                 <div class="box_bottom">
-                                  <div class="publics col-md-2">
+                                  <div class="publics col-md-2" style="display:none;">
                                     <button aria-expanded="false" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">Public <span class="caret"></span></button>
                                   </div>
                                   <div class="col-md-10 skil_box">

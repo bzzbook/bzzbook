@@ -1842,7 +1842,6 @@ $('#addedusers').val(user_id)
 
 }
 function addfrndfortagging(user_id,name){
-	
 var cur_content = $('#taggedfriends').html();
 var new_content = "<span id='"+user_id+"'>"+name+"<a onclick='removefrndfromtagging("+user_id+")'><img class='as_close_btn' src='<?php echo base_url().'images/close_btn.png'; ?>'/></a></span>";
  $('#taggedfriends').html(new_content+cur_content);
@@ -1981,7 +1980,6 @@ function keyupevent(){
 	else{ $('#autosuggest').hide(); }
 }
 function tagkeyupevent(){
-
 	var value = $('#tagsearchfriends').val();
 	var addedusers = $('#tagaddedusers').val();
 	if(value!='')
@@ -3057,7 +3055,7 @@ function close_mobile()
 {
 	$('#add_mbl_disp').hide();
 	$('#add_mbl_block').show();
-	
+	//$('#mobile_val_display').show();
 }
 
 function close_mbl()
@@ -3067,11 +3065,11 @@ function close_mbl()
 }
 
 
-function add_mbl()
+/*function add_mbl()
 {
 	var mobile = $('#mbl_no').val();
 		
-	url = "<?php echo base_url(); ?>profile/addmobile/";
+	url = "<?php // echo base_url(); ?>profile/addmobile/";
 	$.ajax({
 		type: "POST",
 		data: { mobile : mobile},
@@ -3086,47 +3084,164 @@ function add_mbl()
 	
 	
 }
- function mbl_edit()
+*/ function mbl_edit()
 {
-	$('#mobile_val_display').hide();
-	$('#add_mbl_disp').show();
+	//$('#mobile_val_display').hide();
+	//$('#add_mbl_disp').show();
+	
+	
+	$('.mobile_edit').click(function(){
+		
+		mobile_id = $(this).attr("id").substr(11);
+		//alert(organization_id);
+		$("input[name=mobile_disp_id]").val(mobile_id)
+		url="<?php echo base_url(); ?>profile/mobileEdit/";
+		$.post( url, { mobile_id: mobile_id})
+		.done(function( data ) {
+			info = JSON.parse(data);
+			$("input[name=mobile_no]").val(info.mobile_no);
+			$("select[name=country_codes]").val(info.country_code);
+			$("input[name=mobile_action]").val("update");
+			
+			$('#mobile_'+mobile_id).append($('#mbl_disp_edit').show());
+			
+		});
+		return false;
+
+		
+	});
+	
 }
 
 
 
 
+del_mobile();
 function del_mobile()
 {
+	$('.mobile_delete').click(function(){
+	mbl_id = $(this).attr("id").substr(13);
+	//alert(mbl_id);
 	if (confirm("Delete Your Mobile No from Bzzbook") == true) {
 	url="<?php echo base_url();?>profile/deletemobile/";
 	 $.ajax({
 		url: url,
+		type: "POST",
+		data:{ mbl_id:mbl_id },
 		success: function(html)
 		{   					
 			
 			$('ul.basic_info > #mobile-li').html(html);
-		    $('#mobile_val_display').hide();
-			$('#add_mbl_block').show();
-			
-		
+
 		}
 		
 	   });
        
     } 
 	
+});
 }
+
+
+
+
+
+
+  var imCnt = 0;
+
+        $('body').delegate('#add_mbl_link','click',function() {
+			//$('.add_mbl_append old_mobile_fields').hide();
+        // alert('wefdwe');
+				 
+				 if(imCnt <= 4)
+				 {
+                imCnt = imCnt + 1;
+
+                // ADD TEXTBOX.
+                $('.add_mbl_append').append('<div class="col-md-12 mobile mobile_values"><div id="individual_mbl_con'+imCnt+'" class="form-group mobile col-md-3 get_mbl_divs"><label for="exampleInputName2">Mobile Phones</label></div><div class="col-md-3"><select class="con_code" id="country_codes'+imCnt+'"><option>india(+91)</option><option>pak(+92)</option></select></div><div class="col-md-3 box-rig_box"><input type="text" class="phone_no" id="mobile' + imCnt + '" value=""></div><div class="col-md-3 inside_drop" style="display:none;"> <a aria-expanded="false" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#"> <i class="fa fa-fw"></i> <span class="fa fa-angle-down"></span></a></div></div>');
+				
+				 }else{
+				 alert('aaaaaaaaaaaaaaaaaa');
+				 }
+			});
+
+function get_mbl_values()
+{
+	i=0;
+	$('.mobile_values').each(function()
+	{
+	
+		var value = $(this).attr('id');
+		
+		var mbl_no = $('#mobile'+i).val();
+	var country = $('#country_codes'+i).val();
+	
+	
+			
+	url = "<?php echo base_url(); ?>profile/addmobile/";
+	$.ajax({
+		type: "POST",
+		data: { mbl_no : mbl_no,country : country },
+		url : url,
+		success : function(html)
+		{
+			$('#add_mbl_disp').hide();
+	      	$('ul.basic_info > #mobile-li').html(html);		
+		
+		}
+	});
+		
+		 	i++;
+		
+	});
+	
+
+}
+
+
+
+function edit_mobile_value()
+{
+	
+	var mobile_no = $('#mbl_no').val();
+	var con_code = $('#country_code_mbl').val();
+	var mobile_id = $('#mobile_no_id').val();	
+	url = "<?php  echo base_url(); ?>profile/editmobilebyid/";
+	$.ajax({
+		type: "POST",
+		data: { mobile_no : mobile_no, con_code : con_code, mobile_id : mobile_id },
+		url : url,
+		success : function(html)
+		{
+			$('#add_mbl_disp').hide();
+	      	$('ul.basic_info > #mobile-li').html(html);		
+		
+		}
+	});
+	
+	
+
+}
+
+
+function close_edit_mobile()
+{
+	
+	$('#mbl_disp_edit').hide();
+}
+
+
 </script>
 <script>//add_web_site
 $('body').delegate('#add_website','click',function()
 {
-	$('#website').hide();
+	$('#add_web_site').hide();
 	$('#website_disp').show();
 });
 
 function close_website()
 {
-	$('#website').show();
+	$('#add_web_site').show();
 	$('#website_disp').hide();
 }
 
@@ -3295,7 +3410,7 @@ function close_work()
 }
 
 
-		$('body').delegare('#work_form','submit',function( event){
+		$('body').delegate('#work_form','submit',function( event){
 			
 					url="<?php echo base_url();?>profile/add_work/";
 					$.post( url, { formdata: $(this).serialize() })
@@ -3328,16 +3443,89 @@ function work_edit()
 			$("input[name=company]").val(info.org_name);
 			$("input[name=position]").val(info.position);
 			$("textarea[name=description]").val(info.org_desc);
+			
+			if(info.emp_status == 'wor')
+			{
 			$("input[type='checkbox']").prop("checked","checked");
-			$("ïnput[type=city]").val(info.city);		
-			from_date = info.start_date.split('-')
-			$("select[name=frm_years]").val(from_date[0]);
-			$("select[name=frm_months]").val(from_date[1]);
-			$("select[name=frm_days]").val(from_date[2]);
-			to_date = info.end_date.split('-')
-			$("select[name=to_years]").val(to_date[0]);
-			$("select[name=to_months]").val(to_date[1]);
-			$("select[name=to_days]").val(to_date[2]);
+			}
+			$("ïnput[type=city]").val(info.city);
+				
+	if(!info.start_date)
+			{
+				$('#frm_years_link').show();
+			}else
+		{
+			
+			from_work_date = info.start_date.split('-')
+			if(from_work_date[0])
+			{
+				$('#add_years').hide();	
+			$('#frm_years_link').hide();
+			$('#frm_years').show();	
+			$("select[name=frm_years]").val(from_work_date[0]);
+			}else{
+			$('#frm_years_link').show();
+			}
+			if(from_work_date[1])
+			{
+				$('#add_years').hide();	
+			$('#frm_years_link').hide();
+			$('#frm_months').show();	
+			$("select[name=frm_months]").val(from_work_date[1]);
+			}else{
+				$('#frm_months_link').show();
+			}
+			if(from_work_date[2])
+			{
+				$('#add_years').hide();	
+			$('#frm_years_link').hide();
+			$('#frm_days').show();	
+			$("select[name=frm_days]").val(from_work_date[2]);
+			}else{
+				$('#frm_days_link').show();
+			}
+		}
+		
+		
+		if(!info.end_date)
+			{
+				$('#to_years_link').show();
+			}else
+		{
+			
+			to_work_date = info.end_date.split('-')
+			
+			if(to_work_date[0])
+			{
+				
+			$('#to_years_link').hide();
+			$('#to_years').show();	
+			$("select[name=to_years]").val(to_work_date[0]);
+			}else{
+			$('#to_years_link').show();
+			}
+			
+			if(to_work_date[1])
+			{
+			
+			$('#to_years_link').hide();
+			$('#to_months').show();	
+			$("select[name=to_months]").val(to_work_date[1]);
+			}else{
+				$('#to_months_link').show();
+			}
+			if(to_work_date[2])
+			{
+				
+			$('#to_years_link').hide();
+			$('#to_days').show();	
+			$("select[name=to_days]").val(to_work_date[2]);
+			}else{
+				$('#to_days_link').show();
+			}
+		}
+			
+			
 			
 			$("input[name=work_action]").val("update");
 			
@@ -3367,9 +3555,6 @@ function work_delete()
 		{   					
 			
 			$('ul.backgrounds > #workplace-li').html(html);
-		  	//$('#work_head1').show();
-			//$('#work_head2').show();
-			//$('#address_val_display').hide();
 		
 		}
 		
@@ -3412,15 +3597,14 @@ function add_year()
 		
 	});
 	
-	$('#frm_months_link').click(function()
+	$('body').delegate('#frm_months_link','click',function()
 	{
 		
 		$(this).hide();
 		$('#frm_months').show();
 		$('#frm_days_link').show();
 	});
-	
-	$('#frm_months').change(function()
+	$('body').delegate('#frm_months','change',function()
 	{
 		//alert($('#frm_months').val());
 		if( $('#frm_months').val() == 0)
@@ -3439,7 +3623,7 @@ function add_year()
 			}}
 	});
 	
-	$('#frm_days_link').click(function ()
+	$('body').delegate('#frm_days_link','click',function()
 	{
 		$(this).hide();
 		$('#frm_days').show();
@@ -3451,13 +3635,17 @@ function add_year()
 		}else{
 			$('#to_present').hide();
 			$('#to').show();
-			$('#to_years_link').show();
+			
+			 if($('#to_years').is(":hidden"))
+			{
+				$('#to_years_link').show();
+			}
+			
 		}
 		
 		
 	});
-	
-	$('#frm_days').change(function()
+	$('body').delegate('#frm_days','change',function()
 	{
 		if( $('#frm_days').val() == 0)
 		{
@@ -3510,9 +3698,8 @@ function add_year()
 	}*/
 	
 	
-	
-  $('#curent_status').click(function ()
-  {
+	$('body').delegate('#curent_status','click',function()
+   {
 	 if( $('#curent_status').is(':checked'))
 	 {
 		 $('#to_years_link').hide();
@@ -3533,8 +3720,7 @@ function add_year()
 	 }
 	  });
  
-	
-	$('#to_years_link').click(function()
+	$('body').delegate('#to_years_link','click',function()
 	{
 		$(this).hide();
 		$('#to_years').show();
@@ -3542,8 +3728,7 @@ function add_year()
 		
 	});
 	
-	
-	$('#to_years').change(function()
+	$('body').delegate('#to_years','change',function()
 	{
 		if( $('#to_years').val() == 0)
 		{
@@ -3564,16 +3749,14 @@ function add_year()
 	});
 	
 	
-	
-	$('#to_months_link').click(function()
+	$('body').delegate('#to_months_link','click',function()
 	{
 		
 		$(this).hide();
 		$('#to_months').show();
 		$('#to_days_link').show();
 	});
-	
-	$('#to_months').change(function()
+	$('body').delegate('#to_months','change',function()
 	{
 		//alert($('#frm_months').val());
 		if( $('#to_months').val() == 0)
@@ -3589,13 +3772,14 @@ function add_year()
 			}}
 	});
 	
-		$('#to_days_link').click(function ()
+	
+	$('body').delegate('#to_days_link','click',function()
 	{
 		$(this).hide();
 		$('#to_days').show();
 	});
 	
-	$('#to_days').change(function()
+	$('body').delegate('#to_days','change',function()
 	{
 		if( $('#to_days').val() == 0)
 		{
@@ -3670,14 +3854,14 @@ function college_delete()
 
 
 
-$('#clg_add_year').click(function()
+$('body').delegate('#clg_add_year','click',function()
 {
 	$(this).hide();
 	$('#frm_years_college').show();
 	$('#frm_months_clg').show();
 });
 
-$('#frm_years_college').change(function()
+$('body').delegate('#frm_years_college','change',function()
 {
 	
 	if($('#frm_years_college').val() == 0)
@@ -3698,14 +3882,14 @@ $('#frm_years_college').change(function()
 });
 
 
-$('#frm_months_clg').click(function()
+$('body').delegate('#frm_months_clg','click',function()
 {
 	$(this).hide();
 	$('#frm_months_college').show();
 	$('#frm_days_clg').show();
 });
 
-$('#frm_months_college').change(function()
+$('body').delegate('#frm_months_college','change',function()
 {
 	
 	if($('#frm_months_college').val() == 0)
@@ -3722,7 +3906,7 @@ $('#frm_months_college').change(function()
 	}
 });
 
-$('#frm_days_clg').click(function()
+$('body').delegate('#frm_days_clg','click',function()
 {
 	$(this).hide();
 	$('#frm_days_college').show();
@@ -3730,7 +3914,7 @@ $('#frm_days_clg').click(function()
 });
 
 
-$('#frm_days_college').change(function()
+$('body').delegate('#frm_days_college','change',function()
 {
 	
 	if($('#frm_days_college').val() == 0)
@@ -3745,7 +3929,7 @@ $('#frm_days_college').change(function()
 
 
 
-	$('#to_years_clg').click(function()
+	$('body').delegate('#to_years_clg','click',function()
 	{
 		$(this).hide();
 		$('#to_years_college').show();
@@ -3754,7 +3938,7 @@ $('#frm_days_college').change(function()
 	});
 	
 	
-	$('#to_years_college').change(function()
+	$('body').delegate('#to_years_college','change',function()
 	{
 		if( $('#to_years_college').val() == 0)
 		{
@@ -3777,7 +3961,7 @@ $('#frm_days_college').change(function()
 	
 	
 	
-	$('#to_months_clg').click(function()
+	$('body').delegate('#to_months_clg','click',function()
 	{
 		
 		$(this).hide();
@@ -3785,7 +3969,7 @@ $('#frm_days_college').change(function()
 		$('#to_days_clg').show();
 	});
 	
-	$('#to_months_college').change(function()
+	$('body').delegate('#to_months_college','change',function()
 	{
 		//alert($('#frm_months').val());
 		if( $('#to_months_college').val() == 0)
@@ -3801,13 +3985,13 @@ $('#frm_days_college').change(function()
 			}}
 	});
 	
-		$('#to_days_clg').click(function ()
+		$('body').delegate('#to_days_clg','click',function()
 	{
 		$(this).hide();
 		$('#to_days_college').show();
 	});
 	
-	$('#to_days_college').change(function()
+	$('body').delegate('#to_days_college','change',function()
 	{
 		if( $('#to_days_college').val() == 0)
 		{
@@ -3855,18 +4039,86 @@ function college_edit()
 			$("input[name=college_name]").val(info.college_name);
 			
 			$("textarea[name=description]").val(info.description);
+			if(info.edu_status == 'graduate')
+			{
 			$("input[type='checkbox']").prop("checked","checked");
+			}
 			$("input[name=concentration1]").val(info.concentration1);
 			$("input[name=concentration2]").val(info.concentration2);
 			$("input[name=concentration3]").val(info.concentration3);
-			from_date = info.start_date.split('-')
-			$("select[name=frm_years_college]").val(from_date[0]);
-			$("select[name=frm_months_college]").val(from_date[1]);
-			$("select[name=frm_days_college]").val(from_date[2]);
-			to_date = info.end_date.split('-')
-			$("select[name=to_years_college]").val(to_date[0]);
-			$("select[name=to_months_college]").val(to_date[1]);
-			$("select[name=to_days_college]").val(to_date[2]);
+			
+			if(!info.start_date)
+			{
+				$('#clg_add_year').show();
+			}else
+		{
+			
+			from_college_date = info.start_date.split('-')
+			
+			if(from_college_date[0])
+			{
+				$('#clg_add_year').hide();
+				$('#frm_years_college').show();
+				$("select[name=frm_clg_years]").val(from_college_date[0]);
+			}else{
+				$('#clg_add_year').show();
+			}
+			
+			if(from_college_date[1])
+			{
+				$('#clg_add_year').hide();
+				$('#frm_months_college').show();
+				$("select[name=frm_clg_months]").val(from_college_date[1]);
+			}else{
+					$('#frm_months_clg').show();
+			}
+			
+			if(from_college_date[2])
+			{
+				$('#clg_add_year').hide();
+				$('#frm_days_college').show();
+				$("select[name=frm_clg_days]").val(from_college_date[2]);
+			}else{
+					$('#frm_days_clg').show();
+			}
+		}
+		
+			if(!info.end_date)
+			{
+				$('#to_years_clg').show();
+			}else
+		{
+			
+			to_college_date = info.end_date.split('-')
+			
+			if(to_college_date[0])
+			{
+				
+				$('#to_years_clg').hide();
+				$('#to_years_college').show();
+				$("select[name=to_clg_years]").val(to_college_date[0]);
+			}else{
+				$('#to_years_clg').show();
+			}
+			
+				if(to_college_date[1])
+			{
+				$('#to_months_clg').hide();
+				$('#to_months_college').show();
+				$("select[name=to_clg_months]").val(to_college_date[1]);
+			}else{
+				$('#to_months_clg').show();
+			}
+			
+				if(to_college_date[2])
+			{
+				$('#to_days_clg').hide();
+				$('#to_days_college').show();
+				$("select[name=to_clg_days]").val(to_college_date[2]);
+			}else{
+				$('#to_days_clg').show();
+			}
+		}
 			$("input[name=clg_action]").val("update")
 		$('#college_disp').show();
 		});
@@ -3934,14 +4186,14 @@ function school_delete()
 
 
 
-$('#frm_years_sch').click(function()
+$('body').delegate('#frm_years_sch','click',function()
 {
 	$(this).hide();
 	$('#frm_years_school').show();
 	$('#frm_months_sch').show();
 });
 
-$('#frm_years_school').change(function()
+$('body').delegate('#frm_years_school','change',function()
 {
 	
 	if($('#frm_years_school').val() == 0)
@@ -3962,14 +4214,14 @@ $('#frm_years_school').change(function()
 });
 
 
-$('#frm_months_sch').click(function()
+$('body').delegate('#frm_months_sch','click',function()
 {
 	$(this).hide();
 	$('#frm_months_school').show();
 	$('#frm_days_sch').show();
 });
 
-$('#frm_months_school').change(function()
+$('body').delegate('#frm_months_school','change',function()
 {
 	
 	if($('#frm_months_school').val() == 0)
@@ -3986,7 +4238,7 @@ $('#frm_months_school').change(function()
 	}
 });
 
-$('#frm_days_sch').click(function()
+$('body').delegate('#frm_days_sch','click',function()
 {
 	$(this).hide();
 	$('#frm_days_school').show();
@@ -3994,7 +4246,7 @@ $('#frm_days_sch').click(function()
 });
 
 
-$('#frm_days_school').change(function()
+$('body').delegate('#frm_days_school','change',function()
 {
 	
 	if($('#frm_days_school').val() == 0)
@@ -4009,7 +4261,7 @@ $('#frm_days_school').change(function()
 
 
 
-	$('#to_years_sch').click(function()
+	$('body').delegate('#to_years_sch','click',function()
 	{
 		$(this).hide();
 		$('#to_years_school').show();
@@ -4018,7 +4270,7 @@ $('#frm_days_school').change(function()
 	});
 	
 	
-	$('#to_years_school').change(function()
+	$('body').delegate('#to_years_school','change',function()
 	{
 		if( $('#to_years_school').val() == 0)
 		{
@@ -4041,7 +4293,7 @@ $('#frm_days_school').change(function()
 	
 	
 	
-	$('#to_months_sch').click(function()
+	$('body').delegate('#to_months_sch','click',function()
 	{
 		
 		$(this).hide();
@@ -4049,7 +4301,7 @@ $('#frm_days_school').change(function()
 		$('#to_days_sch').show();
 	});
 	
-	$('#to_months_school').change(function()
+	$('body').delegate('#to_months_school','change',function()
 	{
 		//alert($('#frm_months').val());
 		if( $('#to_months_school').val() == 0)
@@ -4065,13 +4317,13 @@ $('#frm_days_school').change(function()
 			}}
 	});
 	
-		$('#to_days_sch').click(function ()
+		$('body').delegate('#to_days_sch','click',function ()
 	{
 		$(this).hide();
 		$('#to_days_school').show();
 	});
 	
-	$('#to_days_school').change(function()
+	$('body').delegate('#to_days_school','change',function()
 	{
 		if( $('#to_days_school').val() == 0)
 		{
@@ -4115,15 +4367,78 @@ function school_edit()
 			info = JSON.parse(data);
 			$("input[name=school_name]").val(info.school_name);
 			$("textarea[name=description]").val(info.description);
+			if(info.sch_status == 'graduate')
+			{
 			$("input[type='checkbox']").prop("checked","checked");
-			from_date = info.start_date.split('-')
-			$("select[name=frm_years_college]").val(from_date[0]);
-			$("select[name=frm_months_college]").val(from_date[1]);
-			$("select[name=frm_days_college]").val(from_date[2]);
-			to_date = info.end_date.split('-')
-			$("select[name=to_years_college]").val(to_date[0]);
-			$("select[name=to_months_college]").val(to_date[1]);
-			$("select[name=to_days_college]").val(to_date[2]);
+			}
+			
+			if(!info.start_date)
+			{
+				$('#frm_years_sch').show();
+			}else
+		{
+			from_sch_date = info.start_date.split('-')
+			if(from_sch_date[0])
+			{
+				$('#frm_years_sch').hide();
+				$('#frm_years_school').show();
+				$("select[name=frm_sch_years]").val(from_sch_date[0]);
+			}else{
+				$('#frm_years_sch').show();
+			}
+				if(from_sch_date[1])
+			{
+				$('#frm_months_sch').hide();
+				$('#frm_months_school').show();
+				$("select[name=frm_sch_months]").val(from_sch_date[1]);
+			}else{
+				$('#frm_months_sch').show();
+			}
+				if(from_sch_date[2])
+			{
+				$('#frm_days_sch').hide();
+				$('#frm_days_school').show();
+				$("select[name=frm_sch_days]").val(from_sch_date[2]);
+			}else{
+				$('#frm_days_sch').show();
+			}
+			
+		}
+		
+			if(!info.end_date)
+			{
+				$('#to_years_sch').show();
+			}else
+		{
+			to_sch_date = info.end_date.split('-')
+			
+				if(to_sch_date[0])
+			{
+				$('#to_years_sch').hide();
+				$('#to_years_school').show();
+				$("select[name=to_sch_years]").val(to_sch_date[0]);
+			}else{
+				$('#to_years_sch').show();
+			}
+				if(to_sch_date[1])
+			{
+				$('#to_months_sch').hide();
+				$('#to_months_school').show();
+			$("select[name=to_sch_months]").val(to_sch_date[1]);
+			}else{
+				$('#to_months_sch').show();
+			}
+				if(to_sch_date[2])
+			{
+				$('#to_days_sch').hide();
+				$('#to_days_school').show();
+				
+			$("select[name=to_sch_days]").val(to_sch_date[2]);
+			}else{
+				$('#to_days_sch').show();
+			}
+		}
+			
 			$("input[name=sch_action]").val("update")
 		$('#highschool').show();
 		});
@@ -4601,8 +4916,8 @@ $('#move_to_relation').click(function()
 {
 	$('#overview_tab').removeClass("active");
 	$('#overview').removeClass("active");
-	$('#life_tab').addClass("active");
-	$('#life').addClass("active");
+	$('#family_tab').addClass("active");
+	$('#family').addClass("active");
 });
 
 $('#move_to_contact').click(function()
@@ -4615,7 +4930,177 @@ $('#move_to_contact').click(function()
 
 </script>
 
+<script>// aboutme add other accounts
 
+$('body').delegate('#add_oth_acc','click',function()
+{
+	$('#add_oth_acc1').hide();
+	$('#other_accounts').show();
+});
+
+  var iCnt = 0;
+
+        $('body').delegate('#add_another_link','click',function() {
+         
+				 if(iCnt <= 19)
+				 {
+                iCnt = iCnt + 1;
+
+                // ADD TEXTBOX.
+                $('.other_acc_default').append('<div class="account col-md-12 account_values_div"><div class="form-group col-md-4 individual_ac_divs" id="individual_oth_ac'+iCnt+'"><label for="exampleInputName2">Other Accounts</label></div><div class="col-md-4"><input type="text"  id="account_name' + iCnt + '" value="" /></div><div class="col-md-3"><select id="account_type'+iCnt+'"><option value="facebook">facebook</option><option value="twitter">twitter</option><option value="pinterest">pinterest</option><option value="linked_in">LinkedIn</option></select></div></div>');
+				
+				 }else{
+				 alert('qwefqwef');
+				 }
+			});
+			
+		
+		
+function add_other_accounts()
+{
+	i=0;
+	$('.account_values_div').each(function()
+	{
+	
+		var value = $(this).attr('id');
+		
+		var acc_name = $('#account_name'+i).val();
+	    var acc_type = $('#account_type'+i).val();
+	
+	
+			
+	url = "<?php echo base_url(); ?>profile/addaccounts/";
+	$.ajax({
+		type: "POST",
+		data: { acc_name : acc_name,acc_type : acc_type },
+		url : url,
+		success : function(html)
+		{
+			$('#other_accounts').hide();
+	      	$('ul.basic_info > #oth_accounts-li').html(html);		
+		
+		}
+	});
+		
+		 	i++;
+		
+	});
+	
+
+}
+account_delete();
+
+function account_delete()
+{
+	
+	$('.account_delete').click(function(){
+	account_id = $(this).attr("id").substr(14);
+	//alert(account_id);
+	if (confirm("Delete Your Mobile No from Bzzbook") == true) {
+	url="<?php echo base_url();?>profile/deleteothaccount/";
+	 $.ajax({
+		url: url,
+		type: "POST",
+		data:{ account_id:account_id },
+		success: function(html)
+		{   					
+			
+			$('ul.basic_info > #oth_accounts-li').html(html);
+
+		}
+		
+	   });
+       
+    } 
+	
+});
+
+}
+
+
+function close_other_accounts()
+{
+	$('#other_accounts').hide();
+	$('#add_oth_acc1').show();
+	$('#add_oth_acc').show();
+}
+
+
+
+
+
+
+
+accounts_edit();
+
+
+function accounts_edit()
+{
+	
+	$('.account_edit').click(function(){
+		
+		account_id = $(this).attr("id").substr(12);
+		//alert(account_id);
+		$("input[name=account_disp_id]").val(account_id)
+		url="<?php echo base_url(); ?>profile/accountEdit/";
+		$.post( url, { account_id: account_id})
+		.done(function( data ) {
+			info = JSON.parse(data);
+			$("input[name=account_name]").val(info.account_name);
+			$("select[name=account_type]").val(info.account_type);
+			$("input[name=account_action]").val("update");
+			
+			$('#accounts_'+account_id).append($('#accounts_disp_edit').show());
+			
+		});
+		return false;
+
+		
+	});
+	
+
+}
+
+function close_account_edit()
+{
+	
+	$('#accounts_disp_edit').hide();
+}
+/*$('#basic_address').hover( function()
+{
+	$('#move_to_contact').show();
+});
+$('#basic_address').mouseleave( function()
+{
+	$('#move_to_contact').hide();
+});
+*/
+
+function edit_account_values()
+{
+	
+	
+	var account_name = $('#account_name').val();
+	var account_type = $('#account_type').val();
+	var account_id = $('#account_no_id').val();	
+	url = "<?php  echo base_url(); ?>profile/editaccountbyid/";
+	$.ajax({
+		type: "POST",
+		data: { account_name : account_name, account_type : account_type, account_id : account_id },
+		url : url,
+		success : function(html)
+		{
+			$('#other_accounts').hide();
+	      	$('ul.basic_info > #oth_accounts-li').html(html);		
+		
+		}
+	});
+	
+	
+
+
+}
+</script>
 
 <?php $this->load->view('profile_models'); ?>
 <script language="javascript">print_country("con");</script><!--  //for groups   --> 
