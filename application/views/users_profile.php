@@ -1,5 +1,153 @@
-   <?php $image = $this->profile_set->get_profile_pic($user_id);	?>
-    <section class="col-lg-6 col-md-6 col-sm-5 col-xs-12 coloumn2">
+<?php  
+       $image = $this->profile_set->get_profile_pic($user_id);
+	   $data = $this->profile_set->get_userinfo($user_id); 
+	   $friends = $this->friendsmodel->getfriends('','',$user_id,9);
+	   $organization_details = $this->profile_set->getorganizationDetails($user_id);
+	   $emp_working = $this->profile_set->get_org_details_by_status_work($user_id);
+	   $emp_work_ended = $this->profile_set->get_org_details_by_status_all($user_id);
+	   $college_details = $this->profile_set->get_clg_details_all($user_id);
+	   $result = $this->profile_set->save_settings($user_id);
+	      ?>
+<section class="col-lg-9 col-md-9 nopad">
+      <div class="col-xs-12 ProfileView">
+        <section class="visitorBox">
+          <div class="visitiBoxInner">
+            <figure class="compCover"><img alt="" src="<?php echo base_url(); ?>images/about_banner.jpg" class="img-responsive"></figure>
+             
+            <div class="profileLogo">
+              <figure class="cmplogo"><a href="#"><span class="glyphicon glyphicon-camera change-photo fileinput-button" aria-hidden="true"><em>Change Picture</em> <input type="file" name="userfile" id="userfile" size="20" required/></span></a><img src="<?php echo base_url();?>uploads/<?php if(!empty($image[0]->user_img_thumb)) echo $image[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" alt="<?php echo base_url();?>uploads/<?php if(!empty($image[0]->user_img_thumb)) echo $image[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>"></figure>
+
+              <!-- <span class="inside glyphicon glyphicon-camera" ></span>--> 
+            </div>
+            <h4 class="profile-name"><?php echo $data[0]['user_firstname']." ".$data[0]['user_lastname'] ?></h4>
+            <div class="ProfileViewNav"></div>
+          </div>
+        </section>
+      </div>
+     
+     <!-- <section class="about-user-details">
+        
+        <div class="about-user-details-inner" >
+          <section class="col-lg-12 col-md-12 col-sm-5 col-xs-12 coloumn2 aboutme">
+            <div class="posts">
+              <div class="col-md-4">
+                
+              </div>
+              <div class="tab-content col-md-8">
+                           
+              </div>
+              <div class="clear"></div>
+            </div>
+          </section>
+          <div class="clearfix"></div>
+        </div>
+      </section>-->
+        <section class="col-lg-4 col-md-4 col-sm-4 col-xs-12 coloumn1" style="padding-right:0; padding-top:0;margin-top:-15px; "><aside>
+        <?php /*?><div class="myPhotos">
+        <?php if(!empty($organization_details)){ ?>
+        
+        				
+                        <div class="inner_rights boxs" style="">
+                        <i class="fa fa-briefcase"></i>
+                        <?php 	
+						if(!empty($emp_working))
+						{
+							foreach($emp_working as $working)
+							{
+						?>		
+						
+                          <span><?php echo $working['position']; ?> at <a href="#"><?php echo $working['org_name']; ?></a></span>
+                          
+                          <?php } } ?>
+                          <?php 	
+						  if(!empty($emp_work_ended))
+						{
+							 $i = 0;
+							 ?>
+                             <span class="aboutme_clg">Past:</span>
+                             <?php
+							foreach($emp_work_ended as $worked)
+							{
+							
+						?>
+                         <a href="#" class="aboutme_clg"><?php echo $worked['org_name']; ?></a>
+                          
+						  <?php 
+						  
+						  if($i < count($emp_work_ended))
+						  
+						  { 
+						  
+						  if($i == count($emp_work_ended)-1)
+						  {
+						  break;
+						  }
+						  elseif($i == count($emp_work_ended)-2)
+						  {
+							  
+						  ?>
+                          <span class="aboutme_clg">and</span>
+                          <?php }else{ ?>
+                          <span class="aboutme_clg">,</span>
+                          
+					<?php
+							}
+						  } $i++;} ?>
+                       <!--   <div class="edu_cation"><a href="javascript:void(0)" onclick="mov_to_work_edu()">Edit your education</a></div> -->
+                        </div>
+                        <div class="clearfix"></div>
+        <?php } }?>
+       
+                      
+                        <?php  if(!empty($college_details)) { $j=1; foreach($college_details as $college) {  ?>
+						    
+							
+                        <div class="inner_rights boxs"><i class="fa fa-graduation-cap"></i>
+                        <?php if($j == 1) { ?>
+                          <span>Studied at <a href="#"><?php echo $college['college_name']; ?></a></span>
+                          <?php }else { ?>
+                        
+                          <span class="aboutme_clg">Past:</span> <a href="#" class="aboutme_clg"><?php echo $college['college_name']; ?></a>
+                          <?php if($j < count($college_details)) { 
+						  
+						    if($i == count($college_details)-1)
+						  {
+						  break;
+						  }
+						   elseif($j < count($college_details) - 2){ ?>
+                             
+                          <span class="aboutme_clg">and</span>
+                          <?php }else{ ?>
+                          <span class="aboutme_clg">,</span>
+                            
+                            <?php  }} } $j++; ?>
+                      
+                        <!--  <div class="edu_cation"><a href="javascript:void(0)" onclick="mov_to_work_edu()">Edit your education</a></div> -->
+                        </div>
+                        <?php  } } ?>
+                         <?php if(!empty($result[0]->location) && !empty($result[0]->hometown)) { ?>
+                        
+                        <div class="inner_rights boxs"><i class="fa fa-globe"></i>
+                          <span>Lives in <a href="#"><?php if($result[0]->location){ echo $result[0]->location; } else echo "Not Available"; ?></a></span>
+                          <p><i class="fa fa-globe"></i><span> From </span><a href="#"><?php  if($result[0]->hometown){ echo $result[0]->hometown; } else echo "Not Available"; ?></a></p>
+                          
+                        <div class="clearfix"></div>
+                        
+                        
+                        
+                        <?php } ?>
+        </div><?php */?>
+        <div class="myPhotos userProfilemyPhotos">
+          <h3>Friends</h3>
+          <ul>
+          <?php foreach($friends as $frnd): ?>
+            <li><a href="<?php echo base_url(); ?>profile/user/<?php echo $frnd['id']; ?>"><img src="<?php echo base_url(); ?>uploads/<?php echo $frnd['image']; ?>" alt=""><div class="name-overlap"><?php echo $frnd['name']; ?></div></a></li>
+          <?php endforeach; ?>
+          </ul>
+          <div class="clear"></div>
+        </div></aside></section>
+       <?php $image = $this->profile_set->get_profile_pic($user_id);	?>
+    <section class="col-lg-8 col-md-8 col-sm-5 col-xs-12 coloumn2" style="padding-right:0;">
       <div class="updateStatus" id="updateStatus">
         <ul>
           <li> <img src="<?php echo base_url();?>uploads/<?php if(!empty($image[0]->user_img_thumb)) echo $image[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" alt="<?php echo base_url();?>uploads/<?php if(!empty($image[0]->user_img_thumb)) echo $image[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" height="60" width="60"> </li>
@@ -73,7 +221,7 @@
       <article <?php if($row->isGhostpost==1) echo 'class="ghostpost"' ?> >
           <div class="pfInfo"> <a href="<?php echo base_url().'profile/user/'.$get_profiledata[0]->user_id; ?>" class="pfImg"><img src="<?php echo base_url(); ?>uploads/<?php if(!empty($get_profiledata[0]->user_img_thumb)) echo $get_profiledata[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" alt=""></a>
             <div class="pfInfoDetails">
-              <h5><span class="pfname"><a href="<?php echo base_url().'profile/user/'.$get_profiledata[0]->user_id; ?>"><?php echo ucfirst($get_profiledata[0]->user_firstname)."&nbsp;".ucfirst($get_profiledata[0]->user_lastname);?></a>
+              <span><span class="pfname"><a href="<?php echo base_url().'profile/user/'.$get_profiledata[0]->user_id; ?>"><?php echo ucfirst($get_profiledata[0]->user_firstname)."&nbsp;".ucfirst($get_profiledata[0]->user_lastname);?></a>
 			  
 			  <?php if($row->tagged_friends!='') { 
 			  echo ' with '; $tagcount=1;
@@ -89,7 +237,7 @@
 			  $tagcount++; 
 			  } 
 			  }?> 
-			  <?php if($row->shared==1) echo " shared a post "; ?> </span></h5>
+			  <?php if($row->shared==1) echo " shared a post "; ?> </span></span>
               <a href="#" class="date"><?php  echo $hrsago; ?></a> </div>
           </div>
           <?php if(!empty($row->share_post_content)) echo "<div>".$row->share_post_content."</div>"; ?>
@@ -226,3 +374,7 @@ function takeInputToPost(){
 $("#posts").val($("#dummypost").text());
 }
 </script>
+
+    
+    </section>
+      

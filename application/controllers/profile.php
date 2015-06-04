@@ -59,10 +59,17 @@ public function business_details()
 }
 
 public function post($user_id='')
-  {	
+{	
   	  $data['user_id'] = $user_id;
 	  $data['content']='posts';
 	  $this->load->view('template-view',$data);
+	// $this->load->view('posts');
+}
+public function user($user_id='')
+{	
+  	  $data['user_id'] = $user_id;
+	  $data['content']='users_profile';
+	  $this->load->view('full_content_view',$data);
 	// $this->load->view('posts');
 }
 public function message()
