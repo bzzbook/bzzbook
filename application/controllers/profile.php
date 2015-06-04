@@ -1262,6 +1262,17 @@ public function addlanguages()
 		else
 		echo false;
 }
+      public function deletepfskills()
+{
+		$id = $this->session->userdata('logged_in')['account_id'];
+		$up_data = array('professional_skills'=>'');
+		$this->db->where('user_id',$id);
+		if($this->db->update('bzz_userinfo',$up_data))
+		$this->load->view('aboutme/pfskills_inner');
+		else
+		echo false;
+}
+
 
 public function addpfskills()
 {

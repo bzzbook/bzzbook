@@ -125,7 +125,8 @@
                                       <button aria-expanded="false" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">Public <span class="caret"></span></button>
                                     </div>
                                     <div class="col-md-8 add_new">
-                                      <div class="btn3 btn-black" onclick="close_work()">Cancel</div>
+                                      <div class="btn3 btn-black" id="work_close_btn" onclick="close_work()">Cancel</div>
+                                       <div class="btn3 btn-black" id="work_down_close" style="display:none;" onclick="close_work_down()">Cancel</div>
                                       <input type="submit" class="btn3 btn-green " value="Save Changes" />
                                     </div>
                                     <div class="clearfix"></div>
@@ -136,4 +137,12 @@
                             </div>
                             <?php if(!empty($organization_details)){ ?>
                              <a href="javascript:void(0)" id="add_work_link_disp" class="work_edu_side_links">add work details</a>
+                              <div id="add_work_place_down">
+                         <div class="iner_lefts" id="work_head_down1" style="display:none;"><a href="#"><i class="fa fa-plus"></i></a></div>
+                         <div class="inner_rights boxs" id="work_head_down2" style="display:none;">
+                          <h3><a href="javascript:void(0)" id="add_workplace_down">Add a workplace</a></h3>
+                          
+                          <div class="clearfix"></div>
+                        </div>
+                          </div>
 							<?php } ?>

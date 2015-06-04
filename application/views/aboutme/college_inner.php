@@ -22,6 +22,7 @@
                         <div class="col-md-3 com_rig"><a href="javascript:void(0)" class="college_delete" id="college_delete<?php echo $clgdetails->college_id; ?>" onclick="college_delete()"><i class="fa fa-times"></i></a></div>
                         </div>
                         </div>
+                        <div class="clearfix"></div>
                          <?php }?>          
                         </div>
                         <?php }else { ?>
@@ -148,8 +149,9 @@
                                     </div>
                                       <input type="hidden" name="clg_action" id="clg_action" value="add">
                        				  <input type="hidden" value="" name="college_disp_id" >
-                                    <div class="col-md-8">
-                                      <div class="btn3 btn-black" onclick="close_college()">Cancel</div>
+                                    <div class="col-md-8 add_new">
+                                      <div class="btn3 btn-black"  id="clg_close_btn" onclick="close_college()">Cancel</div>
+                                        <div class="btn3 btn-black" id="college_down_close" style="display:none;" onclick="close_college_down()">Cancel</div>
                                       <input type="submit"  class="btn3 btn-green" value="Save Changes" />
                                     </div>
                                     <div class="clearfix"></div>
@@ -162,4 +164,10 @@
                           </div>
                             <?php if(!empty($user_college_info)) { ?>
                            <a href="javascript:void(0)" id="add_college_link_disp" class="work_edu_side_links">add college details</a>
+                            <div id="clg_down_block">
+                           <div class="iner_lefts" id="college_down1" style="display:none;"><a href="#"><i class="fa fa-plus"></i></a></div>
+                          <div class="inner_rights boxs" id="college_down2" style="display:none;">
+                          <h3><a href="javascript:void(0)" id="add_college_down">Add a college</a></h3>
+                          </div>
+                          </div>
                            <?php } ?>

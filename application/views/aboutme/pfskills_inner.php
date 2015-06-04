@@ -4,6 +4,11 @@
   
   
   <div class="tophead">Professional Skills</div>
+  
+  <div class="iner_lefts" id="prof_skills1" style="display:none;"><a href="javascript:void(0)"><i class="fa fa-plus"></i></a></div>
+                        <div class="inner_rights boxs" id="prof_skills2" style="display:none;">
+                          <h3><a href="javascript:void(0)" id="add_pf_skills">Add a professional skill</a></h3>
+                          </div>
                        
                        <div id="pf_skills_val_display">
                         <div class="sm_leftbox"></div>
@@ -20,7 +25,7 @@
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="pf_skills_edit()"><i class="fa fa-pencil"></i></a></div>
-                        <div class="col-md-3 com_rig"><a href="#"><i class="fa fa-times"></i></a></div>
+                        <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_pfskills()"><i class="fa fa-times"></i></a></div>
                         </div>
                         </div>
                         
@@ -36,18 +41,19 @@
 							   <?php 
 							    if($result[0]->professional_skills){ 
 							    $data = explode(',',$result[0]->professional_skills);
+								//print_r($data);
 								foreach($data as $pf_skill)
 								{
 								
 								?>
 								   
-								   <span class="bc_mail_ids" id="<?php echo $pf_skill; ?>"><?php echo $lang;?><a onclick="removelanguage('<?php echo $pf_skill; ?>')" ><img class="as_close_btn" src="<?php echo base_url('images/close_post.png'); ?>" /></a></span>
+								   <span class="bc_mail_ids" id="<?php echo $pf_skill; ?>"><?php echo $pf_skill;?><a onclick="removeskills('<?php echo $pf_skill; ?>')" ><img class="as_close_btn" src="<?php echo base_url('images/close_post.png'); ?>" /></a></span>
 								
                                 <?php } } ?>   
 								  </div>
                                   <label for="exampleInputName2">Professional Skills</label>
                                   <input type="text" placeholder="" id="professional_skils">
-                                  <input type="text" id="addedskills" name="addedskills" value="<?php if($result[0]->professional_skills){ echo $result[0]->professional_skills; } ?>"></input>
+                                  <input type="hidden" id="addedskills" name="addedskills" value="<?php if($result[0]->professional_skills){ echo $result[0]->professional_skills; } ?>"></input>
                                 </div>
                                 <div class="clearfix"></div>
                               </form>

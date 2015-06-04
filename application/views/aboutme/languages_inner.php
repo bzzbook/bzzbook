@@ -49,7 +49,7 @@
 								  </div>
                                 <label for="exampleInputName2">Languages</label>
                                 <input type="text" id="lang_box" />
-                                <input type="text" id="addedlangs" name="addedlangs" value="<?php if($result[0]->languages){ echo $result[0]->languages; } ?>"></input>
+                                <input type="hidden" id="addedlangs" name="addedlangs" value="<?php if($result[0]->languages){ echo $result[0]->languages; } ?>"></input>
                               </div>
                               <div class="clearfix"></div>
                             </form>

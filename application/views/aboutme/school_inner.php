@@ -10,7 +10,8 @@
 				if(!empty($user_school_info)){
 				foreach($user_school_info as $schdetails){
 			?>
-                      <div class="latest_works school_inner">
+            
+                      <div class="latest_works">
                         <div class="sm_rightbox"><h3><a href="#"><?php echo $schdetails->school_name;?></a></h3>
                         <p></p>
                         </div>
@@ -20,6 +21,7 @@
                         <div class="col-md-3 com_rig"><a href="javascript:void(0)" class="school_delete" id="school_delete<?php echo $schdetails->school_id; ?>" onclick="school_delete()"><i class="fa fa-times"></i></a></div>
                         </div>
                         </div>
+                        <div class="clearfix"></div>
                          <?php } ?>
 						 
                         </div>
@@ -115,8 +117,9 @@
                                     <div class="publics col-md-4" style="display:none;">
                                       <button aria-expanded="false" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">Public <span class="caret"></span></button>
                                     </div>
-                                    <div class="col-md-8">
-                                      <div class="btn3 btn-black" onclick="close_school()">Cancel</div>
+                                    <div class="col-md-8 add_new">
+                                      <div class="btn3 btn-black" id="school_close"  onclick="close_school()">Cancel</div>
+                                       <div class="btn3 btn-black" id="school_down_close" style="display:none;" onclick="close_school_down()">Cancel</div>
                                       <input type="submit" class="btn3 btn-green" value="Save Changes" />
                                     </div>
                                     <div class="clearfix"></div>
@@ -128,5 +131,11 @@
                             <div class="graphic"></div>
                           </div>
                               <?php  if(!empty($user_school_info)){ ?>
-                           <a href="javascrpt:void(0)" id="add_school_link_disp" class="work_edu_side_links">add school details</a>
+                           <a href="javascript:void(0)" id="add_school_link_disp" class="work_edu_side_links">add school details</a>
+                             <div id="school_down_block">
+                          <div class="iner_lefts" id="school_down1" style="display:none;"><a href="#"><i class="fa fa-plus"></i></a></div>
+                          <div class="inner_rights boxs" id="school_down2" style="display:none;">
+                          <h3><a href="javascript:void(0)" id="add_school_down">Add a High School</a></h3>
+                          </div>
+                          </div>
                            <?php } ?>

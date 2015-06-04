@@ -2638,6 +2638,30 @@ $('body').delegate('#familymembers','click',function()
 //	$('#relation').show();
 });
 
+$('body').delegate('#add_family_link_disp','click',function()
+{
+	$(this).hide();
+	$('#add_f_member_down1').show();
+	$('#add_f_member_down2').show();
+});
+
+$('body').delegate('#familymembers_down','click',function()
+{
+	$('#add_f_member_down1').hide();
+	$('#add_f_member_down2').hide();
+	$('ul.relations #family_mem_down_block').append($('#family_relation').show());
+	$('#add_family_member').trigger("reset");
+	$('#family_action').val('add');
+	$('#close_family_btn').hide();
+	$('#fam_member_down').show();
+	
+});
+
+$('body').delegate('#fam_member_down','click',function()
+{
+	$('#family_relation').hide();
+	$('#add_family_link_disp').show();
+});
 
 		$('body').delegate('#add_family_member','submit',function( event){
 			
@@ -2954,6 +2978,30 @@ $('#nic_oth_names').change(function()
 
 });
 
+$('body').delegate('#add_nicname_link_disp','click',function()
+{
+	$(this).hide();
+	$('#other_name_down_view').show();
+	
+});
+
+$('body').delegate('#oth_name_down','click',function()
+{
+	$('#other_name_down_view').hide();
+	$('ul.details_about > #nic_names-li #nicname_down_block').append($('#other_names').show());
+	$('#add_nick_name').trigger("reset");
+	$('#nickname_action').val('add');
+	$('#nicname_close_btn').hide();
+	$('#nicname_down_close').show();
+	
+});
+
+
+function nic_name_down_close()
+{
+	$('#other_names').hide();
+	$('#add_nicname_link_disp').show();
+}
 $('body').delegate('#oth_name','click',function()
 {
 	$('#oth_name').hide();
@@ -3342,10 +3390,6 @@ var neighborhood = $('#neighborhood').val();
 		
 		}
 	});
-	
-
-
-
 }
 
 
@@ -3383,12 +3427,6 @@ function del_address()
 	
 }
 
-
-
-
-
-
-
 </script>
 
 
@@ -3402,6 +3440,33 @@ $('body').delegate('#add_workplace','click',function()
 	$('#work_head2').hide();
 	//$('#work_place').show();
 	$('ul.backgrounds > #workplace-li .tophead').append($('#work_place').show());
+});
+
+
+$('body').delegate('#add_workplace_down','click',function()
+{
+	$('#work_head_down1').hide();
+	$('#work_head_down2').hide();
+	//$('#work_place').show();
+	$('ul.backgrounds > #workplace-li #add_work_place_down').append($('#work_place').show());
+	$('#work_action').val('add');
+	$('#work_form').trigger("reset");
+	$('#work_close_btn').hide();
+	$('#work_down_close').show();
+});
+
+
+function close_work_down()
+{
+	$('#add_work_link_disp').show();
+		$('#work_place').hide();
+}
+
+$('body').delegate('#add_work_link_disp','click',function()
+{
+	$(this).hide();
+	$('#work_head_down1').show();
+	$('#work_head_down2').show();
 });
 
 function close_work()
@@ -3819,6 +3884,31 @@ $('body').delegate('#add_college','click',function()
 	$('ul.backgrounds > #college-li .tophead').append($('#college_disp').show());
 });
 
+
+$('body').delegate('#add_college_link_disp','click',function()
+{
+	$(this).hide();
+	$('#college_down1').show();
+	$('#college_down2').show();
+});
+
+$('body').delegate('#add_college_down','click',function()
+{
+	$('#college_down1').hide();
+	$('#college_down2').hide();
+	$('ul.backgrounds > #college-li #clg_down_block').append($('#college_disp').show());
+		$('#college_form').trigger("reset");
+		$('#clg_action').val('add');
+	$('#clg_close_btn').hide();
+	$('#college_down_close').show();
+	
+});
+
+function close_college_down()
+{
+	$('#college_disp').hide();
+	$('#add_college_link_disp').show();
+}
 function close_college()
 {
 	$('#college_disp').hide();
@@ -4148,6 +4238,30 @@ $('body').delegate('#add_school','click',function()
 	$('#highschool').show();
 });
 
+$('body').delegate('#add_school_link_disp','click',function()
+{
+	$(this).hide();
+	$('#school_down1').show();
+	$('#school_down2').show();
+});
+
+$('body').delegate('#add_school_down','click',function()
+{
+	$('#school_down1').hide();
+	$('#school_down2').hide();
+	$('ul.backgrounds > #school-li #school_down_block').append($('#highschool').show());
+	$('#school_form').trigger("reset");
+	$('#sch_action').val('add');
+	$('#school_close').hide();
+	$('#school_down_close').show();
+});
+
+function close_school_down()
+{
+	$('#highschool').hide();
+	$('#add_school_link_disp').show();
+	
+}
 function close_school()
 {
 	$('#highschool').hide();
@@ -4459,17 +4573,23 @@ function school_edit()
 
 <script> //aboutme languages
 //$('#addedlangs').val("");
-$('#lang_box').keypress(function(e) {
+$('body').delegate('#lang_box','keypress',function(e) {
 	
-    if(e.which == 32) {
+    if(e.which == 32 || e.which == 13) {
 	var cur_content = $('#selected_langauges').html();
 	
 	var language = $.trim($(this).val());
 
-	
+	if(language != '')
+	{
 	
 	var new_content  =  "<span class='bc_mail_ids' id='"+language+"'>"+language+"<a onclick='removelanguage(&#39"+language+"&#39)'><img class='as_close_btn' src='<?php echo base_url().'images/close_post.png'; ?>'/></a></span>";
 	$('#selected_langauges').html(new_content+cur_content);
+	//var data = $('#addedlangs').val();
+	
+	//$('#addedlangs').val(data);
+	
+	
 	$('#selected_langauges').show();
 	$(this).val('').focus();
 	
@@ -4480,7 +4600,7 @@ else
 $('#addedlangs').val(language)
 
     }
-
+	}
 });
 
 
@@ -4497,8 +4617,12 @@ function removelanguage(language){
 	else if(added_languages.indexOf(language)==(len-1)){
 	newval = added_languages.replace(','+language,'');
 	}
-	else if(added_languages.indexOf(language)==0)
+	else if(added_languages.indexOf(language)==0){
+	if(added_languages.indexOf(',')>1)
 	newval = added_languages.replace(language+',','');
+	else
+	newval = added_languages.replace(language,'');
+	}
 	else
 	newval = added_languages.replace(language+',','');
 	$('#addedlangs').val(newval);
@@ -4804,14 +4928,15 @@ $('#add_oth_acc').click( function()
 
 <script> //aboutme professional skills
 
-$('#professional_skils').keypress(function(e) {
+$('body').delegate('#professional_skils','keypress',function(e) {
 	
-    if(e.which == 32) {
+    if(e.which == 32 || e.which == 13) {
 	var cur_content = $('#selected_skills').html();
 	
 	var skill = $.trim($(this).val());
 
-	
+	if(skill != '')
+	{
 	
 	var new_content  =  "<span class='bc_mail_ids' id='"+skill+"'>"+skill+"<a onclick='removeskills(&#39"+skill+"&#39)'><img class='as_close_btn' src='<?php echo base_url().'images/close_post.png'; ?>'/></a></span>";
 	$('#selected_skills').html(new_content+cur_content);
@@ -4825,7 +4950,7 @@ else
 $('#addedskills').val(skill)
 
     }
-
+	}
 });
 
 
@@ -4843,7 +4968,12 @@ function removeskills(skill){
 	newval = added_skills.replace(','+skill,'');
 	}
 	else if(added_skills.indexOf(skill)==0)
+	{
+	if(added_skills.indexOf(',')>1)
 	newval = added_skills.replace(skill+',','');
+	else
+	newval = added_skills.replace(skill,'');
+	}
 	else
 	newval = added_skills.replace(skill+',','');
 	$('#addedskills').val(newval);
@@ -4872,7 +5002,30 @@ function add_all_skills()
 
 }
 
-$('#add_pf_skills').click( function()
+function del_pfskills()
+{
+	   if (confirm("Delete Your Professional skills from Bzzbook") == true) {
+		   	url="<?php echo base_url();?>profile/deletepfskills/";
+	 $.ajax({
+		url: url,
+		success: function(html)
+		{   					
+			
+			$('ul.backgrounds > #pfskills-li').html(html);	
+		  	$('#prof_skills1').show();
+			$('#prof_skills2').show();
+			$('#pf_skills_val_display').hide();
+		
+		}
+		
+	   });
+       
+    } 
+	
+	
+}
+
+$('body').delegate('#add_pf_skills','click',function()
 {
 	$('#prof_skills1').hide();
 	$('#prof_skills2').hide();

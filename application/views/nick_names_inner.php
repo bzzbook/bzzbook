@@ -1,10 +1,7 @@
 
 		
         <div class="tophead">Other Names</div>
-			
-    <div class="iner_boxleft" id="oth_names" ><a href="javascript:void(0)" id="oth_name"><i class="fa fa-plus"></i>Add a nickname, a birth name...</a></div>
-
-<div class="clearfix"></div>
+	
 <div id="nicnames_val_disp">
    				  <?php 
 					    $nick_names = $this->profile_set->get_nick_names();
@@ -22,12 +19,18 @@
                         <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="nick_edit()" class="nick_edit" id="nick_edit<?php echo $nicname['nic_name_id']; ?>"><i class="fa fa-pencil"></i></a></div>
                         <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_nic_name('<?php echo $nicname['nic_name_id']; ?>')"><i class="fa fa-times"></i></a></div>
+                         <div class="clearfix"></div>
                         </div>
                         </div>
                          <div class="clearfix"></div>
-                         <?php } }?>
+                         <?php } ?>
+						  </div>
+						 <?php }else{ ?>		
+    <div class="iner_boxleft" id="oth_names" ><a href="javascript:void(0)" id="oth_name"><i class="fa fa-plus"></i>Add a nickname, a birth name...</a></div>
+
+<div class="clearfix"></div> <?php } ?>
            
-                        </div>
+                       
         
         <div class="inner_rights boxs" id="other_names" style="display:none;">
         
@@ -60,6 +63,7 @@
                               
                                     <input type="submit" class="btn3 btn-green" value="Save Changes" />
                                           <div class="btn3 btn-black" onclick="close_othernames()">Cancel</div>
+                                          <div class="btn3 btn-black" id="nicname_down_close" style="display:none;" onclick="nic_name_down_close()">Cancel</div>            
                                   </div>
                                   <div class="clearfix"></div>
                                 </div>
@@ -68,3 +72,12 @@
                               <div class="clearfix"></div>
                           </div>
                         </div>
+                         <?php if(!empty($nick_names)) { ?>
+                        <a href="javascript:void(0)" id="add_nicname_link_disp" class="work_edu_side_links">add Nick Name</a>
+                        <div id="nicname_down_block">
+                        <div class="iner_boxleft othnames" id="other_name_down_view" style="display:none;"><a href="javascript:void(0)" 
+                        id="oth_name_down"><i class="fa fa-plus"></i>Add a nickname, a birth name...</a></div>
+            <div class="clearfix"></div>
+                     </div>
+                      
+                      <?php } ?>

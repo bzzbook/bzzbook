@@ -1236,6 +1236,7 @@ footer{ color:#acacac; font-size:20px; color:#acacac; text-align:center; padding
 .description textarea { width:210px;  border: 1px solid #ececec; margin-bottom: 10px; }
 .description label { width:100px; vertical-align:top; }
 .add_new input { width:116px !important; }
+.add_new { margin-left:100px;}
 /*.add_new { width:150px !important; }*/
 .highschool { font-size:13px; font-weight:300; padding:0; margin:0; }
 #highschool label { width:102px; text-align:right; margin-bottom:8px; font-size:13px; }
@@ -1387,7 +1388,7 @@ margin-bottom: 5px;}
     font-size: 14px;
       padding: 5px 11px 0 10px;
 }
-.to_years_link{margin-left:69px;}
+.to_years_link{margin-left:79px;}
 .newone11 > input {width:20px !important; }
 .frm_years {
     margin-left: 90px;

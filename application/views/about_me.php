@@ -1,3 +1,4 @@
+
 <section class="col-lg-9 col-md-9 nopad">
       <div class="col-xs-12 ProfileView">
         <section class="visitorBox">
@@ -398,7 +399,8 @@
                                       <button aria-expanded="false" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">Public <span class="caret"></span></button>
                                     </div>
                                     <div class="col-md-8 add_new">
-                                      <div class="btn3 btn-black" onclick="close_work()">Cancel</div>
+                                      <div class="btn3 btn-black" id="work_close_btn" onclick="close_work()">Cancel</div>
+                                      <div class="btn3 btn-black" id="work_down_close" style="display:none;" onclick="close_work_down()">Cancel</div>
                                       <input type="submit" class="btn3 btn-green " value="Save Changes" />
                                     </div>
                                     <div class="clearfix"></div>
@@ -412,6 +414,14 @@
                           </div>
                            <?php if(!empty($organization_details)) { ?>
                           <a href="javascript:void(0)" id="add_work_link_disp" class="work_edu_side_links">add work details</a>
+                         <div id="add_work_place_down">
+                         <div class="iner_lefts" id="work_head_down1" style="display:none;"><a href="#"><i class="fa fa-plus"></i></a></div>
+                        <div class="inner_rights boxs" id="work_head_down2" style="display:none;">
+                          <h3><a href="javascript:void(0)" id="add_workplace_down">Add a workplace</a></h3>
+                          
+                          <div class="clearfix"></div>
+                        </div>
+                          </div>
                           <?php } ?>
                       </li>
                       <div class="clearfix"></div>
@@ -439,7 +449,7 @@
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="pf_skills_edit()"><i class="fa fa-pencil"></i></a></div>
-                        <div class="col-md-3 com_rig"><a href="#"><i class="fa fa-times"></i></a></div>
+                        <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_pfskills()"><i class="fa fa-times"></i></a></div>
                         </div>
                         </div>
                           <div class="clearfix"></div>
@@ -469,7 +479,7 @@
                                 <div class="clearfix"></div>
                               </form>
                               <div class="box_bottom">
-                                <div class="publics col-md-4">
+                                <div class="publics col-md-4" style="display:none;">
                                   <button aria-expanded="false" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">Public <span class="caret"></span></button>
                                 </div>
                                 <div class="col-md-8 skil_box">
@@ -637,8 +647,9 @@
                                     </div>
                                       <input type="hidden" name="clg_action" id="clg_action" value="add">
                        				  <input type="hidden" value="" name="college_disp_id" >
-                                    <div class="col-md-8">
-                                      <div class="btn3 btn-black" onclick="close_college()">Cancel</div>
+                                    <div class="col-md-8 add_new">
+                                      <div class="btn3 btn-black" id="clg_close_btn" onclick="close_college()">Cancel</div>
+                                       <div class="btn3 btn-black" id="college_down_close" style="display:none;" onclick="close_college_down()">Cancel</div>
                                       <input type="submit"  class="btn3 btn-green" value="Save Changes" />
                                     </div>
                                     <div class="clearfix"></div>
@@ -651,6 +662,12 @@
                           </div>
                           <?php if(!empty($user_college_info)) { ?>
                            <a href="javascript:void(0)" id="add_college_link_disp" class="work_edu_side_links">add college details</a>
+                           <div id="clg_down_block">
+                           <div class="iner_lefts" id="college_down1" style="display:none;"><a href="#"><i class="fa fa-plus"></i></a></div>
+                          <div class="inner_rights boxs" id="college_down2" style="display:none;">
+                          <h3><a href="javascript:void(0)" id="add_college_down">Add a college</a></h3>
+                          </div>
+                          </div>
                            <?php } ?>
                       </li>
                       <div class="clearfix"></div>
@@ -678,7 +695,6 @@
                         <div class="clearfix"></div>
                         </div>
                          <?php } ?></div><?php }else{ ?>
-            
                           <div class="iner_lefts" id="school1"><a href="#"><i class="fa fa-plus"></i></a></div>
                         <div class="inner_rights boxs" id="school2">
                           <h3><a href="javascript:void(0)" id="add_school">Add a High School</a></h3>
@@ -772,8 +788,9 @@
                                     <div class="publics col-md-4" style="display:none;">
                                       <button aria-expanded="false" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">Public <span class="caret"></span></button>
                                     </div>
-                                    <div class="col-md-8">
-                                      <div class="btn3 btn-black" onclick="close_school()">Cancel</div>
+                                    <div class="col-md-8 add_new">
+                                      <div class="btn3 btn-black" id="school_close" onclick="close_school()">Cancel</div>
+                                      <div class="btn3 btn-black" id="school_down_close" style="display:none;" onclick="close_school_down()">Cancel</div>
                                       <input type="submit" class="btn3 btn-green" value="Save Changes" />
                                     </div>
                                     <div class="clearfix"></div>
@@ -786,6 +803,13 @@
                           </div>
                        <?php  if(!empty($user_school_info)){ ?>
                            <a href="javascript:void(0)" id="add_school_link_disp" class="work_edu_side_links">add school details</a>
+                           
+                           <div id="school_down_block">
+                          <div class="iner_lefts" id="school_down1" style="display:none;"><a href="#"><i class="fa fa-plus"></i></a></div>
+                          <div class="inner_rights boxs" id="school_down2" style="display:none;">
+                          <h3><a href="javascript:void(0)" id="add_school_down">Add a High School</a></h3>
+                          </div>
+                          </div>
                            <?php } ?>
                       </li>
                       <div class="clearfix"></div>
@@ -1405,7 +1429,7 @@
 								  </div>
                                 <label for="exampleInputName2">Languages</label>
                                 <input type="text" id="lang_box" />
-                                <input type="text" id="addedlangs" name="addedlangs" value="<?php if($result[0]->languages){ echo $result[0]->languages; } ?>"></input>
+                                <input type="hidden" id="addedlangs" name="addedlangs" value="<?php if($result[0]->languages){ echo $result[0]->languages; } ?>"></input>
                               </div>
                               <div class="clearfix"></div>
                             </form>
@@ -1631,18 +1655,9 @@
                       <li id="familymembers-li">
                       
                          <div id="tpfam" class="tophead">Family Members</div>
-                        <div class="iner_lefts" id="add_f_member1"><i class="fa fa-plus"></i></div>
-                        <div class="inner_rights boxs" id="add_f_member">
-                          <a href="javascript:void(0)"  id="familymembers"> <h3>Add a family member</h3></a>
-                        </div>
-                      <div class="clearfix"></div>
-                      
-                      
-                      
+                     
                       <div id="family_val_disp">
-   				
-         
-                       <?php 
+   				   <?php 
 					   
 					   if(!empty($family_members))
                     {
@@ -1662,11 +1677,15 @@
                         </div>
                         </div>
                          <div class="clearfix"></div>
-                         <?php } }?>
-           
+                         <?php } ?>    </div>
+                   		<?php }else { ?>
+                        <div class="iner_lefts" id="add_f_member1"><i class="fa fa-plus"></i></div>
+                        <div class="inner_rights boxs" id="add_f_member">
+                         <a href="javascript:void(0)"  id="familymembers"> <h3>Add a family member</h3></a>
                         </div>
-                   
-                    
+                      <div class="clearfix"></div>
+                      <?php } ?>
+           
                       </li>
                 
                      
@@ -1699,14 +1718,14 @@
                                     <div class="publics col-md-4" style="display:none;">
                                       <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Public <span class="caret"></span></button>
                                     </div>
-                                    <div class="col-md-8">
+                                    <div class="col-md-7" style="margin-left:75px">
                                       
                                       <input type="submit" class="btn3 btn-green" value="Save Changes" />
-                                      <?php if($family_members) { ?>
-                                      <div class="btn3 btn-black" onclick="close_family()">Cancel</div>
-                                      <?php } else { ?>
-                                      <div class="btn3 btn-black" onclick="close_family_member()">Cancel</div>
-                                      <?php } ?>
+                                       <div class="btn3 btn-black" style="display:none;" id="fam_member_down" onclick="close_family_member_down()">Cancel</div>
+                                     
+                                      <div class="btn3 btn-black" id="close_family_btn" onclick="close_family()">Cancel</div>
+                                     
+                                     
                                     </div>
                                     <div class="clearfix"></div>
                                   </div>
@@ -1716,9 +1735,17 @@
                             <div class="clearfix"></div>
                             <div class="graphic"></div>
                           </div>
+                           <?php if(!empty($family_members)) { ?>
+                        <a href="javascript:void(0)" id="add_family_link_disp" class="work_edu_side_links">add a family member</a>
+                        <div class="family_mem_down_block">
+                         <div class="iner_lefts" id="add_f_member_down1" style="display:none;"><i class="fa fa-plus"></i></div>
+                        <div class="inner_rights boxs" id="add_f_member_down2" style="display:none;">
+                         <a href="javascript:void(0)"  id="familymembers_down"> <h3>Add a family member</h3></a>
+                        </div>
+                        </div>
+                      <div class="clearfix"></div>
                       
-                      
-                      
+                      <?php } ?>
                       
                       
                       <!-------------    family members div end -------------------------->
@@ -1807,9 +1834,7 @@
                       <li id="nic_names-li">
                         <div id="111" class="tophead">Other Names</div>
                                                
-         <div class="iner_boxleft othnames" id="other_name"><a href="javascript:void(0)" id="oth_name"><i class="fa fa-plus"></i>Add a nickname, a birth name...</a></div>
-            <div class="clearfix"></div>
-            
+        
             
             
               <div id="nicnames_val_disp">
@@ -1829,12 +1854,21 @@
                         <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="nick_edit()" class="nick_edit" id="nick_edit<?php echo $nicname['nic_name_id']; ?>"><i class="fa fa-pencil"></i></a></div>
                         <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_nic_name('<?php echo $nicname['nic_name_id'] ?>')"><i class="fa fa-times"></i></a></div>
+                        <div class="clearfix"></div>
                         </div>
                         </div>
-                         <div class="clearfix"></div>
-                         <?php } }?>
+                          <div class="clearfix"></div>
+                         <?php } ?>
+                            </div>
+                          <?php }else{ ?>
+                         
+                         
+    <div class="iner_boxleft othnames" id="other_name"><a href="javascript:void(0)" id="oth_name"><i class="fa fa-plus"></i>Add a nickname, a birth name...</a></div>
+            <div class="clearfix"></div>
+            
+            <?php } ?>
            
-                        </div>
+                     
                         
               
                         <div class="inner_rights boxs" id="other_names" style="display:none;">
@@ -1867,11 +1901,11 @@
                                    <div class="col-md-5" style="margin-left:75px;">
                               
                                     <input type="submit" class="btn3 btn-green" value="Save Changes" />
-                                        <?php if($nick_names) { ?>  
-                                       <div class="btn3 btn-black" onclick="close_othernames()">Cancel</div>
-                                      <?php } else { ?>
-                                      <div class="btn3 btn-black" onclick="close_other_names()">Cancel</div>
-                                      <?php } ?>
+                                        
+                         <div class="btn3 btn-black" id="nicname_close_btn" onclick="close_othernames()">Cancel</div>
+                          <div class="btn3 btn-black" id="nicname_down_close" style="display:none;" onclick="nic_name_down_close()">Cancel</div>            
+                                    
+                                      
                                   </div>
                                   <div class="clearfix"></div>
                                 </div>
@@ -1879,8 +1913,18 @@
                             </div>
                               <div class="clearfix"></div>
                           </div>
+                           <div class="graphic"></div>
                         </div>
                         <div class="clearfix"></div>
+                          <?php if(!empty($nick_names)) { ?>
+                        <a href="javascript:void(0)" id="add_nicname_link_disp" class="work_edu_side_links">add Nick Name</a>
+                        <div id="nicname_down_block">
+                        <div class="iner_boxleft othnames" id="other_name_down_view" style="display:none;"><a href="javascript:void(0)" 
+                        id="oth_name_down"><i class="fa fa-plus"></i>Add a nickname, a birth name...</a></div>
+            <div class="clearfix"></div>
+                     </div>
+                      
+                      <?php } ?>
                       </li>
                       
                       
