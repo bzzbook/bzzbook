@@ -1,3 +1,8 @@
+<?php
+   $profile_id = '';
+   if(isset($user_id))
+   $profile_id = $user_id; ?>
+
 <?php $result = $this->profile_set->get_userinfo();
  $name = $result[0]['user_firstname']." ".$result[0]['user_lastname'];
  $companies = $this->companies->get_mn_cmp_list();
@@ -12,12 +17,12 @@
           <a href="#" class="navbar-brand">Menu</a> </div>
         <div class="collapse navbar-collapse bs-example-js-navbar-collapse">
           <ul class="nav navbar-nav">
-           <li> <a  href="<?php echo base_url(); ?>profile/post">Postboard</a></li>
-            <li> <a  href="<?php echo base_url(); ?>profile/about_me">About Me</a></li>
-            <li> <a  href="<?php echo base_url(); ?>profile/friends">My Friends</a></li>
-            <li> <a  href="<?php echo base_url(); ?>profile/my_photos">My Photos</a></li>
-             <li> <a  href="<?php echo base_url(); ?>profile/business_details">My Business Card</a></li>
-            <li> <a  href="<?php echo base_url(); ?>company/my_companies">My Companies</a></li>
+           <li> <a  href="<?php echo base_url()."profile/post/".$profile_id; ?>">Postboard</a></li>
+            <li> <a  href="<?php echo base_url()."profile/about_me/".$profile_id; ?>">About</a></li>
+            <li> <a  href="<?php echo base_url()."profile/friends/".$profile_id; ?>">Friends</a></li>
+            <li> <a  href="<?php echo base_url()."profile/my_photos/".$profile_id; ?>">Photos</a></li>
+             <li> <a  href="<?php echo base_url()."profile/business_details/".$profile_id; ?>">Business Card</a></li>
+            <li> <a  href="<?php echo base_url()."company/my_companies/".$profile_id; ?>">Companies</a></li>
           </ul>
           <div class="pull-right viewAs">
             <p>Viewing as:</p>

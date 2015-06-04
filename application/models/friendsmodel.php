@@ -6,13 +6,16 @@ class Friendsmodel extends CI_Model {
     {
    		parent::__construct();   		
     } 	
-  public function getfriends($name='',$addedusers='')
+  public function getfriends($name='',$addedusers='',$user_id='',$limit='')
   {
 	    $id = $this->session->userdata('logged_in')['account_id'];
+		if($user_id!='')
+		$id = $user_id;
 	    $condition = "(user_id ='".$id."' OR friend_id='".$id."') AND request_status='Y'";
 		if($addedusers!='')
 		$condition.= " AND (user_id NOT IN (".$addedusers.") AND friend_id NOT IN (".$addedusers.") )";
-		
+		if($limit!='')
+		$condition .=" LIMIT 0,".$limit;
 		//echo $condition ; exit;
 		$this->db->select('*');
 		$this->db->from('bzz_userfriends');

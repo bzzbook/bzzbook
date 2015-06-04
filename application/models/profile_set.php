@@ -8,8 +8,10 @@ class Profile_set extends CI_Model {
   		
     } 
 	
-   public function save_settings(){
+   public function save_settings($user_id=''){
 	    $id = $this->session->userdata('logged_in')['account_id'];
+		if($user_id!='')
+		$id = $user_id;
 	    $condition = "user_id =" . "'" . $id . "'";
 		$this->db->select('*');
 		$this->db->from('bzz_userinfo');
@@ -24,8 +26,11 @@ class Profile_set extends CI_Model {
    }
    
    
-    public function get_userinfo(){
+    public function get_userinfo($user_id=''){
+		if(empty($user_id))
 	    $id = $this->session->userdata('logged_in')['account_id'];
+		else
+		$id = $user_id;
 	    $condition = "user_id =" . "'" . $id . "'";
 		$this->db->select('*');
 		$this->db->from('bzz_userinfo');
@@ -101,10 +106,12 @@ class Profile_set extends CI_Model {
 		}
    }
    
-   public function getorganizationDetails()
+   public function getorganizationDetails($user_id='')
    {
 	    $id = $this->session->userdata('logged_in')['account_id'];
 	    $condition = "user_id =" . "'" . $id . "'";
+		if($user_id!='')
+		$condition = "user_id =" . "'" . $user_id . "'";
 		$this->db->select('*');
 		$this->db->from('bzz_organizationinfo');
 		$this->db->where($condition);
@@ -1392,9 +1399,12 @@ if($data['frm_clg_years'] == '0')
 	return false;
    }
 
-	public function get_org_details_by_status_work()
+	public function get_org_details_by_status_work($user_id='')
 	{
+		
 		$id = $this->session->userdata('logged_in')['account_id'];
+		if($user_id!='')
+		$id = $user_id;
 		$condition = "user_id =" . "'" . $id . "'" . " AND " . "emp_status = 'wor'";
 		$this->db->select('*');
 		$this->db->from('bzz_organizationinfo');
@@ -1410,9 +1420,11 @@ if($data['frm_clg_years'] == '0')
 		}
 		
 	}
-		public function get_org_details_by_status_all()
+		public function get_org_details_by_status_all($user_id = '')
 	{
 		$id = $this->session->userdata('logged_in')['account_id'];
+		if($user_id!='')
+		$id = $user_id;
 		$condition = "user_id =" . "'" . $id . "'" . " AND " . "emp_status != 'wor'";
 		$this->db->select('*');
 		$this->db->from('bzz_organizationinfo');
@@ -1430,10 +1442,11 @@ if($data['frm_clg_years'] == '0')
 		
 	}
 	
-	public function get_clg_details_all()
+	public function get_clg_details_all($user_id='')
 	{
 		$id = $this->session->userdata('logged_in')['account_id'];
-		
+		if($user_id!='')
+		$id = $user_id;
 		$this->db->select('*');
 		$this->db->from('bzz_user_college');
 	//	$this->db->limit(4);
