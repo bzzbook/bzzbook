@@ -62,8 +62,8 @@
                                   <div class="col-md-10 skil_box">
                               
                                     <input type="submit" class="btn3 btn-green" value="Save Changes" />
-                                          <div class="btn3 btn-black" onclick="close_othernames()">Cancel</div>
-                                          <div class="btn3 btn-black" id="nicname_down_close" style="display:none;" onclick="nic_name_down_close()">Cancel</div>            
+                <div class="btn3 btn-black" id="nicname_close_btn" onclick="close_othernames()">Cancel</div>
+            <div class="btn3 btn-black" id="nicname_down_close" style="display:none;" onclick="nic_name_down_close()">Cancel</div>            
                                   </div>
                                   <div class="clearfix"></div>
                                 </div>

@@ -2649,7 +2649,7 @@ $('body').delegate('#familymembers_down','click',function()
 {
 	$('#add_f_member_down1').hide();
 	$('#add_f_member_down2').hide();
-	$('ul.relations #family_mem_down_block').append($('#family_relation').show());
+	$('ul.relations #familymembers-li #family_mem_down_block').append($('#family_relation').show());
 	$('#add_family_member').trigger("reset");
 	$('#family_action').val('add');
 	$('#close_family_btn').hide();
@@ -2676,6 +2676,7 @@ $('body').delegate('#fam_member_down','click',function()
 						$('#add_f_member').show();
 						$('#add_f_member1').show();	
 						$('ul.relations > #familymembers-li').html(data);	
+						$('#family_relation').hide();
 					
 					  });
 					
@@ -2750,6 +2751,7 @@ function family_edit()
 			$("select[name=family_member_type]").val(info.member_relation);
 			$("input[name=family_action]").val("update");
 		    $('#family_'+fam_member_id).append($('#family_relation').show());	
+			
 		});
 		return false;
 

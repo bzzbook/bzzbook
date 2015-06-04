@@ -1664,16 +1664,17 @@
                         foreach($family_members as $family)
                         { 
 						?>
-                   
-                      <div class="latest_works" id="family_<?php echo $family['fam_member_id']; ?>">
+                   <div class="latest_works">
+                      <div class="family_relations" id="family_<?php echo $family['fam_member_id']; ?>">
                           <div class="sm_leftbox"></div>
                         <div class="sm_rightbox"><h3><a href="#"><?php echo $family['member_name']; ?> </a></h3>
                         <p><?php echo $family['member_relation']; ?></p>
                         </div>
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
-                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" class="family_edit" id="family_edit<?php echo $family['fam_member_id']; ?>"><i class="fa fa-pencil"></i></a></div>
+                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" class="family_edit" onclick="family_edit()" id="family_edit<?php echo $family['fam_member_id']; ?>"><i class="fa fa-pencil"></i></a></div>
                         <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_fam_member('<?php echo $family['fam_member_id']; ?>')"><i class="fa fa-times"></i></a></div>
+                        </div>
                         </div>
                         </div>
                          <div class="clearfix"></div>
@@ -1721,7 +1722,7 @@
                                     <div class="col-md-7" style="margin-left:75px">
                                       
                                       <input type="submit" class="btn3 btn-green" value="Save Changes" />
-                                       <div class="btn3 btn-black" style="display:none;" id="fam_member_down" onclick="close_family_member_down()">Cancel</div>
+                                       <div class="btn3 btn-black" style="display:none;" id="fam_member_down" >Cancel</div>
                                      
                                       <div class="btn3 btn-black" id="close_family_btn" onclick="close_family()">Cancel</div>
                                      
@@ -1737,7 +1738,7 @@
                           </div>
                            <?php if(!empty($family_members)) { ?>
                         <a href="javascript:void(0)" id="add_family_link_disp" class="work_edu_side_links">add a family member</a>
-                        <div class="family_mem_down_block">
+                        <div id="family_mem_down_block">
                          <div class="iner_lefts" id="add_f_member_down1" style="display:none;"><i class="fa fa-plus"></i></div>
                         <div class="inner_rights boxs" id="add_f_member_down2" style="display:none;">
                          <a href="javascript:void(0)"  id="familymembers_down"> <h3>Add a family member</h3></a>
