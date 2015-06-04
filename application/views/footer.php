@@ -15,8 +15,8 @@ $thumb_height = "150";
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
 <script src="<?php echo base_url(); ?>js/jquery-1.11.1.min.js"></script> 
-<script src="<?php echo base_url(); ?>javascripts/jquery.attach.js"></script> 
-<script src="<?php echo base_url(); ?>javascripts/example.js"></script>
+<?php /*?><script src="<?php echo base_url(); ?>javascripts/jquery.attach.js"></script> 
+<script src="<?php echo base_url(); ?>javascripts/example.js"></script><?php */?>
 <!-- Include all compiled plugins (below), or include individual files as needed --> 
 <script src="<?php echo base_url(); ?>js/bootstrap.min.js"></script> 
 <?php
@@ -1918,8 +1918,13 @@ function removefrndfromtagging(user_id){
 	else if(addedusers.indexOf(user_id)==(len-1)){
 	newval = addedusers.replace(','+user_id,'');
 	}
-	else if(addedusers.indexOf(user_id)==0)
-	newval = addedusers.replace(user_id+',','');
+	else if(addedusers.indexOf(user_id)==0){
+	
+	if(addedusers.indexOf(',')>1){
+	newval = addedusers.replace(user_id+',','');  }
+	else{
+	newval = addedusers.replace(user_id,'');  }
+	}
 	else
 	newval = addedusers.replace(user_id+',','');
 	$('#tagaddedusers').val(newval);
@@ -1929,7 +1934,7 @@ function removefrndfromtagging(user_id){
 	$('#withTokens').hide();
 	var nooftags = $('#tagaddedusers').val();	
 	if(nooftags=='')
-	return true;
+	{ return false;}
 	var countTags = nooftags.split(',').length;
 	var tags = nooftags.split(',');
 	var get_content = ''; var put_content = '';
@@ -2380,7 +2385,7 @@ $('#searchbar_category li').click(function()
 </script>
 <script type="text/javascript">
 
-$(function(){
+/*$(function(){
 	$('#swfupload-control').swfupload({
 		upload_url: "upload-file.php",
 		file_post_name: 'uploadfile',
@@ -2441,7 +2446,7 @@ $(function(){
 		})
 	
 });	
-
+*/
 
 </script>
 
