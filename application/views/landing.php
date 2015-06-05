@@ -26,7 +26,7 @@
 <section class="midbody">
   <div class="container">
     <h2>Create a <em>Buzz</em> <span>with Your</span></h2>
-    <h3>Bussiness <span>with the future of</span> <em>social media!</em></h3>
+    <h3>Business <span>with the future of</span> <em>social media!</em></h3>
     <div class="col-md-5 col-sm-5 col-xs-12 leftCol">
       <div class="lp_video">
         <video width="" height="" controls >
@@ -88,7 +88,8 @@
               <input type="radio" name="gender" id="inlineRadio3" value="female" >
               Female </label>
           </div>
-          <p>Lorem ipsum dolor sit amet, at choro omnium partiendo qui, nec nulla voluptua ex, te homero dissentiunt usu. Et vis latine epicuri voluptaria, <a href="#">posse veniam legimus eu ius</a>. Odio albucius ne vis, nec ad scaevola philosophia. Vide nominavi</p>
+          <p>
+By clicking Sign Up, you agree to our Terms and that you have read our Data Policy, including our Cookie Use.
           <div class="sbButtons">
             <input type="submit" value="Sign Up Now">
            

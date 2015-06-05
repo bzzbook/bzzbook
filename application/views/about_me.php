@@ -398,7 +398,7 @@
                                     <div class="publics col-md-4" style="display:none;">
                                       <button aria-expanded="false" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">Public <span class="caret"></span></button>
                                     </div>
-                                    <div class="col-md-8 add_new">
+                                    <div class="col-md-8 add_new" style="margin-left:100px;">
                                       <div class="btn3 btn-black" id="work_close_btn" onclick="close_work()">Cancel</div>
                                       <div class="btn3 btn-black" id="work_down_close" style="display:none;" onclick="close_work_down()">Cancel</div>
                                       <input type="submit" class="btn3 btn-green " value="Save Changes" />
@@ -647,7 +647,7 @@
                                     </div>
                                       <input type="hidden" name="clg_action" id="clg_action" value="add">
                        				  <input type="hidden" value="" name="college_disp_id" >
-                                    <div class="col-md-8 add_new">
+                                    <div class="col-md-8 add_new" style="margin-left:100px;">
                                       <div class="btn3 btn-black" id="clg_close_btn" onclick="close_college()">Cancel</div>
                                        <div class="btn3 btn-black" id="college_down_close" style="display:none;" onclick="close_college_down()">Cancel</div>
                                       <input type="submit"  class="btn3 btn-green" value="Save Changes" />
@@ -788,7 +788,7 @@
                                     <div class="publics col-md-4" style="display:none;">
                                       <button aria-expanded="false" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">Public <span class="caret"></span></button>
                                     </div>
-                                    <div class="col-md-8 add_new">
+                                    <div class="col-md-8 add_new" style="margin-left:100px;">
                                       <div class="btn3 btn-black" id="school_close" onclick="close_school()">Cancel</div>
                                       <div class="btn3 btn-black" id="school_down_close" style="display:none;" onclick="close_school_down()">Cancel</div>
                                       <input type="submit" class="btn3 btn-green" value="Save Changes" />

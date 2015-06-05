@@ -3477,6 +3477,7 @@ function close_work()
 	$('#work_head1').show();
 	$('#work_head2').show();
 	//$('#clearfix').show();
+	$('#add_work_link_disp').show();
 	$('#work_form').trigger("reset");
 	
 }
@@ -3916,6 +3917,7 @@ function close_college()
 	$('#college_disp').hide();
 	$('#college1').show();
 	$('#college2').show();
+	$('#add_college_link_disp').show();
 	
 }
 
@@ -4269,6 +4271,7 @@ function close_school()
 	$('#highschool').hide();
 	$('#school1').show();
 	$('#school2').show();
+	$('#add_school_link_disp').show();
 	
 }
 
