@@ -90,20 +90,20 @@ class Customermodel extends CI_Model {
    public function All_Cmp_Posts($cmp_id){
 	
   	    $id = $this->session->userdata('logged_in')['account_id'];		
-	    $condition = "companyinfo_id = '".$cmp_id."' AND user_id ='".$id."'";
+	    $condition1 = "companyinfo_id = '".$cmp_id."' AND user_id ='".$id."'";
 		$this->db->select('follow_as');
 		$this->db->from('bzz_cmp_follow');
-		$this->db->where($condition);
+		$this->db->where($condition1);
 		$follow_as = '';
 		$query = $this->db->get();
 		if ($query->num_rows() > 0) {
 			$res = $query->result();
 			$follow_as = $res[0]->follow_as;
 		}		
-		$condition = "companyinfo_id ='".$cmp_id."' ";
+		$condition2 = "companyinfo_id ='".$cmp_id."' ";
 		$this->db->select('user_id');
 		$this->db->from('bzz_companyinfo');
-		$this->db->where($condition);
+		$this->db->where($condition2);
 		$query = $this->db->get();
 		if ($query->num_rows() > 0) {
 			$res = $query->result();
