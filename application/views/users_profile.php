@@ -43,12 +43,12 @@
         </div>
       </section>-->
         <section class="col-lg-4 col-md-4 col-sm-4 col-xs-12 coloumn1" style="padding-right:0; padding-top:0;margin-top:-15px; "><aside>
-        <?php /*?><div class="myPhotos">
-        <?php if(!empty($organization_details)){ ?>
-        
-        				
-                        <div class="inner_rights boxs" style="">
-                        <i class="fa fa-briefcase"></i>
+       <?php if($organization_details && $college_details && $result ){ ?>
+        <div class="myPhotos basicInfo"> <?php if(!empty($organization_details)){ ?>
+        				<div class="specific_block">
+        				<div class="in_left"> <i class="fa fa-briefcase"></i></div>
+                        <div class="in_right boxs" style="">
+                       
                         <?php 	
 						if(!empty($emp_working))
 						{
@@ -64,13 +64,13 @@
 						{
 							 $i = 0;
 							 ?>
-                             <span class="aboutme_clg">Past:</span>
+                             <span class="aboutme_clg_bi">Past:</span>
                              <?php
 							foreach($emp_work_ended as $worked)
 							{
 							
 						?>
-                         <a href="#" class="aboutme_clg"><?php echo $worked['org_name']; ?></a>
+                         <a href="#" class="aboutme_clg_bi"><?php echo $worked['org_name']; ?></a>
                           
 						  <?php 
 						  
@@ -86,28 +86,30 @@
 						  {
 							  
 						  ?>
-                          <span class="aboutme_clg">and</span>
+                          <span class="aboutme_clg_bi">and</span>
                           <?php }else{ ?>
-                          <span class="aboutme_clg">,</span>
+                          <span class="aboutme_clg_bi">,</span>
                           
 					<?php
 							}
 						  } $i++;} ?>
                        <!--   <div class="edu_cation"><a href="javascript:void(0)" onclick="mov_to_work_edu()">Edit your education</a></div> -->
                         </div>
-                        <div class="clearfix"></div>
+                        <div class="clearfix"></div></div>
         <?php } }?>
+        
+        
        
                       
-                        <?php  if(!empty($college_details)) { $j=1; foreach($college_details as $college) {  ?>
-						    
-							
-                        <div class="inner_rights boxs"><i class="fa fa-graduation-cap"></i>
+                        <?php  if(!empty($college_details)) { $j=1; ?> <div class="specific_block">  
+						<div class="in_left"><i class="fa fa-graduation-cap"></i></div><div class="in_right boxs"><?php foreach($college_details as $college) {  ?>
+						
+                        
                         <?php if($j == 1) { ?>
                           <span>Studied at <a href="#"><?php echo $college['college_name']; ?></a></span>
                           <?php }else { ?>
                         
-                          <span class="aboutme_clg">Past:</span> <a href="#" class="aboutme_clg"><?php echo $college['college_name']; ?></a>
+                          <?php if($j==2) { ?><span class="aboutme_clg_bi">Past:</span><?php } ?><a href="#" class="aboutme_clg_bi"><?php echo $college['college_name']; ?></a>
                           <?php if($j < count($college_details)) { 
 						  
 						    if($i == count($college_details)-1)
@@ -116,27 +118,32 @@
 						  }
 						   elseif($j < count($college_details) - 2){ ?>
                              
-                          <span class="aboutme_clg">and</span>
+                          <span class="aboutme_clg_bi">and</span>
                           <?php }else{ ?>
-                          <span class="aboutme_clg">,</span>
+                          <span class="aboutme_clg_bi">,</span>
                             
                             <?php  }} } $j++; ?>
                       
                         <!--  <div class="edu_cation"><a href="javascript:void(0)" onclick="mov_to_work_edu()">Edit your education</a></div> -->
-                        </div>
-                        <?php  } } ?>
-                         <?php if(!empty($result[0]->location) && !empty($result[0]->hometown)) { ?>
+                       
+                        <?php  } ?>  </div><div class="clearfix"></div></div> <?php } ?>
                         
-                        <div class="inner_rights boxs"><i class="fa fa-globe"></i>
+                         <?php if(!empty($result[0]->location) && !empty($result[0]->hometown)) { ?>
+                        <div class="specific_block">
+                        <div class="in_left"><i class="fa fa-globe"></i></div>
+                        <div class="in_right boxs">
                           <span>Lives in <a href="#"><?php if($result[0]->location){ echo $result[0]->location; } else echo "Not Available"; ?></a></span>
-                          <p><i class="fa fa-globe"></i><span> From </span><a href="#"><?php  if($result[0]->hometown){ echo $result[0]->hometown; } else echo "Not Available"; ?></a></p>
+                          <span></i><span>, From </span><a href="#"><?php  if($result[0]->hometown){ echo $result[0]->hometown; } else echo "Not Available"; ?></a></span></div>
                           
                         <div class="clearfix"></div>
-                        
+                        </div>
                         
                         
                         <?php } ?>
-        </div><?php */?>
+        
+        
+        </div>
+        <?php } ?>
         <div class="myPhotos userProfilemyPhotos">
           <h3>Friends</h3>
           <ul>
@@ -373,6 +380,7 @@
 function takeInputToPost(){
 $("#posts").val($("#dummypost").text());
 }
+
 </script>
 
     

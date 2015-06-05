@@ -15,9 +15,11 @@ class Companies extends CI_Model {
 		    $this->db->insert('comp_sign_up', $data);
 
 	   }
-	   public function companies_list($limit=0)
+	   public function companies_list($limit=0,$user_id='')
 	   {
 		   $id = $this->session->userdata('logged_in')['account_id'];
+		   if(!empty($user_id))
+		   $id = $user_id;
 	       $condition = "user_id =" . "'" . $id .  "'";
 		   $this->db->select('*');
 		   $this->db->from('bzz_companyinfo');
@@ -35,6 +37,8 @@ class Companies extends CI_Model {
 	   	 public function following_companies_list($limit=0)
 	   {
 		   $id = $this->session->userdata('logged_in')['account_id'];
+		   if(!empty($user_id))
+		   $id = $user_id;
 	       $condition = "user_id =" . "'" . $id . "'" . " AND " . "follow_status = 'Y' ";
 		   $this->db->select('*');
 		   $this->db->from('bzz_cmp_follow');

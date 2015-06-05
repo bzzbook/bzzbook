@@ -1,14 +1,18 @@
 <?php 
-$result = $this->companies->companies_list(); 
-$result1 = $this->companies->following_companies_list();
+$uid = '';
+if(!empty($user_id)){
+$uid = $user_id;	
+}
+$result = $this->companies->companies_list(0,$uid); 
+$result1 = $this->companies->following_companies_list(0,$uid);
 ?>
 <section class="col-lg-9 col-md-9 nopad">
       <div class="col-xs-12 ProfileView">
         <section class="visitorBox">
           <div class="visitiBoxInner">
             <figure class="compCover"><img alt="" src="<?php echo base_url(); ?>images/about_banner.jpg" class="img-responsive"></figure>
-             <?php  $image = $this->profile_set->get_profile_pic();
-			         $data = $this->profile_set->get_userinfo(); ?>
+             <?php  $image = $this->profile_set->get_profile_pic($uid);
+			         $data = $this->profile_set->get_userinfo($uid); ?>
                          <?php $attr = array('id' => 'upload_pfpic', 'name' => 'upload_file'); ?> 
               <?php echo form_open_multipart('profile/do_upload',$attr);?>
             <div class="profileLogo">
@@ -16,14 +20,14 @@ $result1 = $this->companies->following_companies_list();
               <!-- <span class="inside glyphicon glyphicon-camera" ></span>--> 
             </div>
             <h4 class="profile-name"><?php echo $data[0]['user_firstname']." ".$data[0]['user_lastname'] ?></h4>
-            <a href="#"><span class="glyphicon glyphicon-camera change-photo fileinput-button" aria-hidden="true"><em>Change Picture</em> <input type="file" name="userfile" id="pfpic" size="20" required/></span></a></form>
+           <?php if(empty($user_id)){ ?><a href="#"><span class="glyphicon glyphicon-camera change-photo fileinput-button" aria-hidden="true"><em>Change Picture</em> <input type="file" name="userfile" id="pfpic" size="20" required/></span></a><?php } ?></form>
             <div class="ProfileViewNav"></div>
           </div>
         </section>
       </div>
       <section class="about-user-details">
         <h4><span aria-hidden="true" class="glyphicon glyphicon-user"></span> My Companies
-          <button data-toggle="modal" data-target="#AddCompany" class="btn2 btn-black" type="button">Add Company</button>
+         <?php if(empty($user_id)) { ?> <button data-toggle="modal" data-target="#AddCompany" class="btn2 btn-black" type="button">Add Company</button><?php } ?>
         </h4>
         <div class="about-user-details-inner" >
           <section class="my_companys col-lg-12 col-md-12 col-sm-5 col-xs-12 coloumn2 aboutme">

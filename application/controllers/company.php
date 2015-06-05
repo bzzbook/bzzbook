@@ -63,9 +63,11 @@ class Company extends CI_Controller {
 		}
 	}
 	
-	public function my_companies()
+	public function my_companies($user_id='')
 	{
-		 $data['result'] = $this->companies->companies_list();
+		 if(!empty($user_id))
+		 $data['user_id'] = $user_id;
+		 $data['result'] = $this->companies->companies_list(0,$user_id);
 		 $data['content']='my_companies';
 	     $this->load->view('full_content_view',$data);
 	}

@@ -47,12 +47,14 @@ public function about_me()
 }
 
 
-public function business_details()
+public function business_details($user_id='')
 {
 	//$data['profession_details'] = $this->profile_set->getprofessionList();
 	//$data['organization_details'] = $this->profile_set->getorganizationList();
 	//$data['group_details'] = $this->profile_set->getgroupList();
-	$data['profile_info'] = $this->profile_set->get_user_profileinfo();
+	if(!empty($user_id))
+	$data['user_id'] = $user_id;
+	$data['profile_info'] = $this->profile_set->get_user_profileinfo($user_id);
 	$data['content']='my_business_card';
 	$this->load->view('full_content_view',$data);
 	//$this->load->view('business_details',$data);
@@ -415,10 +417,12 @@ public function showfavs()
 		}
 	} 
 	
-	public function my_photos()
+	public function my_photos($user_id='')
 	{
 		//$data['photos'] = $this->profile_set->get_my_pics();
 		//$data['videos'] = $this->profile_set->get_my_videos();
+		if(!empty($user_id))
+		$data['user_id'] = $user_id;
 		$data['content']='myphotos';
 		$this->load->view('full_content_view',$data);
 		
@@ -763,8 +767,10 @@ public function showfavs()
 			 
 			 echo $content;
 	}
-	public function friends()
+	public function friends($user_id='')
 	{
+		if(!empty($user_id))
+		$data['user_id'] = $user_id;
 		$data['content']='myfriends';
 		$this->load->view('full_content_view',$data);
 		//$this->load->view('jobs');

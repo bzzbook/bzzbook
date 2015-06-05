@@ -516,9 +516,12 @@ public function getcustDetails($id)
    }
 
 
-public function get_my_pics()
+public function get_my_pics($user_id = '')
 {
+	if(empty($user_id))
 	$id = $this->session->userdata('logged_in')['account_id'];
+	else
+	$id = $user_id;
 	$condition = "posted_by =" . "'" . $id . "' and uploaded_files !=''";
 	$this->db->select('*');
 	$this->db->where($condition);
@@ -558,9 +561,12 @@ public function get_my_pics()
 	}
 }
 
-public function get_my_videos()
+public function get_my_videos($user_id='')
 {
+	if(empty($user_id))
 	$id = $this->session->userdata('logged_in')['account_id'];
+	else
+	$id = $user_id;
 	$condition = "user_id =" . "'" . $id . "' AND video_name!=''";
 	$this->db->select('video_name');
 	$this->db->where($condition);
@@ -709,8 +715,11 @@ public function editSideBarSettings()
 		}
 	}
 
-public function get_user_profileinfo()
+public function get_user_profileinfo($user_id='')
 {
+	if(!empty($user_id))
+	$id = $user_id;
+	else
 	$id = $this->session->userdata('logged_in')['account_id'];
 	
 		 $condition = "user_id ="."'".$id."'";

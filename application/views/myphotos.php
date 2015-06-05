@@ -2,12 +2,17 @@
 
 $upload_path = "uploads/";		
 $thumb_width = "150";						
-$thumb_height = "150";	
-$data = $this->profile_set->get_my_pics(); 
+$thumb_height = "150";
+$current_user = $this->session->userdata('logged_in')['account_id'];
+if(!isset($user_id))	
+$id = $current_user;
+else
+$id = $user_id;
 
-$videos = $this->profile_set->get_my_videos();
-$user_id = $this->session->userdata('logged_in')['account_id'];
-$profiledata = $this->customermodel->profiledata($user_id);
+
+$data = $this->profile_set->get_my_pics($id);
+$videos = $this->profile_set->get_my_videos($id);
+$profiledata = $this->customermodel->profiledata($id);
 ?>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>cropimage/css/cropimage.css" />
 <link type="text/css" href="<?php echo base_url(); ?>cropimage/css/imgareaselect-default.css" rel="stylesheet" />
@@ -27,7 +32,7 @@ $profiledata = $this->customermodel->profiledata($user_id);
         </section>
         <section>
 <div class="container">
-
+<?php if(isset($user_id) && $user_id==$current_user || !isset($user_id)){ ?>
 	<div class="crop_box">
 <form class="uploadform" method="post" enctype="multipart/form-data" action='' name="photo">	
 	<div class="crop_set_upload">
@@ -70,7 +75,7 @@ $profiledata = $this->customermodel->profiledata($user_id);
 			</div>
 		</div>
 	</div>
-	
+	<?php } ?>
 </div>
 </section>
       </div>
@@ -94,12 +99,13 @@ $profiledata = $this->customermodel->profiledata($user_id);
             </div>
       </section>
       <section class="about-user-details">
-        <h4><span aria-hidden="true" class="glyphicon glyphicon-facetime-video"></span>My Videos ( <?php if($videos) echo count($videos); else echo " Videos not uploaded "; ?> )<div class="myphotos-uploadbtn1 btn-black fileinput-button"> <span>Upload Video</span> 
+        <h4><span aria-hidden="true" class="glyphicon glyphicon-facetime-video"></span>My Videos ( <?php if($videos) echo count($videos); else echo " Videos not uploaded "; ?> )<?php if(isset($user_id) && $user_id==$current_user || !isset($user_id)){ ?>
+<div class="myphotos-uploadbtn1 btn-black fileinput-button"> <span>Upload Video</span> 
                 <!-- The file input field used as target for the file upload widget -->
               <form action="" class="uploadvideoform" method="post" enctype="multipart/form-data">
              <input name="userfile" id="userfile" size="20" required="" type="file">
              </form>    
-                </div></h4>
+                </div><?php } ?></h4>
          	<div class="userPhotos">
                 <?php  if($videos){ foreach($videos as $video){ ?>
 
