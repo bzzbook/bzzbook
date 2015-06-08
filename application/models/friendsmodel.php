@@ -736,7 +736,7 @@ $searchblock .= "<figure class='myfriendspfpic'><img src='" . base_url() ."uploa
 				   {
                $searchblock .= "<div class='dcBtn'><a href='javascript:void(0);'>Friends</a></div>";
 				   }elseif( $myfrnd[0]['request_status'] == 'W'){
-			 $searchblock .= "<div class='dcBtn'><a href='javascript:void(0);'>Request Sent</a></div>";
+			 $searchblock .= "<div class='dcBtn'><a href='javascript:void(0);'>Pending</a></div>";
 				   }else{
 			 $searchblock .= "<div class='dcBtn'><a id='addFrnd".$req[0]['user_id']."'
 			  href='javascript:void(0);' onclick='addSearchFrnd(" .$req[0]['user_id']. ");'>Add Friend</a></div>";

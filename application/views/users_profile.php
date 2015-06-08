@@ -2,6 +2,7 @@
        $image = $this->profile_set->get_profile_pic($user_id);
 	   $data = $this->profile_set->get_userinfo($user_id); 
 	   $friends = $this->friendsmodel->getfriends('','',$user_id,9);
+	   $myfrnd = $this->friendsmodel->user_frnds($user_id);
 	   $organization_details = $this->profile_set->getorganizationDetails($user_id);
 	   $emp_working = $this->profile_set->get_org_details_by_status_work($user_id);
 	   $emp_work_ended = $this->profile_set->get_org_details_by_status_all($user_id);
@@ -16,13 +17,34 @@
              
             <div class="profileLogo">
               <figure class="cmplogo"><a href="#"><span class="glyphicon glyphicon-camera change-photo fileinput-button" aria-hidden="true"><em>Change Picture</em> <input type="file" name="userfile" id="userfile" size="20" required/></span></a><img src="<?php echo base_url();?>uploads/<?php if(!empty($image[0]->user_img_thumb)) echo $image[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" alt="<?php echo base_url();?>uploads/<?php if(!empty($image[0]->user_img_thumb)) echo $image[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>"></figure>
+               <?php 
+			$searchblock = '';
+			 if($myfrnd){
+			//print_r($myfrnd);
+			 if($myfrnd[0]['request_status'] == 'Y') 
+				   {
+               $searchblock .= "<div class='addfrdbtn'><a href='javascript:void(0);'>Friends</a></div>";
+				   }elseif( $myfrnd[0]['request_status'] == 'W'){
+			 $searchblock .= "<div class='addfrdbtn'><a href='javascript:void(0);'>Pending</a></div>";
+				   }else{
+			 $searchblock .= "<div class='addfrdbtn'><a id='addFrnd".$user_id."'
+			  href='javascript:void(0);' onclick='addSearchFrnd(" .$user_id. ");'>Add Friend</a></div>";
+				   }
+			  
+			 }else{
+ $searchblock .= "<div class='addfrdbtn'><a id='addFrnd".$user_id."' href='javascript:void(0);' onclick='addSearchFrnd(" .$user_id. ");'>Add Friend</a></div>";
+			 }
+			echo $searchblock;
+			?>
+
 
               <!-- <span class="inside glyphicon glyphicon-camera" ></span>--> 
             </div>
-            <h4 class="profile-name"><?php echo $data[0]['user_firstname']." ".$data[0]['user_lastname'] ?></h4>
+            <h4 class="profile-name"><?php echo substr($data[0]['user_firstname']." ".$data[0]['user_lastname'],0,20); ?></h4>
+            
             <div class="ProfileViewNav"></div>
           </div>
-        </section>
+                 </section>
       </div>
      
      <!-- <section class="about-user-details">

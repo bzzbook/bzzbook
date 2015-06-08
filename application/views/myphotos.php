@@ -6,8 +6,11 @@ $thumb_height = "150";
 $current_user = $this->session->userdata('logged_in')['account_id'];
 if(!isset($user_id))	
 $id = $current_user;
-else
+else{
 $id = $user_id;
+$myfrnd = $this->friendsmodel->user_frnds($user_id);
+
+}
 
 
 $data = $this->profile_set->get_my_pics($id);
@@ -24,6 +27,24 @@ $profiledata = $this->customermodel->profiledata($id);
             <figure class="compCover"><img alt="" src="<?php echo base_url(); ?>images/about_banner.jpg" class="img-responsive"></figure>
             <div class="profileLogo">
               <figure class="cmplogo"><img src="<?php echo base_url().'uploads/';if(!empty($profiledata[0]->user_img_thumb)) echo $profiledata[0]->user_img_thumb; else echo 'default_profile_pic.png';?>"></figure>
+              
+              <?php 
+			$searchblock = '';
+			 if(isset($myfrnd)){
+			//print_r($myfrnd);
+			 if($myfrnd[0]['request_status'] == 'Y') 
+				   {
+               $searchblock .= "<div class='addfrdbtn'><a href='javascript:void(0);'>Friends</a></div>";
+				   }elseif( $myfrnd[0]['request_status'] == 'W'){
+			 $searchblock .= "<div class='addfrdbtn'><a href='javascript:void(0);'>Pending</a></div>";
+				   }else{
+			 $searchblock .= "<div class='addfrdbtn'><a id='addFrnd".$user_id."'
+			  href='javascript:void(0);' onclick='addSearchFrnd(" .$user_id. ");'>Add Friend</a></div>";
+				   }
+			  
+			 }
+			echo $searchblock;
+			?>
               <!-- <span class="inside glyphicon glyphicon-camera" ></span>--> 
             </div>
             <h4 class="profile-name"><?php echo $profiledata[0]->user_firstname.' '.$profiledata[0]->user_lastname; ?></h4>

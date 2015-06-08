@@ -17,7 +17,7 @@
           <a href="#" class="navbar-brand">Menu</a> </div>
         <div class="collapse navbar-collapse bs-example-js-navbar-collapse">
           <ul class="nav navbar-nav">
-           <li> <a  href="<?php echo base_url()."profile/post/".$profile_id; ?>">Postboard</a></li>
+           <li> <a  href="<?php echo base_url()."profile/post/"; ?>">Postboard</a></li>
             <li> <a  href="<?php echo base_url()."profile/about_me/".$profile_id; ?>">About</a></li>
             <li> <a  href="<?php echo base_url()."profile/friends/".$profile_id; ?>">Friends</a></li>
             <li> <a  href="<?php echo base_url()."profile/my_photos/".$profile_id; ?>">Photos</a></li>

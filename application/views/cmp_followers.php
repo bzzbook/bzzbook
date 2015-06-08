@@ -18,7 +18,7 @@
 			  href="javascript:void(0);">Friends</button>
               <?php  }elseif( $friend_status[0]['request_status'] == 'W'){ ?>
                <button type="button" class="btn btn-primary btn-xs"
-			  href="javascript:void(0);">Request Sent</button>
+			  href="javascript:void(0);">Pending</button>
               <?php }elseif( $friend_status[0]['request_status'] == 'N' || $friend_status[0]['request_status'] == 'B'){?>
             <button type="button" class="btn btn-primary btn-xs" id="addFrnd"
 			  href="javascript:void(0);" onclick="addFollowerFrnd(<?php echo $follower[0]['user_id']; ?>);">Add Friend</button>

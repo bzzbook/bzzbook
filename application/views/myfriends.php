@@ -1,7 +1,10 @@
 <?php 
 $id = '';
 if(isset($user_id))
+{
 $id = $user_id;
+$myfrnd = $this->friendsmodel->user_frnds($user_id);
+}
 $friends = $this->friendsmodel->getfriends('','',$id);  
 ?>
 
@@ -16,6 +19,24 @@ $friends = $this->friendsmodel->getfriends('','',$id);
               <?php echo form_open_multipart('profile/do_upload',$attr);?>
             <div class="profileLogo">
               <figure class="cmplogo"><img src="<?php echo base_url();?>uploads/<?php if(!empty($image[0]->user_img_thumb)) echo $image[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" alt="<?php echo base_url();?>uploads/<?php if(!empty($image[0]->user_img_thumb)) echo $image[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>"></figure>
+              
+              <?php 
+			$searchblock = '';
+			 if(isset($myfrnd)){
+			//print_r($myfrnd);
+			 if($myfrnd[0]['request_status'] == 'Y') 
+				   {
+               $searchblock .= "<div class='addfrdbtn'><a href='javascript:void(0);'>Friends</a></div>";
+				   }elseif( $myfrnd[0]['request_status'] == 'W'){
+			 $searchblock .= "<div class='addfrdbtn'><a href='javascript:void(0);'>Pending</a></div>";
+				   }else{
+			 $searchblock .= "<div class='addfrdbtn'><a id='addFrnd".$user_id."'
+			  href='javascript:void(0);' onclick='addSearchFrnd(" .$user_id. ");'>Add Friend</a></div>";
+				   }
+			  
+			 }
+			echo $searchblock;
+			?>
               <!-- <span class="inside glyphicon glyphicon-camera" ></span>--> 
             </div>
             <h4 class="profile-name"><?php echo $data[0]['user_firstname']." ".$data[0]['user_lastname'] ?></h4>

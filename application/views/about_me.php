@@ -18,6 +18,7 @@
 					 $emp_work_ended = $this->profile_set->get_org_details_by_status_all();
 					 $college_details = $this->profile_set->get_clg_details_all();
 					 $user_log_data = $this->person->get_abtme_user();
+					 //$myfrnd = $this->friendsmodel->user_frnds($user_id);
 					 
 					 ?>
             <div class="profileLogo">
