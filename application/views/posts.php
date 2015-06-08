@@ -76,16 +76,20 @@
               <h5><span class="pfname"><a href="<?php echo base_url().'profile/user/'.$get_profiledata[0]->user_id; ?>"><?php echo ucfirst($get_profiledata[0]->user_firstname)."&nbsp;".ucfirst($get_profiledata[0]->user_lastname);?></a>
 			  
 			  <?php if($row->tagged_friends!='') { 
-			  echo ' with '; $tagcount=1;
+			  echo ' with '; $tagcount=1; $totTags = count($tags);
 			  foreach($tags as $tag){ 
-			  
+			  if($totTags==$tagcount && $totTags!=1)
+			  { ?>
+				  <span class="taggednames"> and <a href="<?php echo base_url().'profile/user/'.$tag->user_id; ?>"><?php echo ucfirst($tag->user_firstname)."&nbsp;".ucfirst($tag->user_lastname);?></a> </span>
+			  <?php break; }
 			  if($tagcount>2){ 
 			  echo ' and '.(count($tags)-2).' <div id="links"><a href="#" class="taggednames">others<span>'.$tagslist.'</span></a></div>';
 			  break;
 			  }
 			  ?>
+            <?php if($tagcount>1) echo ', ';  ?>
             <span class="taggednames"><a href="<?php echo base_url().'profile/user/'.$tag->user_id; ?>"><?php echo ucfirst($tag->user_firstname)."&nbsp;".ucfirst($tag->user_lastname);?></a> </span>
-			  <?php if($tagcount<2) echo ', ';  
+			  <?php  
 			  $tagcount++; 
 			  } 
 			  }?> 
