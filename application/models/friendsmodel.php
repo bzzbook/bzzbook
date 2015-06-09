@@ -841,6 +841,175 @@ $id = $this->session->userdata('logged_in')['account_id'];
 else echo "No friends Found Based On your Search!..";
 */}
 
+public function search_members($value)
+{
+	$id = $this->session->userdata('logged_in')['account_id'];
+	
+	//print_r($data);
+	
+	$searchblock = "";
+ 	$searchblock .= "<ul id='country-list'> "; 
+	
+	// To get members as per search input
+	
+	$this->db->select('*'); 
+	$this->db->from('bzz_userinfo');
+	$this->db->like('user_firstname',$value); 
+	$this->db->or_like('user_lastname',$value); 
+	$this->db->limit(5);
+	$query = $this->db->get();
+	$data = $query->result_array();
+	if(!empty($data))
+	{
+		$userdata = array();
+	foreach($data as $data)
+	{
+		if($data['user_id'] != $id)
+		{
+					
+			$imgcondition = "user_id =" . "'" . $data['user_id'] . "'";
+			$this->db->where($imgcondition);
+			$this->db->select('*');
+			$this->db->from('bzz_user_images');
+			$query = $this->db->get();
+						
+			if($query->num_rows() > 0)
+			{
+			$this->db->select('*');
+			$this->db->from('bzz_userinfo');
+			$this->db->join('bzz_user_images','bzz_userinfo.user_id=bzz_user_images.user_id AND bzz_userinfo.user_id='.$data['user_id']);
+			$this->db->order_by('bzz_user_images.user_imageinfo_id','desc');
+			$query = $this->db->get();
+			$searched_user = $query->result_array();
+			 
+			}else
+			{
+			$usercondition = "user_id =" . "'" . $data['user_id'] . "'";
+			$this->db->select('*');
+			$this->db->from('bzz_userinfo');
+			$this->db->where($usercondition);
+			$query = $this->db->get();
+			$searched_user = $query->result_array();
+			}
+			$jobcondition = "user_id =" . "'" . $data['user_id'] . "' AND emp_status='wor'";
+			$this->db->select('position,org_name');
+			$this->db->from('bzz_organizationinfo');
+			$this->db->where($jobcondition);
+			$query = $this->db->get();
+			$jobres = $query->result_array();
+			if($jobres)
+			$searched_user['job'] = $jobres[0]['position'].' at '.$jobres[0]['org_name'];
+			$userdata[] = $searched_user;
+	}
+	}
+	//print_r($userdata);
+
+	
+          
+             if($userdata) {
+				 
+				  $i =0;
+				  foreach($userdata as $req){
+					 
+        $searchblock .= " <li class='col-md-12' onclick='location.href=&#39;".base_url()."profile/user/".$req[0]['user_id']."&#39;'>
+        	<div class='member-search-sug'>";
+			
+			$searchblock .= "<div class='categoryBlock'>";
+			if($i==0) { $searchblock .="People"; }
+			$searchblock .="</div>";
+			if(!empty($req[0]['user_img_thumb'])){
+$searchblock .= "<figure class='member-sug-pic'><img src='" . base_url() ."uploads/".$req[0]['user_img_thumb']."' alt='". $req[0]['user_firstname'] . " " .$req[0]['user_lastname'] ."'></figure>";
+			}else{
+				$searchblock .= "<figure class='member-sug-pic'><img src='" . base_url() ."uploads/default_profile_pic.png'></figure>";
+			}
+
+		$searchblock .= " <div class='member-search-name'>
+            <h4>". $req[0]['user_firstname'] . " " .$req[0]['user_lastname']."</h4>";
+			if(isset($req['job']))
+			$searchblock .= "<h6>".$req['job']."</h6>";
+ $friendscount = $this->friendsmodel->get_frnds_frnds($req[0]['user_id']); if($friendscount) { $frnds = count($friendscount); }else $frnds = '0' ;
+			 
+			  
+			 
+               $searchblock .= "
+			</div>
+			  </li>	";
+	$i++;
+ } 
+ }
+  
+}
+// To get companies as per search input
+$this->db->select('*'); 
+	$this->db->from('bzz_companyinfo');
+	$this->db->like('cmp_name',$value); 
+	$this->db->or_like('cmp_industry',$value); 
+	$this->db->limit(5);
+	$query = $this->db->get();
+	$userdata = $query->result_array();
+    if($userdata) {
+	  $i = 0;
+	  foreach($userdata as $req){
+	  $searchblock .= " <li class='col-md-12' onclick='location.href=&#39;".base_url()."company/company_disp/".$req['companyinfo_id']."&#39;'>
+        	<div class='member-search-sug'>";
+			$searchblock .= "<div class='categoryBlock'>";
+			if($i==0) { $searchblock .="Companies"; }
+			$searchblock .="</div>";
+			if(!empty($req['company_image'])){
+$searchblock .= "<figure class='member-sug-pic'><img src='" . base_url() ."uploads/".$req['company_image']."' alt='". $req['cmp_name'] . " '></figure>";
+			}else{
+				$searchblock .= "<figure class='member-sug-pic'><img src='" . base_url() ."uploads/default_profile_pic.png'></figure>";
+			}
+
+		$searchblock .= " <div class='member-search-name'>
+            <h4>". $req['cmp_name']."</h4>";
+			
+			$searchblock .= "<h6>Industry: ".$req['cmp_industry'].", Employees:".$req['cmp_colleagues']."</h6>";
+ 
+               $searchblock .= "</div></li>	";
+			   $i++;
+	
+ } 
+ }
+  
+// To get jobs as per search input  
+/*$this->db->select('*'); 
+	$this->db->from('jobs');
+	$this->db->like('job_title',$value); 
+	$this->db->or_like('job_keyword',$value); 
+	$this->db->limit(5);
+	$query = $this->db->get();
+	$userdata = $query->result_array();
+    if($userdata) {
+	  $i = 0;
+	  foreach($userdata as $req){
+	  $searchblock .= " <li class='col-md-12' onclick='location.href=&#39;".base_url()."company/company_disp/".$req['companyinfo_id']."&#39;'>
+        	<div class='member-search-sug'>";
+			$searchblock .= "<div class='categoryBlock'>";
+			if($i==0) { $searchblock .="Companies"; }
+			$searchblock .="</div>";
+			if(!empty($req['company_image'])){
+$searchblock .= "<figure class='member-sug-pic'><img src='" . base_url() ."uploads/".$req['company_image']."' alt='". $req['cmp_name'] . " '></figure>";
+			}else{
+				$searchblock .= "<figure class='member-sug-pic'><img src='" . base_url() ."uploads/default_profile_pic.png'></figure>";
+			}
+
+		$searchblock .= " <div class='member-search-name'>
+            <h4>". $req['cmp_name']."</h4>";
+			
+			$searchblock .= "<h6>Industry: ".$req['cmp_industry'].", Employees:".$req['cmp_colleagues']."</h6>";
+ 
+               $searchblock .= "</div></li>	";
+			   $i++;
+	
+ } 
+ }
+*/
+
+$searchblock .= "</ul>"; 
+ echo $searchblock;
+}
+
 public function user_frnds($frnd_id)
 {
 	$id = $this->session->userdata('logged_in')['account_id'];

@@ -5263,6 +5263,35 @@ function edit_account_values()
 
 
 }
+function changeSearchPlaceholder(data){ 
+$('#header-search').attr('placeholder',data);
+}
+</script>
+<script>
+$(document).ready(function(){
+	$("#header-search").keyup(function(){
+		var search_input = $(this).val();
+		if(search_input.trim()!=''){
+		$.ajax({
+		type: "POST",
+		url: "<?php  echo base_url(); ?>friends/search_members/"+$(this).val(),
+		beforeSend: function(){
+			$("#header-search").css("background","#FFF url(<?php  echo base_url(); ?>images/LoaderIcon.gif) no-repeat 165px");
+		},
+		success: function(data){
+			$("#suggesstion-box").show();
+			$("#suggesstion-box").html(data);
+			$("#header-search").css("background","#FFF");
+		}
+		});
+		}else{ $("#suggesstion-box").hide(); }
+	});
+});
+
+function selectCountry(val) {
+$("#header-search").val(val);
+$("#suggesstion-box").hide();
+}
 </script>
 
 <?php $this->load->view('profile_models'); ?>
