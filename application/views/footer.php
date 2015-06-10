@@ -5294,6 +5294,13 @@ $("#suggesstion-box").hide();
 }
 </script>
 
+<script type="text/javascript">
+
+uploadimages("uploadjob_photos","uploadPhotosnewjob","testingg");
+
+</script>
+
+
 <?php $this->load->view('profile_models'); ?>
 <script language="javascript">print_country("con");</script><!--  //for groups   --> 
 <script language="javascript">print_country("contries");</script> <!-- //for companies-->

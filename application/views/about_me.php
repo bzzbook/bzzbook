@@ -1,4 +1,3 @@
-
 <section class="col-lg-9 col-md-9 nopad">
       <div class="col-xs-12 ProfileView">
         <section class="visitorBox">
@@ -1993,10 +1992,6 @@
                       
                       
                       
-                      
-                      
-                      
-                      
                     </ul>
                   </div>
                 </div>
@@ -2013,9 +2008,132 @@
                       <li>
                         <div class="iner_lefts"><i class="fa fa-plus"></i></div>
                         <div class="inner_rights">
-                          <h3>Add a life event</h3>
+                        
+                        
+                        
+                        <div class="menuModule inner_rights">
+<a href="javascript:void(0);" id="dLabel" type="button" aria-haspopup="true">
+    <h3>Add a life event</h3>
+   </a>
+<div class="menuModuleMain dropdown-menu" role="menu" aria-labelledby="dLabel">
+
+	<table class="momentControl">
+    <tr>
+    <td class="parentLink" id="event_Bar" valign="top">
+    <ul>
+        <li><a href="workEdu"><span class="fa fa-suitcase"></span> Work and Education</a></li>
+        <li><a href="familyy"><span class="fa fa-heart"></span> Family & Relationship</a></li>
+        <li><a href="homeLiving"><span class="fa fa-heart"></span> Home & Living</a></li>
+        <li><a href="health"><span class="fa fa-heartbeat"></span> Health & Wellness</a></li>
+        <li><a href="travel"><span class="fa fa-flag"></span> Travel and Experiences</a></li>
+    </ul>
+    </td>
+    <td class="subLinkHolder" id="sub_bar">
+    <div>
+        <ul class="sub-links" id="workEdu">
+      
+            <li><a href="#AddCompanys" data-toggle="modal" >New Job</a></li>
+            <li><a href="#AddCompanys_book" data-toggle="modal" >Published Book or Paper</a></li>
+            <li><a href="#AddCompanys_Retired" data-toggle="modal" >Retirement</a></li>
+            <li><a href="#AddCompanys_New_school" data-toggle="modal" >New School</a></li>
+            <li><a href="#AddCompanys_Study_abroad" data-toggle="modal" >Study Abroad</a></li>
+            <li><a href="#AddCompanys_Volunteer_Work" data-toggle="modal" >Volunteer Work</a></li>
+            <li><a href="#AddCompanys_Military_Service" data-toggle="modal" >Military Service</a></li>
+            <li><a href="#AddCompanys_Create_own" data-toggle="modal" >Create your Own</a></li>
+         </ul>
+         <ul class="sub-links" id="familyy">
+            <li><a href="#AddCompanys_First_Met" data-toggle="modal" >First Met</a></li>
+            <li><a href="#AddCompanys_New_Relationship" data-toggle="modal" >New Relationship</a></li>
+            <li><a href="#AddCompanys_Engagement" data-toggle="modal" >Engagement</a></li>
+            <li><a href="#AddCompanys_Marriage" data-toggle="modal" >Marriage</a></li>
+            <li><a href="#AddCompanys_Anniversary" data-toggle="modal" >Anniversary</a></li>
+            <li><a href="#AddCompanys_Expecting_baby" data-toggle="modal" >Expecting a Baby</a></li>
+            <li><a href="#AddCompanys_New_Child" data-toggle="modal" >New Child</a></li>
+            <li><a href="#AddCompanys_Family_Member" data-toggle="modal" >New Family Member</a></li>
+            <li><a href="#AddCompanys_New_Pet" data-toggle="modal" >New Pet</a></li>
+            <li><a href="#AddCompanys_End_Relationship" data-toggle="modal" >End of Relationship</a></li>
+            <li><a href="#AddCompanys_Loss_One" data-toggle="modal" >Loss of a Loved One</a></li>
+            <li><a href="#AddCompanys" data-toggle="modal" >Create Your Own</a></li>
+         </ul>
+         <ul class="sub-links" id="homeLiving">
+            <li><a href="#AddCompanys_moved" data-toggle="modal" >Moved</a></li>
+            <li><a href="#AddCompanys_Bought_House" data-toggle="modal" >Bought a Home</a></li>
+            <li><a href="#AddCompanys_Home_improvement" data-toggle="modal" >Home Improvement</a></li>
+            <li><a href="#AddCompanys_New_Roommate" data-toggle="modal" >New Roommate</a></li>
+            <li><a href="#AddCompanys_New_vehicle" data-toggle="modal" >New Vehichle</a></li>
+            <li><a href="#AddCompanys" data-toggle="modal" >Create Your Own</a></li>
+         </ul>
+         <ul class="sub-links" id="health">
+            <li><a href="#AddCompanys_Health_Wellness" data-toggle="modal" >Organ Donor</a></li>
+            <li><a href="#AddCompanys_Overcame_Illness" data-toggle="modal" >Overcame an Illness</a></li>
+            <li><a href="#AddCompanys_Quit_Habit" data-toggle="modal" >Quit a Habit</a></li>
+            <li><a href="#AddCompanys_New_Habits" data-toggle="modal" >New Eating Habits</a></li>
+            <li><a href="#AddCompanys_Weight_Loss" data-toggle="modal" >Weight Loss</a></li>
+            <li><a href="#AddCompanys_Glasses_Contacts" data-toggle="modal" >Glassess, Contacts, Others</a></li>
+            <li><a href="#AddCompanys" data-toggle="modal" >Broken Bone</a></li>
+            <li><a href="#AddCompanys" data-toggle="modal" >Removed Braces</a></li>
+            <li><a href="#AddCompanys" data-toggle="modal" >Create YOur Own</a></li>
+         </ul>
+         <ul class="sub-links" id="travel">
+            <li><a href="#AddCompanys" data-toggle="modal" >New Hobby</a></li>
+            <li><a href="#AddCompanys" data-toggle="modal" >New Instrument</a></li>
+            <li><a href="#AddCompanys" data-toggle="modal" >New Language</a></li>
+            <li><a href="#AddCompanys" data-toggle="modal" >Travel</a></li>
+            <li><a href="#AddCompanys" data-toggle="modal" >Achievement or Award</a></li>
+            <li><a href="#AddCompanys" data-toggle="modal" >Changed Beliefs</a></li>
+            <li><a href="#AddCompanys" data-toggle="modal" >First Word, Kiss, Other</a></li>
+            <li><a href="#AddCompanys" data-toggle="modal" >Create your Own</a></li>
+         </ul>
+     </div>
+     </td>
+     </tr>
+     </table>
+</div>
+</div>
+                        
+                        
+                          
                         </div>
                         <div class="clearfix"></div>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
                       </li>
                     </ul>
                   </div>
@@ -2028,3 +2146,5 @@
         </div>
       </section>
     </section>
+
+

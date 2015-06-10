@@ -48,7 +48,7 @@
           </li>
          
           <li class="box_button">
-          <div class="btn3 btn-black">Back</div>
+          <div class="btn3 btn-black"><a href="javascript:window.history.go(-1);">Back</a></div>
 <div class="btn3 btn-green" data-toggle="modal" data-target="#AddCompany">Apply Jobs</div>
           </li>
           

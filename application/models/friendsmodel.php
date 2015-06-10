@@ -940,7 +940,7 @@ $searchblock .= "<figure class='member-sug-pic'><img src='" . base_url() ."uploa
   
 }
 // To get companies as per search input
-$this->db->select('*'); 
+	$this->db->select('*'); 
 	$this->db->from('bzz_companyinfo');
 	$this->db->like('cmp_name',$value); 
 	$this->db->or_like('cmp_industry',$value); 
@@ -973,9 +973,11 @@ $searchblock .= "<figure class='member-sug-pic'><img src='" . base_url() ."uploa
  }
   
 // To get jobs as per search input  
-/*$this->db->select('*'); 
+ $this->db->select('*'); 
 	$this->db->from('jobs');
 	$this->db->like('job_title',$value); 
+	$this->db->or_like('job_type',$value); 
+	$this->db->or_like('job_category',$value); 
 	$this->db->or_like('job_keyword',$value); 
 	$this->db->limit(5);
 	$query = $this->db->get();
@@ -983,28 +985,77 @@ $searchblock .= "<figure class='member-sug-pic'><img src='" . base_url() ."uploa
     if($userdata) {
 	  $i = 0;
 	  foreach($userdata as $req){
-	  $searchblock .= " <li class='col-md-12' onclick='location.href=&#39;".base_url()."company/company_disp/".$req['companyinfo_id']."&#39;'>
+		  
+	$this->db->select('*'); 
+	$this->db->from('bzz_companyinfo');
+	$this->db->where('companyinfo_id',$req['company_posted_by']);
+	$query = $this->db->get();
+	$cmp_info = $query->result_array();
+		  
+		
+	  $searchblock .= "<li class='col-md-12' onclick='location.href=&#39;".base_url()."jobs/job_view/".$cmp_info[0]['companyinfo_id']."/".$req['job_id']."&#39;'>
         	<div class='member-search-sug'>";
 			$searchblock .= "<div class='categoryBlock'>";
-			if($i==0) { $searchblock .="Companies"; }
+			if($i==0) { $searchblock .="Jobs"; }
 			$searchblock .="</div>";
-			if(!empty($req['company_image'])){
-$searchblock .= "<figure class='member-sug-pic'><img src='" . base_url() ."uploads/".$req['company_image']."' alt='". $req['cmp_name'] . " '></figure>";
+			if(!empty($cmp_info[0]['company_image'])){
+$searchblock .= "<figure class='member-sug-pic'><img src='" . base_url() ."uploads/".$cmp_info[0]['company_image']."' alt='". $cmp_info[0]['cmp_name'] . " '></figure>";
 			}else{
 				$searchblock .= "<figure class='member-sug-pic'><img src='" . base_url() ."uploads/default_profile_pic.png'></figure>";
 			}
 
 		$searchblock .= " <div class='member-search-name'>
-            <h4>". $req['cmp_name']."</h4>";
+            <h4>". $req['job_type']."</h4>";
 			
-			$searchblock .= "<h6>Industry: ".$req['cmp_industry'].", Employees:".$req['cmp_colleagues']."</h6>";
+			$searchblock .= "<h6>Designation: ".$req['job_title']."</h6>";
  
                $searchblock .= "</div></li>	";
 			   $i++;
 	
  } 
  }
-*/
+
+
+//search events  as per search input
+
+
+
+
+ $this->db->select('*'); 
+	$this->db->from('bzz_events');
+	$this->db->like('event_name',$value); 
+	$this->db->or_like('event_location',$value); 
+	 
+	$this->db->limit(5);
+	$query = $this->db->get();
+	$userdata = $query->result_array();
+    if($userdata) {
+	  $i = 0;
+	  foreach($userdata as $req){
+	
+	  $searchblock .= "<li class='col-md-12' onclick='location.href=&#39;".base_url()."events/get_event_byid/".$req['event_id']."/".$req['event_cr_cmp']."&#39;'>
+        	<div class='member-search-sug'>";
+			$searchblock .= "<div class='categoryBlock'>";
+			if($i==0) { $searchblock .="Events"; }
+			$searchblock .="</div>";
+			if(!empty($req['event_image'])){
+$searchblock .= "<figure class='member-sug-pic'><img src='" . base_url() ."uploads/".$req['event_image']."' alt='". $req['event_name'] . " '></figure>";
+			}else{
+				$searchblock .= "<figure class='member-sug-pic'><img src='" . base_url() ."uploads/default_profile_pic.png'></figure>";
+			}
+
+		$searchblock .= " <div class='member-search-name'>
+            <h4>". $req['event_name']."</h4>";
+			
+			$searchblock .= "<h6>Location: ".$req['event_location']."</h6>";
+ 
+               $searchblock .= "</div></li>	";
+			   $i++;
+	
+ } 
+ }
+
+
 
 $searchblock .= "</ul>"; 
  echo $searchblock;

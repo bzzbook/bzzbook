@@ -930,3 +930,2719 @@
 </div>
 
 <!----------------  business card share end ---------------->
+
+<!----------  new job begin -------------------->
+
+<div class="modal fade" id="AddCompanys" tabindex="-1" role="dialog" aria-labelledby="myModalLabe" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div id="comperrormsg"></div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="start"><i class="fa fa-fw"></i></div>
+        <h4 class="modal-title" id="myModalLabe">Starts Work at</h4>
+        <div class="subheads">May 18, 2015</div>
+      </div>
+      <div class="modal-body">
+        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+          <div class="col-md-6 Works" >
+            <div class="form-group">
+              <label for="exampleInputEmail1">Employer</label>
+              <input type="text" class="form-control" id="" placeholder="">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Position</label>
+              <input type="text" class="form-control" id="" placeholder="optional">
+            </div>
+            <div class="located">
+              <label for="exampleInputEmail1">Location</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" class="form-control" id="exampleInputAmount">
+              </div>
+            </div>
+            <div class="Works">
+              <input type="checkbox" class="outside">
+              <span>I currently work here</span> </div>
+            <div class="form-group">
+              <label for="">When</label>
+              <div class="clearfix"></div>
+              <div class="col-md-4">
+                <select>
+                  <option>1982</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>May</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>13</option>
+                </select>
+              </div>
+              <div class="clearfix"></div>
+              <div class="work_botom"><a href="#"><i class="fa fa-plus"></i>&nbsp;Add Year</a></div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Story</label>
+              <div class="clearfix"></div>
+              <textarea rows="4" placeholder="Optional"></textarea>
+            </div>
+          </div>
+          <div class="col-md-6 chos_photos" id="testingg" >
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box" onclick="document.getElementById('uploadjob_photos').click()">Upload Photos...</button>
+             <input class="btn btn-default btn-lg btn-block pho_box" type="file" name="uploadjob_photos[]" id="uploadjob_photos" multiple="multiple" style="display:none;" />
+          </div>
+         <div class="col-md-6 chos_photos" id="uploadPhotosnewjob"></div>
+          <div class="clearfix"></div>
+        </form>
+        <div class="box_bottom">
+          <div class="publics col-md-3" style="float:right">
+           <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save</div>
+            <div class="btn3 btn-black">Cancel</div>
+           
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<!----------  new job end   -------------------->
+
+<!-----Published book or paper------->
+
+<div class="modal fade" id="AddCompanys_book" tabindex="-1" role="dialog" aria-labelledby="myModalLabe" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div id="comperrormsg"></div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="paper"><i class="fa fa-fw"></i></div>
+        <h4 class="modal-title" id="myModalLabe">Published a Paper</h4>
+        <div class="subheads">Today</div>
+      </div>
+      <div class="modal-body">
+        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+          <div class="col-md-6 books" >
+            <div class="form-group">
+              <label for="exampleInputName2">Title</label>
+              <input type="text" class="form-control" id="" placeholder="Optional">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputName2">Type</label>
+              <div class="clearfix"></div>
+              <select>
+                <option>Paper</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Full Citation</label>
+              <div class="clearfix"></div>
+              <textarea rows="4" placeholder="Optional"></textarea>
+            </div>
+            <div class="located">
+              <label for="exampleInputEmail1">Location</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" class="form-control" id="exampleInputAmount" placeholder="Optional">
+              </div>
+            </div>
+            <div class="located">
+              <label for="exampleInputEmail1">With</label>
+              <div class="input-group">
+                <div class="input-group-addon"> <i class="fa fa-fw"></i></div>
+                <input type="text" class="form-control" id="exampleInputAmount" placeholder="">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="">When</label>
+              <div class="clearfix"></div>
+              <div class="col-md-4">
+                <select>
+                  <option>1982</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>May</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>13</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Story</label>
+                <div class="clearfix"></div>
+                <textarea rows="4" placeholder="Optional"></textarea>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+          <div class="col-md-6 chos_photos" >
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
+          </div>
+          <div class="clearfix"></div>
+        </form>
+        <div class="box_bottom">
+          <div class="publics col-md-3" style="float:right">
+           <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save</div>
+            <div class="btn3 btn-black">Cancel</div>
+           
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-----retired------>
+<div class="modal fade" id="AddCompanys_Retired" tabindex="-1" role="dialog" aria-labelledby="myModalLabe" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div id="comperrormsg"></div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="paper"><i class="fa fa-fw"></i></div>
+        <h4 class="modal-title" id="myModalLabe">Retired</h4>
+        <div class="subheads">Today</div>
+      </div>
+      <div class="modal-body">
+        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+          <div class="col-md-6 Retired" >
+            <div class="form-group">
+              <label for="exampleInputName2">Title</label>
+              <input type="text" class="form-control" id="" placeholder="Optional">
+            </div>
+            <div class="form-group">
+              <label for="">When</label>
+              <div class="clearfix"></div>
+              <div class="col-md-4">
+                <select>
+                  <option>1982</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>May</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>13</option>
+                </select>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputName2">Profession</label>
+              <input type="text" class="form-control" id="" placeholder="Optional">
+            </div>
+            <div class="located">
+              <label for="exampleInputEmail1">Location</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" placeholder="Optional" id="exampleInputAmount" class="form-control">
+              </div>
+            </div>
+            <div class="located">
+              <label for="exampleInputEmail1">With</label>
+              <div class="input-group">
+                <div class="input-group-addon"> <i class="fa fa-fw"></i></div>
+                <input type="text" placeholder="" id="exampleInputAmount" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Story</label>
+              <div class="clearfix"></div>
+              <textarea placeholder="Optional" rows="4"></textarea>
+            </div>
+          </div>
+          <div class="col-md-6 chos_photos" >
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
+          </div>
+          <div class="clearfix"></div>
+        </form>
+        <div class="box_bottom">
+          <div class="box_bottom">
+          <div class="publics col-md-3" style="float:right">
+           <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save</div>
+            <div class="btn3 btn-black">Cancel</div>
+           
+          </div>
+          <div class="clearfix"></div>
+        </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-----Started School------>
+<div class="modal fade" id="AddCompanys_New_school" tabindex="-1" role="dialog" aria-labelledby="myModalLabe" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div id="comperrormsg"></div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="paper"><i class="fa fa-fw"></i></div>
+        <h4 class="modal-title" id="myModalLabe">Started School</h4>
+        <div class="subheads">May 25, 2015</div>
+      </div>
+      <div class="modal-body">
+        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+          <div class="col-md-6 New_school" >
+            <div class="form-group">
+              <label for="exampleInputName2">Type of School</label>
+              <br>
+              <div class="schools">
+                <select>
+                  <option>High School </option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputName2">School</label>
+              <input type="text" class="form-control" id="" >
+            </div>
+            <div class="Works">
+              <input type="checkbox" class="outside">
+              <span>I currently study here</span> </div>
+            <div class="form-group">
+              <label for="">When</label>
+              <div class="clearfix"></div>
+              <div class="col-md-4">
+                <select>
+                  <option>1982</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>May</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>13</option>
+                </select>
+              </div>
+              <div class="clearfix"></div>
+              <div class="work_botom"><a href="#"><i class="fa fa-plus"></i>&nbsp;Add Year</a></div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputName2">Graduated</label>
+              <br>
+              <input type="checkbox" class="outside">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Story</label>
+              <div class="clearfix"></div>
+              <textarea placeholder="Optional" rows="4"></textarea>
+            </div>
+          </div>
+          <div class="col-md-6 chos_photos" >
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
+          </div>
+          <div class="clearfix"></div>
+        </form>
+        <div class="box_bottom">
+          <div class="box_bottom">
+          <div class="publics col-md-3" style="float:right">
+           <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save</div>
+            <div class="btn3 btn-black">Cancel</div>
+           
+          </div>
+          <div class="clearfix"></div>
+        </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-----Study abroad------>
+<div class="modal fade" id="AddCompanys_Study_abroad" tabindex="-1" role="dialog" aria-labelledby="myModalLabe" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div id="comperrormsg"></div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="paper"><i class="fa fa-fw"></i></div>
+        <h4 class="modal-title" id="myModalLabe">Studied Abroad</h4>
+        <div class="subheads">Today</div>
+      </div>
+      <div class="modal-body">
+        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+          <div class="col-md-6 Study_abroad" >
+            <div class="form-group">
+              <label for="exampleInputName2">Title</label>
+              <input type="text" class="form-control" id="" placeholder="Optional" >
+            </div>
+            <div class="located">
+              <label for="exampleInputEmail1">Location</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" id="exampleInputAmount" class="form-control" placeholder="Optional">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputName2">School</label>
+              <input type="text" class="form-control" id="" placeholder="Optional" >
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Studying</label>
+              <div class="clearfix"></div>
+              <textarea placeholder="Optional" rows="4"></textarea>
+            </div>
+            <div class="located">
+              <label for="exampleInputEmail1">With</label>
+              <div class="input-group">
+                <div class="input-group-addon"> <i class="fa fa-fw"></i></div>
+                <input type="text" placeholder="" id="exampleInputAmount" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="">From</label>
+              <div class="clearfix"></div>
+              <div class="col-md-4">
+                <select>
+                  <option>1982</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>May</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>13</option>
+                </select>
+              </div>
+              <div class="clearfix"></div>
+              <label for="exampleInputName2">To</label>
+              <br>
+              <div class="work_botom"><a href="#"><i class="fa fa-plus"></i>&nbsp;Add Year</a></div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Story</label>
+              <div class="clearfix"></div>
+              <textarea placeholder="Optional" rows="4"></textarea>
+            </div>
+          </div>
+          <div class="col-md-6 chos_photos" >
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
+          </div>
+          <div class="clearfix"></div>
+        </form>
+        <div class="box_bottom">
+          <div class="box_bottom">
+          <div class="publics col-md-3" style="float:right">
+           <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save</div>
+            <div class="btn3 btn-black">Cancel</div>
+           
+          </div>
+          <div class="clearfix"></div>
+        </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-----Volunteer Work------>
+<div class="modal fade" id="AddCompanys_Volunteer_Work" tabindex="-1" role="dialog" aria-labelledby="myModalLabe" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div id="comperrormsg"></div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="paper"><i class="fa fa-fw"></i></div>
+        <h4 class="modal-title" id="myModalLabe">Started Volunteering</h4>
+        <div class="subheads">Today</div>
+      </div>
+      <div class="modal-body">
+        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+          <div class="col-md-6 Volunteer_Work" >
+            <div class="form-group">
+              <label for="exampleInputName2">Title</label>
+              <input type="text" class="form-control" id="" placeholder="Optional" >
+            </div>
+            <div class="form-group">
+              <label for="exampleInputName2">Organization</label>
+              <input type="text" class="form-control" id="" placeholder="Optional" >
+            </div>
+            <div class="located">
+              <label for="exampleInputEmail1">Location</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" id="exampleInputAmount" class="form-control" placeholder="Optional">
+              </div>
+            </div>
+            <div class="located">
+              <label for="exampleInputEmail1">With</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" id="exampleInputAmount" class="form-control" placeholder="">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="">When</label>
+              <div class="clearfix"></div>
+              <div class="col-md-4">
+                <select>
+                  <option>1982</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>May</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>13</option>
+                </select>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Story</label>
+              <div class="clearfix"></div>
+              <textarea placeholder="Optional" rows="4"></textarea>
+            </div>
+          </div>
+          <div class="col-md-6 chos_photos" >
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
+          </div>
+          <div class="clearfix"></div>
+        </form>
+        <div class="box_bottom">
+          <div class="box_bottom">
+          <div class="publics col-md-3" style="float:right">
+           <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save</div>
+            <div class="btn3 btn-black">Cancel</div>
+           
+          </div>
+          <div class="clearfix"></div>
+        </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-----Military Service------>
+<div class="modal fade" id="AddCompanys_Military_Service" tabindex="-1" role="dialog" aria-labelledby="myModalLabe" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div id="comperrormsg"></div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="paper"><i class="fa fa-fw"></i></div>
+        <h4 class="modal-title" id="myModalLabe">Military Service</h4>
+        <div class="subheads">Today</div>
+      </div>
+      <div class="modal-body">
+        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+
+          <div class="col-md-6 Military_Service" >
+            <div class="form-group">
+              <label for="exampleInputName2">Title</label>
+              <input type="text" class="form-control" id="" placeholder="Optional" >
+            </div>
+            <div class="form-group">
+              <label for="exampleInputName2">Branch</label>
+              <input type="text" class="form-control" id="" placeholder="Optional" >
+            </div>
+            <div class="form-group">
+              <label for="exampleInputName2">Division</label>
+              <input type="text" class="form-control" id="" placeholder="Optional" >
+            </div>
+            <div class="located">
+              <label for="exampleInputEmail1">Country</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" id="exampleInputAmount" class="form-control" placeholder="Optional">
+              </div>
+            </div>
+            <div class="located">
+              <label for="exampleInputEmail1">With</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" id="exampleInputAmount" class="form-control" placeholder="">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="">From</label>
+              <div class="clearfix"></div>
+              <div class="col-md-4">
+                <select>
+                  <option>1982</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>May</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>13</option>
+                </select>
+              </div>
+              <div class="clearfix"></div>
+              <label for="exampleInputName2">To</label>
+              <div class="work_botom"><a href="#"><i class="fa fa-plus"></i>&nbsp;Add Year</a></div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Story</label>
+              <div class="clearfix"></div>
+              <textarea placeholder="Optional" rows="4"></textarea>
+            </div>
+          </div>
+          <div class="col-md-6 chos_photos" >
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
+          </div>
+          <div class="clearfix"></div>
+        </form>
+        <div class="box_bottom">
+          <div class="publics col-md-3" style="float:right">
+           <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save</div>
+            <div class="btn3 btn-black">Cancel</div>
+           
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-----Military Service------>
+<div class="modal fade" id="AddCompanys_Create_own" tabindex="-1" role="dialog" aria-labelledby="myModalLabe" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div id="comperrormsg"></div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="paper"><i class="fa fa-fw"></i></div>
+        <h4 class="modal-title" id="myModalLabe">Other Life Event</h4>
+        <div class="subheads">Today</div>
+      </div>
+      <div class="modal-body">
+        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+          <div class="col-md-6 Create_own" >
+            <div class="form-group">
+              <label for="exampleInputName2">Title</label>
+              <input type="text" class="form-control" id="" placeholder="Optional" >
+            </div>
+            <div class="located">
+              <label for="exampleInputEmail1">Location</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" id="exampleInputAmount" class="form-control" placeholder="Optional">
+              </div>
+            </div>
+            <div class="located">
+              <label for="exampleInputEmail1">With</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" id="exampleInputAmount" class="form-control" placeholder="">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="">When</label>
+              <div class="clearfix"></div>
+              <div class="col-md-4">
+                <select>
+                  <option>1982</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>May</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>13</option>
+                </select>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Story</label>
+              <div class="clearfix"></div>
+              <textarea placeholder="Optional" rows="4"></textarea>
+            </div>
+          </div>
+          <div class="col-md-6 chos_photos" >
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
+          </div>
+          <div class="clearfix"></div>
+        </form>
+        <div class="box_bottom">
+          <div class="publics col-md-3" style="float:right">
+           <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save</div>
+            <div class="btn3 btn-black">Cancel</div>
+           
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-----Family & Relationships second tab open--------------> 
+<!-----First Met------>
+<div class="modal fade" id="AddCompanys_First_Met" tabindex="-1" role="dialog" aria-labelledby="myModalLabe" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div id="comperrormsg"></div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="paper"><i class="fa fa-fw"></i></div>
+        <h4 class="modal-title" id="myModalLabe">First Met Someone</h4>
+        <div class="subheads">Today</div>
+      </div>
+      <div class="modal-body">
+        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+          <div class="col-md-6 First_Met" >
+            <div class="form-group">
+              <label for="exampleInputName2">Title</label>
+              <input type="text" class="form-control" id="" placeholder="Optional" >
+            </div>
+            <div class="located">
+              <label for="exampleInputEmail1">Who</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" id="exampleInputAmount" class="form-control" placeholder="">
+              </div>
+              <div class="form-group">
+                <label for="">When</label>
+                <div class="clearfix"></div>
+                <div class="col-md-4">
+                  <select>
+                    <option>1982</option>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <select>
+                    <option>May</option>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <select>
+                    <option>13</option>
+                  </select>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+            </div>
+            <div class="located">
+              <label for="exampleInputEmail1">Where</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" placeholder="Optional" class="form-control" id="exampleInputAmount">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Story</label>
+              <div class="clearfix"></div>
+              <textarea placeholder="Optional" rows="4"></textarea>
+            </div>
+          </div>
+          <div class="col-md-6 chos_photos" >
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
+          </div>
+          <div class="clearfix"></div>
+        </form>
+        <div class="box_bottom">
+          <div class="publics col-md-3" style="float:right">
+           <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save</div>
+            <div class="btn3 btn-black">Cancel</div>
+           
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-----New Relationship------>
+<div class="modal fade" id="AddCompanys_New_Relationship" tabindex="-1" role="dialog" aria-labelledby="myModalLabe" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div id="comperrormsg"></div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="paper"><i class="fa fa-fw"></i></div>
+        <h4 class="modal-title" id="myModalLabe">In a Relationship</h4>
+        <div class="subheads">Today</div>
+      </div>
+      <div class="modal-body">
+        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+          <div class="col-md-6 New_Relationship" >
+            <div class="form-group">
+              <label for="exampleInputName2">Title</label>
+              <input type="text" class="form-control" id="" placeholder="Optional" >
+            </div>
+            <div class="form-group">
+              <label for="exampleInputName2">Relationship</label>
+              <br>
+              <div class="schools">
+                <select>
+                  <option>In a Relationship </option>
+                </select>
+              </div>
+            </div>
+            <div class="located">
+              <label for="exampleInputEmail1">Location</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" placeholder="Optional" class="form-control" id="exampleInputAmount">
+              </div>
+            </div>
+            <div class="located">
+              <label for="exampleInputEmail1">Who</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" id="exampleInputAmount" class="form-control" placeholder="">
+              </div>
+              <div class="form-group">
+                <label for="">When</label>
+                <div class="clearfix"></div>
+                <div class="col-md-4">
+                  <select>
+                    <option>1982</option>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <select>
+                    <option>May</option>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <select>
+                    <option>13</option>
+                  </select>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Story</label>
+              <div class="clearfix"></div>
+              <textarea placeholder="Optional" rows="4"></textarea>
+            </div>
+          </div>
+          <div class="col-md-6 chos_photos" >
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
+          </div>
+          <div class="clearfix"></div>
+        </form>
+        <div class="box_bottom">
+          <div class="publics col-md-3" style="float:right">
+           <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save</div>
+            <div class="btn3 btn-black">Cancel</div>
+           
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-----Engagement------>
+<div class="modal fade" id="AddCompanys_Engagement" tabindex="-1" role="dialog" aria-labelledby="myModalLabe" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div id="comperrormsg"></div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="paper"><i class="fa fa-fw"></i></div>
+        <h4 class="modal-title" id="myModalLabe">Got Engaged</h4>
+        <div class="subheads">Today</div>
+      </div>
+      <div class="modal-body">
+        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+          <div class="col-md-6 Engagement" >
+            <div class="form-group">
+              <label for="exampleInputName2">Title</label>
+              <input type="text" class="form-control" id="" placeholder="Optional" >
+            </div>
+            <div class="located">
+              <label for="exampleInputEmail1">Engaged To</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" id="exampleInputAmount" class="form-control" placeholder="">
+              </div>
+              <div class="located">
+                <label for="exampleInputEmail1">Location</label>
+                <div class="input-group">
+                  <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                  <input type="text" placeholder="Optional" class="form-control" id="exampleInputAmount">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="">When</label>
+                <div class="clearfix"></div>
+                <div class="col-md-4">
+                  <select>
+                    <option>1982</option>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <select>
+                    <option>May</option>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <select>
+                    <option>13</option>
+                  </select>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Story</label>
+              <div class="clearfix"></div>
+              <textarea placeholder="Optional" rows="4"></textarea>
+            </div>
+            <div class="Works">
+              <input type="checkbox" class="outside">
+              <span>Update relationship status</span> </div>
+          </div>
+          <div class="col-md-6 chos_photos" >
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
+          </div>
+          <div class="clearfix"></div>
+        </form>
+        <div class="box_bottom">
+          <div class="publics col-md-3" style="float:right">
+           <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save</div>
+            <div class="btn3 btn-black">Cancel</div>
+           
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-----Marriage------>
+<div class="modal fade" id="AddCompanys_Marriage" tabindex="-1" role="dialog" aria-labelledby="myModalLabe" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div id="comperrormsg"></div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="paper"><i class="fa fa-fw"></i></div>
+        <h4 class="modal-title" id="myModalLabe">Got Married</h4>
+        <div class="subheads">Today</div>
+      </div>
+      <div class="modal-body">
+        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+          <div class="col-md-6 Marriage" >
+            <div class="form-group">
+              <label for="exampleInputName2">Title</label>
+              <input type="text" class="form-control" id="" placeholder="Optional" >
+            </div>
+            <div class="located">
+              <label for="exampleInputEmail1">Married To</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" id="exampleInputAmount" class="form-control" placeholder="">
+              </div>
+              <div class="located">
+                <label for="exampleInputEmail1">Location</label>
+                <div class="input-group">
+                  <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                  <input type="text" placeholder="Optional" class="form-control" id="exampleInputAmount">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="">When</label>
+                <div class="clearfix"></div>
+                <div class="col-md-4">
+                  <select>
+                    <option>1982</option>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <select>
+                    <option>May</option>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <select>
+                    <option>13</option>
+                  </select>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Story</label>
+              <div class="clearfix"></div>
+              <textarea placeholder="Optional" rows="4"></textarea>
+            </div>
+            <div class="Works">
+              <input type="checkbox" class="outside">
+              <span>Update relationship status</span> </div>
+          </div>
+          <div class="col-md-6 chos_photos" >
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
+          </div>
+          <div class="clearfix"></div>
+        </form>
+        <div class="box_bottom">
+          <div class="publics col-md-3" style="float:right">
+           <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save</div>
+            <div class="btn3 btn-black">Cancel</div>
+           
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-----Anniversary------>
+<div class="modal fade" id="AddCompanys_Anniversary" tabindex="-1" role="dialog" aria-labelledby="myModalLabe" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div id="comperrormsg"></div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="paper"><i class="fa fa-fw"></i></div>
+        <h4 class="modal-title" id="myModalLabe">Anniversary</h4>
+        <div class="subheads"></div>
+      </div>
+      <div class="modal-body">
+        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+          <div class="col-md-6 Anniversary" >
+            <div class="form-group">
+              <label for="exampleInputName2">Title</label>
+              <input type="text" class="form-control" id="" placeholder="Optional" >
+            </div>
+            <div class="located">
+              <label for="exampleInputEmail1">Partner</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" id="exampleInputAmount" class="form-control" placeholder="">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputName2">Relationship</label>
+                <br>
+                <div class="schools">
+                  <select>
+                    <option>In a Relationship </option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputName2">Number of Years</label>
+                <br>
+                <div class="schools">
+                  <select>
+                    <option>1 </option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="">Celebration Date</label>
+                <div class="clearfix"></div>
+                <div class="col-md-4">
+                  <select>
+                    <option>1982</option>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <select>
+                    <option>May</option>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <select>
+                    <option>13</option>
+                  </select>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Story</label>
+              <div class="clearfix"></div>
+              <textarea placeholder="Optional" rows="4"></textarea>
+            </div>
+          </div>
+          <div class="col-md-6 chos_photos" >
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
+          </div>
+          <div class="clearfix"></div>
+        </form>
+        <div class="box_bottom">
+          <div class="publics col-md-3" style="float:right">
+           <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save</div>
+            <div class="btn3 btn-black">Cancel</div>
+           
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-----Expecting a baby------>
+<div class="modal fade" id="AddCompanys_Expecting_baby" tabindex="-1" role="dialog" aria-labelledby="myModalLabe" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div id="comperrormsg"></div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="paper"><i class="fa fa-fw"></i></div>
+        <h4 class="modal-title" id="myModalLabe">Expecting a Baby</h4>
+        <div class="subheads">Announced Today</div>
+      </div>
+      <div class="modal-body">
+        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+          <div class="col-md-6 Expecting_baby" >
+            <div class="form-group">
+              <label for="exampleInputName2">Title</label>
+              <input type="text" class="form-control" id="" placeholder="Optional" >
+            </div>
+            <div class="form-group">
+              <label for="exampleInputName2">Gender</label>
+              <br>
+              <div class="schools">
+                <select>
+                  <option>In </option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputName2">Due Date</label>
+              <br>
+              <div class="work_botom"><a href="#"><i class="fa fa-plus"></i>&nbsp;Add Year</a></div>
+            </div>
+            <div class="form-group">
+              <label for="">Shared the News On</label>
+              <div class="clearfix"></div>
+              <div class="col-md-4">
+                <select>
+                  <option>1982</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>May</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>13</option>
+                </select>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="located">
+              <label for="exampleInputEmail1">With</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" placeholder="" class="form-control" id="exampleInputAmount">
+              </div>
+            </div>
+            <div class="located">
+              <label for="exampleInputEmail1">Location</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" placeholder="Optional" class="form-control" id="exampleInputAmount">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Story</label>
+              <div class="clearfix"></div>
+              <textarea rows="4" placeholder="Optional"></textarea>
+            </div>
+          </div>
+          <div class="col-md-6 chos_photos" >
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
+          </div>
+          <div class="clearfix"></div>
+        </form>
+        <div class="box_bottom">
+          <div class="publics col-md-3" style="float:right">
+           <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save</div>
+            <div class="btn3 btn-black">Cancel</div>
+           
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-----New Child------>
+<div class="modal fade" id="AddCompanys_New_Child" tabindex="-1" role="dialog" aria-labelledby="myModalLabe" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div id="comperrormsg"></div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="paper"><i class="fa fa-fw"></i></div>
+        <h4 class="modal-title" id="myModalLabe">Had a Child</h4>
+        <div class="subheads"> Today</div>
+      </div>
+      <div class="modal-body">
+        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+          <div class="col-md-6 New_Child" >
+            <div class="form-group">
+              <label for="exampleInputName2">Title</label>
+              <input type="text" class="form-control" id="" placeholder="Optional" >
+            </div>
+            <div class="form-group">
+              <label for="exampleInputName2">Name of Child</label>
+              <input type="text" class="form-control" id="" placeholder="Optional" >
+            </div>
+            <div class="form-group">
+              <label for="">Born On</label>
+              <div class="clearfix"></div>
+              <div class="col-md-4">
+                <select>
+                  <option>1982</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>May</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>13</option>
+                </select>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="located">
+              <label for="exampleInputEmail1">With</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" placeholder="" class="form-control" id="exampleInputAmount">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputName2">Gender</label>
+              <br>
+              <div class="schools">
+                <select>
+                  <option>In </option>
+                </select>
+              </div>
+            </div>
+            <div class="located">
+              <label for="exampleInputEmail1">Location</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" placeholder="Optional" class="form-control" id="exampleInputAmount">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Story</label>
+              <div class="clearfix"></div>
+              <textarea rows="4" placeholder="Optional"></textarea>
+            </div>
+          </div>
+          <div class="col-md-6 chos_photos" >
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
+          </div>
+          <div class="clearfix"></div>
+        </form>
+        <div class="box_bottom">
+          <div class="publics col-md-3" style="float:right">
+           <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save</div>
+            <div class="btn3 btn-black">Cancel</div>
+           
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-----New Family Member------>
+<div class="modal fade" id="AddCompanys_Family_Member" tabindex="-1" role="dialog" aria-labelledby="myModalLabe" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div id="comperrormsg"></div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="paper"><i class="fa fa-fw"></i></div>
+        <h4 class="modal-title" id="myModalLabe">Added a Family Member</h4>
+        <div class="subheads"> Today</div>
+      </div>
+      <div class="modal-body">
+        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+          <div class="col-md-6 Family_Member" >
+            <div class="form-group">
+              <label for="exampleInputName2">Title</label>
+              <input type="text" class="form-control" id="" placeholder="Optional" >
+            </div>
+            <div class="located">
+              <label for="exampleInputEmail1">Who</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" placeholder="" class="form-control" id="exampleInputAmount">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputName2">Relationship</label>
+              <br>
+              <div class="schools">
+                <select>
+                  <option>In </option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="">When</label>
+              <div class="clearfix"></div>
+              <div class="col-md-4">
+                <select>
+                  <option>1982</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>May</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>13</option>
+                </select>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Story</label>
+              <div class="clearfix"></div>
+              <textarea rows="4" placeholder="Optional"></textarea>
+            </div>
+          </div>
+          <div class="col-md-6 chos_photos" >
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
+          </div>
+          <div class="clearfix"></div>
+        </form>
+        <div class="box_bottom">
+          <div class="publics col-md-3" style="float:right">
+           <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save</div>
+            <div class="btn3 btn-black">Cancel</div>
+           
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-----New Pet------>
+<div class="modal fade" id="AddCompanys_New_Pet" tabindex="-1" role="dialog" aria-labelledby="myModalLabe" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div id="comperrormsg"></div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="paper"><i class="fa fa-fw"></i></div>
+        <h4 class="modal-title" id="myModalLabe">Got a Pet</h4>
+        <div class="subheads"> Today</div>
+      </div>
+      <div class="modal-body">
+        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+          <div class="col-md-6 New_Pet" >
+            <div class="form-group">
+              <label for="exampleInputName2">Title</label>
+              <input type="text" class="form-control" id="" placeholder="Optional" >
+            </div>
+            <div class="form-group">
+              <label for="exampleInputName2">Name of Pet</label>
+              <input type="text" class="form-control" id="" placeholder="Optional" >
+            </div>
+            <div class="form-group">
+              <label for="exampleInputName2">Title</label>
+              <input type="text" class="form-control" id="" placeholder="Optional" >
+            </div>
+            <div class="form-group">
+              <label for="exampleInputName2">Breed</label>
+              <input type="text" class="form-control" id="" placeholder="Optional" >
+            </div>
+            <div class="form-group">
+              <label for="exampleInputName2">Gender</label>
+              <br>
+              <div class="schools">
+                <select>
+                  <option> </option>
+                </select>
+              </div>
+            </div>
+            <div class="located">
+              <label for="exampleInputEmail1">With</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" placeholder="" class="form-control" id="exampleInputAmount">
+              </div>
+            </div>
+            <div class="located">
+              <label for="exampleInputEmail1">Location</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" id="exampleInputAmount" class="form-control" placeholder="Optional">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="">When</label>
+              <div class="clearfix"></div>
+              <div class="col-md-4">
+                <select>
+                  <option>1982</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>May</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>13</option>
+                </select>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Story</label>
+              <div class="clearfix"></div>
+              <textarea rows="4" placeholder="Optional"></textarea>
+            </div>
+          </div>
+          <div class="col-md-6 chos_photos" >
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
+          </div>
+          <div class="clearfix"></div>
+        </form>
+        <div class="box_bottom">
+          <div class="publics col-md-3" style="float:right">
+           <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save</div>
+            <div class="btn3 btn-black">Cancel</div>
+           
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-----End of Relationship------>
+<div class="modal fade" id="AddCompanys_End_Relationship" tabindex="-1" role="dialog" aria-labelledby="myModalLabe" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div id="comperrormsg"></div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="paper"><i class="fa fa-fw"></i></div>
+        <h4 class="modal-title" id="myModalLabe">End of Relationship</h4>
+        <div class="subheads"> Today</div>
+      </div>
+      <div class="modal-body">
+        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+          <div class="col-md-6 End_Relationship" >
+            <div class="form-group">
+              <label for="exampleInputName2">Title</label>
+              <input type="text" class="form-control" id="" placeholder="Optional" >
+            </div>
+            <div class="form-group">
+              <label for="exampleInputName2">Type</label>
+              <br>
+              <div class="schools">
+                <select>
+                  <option>Ended relationship </option>
+                </select>
+              </div>
+            </div>
+            <div class="located">
+              <label for="exampleInputEmail1">Who</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" placeholder="" class="form-control" id="exampleInputAmount">
+              </div>
+            </div>
+            <div class="located">
+              <label for="exampleInputEmail1">Location</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" id="exampleInputAmount" class="form-control" placeholder="Optional">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="">When</label>
+              <div class="clearfix"></div>
+              <div class="col-md-4">
+                <select>
+                  <option>1982</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>May</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>13</option>
+                </select>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Story</label>
+              <div class="clearfix"></div>
+              <textarea rows="4" placeholder="Optional"></textarea>
+            </div>
+          </div>
+          <div class="col-md-6 chos_photos" >
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
+          </div>
+          <div class="clearfix"></div>
+        </form>
+        <div class="box_bottom">
+          <div class="publics col-md-3" style="float:right">
+           <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save</div>
+            <div class="btn3 btn-black">Cancel</div>
+           
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-----Loss of a Loved One------>
+<div class="modal fade" id="AddCompanys_Loss_One" tabindex="-1" role="dialog" aria-labelledby="myModalLabe" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div id="comperrormsg"></div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="paper"><i class="fa fa-fw"></i></div>
+        <h4 class="modal-title" id="myModalLabe">Lost a Loved One</h4>
+        <div class="subheads"> Today</div>
+      </div>
+      <div class="modal-body">
+        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+          <div class="col-md-6 Loss_One" >
+            <div class="form-group">
+              <label for="exampleInputName2">Title</label>
+              <input type="text" class="form-control" id="" placeholder="Optional" >
+            </div>
+            <div class="located">
+              <label for="exampleInputEmail1">Name</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" placeholder="" class="form-control" id="exampleInputAmount">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputName2">Relationship</label>
+              <br>
+              <div class="schools">
+                <select>
+                  <option>Loved One </option>
+                </select>
+              </div>
+            </div>
+            <div class="located">
+              <label for="exampleInputEmail1">Location</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" id="exampleInputAmount" class="form-control" placeholder="Optional">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="">Passed On</label>
+              <div class="clearfix"></div>
+              <div class="col-md-4">
+                <select>
+                  <option>1982</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>May</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>13</option>
+                </select>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Story</label>
+              <div class="clearfix"></div>
+              <textarea rows="4" placeholder="Optional"></textarea>
+            </div>
+          </div>
+          <div class="col-md-6 chos_photos" >
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
+          </div>
+          <div class="clearfix"></div>
+        </form>
+        <div class="box_bottom">
+          <div class="publics col-md-3" style="float:right">
+           <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save</div>
+            <div class="btn3 btn-black">Cancel</div>
+           
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-----Loss of a Loved One------>
+<div class="modal fade" id="AddCompanys_Loss_One" tabindex="-1" role="dialog" aria-labelledby="myModalLabe" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div id="comperrormsg"></div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="paper"><i class="fa fa-fw"></i></div>
+        <h4 class="modal-title" id="myModalLabe">Lost a Loved One</h4>
+        <div class="subheads"> Today</div>
+      </div>
+      <div class="modal-body">
+        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+          <div class="col-md-6 Loss_One" >
+            <div class="form-group">
+              <label for="exampleInputName2">Title</label>
+              <input type="text" class="form-control" id="" placeholder="Optional" >
+            </div>
+            <div class="located">
+              <label for="exampleInputEmail1">Name</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" placeholder="" class="form-control" id="exampleInputAmount">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputName2">Relationship</label>
+              <br>
+              <div class="schools">
+                <select>
+                  <option>Loved One </option>
+                </select>
+              </div>
+            </div>
+            <div class="located">
+              <label for="exampleInputEmail1">Location</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" id="exampleInputAmount" class="form-control" placeholder="Optional">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="">Passed On</label>
+              <div class="clearfix"></div>
+              <div class="col-md-4">
+                <select>
+                  <option>1982</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>May</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>13</option>
+                </select>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Story</label>
+              <div class="clearfix"></div>
+              <textarea rows="4" placeholder="Optional"></textarea>
+            </div>
+          </div>
+          <div class="col-md-6 chos_photos" >
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
+          </div>
+          <div class="clearfix"></div>
+        </form>
+        <div class="box_bottom">
+          <div class="publics col-md-3" style="float:right">
+           <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save</div>
+            <div class="btn3 btn-black">Cancel</div>
+           
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-----Home & Leving tab3------>
+<div class="modal fade" id="AddCompanys_moved" tabindex="-1" role="dialog" aria-labelledby="myModalLabe" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div id="comperrormsg"></div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="paper"><i class="fa fa-fw"></i></div>
+        <h4 class="modal-title" id="myModalLabe">Moved</h4>
+        <div class="subheads"> Today</div>
+      </div>
+      <div class="modal-body">
+        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+          <div class="col-md-6 moved" >
+            <div class="form-group">
+              <label for="exampleInputName2">Title</label>
+              <input type="text" class="form-control" id="" placeholder="Optional" >
+            </div>
+            <div class="located">
+              <label for="exampleInputEmail1">Where To</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" id="exampleInputAmount" class="form-control" placeholder="">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputName2">Address</label>
+              <input type="text" class="form-control" id="" placeholder="Optional" >
+            </div>
+            <div class="form-group">
+              <label for="exampleInputName2">From</label>
+              <input type="text" class="form-control" id="" placeholder="Optional" >
+            </div>
+            <div class="located">
+              <label for="exampleInputEmail1">With</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" placeholder="" class="form-control" id="exampleInputAmount">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="">When</label>
+              <div class="clearfix"></div>
+              <div class="col-md-4">
+                <select>
+                  <option>1982</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>May</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>13</option>
+                </select>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Story</label>
+              <div class="clearfix"></div>
+              <textarea rows="4" placeholder="Optional"></textarea>
+            </div>
+          </div>
+          <div class="col-md-6 chos_photos" >
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
+          </div>
+          <div class="clearfix"></div>
+        </form>
+        <div class="box_bottom">
+          <div class="publics col-md-3" style="float:right">
+           <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save</div>
+            <div class="btn3 btn-black">Cancel</div>
+           
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-----Bought a home------>
+<div class="modal fade" id="AddCompanys_Bought_House" tabindex="-1" role="dialog" aria-labelledby="myModalLabe" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div id="comperrormsg"></div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="paper"><i class="fa fa-fw"></i></div>
+        <h4 class="modal-title" id="myModalLabe">Bought a House</h4>
+        <div class="subheads"> Today</div>
+      </div>
+      <div class="modal-body">
+        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+          <div class="col-md-6 Bought_House" >
+            <div class="form-group">
+              <label for="exampleInputName2">Title</label>
+              <input type="text" class="form-control" id="" placeholder="Optional" >
+            </div>
+            <div class="form-group">
+              <label for="exampleInputName2">Type</label>
+              <br>
+              <div class="schools">
+                <select>
+                  <option>House </option>
+                </select>
+              </div>
+            </div>
+            <div class="located">
+              <label for="exampleInputEmail1">Location</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" id="exampleInputAmount" class="form-control" placeholder="Optional">
+              </div>
+            </div>
+            <div class="located">
+              <label for="exampleInputEmail1">With</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" placeholder="" class="form-control" id="exampleInputAmount">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="">When</label>
+              <div class="clearfix"></div>
+              <div class="col-md-4">
+                <select>
+                  <option>1982</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>May</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>13</option>
+                </select>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Story</label>
+              <div class="clearfix"></div>
+              <textarea rows="4" placeholder="Optional"></textarea>
+            </div>
+          </div>
+          <div class="col-md-6 chos_photos" >
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
+          </div>
+          <div class="clearfix"></div>
+        </form>
+        <div class="box_bottom">
+          <div class="publics col-md-3" style="float:right">
+           <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save</div>
+            <div class="btn3 btn-black">Cancel</div>
+           
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-----Home_improvement----->
+<div class="modal fade" id="AddCompanys_Home_improvement" tabindex="-1" role="dialog" aria-labelledby="myModalLabe" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div id="comperrormsg"></div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="paper"><i class="fa fa-fw"></i></div>
+        <h4 class="modal-title" id="myModalLabe">Made a Home Improvement</h4>
+        <div class="subheads"> Today</div>
+      </div>
+      <div class="modal-body">
+        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+          <div class="col-md-6 Home_improvement" >
+            <div class="form-group">
+              <label for="exampleInputName2">Title</label>
+              <input type="text" class="form-control" id="" placeholder="Optional" >
+            </div>
+            <div class="form-group">
+              <label for="exampleInputName2">Improvement Made</label>
+              <input type="text" class="form-control" id="" placeholder="Optional" >
+            </div>
+            <div class="located">
+              <label for="exampleInputEmail1">Location</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" id="exampleInputAmount" class="form-control" placeholder="Optional">
+              </div>
+            </div>
+            <div class="located">
+              <label for="exampleInputEmail1">With</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" placeholder="" class="form-control" id="exampleInputAmount">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="">When</label>
+              <div class="clearfix"></div>
+              <div class="col-md-4">
+                <select>
+                  <option>1982</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>May</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>13</option>
+                </select>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Story</label>
+              <div class="clearfix"></div>
+              <textarea rows="4" placeholder="Optional"></textarea>
+            </div>
+          </div>
+          <div class="col-md-6 chos_photos" >
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
+          </div>
+          <div class="clearfix"></div>
+        </form>
+        <div class="box_bottom">
+          <div class="publics col-md-3" style="float:right">
+           <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save</div>
+            <div class="btn3 btn-black">Cancel</div>
+           
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-----New Roommate----->
+<div class="modal fade" id="AddCompanys_New_Roommate" tabindex="-1" role="dialog" aria-labelledby="myModalLabe" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div id="comperrormsg"></div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="paper"><i class="fa fa-fw"></i></div>
+        <h4 class="modal-title" id="myModalLabe">Got a Roommate</h4>
+        <div class="subheads"> Today</div>
+      </div>
+      <div class="modal-body">
+        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+          <div class="col-md-6 New_Roommate" >
+            <div class="form-group">
+              <label for="exampleInputName2">Title</label>
+              <input type="text" class="form-control" id="" placeholder="Optional" >
+            </div>
+            <div class="located">
+              <label for="exampleInputEmail1">Roommate</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" placeholder="" class="form-control" id="exampleInputAmount">
+              </div>
+            </div>
+            <div class="located">
+              <label for="exampleInputEmail1">Location</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" id="exampleInputAmount" class="form-control" placeholder="Optional">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="">From</label>
+              <div class="clearfix"></div>
+              <div class="col-md-4">
+                <select>
+                  <option>1982</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>May</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>13</option>
+                </select>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputName2">To</label>
+              <br>
+              <div class="work_botom"><a href="#"><i class="fa fa-plus"></i>&nbsp;Add Year</a></div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Story</label>
+              <div class="clearfix"></div>
+              <textarea rows="4" placeholder="Optional"></textarea>
+            </div>
+          </div>
+          <div class="col-md-6 chos_photos" >
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
+          </div>
+          <div class="clearfix"></div>
+        </form>
+        <div class="box_bottom">
+          <div class="publics col-md-3" style="float:right">
+           <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save</div>
+            <div class="btn3 btn-black">Cancel</div>
+           
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-----New vehicle----->
+<div class="modal fade" id="AddCompanys_New_vehicle" tabindex="-1" role="dialog" aria-labelledby="myModalLabe" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div id="comperrormsg"></div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="paper"><i class="fa fa-fw"></i></div>
+        <h4 class="modal-title" id="myModalLabe">Got a Car</h4>
+        <div class="subheads"> Today</div>
+        <div class="subheads">Model Year: 2015.</div>
+      </div>
+      <div class="modal-body">
+        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+          <div class="col-md-6 New_vehicle" >
+            <div class="form-group">
+              <label for="exampleInputName2">Title</label>
+              <input type="text" class="form-control" id="" placeholder="Optional" >
+            </div>
+            <div class="form-group">
+              <label for="exampleInputName2">Type</label>
+              <br>
+              <div class="schools">
+                <select>
+                  <option>Car </option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputName2">Make/Model</label>
+              <input type="text" class="form-control" id="" placeholder="Optional" >
+            </div>
+            <div class="form-group">
+              <label for="exampleInputName2">Model Year</label>
+              <br>
+              <div class="schools">
+                <select>
+                  <option>2015 </option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="">When</label>
+              <div class="clearfix"></div>
+              <div class="col-md-4">
+                <select>
+                  <option>1982</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>May</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>13</option>
+                </select>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="located">
+              <label for="exampleInputEmail1">With</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" id="exampleInputAmount" class="form-control" placeholder="">
+              </div>
+            </div>
+            <div class="located">
+              <label for="exampleInputEmail1">Location</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" placeholder="Optional" class="form-control" id="exampleInputAmount">
+              </div>
+            </div>
+            <div class="located">
+              <label for="exampleInputEmail1">Location</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" placeholder="Optional" class="form-control" id="exampleInputAmount">
+              </div>
+            </div>
+            <div class="form-group">
+
+              <label for="exampleInputEmail1">Story</label>
+              <div class="clearfix"></div>
+              <textarea rows="4" placeholder="Optional"></textarea>
+            </div>
+          </div>
+          <div class="col-md-6 chos_photos" >
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
+          </div>
+          <div class="clearfix"></div>
+        </form>
+        <div class="box_bottom">
+          <div class="publics col-md-3" style="float:right">
+           <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save</div>
+            <div class="btn3 btn-black">Cancel</div>
+           
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-----Health & Wellness----->
+<div class="modal fade" id="AddCompanys_Health_Wellness" tabindex="-1" role="dialog" aria-labelledby="myModalLabe" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div id="comperrormsg"></div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="paper"> <i class="fa fa-fw"></i></div>
+        <h4 class="modal-title" id="myModalLabe">Registered as an Organ Donor</h4>
+        <div class="subheads">May 27, 2015</div>
+             </div>
+      <div class="modal-body">
+        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+          <div class="col-md-6 Health_Wellness" >
+            <div class="form-group">
+              <label for="exampleInputName2">Title</label>
+              <input type="text" class="form-control" id="" placeholder="Optional" >
+            </div>
+            
+            <div class="located">
+              <label for="exampleInputEmail1">Location</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" id="exampleInputAmount" class="form-control" placeholder="Optional">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="">When</label>
+              <div class="clearfix"></div>
+              <div class="col-md-4">
+                <select>
+                  <option>1982</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>May</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>13</option>
+                </select>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            
+            <div class="form-group">
+              <label for="exampleInputEmail1">Story</label>
+              <div class="clearfix"></div>
+              <textarea rows="4" placeholder="Optional"></textarea>
+            </div>
+        
+            
+          </div>
+          <div class="col-md-6 chos_photos" >
+        <p>If you are not officially registered as an organ donor, it is easy to <a href="#">sign up with the appropriate registry.</a> </p>
+        <p><a href="#">Learn More</a></p>
+          </div>
+          <div class="clearfix"></div>
+        </form>
+        <div class="box_bottom">
+          <div class="publics col-md-3" style="float:right">
+           <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save</div>
+            <div class="btn3 btn-black">Cancel</div>
+           
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-----Overcame an illness----->
+<div class="modal fade" id="AddCompanys_Overcame_Illness" tabindex="-1" role="dialog" aria-labelledby="myModalLabe" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div id="comperrormsg"></div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="paper"><i class="fa fa-fw"></i></div>
+        <h4 class="modal-title" id="myModalLabe">Overcame an Illness</h4>
+            <div class="subheads">May 27, 2015</div>
+      </div>
+      <div class="modal-body">
+        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+          <div class="col-md-6 Overcame_Illness" >
+            <div class="form-group">
+              <label for="exampleInputName2">Title</label>
+              <input type="text" class="form-control" id="" placeholder="Optional" >
+            </div>
+            
+            <div class="form-group">
+              <label for="exampleInputName2">Illness</label>
+              <input type="text" class="form-control" id="" placeholder="Optional" >
+            </div>
+            
+            <div class="located">
+              <label for="exampleInputEmail1">Location</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" placeholder="Optional" class="form-control" id="exampleInputAmount">
+              </div>
+            </div>
+            
+            <div class="located">
+              <label for="exampleInputEmail1">With</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" id="exampleInputAmount" class="form-control" placeholder="">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="">When</label>
+              <div class="clearfix"></div>
+              <div class="col-md-4">
+                <select>
+                  <option>1982</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>May</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>13</option>
+                </select>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Story</label>
+              <div class="clearfix"></div>
+              <textarea rows="4" placeholder="Optional"></textarea>
+            </div>
+            
+            
+            
+            
+            
+          </div>
+          <div class="col-md-6 chos_photos" >
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
+          </div>
+          <div class="clearfix"></div>
+        </form>
+        <div class="box_bottom">
+          <div class="publics col-md-3" style="float:right">
+           <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save</div>
+            <div class="btn3 btn-black">Cancel</div>
+           
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-----Quit a Habit---->
+<div class="modal fade" id="AddCompanys_Quit_Habit" tabindex="-1" role="dialog" aria-labelledby="myModalLabe" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div id="comperrormsg"></div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="paper"><i class="fa fa-fw"></i></div>
+        <h4 class="modal-title" id="myModalLabe">Quit </h4>
+            <div class="subheads">May 27, 2015</div>
+      </div>
+      <div class="modal-body">
+        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+          <div class="col-md-6 Quit_Habit" >
+            <div class="form-group">
+              <label for="exampleInputName2">Title</label>
+              <input type="text" class="form-control" id="" placeholder="Optional" >
+            </div>
+            <div class="form-group">
+              <label for="exampleInputName2">Habit</label>
+              <br>
+              <div class="schools">
+                <select>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+             
+              <input type="text" class="form-control" id="" placeholder="" >
+            </div>
+            <div class="located">
+              <label for="exampleInputEmail1">Location</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" placeholder="Optional" class="form-control" id="exampleInputAmount">
+              </div>
+            </div>
+            
+            <div class="located">
+              <label for="exampleInputEmail1">With</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" id="exampleInputAmount" class="form-control" placeholder="">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="">When</label>
+              <div class="clearfix"></div>
+              <div class="col-md-4">
+                <select>
+                  <option>1982</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>May</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>13</option>
+                </select>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Story</label>
+              <div class="clearfix"></div>
+              <textarea rows="4" placeholder="Optional"></textarea>
+            </div>
+            
+            
+            
+            
+            
+          </div>
+          <div class="col-md-6 chos_photos" >
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
+          </div>
+          <div class="clearfix"></div>
+        </form>
+        <div class="box_bottom">
+          <div class="publics col-md-3" style="float:right">
+           <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save</div>
+            <div class="btn3 btn-black">Cancel</div>
+           
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-----New_Habits---->
+<div class="modal fade" id="AddCompanys_New_Habits" tabindex="-1" role="dialog" aria-labelledby="myModalLabe" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div id="comperrormsg"></div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="paper"><i class="fa fa-fw"></i></div>
+        <h4 class="modal-title" id="myModalLabe">Became a Vegetarian</h4>
+            <div class="subheads">May 27, 2015</div>
+      </div>
+      <div class="modal-body">
+        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+          <div class="col-md-6 New_Habits" >
+            <div class="form-group">
+              <label for="exampleInputName2">Title</label>
+              <input type="text" class="form-control" id="" placeholder="Optional" >
+            </div>
+            <div class="form-group">
+              <label for="exampleInputName2">Became</label>
+              <br>
+              <div class="schools">
+                <select>
+                  <option>Vegetarian</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="located">
+              <label for="exampleInputEmail1">Location</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" placeholder="Optional" class="form-control" id="exampleInputAmount">
+              </div>
+            </div>
+            
+            <div class="located">
+              <label for="exampleInputEmail1">With</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" id="exampleInputAmount" class="form-control" placeholder="">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="">When</label>
+              <div class="clearfix"></div>
+              <div class="col-md-4">
+                <select>
+                  <option>1982</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>May</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>13</option>
+                </select>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Story</label>
+              <div class="clearfix"></div>
+              <textarea rows="4" placeholder="Optional"></textarea>
+            </div>
+          </div>
+          <div class="col-md-6 chos_photos" >
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
+          </div>
+          <div class="clearfix"></div>
+        </form>
+        <div class="box_bottom">
+          <div class="publics col-md-3" style="float:right">
+           <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save</div>
+            <div class="btn3 btn-black">Cancel</div>
+           
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-----Weight Loss---->
+<div class="modal fade" id="AddCompanys_Weight_Loss" tabindex="-1" role="dialog" aria-labelledby="myModalLabe" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div id="comperrormsg"></div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="paper"><i class="fa fa-fw"></i></div>
+        <h4 class="modal-title" id="myModalLabe">Lost Weight</h4>
+            <div class="subheads">May 27, 2015</div>
+      </div>
+      <div class="modal-body">
+        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+          <div class="col-md-6 Weight_Loss" >
+            <div class="form-group">
+              <label for="exampleInputName2">Title</label>
+              <input type="text" class="form-control" id="" placeholder="Optional" >
+            </div>
+            <div class="form-group">
+              <label for="exampleInputName2">Amount</label>
+              <input type="text" class="form-control" id="" placeholder="Optional" >
+            </div>
+            <div class="form-group">
+              <label for="exampleInputName2">Units</label>
+              <br>
+              <div class="schools">
+                <select>
+                  <option>Pounds</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="located">
+              <label for="exampleInputEmail1">Location</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" placeholder="Optional" class="form-control" id="exampleInputAmount">
+              </div>
+            </div>
+            
+            <div class="located">
+              <label for="exampleInputEmail1">With</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" id="exampleInputAmount" class="form-control" placeholder="">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="">When</label>
+              <div class="clearfix"></div>
+              <div class="col-md-4">
+                <select>
+                  <option>1982</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>May</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>13</option>
+                </select>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Story</label>
+              <div class="clearfix"></div>
+              <textarea rows="4" placeholder="Optional"></textarea>
+            </div>
+          </div>
+          <div class="col-md-6 chos_photos" >
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
+          </div>
+          <div class="clearfix"></div>
+        </form>
+        <div class="box_bottom">
+          <div class="publics col-md-3" style="float:right">
+           <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save</div>
+            <div class="btn3 btn-black">Cancel</div>
+           
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!----Glasses--->
+<div class="modal fade" id="AddCompanys_Glasses_Contacts" tabindex="-1" role="dialog" aria-labelledby="myModalLabe" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div id="comperrormsg"></div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="paper"><i class="fa fa-fw"></i></div>
+        <h4 class="modal-title" id="myModalLabe">Got Glasses</h4>
+            <div class="subheads">Today</div>
+      </div>
+      <div class="modal-body">
+        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+          <div class="col-md-6 Glasses_Contacts" >
+            <div class="form-group">
+              <label for="exampleInputName2">Title</label>
+              <input type="text" class="form-control" id="" placeholder="Optional" >
+            </div>
+            
+            <div class="form-group">
+              <label for="exampleInputName2">Type</label>
+              <br>
+              <div class="schools">
+                <select>
+                  <option>glasses</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="located">
+              <label for="exampleInputEmail1">Location</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" placeholder="Optional" class="form-control" id="exampleInputAmount">
+              </div>
+            </div>
+            
+            <div class="located">
+              <label for="exampleInputEmail1">With</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" id="exampleInputAmount" class="form-control" placeholder="">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="">When</label>
+              <div class="clearfix"></div>
+              <div class="col-md-4">
+                <select>
+                  <option>1982</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>May</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select>
+                  <option>13</option>
+                </select>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Story</label>
+              <div class="clearfix"></div>
+              <textarea rows="4" placeholder="Optional"></textarea>
+            </div>
+          </div>
+          <div class="col-md-6 chos_photos" >
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
+          </div>
+          <div class="clearfix"></div>
+        </form>
+        <div class="box_bottom">
+          <div class="publics col-md-3" style="float:right">
+           <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save</div>
+            <div class="btn3 btn-black">Cancel</div>
+           
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>
