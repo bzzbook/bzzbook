@@ -70,9 +70,9 @@ public function search_frnds($value)
 {
 	$data['result'] = $this->friendsmodel->search_friends($value);
 }
-public function search_members($value)
+public function search_members($value,$specific_search='')
 {
-	$data['result'] = $this->friendsmodel->search_members($value);
+	$data['result'] = $this->friendsmodel->search_members($value,$specific_search);
 }
 public function view_all_reqs()
 {  

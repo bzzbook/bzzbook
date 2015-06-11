@@ -53,13 +53,14 @@ a.previous { display: none; }
           <li><a href="<?php echo base_url(); ?>customer/search_member" tabindex="-1" role="menuitem">Members</a></li>
         </ul><?php */?>
          <ul aria-labelledby="drop2" role="menu" class="dropdown-menu">
-          <li><a href="javascript:void(0)" onClick="changeSearchPlaceholder('Search jobs here...')" tabindex="-1" role="menuitem">Jobs</a></li>
-          <li><a href="javascript:void(0)" onClick="changeSearchPlaceholder('Search companies here...')" tabindex="-1" role="menuitem">Companies</a></li>
-          <li><a href="javascript:void(0)" onClick="changeSearchPlaceholder('Search Events here...')" tabindex="-1" role="menuitem">Events</a></li>
-          <li><a href="javascript:void(0)" onClick="changeSearchPlaceholder('Search Members here...')" tabindex="-1" role="menuitem">Members</a></li>
+          <li><a href="javascript:void(0)" onClick="changeSearchPlaceholder('Search jobs here...','jobs')" tabindex="-1" role="menuitem">Jobs</a></li>
+          <li><a href="javascript:void(0)" onClick="changeSearchPlaceholder('Search companies here...','companies')" tabindex="-1" role="menuitem">Companies</a></li>
+          <li><a href="javascript:void(0)" onClick="changeSearchPlaceholder('Search Events here...','events')" tabindex="-1" role="menuitem">Events</a></li>
+          <li><a href="javascript:void(0)" onClick="changeSearchPlaceholder('Search Members here...','members')" tabindex="-1" role="menuitem">Members</a></li>
         </ul>
         </span>
         <input id="header-search" type="search" placeholder="Search jobs,companies,event,members here......" class="form-control">
+        <input type="hidden" id="specific-search" />
         <div id="suggesstion-box"></div>
         <div class="find"><a id="sidebar_settings">Find</a></div>
       </div>

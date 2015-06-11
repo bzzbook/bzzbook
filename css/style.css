@@ -879,6 +879,7 @@ width: 73.7%; !important;}
 .job p{ font-size:14px; color:#696969; font-family: "Roboto",sans-serif; font-weight:300; padding-bottom:20px; line-height:22px;}
 .job_in{ border-bottom:1px solid #c9c9c9; margin: 0 0 30px;}
 .job span{ font-size:14px;font-family: "Roboto",sans-serif; font-weight:400; }
+.job_in img{ width:100%; margin-top:15px;}
 
 .discription ul{ list-style:none;}
 .discription ul li{ padding:0;}

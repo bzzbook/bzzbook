@@ -841,7 +841,7 @@ $id = $this->session->userdata('logged_in')['account_id'];
 else echo "No friends Found Based On your Search!..";
 */}
 
-public function search_members($value)
+public function search_members($value,$specific_search)
 {
 	$id = $this->session->userdata('logged_in')['account_id'];
 	
@@ -851,12 +851,16 @@ public function search_members($value)
  	$searchblock .= "<ul id='country-list'> "; 
 	
 	// To get members as per search input
-	
+	if($specific_search=='' || $specific_search=='members'){
 	$this->db->select('*'); 
 	$this->db->from('bzz_userinfo');
 	$this->db->like('user_firstname',$value); 
 	$this->db->or_like('user_lastname',$value); 
-	$this->db->limit(5);
+	if($specific_search=='')
+	$limit = 5;
+	else
+	$limit = 10;
+	$this->db->limit($limit);
 	$query = $this->db->get();
 	$data = $query->result_array();
 	if(!empty($data))
@@ -915,7 +919,7 @@ public function search_members($value)
         	<div class='member-search-sug'>";
 			
 			$searchblock .= "<div class='categoryBlock'>";
-			if($i==0) { $searchblock .="People"; }
+			if($i==0) { $searchblock .="Members"; }
 			$searchblock .="</div>";
 			if(!empty($req[0]['user_img_thumb'])){
 $searchblock .= "<figure class='member-sug-pic'><img src='" . base_url() ."uploads/".$req[0]['user_img_thumb']."' alt='". $req[0]['user_firstname'] . " " .$req[0]['user_lastname'] ."'></figure>";
@@ -939,12 +943,14 @@ $searchblock .= "<figure class='member-sug-pic'><img src='" . base_url() ."uploa
  }
   
 }
+	}
 // To get companies as per search input
+	if($specific_search=='' || $specific_search=='companies'){
 	$this->db->select('*'); 
 	$this->db->from('bzz_companyinfo');
 	$this->db->like('cmp_name',$value); 
 	$this->db->or_like('cmp_industry',$value); 
-	$this->db->limit(5);
+	$this->db->limit($limit);
 	$query = $this->db->get();
 	$userdata = $query->result_array();
     if($userdata) {
@@ -971,18 +977,51 @@ $searchblock .= "<figure class='member-sug-pic'><img src='" . base_url() ."uploa
 	
  } 
  }
-  
+	}
 // To get jobs as per search input  
+if($specific_search=='' || $specific_search=='jobs'){
  $this->db->select('*'); 
 	$this->db->from('jobs');
-	$this->db->like('job_title',$value); 
-	$this->db->or_like('job_type',$value); 
-	$this->db->or_like('job_category',$value); 
+	$this->db->like('job_title',$value);  
 	$this->db->or_like('job_keyword',$value); 
-	$this->db->limit(5);
+	$this->db->or_like('job_requirements',$value);
+	$this->db->limit($limit);
 	$query = $this->db->get();
 	$userdata = $query->result_array();
     if($userdata) {
+	   
+	  	if(strlen($value)>=3){
+		if(strpos($userdata[0]['job_title'],$value)!==false){
+			$title_split = explode(' ',$userdata[0]['job_title']);
+			foreach($title_split as $part){
+			if(strpos($part,$value)!== false){ $value = $part; break; }
+			}
+		}
+		if(strpos($userdata[0]['job_keyword'],$value)!==false){
+			$title_split = explode(',',$userdata[0]['job_keyword']);
+			foreach($title_split as $part){
+			if(strpos($part,$value)!== false){ $value = $part; break; }
+			}
+		}
+		if(strpos($userdata[0]['job_requirements'],$value)!==false){
+			$title_split = explode(',',$userdata[0]['job_requirements']);
+			foreach($title_split as $part){
+			if(strpos($part,$value)!== false){ $value = $part; break; }
+			}
+		}
+	    $searchblock .= "<li class='col-md-12' onclick='location.href=&#39;".base_url()."jobs/search_jobs/".$value."&#39;'>
+        	<div class='member-search-sug'>";
+			$searchblock .= "<div class='categoryBlock'></div>";
+			
+				$searchblock .= "<figure class='member-sug-pic'><img src='" . base_url() ."images/default_search.png'></figure>";
+			
+
+		$searchblock .= " <div class='member-search-name'>
+            <h4>Jobs with <span style='color:#5BC2ED'>". strtoupper($value)."</span> skills</h4>";
+			
+			
+               $searchblock .= "</div></li>	";
+		}
 	  $i = 0;
 	  foreach($userdata as $req){
 		  
@@ -1005,9 +1044,9 @@ $searchblock .= "<figure class='member-sug-pic'><img src='" . base_url() ."uploa
 			}
 
 		$searchblock .= " <div class='member-search-name'>
-            <h4>". $req['job_type']."</h4>";
+            <h4>". $req['job_title']."</h4>";
 			
-			$searchblock .= "<h6>Designation: ".$req['job_title']."</h6>";
+			$searchblock .= "<h6>Category: ".$req['job_category']."</h6>";
  
                $searchblock .= "</div></li>	";
 			   $i++;
@@ -1015,18 +1054,18 @@ $searchblock .= "<figure class='member-sug-pic'><img src='" . base_url() ."uploa
  } 
  }
 
-
+}
 //search events  as per search input
 
 
 
-
+if($specific_search=='' || $specific_search=='events'){
  $this->db->select('*'); 
 	$this->db->from('bzz_events');
 	$this->db->like('event_name',$value); 
 	$this->db->or_like('event_location',$value); 
 	 
-	$this->db->limit(5);
+	$this->db->limit($limit);
 	$query = $this->db->get();
 	$userdata = $query->result_array();
     if($userdata) {
@@ -1054,7 +1093,7 @@ $searchblock .= "<figure class='member-sug-pic'><img src='" . base_url() ."uploa
 	
  } 
  }
-
+}
 
 
 $searchblock .= "</ul>"; 

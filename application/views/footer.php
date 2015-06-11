@@ -5263,18 +5263,23 @@ function edit_account_values()
 
 
 }
-function changeSearchPlaceholder(data){ 
+function changeSearchPlaceholder(data,search_type){ 
 $('#header-search').attr('placeholder',data);
+$('#specific-search').val(search_type);
 }
 </script>
 <script>
 $(document).ready(function(){
 	$("#header-search").keyup(function(){
 		var search_input = $(this).val();
+		var req_url = "<?php  echo base_url(); ?>friends/search_members/"+$(this).val();
+		var specific_search = $('#specific-search').val();
+		if(specific_search!='')
+		req_url += "/"+specific_search;
 		if(search_input.trim()!=''){
 		$.ajax({
 		type: "POST",
-		url: "<?php  echo base_url(); ?>friends/search_members/"+$(this).val(),
+		url: req_url,
 		beforeSend: function(){
 			$("#header-search").css("background","#FFF url(<?php  echo base_url(); ?>images/LoaderIcon.gif) no-repeat 165px");
 		},
