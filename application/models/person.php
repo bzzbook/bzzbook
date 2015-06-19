@@ -98,9 +98,15 @@ class person extends CI_Model {
 		}
 	   			
 				
-		public function get_abtme_user()
+		public function get_abtme_user($user_id)
 		{
+		if($user_id!='')
+		{
+		$id = $user_id;
+		
+		}else{
 		$id = $this->session->userdata('logged_in')['account_id'];
+		}
 			$this->db->select('*');
 			$this->db->from('bzz_users');
 			$this->db->where('user_id',$id);

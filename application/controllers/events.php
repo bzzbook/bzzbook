@@ -13,7 +13,7 @@ class Events extends CI_Controller {
 	
 	public function disp_events($id)
 	{
-		echo $id;
+	//	echo $id;
 	//$id = $this->encrypt->decode($id);
 	
 	$data['cmp_info'] =  $this->companies->get_cmp_by_id($id);

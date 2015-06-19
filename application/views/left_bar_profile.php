@@ -1,6 +1,6 @@
 <div class="profile">
           <?php $image = $this->profile_set->get_profile_pic(); 
-				$result = $this->profile_set->get_userinfo();
+				$result = $this->profile_set->get_userinfo($user_id='');
 				 $name = $result[0]['user_firstname']." ".$result[0]['user_lastname'];		  
 		  
 		  	?>

@@ -5075,6 +5075,15 @@ function mov_to_work_edu()
 	$('#education').addClass("active");
 }
 
+
+function mov_life_events()
+{
+	$('#overview_tab').removeClass("active");
+	$('#overview').removeClass("active");
+	$('#life_tab').addClass("active");
+	$('#life').addClass("active");
+}
+
 $('#move_to_relation').click(function()
 {
 	$('#overview_tab').removeClass("active");
@@ -5303,7 +5312,297 @@ $("#suggesstion-box").hide();
 
 <script type="text/javascript">
 
-uploadimages("uploadjob_photos","uploadPhotosnewjob","testingg");
+uploadimages("uploadjobphotos","uploadPhotosnewjob","testingg");
+uploadimages("uploadretirementphotos","uploadPhotosretirement","retirement_pics");
+uploadimages("uploadanniversarypics","upload_anniversary_pics","anniversary_pics");
+uploadimages("uploadstudyabroadpics","upload_study_abroad_pics","study_abroad_pics");
+uploadimages("uploadengagementpics","upload_engagement_pics","engagement_pics");
+uploadimages("uploadmarriagepics","upload_marriage_pics","marriage_pics");
+uploadimages("uploadchildpics","upload_child_pics","child_pics");
+uploadimages("uploadmovedphotos","upload_moved_photos","moved_pics");
+uploadimages("uploadboughthomephotos","upload_bought_home_photos","bought_home_pics");
+uploadimages("uploadvehiclephotos","uploadPhotosnewvehicle","vehicle_pics");
+uploadimages("uploadquithabitpics","upload_quit_habit_pics","quit_habit_pics");
+uploadimages("uploadnewhabitpics","upload_new_habit_pics","new_habit_pics");
+uploadimages("uploadnewglasespics","upload_new_glasses_pics","new_glasses_pics");
+uploadimages("uploadnewhobbypics","upload_new_hobby_pics","new_hobby_pics");
+uploadimages("uploadvotedpics","upload_voted_pics","new_voted_pics");
+uploadimages("uploadtravelpics","upload_travel_pics","new_travel_pics");
+
+
+
+
+
+function uploadimages(a,b,c){
+	
+	 var fileUpload = document.getElementById(a);
+    fileUpload.onchange = function () {
+		//console.log(a+"/"+b);
+		$('#'+c).hide();
+        if (typeof (FileReader) != "undefined") {
+			//console.log('haiii');
+            var dvPreview = document.getElementById(b);
+            dvPreview.innerHTML = "";
+            var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+            for (var i = 0; i < fileUpload.files.length; i++) {
+                var file = fileUpload.files[i];
+                if (regex.test(file.name.toLowerCase())) {
+					
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var img = document.createElement("IMG");
+                        img.height = "55";
+                        img.width = "55";
+                        img.src = e.target.result;
+                        dvPreview.appendChild(img);
+                    }
+                    reader.readAsDataURL(file);
+                } else {
+                    alert(file.name + " is not a valid image file.");
+                    dvPreview.innerHTML = "";
+                    return false;
+                }
+            }
+        } else {
+            alert("This browser does not support HTML5 FileReader.");
+        }
+    }
+	}
+
+	
+
+</script>
+<script>
+
+
+$('body').delegate('#n_j_employer','keypress',function(e) {
+	
+	var employer = $.trim($(this).val()).toUpperCase();
+	$('#employer_data').text(employer);
+	//alert(employer);
+	
+});
+
+function from_year_disp(add_years_link_id,add_years_select_id,add_months_link_id)
+{
+	$('#'+add_years_link_id).hide();
+	$('#'+add_years_select_id).show();
+	$('#'+add_months_link_id).show();
+}
+
+function from_month_disp(add_months_link_id,add_months_select_id,add_days_link_id)
+
+	{
+		
+		$('#'+add_months_link_id).hide();
+		$('#'+add_months_select_id).show();
+		$('#'+add_days_link_id).show();
+	}
+
+
+
+function from_day_disp(add_days_link_id,add_days_select_id,curent_status,to,to_presant,add_to_years_select_id,add_to_years_link_id)
+{
+	    $('#'+add_days_link_id).hide();
+		$('#'+add_days_select_id).show();
+		
+		
+		if( $('#'+curent_status).is(':checked'))
+		{
+			$('#'+to_presant).show();
+			$('#'+to).hide();
+		}else{
+			$('#'+to_presant).hide();
+			$('#'+to).show();
+			
+			 if($('#'+add_to_years_select_id).is(":hidden"))
+			{
+				$('#'+add_to_year_link_m).show();
+			}
+		}
+		
+		
+}
+
+
+function to_year_disp(add_to_years_link_id,add_to_years_select_id,add_to_months_link_id)
+{
+    	$('#'+add_to_years_link_id).hide();
+		$('#'+add_to_years_select_id).show();
+		$('#'+add_to_months_link_id).show();
+}
+
+
+
+
+function to_month_disp(add_to_months_link_id,add_to_months_select_id,add_to_days_link_id)
+	{	
+		$('#'+add_to_months_link_id).hide();
+		$('#'+add_to_months_select_id).show();
+		$('#'+add_to_days_link_id).show();
+	}
+
+function to_day_disp(add_to_days_link_id,add_to_days_select_id)
+{
+	$('#'+add_to_days_link_id).hide();
+	$('#'+add_to_days_select_id).show();
+}
+
+
+
+function status_change(n_j_status,all_n_j_to_dates_dropdown,n_j_to,n_j_to_presant,add_to_year_link_m,n_j_to_years)
+{
+	
+	
+	if( $('#'+n_j_status).is(':checked'))
+	 {
+		 $('#'+n_j_to_years).hide();
+		 $('#'+n_j_to_presant).show();
+		 $('#'+n_j_to).hide();
+		 $('#'+add_to_year_link_m).hide();
+	   $('#'+all_n_j_to_dates_dropdown).hide();
+	 } else
+	 {
+		 
+		 $('#'+n_j_to_presant).hide();
+		 $('#'+n_j_to).show();
+		 $('#'+all_n_j_to_dates_dropdown).show();
+		 // $('#'+add_to_year_link_m).show();
+		  //$('#'+n_j_to_years).show();
+		 if($('#'+n_j_to_years).is(":hidden"))
+			{
+				$('#'+add_to_year_link_m).show();
+			}
+		 
+	 }
+	
+}
+
+
+
+function frm_years_change(n_j_frm_years,add_month_link_m,n_j_frm_months,add_day_link_m,n_j_frm_days,add_year_link_m)
+{
+	if( $('#'+n_j_frm_years).val() == 0)
+		{
+		$('#'+add_month_link_m).hide();
+		$('#'+add_day_link_m).hide();
+		$('#'+n_j_frm_months).hide();
+		$('#'+n_j_frm_days).hide();
+		//$('#todates_dropdowns').hide();
+		$('#'+n_j_frm_years).hide();
+		$('#'+add_year_link_m).show();
+		//$('#to').hide();
+		} else {
+			
+			if($('#'+n_j_frm_months).is(":hidden"))
+			{
+	$('#'+add_month_link_m).show();
+			}
+		
+		}
+		
+	
+}
+
+function frm_months_change(add_month_link_m,n_j_frm_months,add_day_link_m,n_j_frm_days,add_year_link_m)
+{
+			if( $('#'+n_j_frm_months).val() == 0)
+		{
+	
+		$('#'+add_day_link_m).hide();
+		$('#'+n_j_frm_days).hide();
+		$('#'+add_year_link_m).hide();
+		$('#'+n_j_frm_months).hide();
+		$('#'+add_month_link_m).show();
+		
+		} else {
+			if($('#'+n_j_frm_days).is(":hidden"))
+			{
+		$('#'+add_day_link_m).show();
+			}}
+	
+}
+	
+	function frm_days_change(n_j_frm_days,add_day_link_m,add_to_year_link_m,n_j_to,n_j_to_presant,n_j_status,all_n_j_to_dates_dropdown,n_j_to_years)
+	{
+	
+		if( $('#'+n_j_frm_days).val() == 0)
+		{
+		$('#'+n_j_frm_days).hide();
+		//$('#'+add_to_year_link_m).show();
+
+		$('#'+add_day_link_m).show();
+		} else {
+			
+		
+			if($('#'+n_j_status).is(':checked'))
+			{
+				$('#'+n_j_to_presant).show();
+				$('#'+n_j_to).hide();
+				$('#'+all_n_j_to_dates_dropdown).hide();
+			}else{
+		
+				
+				$('#'+n_j_to_presant).hide();
+				$('#'+n_j_to).show();
+				//$('#'+all_n_j_to_dates_dropdown).show();
+				
+			}
+	
+		
+		}
+	}
+
+
+
+function to_years_change(add_to_year_link_m,n_j_to_years,add_to_month_link_m,n_j_to_months,n_j_to_days)
+{
+	if( $('#'+n_j_to_years).val() == 0)
+		{
+		$('#'+add_to_month_link_m).hide();
+		$('#'+n_j_to_months).hide();
+		$('#'+n_j_to_days).hide();
+		$('#'+n_j_to_years).hide();
+		$('#'+add_to_year_link_m).show();
+		} else {
+			
+			if($('#'+n_j_to_months).is(":hidden"))
+			{
+	$('#'+add_to_month_link_m).show();
+			}
+		
+		}
+}
+	
+		
+	function to_months_change(n_j_to_months,add_to_month_link_m,add_to_day_link_m,n_j_to_days)
+	{
+		
+		
+		if( $('#'+n_j_to_months).val() == 0)
+		{
+		$('#'+add_to_day_link_m).hide();
+		$('#'+n_j_to_days).hide();
+		$('#'+n_j_to_months).hide();
+		$('#'+add_to_month_link_m).show();
+		} else {
+			if($('#'+n_j_to_days).is(":hidden"))
+			{
+		$('#'+add_to_day_link_m).show();
+			}}
+	}
+	
+	
+	
+function to_days_change(add_to_day_link_m,n_j_to_days)
+{
+		if( $('#'+n_j_to_days).val() == 0)
+		{
+		$('#'+n_j_to_days).hide();
+		$('#'+add_to_day_link_m).show();
+		} 
+}
+
 
 </script>
 

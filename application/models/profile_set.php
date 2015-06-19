@@ -8,10 +8,15 @@ class Profile_set extends CI_Model {
   		
     } 
 	
-   public function save_settings($user_id=''){
-	    $id = $this->session->userdata('logged_in')['account_id'];
+   public function save_settings($user_id){
+	    
 		if($user_id!='')
+		{
 		$id = $user_id;
+		
+		}else{
+		$id = $this->session->userdata('logged_in')['account_id'];
+		}
 	    $condition = "user_id =" . "'" . $id . "'";
 		$this->db->select('*');
 		$this->db->from('bzz_userinfo');
@@ -26,12 +31,17 @@ class Profile_set extends CI_Model {
    }
    
    
-    public function get_userinfo($user_id=''){
-		if(empty($user_id))
-	    $id = $this->session->userdata('logged_in')['account_id'];
-		else
+    public function get_userinfo($user_id){
+		
+		if($user_id!='')
+		{
 		$id = $user_id;
-	    $condition = "user_id =" . "'" . $id . "'";
+		
+		}else{
+		$id = $this->session->userdata('logged_in')['account_id'];
+		}
+
+		$condition = "user_id =" . "'" . $id . "'";
 		$this->db->select('*');
 		$this->db->from('bzz_userinfo');
 		$this->db->where($condition);
@@ -106,12 +116,18 @@ class Profile_set extends CI_Model {
 		}
    }
    
-   public function getorganizationDetails($user_id='')
+   public function getorganizationDetails($user_id)
    {
-	    $id = $this->session->userdata('logged_in')['account_id'];
-	    $condition = "user_id =" . "'" . $id . "'";
-		if($user_id!='')
-		$condition = "user_id =" . "'" . $user_id . "'";
+	   	   
+	   if($user_id!='')
+		{
+		$id = $user_id;
+		
+		}else{
+		$id = $this->session->userdata('logged_in')['account_id'];
+		}
+	    
+	 	$condition = "user_id =" . "'" . $id . "'";
 		$this->db->select('*');
 		$this->db->from('bzz_organizationinfo');
 		$this->db->where($condition);
@@ -125,9 +141,17 @@ class Profile_set extends CI_Model {
    }
    
    
-     public function get_college_details()
+     public function get_college_details($user_id)
    {
-	    $id = $this->session->userdata('logged_in')['account_id'];
+	
+	   	if($user_id!='')
+		{
+		$id = $user_id;
+		
+		}else{
+		$id = $this->session->userdata('logged_in')['account_id'];
+		}
+	   
 	    $condition = "user_id =" . "'" . $id . "'";
 		$this->db->select('*');
 		$this->db->from('bzz_user_college');
@@ -141,9 +165,16 @@ class Profile_set extends CI_Model {
 		}
    }
    
-        public function get_school_details()
+        public function get_school_details($user_id)
    {
-	    $id = $this->session->userdata('logged_in')['account_id'];
+	   	if($user_id!='')
+		{
+		$id = $user_id;
+		
+		}else{
+		$id = $this->session->userdata('logged_in')['account_id'];
+		}
+	    
 	    $condition = "user_id =" . "'" . $id . "'";
 		$this->db->select('*');
 		$this->db->from('bzz_user_school');
@@ -804,9 +835,16 @@ public function add_family_members($data)
 		
 	}
 	
-	public function get_family_members()
+	public function get_family_members($user_id)
 	{
+		if($user_id!='')
+		{
+		$id = $user_id;
+		
+		}else{
 		$id = $this->session->userdata('logged_in')['account_id'];
+		}
+		
 		$this->db->select('*');
 		$this->db->from('bzz_family_members');
 		$this->db->where('user_id',$id);
@@ -926,9 +964,16 @@ public function add_fav_quotes($favquotes)
 	
 	
 	
-	public function get_nick_names()
+	public function get_nick_names($user_id)
 	{
+		if($user_id!='')
+		{
+		$id = $user_id;
+		
+		}else{
 		$id = $this->session->userdata('logged_in')['account_id'];
+		}
+		
 		$this->db->select('*');
 		$this->db->from('bzz_nicknames');
 		$this->db->where('user_id',$id);
@@ -1012,9 +1057,15 @@ public function add_fav_quotes($favquotes)
 		return false;
 	}
 	
-	public function get_mbl_nos()
+	public function get_mbl_nos($user_id)
 	{
+		if($user_id!='')
+		{
+		$id = $user_id;
+		
+		}else{
 		$id = $this->session->userdata('logged_in')['account_id'];
+		}
 		$this->db->select('*');
 		$this->db->from('bzz_mobile_nos');
 		$this->db->where('user_id',$id);
@@ -1030,9 +1081,15 @@ public function add_fav_quotes($favquotes)
 		
 	}
 		
-	public function get_other_accounts_by_id()
-	{
+	public function get_other_accounts_by_id($user_id)
+	{if($user_id!='')
+		{
+		$id = $user_id;
+		
+		}else{
 		$id = $this->session->userdata('logged_in')['account_id'];
+		}
+		
 		$this->db->select('*');
 		$this->db->from('bzz_other_accounts');
 		$this->db->where('user_id',$id);
@@ -1408,12 +1465,17 @@ if($data['frm_clg_years'] == '0')
 	return false;
    }
 
-	public function get_org_details_by_status_work($user_id='')
+	public function get_org_details_by_status_work($user_id)
 	{
 		
-		$id = $this->session->userdata('logged_in')['account_id'];
-		if($user_id!='')
+	   	if($user_id!='')
+		{
 		$id = $user_id;
+		
+		}else{
+		$id = $this->session->userdata('logged_in')['account_id'];
+		}
+	   
 		$condition = "user_id =" . "'" . $id . "'" . " AND " . "emp_status = 'wor'";
 		$this->db->select('*');
 		$this->db->from('bzz_organizationinfo');
@@ -1429,11 +1491,16 @@ if($data['frm_clg_years'] == '0')
 		}
 		
 	}
-		public function get_org_details_by_status_all($user_id = '')
+		public function get_org_details_by_status_all($user_id)
 	{
-		$id = $this->session->userdata('logged_in')['account_id'];
-		if($user_id!='')
+		 if($user_id!='')
+		{
 		$id = $user_id;
+		
+		}else{
+		$id = $this->session->userdata('logged_in')['account_id'];
+		}
+	   
 		$condition = "user_id =" . "'" . $id . "'" . " AND " . "emp_status != 'wor'";
 		$this->db->select('*');
 		$this->db->from('bzz_organizationinfo');
@@ -1451,11 +1518,16 @@ if($data['frm_clg_years'] == '0')
 		
 	}
 	
-	public function get_clg_details_all($user_id='')
+	public function get_clg_details_all($user_id)
 	{
-		$id = $this->session->userdata('logged_in')['account_id'];
-		if($user_id!='')
+		
+		  if($user_id!='')
+		{
 		$id = $user_id;
+		
+		}else{
+		$id = $this->session->userdata('logged_in')['account_id'];
+		}
 		$this->db->select('*');
 		$this->db->from('bzz_user_college');
 	//	$this->db->limit(4);
