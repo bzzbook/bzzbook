@@ -5380,8 +5380,22 @@ function updateGoingStatus(event_id,status)
 	 
 		});
 }*/
-
-</script>
+/*function testclick()
+{
+		url="<?php echo base_url(); ?>signg_in/api_db_check_login";
+		$.ajax({
+        type: "POST",
+        url: url,
+		data: { email: 'vijaykumar@gmail.com',password: '123456'} ,
+        success: function(data)
+        {   
+			alert(data);
+		},
+		cache: false
+		});
+		
+}
+*/</script>
 
 
 <?php $this->load->view('profile_models'); ?>

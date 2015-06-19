@@ -17,14 +17,13 @@ class Signg_in extends CI_Controller {
 	
 	public function api_db_check_login()
 	{
+		header("Access-Control-Allow-Origin: *");
+		header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Access-Control-Allow-Origin");
+		header("Access-Control-Allow-Methods: PUT, GET, POST, DELETE, OPTIONS");
+		header( "Access-Control-Allow-Headers: Authorization, Content-Type" );
 		
-		$this->form_validation->set_rules('email','Email','trim|required|valid_email|xss_clean');
-		$this->form_validation->set_rules('password','Password','trim|required|xss_clean');
 		
-	if($this->form_validation->run() == FALSE)
-		 {
-		   $this->load->view('sign_in_v');
-		}else{
+		
 		$data = array(
 					'email' => $this->input->post('email'),
 					'password' => $this->input->post('password')
@@ -55,8 +54,8 @@ class Signg_in extends CI_Controller {
 		$result = $this->sign_inm->read_user_information($sess_array);
 		if($result != false){
 			$data = array(
-						'result' =>'yes',
-						'success' => 'true'
+						'result' =>$result,
+						'success' => true
 					     );
 						//header('Content-type: application/json');
 						echo json_encode($data); 
@@ -72,7 +71,8 @@ class Signg_in extends CI_Controller {
 							/*$data['error_message'] = 'Invalid Username or Password';
 							$this->load->view('sign_in_v', $data);*/
 						}
-					}
+					
+					
 	}
 	
 	public function db_check_login()
