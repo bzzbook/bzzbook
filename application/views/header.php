@@ -44,7 +44,26 @@ a.previous { display: none; }
   <section class="container">
     <figure class="col-lg-3 col-md-3 col-sm-4 col-xs-12 animate-plus" data-animations="pulse"  data-animation-when-visible="true"  data-animation-reset-offscreen="true"><a href="<?php echo base_url();?>" ><img src="<?php echo base_url(); ?>images/logo.png" alt="" /></a></figure>
     <div class="col-lg-6 col-md-6 col-sm-4 col-xs-12 search">
-      <div class="input-group"> <span class="input-group-btn align-top">
+      <div class="menuSearch">
+	<div class="menuComponent" id="mainTopSearchBar">
+	<a href="#" class="menuBtn" id="dropBtn" onClick="document.getElementById('suggesstion-box').style.display='none'"><span><i></i></span></a>
+    <div class="dropBlock" id="dropBlock">
+    	<ul>
+        	<li class="all active" onClick="changeSearchPlaceholder('Search jobs,companies,event,members here...')"><span><i></i>All</span></li>
+            <li class="jobs" onClick="changeSearchPlaceholder('Search jobs here...','jobs')"><span><i></i>Jobs</span></li>
+            <li class="companies" onClick="changeSearchPlaceholder('Search companies here...','companies')"><span><i></i>Companies</span></li>
+            <li class="events" onClick="changeSearchPlaceholder('Search Events here...','events')"><span><i></i>Events</span></li>
+            <li class="members" onClick="changeSearchPlaceholder('Search Members here...','members')"><span><i></i>Members</span></li>
+        </ul>
+    </div>
+    <div class="searchBar"><input id="header-search" type="search" placeholder="Search jobs,companies,event,members here..."  /> <input type="hidden" id="specific-search" /><div id="suggesstion-box"></div></div>
+    <button class="searchBtnNew" id="sidebar_settings">FIND</button>
+    </div>
+</div>
+
+<!--This is old search drop down
+-->
+<!--<div class="input-group"> <span class="input-group-btn align-top">
         <input type="button" value="" role="button"  class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" id="drop2" onClick="document.getElementById('suggesstion-box').style.display='none'">
        <?php /*?> <ul aria-labelledby="drop2" role="menu" class="dropdown-menu">
           <li><a href="<?php echo base_url(); ?>customer/search_job" tabindex="-1" role="menuitem">Jobs</a></li>
@@ -63,7 +82,9 @@ a.previous { display: none; }
         <input type="hidden" id="specific-search" />
         <div id="suggesstion-box"></div>
         <div class="find"><a id="sidebar_settings">Find</a></div>
-      </div>
+      </div>-->
+
+
     </div>
     <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
       <div class="curentUser">

@@ -5270,7 +5270,9 @@ $('#specific-search').val(search_type);
 </script>
 <script>
 $(document).ready(function(){
+	
 	$("#header-search").keyup(function(){
+		$('.dropAnimate').removeClass('dropAnimate');
 		var search_input = $(this).val();
 		var req_url = "<?php  echo base_url(); ?>friends/search_members/"+$(this).val();
 		var specific_search = $('#specific-search').val();
@@ -5302,6 +5304,82 @@ $("#suggesstion-box").hide();
 <script type="text/javascript">
 
 uploadimages("uploadjob_photos","uploadPhotosnewjob","testingg");
+
+</script>
+
+<script type="text/javascript">
+/* search dropdown script */
+	$(document).ready(function(){
+		var storeVar = "";
+		$('.dropBlock li').click(function(){
+			$('.active').removeClass('active');
+			$(this).addClass('active');
+			$(".menuComponent .menuBtn").removeClass(storeVar);
+			var catName = $(this).attr('class');
+			storeVar = catName;			
+			$(".menuComponent .menuBtn").addClass(catName);
+			$('.dropBlock').toggleClass("dropAnimate");			
+		});
+		$('#dropBtn').click(function(){	
+				
+			$('.dropBlock').toggleClass("dropAnimate");
+			});
+			
+	});
+function updateGoingStatus(event_id,status)
+{
+	alert(status);
+	if(status==''){ status = document.getElementById('goingsts'+event_id).value; }
+	url="<?php echo base_url(); ?>events/change_event_going_sts/"+event_id+"/"+status;
+	$.ajax({
+		
+		type: "POST",
+		dataType: 'text',
+        url: url
+		}).done(function(data){ 
+		if(data){
+		content = "<p></p><label><select  name='goingsts"+event_id+"' id='goingsts"+event_id+"' onChange='updateGoingStatus("+event_id+",this.value)'><option value='1'";
+		if(status==1)
+		content+="selected='selected'"
+		content+=">Going</option><option value='2'";
+		if(status==2)
+		content+="selected='selected'";
+		content+=">Maybe</option><option value='3'";
+		if(status==3)
+		content+="selected='selected'";
+		content+=">Not going</option></select></label>";
+		$('.event-btns'+event_id).html(content);
+		}
+	 
+		});
+}
+
+/*function updateInviteGoingStatus(event_id,status='')
+{
+	if(status==''){ status = document.getElementById('invitegoingsts'+event_id).value; }
+	url="<?php echo base_url(); ?>events/change_event_going_sts/"+event_id+"/"+status;
+	$.ajax({
+		
+		type: "POST",
+		dataType: 'text',
+        url: url
+		}).done(function(data){ 
+		if(data){
+		content = "<p></p><label><select  name='invitegoingsts"+event_id+"' id='invitegoingsts"+event_id+"' onChange='inviteupdateGoingStatus("+event_id+")'><option value='1'";
+		if(status==1)
+		content+="selected='selected'"
+		content+=">Going</option><option value='2'";
+		if(status==2)
+		content+="selected='selected'";
+		content+=">Maybe</option><option value='3'";
+		if(status==3)
+		content+="selected='selected'";
+		content+=">Not going</option></select></label>";
+		$('.event-btns'+event_id).html();
+		}
+	 
+		});
+}*/
 
 </script>
 

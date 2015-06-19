@@ -70,7 +70,7 @@
 	  else
 	  $user_id = $user_id;
 	  ?>
-      <article <?php if($row->isGhostpost==1) echo 'class="ghostpost"' ?> >
+      <article id="post<?php echo $row->post_id; ?>" <?php if($row->isGhostpost==1) echo 'class="ghostpost"' ?> >
           <div class="pfInfo"> <a href="<?php echo base_url().'profile/user/'.$get_profiledata[0]->user_id; ?>" class="pfImg"><img src="<?php echo base_url(); ?>uploads/<?php if(!empty($get_profiledata[0]->user_img_thumb)) echo $get_profiledata[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" alt=""></a>
             <div class="pfInfoDetails">
               <h5><span class="pfname"><a href="<?php echo base_url().'profile/user/'.$get_profiledata[0]->user_id; ?>"><?php echo ucfirst($get_profiledata[0]->user_firstname)."&nbsp;".ucfirst($get_profiledata[0]->user_lastname);?></a>
@@ -97,7 +97,7 @@
               <a href="#" class="date"><?php  echo $hrsago; ?></a> </div>
           </div>
           <?php if(!empty($row->share_post_content)) echo "<div>".$row->share_post_content."</div>"; ?>
-          <div class="userContent"> <?php if(!empty($row->uploaded_files))
+          <div class="userContent <?php if($row->isGhostpost==1) echo 'hidethis'; ?>"  > <?php if(!empty($row->uploaded_files))
 			 {
 			 $up_files = explode(',',$row->uploaded_files);
 			 $i = 0;
@@ -123,8 +123,12 @@
 			 }else{
 				echo  $str_des=substr($row->post_content,0,250);
 			 } ?></div>
+             
           </div>
-          <div class="sharingLink"><?php 
+          <?php if($row->isGhostpost==1){ ?>
+          <div class="ghostpostBtn" id="ghostpostBtn<?php echo $row->post_id; ?>" onclick="showghostpost(<?php echo $row->post_id.",".$curr_user_id.",'".$row->posted_to."',".$row->posted_by;?>)"></div>
+          <?php } ?>
+          <div class="sharingLink <?php if($row->isGhostpost==1) echo 'hidethis'; ?>" ><?php 
 					$get_likedetails = $this->customermodel->likedata($row->post_id);
 					$current_user_like_data = $this->customermodel->currentuserlikedata($row->post_id);
 					if($current_user_like_data){
@@ -147,7 +151,7 @@
 				   // foreach($comments_details as $row_comment):
 			       if($i<=4){ $com_user_data = $this->customermodel->profiledata($comments_details[$i]->commented_by); 	  $hrsago = $this->customermodel->get_time_difference_php($comments_details[$i]->commented_time);
 ?>
-                   <div class="commentBox">
+                   <div class="commentBox <?php if($row->isGhostpost==1) echo 'hidethis'; ?>">
             <figure> <a href="<?php echo base_url().'profile/user/'.$com_user_data[0]->user_id; ?>"><img src="<?php echo base_url();?>uploads/<?php if(!empty($com_user_data[0]->user_img_thumb))echo $com_user_data[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" alt="<?php echo base_url();?>uploads/<?php if(!empty($image[0]->user_img_thumb)) echo $image[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>"></a></figure>
             <div class="postAComment"> 
             	<div class="postACommentInner"><span class="pfname" style="color:#5A5998;"><a href="<?php echo base_url().'profile/user/'.$com_user_data[0]->user_id; ?>"><?php echo ucfirst($com_user_data[0]->user_firstname)."&nbsp;".ucfirst($com_user_data[0]->user_lastname);?></a></span> <span class="date" style="color:black;">
@@ -187,7 +191,7 @@
             <a href="#" onclick="view_comments('<?php echo $row->post_id;?>')" style="font-size:12px;">View More</a>
             <?php } ?>
           </div>
-          <div class="commentBox">
+          <div class="commentBox <?php if($row->isGhostpost==1) echo 'hidethis'; ?>">
             <figure><img src="<?php echo base_url();?>uploads/<?php if(!empty($image[0]->user_img_thumb)) echo $image[0]->user_img_thumb; else echo 'default_profile_pic.png';; ?>" alt=""></figure>
             <div class="postAComment"> 
             	<div class="postACommentInner">
@@ -228,5 +232,18 @@
 <script>
 function takeInputToPost(){
 $("#posts").val($("#dummypost").text());
+}
+function showghostpost(post_id,current_id,posted_to,posted_by){
+$('#post'+post_id).addClass('ghostpostside');
+var viewers = posted_to.split(',');
+if(viewers.indexOf(current_id) > -1 || viewers==current_id || posted_by==current_id)
+{
+	$("#ghostpostBtn"+post_id).hide(200);
+	$("#post"+post_id+" .hidethis").show(500);
+}
+else{
+	alert('This is a ghost post.you are not authorized to view');
+}
+
 }
 </script>

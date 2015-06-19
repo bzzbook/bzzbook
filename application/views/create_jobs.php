@@ -19,11 +19,11 @@
 					if(in_array($cmp_info[0]['companyinfo_id'],$jobs))
 					{
               ?>
-		<button type="button" class="btn btn-primary createbutton fright" data-toggle="modal" data-target=".bs-example-modal-lg">Create Job</button>
+		<button type="button" class="btn btn-primary createbutton fright" data-toggle="modal" data-target="#cr_jobs">Create Job</button>
         <?php } } ?>
 
 		
-      <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal fade bs-example-modal-lg" tabindex="-1" id="cr_jobs" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
         
           <div class="col-md-12 col-sm-6  modal-content">

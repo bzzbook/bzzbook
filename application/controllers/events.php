@@ -101,5 +101,30 @@ public function write_discussion($event_id,$cmp_id)
 	   redirect('events/get_event_byid/'.$event_id."/".$cmp_id);
 }
 
+public function create_user_event()
+{
+	$event_info = array(
+	'event_name'=>$this->input->post('event_name'),
+	'event_location'=>$this->input->post('event_location'),
+	'event_date'=>$this->input->post('event_date'),
+	'event_time'=>$this->input->post('event_time'),
+	'event_details'=>$this->input->post('event_details'),
+	'event_type'=>$this->input->post('event_type'),
+	'event_created_by'=>$this->session->userdata('logged_in')['account_id']
+	);
+
+	$event_id = $this->eventmodel->insert_user_event($event_info);
+	if($event_id)
+	redirect('profile/events');
+	
+}
+public function change_event_going_sts($event_id,$status)
+	{
+		 $result = $this->eventmodel->event_going_sts($event_id,$status);
+		 if($result)
+		 return true;
+		 else
+		return false;
+	}
 }
 ?>

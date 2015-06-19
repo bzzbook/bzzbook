@@ -15,6 +15,65 @@ class Signg_in extends CI_Controller {
      $this->load->view('sign_in_v');
    }
 	
+	public function api_db_check_login()
+	{
+		
+		$this->form_validation->set_rules('email','Email','trim|required|valid_email|xss_clean');
+		$this->form_validation->set_rules('password','Password','trim|required|xss_clean');
+		
+	if($this->form_validation->run() == FALSE)
+		 {
+		   $this->load->view('sign_in_v');
+		}else{
+		$data = array(
+					'email' => $this->input->post('email'),
+					'password' => $this->input->post('password')
+				    );
+					
+						
+				$this->load->model('sign_inm');
+			    $result = $this->sign_inm->sign_in($data);
+		
+		
+	    if($result == TRUE){
+	    /*	$sess_array = array(
+		   					'email' => $this->input->post('email'),
+		   					'password' => $this->input->post('password')
+							
+						   );
+						 */
+						 
+		$sess_array = array(
+		   					'email' =>$result[0]['user_email'],
+						    'password' =>$result[0]['password'],
+							'account_id' =>$result[0]['user_id']
+							
+						   );
+		
+        $this->session->set_userdata('logged_in',$sess_array);
+	//	print_r($this->session->userdata);
+		$result = $this->sign_inm->read_user_information($sess_array);
+		if($result != false){
+			$data = array(
+						'result' =>'yes',
+						'success' => 'true'
+					     );
+						//header('Content-type: application/json');
+						echo json_encode($data); 
+						//$this->load->view('posts', $data);
+						//redirect('/profiles');
+		}
+						}else{
+							//$this->session->set_flashdata('error','Invalid Username or Password ,   Please Try again with valid Details!...');
+							$data = array('success'=> false,'message'=>'Invalid Username or Password');
+							//header('Content-type: application/json');
+							echo json_encode($data); 
+							//redirect('signg_in');
+							/*$data['error_message'] = 'Invalid Username or Password';
+							$this->load->view('sign_in_v', $data);*/
+						}
+					}
+	}
 	
 	public function db_check_login()
 	{

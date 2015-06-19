@@ -849,17 +849,17 @@ public function search_members($value,$specific_search)
 	
 	$searchblock = "";
  	$searchblock .= "<ul id='country-list'> "; 
-	
+	if($specific_search=='')
+	$limit = 5;
+	else
+	$limit = 10;
 	// To get members as per search input
 	if($specific_search=='' || $specific_search=='members'){
 	$this->db->select('*'); 
 	$this->db->from('bzz_userinfo');
 	$this->db->like('user_firstname',$value); 
 	$this->db->or_like('user_lastname',$value); 
-	if($specific_search=='')
-	$limit = 5;
-	else
-	$limit = 10;
+	
 	$this->db->limit($limit);
 	$query = $this->db->get();
 	$data = $query->result_array();

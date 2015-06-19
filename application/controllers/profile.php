@@ -106,7 +106,10 @@ public function messageview($msgid)
 public function events()
 {
 		$data['content']='events';
-	$this->load->view('template-view',$data);
+		$data['events'] = $this->eventmodel->get_events_and_invites();
+		$data['invites'] = $this->eventmodel->get_invites();
+		$data['hosts'] = $this->eventmodel->get_event_hosts();
+		$this->load->view('full_content_view',$data);
 	//$this->load->view('events');
 }
 public function groups()

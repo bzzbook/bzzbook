@@ -16,7 +16,14 @@ class EventModel extends CI_Model {
 		else
 			return false;
 	} 
-	
+	public function insert_user_event($event_info)
+	{
+		
+		if($this->db->insert('bzz_user_events',$event_info))
+		return true;
+		else
+			return false;
+	} 
 	public function get_events_by_cmpid($cmp_id)
 	{
         $id = $this->session->userdata('logged_in')['account_id'];
@@ -32,8 +39,62 @@ class EventModel extends CI_Model {
 		}
 		return false;
 	}
- 
- 
+ 	public function get_events_and_invites()
+	{
+         $id = $this->session->userdata('logged_in')['account_id'];
+		$condition = "(a.event_created_by = " .$id." OR b.frnd_id=".$id.") AND a.event_date>=NOW() AND a.event_date<=DATE_ADD(NOW(), INTERVAL 1 WEEK)";
+		$this->db->select('a.event_id,a.event_name,a.event_location,a.event_details,a.event_date,a.event_time,a.event_type,a.event_created_by,b.frnd_id,b.invitation_status');
+		$this->db->from('bzz_user_events a'); 
+		$this->db->join('bzz_user_event_invites b', 'b.event_id=a.event_id and b.frnd_id='.$id, 'left');
+		$this->db->where($condition);
+		$this->db->order_by('a.event_date','desc');   
+		$this->db->order_by('a.event_time','desc');      
+		$query = $this->db->get(); 
+		
+		$event_data = $query->result();
+		//echo $this->db->last_query(); exit;
+		//print_r($event_data);exit;
+		if(!empty($event_data))
+		{
+			return $event_data;
+		}
+		return false;
+	}
+	public function get_invites()
+	{
+         $id = $this->session->userdata('logged_in')['account_id'];
+		
+		$this->db->select('a.event_id,a.event_name,a.event_location,a.event_details,a.event_date,a.event_time,a.event_type,a.event_created_by,b.frnd_id,b.invitation_status');
+		$this->db->from('bzz_user_events a'); 
+		$this->db->join('bzz_user_event_invites b', 'b.event_id=a.event_id and b.frnd_id='.$id, 'inner');
+		$this->db->order_by('a.event_date','desc');   
+		$this->db->order_by('a.event_time','desc');      
+		$query = $this->db->get(); 
+		
+		$event_data = $query->result();
+		if(!empty($event_data))
+		{
+			return $event_data;
+		}
+		return false;
+	}
+ public function get_event_hosts()
+	{
+        $id = $this->session->userdata('logged_in')['account_id'];
+		$condition = "event_created_by = " .$id;
+		$this->db->select('*');
+		$this->db->from('bzz_user_events'); 
+		$this->db->where($condition);
+		$this->db->order_by('event_date','desc');   
+		$this->db->order_by('event_time','desc');      
+		$query = $this->db->get(); 
+		$event_data = $query->result();
+		if(!empty($event_data))
+		{
+			return $event_data;
+		}
+		return false;
+	}
  public function checkbutton($cmp_id)
  {
 	   $id = $this->session->userdata('logged_in')['account_id'];
@@ -82,6 +143,7 @@ class EventModel extends CI_Model {
 	 }
 	 return false;
  }
+ 
  
  public function get_event_discussion($event_id)
  {
@@ -166,6 +228,20 @@ class EventModel extends CI_Model {
   return false;
  }*/
  }
- 
+  public function event_going_sts($event_id,$status)
+ {
+		$id = $this->session->userdata('logged_in')['account_id'];		
+		$condition =  "frnd_id =" . "'" . $id . "'" . " AND " . "event_id = ". "'" .$event_id."'";
+		$this->db->where($condition);
+		$query = $this->db->get('bzz_user_event_invites');
+		$result = $query->result_array();
+		if(!empty($result))
+		{
+		 $data['invitation_status'] = $status;
+		 $this->db->where($condition);
+		 if($this->db->update('bzz_user_event_invites',$data))
+		 return true;
+		}	   
+ }
  }
 ?>
