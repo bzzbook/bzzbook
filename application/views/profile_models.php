@@ -940,73 +940,139 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <div class="start"><i class="fa fa-fw"></i></div>
-        <h4 class="modal-title" id="myModalLabe">Starts Work at</h4>
+        <h4 class="modal-title" id="new_job_label">Starts Work at <span id="employer_data"></span></h4>
         <div class="subheads">May 18, 2015</div>
       </div>
       <div class="modal-body">
-        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+        <form name="new_job_form"  action="<?php echo base_url(); ?>Life_Events/add_new_job/" method="post" enctype="multipart/form-data">
           <div class="col-md-6 Works" >
             <div class="form-group">
               <label for="exampleInputEmail1">Employer</label>
-              <input type="text" class="form-control" id="" placeholder="">
+              <input type="text" class="form-control" id="n_j_employer" name="n_j_employer" placeholder="">
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">Position</label>
-              <input type="text" class="form-control" id="" placeholder="optional">
+              <input type="text" class="form-control" name="n_j_position" placeholder="optional">
             </div>
             <div class="located">
               <label for="exampleInputEmail1">Location</label>
               <div class="input-group">
                 <div class="input-group-addon"><i class="fa fa-fw"></i></div>
-                <input type="text" class="form-control" id="exampleInputAmount">
+                <input type="text" class="form-control" id="exampleInputAmount" name="n_j_location">
               </div>
             </div>
             <div class="Works">
-              <input type="checkbox" class="outside">
+              <input type="checkbox" class="outside" name="n_j_status" value="Y" id="n_j_status" onclick="status_change('n_j_status','all_n_j_to_dates_dropdown','n_j_to','n_j_to_presant','add_to_year_link_m','n_j_to_years')">
               <span>I currently work here</span> </div>
             <div class="form-group">
               <label for="">When</label>
               <div class="clearfix"></div>
+              <div class="work_botom"><a href="#" onclick="from_year_disp('add_year_link_m','n_j_frm_years','add_month_link_m');" id="add_year_link_m"><i class="fa fa-plus"></i>&nbsp;Add Year</a></div>
               <div class="col-md-4">
-                <select>
-                  <option>1982</option>
+              
+                <select style="display:none;"  name="n_j_frm_years" id="n_j_frm_years" onchange="frm_years_change('n_j_frm_years','add_month_link_m','n_j_frm_months','add_day_link_m','n_j_frm_days','add_year_link_m')">
+                  <option value="0">years</option>
+                    <option>1983</option>  
+                    <option>1984</option>  
+                    <option>1985</option>  
+                    <option>1986</option> 
+                     <option>1987</option>  
+                     <option>1988</option>
                 </select>
               </div>
+              <div class="work_botom"><a href="#" onclick="from_month_disp('add_month_link_m','n_j_frm_months','add_day_link_m');" style="display:none;" id="add_month_link_m"><i class="fa fa-plus"></i>&nbsp;Add Month</a></div>
               <div class="col-md-4">
-                <select>
-                  <option>May</option>
+               <select style="display:none;" name="n_j_frm_months"  id="n_j_frm_months" onchange="frm_months_change('add_month_link_m','n_j_frm_months','add_day_link_m','n_j_frm_days','add_year_link_m')">
+                  <option value="0">months</option>
+                    <option>1</option>  
+                    <option>2</option>  
+                    <option>3</option>  
+                    <option>4</option> 
+                    <option>5</option>  
+                    <option>6</option>
                 </select>
               </div>
+              <div class="work_botom"><a href="#" onclick="from_day_disp('add_day_link_m','n_j_frm_days','n_j_status','n_j_to','n_j_to_presant','n_j_to_years','add_to_year_link_m');" style="display:none;" id="add_day_link_m"><i class="fa fa-plus"></i>&nbsp;Add Day</a></div>
               <div class="col-md-4">
-                <select>
-                  <option>13</option>
+                <select style="display:none;" name="n_j_frm_days" id="n_j_frm_days" onchange="frm_days_change('n_j_frm_days','add_day_link_m','add_to_year_link_m','n_j_to','n_j_to_presant','n_j_status','all_n_j_to_dates_dropdown','add_to_year_link_m')">
+                  <option value="0">Days</option>
+                   <option>1</option>  
+                    <option>2</option>  
+                    <option>3</option>  
+                    <option>4</option> 
+                    <option>5</option> 
                 </select>
               </div>
               <div class="clearfix"></div>
-              <div class="work_botom"><a href="#"><i class="fa fa-plus"></i>&nbsp;Add Year</a></div>
+               <div class="work_botom" id="n_j_to">To</div>
+               <div class="work_botom" id="n_j_to_presant" style="display:none;">To Presant</div>
+              <div class="work_botom"><a href="#" id="add_to_year_link_m" onclick="to_year_disp('add_to_year_link_m','n_j_to_years','add_to_month_link_m');"><i class="fa fa-plus"></i>&nbsp;Add Year</a></div>
+            </div>
+            
+            <div class="form-group" id="all_n_j_to_dates_dropdown">
+             
+              <div class="clearfix"></div>
+              <div class="col-md-4">
+                <select style="display:none;" name="n_j_to_years" id="n_j_to_years" onchange="to_years_change('add_to_year_link_m','n_j_to_years','add_to_month_link_m','n_j_to_months','n_j_to_days')">
+                 <option value="0">years</option>
+                    <option>1983</option>  
+                    <option>1984</option>  
+                    <option>1985</option>  
+                    <option>1986</option> 
+                     <option>1987</option>  
+                     <option>1988</option>
+                </select>
+              </div>
+               <div class="work_botom"><a href="#" onclick="to_month_disp('add_to_month_link_m','n_j_to_months','add_to_day_link_m');" style="display:none;" id="add_to_month_link_m"><i class="fa fa-plus"></i>&nbsp;Add Month</a></div>
+              <div class="col-md-4">
+                <select style="display:none;" id="n_j_to_months"  name="n_j_to_months" onchange="to_months_change('n_j_to_months','add_to_month_link_m','add_to_day_link_m','n_j_to_days')">
+                   <option value="0">Months</option>
+                    <option>1</option>  
+                    <option>2</option>  
+                    <option>3</option>  
+                    <option>4</option> 
+                    <option>5</option> 
+                </select>
+              </div>
+              <div class="work_botom"><a href="#" onclick="to_day_disp('add_to_day_link_m','n_j_to_days');" style="display:none;" id="add_to_day_link_m"><i class="fa fa-plus"></i>&nbsp;Add Day</a></div>
+              <div class="col-md-4">
+                <select style="display:none;" name="n_j_to_days" id="n_j_to_days" onchange="to_days_change('add_to_day_link_m','n_j_to_days')">
+                  <option value="0">Days</option>
+                   <option>1</option>  
+                    <option>2</option>  
+                    <option>3</option>  
+                    <option>4</option> 
+                    <option>5</option> 
+                </select>
+              </div>
+              <div class="clearfix"></div>
+              
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">Story</label>
               <div class="clearfix"></div>
-              <textarea rows="4" placeholder="Optional"></textarea>
+              <textarea rows="4" placeholder="Optional" name="n_j_story"></textarea>
+              <input type="hidden" name="n_j_images" value="uploadjobphotos" />
+              <input type="hidden" name="n_j_type" value="new_job" />
             </div>
           </div>
           <div class="col-md-6 chos_photos" id="testingg" >
-            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
-            <button type="button" class="btn btn-default btn-lg btn-block pho_box" onclick="document.getElementById('uploadjob_photos').click()">Upload Photos...</button>
-             <input class="btn btn-default btn-lg btn-block pho_box" type="file" name="uploadjob_photos[]" id="uploadjob_photos" multiple="multiple" style="display:none;" />
+           <!-- <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button> -->
+           <button type="button" class="btn btn-default btn-lg btn-block pho_box" onclick="document.getElementById('uploadjobphotos').click()">Upload Photos...</button>
+             <input class="btn btn-default btn-lg btn-block pho_box" type="file" name="uploadjobphotos[]" id="uploadjobphotos" multiple="multiple" style="display:none;" />
           </div>
          <div class="col-md-6 chos_photos" id="uploadPhotosnewjob"></div>
           <div class="clearfix"></div>
-        </form>
+      
         <div class="box_bottom">
           <div class="publics col-md-3" style="float:right">
-           <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save</div>
-            <div class="btn3 btn-black">Cancel</div>
+           <input type="submit" class="btn3 btn-green" value="Save" />
+            <div class="btn3 btn-black"  data-dismiss="modal" >Cancel</div>
            
           </div>
           <div class="clearfix"></div>
         </div>
+          </form>
         <div class="clearfix"></div>
       </div>
     </div>
@@ -1086,14 +1152,14 @@
             </div>
           </div>
           <div class="col-md-6 chos_photos" >
-            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
+           <!-- <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button> -->
             <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
           </div>
           <div class="clearfix"></div>
         </form>
         <div class="box_bottom">
           <div class="publics col-md-3" style="float:right">
-           <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save</div>
+           <div data-target="#AddCompany" data-toggle="modal" data-dismiss="modal" class="btn3 btn-green">Save</div>
             <div class="btn3 btn-black">Cancel</div>
            
           </div>
@@ -1117,73 +1183,79 @@
         <div class="subheads">Today</div>
       </div>
       <div class="modal-body">
-        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+        <form name="add_retirement" id="add_retirement" action="<?php echo base_url(); ?>Life_Events/add_retirement/" method="post" enctype="multipart/form-data">
           <div class="col-md-6 Retired" >
             <div class="form-group">
               <label for="exampleInputName2">Title</label>
-              <input type="text" class="form-control" id="" placeholder="Optional">
+              <input type="text" class="form-control" id="" placeholder="Optional" name="r_title">
             </div>
             <div class="form-group">
               <label for="">When</label>
               <div class="clearfix"></div>
               <div class="col-md-4">
-                <select>
+                <select name="r_year">
                   <option>1982</option>
                 </select>
               </div>
               <div class="col-md-4">
-                <select>
+                <select name="r_month">
                   <option>May</option>
                 </select>
               </div>
               <div class="col-md-4">
-                <select>
-                  <option>13</option>
+                <select name="r_date">
+                  <option >13</option>
                 </select>
               </div>
               <div class="clearfix"></div>
             </div>
             <div class="form-group">
               <label for="exampleInputName2">Profession</label>
-              <input type="text" class="form-control" id="" placeholder="Optional">
+              <input type="text" class="form-control" id="" placeholder="Optional" name="r_profession">
             </div>
             <div class="located">
               <label for="exampleInputEmail1">Location</label>
               <div class="input-group">
                 <div class="input-group-addon"><i class="fa fa-fw"></i></div>
-                <input type="text" placeholder="Optional" id="exampleInputAmount" class="form-control">
+                <input type="text" placeholder="Optional" id="exampleInputAmount" class="form-control" name="r_location">
               </div>
             </div>
             <div class="located">
               <label for="exampleInputEmail1">With</label>
               <div class="input-group">
                 <div class="input-group-addon"> <i class="fa fa-fw"></i></div>
-                <input type="text" placeholder="" id="exampleInputAmount" class="form-control">
+                <input type="text" placeholder="" id="exampleInputAmount" class="form-control" name="r_with">
+                 <input type="hidden" name="r_images" value="uploadretirementphotos" />
+                 <input type="hidden" name="r_type" value="retirement" />
               </div>
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">Story</label>
               <div class="clearfix"></div>
-              <textarea placeholder="Optional" rows="4"></textarea>
+              <textarea placeholder="Optional" rows="4" name="r_story"></textarea>
             </div>
           </div>
-          <div class="col-md-6 chos_photos" >
-            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
-            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
+          <div class="col-md-6 chos_photos" id="retirement_pics">
+           <!-- <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button> -->
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box"  onclick="document.getElementById('uploadretirementphotos').click()">Upload Photos...</button>
+              
+             <input class="btn btn-default btn-lg btn-block pho_box" type="file" name="uploadretirementphotos[]" id="uploadretirementphotos" multiple="multiple" style="display:none;" />
           </div>
+           <div class="col-md-6 chos_photos" id="uploadPhotosretirement"></div>
           <div class="clearfix"></div>
-        </form>
-        <div class="box_bottom">
           <div class="box_bottom">
+         
           <div class="publics col-md-3" style="float:right">
-           <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save</div>
-            <div class="btn3 btn-black">Cancel</div>
+           <input type="submit" class="btn3 btn-green" value="Save">
+            <div class="btn3 btn-black"  data-dismiss="modal">Cancel</div>
            
           </div>
           <div class="clearfix"></div>
-        </div>
+    
           <div class="clearfix"></div>
         </div>
+        </form>
+        
         <div class="clearfix"></div>
       </div>
     </div>
@@ -1253,9 +1325,10 @@
             </div>
           </div>
           <div class="col-md-6 chos_photos" >
-            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
+           <!-- <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button> -->
             <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
           </div>
+           <div class="col-md-6 chos_photos" id="uploadPhotosnewjob"></div>
           <div class="clearfix"></div>
         </form>
         <div class="box_bottom">
@@ -1287,50 +1360,114 @@
         <div class="subheads">Today</div>
       </div>
       <div class="modal-body">
-        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>Life_Events/add_study_abroad"  enctype="multipart/form-data" method="post">
           <div class="col-md-6 Study_abroad" >
             <div class="form-group">
               <label for="exampleInputName2">Title</label>
-              <input type="text" class="form-control" id="" placeholder="Optional" >
+              <input type="text" class="form-control" id="" placeholder="Optional"  name="s_a_title">
             </div>
             <div class="located">
               <label for="exampleInputEmail1">Location</label>
               <div class="input-group">
                 <div class="input-group-addon"><i class="fa fa-fw"></i></div>
-                <input type="text" id="exampleInputAmount" class="form-control" placeholder="Optional">
+                <input type="text" id="exampleInputAmount" class="form-control" placeholder="Optional" name="s_a_location">
               </div>
             </div>
             <div class="form-group">
               <label for="exampleInputName2">School</label>
-              <input type="text" class="form-control" id="" placeholder="Optional" >
+              <input type="text" class="form-control" id="" placeholder="Optional" name="s_a_school">
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">Studying</label>
               <div class="clearfix"></div>
-              <textarea placeholder="Optional" rows="4"></textarea>
+              <textarea placeholder="Optional" rows="4" name="s_a_studying"></textarea>
+               <input type="hidden" name="s_a_images" value="uploadstudyabroadpics" />
+               <input type="hidden" name="s_a_type" value="study_abroad" />
             </div>
             <div class="located">
               <label for="exampleInputEmail1">With</label>
               <div class="input-group">
                 <div class="input-group-addon"> <i class="fa fa-fw"></i></div>
-                <input type="text" placeholder="" id="exampleInputAmount" class="form-control">
+                <input type="text" placeholder="" id="exampleInputAmount" class="form-control" name="s_a_with">
               </div>
             </div>
+            
+            
+            
+            
+            
+            
             <div class="form-group">
               <label for="">From</label>
               <div class="clearfix"></div>
+              <div class="work_botom"><a href="#" onclick="from_year_disp('add_year_link_s_a','s_a_frm_years','add_month_link_s_a');" id="add_year_link_s_a"><i class="fa fa-plus"></i>&nbsp;Add Year</a></div>
               <div class="col-md-4">
-                <select>
+              
+                <select style="display:none;" name="s_a_frmyear" id="s_a_frm_years" onchange="frm_years_change('s_a_frm_years','add_month_link_s_a','s_a_frm_months','add_day_link_s_a','s_a_frm_days','add_year_link_s_a')">
+                  <option value="0">years</option>
+                    <option>1983</option>  
+                    <option>1984</option>  
+                    <option>1985</option>  
+                    <option>1986</option> 
+                     <option>1987</option>  
+                     <option>1988</option>
+                </select>
+              </div>
+              <div class="work_botom"><a href="#" onclick="from_month_disp('add_month_link_s_a','s_a_frm_months','add_day_link_s_a');" style="display:none;" id="add_month_link_s_a"><i class="fa fa-plus"></i>&nbsp;Add Month</a></div>
+              <div class="col-md-4">
+               <select style="display:none;"  name="s_a_frmmonth" id="s_a_frm_months" onchange="frm_months_change('add_month_link_s_a','s_a_frm_months','add_day_link_s_a','s_a_frm_days','add_year_link_s_a')">
+                  <option value="0">months</option>
+                    <option>1</option>  
+                    <option>2</option>  
+                    <option>3</option>  
+                    <option>4</option> 
+                    <option>5</option>  
+                    <option>6</option>
+                </select>
+              </div>
+              <div class="work_botom"><a href="#" onclick="from_day_disp('add_day_link_s_a','s_a_frm_days','n_j_status','s_a_to','s_a_to_presant','s_a_to_years','add_year_link_s_a');" style="display:none;" id="add_day_link_s_a"><i class="fa fa-plus"></i>&nbsp;Add Day</a></div>
+              <div class="col-md-4">
+                <select style="display:none;" name="s_a_frmdate" id="s_a_frm_days" onchange="frm_days_change('s_a_frm_days','add_day_link_s_a','add_year_link_s_a','s_a_to','s_a_to_presant','n_j_status','all_s_a_to_dates_dropdown','add_to_year_link_s_a')">
+                  <option value="0">Days</option>
+                   <option>1</option>  
+                    <option>2</option>  
+                    <option>3</option>  
+                    <option>4</option> 
+                    <option>5</option> 
+                </select>
+              </div>
+              <div class="clearfix"></div>
+               <div class="work_botom" id="s_a_to">To</div>
+               <div class="work_botom" id="s_a_to_presant" style="display:none;">To Presant</div>
+              <div class="work_botom"><a href="#" id="add_to_year_link_s_a" onclick="to_year_disp('add_to_year_link_s_a','s_a_to_years','add_to_month_link_s_a');"><i class="fa fa-plus"></i>&nbsp;Add Year</a></div>
+            </div>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <!--<div class="form-group">
+              <label for="">From</label>
+              <div class="clearfix"></div>
+              <div class="col-md-4">
+                <select name="s_a_frmyear">
                   <option>1982</option>
                 </select>
               </div>
               <div class="col-md-4">
-                <select>
+                <select name="s_a_frmmonth">
                   <option>May</option>
                 </select>
               </div>
               <div class="col-md-4">
-                <select>
+                <select name="s_a_frmdate">
                   <option>13</option>
                 </select>
               </div>
@@ -1338,30 +1475,78 @@
               <label for="exampleInputName2">To</label>
               <br>
               <div class="work_botom"><a href="#"><i class="fa fa-plus"></i>&nbsp;Add Year</a></div>
+            </div>-->
+            
+            
+            
+            <div class="form-group" id="all_s_a_to_dates_dropdown">
+             
+              <div class="clearfix"></div>
+              <div class="col-md-4">
+                <select style="display:none;"  name="s_a_to_years" id="s_a_to_years" onchange="to_years_change('add_to_year_link_s_a','s_a_to_years','add_to_month_link_s_a','s_a_to_months','s_a_to_days')">
+                 <option value="0">years</option>
+                    <option>1983</option>  
+                    <option>1984</option>  
+                    <option>1985</option>  
+                    <option>1986</option> 
+                     <option>1987</option>  
+                     <option>1988</option>
+                </select>
+              </div>
+               <div class="work_botom"><a href="#" onclick="to_month_disp('add_to_month_link_s_a','s_a_to_months','add_to_day_link_s_a');" style="display:none;" id="add_to_month_link_s_a"><i class="fa fa-plus"></i>&nbsp;Add Month</a></div>
+              <div class="col-md-4">
+                <select style="display:none;" id="s_a_to_months" name="s_a_to_months" onchange="to_months_change('s_a_to_months','add_to_month_link_s_a','add_to_day_link_s_a','s_a_to_days')">
+                   <option value="0">Months</option>
+                    <option>1</option>  
+                    <option>2</option>  
+                    <option>3</option>  
+                    <option>4</option> 
+                    <option>5</option> 
+                </select>
+              </div>
+              <div class="work_botom"><a href="#" onclick="to_day_disp('add_to_day_link_s_a','s_a_to_days');" style="display:none;" id="add_to_day_link_s_a"><i class="fa fa-plus"></i>&nbsp;Add Day</a></div>
+              <div class="col-md-4">
+                <select style="display:none;" id="s_a_to_days" name="s_a_to_days" onchange="to_days_change('add_to_day_link_s_a','s_a_to_days')">
+                  <option value="0">Days</option>
+                   <option>1</option>  
+                    <option>2</option>  
+                    <option>3</option>  
+                    <option>4</option> 
+                    <option>5</option> 
+                </select>
+              </div>
+              <div class="clearfix"></div>
+              
             </div>
+            
+            
+            
             <div class="form-group">
               <label for="exampleInputEmail1">Story</label>
               <div class="clearfix"></div>
-              <textarea placeholder="Optional" rows="4"></textarea>
+              <textarea placeholder="Optional" rows="4" name="s_a_story"></textarea>
             </div>
           </div>
-          <div class="col-md-6 chos_photos" >
-            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
-            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
+          <div class="col-md-6 chos_photos" id="study_abroad_pics">
+           <!-- <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button> -->
+             <button type="button" class="btn btn-default btn-lg btn-block pho_box"  onclick="document.getElementById('uploadstudyabroadpics').click()">Upload Photos...</button>
+              
+             <input class="btn btn-default btn-lg btn-block pho_box" type="file" name="uploadstudyabroadpics[]" id="uploadstudyabroadpics" multiple="multiple" style="display:none;" />
           </div>
+           <div class="col-md-6 chos_photos" id="upload_study_abroad_pics"></div>
           <div class="clearfix"></div>
-        </form>
-        <div class="box_bottom">
-          <div class="box_bottom">
+                  <div class="box_bottom">
+         
           <div class="publics col-md-3" style="float:right">
-           <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save</div>
-            <div class="btn3 btn-black">Cancel</div>
+           <input type="submit" class="btn3 btn-green" value="Save" />
+            <div class="btn3 btn-black" data-dismiss="modal">Cancel</div>
            
           </div>
+  
           <div class="clearfix"></div>
         </div>
-          <div class="clearfix"></div>
-        </div>
+        </form>
+
         <div class="clearfix"></div>
       </div>
     </div>
@@ -1431,7 +1616,7 @@
             </div>
           </div>
           <div class="col-md-6 chos_photos" >
-            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
+           <!-- <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button> -->
             <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
           </div>
           <div class="clearfix"></div>
@@ -1523,7 +1708,7 @@
             </div>
           </div>
           <div class="col-md-6 chos_photos" >
-            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
+           <!-- <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button> -->
             <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
           </div>
           <div class="clearfix"></div>
@@ -1601,7 +1786,7 @@
             </div>
           </div>
           <div class="col-md-6 chos_photos" >
-            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
+           <!-- <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button> -->
             <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
           </div>
           <div class="clearfix"></div>
@@ -1680,7 +1865,7 @@
             </div>
           </div>
           <div class="col-md-6 chos_photos" >
-            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
+           <!-- <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button> -->
             <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
           </div>
           <div class="clearfix"></div>
@@ -1767,7 +1952,7 @@
             </div>
           </div>
           <div class="col-md-6 chos_photos" >
-            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
+           <!-- <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button> -->
             <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
           </div>
           <div class="clearfix"></div>
@@ -1798,40 +1983,42 @@
         <div class="subheads">Today</div>
       </div>
       <div class="modal-body">
-        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+        <form action="<?php echo base_url(); ?>Life_Events/add_engagement" enctype="multipart/form-data" method="post">
           <div class="col-md-6 Engagement" >
             <div class="form-group">
               <label for="exampleInputName2">Title</label>
-              <input type="text" class="form-control" id="" placeholder="Optional" >
+              <input type="text" class="form-control" id="" placeholder="Optional"  name="engage_title">
             </div>
             <div class="located">
               <label for="exampleInputEmail1">Engaged To</label>
               <div class="input-group">
                 <div class="input-group-addon"><i class="fa fa-fw"></i></div>
-                <input type="text" id="exampleInputAmount" class="form-control" placeholder="">
+                <input type="text" id="exampleInputAmount" class="form-control" placeholder="" name="engage_with">
               </div>
               <div class="located">
                 <label for="exampleInputEmail1">Location</label>
                 <div class="input-group">
                   <div class="input-group-addon"><i class="fa fa-fw"></i></div>
-                  <input type="text" placeholder="Optional" class="form-control" id="exampleInputAmount">
+                  <input type="text" placeholder="Optional" class="form-control" id="exampleInputAmount" name="engage_location">
+                  <input type="hidden" name="engage_images" value="uploadengagementpics" />
+                  <input type="hidden" name="engage_type" value="engagement" />
                 </div>
               </div>
               <div class="form-group">
                 <label for="">When</label>
                 <div class="clearfix"></div>
                 <div class="col-md-4">
-                  <select>
+                  <select name="engage_year">
                     <option>1982</option>
                   </select>
                 </div>
                 <div class="col-md-4">
-                  <select>
+                  <select name="engage_month">
                     <option>May</option>
                   </select>
                 </div>
                 <div class="col-md-4">
-                  <select>
+                  <select name="engage_date">
                     <option>13</option>
                   </select>
                 </div>
@@ -1841,26 +2028,30 @@
             <div class="form-group">
               <label for="exampleInputEmail1">Story</label>
               <div class="clearfix"></div>
-              <textarea placeholder="Optional" rows="4"></textarea>
+              <textarea placeholder="Optional" rows="4" name="engage_story"></textarea>
             </div>
-            <div class="Works">
+            <div class="Works" style="display:none;">
               <input type="checkbox" class="outside">
               <span>Update relationship status</span> </div>
           </div>
-          <div class="col-md-6 chos_photos" >
-            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
-            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
+          <div class="col-md-6 chos_photos" id="engagement_pics" >
+           <!-- <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button> -->
+           <button type="button" class="btn btn-default btn-lg btn-block pho_box"  onclick="document.getElementById('uploadengagementpics').click()">Upload Photos...</button>
+              
+             <input class="btn btn-default btn-lg btn-block pho_box" type="file" name="uploadengagementpics[]" id="uploadengagementpics" multiple="multiple" style="display:none;" />
           </div>
+             <div class="col-md-6 chos_photos" id="upload_engagement_pics"></div>
           <div class="clearfix"></div>
-        </form>
-        <div class="box_bottom">
+          <div class="box_bottom">
           <div class="publics col-md-3" style="float:right">
-           <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save</div>
-            <div class="btn3 btn-black">Cancel</div>
+           <input type="submit" class="btn3 btn-green" value="Save" / >
+            <div class="btn3 btn-black" data-dismiss="modal" >Cancel</div>
            
           </div>
           <div class="clearfix"></div>
         </div>
+        </form>
+        
         <div class="clearfix"></div>
       </div>
     </div>
@@ -1879,40 +2070,40 @@
         <div class="subheads">Today</div>
       </div>
       <div class="modal-body">
-        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+        <form action="<?php echo base_url(); ?>Life_Events/add_marriage" enctype="multipart/form-data" method="post">
           <div class="col-md-6 Marriage" >
             <div class="form-group">
               <label for="exampleInputName2">Title</label>
-              <input type="text" class="form-control" id="" placeholder="Optional" >
+              <input type="text" class="form-control" id="" placeholder="Optional" name="mrg_title">
             </div>
             <div class="located">
               <label for="exampleInputEmail1">Married To</label>
               <div class="input-group">
                 <div class="input-group-addon"><i class="fa fa-fw"></i></div>
-                <input type="text" id="exampleInputAmount" class="form-control" placeholder="">
+                <input type="text" id="exampleInputAmount" class="form-control" placeholder="" name="mrg_with">
               </div>
               <div class="located">
                 <label for="exampleInputEmail1">Location</label>
                 <div class="input-group">
                   <div class="input-group-addon"><i class="fa fa-fw"></i></div>
-                  <input type="text" placeholder="Optional" class="form-control" id="exampleInputAmount">
+                  <input type="text" placeholder="Optional" class="form-control" id="exampleInputAmount" name="mrg_location">
                 </div>
               </div>
               <div class="form-group">
                 <label for="">When</label>
                 <div class="clearfix"></div>
                 <div class="col-md-4">
-                  <select>
+                  <select name="mrg_year">
                     <option>1982</option>
                   </select>
                 </div>
                 <div class="col-md-4">
-                  <select>
+                  <select name="mrg_month">
                     <option>May</option>
                   </select>
                 </div>
                 <div class="col-md-4">
-                  <select>
+                  <select name="mrg_date">
                     <option>13</option>
                   </select>
                 </div>
@@ -1922,26 +2113,33 @@
             <div class="form-group">
               <label for="exampleInputEmail1">Story</label>
               <div class="clearfix"></div>
-              <textarea placeholder="Optional" rows="4"></textarea>
+              <textarea placeholder="Optional" rows="4" name="mrg_story"></textarea>
+               <input type="hidden" name="marriage_images" value="uploadmarriagepics" />
+               <input type="hidden" name="mrg_type" value="marriage" />
             </div>
-            <div class="Works">
+            <div class="Works" style="display:none;">
               <input type="checkbox" class="outside">
+              
               <span>Update relationship status</span> </div>
           </div>
-          <div class="col-md-6 chos_photos" >
-            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
-            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
+          <div class="col-md-6 chos_photos" id="marriage_pics">
+           <!-- <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button> -->
+             <button type="button" class="btn btn-default btn-lg btn-block pho_box"  onclick="document.getElementById('uploadmarriagepics').click()">Upload Photos...</button>
+              
+             <input class="btn btn-default btn-lg btn-block pho_box" type="file" name="uploadmarriagepics[]" id="uploadmarriagepics" multiple="multiple" style="display:none;" />   
           </div>
+           <div class="col-md-6 chos_photos" id="upload_marriage_pics"></div>
           <div class="clearfix"></div>
-        </form>
-        <div class="box_bottom">
+          <div class="box_bottom">
           <div class="publics col-md-3" style="float:right">
-           <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save</div>
-            <div class="btn3 btn-black">Cancel</div>
+           <input type="submit" class="btn3 btn-green" value="Save" />
+            <div class="btn3 btn-black" data-dismiss="modal">Cancel</div>
            
           </div>
           <div class="clearfix"></div>
         </div>
+        </form>
+        
         <div class="clearfix"></div>
       </div>
     </div>
@@ -1960,24 +2158,26 @@
         <div class="subheads"></div>
       </div>
       <div class="modal-body">
-        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+        <form action="<?php echo base_url(); ?>Life_Events/add_anniversary"  enctype="multipart/form-data" method="post">
           <div class="col-md-6 Anniversary" >
             <div class="form-group">
               <label for="exampleInputName2">Title</label>
-              <input type="text" class="form-control" id="" placeholder="Optional" >
+              <input type="text" class="form-control" id="" placeholder="Optional" name="ann_title" >
             </div>
             <div class="located">
               <label for="exampleInputEmail1">Partner</label>
               <div class="input-group">
                 <div class="input-group-addon"><i class="fa fa-fw"></i></div>
-                <input type="text" id="exampleInputAmount" class="form-control" placeholder="">
+                <input type="text" id="exampleInputAmount" class="form-control" placeholder="" name="ann_partner" >
               </div>
               <div class="form-group">
                 <label for="exampleInputName2">Relationship</label>
                 <br>
                 <div class="schools">
-                  <select>
-                    <option>In a Relationship </option>
+                  <select name="ann_relationship">
+                    <option>Love</option>
+                     <option>Marriage</option>
+                      <option>Friendship</option>
                   </select>
                 </div>
               </div>
@@ -1985,7 +2185,7 @@
                 <label for="exampleInputName2">Number of Years</label>
                 <br>
                 <div class="schools">
-                  <select>
+                  <select name="ann_no_of_years">
                     <option>1 </option>
                   </select>
                 </div>
@@ -1994,17 +2194,17 @@
                 <label for="">Celebration Date</label>
                 <div class="clearfix"></div>
                 <div class="col-md-4">
-                  <select>
+                  <select name="ann_year">
                     <option>1982</option>
                   </select>
                 </div>
                 <div class="col-md-4">
-                  <select>
+                  <select name="ann_month">
                     <option>May</option>
                   </select>
                 </div>
                 <div class="col-md-4">
-                  <select>
+                  <select name="ann_date">
                     <option>13</option>
                   </select>
                 </div>
@@ -2014,23 +2214,29 @@
             <div class="form-group">
               <label for="exampleInputEmail1">Story</label>
               <div class="clearfix"></div>
-              <textarea placeholder="Optional" rows="4"></textarea>
+              <textarea placeholder="Optional" rows="4" name="ann_story"></textarea>
+              <input type="hidden" name="anniversary_images" value="uploadanniversarypics" />
+               <input type="hidden" name="ann_type" value="anniversary" />
             </div>
           </div>
-          <div class="col-md-6 chos_photos" >
-            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
-            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
+          <div class="col-md-6 chos_photos"  id="anniversary_pics">
+           <!-- <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button> -->
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box"  onclick="document.getElementById('uploadanniversarypics').click()">Upload Photos...</button>
+              
+             <input class="btn btn-default btn-lg btn-block pho_box" type="file" name="uploadanniversarypics[]" id="uploadanniversarypics" multiple="multiple" style="display:none;" />
           </div>
+          <div class="col-md-6 chos_photos" id="upload_anniversary_pics"></div>
           <div class="clearfix"></div>
-        </form>
+         
         <div class="box_bottom">
           <div class="publics col-md-3" style="float:right">
-           <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save</div>
-            <div class="btn3 btn-black">Cancel</div>
-           
+           <input type="submit" class="btn3 btn-green" value="Save" />
+            <div class="btn3 btn-black" data-dismiss="modal">Cancel</div>
+          
           </div>
           <div class="clearfix"></div>
         </div>
+         </form>
         <div class="clearfix"></div>
       </div>
     </div>
@@ -2110,7 +2316,7 @@
             </div>
           </div>
           <div class="col-md-6 chos_photos" >
-            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
+           <!-- <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button> -->
             <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
           </div>
           <div class="clearfix"></div>
@@ -2141,31 +2347,31 @@
         <div class="subheads"> Today</div>
       </div>
       <div class="modal-body">
-        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+        <form  action="<?php echo base_url(); ?>life_Events/add_child" enctype="multipart/form-data" method="post">
           <div class="col-md-6 New_Child" >
             <div class="form-group">
               <label for="exampleInputName2">Title</label>
-              <input type="text" class="form-control" id="" placeholder="Optional" >
+              <input type="text" class="form-control" id="" placeholder="Optional"  name="ch_title">
             </div>
             <div class="form-group">
               <label for="exampleInputName2">Name of Child</label>
-              <input type="text" class="form-control" id="" placeholder="Optional" >
+              <input type="text" class="form-control" id="" placeholder="Optional"  name="ch_name">
             </div>
             <div class="form-group">
               <label for="">Born On</label>
               <div class="clearfix"></div>
               <div class="col-md-4">
-                <select>
+                <select name="ch_year">
                   <option>1982</option>
                 </select>
               </div>
               <div class="col-md-4">
-                <select>
+                <select name="ch_month">
                   <option>May</option>
                 </select>
               </div>
               <div class="col-md-4">
-                <select>
+                <select name="ch_date">
                   <option>13</option>
                 </select>
               </div>
@@ -2175,15 +2381,16 @@
               <label for="exampleInputEmail1">With</label>
               <div class="input-group">
                 <div class="input-group-addon"><i class="fa fa-fw"></i></div>
-                <input type="text" placeholder="" class="form-control" id="exampleInputAmount">
+                <input type="text" placeholder="" class="form-control" id="exampleInputAmount" name="ch_with">
               </div>
             </div>
             <div class="form-group">
               <label for="exampleInputName2">Gender</label>
               <br>
               <div class="schools">
-                <select>
-                  <option>In </option>
+                <select name="ch_gender">
+                  <option>male </option>
+                  <option>female</option>
                 </select>
               </div>
             </div>
@@ -2191,29 +2398,35 @@
               <label for="exampleInputEmail1">Location</label>
               <div class="input-group">
                 <div class="input-group-addon"><i class="fa fa-fw"></i></div>
-                <input type="text" placeholder="Optional" class="form-control" id="exampleInputAmount">
+                <input type="text" placeholder="Optional" class="form-control" id="exampleInputAmount" name="ch_location">
               </div>
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">Story</label>
               <div class="clearfix"></div>
-              <textarea rows="4" placeholder="Optional"></textarea>
+              <textarea rows="4" placeholder="Optional" name="ch_story"></textarea>
+              <input type="hidden" name="child_images" value="uploadchildpics" />
+               <input type="hidden" name="ch_type" value="new_child" />
             </div>
           </div>
-          <div class="col-md-6 chos_photos" >
-            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
-            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
+          <div class="col-md-6 chos_photos" id="child_pics">
+           <!-- <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button> -->
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box"  onclick="document.getElementById('uploadchildpics').click()">Upload Photos...</button>
+              
+             <input class="btn btn-default btn-lg btn-block pho_box" type="file" name="uploadchildpics[]" id="uploadchildpics" multiple="multiple" style="display:none;" />
           </div>
+          <div class="col-md-6 chos_photos" id="upload_child_pics"></div>
           <div class="clearfix"></div>
-        </form>
+       
         <div class="box_bottom">
           <div class="publics col-md-3" style="float:right">
-           <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save</div>
+           <input type="submit" class="btn3 btn-green" value="Save" />
             <div class="btn3 btn-black">Cancel</div>
            
           </div>
           <div class="clearfix"></div>
         </div>
+         </form>
         <div class="clearfix"></div>
       </div>
     </div>
@@ -2232,7 +2445,7 @@
         <div class="subheads"> Today</div>
       </div>
       <div class="modal-body">
-        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>Life_Events/add_familymember" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
           <div class="col-md-6 Family_Member" >
             <div class="form-group">
               <label for="exampleInputName2">Title</label>
@@ -2281,7 +2494,7 @@
             </div>
           </div>
           <div class="col-md-6 chos_photos" >
-            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
+           <!-- <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button> -->
             <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
           </div>
           <div class="clearfix"></div>
@@ -2380,7 +2593,7 @@
             </div>
           </div>
           <div class="col-md-6 chos_photos" >
-            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
+           <!-- <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button> -->
             <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
           </div>
           <div class="clearfix"></div>
@@ -2467,7 +2680,7 @@
             </div>
           </div>
           <div class="col-md-6 chos_photos" >
-            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
+           <!-- <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button> -->
             <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
           </div>
           <div class="clearfix"></div>
@@ -2554,7 +2767,7 @@
             </div>
           </div>
           <div class="col-md-6 chos_photos" >
-            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
+           <!-- <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button> -->
             <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
           </div>
           <div class="clearfix"></div>
@@ -2641,7 +2854,7 @@
             </div>
           </div>
           <div class="col-md-6 chos_photos" >
-            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
+           <!-- <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button> -->
             <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
           </div>
           <div class="clearfix"></div>
@@ -2672,49 +2885,49 @@
         <div class="subheads"> Today</div>
       </div>
       <div class="modal-body">
-        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+        <form action="<?php echo base_url(); ?>Life_Events/add_movedlocation" enctype="multipart/form-data" method="post">
           <div class="col-md-6 moved" >
             <div class="form-group">
               <label for="exampleInputName2">Title</label>
-              <input type="text" class="form-control" id="" placeholder="Optional" >
+              <input type="text" class="form-control" id="" placeholder="Optional"  name="mov_title">
             </div>
             <div class="located">
               <label for="exampleInputEmail1">Where To</label>
               <div class="input-group">
                 <div class="input-group-addon"><i class="fa fa-fw"></i></div>
-                <input type="text" id="exampleInputAmount" class="form-control" placeholder="">
+                <input type="text" id="exampleInputAmount" class="form-control" placeholder="" name="mov_where_to">
               </div>
             </div>
             <div class="form-group">
               <label for="exampleInputName2">Address</label>
-              <input type="text" class="form-control" id="" placeholder="Optional" >
+              <input type="text" class="form-control" id="" placeholder="Optional"  name="mov_address">
             </div>
             <div class="form-group">
               <label for="exampleInputName2">From</label>
-              <input type="text" class="form-control" id="" placeholder="Optional" >
+              <input type="text" class="form-control" id="" placeholder="Optional" name="mov_from" >
             </div>
             <div class="located">
               <label for="exampleInputEmail1">With</label>
               <div class="input-group">
                 <div class="input-group-addon"><i class="fa fa-fw"></i></div>
-                <input type="text" placeholder="" class="form-control" id="exampleInputAmount">
+                <input type="text" placeholder="" class="form-control" id="exampleInputAmount" name="mov_with">
               </div>
             </div>
             <div class="form-group">
               <label for="">When</label>
               <div class="clearfix"></div>
               <div class="col-md-4">
-                <select>
+                <select name="mov_year">
                   <option>1982</option>
                 </select>
               </div>
               <div class="col-md-4">
-                <select>
+                <select name="mov_month">
                   <option>May</option>
                 </select>
               </div>
               <div class="col-md-4">
-                <select>
+                <select name="mov_date">
                   <option>13</option>
                 </select>
               </div>
@@ -2723,23 +2936,28 @@
             <div class="form-group">
               <label for="exampleInputEmail1">Story</label>
               <div class="clearfix"></div>
-              <textarea rows="4" placeholder="Optional"></textarea>
+              <textarea rows="4" placeholder="Optional" name="mov_story"></textarea>
+               <input type="hidden" name="moved_images" value="uploadmovedphotos" />
+                <input type="hidden" name="mov_type" value="moved" />
             </div>
           </div>
-          <div class="col-md-6 chos_photos" >
-            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
-            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
+          <div class="col-md-6 chos_photos" id="moved_pics" >
+           <!-- <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button> -->
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box" onclick="document.getElementById('uploadmovedphotos').click()">Upload Photos...</button>
+             <input class="btn btn-default btn-lg btn-block pho_box" type="file" name="uploadmovedphotos[]" id="uploadmovedphotos" multiple="multiple" style="display:none;" />
           </div>
+         <div class="col-md-6 chos_photos" id="upload_moved_photos"></div>
           <div class="clearfix"></div>
-        </form>
-        <div class="box_bottom">
+          <div class="box_bottom">
           <div class="publics col-md-3" style="float:right">
-           <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save</div>
-            <div class="btn3 btn-black">Cancel</div>
+           <input type="submit" class="btn3 btn-green" value="Save" />
+            <div class="btn3 btn-black" data-dismiss="modal">Cancel</div>
            
           </div>
           <div class="clearfix"></div>
         </div>
+        </form>
+        
         <div class="clearfix"></div>
       </div>
     </div>
@@ -2758,17 +2976,17 @@
         <div class="subheads"> Today</div>
       </div>
       <div class="modal-body">
-        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+        <form  action="<?php echo base_url(); ?>Life_Events/add_bought_home" enctype="multipart/form-data" method="post">
           <div class="col-md-6 Bought_House" >
             <div class="form-group">
               <label for="exampleInputName2">Title</label>
-              <input type="text" class="form-control" id="" placeholder="Optional" >
+              <input type="text" class="form-control" id="" placeholder="Optional" name="bt_hme_title" >
             </div>
             <div class="form-group">
               <label for="exampleInputName2">Type</label>
               <br>
               <div class="schools">
-                <select>
+                <select name="bt_hme_type">
                   <option>House </option>
                 </select>
               </div>
@@ -2777,31 +2995,31 @@
               <label for="exampleInputEmail1">Location</label>
               <div class="input-group">
                 <div class="input-group-addon"><i class="fa fa-fw"></i></div>
-                <input type="text" id="exampleInputAmount" class="form-control" placeholder="Optional">
+                <input type="text" id="exampleInputAmount" class="form-control" placeholder="Optional" name="bt_hme_location">
               </div>
             </div>
             <div class="located">
               <label for="exampleInputEmail1">With</label>
               <div class="input-group">
                 <div class="input-group-addon"><i class="fa fa-fw"></i></div>
-                <input type="text" placeholder="" class="form-control" id="exampleInputAmount">
+                <input type="text" placeholder="" class="form-control" id="exampleInputAmount" name="bt_hme_with">
               </div>
             </div>
             <div class="form-group">
               <label for="">When</label>
               <div class="clearfix"></div>
               <div class="col-md-4">
-                <select>
+                <select name="bt_hme_year">
                   <option>1982</option>
                 </select>
               </div>
               <div class="col-md-4">
-                <select>
+                <select name="bt_hme_month">
                   <option>May</option>
                 </select>
               </div>
               <div class="col-md-4">
-                <select>
+                <select name="bt_hme_date">
                   <option>13</option>
                 </select>
               </div>
@@ -2810,23 +3028,28 @@
             <div class="form-group">
               <label for="exampleInputEmail1">Story</label>
               <div class="clearfix"></div>
-              <textarea rows="4" placeholder="Optional"></textarea>
+              <textarea rows="4" placeholder="Optional" name="bt_hme_story"></textarea>
+               <input type="hidden" name="bought_home_images" value="uploadboughthomephotos" />
+               <input type="hidden" name="bt_hme_type" value="bought_home" />
             </div>
           </div>
-          <div class="col-md-6 chos_photos" >
-            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
-            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
+          <div class="col-md-6 chos_photos" id="bought_home_pics" >
+           <!-- <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button> -->
+          <button type="button" class="btn btn-default btn-lg btn-block pho_box" onclick="document.getElementById('uploadboughthomephotos').click()">Upload Photos...</button>
+             <input class="btn btn-default btn-lg btn-block pho_box" type="file" name="uploadboughthomephotos[]" id="uploadboughthomephotos" multiple="multiple" style="display:none;" />
           </div>
+         <div class="col-md-6 chos_photos" id="upload_bought_home_photos"></div>
           <div class="clearfix"></div>
-        </form>
-        <div class="box_bottom">
+          <div class="box_bottom">
           <div class="publics col-md-3" style="float:right">
-           <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save</div>
-            <div class="btn3 btn-black">Cancel</div>
+           <input type="submit" class="btn3 btn-green" value="Save" />
+            <div class="btn3 btn-black" data-dismiss="modal">Cancel</div>
            
           </div>
           <div class="clearfix"></div>
         </div>
+        </form>
+        
         <div class="clearfix"></div>
       </div>
     </div>
@@ -2896,7 +3119,7 @@
             </div>
           </div>
           <div class="col-md-6 chos_photos" >
-            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
+           <!-- <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button> -->
             <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
           </div>
           <div class="clearfix"></div>
@@ -2979,7 +3202,7 @@
             </div>
           </div>
           <div class="col-md-6 chos_photos" >
-            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
+           <!-- <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button> -->
             <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
           </div>
           <div class="clearfix"></div>
@@ -3011,30 +3234,30 @@
         <div class="subheads">Model Year: 2015.</div>
       </div>
       <div class="modal-body">
-        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+        <form action="<?php echo base_url(); ?>Life_Events/add_newvehicle" enctype="multipart/form-data" method="post">
           <div class="col-md-6 New_vehicle" >
             <div class="form-group">
               <label for="exampleInputName2">Title</label>
-              <input type="text" class="form-control" id="" placeholder="Optional" >
+              <input type="text" class="form-control" id="" placeholder="Optional" name="n_v_title" >
             </div>
             <div class="form-group">
               <label for="exampleInputName2">Type</label>
               <br>
               <div class="schools">
-                <select>
+                <select name="n_v_type">
                   <option>Car </option>
                 </select>
               </div>
             </div>
             <div class="form-group">
               <label for="exampleInputName2">Make/Model</label>
-              <input type="text" class="form-control" id="" placeholder="Optional" >
+              <input type="text" class="form-control" id="" placeholder="Optional"  name="n_v_model">
             </div>
             <div class="form-group">
               <label for="exampleInputName2">Model Year</label>
               <br>
               <div class="schools">
-                <select>
+                <select name="n_v_model_year">
                   <option>2015 </option>
                 </select>
               </div>
@@ -3043,17 +3266,17 @@
               <label for="">When</label>
               <div class="clearfix"></div>
               <div class="col-md-4">
-                <select>
+                <select name="n_v_year">
                   <option>1982</option>
                 </select>
               </div>
               <div class="col-md-4">
-                <select>
+                <select name="n_v_month">
                   <option>May</option>
                 </select>
               </div>
               <div class="col-md-4">
-                <select>
+                <select name="n_v_date">
                   <option>13</option>
                 </select>
               </div>
@@ -3063,44 +3286,43 @@
               <label for="exampleInputEmail1">With</label>
               <div class="input-group">
                 <div class="input-group-addon"><i class="fa fa-fw"></i></div>
-                <input type="text" id="exampleInputAmount" class="form-control" placeholder="">
+                <input type="text" id="exampleInputAmount" class="form-control" placeholder="" name="n_v_with">
               </div>
             </div>
             <div class="located">
               <label for="exampleInputEmail1">Location</label>
               <div class="input-group">
                 <div class="input-group-addon"><i class="fa fa-fw"></i></div>
-                <input type="text" placeholder="Optional" class="form-control" id="exampleInputAmount">
+                <input type="text" placeholder="Optional" class="form-control" id="exampleInputAmount" name="n_v_location">
               </div>
             </div>
-            <div class="located">
-              <label for="exampleInputEmail1">Location</label>
-              <div class="input-group">
-                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
-                <input type="text" placeholder="Optional" class="form-control" id="exampleInputAmount">
-              </div>
-            </div>
+            
             <div class="form-group">
 
               <label for="exampleInputEmail1">Story</label>
               <div class="clearfix"></div>
-              <textarea rows="4" placeholder="Optional"></textarea>
+              <textarea rows="4" placeholder="Optional" name="n_v_story"></textarea>
+               <input type="hidden" name="n_v_images" value="uploadvehiclephotos" />
+               <input type="hidden" name="n_v_type" value="new_vehicle" />
             </div>
           </div>
-          <div class="col-md-6 chos_photos" >
-            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
-            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
+          <div class="col-md-6 chos_photos" id="vehicle_pics">
+           <!-- <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button> -->
+             <button type="button" class="btn btn-default btn-lg btn-block pho_box" onclick="document.getElementById('uploadvehiclephotos').click()">Upload Photos...</button>
+             <input class="btn btn-default btn-lg btn-block pho_box" type="file" name="uploadvehiclephotos[]" id="uploadvehiclephotos" multiple="multiple" style="display:none;" />
           </div>
+         <div class="col-md-6 chos_photos" id="uploadPhotosnewvehicle"></div>
           <div class="clearfix"></div>
-        </form>
-        <div class="box_bottom">
+          <div class="box_bottom">
           <div class="publics col-md-3" style="float:right">
-           <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save</div>
-            <div class="btn3 btn-black">Cancel</div>
+           <input type="submit" class="btn3 btn-green" value="Save" />
+            <div class="btn3 btn-black" data-dismiss="modal">Cancel</div>
            
           </div>
           <div class="clearfix"></div>
         </div>
+        </form>
+        
         <div class="clearfix"></div>
       </div>
     </div>
@@ -3119,18 +3341,18 @@
         <div class="subheads">May 27, 2015</div>
              </div>
       <div class="modal-body">
-        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+        <form  action="<?php echo base_url(); ?>Life_Events/add_organ_donor" enctype="multipart/form-data" method="post">
           <div class="col-md-6 Health_Wellness" >
             <div class="form-group">
               <label for="exampleInputName2">Title</label>
-              <input type="text" class="form-control" id="" placeholder="Optional" >
+              <input type="text" class="form-control" id="" placeholder="Optional" name="o_d_title" >
             </div>
             
             <div class="located">
               <label for="exampleInputEmail1">Location</label>
               <div class="input-group">
                 <div class="input-group-addon"><i class="fa fa-fw"></i></div>
-                <input type="text" id="exampleInputAmount" class="form-control" placeholder="Optional">
+                <input type="text" id="exampleInputAmount" class="form-control" placeholder="Optional" name="o_d_location">
               </div>
             </div>
             
@@ -3138,17 +3360,17 @@
               <label for="">When</label>
               <div class="clearfix"></div>
               <div class="col-md-4">
-                <select>
+                <select  name="o_d_year">
                   <option>1982</option>
                 </select>
               </div>
               <div class="col-md-4">
-                <select>
+                <select name="o_d_month">
                   <option>May</option>
                 </select>
               </div>
               <div class="col-md-4">
-                <select>
+                <select name="o_d_date">
                   <option>13</option>
                 </select>
               </div>
@@ -3158,7 +3380,8 @@
             <div class="form-group">
               <label for="exampleInputEmail1">Story</label>
               <div class="clearfix"></div>
-              <textarea rows="4" placeholder="Optional"></textarea>
+              <textarea rows="4" placeholder="Optional" name="o_d_story"></textarea>
+              <input type="hidden" name="o_d_type" value="organ_donor" />
             </div>
         
             
@@ -3168,15 +3391,16 @@
         <p><a href="#">Learn More</a></p>
           </div>
           <div class="clearfix"></div>
-        </form>
-        <div class="box_bottom">
+          <div class="box_bottom">
           <div class="publics col-md-3" style="float:right">
-           <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save</div>
-            <div class="btn3 btn-black">Cancel</div>
+           <input type="submit" class="btn3 btn-green" value="Save" />
+            <div  data-dismiss="modal" class="btn3 btn-black">Cancel</div>
            
           </div>
           <div class="clearfix"></div>
         </div>
+        </form>
+        
         <div class="clearfix"></div>
       </div>
     </div>
@@ -3195,7 +3419,7 @@
             <div class="subheads">May 27, 2015</div>
       </div>
       <div class="modal-body">
-        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+        <form  action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
           <div class="col-md-6 Overcame_Illness" >
             <div class="form-group">
               <label for="exampleInputName2">Title</label>
@@ -3255,7 +3479,7 @@
             
           </div>
           <div class="col-md-6 chos_photos" >
-            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
+           <!-- <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button> -->
             <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
           </div>
           <div class="clearfix"></div>
@@ -3286,17 +3510,17 @@
             <div class="subheads">May 27, 2015</div>
       </div>
       <div class="modal-body">
-        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+        <form  action="<?php echo base_url(); ?>Life_Events/add_quit_habit" enctype="multipart/form-data" method="post">
           <div class="col-md-6 Quit_Habit" >
             <div class="form-group">
               <label for="exampleInputName2">Title</label>
-              <input type="text" class="form-control" id="" placeholder="Optional" >
+              <input type="text" class="form-control" id="" placeholder="Optional" name="q_h_title" >
             </div>
             <div class="form-group">
               <label for="exampleInputName2">Habit</label>
               <br>
               <div class="schools">
-                <select>
+                <select name="q_h_habit">
                   <option>Other</option>
                 </select>
               </div>
@@ -3309,7 +3533,7 @@
               <label for="exampleInputEmail1">Location</label>
               <div class="input-group">
                 <div class="input-group-addon"><i class="fa fa-fw"></i></div>
-                <input type="text" placeholder="Optional" class="form-control" id="exampleInputAmount">
+                <input type="text" placeholder="Optional" class="form-control" id="exampleInputAmount" name="q_h_location">
               </div>
             </div>
             
@@ -3317,7 +3541,7 @@
               <label for="exampleInputEmail1">With</label>
               <div class="input-group">
                 <div class="input-group-addon"><i class="fa fa-fw"></i></div>
-                <input type="text" id="exampleInputAmount" class="form-control" placeholder="">
+                <input type="text" id="exampleInputAmount" class="form-control" placeholder="" name="q_h_with">
               </div>
             </div>
             
@@ -3325,17 +3549,17 @@
               <label for="">When</label>
               <div class="clearfix"></div>
               <div class="col-md-4">
-                <select>
+                <select name="q_h_year">
                   <option>1982</option>
                 </select>
               </div>
               <div class="col-md-4">
-                <select>
+                <select name="q_h_month">
                   <option>May</option>
                 </select>
               </div>
               <div class="col-md-4">
-                <select>
+                <select name="q_h_date">
                   <option>13</option>
                 </select>
               </div>
@@ -3344,7 +3568,9 @@
             <div class="form-group">
               <label for="exampleInputEmail1">Story</label>
               <div class="clearfix"></div>
-              <textarea rows="4" placeholder="Optional"></textarea>
+              <textarea rows="4" placeholder="Optional" name="q_h_story"></textarea>
+                <input type="hidden" name="quit_habit_images" value="uploadquithabitpics" />
+                 <input type="hidden" name="q_h_type" value="quit_habit" />
             </div>
             
             
@@ -3352,20 +3578,24 @@
             
             
           </div>
-          <div class="col-md-6 chos_photos" >
-            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
-            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
+          <div class="col-md-6 chos_photos" id="quit_habit_pics" >
+           <!-- <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button> -->
+           <button type="button" class="btn btn-default btn-lg btn-block pho_box"  onclick="document.getElementById('uploadquithabitpics').click()">Upload Photos...</button>
+              
+             <input class="btn btn-default btn-lg btn-block pho_box" type="file" name="uploadquithabitpics[]" id="uploadquithabitpics" multiple="multiple" style="display:none;" />  <input type="hidden" name="quit_habit_images" value="uploadquithabitpics" />
           </div>
+           <div class="col-md-6 chos_photos" id="upload_quit_habit_pics"></div>
           <div class="clearfix"></div>
-        </form>
-        <div class="box_bottom">
+          <div class="box_bottom">
           <div class="publics col-md-3" style="float:right">
-           <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save</div>
-            <div class="btn3 btn-black">Cancel</div>
+           <input type="submit" class="btn3 btn-green" value="Save" />
+            <div data-dismiss="modal" class="btn3 btn-black">Cancel</div>
            
           </div>
           <div class="clearfix"></div>
         </div>
+        </form>
+        
         <div class="clearfix"></div>
       </div>
     </div>
@@ -3384,17 +3614,17 @@
             <div class="subheads">May 27, 2015</div>
       </div>
       <div class="modal-body">
-        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+        <form action="<?php echo base_url(); ?>Life_Events/add_food_habit" enctype="multipart/form-data" method="post">
           <div class="col-md-6 New_Habits" >
             <div class="form-group">
               <label for="exampleInputName2">Title</label>
-              <input type="text" class="form-control" id="" placeholder="Optional" >
+              <input type="text" class="form-control" id="" placeholder="Optional"  name="n_h_title">
             </div>
             <div class="form-group">
               <label for="exampleInputName2">Became</label>
               <br>
               <div class="schools">
-                <select>
+                <select name="n_h_habit">
                   <option>Vegetarian</option>
                 </select>
               </div>
@@ -3404,7 +3634,7 @@
               <label for="exampleInputEmail1">Location</label>
               <div class="input-group">
                 <div class="input-group-addon"><i class="fa fa-fw"></i></div>
-                <input type="text" placeholder="Optional" class="form-control" id="exampleInputAmount">
+                <input type="text" placeholder="Optional" class="form-control" id="exampleInputAmount" name="n_h_location">
               </div>
             </div>
             
@@ -3412,7 +3642,7 @@
               <label for="exampleInputEmail1">With</label>
               <div class="input-group">
                 <div class="input-group-addon"><i class="fa fa-fw"></i></div>
-                <input type="text" id="exampleInputAmount" class="form-control" placeholder="">
+                <input type="text" id="exampleInputAmount" class="form-control" placeholder=""  name="n_h_with">
               </div>
             </div>
             
@@ -3420,17 +3650,17 @@
               <label for="">When</label>
               <div class="clearfix"></div>
               <div class="col-md-4">
-                <select>
+                <select name="n_h_year">
                   <option>1982</option>
                 </select>
               </div>
               <div class="col-md-4">
-                <select>
+                <select name="n_h_month">
                   <option>May</option>
                 </select>
               </div>
               <div class="col-md-4">
-                <select>
+                <select name="n_h_date">
                   <option>13</option>
                 </select>
               </div>
@@ -3439,23 +3669,29 @@
             <div class="form-group">
               <label for="exampleInputEmail1">Story</label>
               <div class="clearfix"></div>
-              <textarea rows="4" placeholder="Optional"></textarea>
+              <textarea rows="4" placeholder="Optional" name="n_h_story"></textarea>
+               <input type="hidden" name="new_food_habit_images" value="uploadnewhabitpics" />
+               <input type="hidden" name="n_h_type" value="new_food_habit" />
             </div>
           </div>
-          <div class="col-md-6 chos_photos" >
-            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
-            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
+          <div class="col-md-6 chos_photos"  id="new_habit_pics">
+           <!-- <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button> -->
+            <button type="button" class="btn btn-default btn-lg btn-block pho_box"  onclick="document.getElementById('uploadnewhabitpics').click()">Upload Photos...</button>
+              
+             <input class="btn btn-default btn-lg btn-block pho_box" type="file" name="uploadnewhabitpics[]" id="uploadnewhabitpics" multiple="multiple" style="display:none;" /> 
           </div>
+           <div class="col-md-6 chos_photos" id="upload_new_habit_pics"></div>
           <div class="clearfix"></div>
-        </form>
-        <div class="box_bottom">
+          <div class="box_bottom">
           <div class="publics col-md-3" style="float:right">
-           <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save</div>
-            <div class="btn3 btn-black">Cancel</div>
+           <input type="submit" class="btn3 btn-green" value="Save">
+            <div class="btn3 btn-black" data-dismiss="modal">Cancel</div>
            
           </div>
           <div class="clearfix"></div>
         </div>
+        </form>
+        
         <div class="clearfix"></div>
       </div>
     </div>
@@ -3537,7 +3773,7 @@
             </div>
           </div>
           <div class="col-md-6 chos_photos" >
-            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
+           <!-- <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button> -->
             <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
           </div>
           <div class="clearfix"></div>
@@ -3568,18 +3804,18 @@
             <div class="subheads">Today</div>
       </div>
       <div class="modal-body">
-        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>company/addcompanys" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+        <form action="<?php echo base_url(); ?>Life_Events/add_glasses" enctype="multipart/form-data" method="post">
           <div class="col-md-6 Glasses_Contacts" >
             <div class="form-group">
               <label for="exampleInputName2">Title</label>
-              <input type="text" class="form-control" id="" placeholder="Optional" >
+              <input type="text" class="form-control" id="" placeholder="Optional"  name="glas_title">
             </div>
             
             <div class="form-group">
               <label for="exampleInputName2">Type</label>
               <br>
               <div class="schools">
-                <select>
+                <select name="glas_type"> 
                   <option>glasses</option>
                 </select>
               </div>
@@ -3589,7 +3825,7 @@
               <label for="exampleInputEmail1">Location</label>
               <div class="input-group">
                 <div class="input-group-addon"><i class="fa fa-fw"></i></div>
-                <input type="text" placeholder="Optional" class="form-control" id="exampleInputAmount">
+                <input type="text" placeholder="Optional" class="form-control" id="exampleInputAmount" name="glas_location">
               </div>
             </div>
             
@@ -3597,7 +3833,7 @@
               <label for="exampleInputEmail1">With</label>
               <div class="input-group">
                 <div class="input-group-addon"><i class="fa fa-fw"></i></div>
-                <input type="text" id="exampleInputAmount" class="form-control" placeholder="">
+                <input type="text" id="exampleInputAmount" class="form-control" placeholder="" name="glas_with">
               </div>
             </div>
             
@@ -3605,17 +3841,17 @@
               <label for="">When</label>
               <div class="clearfix"></div>
               <div class="col-md-4">
-                <select>
+                <select name="glas_year">
                   <option>1982</option>
                 </select>
               </div>
               <div class="col-md-4">
-                <select>
+                <select name="glas_month">
                   <option>May</option>
                 </select>
               </div>
               <div class="col-md-4">
-                <select>
+                <select name="glas_date">
                   <option>13</option>
                 </select>
               </div>
@@ -3624,25 +3860,366 @@
             <div class="form-group">
               <label for="exampleInputEmail1">Story</label>
               <div class="clearfix"></div>
-              <textarea rows="4" placeholder="Optional"></textarea>
+              <textarea rows="4" placeholder="Optional" name="glas_story"></textarea>
+               <input type="hidden" name="new_glasses_images" value="uploadnewglasespics" />
+                 <input type="hidden" name="glas_type" value="new_glasses" />
             </div>
           </div>
-          <div class="col-md-6 chos_photos" >
-            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button>
-            <button type="button" class="btn btn-default btn-lg btn-block pho_box">Upload Photos...</button>
+          <div class="col-md-6 chos_photos"  id="new_glasses_pics">
+           <!-- <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button> -->
+           <button type="button" class="btn btn-default btn-lg btn-block pho_box"  onclick="document.getElementById('uploadnewglasespics').click()">Upload Photos...</button>
+              
+             <input class="btn btn-default btn-lg btn-block pho_box" type="file" name="uploadnewglasespics[]" id="uploadnewglasespics" multiple="multiple" style="display:none;" /> 
           </div>
+           <div class="col-md-6 chos_photos" id="upload_new_glasses_pics"></div>
           <div class="clearfix"></div>
-        </form>
-        <div class="box_bottom">
+
+		<div class="box_bottom">
           <div class="publics col-md-3" style="float:right">
-           <div data-target="#AddCompany" data-toggle="modal" class="btn3 btn-green">Save</div>
-            <div class="btn3 btn-black">Cancel</div>
+           <input type="submit"  class="btn3 btn-green" value="Save" />
+            <div data-dismiss="modal" class="btn3 btn-black">Cancel</div>
            
           </div>
           <div class="clearfix"></div>
         </div>
+        </form>
+        
         <div class="clearfix"></div>
       </div>
     </div>
   </div>
 </div>
+<!---------------->
+
+<!----------- new hobby ---------------------->
+<div class="modal fade" id="AddCompanys_new_hobby" tabindex="-1" role="dialog" aria-labelledby="myModalLabe" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div id="comperrormsg"></div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="paper"><i class="fa fa-fw"></i></div>
+        <h4 class="modal-title" id="myModalLabe">Started a Hobby</h4>
+            <div class="subheads">Today</div>
+      </div>
+      <div class="modal-body">
+        <form action="<?php echo base_url(); ?>Life_Events/add_hobby" enctype="multipart/form-data" method="post">
+          <div class="col-md-6 Glasses_Contacts" >
+            <div class="form-group">
+              <label for="exampleInputName2">Title</label>
+              <input type="text" class="form-control" id="" placeholder="Optional"  name="n_h_title">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputName2">Hobby</label>
+              <input type="text" class="form-control" id="" placeholder="Optional"  name="n_h_hobby">
+            </div>
+            
+            
+            <div class="located">
+              <label for="exampleInputEmail1">Location</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" placeholder="Optional" class="form-control" id="exampleInputAmount" name="n_h_location">
+              </div>
+            </div>
+            
+            <div class="located">
+              <label for="exampleInputEmail1">With</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" id="exampleInputAmount" class="form-control" placeholder="" name="n_h_with">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="">When</label>
+              <div class="clearfix"></div>
+              <div class="col-md-4">
+                <select name="n_h_year">
+                  <option>1982</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select name="n_h_month">
+                  <option>May</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select name="n_h_date">
+                  <option>13</option>
+                </select>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Story</label>
+              <div class="clearfix"></div>
+              <textarea rows="4" placeholder="Optional" name="n_h_story"></textarea>
+               <input type="hidden" name="new_hobby_images" value="uploadnewhobbypics" />
+               <input type="hidden" name="n_hobby_type" value="new_hobby" />
+            </div>
+          </div>
+          <div class="col-md-6 chos_photos"  id="new_hobby_pics">
+           <!-- <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button> -->
+           <button type="button" class="btn btn-default btn-lg btn-block pho_box"  onclick="document.getElementById('uploadnewhobbypics').click()">Upload Photos...</button>
+              
+             <input class="btn btn-default btn-lg btn-block pho_box" type="file" name="uploadnewhobbypics[]" id="uploadnewhobbypics" multiple="multiple" style="display:none;" /> 
+          </div>
+           <div class="col-md-6 chos_photos" id="upload_new_hobby_pics"></div>
+          <div class="clearfix"></div>
+
+		<div class="box_bottom">
+          <div class="publics col-md-3" style="float:right">
+           <input type="submit"  class="btn3 btn-green" value="Save" />
+            <div data-dismiss="modal" class="btn3 btn-black">Cancel</div>
+           
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        </form>
+        
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<!----------- new hobby ---------------------->
+<!-------- voted --------------->
+
+
+<div class="modal fade" id="AddCompanys_voted" tabindex="-1" role="dialog" aria-labelledby="myModalLabe" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div id="comperrormsg"></div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="paper"><i class="fa fa-fw"></i></div>
+        <h4 class="modal-title" id="myModalLabe">Voted</h4>
+            <div class="subheads">Today</div>
+      </div>
+      <div class="modal-body">
+        <form action="<?php echo base_url(); ?>Life_Events/add_voted" enctype="multipart/form-data" method="post">
+          <div class="col-md-6 Glasses_Contacts" >
+            <div class="form-group">
+              <label for="exampleInputName2">Title</label>
+              <input type="text" class="form-control" id="" placeholder="Optional"  name="voted_title">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputName2">Candidate</label>
+              <input type="text" class="form-control" id="" placeholder="Optional"  name="voted_candidate">
+            </div>
+       
+            
+            <div class="form-group">
+              <label for="">When</label>
+              <div class="clearfix"></div>
+              <div class="col-md-4">
+                <select name="voted_year">
+                  <option>1982</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select name="voted_month">
+                  <option>May</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <select name="voted_date">
+                  <option>13</option>
+                </select>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Story</label>
+              <div class="clearfix"></div>
+              <textarea rows="4" placeholder="Optional" name="voted_story"></textarea>
+               <input type="hidden" name="new_voted_images" value="uploadvotedpics" />
+                 <input type="hidden" name="voted_type" value="voted" />
+            </div>
+          </div>
+          <div class="col-md-6 chos_photos"  id="new_voted_pics">
+           <!-- <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button> -->
+           <button type="button" class="btn btn-default btn-lg btn-block pho_box"  onclick="document.getElementById('uploadvotedpics').click()">Upload Photos...</button>
+              
+             <input class="btn btn-default btn-lg btn-block pho_box" type="file" name="uploadvotedpics[]" id="uploadvotedpics" multiple="multiple" style="display:none;" /> 
+          </div>
+           <div class="col-md-6 chos_photos" id="upload_voted_pics"></div>
+          <div class="clearfix"></div>
+
+		<div class="box_bottom">
+          <div class="publics col-md-3" style="float:right">
+           <input type="submit"  class="btn3 btn-green" value="Save" />
+            <div data-dismiss="modal" class="btn3 btn-black">Cancel</div>
+           
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        </form>
+        
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-------- voted --------------->
+
+<!---------- travelled  ------------->
+
+
+<div class="modal fade" id="AddCompanys_travelled" tabindex="-1" role="dialog" aria-labelledby="myModalLabe" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div id="comperrormsg"></div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="start"><i class="fa fa-fw"></i></div>
+        <h4 class="modal-title" id="new_job_label">Travelled</h4>
+        <div class="subheads">May 18, 2015</div>
+      </div>
+      <div class="modal-body">
+        <form  action="<?php echo base_url(); ?>Life_Events/add_travel" method="post" enctype="multipart/form-data">
+          <div class="col-md-6 Works" >
+            <div class="form-group">
+              <label for="exampleInputEmail1">Title</label>
+              <input type="text" class="form-control"  name="travel_title" placeholder="">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Trip Name</label>
+              <input type="text" class="form-control" name="travel_tripname" placeholder="optional">
+            </div>
+            <div class="located">
+              <label for="exampleInputEmail1">Places Visited</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" class="form-control" id="exampleInputAmount" name="travel_location">
+              </div>
+            </div>
+            
+                   
+            <div class="form-group">
+              <label for="">From</label>
+              <div class="clearfix"></div>
+              <div class="work_botom"><a href="#" onclick="from_year_disp('add_year_link_travel','travel_frm_years','add_month_link_travel');" id="add_year_link_travel"><i class="fa fa-plus"></i>&nbsp;Add Year</a></div>
+              <div class="col-md-4">
+              
+                <select style="display:none;" name="travel_year" id="travel_frm_years" onchange="frm_years_change('travel_frm_years','add_month_link_travel','travel_frm_months','add_day_link_travel','travel_frm_days','add_year_link_travel')">
+                  <option value="0">years</option>
+                    <option>1983</option>  
+                    <option>1984</option>  
+                    <option>1985</option>  
+                    <option>1986</option> 
+                     <option>1987</option>  
+                     <option>1988</option>
+                </select>
+              </div>
+              <div class="work_botom"><a href="#" onclick="from_month_disp('add_month_link_travel','travel_frm_months','add_day_link_travel');" style="display:none;" id="add_month_link_travel"><i class="fa fa-plus"></i>&nbsp;Add Month</a></div>
+              <div class="col-md-4">
+               <select style="display:none;"  name="travel_month" id="travel_frm_months" onchange="frm_months_change('add_month_link_travel','travel_frm_months','add_day_link_travel','travel_frm_days','add_year_link_travel')">
+                  <option value="0">months</option>
+                    <option>1</option>  
+                    <option>2</option>  
+                    <option>3</option>  
+                    <option>4</option> 
+                    <option>5</option>  
+                    <option>6</option>
+                </select>
+              </div>
+              <div class="work_botom"><a href="#" onclick="from_day_disp('add_day_link_travel','travel_frm_days','n_j_status','travel_to','travel_to_presant','n_j_to_years','add_year_link_travel');" style="display:none;" id="add_day_link_travel"><i class="fa fa-plus"></i>&nbsp;Add Day</a></div>
+              <div class="col-md-4">
+                <select style="display:none;" name="travel_date" id="travel_frm_days" onchange="frm_days_change('travel_frm_days','add_day_link_travel','add_year_link_travel','travel_to','travel_to_presant','n_j_status','all_travel_to_dates_dropdown','add_to_year_link_travel')">
+                  <option value="0">Days</option>
+                   <option>1</option>  
+                    <option>2</option>  
+                    <option>3</option>  
+                    <option>4</option> 
+                    <option>5</option> 
+                </select>
+              </div>
+              <div class="clearfix"></div>
+               <div class="work_botom" id="travel_to">To</div>
+               <div class="work_botom" id="travel_to_presant" style="display:none;">To Presant</div>
+              <div class="work_botom"><a href="#" id="add_to_year_link_travel" onclick="to_year_disp('add_to_year_link_travel','travel_to_years','add_to_month_link_travel');"><i class="fa fa-plus"></i>&nbsp;Add Year</a></div>
+            </div>
+            
+       
+            
+            
+            <div class="form-group" id="all_travel_to_dates_dropdown">
+             
+              <div class="clearfix"></div>
+              <div class="col-md-4">
+                <select style="display:none;" name="travel_to_year" id="travel_to_years" onchange="to_years_change('add_to_year_link_travel','travel_to_years','add_to_month_link_travel','travel_to_months','travel_to_days')">
+                 <option value="0">years</option>
+                    <option>1983</option>  
+                    <option>1984</option>  
+                    <option>1985</option>  
+                    <option>1986</option> 
+                     <option>1987</option>  
+                     <option>1988</option>
+                </select>
+              </div>
+               <div class="work_botom"><a href="#" onclick="to_month_disp('add_to_month_link_travel','travel_to_months','add_to_day_link_travel');" style="display:none;" id="add_to_month_link_travel"><i class="fa fa-plus"></i>&nbsp;Add Month</a></div>
+              <div class="col-md-4">
+                <select style="display:none;" name="travel_to_month" id="travel_to_months"  onchange="to_months_change('travel_to_months','add_to_month_link_travel','add_to_day_link_travel','travel_to_days')">
+                   <option value="0">Months</option>
+                    <option>1</option>  
+                    <option>2</option>  
+                    <option>3</option>  
+                    <option>4</option> 
+                    <option>5</option> 
+                </select>
+              </div>
+              <div class="work_botom"><a href="#" onclick="to_day_disp('add_to_day_link_travel','travel_to_days');" style="display:none;" id="add_to_day_link_travel"><i class="fa fa-plus"></i>&nbsp;Add Day</a></div>
+              <div class="col-md-4">
+                <select style="display:none;" name="travel_to_day" id="travel_to_days" onchange="to_days_change('add_to_day_link_travel','travel_to_days')">
+                  <option value="0">Days</option>
+                   <option>1</option>  
+                    <option>2</option>  
+                    <option>3</option>  
+                    <option>4</option> 
+                    <option>5</option> 
+                </select>
+              </div>
+              <div class="clearfix"></div>
+              
+            </div>
+    
+            <div class="located">
+              <label for="exampleInputEmail1">With</label>
+              <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-fw"></i></div>
+                <input type="text" id="exampleInputAmount" class="form-control" placeholder="" name="travel_with">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Story</label>
+              <div class="clearfix"></div>
+              <textarea rows="4" placeholder="Optional" name="travel_story"></textarea>
+              <input type="hidden" name="travel_images" value="uploadtravelpics" />
+               <input type="hidden" name="travel_type" value="travel" />
+            </div>
+          </div>
+          <div class="col-md-6 chos_photos" id="new_travel_pics" >
+           <!-- <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button> -->
+           <button type="button" class="btn btn-default btn-lg btn-block pho_box" onclick="document.getElementById('uploadtravelpics').click()">Upload Photos...</button>
+             <input class="btn btn-default btn-lg btn-block pho_box" type="file" name="uploadtravelpics[]" id="uploadtravelpics" multiple="multiple" style="display:none;" />
+          </div>
+         <div class="col-md-6 chos_photos" id="upload_travel_pics"></div>
+          <div class="clearfix"></div>
+      
+        <div class="box_bottom">
+          <div class="publics col-md-3" style="float:right">
+           <input type="submit" class="btn3 btn-green" value="Save" />
+            <div class="btn3 btn-black"  data-dismiss="modal" >Cancel</div>
+           
+          </div>
+          <div class="clearfix"></div>
+        </div>
+          </form>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<!---------- travelled   ------------>

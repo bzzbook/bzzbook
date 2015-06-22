@@ -746,7 +746,11 @@ border-radius: 90px 90px 90px 90px; height: 110px; width: 110px; overflow: hidde
 .smallboxes h3{ font-size:16px; font-family: 'Roboto', sans-serif; font-weight:300; color:#646464; padding-top:7px; }
 .smallboxes ul { list-style:none; }
 .smallboxes ul li{ border-bottom:1px solid #efefef; padding-bottom:15px; margin-bottom:15px;}
+.smallboxes_events ul { list-style:none; }
+.smallboxes_events  ul li{ padding-bottom:8px; font-weight: 300;}
+.smallboxes_events h3{ font-size:16px; font-family: 'Roboto', sans-serif; font-weight:300; color:#646464; padding-top:7px; }
 .iner_lefts{ float: left; width:43px; height:39px; background:#ececec;  margin-right:9px; margin-top:2px;  padding: 7px 0 0 15px; color:#337ab7;}
+.events_down_categorized {  border-bottom:1px solid #efefef; }
 .smallboxes .aboutme-overview li{ border-bottom:0px solid #efefef; padding-bottom:15px; margin-bottom:15px;}
 .iner_mail{ float: left; padding-right:15px; float:left; margin-right:9px;}
 
@@ -838,7 +842,7 @@ modal { position: absolute; }
 .memSearch .input-group .input-group-btn .btn{ text-align:center; top:0; background:#000; color:#fff;}
 .form-mandatory{color:red;}
 #uploadPhotosdvPreview img{margin-right:5px; }
-#uploadPhotosnewjob img{margin-right:5px; }
+.chos_photos img{margin-right:5px; }
 
 #sharePostBtn{background: #609b34;  height: 30px;  font-size: 14px;  line-height: 30px;  padding: 0 15px;  display: inline-block;
   -webkit-border-radius: 2px;  border-radius: 2px; color: #fff; font-weight: 300;}
@@ -1835,6 +1839,15 @@ color: #E8E8E8; }
 .Glasses_Contacts .form-control{ font-size:13px;}
 .Glasses_Contacts select{ font-size:13px;  border: 1px solid #ececec; }
 .Glasses_Contacts textarea{ font-size:12px; width:255px; border: 1px solid #ccc; border-radius:5px;}
+
+#AddCompanys_new_hobby .modal-title {color: #fff; text-align:center; font-weight: 700;}
+#AddCompanys_new_hobby .modal-header {background: none repeat scroll 0 0 #fbc436 !important; border-top-left-radius: 5px; border-top-right-radius: 5px;}	
+#AddCompanys_voted .modal-title {color: #fff; text-align:center; font-weight: 700;}
+#AddCompanys_voted .modal-header {background: none repeat scroll 0 0 #fbc436 !important; border-top-left-radius: 5px; border-top-right-radius: 5px;}	
+#AddCompanys_travelled .modal-title {color: #fff; text-align:center; font-weight: 700;}
+#AddCompanys_travelled .modal-header {background: none repeat scroll 0 0 #fbc436 !important; border-top-left-radius: 5px; border-top-right-radius: 5px;}
+
+
 
 .hidethis{ display:none; }
 .ghostpostBtn{ background: transparent url("../images/ghost-post.png") no-repeat scroll 0px 0px;

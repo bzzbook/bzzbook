@@ -1,5 +1,5 @@
 <?php 
-	 $result = $this->profile_set->save_settings();
+	 $result = $this->profile_set->save_settings($user_id='');
 ?>
   
   

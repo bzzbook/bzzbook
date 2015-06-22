@@ -1,5 +1,5 @@
 <?php 
-	 $result = $this->profile_set->save_settings();
+	 $result = $this->profile_set->save_settings($user_id='');
 	  if(!empty($result[0]->religious))
 	 {
 	 	$data = explode('|@|',$result[0]->religious);

@@ -23,23 +23,25 @@ public function profile_setting()
 	$this->load->model('profile_set');
 	$this->load->model('lookup');
 	$data['industry'] = $this->lookup->get_lookup_industry();
-	$data['user_info'] = $this->profile_set->save_settings();
+	$data['user_info'] = $this->profile_set->save_settings($user_id='');
 	$data['user'] = $this->profile_set->get_user();
 	$data['user_set'] = $this->profile_set->get_user_settings();
 	$data['education_details'] = $this->profile_set->geteducationDetails();
 	$data['profession_details'] = $this->profile_set->getprofessionDetails();
-	$data['organization_details'] = $this->profile_set->getorganizationDetails();
+	$data['organization_details'] = $this->profile_set->getorganizationDetails($user_id='');
 	$data['group_details'] = $this->profile_set->getgroupDetails();
 	$data['content']='profile_settings';
 	$this->load->view('template-view',$data);
 	//$this->load->view('profile_settings',$data);	
 }
 
-public function about_me()
+public function about_me($user_id='')
 {
+	if(!empty($user_id))
+	$data['user_id'] = $user_id;
 	$data['user'] = $this->profile_set->get_user();
-	$data['user_info'] = $this->profile_set->get_userinfo();
-	$data['result'] = $this->profile_set->save_settings();
+	$data['user_info'] = $this->profile_set->get_userinfo($user_id);
+	$data['result'] = $this->profile_set->save_settings($user_id);
 	$data['education_details'] = $this->profile_set->geteducationList();
 	$data['content']='about_me';
 	$this->load->view('full_content_view',$data);
@@ -663,7 +665,7 @@ public function showfavs()
 		$row = $row[0];
 		$posted_id=$row->posted_by;
 	 	$get_profiledata = $this->customermodel->profiledata($posted_id);
-	    $user_id=$this->session->userdata('logged_in')['account_id'];
+	    $user_id = $this->session->userdata('logged_in')['account_id'];
 		
 		$attr = array('name' => 'share_form', 'id' =>'share_form', 'enctype'=>"multipart/form-data");
       	
@@ -923,7 +925,7 @@ public function send_business_card()
   {
 	
 	$insert_id =  $this->profile_set->add_home_town($_POST['home_town']);
-	$result = $this->profile_set->save_settings();
+	$result = $this->profile_set->save_settings($user_id='');
 	if($this->profile_set->add_home_town($_POST['home_town']))
 		
 		$this->load->view('home_town');
@@ -938,7 +940,7 @@ public function send_business_card()
   {
 	 
 	$insert_id =  $this->profile_set->add_location($_POST['current_city']);
-	$result = $this->profile_set->save_settings();
+	$result = $this->profile_set->save_settings($user_id='');
 	if($this->profile_set->add_location($_POST['current_city']))
 		
 		$this->load->view('aboutme/location_inner');
@@ -1011,7 +1013,7 @@ public function deletehometown()
 	  
 	  //parse_str($_POST['form_data'],$field_info);
 	$insert_id =  $this->profile_set->add_about_me($_POST['about_me']);
-    $result = $this->profile_set->save_settings();
+    $result = $this->profile_set->save_settings($user_id='');
 	if($this->profile_set->add_about_me($_POST['about_me']))
 		
 	
@@ -1049,7 +1051,7 @@ public function deletehometown()
     public function addfavquotes()
   {
 	$insert_id =  $this->profile_set->add_fav_quotes($_POST['fav_quotes']);
-    $result = $this->profile_set->save_settings();
+    $result = $this->profile_set->save_settings($user_id='');
 	if($this->profile_set->add_fav_quotes($_POST['fav_quotes']))
 		
      $this->load->view('fav_quotes_inner');
@@ -1075,7 +1077,7 @@ public function deletehometown()
 	  
 	 
 	$insert_id =  $this->profile_set->add_relation($_POST['relation']);
-    $result = $this->profile_set->save_settings();
+    $result = $this->profile_set->save_settings($user_id='');
 	if($this->profile_set->add_relation($_POST['relation']))
 		
 	$this->load->view('relationship_inner');
@@ -1217,7 +1219,7 @@ public function add_other_accounts()
 public function addwebsite()
 {
 	//$insert_id =  $this->profile_set->add_about_me($_POST['about_me']);
-    $result = $this->profile_set->save_settings();
+    $result = $this->profile_set->save_settings($user_id='');
 	if($this->profile_set->add_website($_POST['website']))
 	$this->load->view('aboutme/website_inner');
 	else
@@ -1238,7 +1240,7 @@ public function addwebsite()
 public function addaddress()
 {
 	//$insert_id =  $this->profile_set->add_about_me($_POST['about_me']);
-    $result = $this->profile_set->save_settings();
+    $result = $this->profile_set->save_settings($user_id='');
 	if($this->profile_set->add_address($_POST['address'],$_POST['city'],$_POST['zipcode'],$_POST['neighborhood']))
 	$this->load->view('aboutme/address_inner');
 	else
@@ -1260,7 +1262,7 @@ public function addaddress()
 public function addlanguages()
 {
 	//$insert_id =  $this->profile_set->add_about_me($_POST['about_me']);
-    $result = $this->profile_set->save_settings();
+    $result = $this->profile_set->save_settings($user_id='');
 	if($this->profile_set->add_languages($_POST['lang_data']))
 	$this->load->view('aboutme/languages_inner');
 	else
@@ -1293,7 +1295,7 @@ public function addlanguages()
 public function addpfskills()
 {
 	//$insert_id =  $this->profile_set->add_about_me($_POST['about_me']);
-    $result = $this->profile_set->save_settings();
+    $result = $this->profile_set->save_settings($user_id='');
 	if($this->profile_set->add_professional_skills($_POST['skill_data']))
 	$this->load->view('aboutme/pfskills_inner');
 	else
@@ -1332,7 +1334,7 @@ public function addinterest()
 public function addrelegious()
 {
 	//$insert_id =  $this->profile_set->add_about_me($_POST['about_me']);
-    $result = $this->profile_set->save_settings();
+    $result = $this->profile_set->save_settings($user_id='');
 	if($this->profile_set->add_relegious_belief($_POST['relegion'],$_POST['description']))
 	$this->load->view('aboutme/relegious_inner');
 	else
@@ -1355,7 +1357,7 @@ public function addrelegious()
 public function addpolitical()
 {
 	//$insert_id =  $this->profile_set->add_about_me($_POST['about_me']);
-    $result = $this->profile_set->save_settings();
+    $result = $this->profile_set->save_settings($user_id='');
 	if($this->profile_set->add_political_belief($_POST['political'],$_POST['description']))
 	$this->load->view('aboutme/political_inner');
 	else

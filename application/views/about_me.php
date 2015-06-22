@@ -3,20 +3,33 @@
         <section class="visitorBox">
           <div class="visitiBoxInner">
             <figure class="compCover"><img alt="" src="<?php echo base_url(); ?>images/about_banner.jpg" class="img-responsive"></figure>
-              <?php  $image = $this->profile_set->get_profile_pic();
-			         $data = $this->profile_set->get_userinfo(); 
-					 $result = $this->profile_set->save_settings();
-					 $organization_details = $this->profile_set->getorganizationDetails();
-					 $user_college_info = $this->profile_set->get_college_details();
-					 $user_school_info = $this->profile_set->get_school_details();
-					 $family_members = $this->profile_set->get_family_members();
-					 $nick_names = $this->profile_set->get_nick_names();
-					 $mobile_data = $this->profile_set->get_mbl_nos();
-					 $accounts_data = $this->profile_set->get_other_accounts_by_id(); 
-					 $emp_working = $this->profile_set->get_org_details_by_status_work();
-					 $emp_work_ended = $this->profile_set->get_org_details_by_status_all();
-					 $college_details = $this->profile_set->get_clg_details_all();
-					 $user_log_data = $this->person->get_abtme_user();
+              <?php 
+			  
+						 $id = '';
+						  $cur_user_id ='';
+						 if(isset($user_id))
+						{
+						$id = $user_id;
+						$cur_user_id = $user_id;
+						}
+						
+			  		 $image = $this->profile_set->get_profile_pic();
+			         $data = $this->profile_set->get_userinfo($id); 
+					 $result = $this->profile_set->save_settings($id);
+					 $organization_details = $this->profile_set->getorganizationDetails($id);
+					 $user_college_info = $this->profile_set->get_college_details($id);
+					 $user_school_info = $this->profile_set->get_school_details($id);
+					 $family_members = $this->profile_set->get_family_members($id);
+					 $nick_names = $this->profile_set->get_nick_names($id);
+					 $mobile_data = $this->profile_set->get_mbl_nos($id);
+					 $accounts_data = $this->profile_set->get_other_accounts_by_id($id); 
+					 $emp_working = $this->profile_set->get_org_details_by_status_work($id);
+					 $emp_work_ended = $this->profile_set->get_org_details_by_status_all($id);
+					 $college_details = $this->profile_set->get_clg_details_all($id);
+					 $user_log_data = $this->person->get_abtme_user($id);
+					 $life_events_data = $this->life_events_model->get_life_events_by_id($id);
+					 
+					
 					 //$myfrnd = $this->friendsmodel->user_frnds($user_id);
 					 
 					 ?>
@@ -114,13 +127,23 @@
                       <li>
                         <div class="tophead">WORK EXPERIENCE</div>
                       <?php if(empty($organization_details)) { ?>
-                        <div class="iner_lefts"><i class="fa fa-plus"></i></div>
+                               <?php if($id == $this->session->userdata('logged_in')['account_id'] || $id='') { ?>
+                         
+                         <div class="iner_lefts"><i class="fa fa-plus"></i></div>
                         <div class="inner_rights boxs">
                           <h3><a href="javascript:void(0)" onclick="mov_to_work_edu()">Add a workplace</a></h3>
                           <div class="graphic"></div>
                         </div>
                         <div class="clearfix"></div>
-                        <?php } else { 
+					  <?php } else { ?>
+					    <div class="iner_lefts"><i class="fa fa-briefcase"></i></div>
+                        <div class="inner_rights boxs">
+                          <h3> Work Details Not found...</h3>
+                          <div class="graphic"></div>
+                        </div>
+                        <div class="clearfix"></div>
+                      
+                        <?php } } else { 
 						?>
                          <div class="iner_lefts"><i class="fa fa-briefcase"></i></div>
                         <div class="inner_rights boxs">
@@ -176,13 +199,25 @@
                       <li>
                       <div class="tophead">EDUCATION DETAILS</div>
                       <?php if(empty($college_details)) { ?>
-                       <div class="iner_lefts"><i class="fa fa-plus"></i></div>
+                      
+                      
+                      <?php if($id == $this->session->userdata('logged_in')['account_id'] || $id='') { ?>
+                         
+                         <div class="iner_lefts"><i class="fa fa-plus"></i></div>
                         <div class="inner_rights boxs">
-                          <h3><a href="javascript:void(0)" onclick="mov_to_work_edu()">Add a College</a></h3>
+                         <h3><a href="javascript:void(0)" onclick="mov_to_work_edu()">Add a College</a></h3>
                           <div class="graphic"></div>
                         </div>
                         <div class="clearfix"></div>
-                        <?php }else{ $j = 1; ?>
+					  <?php } else { ?>
+					    <div class="iner_lefts"><i class="fa fa-graduation-cap"></i></div>
+                        <div class="inner_rights boxs">
+                          <h3>College Details Not found...</h3>
+                          <div class="graphic"></div>
+                        </div>
+                        <div class="clearfix"></div>
+                     
+                          <?php } }else{ $j = 1; ?>
 						  <div class="iner_lefts"><i class="fa fa-graduation-cap"></i></div>
                       
                         <?php foreach($college_details as $college) {  ?>
@@ -217,14 +252,25 @@
                       <div class="tophead">PLACES YOU'VE LIVED</div>
                      <?php  if(empty($result[0]->location) && empty($result[0]->hometown)) { ?>
                      
-                     <div class="iner_lefts"><i class="fa fa-plus"></i></div>
+                     
+                        <?php if($id == $this->session->userdata('logged_in')['account_id'] || $id='') { ?>
+                         <div class="iner_lefts"><i class="fa fa-plus"></i></div>
                         <div class="inner_rights boxs">
                           <h3><a  href="javascript:void(0)" id="move_to_places">Add a Location</a></h3>
                           <div class="graphic"></div>
                         </div>
                         <div class="clearfix"></div>
+
+					  <?php } else { ?>
+					    <div class="iner_lefts"><i class="fa fa-globe"></i></div>
+                        <div class="inner_rights boxs">
+                          <h3> Lived Places Details Not found...</h3>
+                          <div class="graphic"></div>
+                        </div>
+                        <div class="clearfix"></div>
+                     
                       
-                      <?php }else{ ?>
+                      <?php }  } else{ ?>
                         <div class="iner_lefts"><i class="fa fa-globe"></i></div>
                         <div class="inner_rights boxs">
                           <h5>Lives in <a href="#"><?php if($result[0]->location){ echo $result[0]->location; } else echo "Not Available"; ?></a></h5>
@@ -241,13 +287,24 @@
                       <li>
                         <div class="tophead">YOUR FAMILY MEMBERS</div>
                       <?php if(empty($family_members)) { ?> 
-                        <div class="iner_lefts"><i class="fa fa-plus"></i></div>
+                      
+                      
+                       <?php if($id == $this->session->userdata('logged_in')['account_id'] || $id='') { ?>
+                         
+                             <div class="iner_lefts"><i class="fa fa-plus"></i></div>
                         <div class="inner_rights boxs">
                           <h3><a href="javascript:void(0)" id="move_to_relation">Add a relationship</a></h3>
                           <div class="graphic"></div>
                         </div>
                         <div class="clearfix"></div>
-                        <?php }else{ ?>
+					  <?php } else { ?>
+					    <div class="iner_lefts"><i class="fa fa-users"></i></div>
+                        <div class="inner_rights boxs">
+                          <h3>Family Memebers Details Not found...</h3>
+                          <div class="graphic"></div>
+                        </div>
+                        <div class="clearfix"></div>              
+                        <?php  } } else{ ?>
                          
                          <div class="iner_lefts"><a  href="javascript:void(0)" id="move_to_relation"><i class="fa fa-users"></i></a></div>
                         <div class="inner_rights boxs">
@@ -281,20 +338,31 @@
                         <h3><a href="#"><?php echo $orgdetails->org_name;?></a></h3>
                         <p><?php echo $orgdetails->position;?></p>
                         </div>
+                        <?php if(!$cur_user_id) { ?>
                         <div class="sm_rightside" >
                         <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid">
                         <a class="work_edit" href="javascript:void(0)" onclick="work_edit()" id="work_edit<?php echo $orgdetails->organization_id; ?>"><i class="fa fa-pencil"></i></a></div>
                         <div class="col-md-3 com_rig"><a href="javascript:void(0)" class="work_delete" id="work_delete<?php echo $orgdetails->organization_id; ?>" onclick="work_delete()"><i class="fa fa-times"></i></a></div>
                         </div>
-                        
+                        <?php } ?>
                         <div class="clearfix" id="clearfix"></div>
                         </div>
                     
                          <?php } ?>
-                         </div>
+                        </div>
                         <?php } else { ?>
-            
+              <?php if($user_id != $this->session->userdata('logged_in')['account_id']) { ?>
+                         
+                         <div class="iner_lefts"><i class="fa fa-globe"></i></div>
+                         <div class="inner_rights boxs">
+                          <h3>Work Details Are Not found...</h3>
+                          <div class="graphic"></div>
+                         </div>
+                         <div class="clearfix"></div>
+                        
+                          
+					  <?php } else { ?>
              
                       <div class="iner_lefts" id="work_head1"><a href="#"><i class="fa fa-plus"></i></a></div>
                         <div class="inner_rights boxs" id="work_head2">
@@ -302,7 +370,7 @@
                           
                           <div class="clearfix"></div>
                         </div>
-                        <?php } ?>
+                        <?php } } ?>
                    
                     <!-- $this->load->view('aboutme/work_inner'); -->
                        
@@ -411,8 +479,9 @@
                             </div>
                             <div class="graphic"></div>
                             <div class="clearfix"></div>
-                          </div>
-                           <?php if(!empty($organization_details)) { ?>
+                        </div>
+                           <?php if(!empty($organization_details)) {  if(empty($user_id)) { ?>
+                           
                           <a href="javascript:void(0)" id="add_work_link_disp" class="work_edu_side_links">add work details</a>
                          <div id="add_work_place_down">
                          <div class="iner_lefts" id="work_head_down1" style="display:none;"><a href="#"><i class="fa fa-plus"></i></a></div>
@@ -421,18 +490,31 @@
                           
                           <div class="clearfix"></div>
                         </div>
-                          </div>
-                          <?php } ?>
+                        </div>
+                          <?php } }?>
                       </li>
                       <div class="clearfix"></div>
                       <li id="pfskills-li">
                         <div class="tophead">Professional Skills</div>
                            <?php if(empty($result[0]->professional_skills)) { ?>
+                           
+                           <?php if(!empty($user_id)) { ?>
+                         
+                         <div class="iner_lefts"><i class="fa fa-globe"></i></div>
+                         <div class="inner_rights boxs">
+                          <h3>Professional Skills Are Not found...</h3>
+                          <div class="graphic"></div>
+                         </div>
+                         <div class="clearfix"></div>
+                        
+                          
+					  <?php } else { ?>
+                           
                         <div class="iner_lefts" id="prof_skills1"><a href="javascript:void(0)"><i class="fa fa-plus"></i></a></div>
                         <div class="inner_rights boxs" id="prof_skills2">
                           <h3><a href="javascript:void(0)" id="add_pf_skills">Add a professional skill</a></h3>
-                          </div>
-                          <?php } else { ?>
+                        </div>
+                          <?php } }else { ?>
                           
                           <div id="pf_skills_val_display">
                         <div class="sm_leftbox"></div>
@@ -446,11 +528,13 @@
 						?>
                         </a></h3>
                         </div>
+                        <?php if(!$cur_user_id) { ?>
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="pf_skills_edit()"><i class="fa fa-pencil"></i></a></div>
                         <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_pfskills()"><i class="fa fa-times"></i></a></div>
                         </div>
+                        <?php } ?>
                         </div>
                           <div class="clearfix"></div>
                          <?php } ?> 
@@ -511,23 +595,36 @@
                         <div class="sm_rightbox"><h3><a href="#"><?php echo $clgdetails->college_name;?></a></h3>
                         <p><?php echo $clgdetails->concentration1;?> <?php echo $clgdetails->concentration2;?> <?php echo $clgdetails->concentration3;?></p>
                         </div>
+                        <?php if(!$cur_user_id) { ?>
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" class="college_edit" id="college_edit<?php echo $clgdetails->college_id; ?>" onclick="college_edit()"><i class="fa fa-pencil"></i></a></div>
                         <div class="col-md-3 com_rig"><a  href="javascript:void(0)" class="college_delete" id="college_delete<?php echo $clgdetails->college_id; ?>" onclick="college_delete()"><i class="fa fa-times"></i></a></div>
                         </div>
+                        <?php }?>
                            <div class="clearfix"></div>
                         </div>
                          <?php } ?>
 						 </div>
 						 <?php }else { ?>
             
+                           <?php if($user_id != $this->session->userdata('logged_in')['account_id']) { ?>
+                         
+                         <div class="iner_lefts"><i class="fa fa-globe"></i></div>
+                         <div class="inner_rights boxs">
+                          <h3>College Details Are Not found...</h3>
+                          <div class="graphic"></div>
+                         </div>
+                         <div class="clearfix"></div>
+                        
+                          
+					  <?php } else { ?>
                          <div class="iner_lefts" id="college1"><a href="#"><i class="fa fa-plus"></i></a></div>
                         <div class="inner_rights boxs" id="college2">
                           <h3><a href="javascript:void(0)" id="add_college">Add a college</a></h3>
-                          </div>
+                        </div>
                           
-                          <?php } ?>
+                          <?php } } ?>
                          
                           
                           <div id="college_disp" style="display:none;">
@@ -541,7 +638,7 @@
                                   <div class="form-group period">
                                     <label for="exampleInputName2">Time Period</label>
                                      <a href="javascript:void(0)" id="clg_add_year"><i class="fa fa-plus"></i>Add year</a>
-                                     </div>
+                                  </div>
                                      
                                    <select id="frm_years_college" style="display:none;" name="frm_clg_years" class="frm_clg_years">
                                   <option value="0">yyyy</option>
@@ -660,7 +757,7 @@
                             </div>
                             <div class="graphic"></div>
                           </div>
-                          <?php if(!empty($user_college_info)) { ?>
+                          <?php if(!empty($user_college_info)) {  if(empty($user_id)) { ?>
                            <a href="javascript:void(0)" id="add_college_link_disp" class="work_edu_side_links">add college details</a>
                            <div id="clg_down_block">
                            <div class="iner_lefts" id="college_down1" style="display:none;"><a href="#"><i class="fa fa-plus"></i></a></div>
@@ -668,7 +765,7 @@
                           <h3><a href="javascript:void(0)" id="add_college_down">Add a college</a></h3>
                           </div>
                           </div>
-                           <?php } ?>
+                           <?php } } ?>
                       </li>
                       <div class="clearfix"></div>
                       
@@ -687,19 +784,35 @@
                         <div class="sm_rightbox"><h3><a href="#"><?php echo $schdetails->school_name;?></a></h3>
                         <p> </p>
                         </div>
+                        <?php if(!$cur_user_id) { ?>
                          <div class="sm_rightside">
                         <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" class="school_edit" id="school_edit<?php echo $schdetails->school_id; ?>" onclick="school_edit()"><i class="fa fa-pencil"></i></a></div>
                         <div class="col-md-3 com_rig"><a href="javascript:void(0)" class="school_delete" id="school_delete<?php echo $schdetails->school_id; ?>" onclick="school_delete()"><i class="fa fa-times"></i></a></div>
                         </div>
+                        <?php } ?>
                         <div class="clearfix"></div>
                         </div>
                          <?php } ?></div><?php }else{ ?>
+                         
+                           <?php if($user_id != $this->session->userdata('logged_in')['account_id']) { ?>
+                         
+                         <div class="iner_lefts"><i class="fa fa-globe"></i></div>
+                         <div class="inner_rights boxs">
+                          <h3>High School Details Are Not found...</h3>
+                          <div class="graphic"></div>
+                         </div>
+                         <div class="clearfix"></div>
+                        
+                          
+					  <?php } else { ?>
+					
+                         
                           <div class="iner_lefts" id="school1"><a href="#"><i class="fa fa-plus"></i></a></div>
-                        <div class="inner_rights boxs" id="school2">
+                          <div class="inner_rights boxs" id="school2">
                           <h3><a href="javascript:void(0)" id="add_school">Add a High School</a></h3>
                           </div>
-                          <?php } ?>
+                          <?php } } ?>
                                                 
                           
                            <div id="highschool" style="display:none;">
@@ -801,7 +914,7 @@
                             </div>
                             <div class="graphic"></div>
                           </div>
-                       <?php  if(!empty($user_school_info)){ ?>
+                       <?php  if(!empty($user_school_info)){  if(empty($user_id)) { ?>
                            <a href="javascript:void(0)" id="add_school_link_disp" class="work_edu_side_links">add school details</a>
                            
                            <div id="school_down_block">
@@ -810,7 +923,7 @@
                           <h3><a href="javascript:void(0)" id="add_school_down">Add a High School</a></h3>
                           </div>
                           </div>
-                           <?php } ?>
+                           <?php } } ?>
                       </li>
                       <div class="clearfix"></div>
                     </ul>
@@ -826,22 +939,39 @@
                       <div class="tophead">Current City</div>
                       
                       <?php if(empty($result[0]->location)) { ?>
+                      
+                      
+                        <?php if($id == $this->session->userdata('logged_in')['account_id'] || $id='') { ?>
+                         
+                                  
+                      
                         <div class="iner_lefts" id="add_currentcity1"><i class="fa fa-plus"></i></div>
                         <div class="inner_rights boxs" id="add_currentcity2">
                         <a href="javascript:void(0)" id="add_currentcity" ><h3>Add your current city</h3> </a>
                           
                         </div>
-                          <?php }else { ?>
+					  <?php } else { ?>
+					    <div class="iner_lefts"><i class="fa fa-globe"></i></div>
+                        <div class="inner_rights boxs">
+                          <h3>Current city Details Not found...</h3>
+                          <div class="graphic"></div>
+                        </div>
+                        <div class="clearfix"></div>
+                      
+            
+                          <?php } } else { ?>
               			<div id="currentcity_val_disp">
                         <div class="sm_leftbox"><i class="fa fa-globe"></i></div>
                         <div class="sm_rightbox"><h3><a href="#"><?php echo $result[0]->location; ?></a></h3>
                         <p>Current city</p>
                         </div>
+                         <?php if(!$cur_user_id) { ?>
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="current_city_edit()"><i class="fa fa-pencil"></i></a></div>
                         <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="delete_current_city()"><i class="fa fa-times"></i></a></div>
                         </div>
+                        <?php } ?>
                         </div>
                         <div class="clearfix"></div>
                    
@@ -887,22 +1017,36 @@
                       <div class="tophead">Hometown</div>
                         
                          <?php if(empty($result[0]->hometown)) { ?>
-                         <div class="iner_lefts" id="hme_town"><i class="fa fa-plus"></i></div>
-                        <div class="inner_rights boxs"  id="hme_town1">
+                         
+                         
+                        <?php if($user_id != $this->session->userdata('logged_in')['account_id']) { ?>
+                         
+                         <div class="iner_lefts"><i class="fa fa-globe"></i></div>
+                         <div class="inner_rights boxs">
+                          <h3>Hometown Details Not found...</h3>
+                          <div class="graphic"></div>
+                         </div>
+                         <div class="clearfix"></div>
+                        
                           
- <a href="javascript:void(0)" id="hometown"><h3>Add your hometown</h3></a>                          
+					  <?php } else { ?>
+					<div class="iner_lefts" id="hme_town"><i class="fa fa-plus"></i></div>
+                        <div class="inner_rights boxs"  id="hme_town1"> <a href="javascript:void(0)" id="hometown"><h3>Add your hometown</h3></a>                          
                         </div>
-                           <?php }else { ?>
+                      
+                         <?php } } else { ?>
                            <div id="hometown_val_disp">
                         <div class="sm_leftbox" ><i class="fa fa-globe"></i></div>
                         <div class="sm_rightbox"><h3><a href="#"><?php echo $result[0]->hometown; ?></a></h3>
                         <p>Home Town</p>
                         </div>
+                        <?php if(!$cur_user_id) { ?>
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="home_town_edit()"><i class="fa fa-pencil"></i></a></div>
                         <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="delete_hometown()"><i class="fa fa-times"></i></a></div>
                         </div>
+                        <?php } ?>
                         </div>
                         <div class="clearfix"></div>
                            
@@ -958,20 +1102,35 @@
                       <li id="mobile-li">
                        <!-- <div class="tophead">Contact Information</div> -->
                         <?php if(empty($mobile_data)) { ?>
+                                               
+                           <?php  if(!empty($user_id)) { ?>
+                         
+                         <div class="iner_lefts"><i class="fa fa-globe"></i></div>
+                         <div class="inner_rights boxs">
+                          <h3>Mobile No Details Not found...</h3>
+                          <div class="graphic"></div>
+                         </div>
+                         <div class="clearfix"></div>
+                        
+                          
+					  <?php } else { ?>
+                        
+                        
                         <div class="iner_boxleft" id="add_mbl_block"><a href="javascript:void(0)" id="add_mbl"><i class="fa fa-plus"></i>Add a mobile phone</a></div>
-                        <?php } else {   foreach($mobile_data as $data) { ?>
+                        <?php } } else {   foreach($mobile_data as $data) { ?>
                         <div id="mobile_val_display">
                        <div class="latest_works" id="mobile_<?php echo $data['mobile_id']; ?>"> 
                         <div class="sm_leftbox"></div>
                         <div class="sm_rightbox"><h3><a href="#"><?php echo $data['mobile_no']; ?></a></h3>
                         <p>mobile</p>
                         </div>
+                        <?php if(!$cur_user_id) { ?>
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="mbl_edit()"  class="mobile_edit" id="mobile_edit<?php echo $data['mobile_id']; ?>"><i class="fa fa-pencil"></i></a></div>
                         <div class="col-md-3 com_rig"><a  href="javascript:void(0)" onclick="del_mobile()" class="mobile_delete" id="mobile_delete<?php echo $data['mobile_id']; ?>"><i class="fa fa-times"></i></a></div>
                         </div>
-                            
+                         <?php } ?>   
                        </div>
                       <div class="clearfix"></div> 
                       </div>
@@ -1082,8 +1241,24 @@
 							 }
                           ?>      
                           <?php if(empty($data)) {  ?>
+                          
+                          
+                             <?php if(!empty($user_id)) { ?>
+                         
+                         <div class="iner_lefts"><i class="fa fa-home"></i></div>
+                         <div class="inner_rights boxs">
+                          <h3>Addres Details Not found...</h3>
+                          <div class="graphic"></div>
+                         </div>
+                         <div class="clearfix"></div>
+                        
+                          
+					  <?php } else { ?>
+					
+                    
+                          
       <div class="iner_boxleft" id="address1"><a href="javascript:void(0)" id="add_address"><i class="fa fa-plus"></i>Add your address</a></div> 
-                        <?php } else { ?>
+                        <?php } }else { ?>
                         
                         <div id="address_val_display">
                         <div class="sm_leftbox"></div>
@@ -1092,11 +1267,13 @@
                         <?php if($data) { if($data[1]) {  echo $data[1].','; } } ?>
 						<?php if($data) { if($data[2]) {  echo $data[2].'.'; } } ?></p>
                         </div>
+                        <?php if(!$cur_user_id) { ?>
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="address_edit()"><i class="fa fa-pencil"></i></a></div>
                         <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_address()"><i class="fa fa-times"></i></a></div>
                         </div>
+                        <?php } ?>
                         </div>
                         <div class="clearfix"></div>
                         
@@ -1147,8 +1324,20 @@
                         
                         
                            <?php if(empty($accounts_data)) { ?>
+                         
+                             <?php  if(!empty($user_id)) { ?>
+                         
+                         <div class="iner_lefts"><i class="fa fa-globe"></i></div>
+                         <div class="inner_rights boxs">
+                          <h3>Other Account Details Are Not found...</h3>
+                          <div class="graphic"></div>
+                         </div>
+                         <div class="clearfix"></div>
+                        
+                          
+					  <?php } else { ?>
                          <div class="iner_boxleft"  id="add_oth_acc1"><a href="javascript:void(0)" id="add_oth_acc"><i class="fa fa-plus"></i>Add other accounts</a></div>
-                        <?php } else { 
+                        <?php } }else { 
 						
 						 foreach($accounts_data as $data) {?>
                         <div id="accounts_val_display">
@@ -1157,11 +1346,13 @@
                         <div class="sm_rightbox"><h3><a href="#"><?php echo $data['account_name']; ?></a></h3>
                         <p><?php echo $data['account_type']; ?></p>
                         </div>
+                        <?php if(!$cur_user_id) { ?>
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="accounts_edit()"  class="account_edit" id="account_edit<?php echo $data['account_id']; ?>"><i class="fa fa-pencil"></i></a></div>
                         <div class="col-md-3 com_rig"><a  href="javascript:void(0)" onclick="account_delete()" class="account_delete" id="account_delete<?php echo $data['account_id']; ?>"><i class="fa fa-times"></i></a></div>
                         </div>
+                        <?php } ?>
                         </div>
                       
                         <div class="clearfix"></div>
@@ -1247,22 +1438,39 @@
                         <!--<div class="tophead">Add a website</div>-->
                         
                         <?php if(empty($result[0]->website)) { ?>
+                        
+                        <?php  if(!empty($user_id)) { ?>
+                         
+                         
+                         <div class="iner_lefts"><i class="fa fa-globe"></i></div>
+                         <div class="inner_rights boxs">
+                          <h3>Website Details Not found...</h3>
+                          <div class="graphic"></div>
+                         </div>
+                         <div class="clearfix"></div>
+                        
+                          
+					  <?php } else { ?>
+					
+                                           
                         <div class="iner_boxleft" id="add_web_site">
                         <a href="javascript:void(0)" id="add_website"><i class="fa fa-plus"></i>Add a website</a>
                         </div>
                         
-                              <?php } else { ?>
+                              <?php } } else { ?>
                         
                         <div id="website_val_display">
                         <div class="sm_leftbox"></div>
                         <div class="sm_rightbox"><h3><a href="#"><?php echo $result[0]->website; ?></a></h3>
                         <p>website</p>
                         </div>
+                        <?php if(!$cur_user_id) { ?>
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="website_edit()"><i class="fa fa-pencil"></i></a></div>
                         <div class="col-md-3 com_rig"><a  href="javascript:void(0)" onclick="del_website()"><i class="fa fa-times"></i></a></div>
                         </div>
+                        <?php } ?>
                         </div>
                         <div class="clearfix"></div>
                         
@@ -1300,9 +1508,24 @@
                       <li id="interest-li"> 
                        <!-- <div class="tophead">Basic Information</div> -->
                        <?php if(empty($result[0]->interests)) { ?>
+                                              
+                        <?php  if(!empty($user_id)) { ?>
+                         
+                         
+                         <div class="iner_lefts"><i class="fa fa-globe"></i></div>
+                         <div class="inner_rights boxs">
+                          <h3>Interest Details are Not found...</h3>
+                          <div class="graphic"></div>
+                         </div>
+                         <div class="clearfix"></div>
+                        
+                          
+					  <?php } else { ?>
+					
+                    
                         <div class="iner_boxleft" id="interest">
                         <a href="javascript:void(0)" id="add_interest"><i class="fa fa-plus"></i>Add who you're interested in</a></div>
-                       <?php } else { ?>
+                       <?php } } else { ?>
                         <div id="interest_val_disp">
                         <div class="sm_leftbox"></div>
                         <div class="sm_rightbox"><h3><a href="#">
@@ -1324,11 +1547,13 @@
 						 ?></a></h3>
                         
                         </div>
+                        <?php if(!$cur_user_id) { ?>
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="interests_edit()"><i class="fa fa-pencil"></i></a></div>
                         <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_interestedin()"><i class="fa fa-times"></i></a></div>
                         </div>
+                        <?php } ?>
                         </div>
                         <div class="clearfix"></div>
                         
@@ -1384,7 +1609,24 @@
                         
  						<!-- <div class="tophead">Languages</div> -->
                         <?php if(empty($result[0]->languages)) { ?>
-                        <div class="iner_boxleft" id="lang1"><a href="javascript:void(0)" id="add_language"><i class="fa fa-plus"></i>Add a language</a></div> <?php } else { ?>
+                        
+                        
+                                                
+                        <?php  if(!empty($user_id)) { ?>
+                         
+                         
+                         <div class="iner_lefts"><i class="fa fa-globe"></i></div>
+                         <div class="inner_rights boxs">
+                          <h3>Language Details Not found...</h3>
+                          <div class="graphic"></div>
+                         </div>
+                         <div class="clearfix"></div>
+                        
+                          
+					  <?php } else { ?>
+					
+                    
+                        <div class="iner_boxleft" id="lang1"><a href="javascript:void(0)" id="add_language"><i class="fa fa-plus"></i>Add a language</a></div> <?php } } else { ?>
                         
                         <div id="language_val_display">
                         <div class="sm_leftbox"></div>
@@ -1398,11 +1640,13 @@
 						?>
                         </a></h3>
                         </div>
+                        <?php if(!$cur_user_id) { ?>
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="languages_edit()"><i class="fa fa-pencil"></i></a></div>
                         <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_language()"><i class="fa fa-times"></i></a></div>
                         </div>
+                        <?php } ?>
                         </div>
                         <div class="clearfix"></div>
                         
@@ -1456,10 +1700,26 @@
                         <!--<div class="tophead">Basic Information</div>-->
                        
                         <?php if(empty($result[0]->religious)) {?>
+                        
+                                               
+                        <?php  if(!empty($user_id)) { ?>
+                         
+                         
+                         <div class="iner_lefts"><i class="fa fa-globe"></i></div>
+                         <div class="inner_rights boxs">
+                          <h3>Religious Views Are Not found...</h3>
+                          <div class="graphic"></div>
+                         </div>
+                         <div class="clearfix"></div>
+                        
+                          
+					  <?php } else { ?>
+					
+                    
                          <div class="iner_boxleft" id="relegious"><a href="javascript:void(0)" id="add_relegious"><i class="fa fa-plus"></i>Add your religious views</a></div>
                         
                         
-                        <?php } else { ?>
+                        <?php } } else { ?>
                         
                           <div id="relegious_val_disp">
                         <div class="sm_leftbox"></div>
@@ -1470,11 +1730,13 @@
 						 ?></a></h3>
                         <p><?php echo $data[1]; ?></p>
                         </div>
+                        <?php if(!$cur_user_id) { ?>
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="relegious_edit()"><i class="fa fa-pencil"></i></a></div>
                         <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_relegion_belief()"><i class="fa fa-times"></i></a></div>
                         </div>
+                        <?php } ?>
                         </div>
                         <div class="clearfix"></div>
                         
@@ -1518,9 +1780,25 @@
                       <li id="political-li"> 
                         <!--<div class="tophead">Basic Information</div>-->
                                <?php if(empty($result[0]->political)) { ?>
+                               
+                                                        
+                        <?php  if(!empty($user_id)) { ?>
+                         
+                         
+                         <div class="iner_lefts"><i class="fa fa-globe"></i></div>
+                         <div class="inner_rights boxs">
+                          <h3>Political Views Are Not found...</h3>
+                          <div class="graphic"></div>
+                         </div>
+                         <div class="clearfix"></div>
+                        
+                          
+					  <?php } else { ?>
+					
+                    
                         <div class="iner_boxleft" id="political"><a href="javascript:void(0)" id="add_political"><i class="fa fa-plus"></i>Add your political views</a></div>
                         
-                        <?php } else { ?>
+                        <?php } } else { ?>
                         
                         <div id="political_val_disp">
                         <div class="sm_leftbox"></div>
@@ -1531,11 +1809,13 @@
 						 ?></a></h3>
                         <p><?php echo $p_data[1]; ?></p>
                         </div>
+                        <?php if(!$cur_user_id){ ?>
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="political_edit()"><i class="fa fa-pencil"></i></a></div>
                         <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_political_belief()"><i class="fa fa-times"></i></a></div>
                         </div>
+                        <?php } ?>
                         </div>
                         <?php } ?>
                         <div class="inner_rights boxs">
@@ -1582,12 +1862,28 @@
                       <li id="relation-li">
                         <div class="tophead">Relationship</div>
                         <?php if(empty($result[0]->relationshipstatus)) { ?>
+                        
+                                                 
+                        <?php  if(!empty($user_id)) { ?>
+                         
+                         
+                         <div class="iner_lefts"><i class="fa fa-globe"></i></div>
+                         <div class="inner_rights boxs">
+                          <h3>Reltionship Details Not found...</h3>
+                          <div class="graphic"></div>
+                         </div>
+                         <div class="clearfix"></div>
+                        
+                          
+					  <?php } else { ?>
+					
+                    
                         <div class="iner_lefts" id="relation1"><i class="fa fa-plus"></i></div>
                         <div class="inner_rights boxs" id="relation2">
                           <a href="javascript:void(0)" id="relation_status"><h3>Add your relationship status</h3></a>
                           
                         </div>
-                        <?php } else { ?>
+                        <?php } }else { ?>
                         <div id="relation">
                             <div class="relation_box col-md-12">
                               <div class="col-md-8" style="margin-left:-40px;">
@@ -1596,10 +1892,12 @@
                                   <h3><?php echo $result[0]->relationshipstatus; ?></h3>
                                 </div>
                               </div>
-                              <div class="col-md-4 rightblock " >
+                              <?php if(!$cur_user_id) { ?>
+                              <div class="col-md-4 rightblock ">
                                 <div class="col-md-3 family" style="display:none;"><a href="#"><i class="fa fa-globe"></i></a></div>
                                 <div class="col-md-9 com_rig" ><a href="javascript:void(0)"  onclick="edit_relation()"><i class="fa fa-pencil"></i></a> </div>
                               </div>
+                              <?php } ?>
                             </div>
                           </div>
 							<?php } ?>
@@ -1670,22 +1968,41 @@
                         <div class="sm_rightbox"><h3><a href="#"><?php echo $family['member_name']; ?> </a></h3>
                         <p><?php echo $family['member_relation']; ?></p>
                         </div>
+                        <?php if(!$cur_user_id) { ?>
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" class="family_edit" onclick="family_edit()" id="family_edit<?php echo $family['fam_member_id']; ?>"><i class="fa fa-pencil"></i></a></div>
                         <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_fam_member('<?php echo $family['fam_member_id']; ?>')"><i class="fa fa-times"></i></a></div>
                         </div>
+                        <?php } ?>
                         </div>
                         </div>
                          <div class="clearfix"></div>
                          <?php } ?>    </div>
                    		<?php }else { ?>
+                        
+                                                 
+                        <?php  if(!empty($user_id)) { ?>
+                         
+                         
+                         <div class="iner_lefts"><i class="fa fa-users"></i></div>
+                         <div class="inner_rights boxs">
+                          <h3>Family Members Details Not found...</h3>
+                          <div class="graphic"></div>
+                         </div>
+                         <div class="clearfix"></div>
+                        
+                          
+					  <?php } else { ?>
+					
+                    
+                        
                         <div class="iner_lefts" id="add_f_member1"><i class="fa fa-plus"></i></div>
                         <div class="inner_rights boxs" id="add_f_member">
                          <a href="javascript:void(0)"  id="familymembers"> <h3>Add a family member</h3></a>
                         </div>
                       <div class="clearfix"></div>
-                      <?php } ?>
+                      <?php }  }?>
            
                       </li>
                 
@@ -1737,6 +2054,7 @@
                             <div class="graphic"></div>
                           </div>
                            <?php if(!empty($family_members)) { ?>
+                           <?php if(empty($user_id)) { ?>
                         <a href="javascript:void(0)" id="add_family_link_disp" class="work_edu_side_links">add a family member</a>
                         <div id="family_mem_down_block">
                          <div class="iner_lefts" id="add_f_member_down1" style="display:none;"><i class="fa fa-plus"></i></div>
@@ -1744,6 +2062,7 @@
                          <a href="javascript:void(0)"  id="familymembers_down"> <h3>Add a family member</h3></a>
                         </div>
                         </div>
+                        <?php } ?>
                       <div class="clearfix"></div>
                       
                       <?php } ?>
@@ -1764,18 +2083,36 @@
                       <li id="aboutme-li">
                         <div class="tophead">About You</div>
                         <?php if(empty($result[0]->aboutme)) { ?>
+                        
+                                               
+                        <?php  if(!empty($user_id)) { ?>
+                         
+                         
+                         <div class="iner_lefts"><i class="fa fa-globe"></i></div>
+                         <div class="inner_rights boxs">
+                          <h3>About him Details Not found...</h3>
+                          <div class="graphic"></div>
+                         </div>
+                         <div class="clearfix"></div>
+                        
+                          
+					  <?php } else { ?>
+					
+                    
                         <div class="iner_boxleft"><a href="javascript:void(0)" id="aboutme_a"><i class="fa fa-plus"></i>Write some details about yourself</a></div>
-                         <?php }else { ?>
+                         <?php } } else { ?>
                         <div id="aboutme_val_disp">
                       
                         <div class="sm_rightbox"><h3><a href="#"><?php echo $result[0]->aboutme ; ?></a></h3>
                        
                         </div>
+                        <?php if(!$cur_user_id) { ?>
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="about_me_edit()"><i class="fa fa-pencil"></i></a></div>
                         <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_about_me()"><i class="fa fa-times"></i></a></div>
                         </div>
+                        <?php } ?>
                         </div>
                         <div class="clearfix"></div>
                          
@@ -1851,23 +2188,39 @@
                         <div class="sm_rightbox"><h3><a href="#"><?php echo $nicname['nic_name']; ?></a></h3>
                         <p><?php echo $nicname['nic_name_type']; ?></p>
                         </div>
+                        <?php if(!$cur_user_id) { ?>
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="nick_edit()" class="nick_edit" id="nick_edit<?php echo $nicname['nic_name_id']; ?>"><i class="fa fa-pencil"></i></a></div>
                         <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_nic_name('<?php echo $nicname['nic_name_id'] ?>')"><i class="fa fa-times"></i></a></div>
                         <div class="clearfix"></div>
                         </div>
+                        <?php } ?>
                         </div>
                           <div class="clearfix"></div>
                          <?php } ?>
                             </div>
-                          <?php }else{ ?>
+                          <?php } else { ?>
+                                                 
+                        <?php  if(!empty($user_id)) { ?>
                          
+                         
+                         <div class="iner_lefts"><i class="fa fa-globe"></i></div>
+                         <div class="inner_rights boxs">
+                          <h3>About him Details Not found...</h3>
+                          <div class="graphic"></div>
+                         </div>
+                         <div class="clearfix"></div>
+                        
+                          
+					  <?php } else { ?>
+					
+                    
                          
     <div class="iner_boxleft othnames" id="other_name"><a href="javascript:void(0)" id="oth_name"><i class="fa fa-plus"></i>Add a nickname, a birth name...</a></div>
             <div class="clearfix"></div>
             
-            <?php } ?>
+            <?php } } ?>
            
                      
                         
@@ -1918,23 +2271,41 @@
                         </div>
                         <div class="clearfix"></div>
                           <?php if(!empty($nick_names)) { ?>
+                            <?php  if(empty($user_id)) { ?>
                         <a href="javascript:void(0)" id="add_nicname_link_disp" class="work_edu_side_links">add Nick Name</a>
                         <div id="nicname_down_block">
                         <div class="iner_boxleft othnames" id="other_name_down_view" style="display:none;"><a href="javascript:void(0)" 
                         id="oth_name_down"><i class="fa fa-plus"></i>Add a nickname, a birth name...</a></div>
             <div class="clearfix"></div>
+            
                      </div>
+                      <?php } }?>
                       
-                      <?php } ?>
                       </li>
                       
                       
                       <li id="favquotes-li">
                         <div class="tophead">Favorite Quotes</div>
                         <?php if(empty($result[0]->favquotes)) { ?>
+                        
+                                                  
+                        <?php  if(!empty($user_id)) { ?>
+                         
+                         
+                         <div class="iner_lefts"><i class="fa fa-globe"></i></div>
+                         <div class="inner_rights boxs">
+                          <h3>Favorite Quotes Details Not found...</h3>
+                          <div class="graphic"></div>
+                         </div>
+                         <div class="clearfix"></div>
+                        
+                          
+					  <?php } else { ?>
+					
+                    
                         <div class="iner_boxleft"><a href="javascript:void(0)" id="fav_quotes"><i class="fa fa-plus"></i>Add your favorite quotations</a></div>
                         
-                      <?php } else { ?>  
+                      <?php } } else { ?>  
                         
                         
                         <div id="favquotes_val_disp">
@@ -1942,12 +2313,13 @@
                         <div class="sm_rightbox"><h3><a href="#"><?php echo $result[0]->favquotes ; ?></a></h3>
                        
                         </div>
+                        <?php if(!$cur_user_id) { ?>
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="fav_quotes_edit()"><i class="fa fa-pencil"></i></a></div>
                         <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_fav_quotes()"><i class="fa fa-times"></i></a></div>
                         </div>
-                        
+                        <?php } ?>
                         </div>
                         <div class="clearfix"></div>
                         <?php } ?>
@@ -1996,15 +2368,225 @@
                   </div>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="life">
-                  <div class="smallboxes">
+                  <div class="smallboxes_events">
+                    <div class="tophead">Life Events</div>
                     <ul>
-                      <li>
-                        <div class="iner_lefts"><i class="fa fa-plus"></i></div>
+                    
+                    
+                    
+                    <?php     
+					//print_r($life_events_data);
+					if(!empty($life_events_data))
+					{
+						$year = date("Y");
+						for($i=$year; $i>=1800; $i--)
+						{
+							 foreach($life_events_data as $events)
+					      {
+							   $event_years_data = explode('-',$events['exact_date']); 
+							  if($i == $event_years_data[0])
+							  {
+							echo $i;
+							break;
+						
+							  }
+						  }
+						
+					 foreach($life_events_data as $events)
+					  {
+						
+					
+						 $years_data = explode('-',$events['exact_date']); 
+						// print_r($years_data[0]);
+						// echo "     ";
+						
+						
+						
+						  if($i == $years_data[0])
+						  {
+							 
+						
+						 if($events['life_event_type'] == 'new_job')
+						 {
+							 ?>
+                               <li>
+                        
                         <div class="inner_rights">
-                          <h3>Life Events</h3>
+                          <h3><i class="fa fa-fw"></i> Started Working at <?php echo $events['employer']; ?></h3>
                         </div>
                         <div class="clearfix"></div>
                       </li>
+                             
+                             <?php }else if($events['life_event_type'] == 'retirement')
+							 { ?>
+                             <li>
+                               <div class="inner_rights">
+                          <h3><i class="fa fa-fw"></i> Job Retirement</h3>
+                        </div>
+                        <div class="clearfix"></div>
+                      </li>
+                      
+                      
+                         <?php }else if($events['life_event_type'] == 'study_abroad')
+							 { ?>
+                             <li>
+                                <div class="inner_rights">
+                               
+                          <h3><i class="fa fa-fw"></i>  Studying at <?php echo $events['title']." with ".$events['with_or_whom']; ?> </h3>
+                        </div>
+                        <div class="clearfix"></div>
+                      </li>
+                      
+                      
+                       <?php }else if($events['life_event_type'] == 'engagement')
+							 { ?>
+                             <li>
+                                <div class="inner_rights">
+                          <h3><i class="fa fa-fw"></i> engaged with <?php echo $events['with_or_whom']; ?></h3>
+                        </div>
+                        <div class="clearfix"></div>
+                      </li>
+                      
+                        <?php }else if($events['life_event_type'] == 'marriage')
+							 { ?>
+                             <li>
+                                <div class="inner_rights">
+                               
+                          <h3><i class="fa fa-fw"></i> marriage with <?php echo $events['with_or_whom']; ?></h3>
+                        </div>
+                        <div class="clearfix"></div>
+                      </li>
+                      
+                          <?php }else if($events['life_event_type'] == 'anniversary')
+							 { ?>
+                             <li>
+                                <div class="inner_rights">
+                               
+                          <h3><i class="fa fa-fw"></i> Anniversary with <?php echo $events['with_or_whom']; ?></h3>
+                        </div>
+                        <div class="clearfix"></div>
+                      </li>
+                       <?php }else if($events['life_event_type'] == 'new_child')
+							 { ?>
+                             <li>
+                                <div class="inner_rights">
+                               
+                          <h3><i class="fa fa-fw"></i> Born</h3>
+                        </div>
+                        <div class="clearfix"></div>
+                      </li>
+                      
+                        <?php }else if($events['life_event_type'] == 'moved')
+							 { ?>
+                             <li>
+                                <div class="inner_rights">
+                               
+                          <h3><i class="fa fa-fw"></i> Moved with <?php echo $events['with_or_whom']; ?></h3>
+                        </div>
+                        <div class="clearfix"></div>
+                      </li>
+                      
+                              <?php }else if($events['life_event_type'] == 'bought_home')
+							 { ?>
+                             <li>
+                                <div class="inner_rights">
+                               
+                          <h3><i class="fa fa-fw"></i> Bought with <?php echo $events['with_or_whom']; ?></h3>
+                        </div>
+                        <div class="clearfix"></div>
+                      </li>
+                      
+                              <?php }else if($events['life_event_type'] == 'new_vehicle')
+							 { ?>
+                             <li>
+                                <div class="inner_rights">
+                               
+                          <h3><i class="fa fa-fw"></i> Bought with <?php echo $events['with_or_whom']; ?></h3>
+                        </div>
+                        <div class="clearfix"></div>
+                      </li>
+                      
+                        <?php }else if($events['life_event_type'] == 'organ_donor')
+							 { ?>
+                             <li>
+                                <div class="inner_rights">
+                               
+                          <h3><i class="fa fa-fw"></i> Organ Donated</h3>
+                        </div>
+                        <div class="clearfix"></div>
+                      </li>
+                      
+                       <?php }else if($events['life_event_type'] == 'quit_habit')
+							 { ?>
+                             <li>
+                                <div class="inner_rights">
+                               
+                          <h3><i class="fa fa-fw"></i> quits <?php echo $events['habit']; ?></h3>
+                        </div>
+                        <div class="clearfix"></div>
+                      </li>
+                      
+                        <?php }else if($events['life_event_type'] == 'new_food_habit')
+							 { ?>
+                             <li>
+                                <div class="inner_rights">
+                               
+                          <h3><i class="fa fa-fw"></i> started   <?php echo $events['food_habit']." as new habit"; ?></h3>
+                        </div>
+                        <div class="clearfix"></div>
+                      </li>
+                      
+                              <?php }else if($events['life_event_type'] == 'new_hobby')
+							 { ?>
+                             <li>
+                                <div class="inner_rights">
+                               
+                          <h3><i class="fa fa-fw"></i> started <?php echo $events['hobby']." as new hobby"; ?></h3>
+                        </div>
+                        <div class="clearfix"></div>
+                      </li>
+                      
+                       <?php }else if($events['life_event_type'] == 'voted')
+							 { ?>
+                             <li>
+                                <div class="inner_rights">
+                               
+                          <h3><i class="fa fa-fw"></i>voted to <?php echo $events['candidate']; ?></h3>
+                        </div>
+                        <div class="clearfix"></div>
+                      </li>
+                       <?php }else if($events['life_event_type'] == 'travel')
+							 { ?>
+                             <li>
+                                <div class="inner_rights">
+                               
+                          <h3><i class="fa fa-fw"></i>travelled to <?php echo $events['location']; ?></h3>
+                        </div>
+                        <div class="clearfix"></div>
+                      </li>
+						               
+                      
+                      
+                       <?php }else if($events['life_event_type'] == 'new_glasses')
+							 { ?>
+                             <li>
+                                <div class="inner_rights">
+                               
+                          <h3><i class="fa fa-fw"></i> started using <?php echo $events['glasses_type']." of glasses"; ?></h3>
+                        </div>
+                        <div class="clearfix"></div>
+                      </li>
+					 <?php } }
+					 } }} else { ?>
+                      <li>
+                                <div class="inner_rights">
+                               
+                          <h3>No Life Events found...</h3>
+                        </div>
+                        <div class="clearfix"></div>
+                      </li>
+                     <?php } ?>
+                  
                       <li>
                         <div class="iner_lefts"><i class="fa fa-plus"></i></div>
                         <div class="inner_rights">
@@ -2033,56 +2615,71 @@
         <ul class="sub-links" id="workEdu">
       
             <li><a href="#AddCompanys" data-toggle="modal" >New Job</a></li>
-            <li><a href="#AddCompanys_book" data-toggle="modal" >Published Book or Paper</a></li>
+           
             <li><a href="#AddCompanys_Retired" data-toggle="modal" >Retirement</a></li>
-            <li><a href="#AddCompanys_New_school" data-toggle="modal" >New School</a></li>
+            
             <li><a href="#AddCompanys_Study_abroad" data-toggle="modal" >Study Abroad</a></li>
+          <!--  
             <li><a href="#AddCompanys_Volunteer_Work" data-toggle="modal" >Volunteer Work</a></li>
+            <li><a href="#AddCompanys_New_school" data-toggle="modal" >New School</a></li>
+            <li><a href="#AddCompanys_book" data-toggle="modal" >Published Book or Paper</a></li>
             <li><a href="#AddCompanys_Military_Service" data-toggle="modal" >Military Service</a></li>
-            <li><a href="#AddCompanys_Create_own" data-toggle="modal" >Create your Own</a></li>
+            <li><a href="#AddCompanys_Create_own" data-toggle="modal" >Create your Own</a></li>-->
          </ul>
          <ul class="sub-links" id="familyy">
-            <li><a href="#AddCompanys_First_Met" data-toggle="modal" >First Met</a></li>
-            <li><a href="#AddCompanys_New_Relationship" data-toggle="modal" >New Relationship</a></li>
+          
+           
             <li><a href="#AddCompanys_Engagement" data-toggle="modal" >Engagement</a></li>
             <li><a href="#AddCompanys_Marriage" data-toggle="modal" >Marriage</a></li>
             <li><a href="#AddCompanys_Anniversary" data-toggle="modal" >Anniversary</a></li>
-            <li><a href="#AddCompanys_Expecting_baby" data-toggle="modal" >Expecting a Baby</a></li>
+           
             <li><a href="#AddCompanys_New_Child" data-toggle="modal" >New Child</a></li>
-            <li><a href="#AddCompanys_Family_Member" data-toggle="modal" >New Family Member</a></li>
+           
+            <!-- 
             <li><a href="#AddCompanys_New_Pet" data-toggle="modal" >New Pet</a></li>
+            <li><a href="#AddCompanys_First_Met" data-toggle="modal" >First Met</a></li>
+             <li><a href="#AddCompanys_Family_Member" data-toggle="modal" >New Family Member</a></li>
+            <li><a href="#AddCompanys_Expecting_baby" data-toggle="modal" >Expecting a Baby</a></li>
+            <li><a href="#AddCompanys_New_Relationship" data-toggle="modal" >New Relationship</a></li>
             <li><a href="#AddCompanys_End_Relationship" data-toggle="modal" >End of Relationship</a></li>
             <li><a href="#AddCompanys_Loss_One" data-toggle="modal" >Loss of a Loved One</a></li>
-            <li><a href="#AddCompanys" data-toggle="modal" >Create Your Own</a></li>
+            <li><a href="#AddCompanys" data-toggle="modal" >Create Your Own</a></li> -->
          </ul>
          <ul class="sub-links" id="homeLiving">
             <li><a href="#AddCompanys_moved" data-toggle="modal" >Moved</a></li>
             <li><a href="#AddCompanys_Bought_House" data-toggle="modal" >Bought a Home</a></li>
+          	<li><a href="#AddCompanys_New_vehicle" data-toggle="modal" >New Vehichle</a></li>
+        <!--<li><a href="#AddCompanys_New_Roommate" data-toggle="modal" >New Roommate</a></li>
             <li><a href="#AddCompanys_Home_improvement" data-toggle="modal" >Home Improvement</a></li>
-            <li><a href="#AddCompanys_New_Roommate" data-toggle="modal" >New Roommate</a></li>
-            <li><a href="#AddCompanys_New_vehicle" data-toggle="modal" >New Vehichle</a></li>
-            <li><a href="#AddCompanys" data-toggle="modal" >Create Your Own</a></li>
+            <li><a href="#AddCompanys" data-toggle="modal" >Create Your Own</a></li> -->
          </ul>
          <ul class="sub-links" id="health">
             <li><a href="#AddCompanys_Health_Wellness" data-toggle="modal" >Organ Donor</a></li>
-            <li><a href="#AddCompanys_Overcame_Illness" data-toggle="modal" >Overcame an Illness</a></li>
+            
             <li><a href="#AddCompanys_Quit_Habit" data-toggle="modal" >Quit a Habit</a></li>
             <li><a href="#AddCompanys_New_Habits" data-toggle="modal" >New Eating Habits</a></li>
-            <li><a href="#AddCompanys_Weight_Loss" data-toggle="modal" >Weight Loss</a></li>
+          
             <li><a href="#AddCompanys_Glasses_Contacts" data-toggle="modal" >Glassess, Contacts, Others</a></li>
+           <!-- 
+            <li><a href="#AddCompanys_Overcame_Illness" data-toggle="modal" >Overcame an Illness</a></li>
+            <li><a href="#AddCompanys_Weight_Loss" data-toggle="modal" >Weight Loss</a></li>
             <li><a href="#AddCompanys" data-toggle="modal" >Broken Bone</a></li>
             <li><a href="#AddCompanys" data-toggle="modal" >Removed Braces</a></li>
-            <li><a href="#AddCompanys" data-toggle="modal" >Create YOur Own</a></li>
+            <li><a href="#AddCompanys" data-toggle="modal" >Create YOur Own</a></li> -->
          </ul>
          <ul class="sub-links" id="travel">
-            <li><a href="#AddCompanys" data-toggle="modal" >New Hobby</a></li>
-            <li><a href="#AddCompanys" data-toggle="modal" >New Instrument</a></li>
-            <li><a href="#AddCompanys" data-toggle="modal" >New Language</a></li>
-            <li><a href="#AddCompanys" data-toggle="modal" >Travel</a></li>
-            <li><a href="#AddCompanys" data-toggle="modal" >Achievement or Award</a></li>
+            <li><a href="#AddCompanys_new_hobby" data-toggle="modal" >New Hobby</a></li>
+           <li><a href="#AddCompanys_voted" data-toggle="modal" >Voted...</a></li>
+         
+            <li><a href="#AddCompanys_travelled" data-toggle="modal" >Travel</a></li>
+            
+            <!--
             <li><a href="#AddCompanys" data-toggle="modal" >Changed Beliefs</a></li>
+            <li><a href="#AddCompanys" data-toggle="modal" >New Language</a></li>
+             <li><a href="#AddCompanys" data-toggle="modal" >New Instrument</a></li>
+            <li><a href="#AddCompanys" data-toggle="modal" >Achievement or Award</a></li>
             <li><a href="#AddCompanys" data-toggle="modal" >First Word, Kiss, Other</a></li>
-            <li><a href="#AddCompanys" data-toggle="modal" >Create your Own</a></li>
+            <li><a href="#AddCompanys" data-toggle="modal" >Create your Own</a></li> -->
          </ul>
      </div>
      </td>
@@ -2098,43 +2695,7 @@
                       
                       
                       
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      </li>
+                                            </li>
                     </ul>
                   </div>
                 </div>
