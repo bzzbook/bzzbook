@@ -944,7 +944,7 @@
         <div class="subheads">May 18, 2015</div>
       </div>
       <div class="modal-body">
-        <form name="new_job_form"  action="<?php echo base_url(); ?>Life_Events/add_new_job/" method="post" enctype="multipart/form-data">
+        <form name="new_job_form"  action="<?php echo base_url(); ?>life_events/add_new_job" method="post" enctype="multipart/form-data">
           <div class="col-md-6 Works" >
             <div class="form-group">
               <label for="exampleInputEmail1">Employer</label>
@@ -1183,7 +1183,7 @@
         <div class="subheads">Today</div>
       </div>
       <div class="modal-body">
-        <form name="add_retirement" id="add_retirement" action="<?php echo base_url(); ?>Life_Events/add_retirement/" method="post" enctype="multipart/form-data">
+        <form name="add_retirement" id="add_retirement" action="<?php echo base_url(); ?>life_events/add_retirement" method="post" enctype="multipart/form-data">
           <div class="col-md-6 Retired" >
             <div class="form-group">
               <label for="exampleInputName2">Title</label>
@@ -1360,7 +1360,7 @@
         <div class="subheads">Today</div>
       </div>
       <div class="modal-body">
-        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>Life_Events/add_study_abroad"  enctype="multipart/form-data" method="post">
+        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>life_events/add_study_abroad"  enctype="multipart/form-data" method="post">
           <div class="col-md-6 Study_abroad" >
             <div class="form-group">
               <label for="exampleInputName2">Title</label>
@@ -1983,7 +1983,7 @@
         <div class="subheads">Today</div>
       </div>
       <div class="modal-body">
-        <form action="<?php echo base_url(); ?>Life_Events/add_engagement" enctype="multipart/form-data" method="post">
+        <form action="<?php echo base_url(); ?>life_events/add_engagement" enctype="multipart/form-data" method="post">
           <div class="col-md-6 Engagement" >
             <div class="form-group">
               <label for="exampleInputName2">Title</label>
@@ -2071,7 +2071,7 @@ iage------>
         <div class="subheads">Today</div>
       </div>
       <div class="modal-body">
-        <form action="<?php echo base_url(); ?>Life_Events/add_iage" enctype="multipart/form-data" method="post">
+        <form action="<?php echo base_url(); ?>life_events/add_iage" enctype="multipart/form-data" method="post">
           <div class="col-md-6 iage" >
             <div class="form-group">
               <label for="exampleInputName2">Title</label>
@@ -2159,7 +2159,7 @@ iage------>
         <div class="subheads"></div>
       </div>
       <div class="modal-body">
-        <form action="<?php echo base_url(); ?>Life_Events/add_anniversary"  enctype="multipart/form-data" method="post">
+        <form action="<?php echo base_url(); ?>life_events/add_anniversary"  enctype="multipart/form-data" method="post">
           <div class="col-md-6 Anniversary" >
             <div class="form-group">
               <label for="exampleInputName2">Title</label>
@@ -2348,7 +2348,7 @@ iage------>
         <div class="subheads"> Today</div>
       </div>
       <div class="modal-body">
-        <form  action="<?php echo base_url(); ?>life_Events/add_child" enctype="multipart/form-data" method="post">
+        <form  action="<?php echo base_url(); ?>life_events/add_child" enctype="multipart/form-data" method="post">
           <div class="col-md-6 New_Child" >
             <div class="form-group">
               <label for="exampleInputName2">Title</label>
@@ -2446,7 +2446,7 @@ iage------>
         <div class="subheads"> Today</div>
       </div>
       <div class="modal-body">
-        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>Life_Events/add_familymember" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
+        <form name="company_form" id="company_form" action="<?php echo base_url(); ?>life_events/add_familymember" onsubmit="return validateCompanyForm();" enctype="multipart/form-data" method="post">
           <div class="col-md-6 Family_Member" >
             <div class="form-group">
               <label for="exampleInputName2">Title</label>
@@ -2886,7 +2886,7 @@ iage------>
         <div class="subheads"> Today</div>
       </div>
       <div class="modal-body">
-        <form action="<?php echo base_url(); ?>Life_Events/add_movedlocation" enctype="multipart/form-data" method="post">
+        <form action="<?php echo base_url(); ?>life_events/add_movedlocation" enctype="multipart/form-data" method="post">
           <div class="col-md-6 moved" >
             <div class="form-group">
               <label for="exampleInputName2">Title</label>
@@ -2977,7 +2977,7 @@ iage------>
         <div class="subheads"> Today</div>
       </div>
       <div class="modal-body">
-        <form  action="<?php echo base_url(); ?>Life_Events/add_bought_home" enctype="multipart/form-data" method="post">
+        <form  action="<?php echo base_url(); ?>life_events/add_bought_home" enctype="multipart/form-data" method="post">
           <div class="col-md-6 Bought_House" >
             <div class="form-group">
               <label for="exampleInputName2">Title</label>
@@ -3235,7 +3235,7 @@ iage------>
         <div class="subheads">Model Year: 2015.</div>
       </div>
       <div class="modal-body">
-        <form action="<?php echo base_url(); ?>Life_Events/add_newvehicle" enctype="multipart/form-data" method="post">
+        <form action="<?php echo base_url(); ?>life_events/add_newvehicle" enctype="multipart/form-data" method="post">
           <div class="col-md-6 New_vehicle" >
             <div class="form-group">
               <label for="exampleInputName2">Title</label>
@@ -3273,7 +3273,7 @@ iage------>
               </div>
               <div class="col-md-4">
                 <select name="n_v_month">
-                  <option>May</option>
+                  <option>01</option>
                 </select>
               </div>
               <div class="col-md-4">
@@ -3342,7 +3342,7 @@ iage------>
         <div class="subheads">May 27, 2015</div>
              </div>
       <div class="modal-body">
-        <form  action="<?php echo base_url(); ?>Life_Events/add_organ_donor" enctype="multipart/form-data" method="post">
+        <form  action="<?php echo base_url(); ?>life_events/add_organ_donor" enctype="multipart/form-data" method="post">
           <div class="col-md-6 Health_Wellness" >
             <div class="form-group">
               <label for="exampleInputName2">Title</label>
@@ -3511,7 +3511,7 @@ iage------>
             <div class="subheads">May 27, 2015</div>
       </div>
       <div class="modal-body">
-        <form  action="<?php echo base_url(); ?>Life_Events/add_quit_habit" enctype="multipart/form-data" method="post">
+        <form  action="<?php echo base_url(); ?>life_events/add_quit_habit" enctype="multipart/form-data" method="post">
           <div class="col-md-6 Quit_Habit" >
             <div class="form-group">
               <label for="exampleInputName2">Title</label>
@@ -3615,7 +3615,7 @@ iage------>
             <div class="subheads">May 27, 2015</div>
       </div>
       <div class="modal-body">
-        <form action="<?php echo base_url(); ?>Life_Events/add_food_habit" enctype="multipart/form-data" method="post">
+        <form action="<?php echo base_url(); ?>life_events/add_food_habit" enctype="multipart/form-data" method="post">
           <div class="col-md-6 New_Habits" >
             <div class="form-group">
               <label for="exampleInputName2">Title</label>
@@ -3805,7 +3805,7 @@ iage------>
             <div class="subheads">Today</div>
       </div>
       <div class="modal-body">
-        <form action="<?php echo base_url(); ?>Life_Events/add_glasses" enctype="multipart/form-data" method="post">
+        <form action="<?php echo base_url(); ?>life_events/add_glasses" enctype="multipart/form-data" method="post">
           <div class="col-md-6 Glasses_Contacts" >
             <div class="form-group">
               <label for="exampleInputName2">Title</label>
@@ -3904,7 +3904,7 @@ iage------>
             <div class="subheads">Today</div>
       </div>
       <div class="modal-body">
-        <form action="<?php echo base_url(); ?>Life_Events/add_hobby" enctype="multipart/form-data" method="post">
+        <form action="<?php echo base_url(); ?>life_events/add_hobby" enctype="multipart/form-data" method="post">
           <div class="col-md-6 Glasses_Contacts" >
             <div class="form-group">
               <label for="exampleInputName2">Title</label>
@@ -3999,7 +3999,7 @@ iage------>
             <div class="subheads">Today</div>
       </div>
       <div class="modal-body">
-        <form action="<?php echo base_url(); ?>Life_Events/add_voted" enctype="multipart/form-data" method="post">
+        <form action="<?php echo base_url(); ?>life_events/add_voted" enctype="multipart/form-data" method="post">
           <div class="col-md-6 Glasses_Contacts" >
             <div class="form-group">
               <label for="exampleInputName2">Title</label>
@@ -4079,7 +4079,7 @@ iage------>
         <div class="subheads">May 18, 2015</div>
       </div>
       <div class="modal-body">
-        <form  action="<?php echo base_url(); ?>Life_Events/add_travel" method="post" enctype="multipart/form-data">
+        <form  action="<?php echo base_url(); ?>life_events/add_travel" method="post" enctype="multipart/form-data">
           <div class="col-md-6 Works" >
             <div class="form-group">
               <label for="exampleInputEmail1">Title</label>
@@ -4243,21 +4243,22 @@ iage------>
         
         <!-- <div id="life_event_date"><div class="life_event_text "></div></div> -->
          <div id="life_event_with"><div class="life_event_text "></div></div>
-          <div id="life_event_location"><div class="life_event_loc"></div></div>
+         <div id="life_event_location"><div class="life_event_loc"></div></div>
       
         
-          <div id="life_event_story"><div class="life_event_lefts"></div></div>
-        <div id="life_event_images"><div class="life_event_lefts_img"></div></div>
+         <div id="life_event_story"><div class="life_event_lefts"></div></div>
+         <div id="life_event_images"><div class="life_event_lefts_img"></div></div>
         
            
            <div id="map-canvas" class="canvas_maps"></div>
 
         </div>
     </div>
-      <div class="modal-footer">
+      <!--<div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary">Save changes</button>
-      </div>  </div><!-- /.modal-content -->
+      </div>-->
+        </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <!---------------  end -------------------------------------->

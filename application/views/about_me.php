@@ -66,7 +66,7 @@
                     
            <li>
                  		  <div class="tophead">Basic Info</div>
-                          <a href="#google-maps" data-toggle="modal">google maps testing</a>
+                         
                           <div class="col-md-12">
                         <div class="boxicon col-md-1"><i class="fa fa-user overviewicons"></i></div>
                         <div class="boxicon_text col-md-8"><?php echo $result[0]->user_firstname ." " .$result[0]->user_lastname; ?></div>
