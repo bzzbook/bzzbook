@@ -65,6 +65,18 @@ class person extends CI_Model {
 		   }else
 		   return false;
 	   }
+	    public function phone_check($user_phone)
+	   {
+		   $this->db->select('user_phoneno');
+		   $this->db->from('bzz_userinfo');
+		   $this->db->where('user_phoneno',$user_phone);
+		   $query = $this->db->get();
+		   if($query->num_rows() > 0)
+		   {
+			   return $query->result_array();
+		   }else
+		   return false;
+	   }
 	   public function post_buzz($data)
 	   {
 		   

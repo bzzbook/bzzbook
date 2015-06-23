@@ -66,6 +66,7 @@
                     
            <li>
                  		  <div class="tophead">Basic Info</div>
+                          <a href="#google-maps" data-toggle="modal">google maps testing</a>
                           <div class="col-md-12">
                         <div class="boxicon col-md-1"><i class="fa fa-user overviewicons"></i></div>
                         <div class="boxicon_text col-md-8"><?php echo $result[0]->user_firstname ." " .$result[0]->user_lastname; ?></div>
@@ -2412,7 +2413,7 @@
                                <li>
                         
                         <div class="inner_rights">
-                          <h3><i class="fa fa-fw"></i> Started Working at <?php echo $events['employer']; ?></h3>
+                          <h3><a href="javascript:void(0);" class="life_events_disp" id="life_<?php echo $events['life_event_id']; ?>"><i class="fa fa-briefcase"></i> Started Working at <?php echo $events['employer']; ?></a></h3>
                         </div>
                         <div class="clearfix"></div>
                       </li>
@@ -2421,7 +2422,7 @@
 							 { ?>
                              <li>
                                <div class="inner_rights">
-                          <h3><i class="fa fa-fw"></i> Job Retirement</h3>
+                          <h3><a href="javascript:void(0);" class="life_events_disp" id="life_<?php echo $events['life_event_id']; ?>"><i class="fa fa-apple"></i> Job Retirement</a></h3>
                         </div>
                         <div class="clearfix"></div>
                       </li>
@@ -2432,7 +2433,7 @@
                              <li>
                                 <div class="inner_rights">
                                
-                          <h3><i class="fa fa-fw"></i>  Studying at <?php echo $events['title']." with ".$events['with_or_whom']; ?> </h3>
+                          <h3><a href="javascript:void(0);" class="life_events_disp" id="life_<?php echo $events['life_event_id']; ?>"> <i class="fa fa-pagelines"></i>  Studying at <?php echo $events['title']." with ".$events['with_or_whom']; ?> </a></h3>
                         </div>
                         <div class="clearfix"></div>
                       </li>
@@ -2442,7 +2443,7 @@
 							 { ?>
                              <li>
                                 <div class="inner_rights">
-                          <h3><i class="fa fa-fw"></i> engaged with <?php echo $events['with_or_whom']; ?></h3>
+                          <h3><a href="javascript:void(0);" class="life_events_disp" id="life_<?php echo $events['life_event_id']; ?>"><i class="fa fa-diamond"></i> engaged with <?php echo $events['with_or_whom']; ?></a></h3>
                         </div>
                         <div class="clearfix"></div>
                       </li>
@@ -2452,7 +2453,7 @@
                              <li>
                                 <div class="inner_rights">
                                
-                          <h3><i class="fa fa-fw"></i> marriage with <?php echo $events['with_or_whom']; ?></h3>
+                          <h3><a href="javascript:void(0);" class="life_events_disp" id="life_<?php echo $events['life_event_id']; ?>"><i class="fa fa-heart-o"></i> marriage with <?php echo $events['with_or_whom']; ?></a></h3>
                         </div>
                         <div class="clearfix"></div>
                       </li>
@@ -2462,7 +2463,7 @@
                              <li>
                                 <div class="inner_rights">
                                
-                          <h3><i class="fa fa-fw"></i> Anniversary with <?php echo $events['with_or_whom']; ?></h3>
+                          <h3><a href="javascript:void(0);" class="life_events_disp" id="life_<?php echo $events['life_event_id']; ?>"><i class="fa fa-gift"></i> Anniversary with <?php echo $events['with_or_whom']; ?></a></h3>
                         </div>
                         <div class="clearfix"></div>
                       </li>
@@ -2481,7 +2482,7 @@
                              <li>
                                 <div class="inner_rights">
                                
-                          <h3><i class="fa fa-fw"></i> Moved with <?php echo $events['with_or_whom']; ?></h3>
+                          <h3><a href="javascript:void(0);" class="life_events_disp" id="life_<?php echo $events['life_event_id']; ?>"><i class="fa fa-home"></i> Moved with <?php echo $events['with_or_whom']; ?></a></h3>
                         </div>
                         <div class="clearfix"></div>
                       </li>
@@ -2491,7 +2492,7 @@
                              <li>
                                 <div class="inner_rights">
                                
-                          <h3><i class="fa fa-fw"></i> Bought with <?php echo $events['with_or_whom']; ?></h3>
+                          <h3><a href="javascript:void(0);" class="life_events_disp" id="life_<?php echo $events['life_event_id']; ?>"><i class="fa fa-home"></i> Bought with <?php echo $events['with_or_whom']; ?></a></h3>
                         </div>
                         <div class="clearfix"></div>
                       </li>
@@ -2501,7 +2502,7 @@
                              <li>
                                 <div class="inner_rights">
                                
-                          <h3><i class="fa fa-fw"></i> Bought with <?php echo $events['with_or_whom']; ?></h3>
+                          <h3><a href="javascript:void(0);" class="life_events_disp" id="life_<?php echo $events['life_event_id']; ?>"><i class="fa fa-car "></i> Bought with <?php echo $events['with_or_whom']; ?></a></h3>
                         </div>
                         <div class="clearfix"></div>
                       </li>
@@ -2511,7 +2512,7 @@
                              <li>
                                 <div class="inner_rights">
                                
-                          <h3><i class="fa fa-fw"></i> Organ Donated</h3>
+                          <h3><a href="javascript:void(0);" class="life_events_disp" id="life_<?php echo $events['life_event_id']; ?>"><i class="fa fa-heartbeat"></i> Organ Donated</a></h3>
                         </div>
                         <div class="clearfix"></div>
                       </li>
@@ -2521,7 +2522,7 @@
                              <li>
                                 <div class="inner_rights">
                                
-                          <h3><i class="fa fa-fw"></i> quits <?php echo $events['habit']; ?></h3>
+                          <h3><a href="javascript:void(0);" class="life_events_disp" id="life_<?php echo $events['life_event_id']; ?>"><i class="fa fa-ban"></i> quits <?php echo $events['habit']; ?></a></h3>
                         </div>
                         <div class="clearfix"></div>
                       </li>
@@ -2531,7 +2532,7 @@
                              <li>
                                 <div class="inner_rights">
                                
-                          <h3><i class="fa fa-fw"></i> started   <?php echo $events['food_habit']." as new habit"; ?></h3>
+                          <h3><a href="javascript:void(0);" class="life_events_disp" id="life_<?php echo $events['life_event_id']; ?>"><i class="fa fa-paperclip"></i> started   <?php echo $events['food_habit']." as new habit"; ?></a></h3>
                         </div>
                         <div class="clearfix"></div>
                       </li>
@@ -2541,7 +2542,7 @@
                              <li>
                                 <div class="inner_rights">
                                
-                          <h3><i class="fa fa-fw"></i> started <?php echo $events['hobby']." as new hobby"; ?></h3>
+                          <h3><a href="javascript:void(0);" class="life_events_disp" id="life_<?php echo $events['life_event_id']; ?>"><i class="fa fa-leaf "></i> started <?php echo $events['hobby']." as new hobby"; ?></a></h3>
                         </div>
                         <div class="clearfix"></div>
                       </li>
@@ -2551,7 +2552,7 @@
                              <li>
                                 <div class="inner_rights">
                                
-                          <h3><i class="fa fa-fw"></i>voted to <?php echo $events['candidate']; ?></h3>
+                          <h3><a href="javascript:void(0);" class="life_events_disp" id="life_<?php echo $events['life_event_id']; ?>"><i class="fa fa-yelp"></i>voted to <?php echo $events['candidate']; ?></a></h3>
                         </div>
                         <div class="clearfix"></div>
                       </li>
@@ -2560,7 +2561,7 @@
                              <li>
                                 <div class="inner_rights">
                                
-                          <h3><i class="fa fa-fw"></i>travelled to <?php echo $events['location']; ?></h3>
+                          <h3><a href="javascript:void(0);" class="life_events_disp" id="life_<?php echo $events['life_event_id']; ?>"><i class="fa fa-suitcase"></i>travelled to <?php echo $events['location']; ?></a></h3>
                         </div>
                         <div class="clearfix"></div>
                       </li>
@@ -2572,7 +2573,7 @@
                              <li>
                                 <div class="inner_rights">
                                
-                          <h3><i class="fa fa-fw"></i> started using <?php echo $events['glasses_type']." of glasses"; ?></h3>
+                          <h3><a href="javascript:void(0);" class="life_events_disp" id="life_<?php echo $events['life_event_id']; ?>"><i class="fa fa-search"></i> started using <?php echo $events['glasses_type']." of glasses"; ?></a></h3>
                         </div>
                         <div class="clearfix"></div>
                       </li>
