@@ -5604,6 +5604,230 @@ function to_days_change(add_to_day_link_m,n_j_to_days)
 }
 
 
+$('.life_events_disp').click(function()
+{
+	alert('haiiii');
+	var id = $(this).attr("id").substr(5);
+	
+	
+	url="<?php echo base_url(); ?>life_events/get_event_by_id/"+id;
+	base_url="<?php echo base_url(); ?>";
+	$.post( url)
+	.done(function( data ) {
+		info = JSON.parse(data);
+		    
+		
+		$('#life_event_header').find('div.life_event_loc').remove();
+		$('#life_event_date').find('div.life_event_text ').remove();
+			$('#life_event_images').find('div.life_event_lefts_img').remove();
+			$('#life_event_story').find('div.life_event_lefts').remove();
+			$('#life_event_location').find('div.life_event_loc').remove();
+			$('#life_event_icon').find('div.alignbox').remove();
+		/*
+		$('#life_event_with').find('div').remove();
+		
+		
+		
+		$('#life_event_date .life_event_text').find('div').remove();
+	 */
+		
+		
+		$('#google-maps').modal('toggle');
+		
+		
+			var event_category;
+			var event_header;
+			switch(info.life_event_type)
+			{
+				
+			case "new_job":
+			event_category = "<i class='fa fa-briefcase'></i>";
+		    $('#life_event_header').append('<div class="life_event_loc" > Started Work At ' + info.employer + '</div>');
+		
+			break;
+			case "retirement":
+			event_category ="<i class='fa fa-apple'></i>";
+			$('#life_event_header').append('<div class="life_event_loc" > Retirement ' + info.title + '</div>');
+			break;
+			case "study_abroad":
+			event_category = "<i class='fa fa-pagelines '></i>";
+			$('#life_event_header').append('<div class="life_event_loc" >  Studying at ' + info.title + '</div>');
+			break;
+			case "engagement":
+			event_category = "<i class='fa fa-diamond '></i>";
+			$('#life_event_header').append('<div class="life_event_loc" >engaged with ' + info.with_or_whom + '</div>');
+			break;
+			case "marriage":
+			event_category = "<i class='fa fa-heart-o'></i>";
+			$('#life_event_header').append('<div class="life_event_loc" > marriage with ' + info.with_or_whom + '</div>');
+			break;
+			case "anniversary":
+			event_category = "<i class='fa fa-gift'></i>";
+			$('#life_event_header').append('<div class="life_event_loc" > Anniversary with ' + info.with_or_whom + '</div>');
+			break;
+			case "new_child":
+			event_category = "<i class='fa fa-child'></i>";
+			$('#life_event_header').append('<div class="life_event_loc" >  Born ' + info.chid_name + '</div>');
+			break;
+			case "moved":
+			event_category = "<i class='fa fa-home'></i>";
+			$('#life_event_header').append('<div class="life_event_loc" > Moved with '  + info.with_or_whom + '</div>');
+			break;
+			case "bought_home":
+			event_category = "<i class='fa fa-home'></i>";
+			$('#life_event_header').append('<div class="life_event_loc" > Bought with ' + info.with_or_whom + '</div>');
+			break;
+			case "new_vehicle":
+			event_category = "<i class='fa fa-car'></i>";
+			$('#life_event_header').append('<div class="life_event_loc" >Bought with ' + info.with_or_whom + '</div>');
+			break;
+			case "organ_donor":
+			event_category = "<i class='fa  fa-heartbeat'></i>";
+			$('#life_event_header').append('<div class="life_event_loc" >  Organ Donated</div>');
+			break;
+			case "quit_habit":
+			event_category = "<i class='fa fa-ban'></i>";
+			$('#life_event_header').append('<div class="life_event_loc" > quits ' + info.habit + '</div>');
+			break;
+			case "new_food_habit":
+			event_category = "<i class='fa fa-paperclip'></i>";
+			$('#life_event_header').append('<div class="life_event_loc" > started '  + info.food_habit + ' as new habit</div>');
+			break;
+			case "new_hobby":
+			event_category = "<i class='fa  fa-leaf'></i>";
+			$('#life_event_header').append('<div class="life_event_loc" > started ' + info.hobby + 'as a new hobby</div>');
+			break;
+			case "new_glasses":
+			event_category = "<i class='fa  fa-search'></i>";
+			$('#life_event_header').append('<div class="life_event_loc" > started using ' + info.glasses_type + 'of glasses</div>');
+			break;
+			case "voted":
+			event_category ="<i class='fa fa-yelp'></i>";
+			$('#life_event_header').append('<div class="life_event_loc" >voted to ' + info.candidate + '</div>');
+			break;
+			case "travel":
+			event_category = "<i class='fa fa-suitcase'></i>";
+			$('#life_event_header').append('<div class="life_event_loc" > travelled to ' + info.location + '</div>');
+			break;
+			default:
+			event_category = "<i class='fa fa-fw'></i>";
+			$('#life_event_header').append('<div class="life_event_loc" >' + info.title + '</div>');
+			}
+			
+			
+			
+		if(info.exact_date)
+		{
+		 var date = info.exact_date
+    	 var res = date.split(" ");
+		 var da = res[0].split("-");
+		 
+		 var month;
+		 
+		 switch(da[1])
+		 {
+			case 01:
+			month = "January";
+			break;
+			case 02:
+			month = "February";
+			break;
+			case 03:
+			month = "March";
+			break;
+			case 04:
+			month = "April";
+			break;
+			case 05:
+			month = "May";
+			break;
+			case 06:
+			month = "June";
+			break;
+			case 07:
+			month = "July";
+			break;
+			case 08:
+			month = "August";
+			break;
+			case 09:
+			month = "September";
+			break;
+			case 10:
+			month = "October";
+			break;
+			case 11:
+			month = "November";
+			break;
+			case 12:
+			month = "December";
+			break;
+			default:
+			month ="of this month";
+		 }
+		 
+		 var day;
+		 
+		 switch(da[2])
+		 {
+			case 01:
+			day = da[2]+"<sup>st<sup>";
+			break;
+			case 02:
+			day = da[2]+"<sup>nd<sup>";
+			break;
+			case 03:
+			day = da[2]+"<sup>rd<sup>";
+			break;
+			default:
+			day = da[2]+"<sup>th</sup>"
+			
+		 }
+		 
+		 $('#life_event_date').append('<div  class="life_event_text ">  ' + day +' '+  month  + '</div>');
+		}
+		
+		if(info.with_or_whom)
+		{
+			$('#life_event_date .life_event_text').append('<span> with  ' + info.with_or_whom + '</span>');
+		}
+		var address_location = info.location;
+		if(info.location)
+		{
+		 codeAddress(address_location);
+		 $('#life_event_location').append('<div class="life_event_loc" >' + info.location + '</div>');
+		}else
+		{
+			$('#map-canvas').remove();
+		}
+	
+		$('#life_event_icon').append('<div class="alignbox">' + event_category + '</div>');
+		
+		if(info.uploaded_files)
+		{
+		 all_images = info.uploaded_files; 
+		  var images = all_images.split(",");
+		 for (var i = 0; i < images.length; i++) {
+
+		  	$('#life_event_images').append('<div class="life_event_lefts_img"><img src="' + base_url+'uploads/'+images[i] +'"/></div>');
+        }
+		
+		if(info.story)
+		{
+			$('#life_event_story').append('<div class="life_event_lefts"> ' + info.story + '</div>');
+			
+		}
+		}
+	//	$('#bbbb').append('<span>' + images + '</span>');
+//$('#bbbb').append('<span>' + info.uploaded_files + '</span>');
+			
+		//$('#google-maps').trigger("reset");
+		//$('#google-maps').html(data);
+	});
+	return false;
+				
+	
+});
 </script>
 
 <script type="text/javascript">
@@ -5680,13 +5904,80 @@ function updateGoingStatus(event_id,status)
 		});
 }*/
 
-function testclick()
+</script>
+
+
+<?php $this->load->view('profile_models'); ?>
+
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+
+<script>
+ 
+  var geocoder;
+  var map;
+  function initialize() {
+  
+	
+    geocoder = new google.maps.Geocoder();
+    var latlng = new google.maps.LatLng(-34.397, 150.644);
+    var mapOptions = {
+      zoom: 8,
+      center: latlng
+    }
+    map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+  }
+
+	   function codeAddress(address_location) {
+   // var address = document.getElementById("address").value;
+    geocoder.geocode( { 'address': address_location}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        map.setCenter(results[0].geometry.location);
+        var marker = new google.maps.Marker({
+            map: map,
+            position: results[0].geometry.location
+        });
+      } else {
+        alert("Geocode was not successful for the following reason: " + status);
+      }
+    });
+  }
+	google.maps.event.addDomListener(window, 'load', initialize);
+  
+ </script>
+<script>
+/*function updateInviteGoingStatus(event_id,status='')
 {
-		url="<?php echo base_url(); ?>api/customer/cust_sign_up";
+	if(status==''){ status = document.getElementById('invitegoingsts'+event_id).value; }
+	url="<?php // echo base_url(); ?>events/change_event_going_sts/"+event_id+"/"+status;
+	$.ajax({
+		
+		type: "POST",
+		dataType: 'text',
+        url: url
+		}).done(function(data){ 
+		if(data){
+		content = "<p></p><label><select  name='invitegoingsts"+event_id+"' id='invitegoingsts"+event_id+"' onChange='inviteupdateGoingStatus("+event_id+")'><option value='1'";
+		if(status==1)
+		content+="selected='selected'"
+		content+=">Going</option><option value='2'";
+		if(status==2)
+		content+="selected='selected'";
+		content+=">Maybe</option><option value='3'";
+		if(status==3)
+		content+="selected='selected'";
+		content+=">Not going</option></select></label>";
+		$('.event-btns'+event_id).html();
+		}
+	 
+		});
+}*/
+/*function testclick()
+{
+		url="<?php echo base_url(); ?>signg_in/api_db_check_login";
 		$.ajax({
         type: "POST",
         url: url,
-		data: { firstname:'vijaykumar',lastname:'satyamsetti',dob:'21-09-1987', email: 'vijaykumar.satyamsetti@gmail.com',password: '123456',phone_number:'1236547890',gender:'m'} ,
+		data: { email: 'vijaykumar@gmail.com',password: '123456'} ,
         success: function(data)
         {   
 			alert(data);
@@ -5695,10 +5986,8 @@ function testclick()
 		});
 		
 }
+*/
 </script>
-
-
-<?php $this->load->view('profile_models'); ?>
 <script language="javascript">print_country("con");</script><!--  //for groups   --> 
 <script language="javascript">print_country("contries");</script> <!-- //for companies-->
 
