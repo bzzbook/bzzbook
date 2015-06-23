@@ -5679,13 +5679,14 @@ function updateGoingStatus(event_id,status)
 	 
 		});
 }*/
-/*function testclick()
+
+function testclick()
 {
-		url="<?php echo base_url(); ?>signg_in/api_db_check_login";
+		url="<?php echo base_url(); ?>api/customer/cust_sign_up";
 		$.ajax({
         type: "POST",
         url: url,
-		data: { email: 'vijaykumar@gmail.com',password: '123456'} ,
+		data: { firstname:'vijaykumar',lastname:'satyamsetti',dob:'21-09-1987', email: 'vijaykumar.satyamsetti@gmail.com',password: '123456',phone_number:'1236547890',gender:'m'} ,
         success: function(data)
         {   
 			alert(data);
@@ -5694,7 +5695,7 @@ function updateGoingStatus(event_id,status)
 		});
 		
 }
-*/</script>
+</script>
 
 
 <?php $this->load->view('profile_models'); ?>

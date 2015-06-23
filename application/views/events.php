@@ -26,7 +26,7 @@
 <!--            <li role="presentation"><a href="#saved" aria-controls="settings" role="tab" data-toggle="tab">Saved</a></li>
 -->           <li role="presentation"><a href="#hosting" aria-controls="settings" role="tab" data-toggle="tab">Hosting</a></li>
           <div class="right_event">
-          <!--<input type="button" onclick="testclick()" />-->
+          <input type="button" onclick="testclick()" />
             <div data-target="#events_upcoming" data-toggle="modal" class="btn2 btn-black2"><i class="fa fa-plus"></i>Create</div>
           </div>
           </ul>
