@@ -1178,7 +1178,7 @@
       <div id="comperrormsg"></div>
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <div class="paper"><i class="fa fa-fw"></i></div>
+        <div class="paper"><i class="fa fa-apple"></i></div>
         <h4 class="modal-title" id="myModalLabe">Retired</h4>
         <div class="subheads">Today</div>
       </div>
@@ -1355,7 +1355,7 @@
       <div id="comperrormsg"></div>
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <div class="paper"><i class="fa fa-fw"></i></div>
+        <div class="paper"><i class="fa fa-pagelines"></i></div>
         <h4 class="modal-title" id="myModalLabe">Studied Abroad</h4>
         <div class="subheads">Today</div>
       </div>
@@ -1978,7 +1978,7 @@
       <div id="comperrormsg"></div>
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <div class="paper"><i class="fa fa-fw"></i></div>
+        <div class="paper"><i class="fa fa-heart-o"></i></div>
         <h4 class="modal-title" id="myModalLabe">Got Engaged</h4>
         <div class="subheads">Today</div>
       </div>
@@ -2058,26 +2058,27 @@
   </div>
 </div>
 
-<!-----Marriage------>
-<div class="modal fade" id="AddCompanys_Marriage" tabindex="-1" role="dialog" aria-labelledby="myModalLabe" aria-hidden="true">
+<!-----
+iage------>
+<div class="modal fade" id="AddCompanys_iage" tabindex="-1" role="dialog" aria-labelledby="myModalLabe" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div id="comperrormsg"></div>
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <div class="paper"><i class="fa fa-fw"></i></div>
-        <h4 class="modal-title" id="myModalLabe">Got Married</h4>
+        <div class="paper"><i class="fa fa-heart-o"></i></div>
+        <h4 class="modal-title" id="myModalLabe">Got ied</h4>
         <div class="subheads">Today</div>
       </div>
       <div class="modal-body">
-        <form action="<?php echo base_url(); ?>Life_Events/add_marriage" enctype="multipart/form-data" method="post">
-          <div class="col-md-6 Marriage" >
+        <form action="<?php echo base_url(); ?>Life_Events/add_iage" enctype="multipart/form-data" method="post">
+          <div class="col-md-6 iage" >
             <div class="form-group">
               <label for="exampleInputName2">Title</label>
               <input type="text" class="form-control" id="" placeholder="Optional" name="mrg_title">
             </div>
             <div class="located">
-              <label for="exampleInputEmail1">Married To</label>
+              <label for="exampleInputEmail1">ied To</label>
               <div class="input-group">
                 <div class="input-group-addon"><i class="fa fa-fw"></i></div>
                 <input type="text" id="exampleInputAmount" class="form-control" placeholder="" name="mrg_with">
@@ -2114,21 +2115,21 @@
               <label for="exampleInputEmail1">Story</label>
               <div class="clearfix"></div>
               <textarea placeholder="Optional" rows="4" name="mrg_story"></textarea>
-               <input type="hidden" name="marriage_images" value="uploadmarriagepics" />
-               <input type="hidden" name="mrg_type" value="marriage" />
+               <input type="hidden" name="iage_images" value="uploadiagepics" />
+               <input type="hidden" name="mrg_type" value="iage" />
             </div>
             <div class="Works" style="display:none;">
               <input type="checkbox" class="outside">
               
               <span>Update relationship status</span> </div>
           </div>
-          <div class="col-md-6 chos_photos" id="marriage_pics">
+          <div class="col-md-6 chos_photos" id="iage_pics">
            <!-- <button type="button" class="btn btn-default btn-lg btn-block pho_box">Choose From Photos...</button> -->
-             <button type="button" class="btn btn-default btn-lg btn-block pho_box"  onclick="document.getElementById('uploadmarriagepics').click()">Upload Photos...</button>
+             <button type="button" class="btn btn-default btn-lg btn-block pho_box"  onclick="document.getElementById('uploadiagepics').click()">Upload Photos...</button>
               
-             <input class="btn btn-default btn-lg btn-block pho_box" type="file" name="uploadmarriagepics[]" id="uploadmarriagepics" multiple="multiple" style="display:none;" />   
+             <input class="btn btn-default btn-lg btn-block pho_box" type="file" name="uploadiagepics[]" id="uploadiagepics" multiple="multiple" style="display:none;" />   
           </div>
-           <div class="col-md-6 chos_photos" id="upload_marriage_pics"></div>
+           <div class="col-md-6 chos_photos" id="upload_iage_pics"></div>
           <div class="clearfix"></div>
           <div class="box_bottom">
           <div class="publics col-md-3" style="float:right">
@@ -2153,7 +2154,7 @@
       <div id="comperrormsg"></div>
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <div class="paper"><i class="fa fa-fw"></i></div>
+        <div class="paper"><i class="fa fa-gift"></i></div>
         <h4 class="modal-title" id="myModalLabe">Anniversary</h4>
         <div class="subheads"></div>
       </div>
@@ -2176,7 +2177,7 @@
                 <div class="schools">
                   <select name="ann_relationship">
                     <option>Love</option>
-                     <option>Marriage</option>
+                     <option>marriage</option>
                       <option>Friendship</option>
                   </select>
                 </div>
@@ -3336,7 +3337,7 @@
       <div id="comperrormsg"></div>
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <div class="paper"> <i class="fa fa-fw"></i></div>
+        <div class="paper"> <i class="fa fa-heartbeat"></i></div>
         <h4 class="modal-title" id="myModalLabe">Registered as an Organ Donor</h4>
         <div class="subheads">May 27, 2015</div>
              </div>
@@ -3505,7 +3506,7 @@
       <div id="comperrormsg"></div>
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <div class="paper"><i class="fa fa-fw"></i></div>
+        <div class="paper"><i class="fa fa-ban"></i></div>
         <h4 class="modal-title" id="myModalLabe">Quit </h4>
             <div class="subheads">May 27, 2015</div>
       </div>
@@ -3609,7 +3610,7 @@
       <div id="comperrormsg"></div>
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <div class="paper"><i class="fa fa-fw"></i></div>
+        <div class="paper"><i class="fa fa-paperclip"></i></div>
         <h4 class="modal-title" id="myModalLabe">Became a Vegetarian</h4>
             <div class="subheads">May 27, 2015</div>
       </div>
@@ -3799,7 +3800,7 @@
       <div id="comperrormsg"></div>
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <div class="paper"><i class="fa fa-fw"></i></div>
+        <div class="paper"><i class='fa  fa-search'></i></div>
         <h4 class="modal-title" id="myModalLabe">Got Glasses</h4>
             <div class="subheads">Today</div>
       </div>
@@ -3898,7 +3899,7 @@
       <div id="comperrormsg"></div>
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <div class="paper"><i class="fa fa-fw"></i></div>
+        <div class="paper"><i class='fa  fa-leaf'></i></div>
         <h4 class="modal-title" id="myModalLabe">Started a Hobby</h4>
             <div class="subheads">Today</div>
       </div>
@@ -3993,7 +3994,7 @@
       <div id="comperrormsg"></div>
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <div class="paper"><i class="fa fa-fw"></i></div>
+        <div class="paper"><i class='fa fa-yelp'></i></div>
         <h4 class="modal-title" id="myModalLabe">Voted</h4>
             <div class="subheads">Today</div>
       </div>
@@ -4073,7 +4074,7 @@
       <div id="comperrormsg"></div>
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <div class="start"><i class="fa fa-fw"></i></div>
+        <div class="start"><i class='fa fa-suitcase'></i></div>
         <h4 class="modal-title" id="new_job_label">Travelled</h4>
         <div class="subheads">May 18, 2015</div>
       </div>
@@ -4223,3 +4224,40 @@
   </div>
 </div>
 <!---------- travelled   ------------>
+
+<!---------------  google maps embedding api ---------------->
+
+<div class="modal fade"  id="google-maps" role="dialog" aria-labelledby="gridSystemModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+      
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="gridSystemModalLabel">Life Events</h4>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div id="life_event_icon"><div class="alignbox"></div></div>
+           <div id="life_event_header"><div class="life_event_loc"></div></div>
+           <div id="life_event_date"><div class="life_event_text "></div></div>
+        
+        <!-- <div id="life_event_date"><div class="life_event_text "></div></div> -->
+         <div id="life_event_with"><div class="life_event_text "></div></div>
+          <div id="life_event_location"><div class="life_event_loc"></div></div>
+      
+        
+          <div id="life_event_story"><div class="life_event_lefts"></div></div>
+        <div id="life_event_images"><div class="life_event_lefts_img"></div></div>
+        
+           
+           <div id="map-canvas" class="canvas_maps"></div>
+
+        </div>
+    </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>  </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!---------------  end -------------------------------------->

@@ -4,6 +4,7 @@ class Life_Events_Model extends CI_Model {
 
 	function __construct()
     { 
+	
    		parent::__construct(); 
   		
     } 
@@ -178,7 +179,20 @@ class Life_Events_Model extends CI_Model {
 		}
    }
    
-   
+   public function get_life_events_by_individual_id($id)
+   {
+	   $this->db->select('*');
+	   $this->db->from('bzz_life_events');
+	   $this->db->where('life_event_id',$id);
+	   $query = $this->db->get();
+		if ($query->num_rows() > 0) {
+			return $query->result();
+		} else {
+		return false;
+		}
+	   
+	   
+   }
    
    
    

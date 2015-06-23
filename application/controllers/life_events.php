@@ -463,12 +463,59 @@ class Life_Events extends CI_Controller {
 		//mov_life_events();
 		}
 	
-		
-		
+		public function get_event_by_id($id)	
+		{
+		$data =	$this->life_events_model->get_life_events_by_individual_id($id);
 	
+	    foreach( $data as $result):
+		$event_data['life_event_id'] = $result->life_event_id;
+		$event_data['user_id'] = $result->user_id;
+		$event_data['uploaded_files'] = $result->uploaded_files;
+		$event_data['life_event_type'] = $result->life_event_type;
+		$event_data['title'] = $result->title;
+		$event_data['employer'] = $result->employer;
+		$event_data['position'] = $result->position;
+		$event_data['location'] = $result->location;
+		$event_data['curent_work_or_stud'] = $result->curent_work_or_stud;
+		$event_data['from_date'] = $result->from_date;
+		$event_data['to_date'] = $result->to_date;
+		$event_data['exact_date'] = $result->exact_date;
+		$event_data['story'] = $result->story;
+		$event_data['with_or_whom'] = $result->with_or_whom;
+		$event_data['profession'] = $result->profession;
+		$event_data['school_type'] = $result->school_type;
+		$event_data['school_name'] = $result->school_name;
+		$event_data['graduated'] = $result->graduated;
+		$event_data['studying'] = $result->studying;
+		$event_data['organization'] = $result->organization;
+		$event_data['country'] = $result->country;
+		$event_data['relationship'] = $result->relationship;
+		$event_data['no_of_years'] = $result->no_of_years;
+		$event_data['gender'] = $result->gender;
+		$event_data['child_name'] = $result->child_name;
+		$event_data['from_addr'] = $result->from_addr;
+		$event_data['address'] = $result->address;
+		$event_data['where_to_addr'] = $result->where_to_addr;
+		$event_data['house_type'] = $result->house_type;
+		$event_data['car_type'] = $result->car_type;
+		$event_data['model'] = $result->model;
+		$event_data['model_year'] = $result->model_year;
+		$event_data['habit'] = $result->habit;
+		$event_data['food_habit'] = $result->food_habit;
+		$event_data['glasses_type'] = $result->glasses_type;
+		$event_data['hobby'] = $result->hobby;
+		$event_data['candidate'] = $result->candidate;
+		$event_data['trip_name'] = $result->trip_name;
+		$event_data['cr_time'] = $result->cr_time;
 		
+		/*$edu_data['degree_certificate'] = $result->degree_certificate;
+		$edu_data['attended_from'] = $result->attended_from;
+		$edu_data['attended_upto'] = $result->attended_upto;
+		$edu_data['specialised_studies'] = $result->specialised_studies;*/
 		
-		
+	endforeach;
+	echo json_encode($event_data);
+		}
 		
 		
 

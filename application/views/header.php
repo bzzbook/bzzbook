@@ -39,7 +39,8 @@ a.previous { display: none; }
       <script src="js/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
+<body onload="initialize()">
+
 <header>
   <section class="container">
     <figure class="col-lg-3 col-md-3 col-sm-4 col-xs-12 animate-plus" data-animations="pulse"  data-animation-when-visible="true"  data-animation-reset-offscreen="true"><a href="<?php echo base_url();?>" ><img src="<?php echo base_url(); ?>images/logo.png" alt="" /></a></figure>
