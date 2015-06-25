@@ -35,7 +35,8 @@
           <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="all">
              <!--<h4 class="clear">This Week</h4>-->
-            <?php if($events):
+            <?php 
+			 if($events):
 				foreach($events as $event){ 
 				
 				$image = $this->profile_set->get_profile_pic($event->event_created_by);
@@ -57,7 +58,7 @@
               <p><a href=""><?php echo $event->event_location; ?></a></p>
              <div class="event-btns event-btns<?php echo $event->event_id; ?>" id="eventBtns<?php echo $event->event_id; ?>"> 
              	  <?php if($event->event_created_by==$curr_user_id) {?>
-                  <p></p><div data-target="#events_upcoming" data-toggle="modal" class="invitebtn"><i class="fa fa-envelope-o "></i>  Invite</div><input type="submit" value="Hosting" class="hostbtn adings nocursor">
+                  <p></p><div class="invitebtn invite_friends_modal" id="user_events<?php  echo $event->event_id;  ?>"><i class="fa fa-envelope-o "></i>  Invite</div><input type="submit" value="Hosting" class="hostbtn adings nocursor">
                   <?php }else{ if(!$event->invitation_status){ ?>
                   <p></p>
                   <input type="button" value="Decline" class="gngSts adings" onclick="updateGoingStatus(<?php echo $event->event_id; ?>,3)"><input type="button" value="Maybe" class="gngSts adings" onclick="updateGoingStatus(<?php echo $event->event_id; ?>,2)"><input type="button" value="Join" class="gngSts adings" onclick="updateGoingStatus(<?php echo $event->event_id; ?>,1)">
@@ -103,7 +104,7 @@
               <p><a href=""><?php echo $invite->event_location; ?></a></p>
              <div class="event-btns event-btns<?php echo $invite->event_id; ?>" id="eventBtns<?php echo $invite->event_id; ?>"> 
              <?php if($invite->event_created_by==$curr_user_id) {?>
-                  <div data-target="#events_upcoming" data-toggle="modal" class="btn2 invitebtn"><i class="fa fa-envelope-o "></i>  Invite</div><input type="submit" value="Hosting" class="hostbtn adings">
+                  <div class="btn2 invitebtn invite_friends_modal" id="user_events<?php  echo $event->event_id;  ?>"><i class="fa fa-envelope-o "></i>  Invite</div><input type="submit" value="Hosting" class="hostbtn adings">
                   <?php }else{ if(!$invite->invitation_status){  ?>
                   <p></p><input type="button" value="Decline" class="gngSts adings" onclick="updateGoingStatus(<?php echo $invite->event_id; ?>,3)"><input type="button" value="Maybe" class="gngSts adings" onclick="updateGoingStatus(<?php echo $invite->event_id; ?>,2)"><input type="button" value="Join" class="gngSts adings" onclick="updateGoingStatus(<?php echo $invite->event_id; ?>,1)">
                   
@@ -154,7 +155,7 @@
               <p><a href=""><?php echo $host->event_location; ?></a></p>
              <div class="event-btns" id="eventBtns<?php echo $host->event_id; ?>"> 
              <?php if($host->event_created_by==$curr_user_id) {?>
-                  <div data-target="#events_upcoming" data-toggle="modal" class="btn2 invitebtn"><i class="fa fa-envelope-o "></i>  Invite</div><input type="submit" value="Hosting" class="hostbtn adings">
+                  <div class="btn2 invitebtn invite_friends_modal" id="user_events<?php  echo $event->event_id;  ?>"><i class="fa fa-envelope-o "></i>  Invite</div><input type="submit" value="Hosting" class="hostbtn adings">
                   <?php }else{ ?>
                   <input type="button" value="Decline" class="gngSts adings" onclick="updateGoingStatus(<?php echo $host->event_id; ?>,3)"><input type="button" value="Maybe" class="gngSts adings" onclick="updateGoingStatus(<?php echo $host->event_id; ?>,2)"><input type="button" value="Join" class="gngSts adings" onclick="updateGoingStatus(<?php echo $host->event_id; ?>,1)">
                   
@@ -231,13 +232,56 @@
           </div>-->
           
        
-        </form>
+      
         <div class="publics col-md-12">
             <div class="btn3 btn-black" onclick="document.getElementById('event_form').submit();">Create</div>
             <div class="btn3 btn-green" data-toggle="modal" data-target="#AddCompany">cancel</div>
           </div>
+          </div>
            </form>
         <div class="clearfix"></div>
+      </div>
+    
+  </div>
+</div>
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="event_invite_friends" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+       
+        
+         
+         <div id="search_invited_frnd_wrapper">
+         
+         <input type="text" name="txtsearch" id="invite_eve_friends" onkeyup="invite_event_frnds();" />
+          <input type="text" name="event_id" id="event_id"/>
+         
+         <input type="hidden" id="invitedusers" name="invitedusers" />
+         
+         <div id="autosuggest_invite_frnds">
+         
+         </div>
+         
+         </div>
+            <div id="all_friends_invites" style="border:1px solid #03C; height:100px; width:400px; float:right; overflow:scroll;">
+         </div>
+          <div id="invited_friends" style="border:1px solid #03C; height:300px; width:200px; float:right; overflow:scroll">
+         </div>
+        
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="send_event_invitations">Save changes</button>
       </div>
     </div>
   </div>

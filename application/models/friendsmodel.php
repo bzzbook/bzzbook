@@ -1114,6 +1114,98 @@ public function user_frnds($frnd_id)
 }return false;
 }
 
+public function user_frnds_by_id($limit)
+{
+	
+	    $id = $this->session->userdata('logged_in')['account_id'];
+	    $condition = "(user_id ='" .$id. "' or friend_id ='".$id."') AND request_status='Y'";
+		$this->db->select('user_id,friend_id');
+		$this->db->from('bzz_userfriends');
+		
+		if($limit)
+		{
+			
+		$this->db->limit($limit);
+		
+		}else{
+		$this->db->limit(1);
+		}
+		$this->db->where($condition);
+		$query = $this->db->get();
+		if($query->num_rows() > 0) {
+			$friends = $query->result_array();
+			$frnds = array();
+			foreach($friends as $friend)
+			{
+				$frnds[] = $friend['user_id'];
+				$frnds[] = $friend['friend_id'];	
+			}
+		}
+		
+		     $this->db->select('frnd_id');
+			 $this->db->from('bzz_user_event_invites');
+			 $this->db->where('user_id',$id);
+			 $query = $this->db->get();
+			 $data =  $query->result_array();
+			  if(!empty($data))
+			  $invited_users = array();
+			 foreach($data as $data)
+			 {
+				$invited_users[] = $data['frnd_id'];
+		
+			 }
+		
+		$all_users = array_merge($frnds,$invited_users);
+		$invited_frnds = array_diff($all_users,$invited_users);
+		
+
+		if(!empty($invited_frnds))
+			{
+		$usr_ids = array_unique($invited_frnds);
+		
+		$key = array_search($id,$usr_ids);
+		if($key!==false)
+		{
+  		unset($usr_ids[$key]);
+		}
+		 $userdata = array();
+			foreach($usr_ids as $user_id)
+			{
+				 $usercondition = "user_id ="."'".$user_id."'";
+						 $this->db->select('*');
+						 $this->db->from('bzz_user_images');
+						 $this->db->where($usercondition);
+						 $query = $this->db->get();
+						 if($query->num_rows > 0)
+						 {
+							$this->db->select('*');
+							$this->db->from('bzz_users');
+							$this->db->join('bzz_user_images','bzz_users.user_id=bzz_user_images.user_id AND bzz_users.user_id='.$user_id);
+							$this->db->join('bzz_userinfo','bzz_users.user_id=bzz_userinfo.user_id');
+							$this->db->order_by('bzz_user_images.user_imageinfo_id','desc');
+							$query = $this->db->get();
+							$user_data =  $query->result_array();
+							
+						 }else{
+							  $this->db->select('*');
+							// $this->db->limit(2);
+							  $this->db->from('bzz_users');
+							  $this->db->join('bzz_userinfo','bzz_users.user_id=bzz_userinfo.user_id AND bzz_users.user_id='.$user_id);
+							 // $this->db->where($followercondition);
+							  $query = $this->db->get(); 
+							   $user_data =  $query->result_array();
+						 }
+						  $userdata[] = $user_data;
+					}
+					
+			return $userdata;
+		} else {
+		return false;
+		}
+   
+
+}
+
 	public function addFollowFriend_Request($frnd_id)
 	{
 		
@@ -1151,6 +1243,96 @@ public function user_frnds($frnd_id)
 		}
 	
 	}
+	
+	
+	
+	 public function invite_friends_to_user_event($name='',$addedusers='',$user_id='',$limit='')
+  {
+	  
+	    $id = $this->session->userdata('logged_in')['account_id'];
+			 
+			
+			 
+ 
+		if($user_id!='')
+		$id = $user_id;
+	    $condition = "(user_id ='".$id."' OR friend_id='".$id."') AND request_status='Y'";
+		if($addedusers!='')
+		$condition.= " AND (user_id NOT IN (".$addedusers.") AND friend_id NOT IN (".$addedusers.") )";
+		
+		 $this->db->select('*');
+			 $this->db->from('bzz_user_event_invites');
+			 $this->db->where('user_id',$id);
+			 $query = $this->db->get();
+			 $data =  $query->result_array();
+			  if(!empty($data))
+			 foreach($data as $data){
+				
+		$condition.= " AND (user_id NOT IN (".$data['frnd_id'].") AND friend_id NOT IN (".$data['frnd_id'].") )";
+			 }
+		
+		if($limit!='')
+		$condition .=" LIMIT 0,".$limit;
+		//echo $condition ; exit;
+		$this->db->select('*');
+		$this->db->from('bzz_userfriends');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		if ($query->num_rows() >0) {
+			$friends = $query->result_array();
+			$frnds = array();
+			foreach($friends as $friend)
+			{
+				if($friend['friend_id']==$id)
+			    $condition = "user_id =" . "'" . $friend['user_id'] . "'";
+				else
+				$condition = "user_id =" . "'" . $friend['friend_id'] . "'";
+				if($name!='')
+				{
+					$condition.= " AND (user_firstname LIKE '%".$name."%' OR user_lastname LIKE '%".$name."%' )"; 
+				}
+				if($addedusers!=''){
+					$condition.= " AND user_id NOT IN (".$addedusers.")";
+				}
+				
+				$this->db->select('*');
+				$this->db->from('bzz_userinfo');
+				$this->db->where($condition);
+				$query = $this->db->get();
+				$frnd = array();
+				if ($query->num_rows() == 1) {
+					$result = $query->result_array();	
+					$frnd['name'] = $result[0]['user_firstname'].' '.$result[0]['user_lastname'];	
+					$this->db->select('*');
+				$this->db->from('bzz_user_images');
+				if($friend['friend_id']==$id)
+			    $condition = "user_id =" . "'" . $friend['user_id'] . "'";
+				else
+				$condition = "user_id =" . "'" . $friend['friend_id'] . "'";
+				$this->db->where($condition);
+				$this->db->order_by('user_imageinfo_id','desc');
+				$query = $this->db->get();
+				$result = $query->result_array();
+				if($result)
+				$frnd['image'] = $result[0]['user_img_thumb'];
+				else
+				$frnd['image'] =  'default_profile_pic.png';
+				if($friend['friend_id']==$id)
+				$frnd['id'] = $friend['user_id'];
+				else
+				$frnd['id'] = $friend['friend_id'];
+				$frnds[] = $frnd;				
+				}
+				
+			}
+			return $frnds;
+		} else {
+		return false;
+		}
+   }
+
+   
+
 	
 }
 ?>

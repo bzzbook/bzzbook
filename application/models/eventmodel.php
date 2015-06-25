@@ -301,5 +301,42 @@ class EventModel extends CI_Model {
 		 return true;
 		}	   
  }
+ 
+public function send_event_invitation_to_frnds($event_id,$invited_users)
+ {
+	 $frnds_ids = explode(',',$invited_users);
+	// print_r($frnds_ids);
+	 
+	 if(!empty($frnds_ids))
+	 {
+	 
+	 foreach($frnds_ids as $frnd_id)
+	 {
+ //echo $frnd_id;
+ $id = $this->session->userdata('logged_in')['account_id'];
+  $up_data = 
+		array(
+		'event_id'=>$event_id,
+		'frnd_id'=>$frnd_id,
+		'user_id'=>$id,
+		'invitation_status'=>'',
+		);
+ 
+/* $this->db->select('*');
+ $this->db->from('bzz_user_event_invites');
+ $this->db->where('user_id',$id);
+ $query = $this->db->get();
+ $data =  $query->result_array();
+ 
+
+		
+*/
+
+ $this->db->insert('bzz_user_event_invites',$up_data);
+ }
+}
+ 
+ }
+ 
  }
 ?>

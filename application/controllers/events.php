@@ -126,5 +126,17 @@ public function change_event_going_sts($event_id,$status)
 		 else
 		return false;
 	}
+
+
+public function send_event_invitation()
+	{
+
+	if($this->eventmodel->send_event_invitation_to_frnds($_POST['eventid'],$_POST['invited_users']))
+	
+	return true;
+	else
+	return false;
+	}
+
 }
 ?>
