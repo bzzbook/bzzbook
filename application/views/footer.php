@@ -5861,7 +5861,7 @@ function updateGoingStatus(event_id,status)
         url: url
 		}).done(function(data){ 
 		if(data){
-		content = "<p></p><label><select  name='goingsts"+event_id+"' id='goingsts"+event_id+"' onChange='updateGoingStatus("+event_id+",this.value)'><option value='1'";
+		content = "<label><select  name='goingsts"+event_id+"' id='goingsts"+event_id+"' onChange='updateGoingStatus("+event_id+",this.value)'><option value='1'";
 		if(status==1)
 		content+="selected='selected'"
 		content+=">Going</option><option value='2'";
@@ -5971,13 +5971,13 @@ function updateGoingStatus(event_id,status)
 	 
 		});
 }*/
-/*function testclick()
+function testclick()
 {
-		url="<?php echo base_url(); ?>signg_in/api_db_check_login";
+		url="<?php echo base_url(); ?>api/customer/cust_sign_up";
 		$.ajax({
         type: "POST",
         url: url,
-		data: { email: 'vijaykumar@gmail.com',password: '123456'} ,
+		data: { email: 'vijaykumarss@gmail.com',password: '123456',phone_number:'919700377676',gender:'m',firstname:'vijay',lastname:'s',dob:'15-12-1987'} ,
         success: function(data)
         {   
 			alert(data);
@@ -5986,7 +5986,7 @@ function updateGoingStatus(event_id,status)
 		});
 		
 }
-*/
+
 </script>
 <script language="javascript">print_country("con");</script><!--  //for groups   --> 
 <script language="javascript">print_country("contries");</script> <!-- //for companies-->

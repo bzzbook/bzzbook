@@ -26,8 +26,8 @@
 <!--            <li role="presentation"><a href="#saved" aria-controls="settings" role="tab" data-toggle="tab">Saved</a></li>
 -->           <li role="presentation"><a href="#hosting" aria-controls="settings" role="tab" data-toggle="tab">Hosting</a></li>
           <div class="right_event">
-          <input type="button" onclick="testclick()" />
-            <div data-target="#events_upcoming" data-toggle="modal" class="btn2 btn-black2"><i class="fa fa-plus"></i>Create</div>
+<!--          <input type="button" onclick="testclick()" />
+-->            <div data-target="#events_upcoming" data-toggle="modal" class="btn2 btn-black2"><i class="fa fa-plus"></i>Create</div>
           </div>
           </ul>
           
@@ -52,7 +52,7 @@
               </div>
               </div>
               <div class="col-md-9 thisweek_right">
-              <h5><a href=""><?php echo $event->event_name; ?></a></h5>
+              <h5><a href="<?php echo base_url().'profile/eventview/'.$event->event_id; ?>"><?php echo $event->event_name; ?></a></h5>
               <span><?php echo date('l',strtotime($event->event_date)); ?>, <?php echo date('M',strtotime($event->event_date)); ?> <?php echo date('d',strtotime($event->event_date)); ?></span>
               <p><a href=""><?php echo $event->event_location; ?></a></p>
              <div class="event-btns event-btns<?php echo $event->event_id; ?>" id="eventBtns<?php echo $event->event_id; ?>"> 
@@ -98,7 +98,7 @@
               </div>
               </div>
               <div class="col-md-9 thisweek_right">
-              <h5><a href=""><?php echo $invite->event_name ?></a></h5>
+              <h5><a href="<?php echo base_url().'profile/eventview/'.$invite->event_id; ?>"><?php echo $invite->event_name ?></a></h5>
               <span><?php echo date('l',strtotime($invite->event_date)); ?>, <?php echo date('M',strtotime($invite->event_date)); ?> <?php echo date('d',strtotime($invite->event_date)); ?></span>
               <p><a href=""><?php echo $invite->event_location; ?></a></p>
              <div class="event-btns event-btns<?php echo $invite->event_id; ?>" id="eventBtns<?php echo $invite->event_id; ?>"> 
@@ -149,7 +149,7 @@
               </div>
               </div>
               <div class="col-md-9 thisweek_right">
-              <h5><a href=""><?php echo $host->event_name; ?></a></h5>
+              <h5><a href="<?php echo base_url().'profile/eventview/'.$host->event_id; ?>"><?php echo $host->event_name; ?></a></h5>
               <span><?php echo date('l',strtotime($host->event_date)); ?>, <?php echo date('M',strtotime($host->event_date)); ?> <?php echo date('d',strtotime($host->event_date)); ?></span>
               <p><a href=""><?php echo $host->event_location; ?></a></p>
              <div class="event-btns" id="eventBtns<?php echo $host->event_id; ?>"> 

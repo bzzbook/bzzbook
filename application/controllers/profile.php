@@ -114,6 +114,13 @@ public function events()
 		$this->load->view('full_content_view',$data);
 	//$this->load->view('events');
 }
+public function eventview($event_id='')
+{
+	$data['event'] = $this->eventmodel->get_user_events_by_id($event_id);
+	$data['content']='event_view';
+	$this->load->view('full_content_view',$data);
+	//$this->load->view('about_me',$data);
+}
 public function groups()
 {
 	

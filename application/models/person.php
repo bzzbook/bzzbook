@@ -27,7 +27,14 @@ class person extends CI_Model {
 			else
 			return false;
 	   }
-	   
+	    public function update_otp($access_token,$data)
+		{
+		$this->db->where('access_token', $access_token);
+		if($this->db->update('bzz_users', $data) && $this->db->update('bzz_confirmation', $data))
+		return true;
+		else
+		return false;
+		}
 	   
 	     public function user_settings($user_id)
 	   {
@@ -77,6 +84,18 @@ class person extends CI_Model {
 		   }else
 		   return false;
 	   }
+	   public function check_access_token($access_token)
+	   {
+		   $this->db->select('*');
+		   $this->db->from('bzz_users');
+		   $this->db->where('access_token',$access_token);
+		   $query = $this->db->get();
+		   if($query->num_rows() > 0)
+		   {
+			   return $query->result_array();
+		   }else
+		   return false;
+	   }
 	   public function post_buzz($data)
 	   {
 		   
@@ -95,6 +114,7 @@ class person extends CI_Model {
 		$this->db->where('cust_id', $id);
 		$this->db->update('cust_sign_up', $data);
 		}
+		
 		
 		public function get_user_details($user_id)
 		{

@@ -39,6 +39,64 @@ class EventModel extends CI_Model {
 		}
 		return false;
 	}
+	public function get_user_events_by_id($event_id)
+	{
+        $id = $this->session->userdata('logged_in')['account_id'];
+		$condition = "a.event_id = ". "'" .$event_id."'";
+		$this->db->select('a.event_id,a.event_name,a.event_location,a.event_details,a.event_date,a.event_time,a.event_type,a.event_created_by,b.frnd_id,b.invitation_status');
+		$this->db->from('bzz_user_events a');
+		$this->db->join('bzz_user_event_invites b', 'b.event_id=a.event_id and b.frnd_id='.$id, 'left');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		$event_data = $query->result();
+		if(!empty($event_data))
+		{
+			return $event_data[0];
+		}
+		return false;
+	}
+	public function get_noofinvites($event_id)
+	{
+        $condition = "event_id = ". "'" .$event_id."'";
+		$this->db->select('*');
+		$this->db->from('bzz_user_event_invites');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		$event_data = $query->result();
+		if(!empty($event_data))
+		{
+			return $event_data;
+		}
+		return false;
+	}
+	public function get_noofgoing($event_id)
+	{
+        $condition = "event_id = ". "'" .$event_id."' AND invitation_status=1";
+		$this->db->select('*');
+		$this->db->from('bzz_user_event_invites');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		$event_data = $query->result();
+		if(!empty($event_data))
+		{
+			return $event_data;
+		}
+		return false;
+	}
+	public function get_noofmaybe($event_id)
+	{
+        $condition = "event_id = ". "'" .$event_id."' AND invitation_status=2";
+		$this->db->select('*');
+		$this->db->from('bzz_user_event_invites');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		$event_data = $query->result();
+		if(!empty($event_data))
+		{
+			return $event_data;
+		}
+		return false;
+	}
  	public function get_events_and_invites()
 	{
          $id = $this->session->userdata('logged_in')['account_id'];
