@@ -5606,7 +5606,7 @@ function to_days_change(add_to_day_link_m,n_j_to_days)
 
 $('.life_events_disp').click(function()
 {
-	alert('haiiii');
+	//alert('haiiii');
 	var id = $(this).attr("id").substr(5);
 	
 	
@@ -5723,43 +5723,43 @@ $('.life_events_disp').click(function()
 		 var da = res[0].split("-");
 		 
 		 var month;
-		 
+		 //  alert(da[1]);
 		 switch(da[1])
 		 {
-			case 01:
+			case "01":
 			month = "January";
 			break;
-			case 02:
+			case "02":
 			month = "February";
 			break;
-			case 03:
+			case "03":
 			month = "March";
 			break;
-			case 04:
+			case "04":
 			month = "April";
 			break;
-			case 05:
+			case "05":
 			month = "May";
 			break;
-			case 06:
+			case "06":
 			month = "June";
 			break;
-			case 07:
+			case "07":
 			month = "July";
 			break;
-			case 08:
+			case "08":
 			month = "August";
 			break;
-			case 09:
+			case "09":
 			month = "September";
 			break;
-			case 10:
+			case "10":
 			month = "October";
 			break;
-			case 11:
+			case "11":
 			month = "November";
 			break;
-			case 12:
+			case "12":
 			month = "December";
 			break;
 			default:
@@ -5770,14 +5770,41 @@ $('.life_events_disp').click(function()
 		 
 		 switch(da[2])
 		 {
-			case 01:
-			day = da[2]+"<sup>st<sup>";
+			case "01":
+			var day1 = da[2].replace(da[2],"1");
+			day = day1+"<sup>st</sup>";
 			break;
-			case 02:
-			day = da[2]+"<sup>nd<sup>";
+			case "02":
+			var day2 = da[2].replace(da[2],"2");
+			day = day2+"<sup>nd</sup>";
 			break;
-			case 03:
-			day = da[2]+"<sup>rd<sup>";
+			case "03":
+			var day3 = da[2].replace(da[2],"3");
+			day = day3+"<sup>rd</sup>";
+			break;
+			case "04":
+			var day4 = da[2].replace(da[2],"4");
+			day = day4+"<sup>th</sup>";
+			break;
+			case "05":
+			var day5 = da[2].replace(da[2],"5");
+			day = day5+"<sup>th</sup>";
+			break;
+			case "06":
+			var day6 = da[2].replace(da[2],"6");
+			day = day6+"<sup>th</sup>";
+			break;
+			case "07":
+			var day7 = da[2].replace(da[2],"7");
+			day = day7+"<sup>th</sup>";
+			break;
+			case "08":
+			var day8 = da[2].replace(da[2],"8");
+			day = day8+"<sup>th</sup>";
+			break;
+			case "09":
+			var day9 = da[2].replace(da[2],"9");
+			day = day9+"<sup>th</sup>";
 			break;
 			default:
 			day = da[2]+"<sup>th</sup>"
@@ -5795,7 +5822,7 @@ $('.life_events_disp').click(function()
 		if(info.location)
 		{
 		 codeAddress(address_location);
-		 $('#life_event_location').append('<div class="life_event_loc" >' + info.location + '</div>');
+		 $('#life_event_location').append('<div class="life_event_loc" > at ' + info.location + '</div>');
 		}else
 		{
 			$('#map-canvas').remove();

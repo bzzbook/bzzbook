@@ -36,7 +36,7 @@ class Life_Events extends CI_Controller {
 		);
 		
         $result = $this->life_events_model->insert_new_job_event($add_job_info);
-		redirect('/Profile/about_me');
+		redirect('/profile/about_me');
 		//$this->load->view('footer');
 		//mov_life_events();
 		}
@@ -63,7 +63,7 @@ class Life_Events extends CI_Controller {
 		);
 		
 	        $result = $this->life_events_model->insert_retirement_event($add_retirement_info);
-		redirect('/Profile/about_me');
+		redirect('/profile/about_me');
 		//$this->load->view('footer');
 		//mov_life_events();
 		}
@@ -96,7 +96,7 @@ class Life_Events extends CI_Controller {
 		);
 		
 	    $result = $this->life_events_model->insert_study_abroad_event($add_stu_abr_info);
-		redirect('/Profile/about_me');
+		redirect('/profile/about_me');
 		//$this->load->view('footer');
 		//mov_life_events();
 		}
@@ -123,7 +123,7 @@ class Life_Events extends CI_Controller {
 		);
 		
 	    $result = $this->life_events_model->insert_engagement_event($add_engagement_info);
-		redirect('/Profile/about_me');
+		redirect('/profile/about_me');
 		//$this->load->view('footer');
 		//mov_life_events();
 		}
@@ -146,8 +146,8 @@ class Life_Events extends CI_Controller {
 		);
 		
 	    $result = $this->life_events_model->insert_marriage_event($add_marriage_info);
-		redirect('/Profile/about_me');
-		//$this->load->view('footer');
+		redirect('/profile/about_me');
+		//$this->load->view('about_me');
 		//mov_life_events();
 		}
 
@@ -174,7 +174,7 @@ class Life_Events extends CI_Controller {
 		);
 		
 		$result = $this->life_events_model->insert_anniversary_event($add_anniversary_info);
-		redirect('/Profile/about_me');
+		redirect('/profile/about_me');
 		//$this->load->view('footer');
 		//mov_life_events();
 		}
@@ -202,7 +202,7 @@ class Life_Events extends CI_Controller {
 		);
 		
 		$result = $this->life_events_model->insert_child_event($add_child_info);
-		redirect('/Profile/about_me');
+		redirect('/profile/about_me');
 		//$this->load->view('footer');
 		//mov_life_events();
 		}
@@ -228,7 +228,7 @@ class Life_Events extends CI_Controller {
 		
 
 		$result = $this->life_events_model->insert_moved_event($add_moved_info);
-		redirect('/Profile/about_me');
+		redirect('/profile/about_me');
 		//$this->load->view('footer');
 		//mov_life_events();
 		}
@@ -255,7 +255,7 @@ class Life_Events extends CI_Controller {
 		
 	
 		$result = $this->life_events_model->insert_bought_home_event($add_bought_home_info);
-		redirect('/Profile/about_me');
+		redirect('/profile/about_me');
 		//$this->load->view('footer');
 		//mov_life_events();
 		}
@@ -266,6 +266,7 @@ class Life_Events extends CI_Controller {
   {
 	  
 	  $vehicle_date = $this->input->post('n_v_year')."-".$this->input->post('n_v_month')."-".$this->input->post('n_v_date');
+	
 	
 		$add_new_vehicle_info = array(
 	    'title'=>$this->input->post('n_v_title'),
@@ -283,7 +284,7 @@ class Life_Events extends CI_Controller {
 		);
 	
 		$result = $this->life_events_model->insert_new_vehicle_event($add_new_vehicle_info);
-		redirect('/Profile/about_me');
+		redirect('/profile/about_me');
 		//$this->load->view('footer');
 		//mov_life_events();
 		}
@@ -305,7 +306,7 @@ class Life_Events extends CI_Controller {
 		);
 		
 			$result = $this->life_events_model->insert_organ_donor_event($add_organ_donor_info);
-		redirect('/Profile/about_me');
+		redirect('/profile/about_me');
 		//$this->load->view('footer');
 		//mov_life_events();
 		}
@@ -331,7 +332,7 @@ class Life_Events extends CI_Controller {
 		
 			
 		$result = $this->life_events_model->insert_quit_habit_event($add_quit_habit_info);
-		redirect('/Profile/about_me');
+		redirect('/profile/about_me');
 		//$this->load->view('footer');
 		//mov_life_events();
 		}
@@ -356,7 +357,7 @@ class Life_Events extends CI_Controller {
 		
 			
 		$result = $this->life_events_model->insert_new_food_habit_event($add_new_food_habit_info);
-		redirect('/Profile/about_me');
+		redirect('/profile/about_me');
 		//$this->load->view('footer');
 		//mov_life_events();
 		}
@@ -381,7 +382,7 @@ class Life_Events extends CI_Controller {
 		
 			
 		$result = $this->life_events_model->insert_new_glasses_event($add_new_glasses_info);
-		redirect('/Profile/about_me');
+		redirect('/profile/about_me');
 		//$this->load->view('footer');
 		//mov_life_events();
 		}
@@ -407,7 +408,7 @@ class Life_Events extends CI_Controller {
 		
 			
 		$result = $this->life_events_model->insert_new_hobby_event($add_new_hobby_info);
-		redirect('/Profile/about_me');
+		redirect('/profile/about_me');
 		//$this->load->view('footer');
 		//mov_life_events();
 		}
@@ -429,7 +430,7 @@ class Life_Events extends CI_Controller {
 		
 	
 		$result = $this->life_events_model->insert_voted_event($add_voted_info);
-		redirect('/Profile/about_me');
+		redirect('/profile/about_me');
 		//$this->load->view('footer');
 		//mov_life_events();
 		}
@@ -458,7 +459,7 @@ class Life_Events extends CI_Controller {
 		);
 	
         $result = $this->life_events_model->insert_travel_event($add_travel_info);
-		redirect('/Profile/about_me');
+		redirect('/profile/about_me');
 		//$this->load->view('footer');
 		//mov_life_events();
 		}
@@ -467,7 +468,7 @@ class Life_Events extends CI_Controller {
 		{
 		$data =	$this->life_events_model->get_life_events_by_individual_id($id);
 	
-	    foreach( $data as $result):
+	    foreach($data as $result):
 		$event_data['life_event_id'] = $result->life_event_id;
 		$event_data['user_id'] = $result->user_id;
 		$event_data['uploaded_files'] = $result->uploaded_files;
@@ -506,7 +507,7 @@ class Life_Events extends CI_Controller {
 		$event_data['hobby'] = $result->hobby;
 		$event_data['candidate'] = $result->candidate;
 		$event_data['trip_name'] = $result->trip_name;
-		$event_data['cr_time'] = $result->cr_time;
+		//$event_data['cr_time'] = $result->cr_time;
 		
 		/*$edu_data['degree_certificate'] = $result->degree_certificate;
 		$edu_data['attended_from'] = $result->attended_from;
