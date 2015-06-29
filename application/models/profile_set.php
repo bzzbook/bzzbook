@@ -1569,5 +1569,34 @@ if($data['frm_clg_years'] == '0')
 		return false;
 		}
 	}
+	public function update_last_active_time(){
+		$id = $this->session->userdata('logged_in')['account_id'];
+		$this->db->select('*');
+		$this->db->from('bzz_user_activity_log');
+		$this->db->where('user_id', $id);
+		$query = $this->db->get();
+		if ($query->num_rows() > 0) {
+			$data = array(
+			   'last_active' => time() 			   
+			);
+			$this->db->where('user_id',$id);
+			$this->db->update('bzz_user_activity_log', $data); 
+			//$condition = "last_active <".(time()-900);
+			$this->db->where('last_active <',time()-900);
+    		$this->db->delete('bzz_user_activity_log'); 
+		} else {
+			
+			$data = array(
+            'last_active' => time(),
+			'user_id' => $id
+      		);
+      	    $this->db->insert('bzz_user_activity_log', $data);
+		}
+	}
+	public function remove_user_activity(){
+		$id = $this->session->userdata('logged_in')['account_id'];
+		$this->db->where('user_id',$id);
+        $this->db->delete('bzz_user_activity_log'); 
+	}
 }
 ?>

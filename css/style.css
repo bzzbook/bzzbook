@@ -46,7 +46,7 @@ header .search .input-group .input-group-btn ul li a:hover{ background:url(../im
 .curentUser .dropdown-menu li a{ color:#fff; padding:10px; }
 .curentUser .dropdown-menu li a:hover{ background:#454545;}
 .curentUser .userImg{ border:1px solid #cacaca; width:60px; height:60px; overflow:hidden; -webkit-border-radius:100px; border-radius:100px; float:left;}
-.curentUser .userName{ float:left; font-size:15px; color:#737373; float:left; padding:8px 34px 0 6px; background:url(../images/settings_icon.png) no-repeat right center;}
+.curentUser .userName{ float:left; font-size:15px; color:#737373; float:left; padding:8px 34px 0 6px; background:url(../images/settings_icon.png) no-repeat right center; width:200px;}
 .curentUser .userName span{ display:block; font-weight:500;}
 
 .navbar-header{ display:none;}
@@ -2136,3 +2136,12 @@ left: 75%; margin-top:5% !important; height:25px; width:20% !important;}
 .change_event .change-photo em{ font-size:15px !important;}
 
 .going-pic{ float:left; margin:1px; }
+
+#online-friends{  
+    position: fixed;
+	right:0;
+    top: 170px;
+    width: 65px;
+    z-index: 999;border-color: #e5e6e9 #dfe0e4 #d0d1d5;
+  border-radius: 1px; }
+/*.chatbox{ right:80px !important; }*/

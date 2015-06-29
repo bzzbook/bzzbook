@@ -72,7 +72,7 @@ $(function () {
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script> 
 <script src="<?php echo base_url(); ?>js/fbphotobox.js"></script>
 <script src="<?php echo base_url(); ?>js/custom.js"></script> 
-
+<script type="text/javascript" src="<?php echo base_url(); ?>js/chat.js"></script>
 <script>
 		$( document ).ready(function() {
 		$('.select').jqTransform({ imgPath: '' });
@@ -6013,7 +6013,60 @@ function testclick()
 		});
 		
 }
+document.addEventListener("click", function(){
+    url="<?php echo base_url(); ?>profile/event_log";
+		$.ajax({
+        url: url,
+		success: function(data)
+        {   
+		},
+		cache: false
+		});
+});
+$( window ).load(function() {
+	showOnlineFriends();
+   url="<?php echo base_url(); ?>profile/event_log";
+		$.ajax({
+        url: url,
+		success: function(data)
+        {   
+		},
+		cache: false
+		});
+});
+$(window).on('unload', function(){
+        url="<?php echo base_url(); ?>profile/remove_event_log";
+		$.ajax({
+        url: url,
+		success: function(data)
+        {   
+		},
+		cache: false
+		});
+});
 
+window.onbeforeunload = function(){
+        url="<?php echo base_url(); ?>profile/remove_event_log";
+		$.ajax({
+        url: url,
+		success: function(data)
+        {   
+		},
+		cache: false
+		});
+}
+function showOnlineFriends(){
+	 url="<?php echo base_url(); ?>friends/get_online_frnds";
+		$.ajax({
+        url: url,
+		success: function(data)
+        {  
+			$('#online-friends').html(data);
+		},
+		cache: false
+		});
+}
+window.setInterval(showOnlineFriends, 5000);
 </script>
 <script language="javascript">print_country("con");</script><!--  //for groups   --> 
 <script language="javascript">print_country("contries");</script> <!-- //for companies-->

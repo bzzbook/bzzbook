@@ -160,6 +160,16 @@ public function get_friend_invitation($limit=''){
 	else
 	echo 'No match found';
 }
+public function get_online_frnds(){
+
+$friends = $this->friendsmodel->get_online_frnds();  
+if($friends){ foreach($friends as $frnd){ echo "<p><a href='javascript:void(0)' onclick='chatWith(&#39;".$frnd['name']."&#39;)' ><img src='".base_url().'uploads/'.$frnd['image']."' width='50px' height='50px' title='".$frnd['name']."' /><img style='margin-bottom:22px;margin-left:3px' src='".base_url(); 
+if($frnd['last_active']>(time()-900))
+echo "images/online-icon.png' width='8px' height='8px'  /></a></p>"; 
+else
+echo "images/offline-icon.jpg' width='8px' height='8px'  /></a></p>"; 
+}}
+}
 
 }
 ?>

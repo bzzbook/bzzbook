@@ -22,6 +22,9 @@ $session_data = $this->session->userdata('logged_in');
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css" />
 <link href="<?php echo base_url(); ?>css/font-awesome.min.css" rel="stylesheet">
 <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<link type="text/css" rel="stylesheet" media="all" href="<?php echo base_url(); ?>css/chat.css" />
+<!--<link type="text/css" rel="stylesheet" media="all" href="<?php echo base_url(); ?>css/screen.css" />
+-->
 
 <style type='text/css'>
 a.previous { display: none; }

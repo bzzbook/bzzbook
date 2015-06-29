@@ -17,6 +17,12 @@ public function index()
 	     $this->load->view('template-view',$data);
 	  //$this->load->view('posts');	
 }
+public function event_log(){
+	$this->profile_set->update_last_active_time();
+}
+public function remove_event_log(){
+	$this->profile_set->remove_user_activity();	
+}
 
 public function profile_setting()
 {
