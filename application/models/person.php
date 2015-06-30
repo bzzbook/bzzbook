@@ -87,7 +87,7 @@ class person extends CI_Model {
 	   public function check_access_token($access_token)
 	   {
 		   $this->db->select('*');
-		   $this->db->from('bzz_users');
+		   $this->db->from('bzz_userinfo');
 		   $this->db->where('access_token',$access_token);
 		   $query = $this->db->get();
 		   if($query->num_rows() > 0)

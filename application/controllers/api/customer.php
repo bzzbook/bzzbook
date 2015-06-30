@@ -98,7 +98,7 @@ class customer extends CI_Controller {
 	   
 	   // Authorisation details.
 	$username = "vijaykumar.satyamsetti@gmail.com";
-	$hash = "03885f34b4737920a7725000fdb9987d124eac20";
+	$hash = "e1166106b263ba6708d74efc9d475be428f98233";
 
 	// Configuration variables. Consult http://api.txtlocal.com/docs for more info.
 	$test = "0";
@@ -135,6 +135,7 @@ class customer extends CI_Controller {
 		  'conf_code' => $user_data[0]['conf_code'],
 		  'conf_status' => 'N',
 		  'user_id' => $user_id,
+		  'access_token' => $user_info['access_token']
 		);
 		$this->load->model('confirmaccount');
 		$this->confirmaccount->confirmation_insert($confirmation);
@@ -196,7 +197,7 @@ class customer extends CI_Controller {
 			return TRUE;
 		}
 	}
-	public function check_otp($access_token,$otp)
+	public function check_otp()
 	{ 
 	$access_token = $this->input->post('access_token');	
 	$otp = $this->input->post('otp');
@@ -238,14 +239,14 @@ class customer extends CI_Controller {
 				   
 				// Authorisation details.
 				$username = "vijaykumar.satyamsetti@gmail.com";
-				$hash = "03885f34b4737920a7725000fdb9987d124eac20";
+				$hash = "e1166106b263ba6708d74efc9d475be428f98233";
 				
 				// Configuration variables. Consult http://api.txtlocal.com/docs for more info.
 				$test = "0";
 				
 				// Data for text message. This is the text message data.
 				$sender = "Bzzbook"; // This is who the message appears to be from.
-				$numbers = $user_info['user_phoneno']; // A single number or a comma-seperated list of numbers
+				$numbers = $check_acctoken[0]['user_phoneno']; // A single number or a comma-seperated list of numbers
 				$message = "You OTP for account activation is ".$password;
 				// 612 chars or less
 				// A single number or a comma-seperated list of numbers

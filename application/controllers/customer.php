@@ -61,6 +61,7 @@ class customer extends CI_Controller {
 		$user['user_type'] = 'user';
 		$confirmation_code = md5(random_string('unique'));
 		$user['conf_code'] = $confirmation_code;
+		$user['access_token'] = md5(time());
 		$this->load->model('person');
 		
 		$user_info['user_phoneno'] = $this->input->post('phone_number');		
@@ -68,7 +69,7 @@ class customer extends CI_Controller {
 		$user_info['user_lastname'] = $this->input->post('lastname');
 		$user_info['user_dob'] = $this->input->post('dob');
 		$user_info['user_gender'] = $this->input->post('gender');
-		
+		$user_info['access_token'] = $user['access_token'];
 		//$user_info['con_password'] = $this->input->post('conf_password');
 		//$user_info['user_jobtype'] = $this->input->post('position');
 		//$user_info['user_industry'] = $this->input->post('industry');

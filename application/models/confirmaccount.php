@@ -36,7 +36,7 @@ class confirmaccount extends CI_Model {
 	   
 	   public function confirmUserAccountByOTP($access_token,$otp)
 	   {
-		 $condition = "access_token='".$access_token."'";
+		 $condition = "access_token = '".$access_token."'";
 		 $this->db->select('*');
 		 $this->db->from('bzz_users');
 		 $this->db->where($condition);
@@ -44,7 +44,7 @@ class confirmaccount extends CI_Model {
 		 if($query->num_rows() == 1)
 		 {
 			 $user_data = $query->result_array();
-			 if(time()<($user_data[0]['otp_timestamp']+360))
+			 if(time()<($user_data[0]['otp_timestamp']+3600))
 			 {
 				 if($user_data[0]['conf_code']==md5($otp))
 				 {
