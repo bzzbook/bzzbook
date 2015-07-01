@@ -153,13 +153,22 @@ echo "</div>";
             name="lastname" placeholder="Last Name" id="lastname" >
           </div>
           <div class="field col-md-6">
+            <input type="tel" class="form-control" data-rule-required="true" data-msg-required="please enter your Username" 
+            name="user_name" id="user_name" placeholder="User name" >
+            
+          </div>
+       
+         
+          <div class="field col-md-6">
             <input type="text" class="form-control"  data-rule-required="true" data-msg-required="please enter your email" 
             data-rule-email="true" data-msg-email="please enter a valid email address" name="email" id="email" placeholder="E-mail" >
           </div>
+              <div class="user_unique_error col-md-12"></div>
           <div class="field col-md-6">
             <input type="tel" class="form-control" data-rule-required="true" data-msg-required="please enter your phone number" 
             name="phone_number" id="phone_number" placeholder="Phone Number" >
           </div>
+          
           <div class="field col-md-6">
             <input type="password" class="form-control" data-rule-required="true" data-msg-required="please enter your password" 
             name="password" id="password" placeholder="Password" >
@@ -323,6 +332,66 @@ $('#forgot_pwd_req').click(function(){
 		
 		
 	};
+
+});
+
+
+$('#user_name').focusout(function() {
+var username = $('#user_name').val();
+if(username == '')
+{
+	$('.user_unique_error').find('span').remove();
+	$('.user_unique_error').append('<span> User Name Shouldn\'t be empty!.. </span>');
+}else
+{
+	$('.user_unique_error').find('span').remove();
+	    url = "<?php echo base_url(); ?>signg_in/username_check/"+username;
+		$.ajax({
+        type: "POST",
+        url: url,
+        success: function(data)
+        {   
+		if(data == true){
+    	$('.user_unique_error').append('<span>Username already registered, Please enter another Username</span>');
+		$('#user_name').focusin();
+		}
+			
+	},
+		cache: false
+		});
+		
+}
+
+
+});
+
+
+$('#email').focusout(function() {
+var user_email = $('#email').val();
+if(user_email == '')
+{
+	$('.user_unique_error').find('span').remove();
+	$('.user_unique_error').append('<span> User email Shouldn\'t be empty!.. </span>');
+}else
+{
+	$('.user_unique_error').find('span').remove();
+	    url = "<?php echo base_url(); ?>signg_in/user_email_check/"+user_email;
+		$.ajax({
+        type: "POST",
+        url: url,
+        success: function(data)
+        {   
+		if(data == true){
+    	$('.user_unique_error').append('<span>This email  already registered, Please enter another email address</span>');
+		$('#user_email').focusin();
+		}
+			
+	},
+		cache: false
+		});
+		
+}
+
 
 });
 

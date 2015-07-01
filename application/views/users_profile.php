@@ -169,9 +169,11 @@
         <div class="myPhotos userProfilemyPhotos">
           <h3>Friends</h3>
           <ul>
-          <?php foreach($friends as $frnd): ?>
+          <?php if($friends)
+		  { 
+		  foreach($friends as $frnd): ?>
             <li><a href="<?php echo base_url(); ?>profile/user/<?php echo $frnd['id']; ?>"><img src="<?php echo base_url(); ?>uploads/<?php echo $frnd['image']; ?>" alt=""><div class="name-overlap"><?php echo $frnd['name']; ?></div></a></li>
-          <?php endforeach; ?>
+          <?php  endforeach; } else echo "No friends Are Available"?>
           </ul>
           <div class="clear"></div>
         </div></aside></section>

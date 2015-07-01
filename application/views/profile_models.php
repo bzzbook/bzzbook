@@ -712,7 +712,7 @@
  
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">Send Busines card</h4>
-       <div id="selected_bc_friends"><div id="search_bc_frnd_wrapper"><input type="text" name="txtsearch" id="search_bc_friends" onkeyup="keyupevent_bc();" autocomplete="off" /><input type="hidden" id="added_bc_users" name="added_bc_users" /><div id="auto_bc_suggest"></div></div></div>
+       <div id="selected_bc_friends"><div id="search_bc_frnd_wrapper"><input type="text" name="txtsearch" id="search_bc_friends" onkeyup="keyupevent_bc();" autocomplete="off" /><input type="text" id="added_bc_users_test" name="added_bc_users_test" value=""/><div id="auto_bc_suggest"></div></div></div>
       </div>
       <div class="modal-body">
     <section class="about-user-details business_card">

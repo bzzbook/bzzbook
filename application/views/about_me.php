@@ -11,7 +11,11 @@
 						{
 						$id = $user_id;
 						$cur_user_id = $user_id;
-						}
+						}else
+						{
+							$id =  $this->session->userdata('logged_in')['account_id'];
+						$cur_user_id = $this->session->userdata('logged_in')['account_id'];
+							}
 						
 			  		 $image = $this->profile_set->get_profile_pic();
 			         $data = $this->profile_set->get_userinfo($id); 
@@ -353,7 +357,7 @@
                          <?php } ?>
                         </div>
                         <?php } else { ?>
-              <?php if($user_id != $this->session->userdata('logged_in')['account_id']) { ?>
+              <?php if($cur_user_id != $this->session->userdata('logged_in')['account_id']) { ?>
                          
                          <div class="iner_lefts"><i class="fa fa-globe"></i></div>
                          <div class="inner_rights boxs">
@@ -609,7 +613,7 @@
 						 </div>
 						 <?php }else { ?>
             
-                           <?php if($user_id != $this->session->userdata('logged_in')['account_id']) { ?>
+                           <?php if($cur_user_id != $this->session->userdata('logged_in')['account_id']) { ?>
                          
                          <div class="iner_lefts"><i class="fa fa-globe"></i></div>
                          <div class="inner_rights boxs">
@@ -796,7 +800,7 @@
                         </div>
                          <?php } ?></div><?php }else{ ?>
                          
-                           <?php if($user_id != $this->session->userdata('logged_in')['account_id']) { ?>
+                           <?php if($cur_user_id != $this->session->userdata('logged_in')['account_id']) { ?>
                          
                          <div class="iner_lefts"><i class="fa fa-globe"></i></div>
                          <div class="inner_rights boxs">
@@ -1020,7 +1024,7 @@
                          <?php if(empty($result[0]->hometown)) { ?>
                          
                          
-                        <?php if($user_id != $this->session->userdata('logged_in')['account_id']) { ?>
+                        <?php if($id != $this->session->userdata('logged_in')['account_id']) { ?>
                          
                          <div class="iner_lefts"><i class="fa fa-globe"></i></div>
                          <div class="inner_rights boxs">

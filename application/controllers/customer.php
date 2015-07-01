@@ -26,7 +26,7 @@ class customer extends CI_Controller {
 		$this->form_validation->set_rules('lastname','LastName','trim|required|alpha|xss_clean');
 		$this->form_validation->set_rules('email','Email','trim|required|valid_email|xss_clean');
 		$this->form_validation->set_rules('phone_number','Phone Number','trim|required|xss_clean');
-	//	$this->form_validation->set_rules('user_name','User Name','trim|required|xss_clean');
+		$this->form_validation->set_rules('user_name','User Name','trim|required|xss_clean');
 		$this->form_validation->set_rules('password','Password','trim|required|xss_clean|md5');
 		$this->form_validation->set_rules('dob','Birthday','required|xss_clean');
 		$this->form_validation->set_rules('gender','Gender','required');
@@ -52,7 +52,7 @@ class customer extends CI_Controller {
 		
 		
 		$user['user_email'] = $this->input->post('email');	
-		//$user['username'] = $this->input->post('user_name');
+		$user['username'] = $this->input->post('user_name');
 		$user['password'] = $this->input->post('password');
 		//$user['user_country'] = $this->input->post('country');
 		//$user['user_state'] = $this->input->post('state');
@@ -69,6 +69,7 @@ class customer extends CI_Controller {
 		$user_info['user_lastname'] = $this->input->post('lastname');
 		$user_info['user_dob'] = $this->input->post('dob');
 		$user_info['user_gender'] = $this->input->post('gender');
+		$user_info['username'] = $this->input->post('user_name');
 		$user_info['access_token'] = $user['access_token'];
 		//$user_info['con_password'] = $this->input->post('conf_password');
 		//$user_info['user_jobtype'] = $this->input->post('position');

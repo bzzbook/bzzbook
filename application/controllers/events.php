@@ -113,9 +113,31 @@ public function create_user_event()
 	'event_created_by'=>$this->session->userdata('logged_in')['account_id']
 	);
 
-	$event_id = $this->eventmodel->insert_user_event($event_info);
-	if($event_id)
-	redirect('profile/events');
+   $event_id = $this->input->post('event_form_id');
+   $event_action = $this->input->post('user_event_action');
+ 
+	if($event_action == 'add')
+		{
+		$event_id = $this->eventmodel->insert_user_event($event_info);
+		if($event_id)
+		redirect('profile/events');
+		else
+			return false;
+		}
+		else if($event_action=='update')
+		{
+			//$educationInfo['educationinfo_id']=$data['edu_form_id'];
+			$this->db->where('event_id', $event_id);
+			if($this->db->update('bzz_user_events', $event_info))
+			redirect('profile/events');
+			else 
+			return false; 
+		}
+	
+	
+	
+	
+	
 	
 }
 public function change_event_going_sts($event_id,$status)
@@ -131,12 +153,112 @@ public function change_event_going_sts($event_id,$status)
 public function send_event_invitation()
 	{
 
-	if($this->eventmodel->send_event_invitation_to_frnds($_POST['eventid'],$_POST['invited_users']))
+	$data['result'] = $this->eventmodel->send_event_invitation_to_frnds($_POST['eventid'],$_POST['invited_users']);
 	
-	return true;
-	else
-	return false;
 	}
+	
+  public function usereventEdit()
+  {
+	 $data = $this->eventmodel->editEventDetails($_POST['user_event_id']);
+	foreach( $data as $result):
+		$event_data['event_name'] = $result->event_name;
+		$event_data['event_details'] = $result->event_details;
+		$event_data['event_location'] = $result->event_location;
+		$event_data['event_date'] = $result->event_date;
+		$event_data['event_time'] = $result->event_time;
+		
+	endforeach;
+	echo json_encode($event_data);
+  }
+  
+  public function inviteFriend()
+  
+{
+	$data['result'] = $this->eventmodel->send_invite_to_frnd($_POST['frnd_id'],$_POST['event_id']);	
+}
 
+public function send_event_post()
+{
+	
+	 
+	 
+	 $session_data = $this->session->userdata('logged_in');
+	 $data['posted_by'] = $session_data['account_id'];
+	 $data['posted_content'] = $this->input->post('post_content');
+	 $data['uploaded_files'] =  $this->doupload($this->input->post('uploaduserevent_Photos'));
+	 $data['event_id'] = $this->input->post('event_id');
+		  if($this->input->post('added_tag_users')!='')
+		  {
+		 $data['tagged_users'] = $this->input->post('added_tag_users');
+		  }
+		 $this->eventmodel->post_event_buzz($data); 
+	
+		 echo "post saved successfully..."; 
+		 redirect('profile/eventview/'.$this->input->post('event_id'));
+	
+}
+
+public function send_event_post_two()
+{
+	
+	 
+	 
+	 $session_data = $this->session->userdata('logged_in');
+	 $data['posted_by'] = $session_data['account_id'];
+	 $data['posted_content'] = $this->input->post('posted_content_two');
+	 $data['uploaded_files'] =  $this->doupload($this->input->post('uploaduserevent_Photos1'));
+	 $data['event_id'] = $this->input->post('event_id');
+		  if($this->input->post('event_tagged_users')!='')
+		  {
+		 $data['tagged_users'] = $this->input->post('tagaddedusers2');
+		  }
+		 $this->eventmodel->post_event_buzz($data); 
+	
+		 echo "post saved successfully..."; 
+		 redirect('profile/eventview/'.$this->input->post('event_id'));
+	
+}
+ 
+  function doupload($filename='',$imgs_id='') {
+	  
+					$name_array = array();
+					if($filename=='')
+					$count = count($_FILES[$imgs_id]['size']);
+					else
+					$count = count($_FILES[$filename]['size']);
+					foreach($_FILES as $key=>$value)
+					for($s=0; $s<=$count-1; $s++) {
+					$_FILES['userfile']['name']=$value['name'][$s];
+					$_FILES['userfile']['type']    = $value['type'][$s];
+					$_FILES['userfile']['tmp_name'] = $value['tmp_name'][$s];
+					$_FILES['userfile']['error']       = $value['error'][$s];
+					$_FILES['userfile']['size']    = $value['size'][$s];  
+						$config['upload_path'] = './uploads/';
+						$type = $_FILES['userfile']['type'];
+						$config['allowed_types'] = 'gif|jpg|png';
+						
+
+						
+					$config['max_size']	= '';
+					$config['max_width']  = '';
+					$config['max_height']  = '';
+					$this->load->library('upload', $config);
+					
+					if ( ! $this->upload->do_upload())
+					{
+						$error = array('error' => $this->upload->display_errors());
+						//$this->load->view('uploadform', $error);
+					}
+					else
+					{
+						$data = $this->upload->data();
+						$name_array[] = $data['file_name'];
+					}
+		
+					}
+					$names= implode(',', $name_array);
+
+						return $names;
+}
 }
 ?>

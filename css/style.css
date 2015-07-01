@@ -842,6 +842,7 @@ modal { position: absolute; }
 .memSearch .input-group .input-group-btn .btn{ text-align:center; top:0; background:#000; color:#fff;}
 .form-mandatory{color:red;}
 #uploadPhotosdvPreview img{margin-right:5px; }
+#uploadPhotoseventPreview img{margin-right:5px; }
 .chos_photos img{margin-right:5px; }
 
 #sharePostBtn{background: #609b34;  height: 30px;  font-size: 14px;  line-height: 30px;  padding: 0 15px;  display: inline-block;
@@ -978,7 +979,19 @@ width: 73.7%; !important;}
 min-height:20px;
 width:100%; display:none;
 }
+#added_tag_frnds{border-top:1px dashed grey;
+min-height:20px;
+width:100%; display:none;
+}
 #taggedfriends{border-top:1px dashed grey;
+min-height:20px;
+width:100%; display:none;
+}
+#taggedfriends1{border-top:1px dashed grey;
+min-height:20px;
+width:100%; display:none;
+}
+#taggedfriends2{border-top:1px dashed grey;
 min-height:20px;
 width:100%; display:none;
 }
@@ -997,7 +1010,29 @@ width:100%; }
     height: 20px;
     padding-left: 5px;
 }
+#tag_search{
+ background: none repeat scroll 0 0 transparent;
+    border: medium none;
+    font-size: 13px;
+    height: 20px;
+    padding-left: 5px;
+}
+
 #tagsearchfriends{
+ background: none repeat scroll 0 0 transparent;
+    border: medium none;
+    font-size: 13px;
+    height: 20px;
+    padding-left: 5px;
+}
+#tagsearchfriends1{
+ background: none repeat scroll 0 0 transparent;
+    border: medium none;
+    font-size: 13px;
+    height: 20px;
+    padding-left: 5px;
+}
+#tagsearchfriends2{
  background: none repeat scroll 0 0 transparent;
     border: medium none;
     font-size: 13px;
@@ -1008,15 +1043,43 @@ width:100%; }
 #search_bc_frnd_wrapper{ position:relative;}
 
 #search_frnd_wrapper{position:relative; }
+#tag_frnd_wrapper_one{position:relative; }
 #tag_frnd_wrapper{position:relative; }
+#search_frnd_wrapper1{position:relative; }
+#tag_frnd_wrapper1{position:relative; }
+#tag_frnd_wrapper2{position:relative; }
 
 #autosuggest{position:absolute;	width:200px; z-index:111; background-color:white; display:none; padding:5px; border:1px solid #f1f1f1;}
+#tag_auto_suggest{position:absolute;	width:200px; z-index:111; background-color:white; display:none; padding:5px; border:1px solid #f1f1f1;}
 #auto_bc_suggest{position:absolute;width:200px; z-index:111; background-color:white; display:none; padding:5px; border:1px solid #f1f1f1;}
 #auto_suggest_company{ background-color: white; border: 1px solid #f1f1f1; border-radius: 8px; display: none; margin-left: 13px; margin-top: 33px; padding: 5px; position: absolute; width: 234px; z-index: 111;}
 #auto_suggest_company .as_frnd_container{  background:#fbc436; color:#000;line-height:30px;}
+#autosuggest_invite_frnds .as_frnd_container{  background:#fbc436; color:#000;line-height:30px; height: 65px;}
+#autosuggest_invite_frnds_main{background-color: white;
+    border: 1px solid #f1f1f1;
+    display: none;
+    margin-left: -22px;
+    margin-top: 34px;
+    padding: 5px;
+    position: absolute;
+    width: 252px;
+    z-index: 111;}
+#autosuggest_invite_frnds_main .as_frnd_container{  background: #fbc436 none repeat scroll 0 0;
+    color: #000;
+  
+    line-height: 54px;}
+#autosuggest_invite_frnds_main .as_frnd_img img{  float: left;
+    height: 40px;
+    margin-left: 20px;
+    margin-right: 10px;
+    margin-top: 8px;
+    width: 40px;}
 
 #tagautosuggest{position:absolute;	width:200px; z-index:111; background-color:white; display:none; padding:5px; border:1px solid #f1f1f1;}
-
+#tagautosuggest1{position:absolute;	width:200px; z-index:111; background-color:white; display:none; padding:5px; border:1px solid #f1f1f1;}
+#tagautosuggest2{position:absolute;	width:200px; z-index:111; background-color:white; display:none; padding:5px; border:1px solid #f1f1f1;}
+#autosuggest_invite_frnds{ background-color: white; border: 1px solid #f1f1f1; display: none; padding: 4px; position: absolute; width: 568px;
+    z-index: 111;}
 
 .as_frnd_container{ width:100%; margin-bottom:2px;}
 .as_frnd_container:hover{ cursor:pointer; cursor:hand; }
@@ -1024,16 +1087,27 @@ width:100%; }
 .as_frnd_name{ vertical-align:middle; }
 .clearfix{ clear:both; }
 .as_close_btn{ vertical-align:middle; }
-
+#autosuggest_invite_frnds .as_frnd_name{  line-height: 58px; }
+#autosuggest_invite_frnds .as_frnd_img img{ height:50px; float:left; }
 #autosuggest .as_frnd_container{  background:#fbc436; color:#000;line-height:30px;}
 #tagautosuggest .as_frnd_container{  background:#fbc436; color:#000;line-height:30px;}
+#tagautosuggest1 .as_frnd_container{  background:#fbc436; color:#000;line-height:30px;}
+#tagautosuggest2 .as_frnd_container{  background:#fbc436; color:#000;line-height:30px;}
+#tag_auto_suggest .as_frnd_container{  background:#fbc436; color:#000;line-height:30px;}
 
 #updateControls{ text-align:right; line-height:24px; position:relative; } 
+#tag_auto_suggest .as_frnd_img img{ width:16%; margin-right:10px;}
 #autosuggest .as_frnd_img img{ width:16%; margin-right:10px;}
 #tagautosuggest .as_frnd_img img{ width:16%; margin-right:10px;}
+#tagautosuggest1 .as_frnd_img img{ width:16%; margin-right:10px;}
+#tagautosuggest2 .as_frnd_img img{ width:16%; margin-right:10px;}
+#autosuggest_invite_frnds .as_frnd_img img{ margin-left: 10px; margin-right: 12px; margin-top: 7px; width: 9%;}
 
 #selectedfriends > span {   float: left;  font-size: 13px;  margin-right: 5px;}
+#added_tag_frnds > span {   float: left;  font-size: 13px;  margin-right: 5px;}
 #taggedfriends > span {   float: left;  font-size: 13px;  margin-right: 5px;}
+#taggedfriends1 > span {   float: left;  font-size: 13px;  margin-right: 5px;}
+#taggedfriends2 > span {   float: left;  font-size: 13px;  margin-right: 5px;}
 
 #search_frnd_wrapper{ float:left;}
 #tag_frnd_wrapper{ float:left;}
@@ -1182,7 +1256,7 @@ width:100%; }
 .rightCol .custsignupToday h5{ background:url(../images/lp_signup_icon.png) no-repeat 0 0; font-size:47px; color:#343536; padding:10px 0 10px 80px; font-weight:400; border-bottom:1px solid #f1f4f5; padding-bottom:20px; margin-bottom:20px; }
 .rightCol .custsignupToday .field{ padding-bottom:15px;}
 .rightCol .custsignupToday .field .form-control{background:#fafcfd; border:1px solid #e3e3e3; box-shadow:none; height:40px; font-size:16px; color:#a8a8a8; font-weight:300;}
-.rightCol .custsignupToday .field label{  color: #616161; display: block; font-size: 14px; font-weight: 300; padding-bottom: 10px;}	
+.rightCol .custsignupToday .field label{  color: #616161; display: block; font-size: 13px; font-weight: 300; padding-bottom: 10px;}	
 .rightCol .custsignupToday .dob .field{ padding-left:0;}
 .rightCol .custsignupToday .dob #dpYears{ position:relative;}
 .rightCol .custsignupToday .dob span.add-on{ position:absolute;  right:24px; top:10px; font-size:20px; cursor:pointer;  }
@@ -2136,7 +2210,15 @@ left: 75%; margin-top:5% !important; height:25px; width:20% !important;}
 .change_event .change-photo em{ font-size:15px !important;}
 
 .going-pic{ float:left; margin:1px; }
-
+#event_invite_friends .modal-header{ background:#fbc436; border-top-left-radius: 5px; border-top-right-radius: 5px;}
+.invited{ border-right:1px solid #f3f3f3;}
+.invited h5{ text-transform:uppercase; color:#737373; font-weight:normal;}
+.invited h6{ color:#353535; font-weight:normal;}
+.invitebox{ margin-top:10px;}
+.invite_imge{ width:48px; height:48px; overflow:hidden; padding:0px;}
+.invites_right  h5{ text-transform:uppercase; color:#737373; font-weight:normal;}
+.invite_right_small img{ width:30px; height:30px; overflow:hidden;}
+.invite_right_small{ margin-top:10px;}
 #online-friends{  
     position: fixed;
 	right:0;

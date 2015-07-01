@@ -155,7 +155,7 @@
               <p><a href=""><?php echo $host->event_location; ?></a></p>
              <div class="event-btns" id="eventBtns<?php echo $host->event_id; ?>"> 
              <?php if($host->event_created_by==$curr_user_id) {?>
-                  <div class="btn2 invitebtn invite_friends_modal" id="user_events<?php  echo $event->event_id;  ?>"><i class="fa fa-envelope-o "></i>  Invite</div><input type="submit" value="Hosting" class="hostbtn adings">
+                  <div class="btn2 invitebtn invite_friends_modal" id="user_events<?php  echo $host->event_id;  ?>"><i class="fa fa-envelope-o "></i>  Invite</div><input type="submit" value="Hosting" class="hostbtn adings">
                   <?php }else{ ?>
                   <input type="button" value="Decline" class="gngSts adings" onclick="updateGoingStatus(<?php echo $host->event_id; ?>,3)"><input type="button" value="Maybe" class="gngSts adings" onclick="updateGoingStatus(<?php echo $host->event_id; ?>,2)"><input type="button" value="Join" class="gngSts adings" onclick="updateGoingStatus(<?php echo $host->event_id; ?>,1)">
                   
@@ -235,7 +235,7 @@
       
         <div class="publics col-md-12">
             <div class="btn3 btn-black" onclick="document.getElementById('event_form').submit();">Create</div>
-            <div class="btn3 btn-green" data-toggle="modal" data-target="#AddCompany">cancel</div>
+            <div class="btn3 btn-green" data-dismiss="modal">cancel</div>
           </div>
           </div>
            </form>
@@ -247,9 +247,77 @@
 
 <!-- Button trigger modal -->
 
+<!---------------------  ADD events upcoming forms BEGIN  --------------------->
+
+<div class="modal fade" id="event_invite_friends" tabindex="-1" role="dialog" aria-labelledby="myModalLabe" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div id="comperrormsg"></div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabe">
+          Invite
+        </h4>
+      </div>
+      <div class="modal-body">
+        
+        <form>
+          
+           <div id="search_invited_frnd_wrapper" class="form-group"> 
+         
+         <input type="text" name="txtsearch" id="invite_eve_friends" class="form-control" onkeyup="invite_event_frnds('invite_eve_friends','invitedusers','autosuggest_invite_frnds');" />
+          <input type="hidden" name="event_id" id="event_id"/>
+         
+         <input type="hidden" id="invitedusers" name="invitedusers" />
+         
+         <div id="autosuggest_invite_frnds">
+         
+         </div>
+       </div>
+        </form>
+         <div class="invited col-md-7">
+   
+        <div class="invitebox" id="all_friends_invites" >
+       <!-- <div class="col-md-2 invite_imge"><img src="<?php echo base_url(); ?>images/logo.png" alt=""></div>
+        <div class="col-md-8">
+        <h6>your name</h6>
+        <p>visakhapatnam</p>
+        </div>
+        <div class="col-md-2"><img src="<?php echo base_url(); ?>images/round1.png" alt=""></div>
+        <div class="clearfix"></div>-->
+       </div>
+        
+     
+       </div> 
+      
+        
+           <div class="col-md-5 invites_right">
+           <div class="col-md-10"><h5>Selected</h5></div>
+            <div class="col-md-2">5</div>
+            <div class="clearfix"></div>
+            
+             <div class="invite_right_small" id="invited_friends">
+           
+            </div>
+         
+            
+           </div>
+           <div class="clearfix"></div>
+        <div class="publics col-md-12">
+          <div class="btn3 btn-black" id="send_event_invitations">Send Invites</div>
+          <div class="btn3 btn-green" data-dismiss="modal" >Cancel</div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!---------------------  ADD events upcoming END  ---------------------> 
+
 
 <!-- Modal -->
-<div class="modal fade" id="event_invite_friends" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<!--<div class="modal fade" id="event_inSvite_friends" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -262,7 +330,7 @@
          
          <div id="search_invited_frnd_wrapper">
          
-         <input type="text" name="txtsearch" id="invite_eve_friends" onkeyup="invite_event_frnds();" />
+         <input type="text" name="txtsearch" id="invite_eve_friends" onkeyup="invite_event_frnds('invite_eve_friends','invitedusers','autosuggest_invite_frnds');" />
           <input type="text" name="event_id" id="event_id"/>
          
          <input type="hidden" id="invitedusers" name="invitedusers" />
@@ -285,7 +353,8 @@
       </div>
     </div>
   </div>
-</div>
+</div>-->
+
   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -296,6 +365,7 @@
 	
   });
 </script>
+
 <!--<section class="col-lg-6 col-md-6 col-sm-5 col-xs-12 coloumn2 jobsSt">
       <h2>My Events</h2>
       <div class="posts">

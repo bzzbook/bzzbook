@@ -69,7 +69,7 @@ class Customermodel extends CI_Model {
 	   $friends = array_unique($friends);
 	   $this->db->select('*');
 	   $this->db->from('bzz_posts');
-/*	   $this->db->where_in('posted_by',$friends);
+/*	   $this->db->where($condition);
 */	   $this->db->order_by("post_id","desc");
 	   $query = $this->db->get();
    	   if ($query->num_rows() > 0) {
@@ -87,6 +87,23 @@ class Customermodel extends CI_Model {
 	   else 
 	   return false;
    }
+   
+   public function All_event_posts($event_id)
+   {
+	   $this->db->select('*');
+	   $this->db->from('bzz_user_event_posts');
+       $this->db->where('event_id',$event_id);
+	   $this->db->order_by("event_post_id","desc");
+	   $query = $this->db->get();
+   	   if ($query->num_rows() > 0) {
+	   		$result =  $query->result();
+			
+			return $result;
+	   } 
+	   return false;
+   }
+   
+   
    public function All_Cmp_Posts($cmp_id){
 	
   	    $id = $this->session->userdata('logged_in')['account_id'];		
@@ -197,7 +214,43 @@ class Customermodel extends CI_Model {
 			}
 		}
    }
+ public function  eventinsertlinks($data)
+{
+	
+	
+	    $pid=$data['like_on'];
+	    $aid=$data['liked_by'];
+	   // $like=$data['like'];
+	    $condition = "like_on =" . $pid . " AND liked_by =".$aid;
+	    $this->db->select('*');
+		$this->db->from('bzz_event_likes');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		$like_count = count($this->customermodel->eventlikedata($pid));
+		if($query->num_rows()>0){
+			$res=$query->result();
+			$res_like=$res[0]->like_status;			
+			if($res_like == 'Y' ){
+				$slike="N";
+			}
+			else if($res_like == 'N'){
+				$slike="Y";
+			}
+			
+		$data1 = array('like_status' => $slike);
+        $this->db->where($condition);
+  		$this->db->update('bzz_event_likes',$data1);	
+	    $data1 = array('like_status' => $slike,'like_count' => $like_count);
+			echo json_encode($data1);
+		}
+		else{
+	    $this->db->insert('bzz_event_likes',$data);
+			$data1 = array('like_status' => 'Y','like_count' => $like_count);
+			echo json_encode($data1);
+		}
+		
    
+}
    public function insertlinks($data)
    {
 	    $pid=$data['like_on'];
@@ -266,6 +319,43 @@ class Customermodel extends CI_Model {
 		}
 		
    }
+   
+       public function event_comment_insert_links($data)
+   {
+	    $pid=$data['like_on'];
+	    $aid=$data['liked_by'];
+	   // $like=$data['like'];
+	    $condition = "like_on =" . $pid . " AND liked_by =".$aid;
+	    $this->db->select('*');
+		$this->db->from('bzz_event_comment_likes');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		$like_count = count($this->customermodel->eventcommentlikedata($pid));
+		if($query->num_rows()>0){
+			$res=$query->result();
+			$res_like=$res[0]->like_status;			
+			if($res_like == 'Y' ){
+				$slike="N";
+			}
+			else if($res_like == 'N'){
+				$slike="Y";
+			}
+			
+		$data1 = array('like_status' => $slike);
+        $this->db->where($condition);
+  		$this->db->update('bzz_event_comment_likes',$data1);	
+	    $data1 = array('like_status' => $slike,'like_count' => $like_count);
+			echo json_encode($data1);
+		}
+		else{
+	    $this->db->insert('bzz_event_comment_likes',$data);
+			$data1 = array('like_status' => 'Y','like_count' =>$like_count);
+			echo json_encode($data1);
+		}
+		
+   }
+   
+   
    public function insertcmplikes($data)
    {
 	    $pid=$data['like_on'];
@@ -309,11 +399,33 @@ class Customermodel extends CI_Model {
 		return $query->result();
 		
    }
+      public function eventlikedata($pid){
+	    $condition = "like_on =" . "'" . $pid . "' AND like_status = 'Y'";
+		$this->db->select('*');
+		$this->db->from('bzz_event_likes');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		//return $query->num_rows();
+		return $query->result();
+		
+   }
    public function currentuserlikedata($pid){
 	    $id = $this->session->userdata('logged_in')['account_id'];
 	    $condition = "like_on =" . "'" . $pid . "' AND liked_by='".$id."' AND like_status = 'Y'";
 		$this->db->select('*');
 		$this->db->from('bzz_likes');
+		$this->db->where($condition);
+		if($query = $this->db->get())
+				return $query->result();
+		else
+				return false;
+		
+   }
+      public function currentusereventlikedata($pid){
+	    $id = $this->session->userdata('logged_in')['account_id'];
+	    $condition = "like_on =" . "'" . $pid . "' AND liked_by='".$id."' AND like_status = 'Y'";
+		$this->db->select('*');
+		$this->db->from('bzz_event_likes');
 		$this->db->where($condition);
 		if($query = $this->db->get())
 				return $query->result();
@@ -331,11 +443,38 @@ class Customermodel extends CI_Model {
 		return $query->result();
 		
    }
+   
+   
+      public function eventcommentlikedata($cid){
+	    $condition = "like_on =" . "'" . $cid . "' AND like_status = 'Y'";
+		$this->db->select('*');
+		$this->db->from('bzz_event_comment_likes');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		//return $query->num_rows();
+		return $query->result();
+		
+   }
+   
+   
    public function currentusercommentlikedata($cid){
 	    $id = $this->session->userdata('logged_in')['account_id'];
 	    $condition = "like_on ='".$cid."' AND liked_by='".$id."'  AND like_status = 'Y'";
 		$this->db->select('*');
 		$this->db->from('bzz_comment_likes');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		//return $query->num_rows();
+		return $query->result();
+		
+   }
+   
+   
+      public function currentusereventcommentlikedata($cid){
+	    $id = $this->session->userdata('logged_in')['account_id'];
+	    $condition = "like_on ='".$cid."' AND liked_by='".$id."'  AND like_status = 'Y'";
+		$this->db->select('*');
+		$this->db->from('bzz_event_comment_likes');
 		$this->db->where($condition);
 		$query = $this->db->get();
 		//return $query->num_rows();
@@ -355,6 +494,9 @@ class Customermodel extends CI_Model {
    public function write_comments($data){
 	    $this->db->insert('bzz_postcomments',$data);
    }
+   public function write_event_comments($data){
+	    $this->db->insert('bzz_event_postcomments',$data);
+   }
    public function write_cmp_comments($data){
 	    $this->db->insert('bzz_cmp_postcomments',$data);
    }
@@ -362,6 +504,15 @@ class Customermodel extends CI_Model {
 	   $condition = "commented_on =" . "'" . $pid . "' and (comment_content != '' OR uploadedfiles!='')";
 		$this->db->select('*');
 		$this->db->from('bzz_postcomments');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		//return $query->num_rows();
+		return $query->result(); 
+   }
+      public function event_comments_data($eventid){
+	   $condition = "commented_on =" . "'" . $eventid . "' and (comment_content != '' OR uploadedfiles!='')";
+		$this->db->select('*');
+		$this->db->from('bzz_event_postcomments');
 		$this->db->where($condition);
 		$query = $this->db->get();
 		//return $query->num_rows();

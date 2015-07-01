@@ -117,6 +117,18 @@ public function getfriendsfortagging($name,$addeduser=''){
 	else
 	echo 'No match found';
 }
+
+public function getfriendsfortaggingtoevent($name,$addeduser=''){
+	$suggestions = $this->friendsmodel->getfriends($name,$addeduser);
+	//print_r($suggestions);exit;
+	if($suggestions){
+	foreach($suggestions as $suggestion){
+	echo "<div class='as_frnd_container' onclick='addfrndforeventtagging(".$suggestion['id'].",&#39;".$suggestion['name']."&#39;)'><div class='as_frnd_img'><img src='".base_url().'uploads/'.$suggestion['image']."'/></div><div class='as_frnd_name'>".$suggestion['name']."</div><div class='clearfix' ></div></div>";
+	}
+	}
+	else
+	echo 'No match found';
+}
 public function getinvitefriendsuggestion($name,$addeduser=''){
 	$invitedsuggestions = $this->friendsmodel->invite_friends_to_user_event($name,$addeduser);
 	if($invitedsuggestions){
@@ -128,6 +140,16 @@ public function getinvitefriendsuggestion($name,$addeduser=''){
 	echo 'No match found';
 }
 
+public function getinvitefriend_suggestion_main($name,$event_id){
+	$invitedsuggestions = $this->friendsmodel->invite_friends_to_user_event($name);
+	if($invitedsuggestions){
+	foreach($invitedsuggestions as $suggestion){
+	echo "<div class='as_frnd_container' onclick='addinvitedfriendsmain(".$suggestion['id'].",".$event_id.")'><div class='as_frnd_img'><img src='".base_url().'uploads/'.$suggestion['image']."'/></div><div class='as_frnd_name'>".$suggestion['name']."</div><div class='clearfix' ></div></div>";
+	}
+	}
+	else
+	echo 'No match found';
+}
 
 public function getfriend_bc_suggestion($name,$addeduser=''){
 	$suggestions = $this->friendsmodel->getfriends($name,$addeduser);
@@ -146,6 +168,8 @@ public function get_friend_invitation($limit=''){
     $data_count =  count($invitations);	
 	//echo $data_count;
 	if($invitations){
+		
+	echo $data= "<div class='data_count invited' id='count".$data_count."'><h5>Friends ( ".$data_count." )</h5>";
 	foreach($invitations as $invitation){
 		if(!empty($invitation[0]['user_img_name']))
 		{
@@ -154,7 +178,9 @@ public function get_friend_invitation($limit=''){
 		{
 			$image = 'default_profile_pic.png';
 		}
-	echo "<div class='data_count' id='count".$data_count."'></div><div class='as_frnd_container' onclick='addinvitedfriends(".$invitation[0]['user_id'].",&#39;".$invitation[0]['user_firstname']." ".$invitation[0]['user_lastname']."&#39;,&#39;".$image."&#39;)'><div class='as_frnd_img'><img src='".base_url().'uploads/'.$image."'/></div><div class='as_frnd_name'>".$invitation[0]['user_firstname']." ".$invitation[0]['user_lastname']."</div><div class='clearfix' ></div></div>";
+	echo "<div class='as_frnd_container'><div class='col-md-2 invite_imge'><img src='".base_url().'uploads/'.$image."' alt='No Image' style='width:48px; height:48px;'/></div><div class='col-md-8'><h6>".$invitation[0]['user_firstname']." ".$invitation[0]['user_lastname']."</h6><p>visakhapatnam</p></div><div class='col-md-2 selected_image'><img src='" .base_url()."images/round1.png' alt='' onclick='addinvitedfriends(".$invitation[0]['user_id'].",&#39;".$invitation[0]['user_firstname']." ".$invitation[0]['user_lastname']."&#39;,&#39;".$image."&#39;)' /></div><div class='clearfix'></div></div></div>";
+	
+	
 	}
 	}
 	else

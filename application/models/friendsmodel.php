@@ -1123,14 +1123,7 @@ public function user_frnds_by_id($limit)
 		$this->db->select('user_id,friend_id');
 		$this->db->from('bzz_userfriends');
 		
-		if($limit)
-		{
-			
-		$this->db->limit($limit);
-		
-		}else{
-		$this->db->limit(1);
-		}
+	
 		$this->db->where($condition);
 		$query = $this->db->get();
 		if($query->num_rows() > 0) {
@@ -1143,39 +1136,61 @@ public function user_frnds_by_id($limit)
 			}
 		}
 		
+	//	print_r($frnds);
 		     $this->db->select('frnd_id');
 			 $this->db->from('bzz_user_event_invites');
 			 $this->db->where('user_id',$id);
 			 $query = $this->db->get();
 			 $data =  $query->result_array();
-			  if(!empty($data))
+			  if($data)
 			  $invited_users = array();
 			 foreach($data as $data)
 			 {
 				$invited_users[] = $data['frnd_id'];
 		
-			 }
+			 
+			 
+			// print_r($invited_users);
+			 
 		
 		$all_users = array_merge($frnds,$invited_users);
-		$invited_frnds = array_diff($all_users,$invited_users);
+		//print_r($all_users);
 		
+		$invited_frnds = array_unique(array_diff($all_users,$invited_users));
+		//print_r($invited_frnds);
+			 }
 
 		if(!empty($invited_frnds))
 			{
 		$usr_ids = array_unique($invited_frnds);
-		
+			}else
+			{
+		$usr_ids = array_unique($frnds);
+			}
+			
+			
 		$key = array_search($id,$usr_ids);
 		if($key!==false)
 		{
   		unset($usr_ids[$key]);
 		}
 		 $userdata = array();
+		 if($usr_ids)
+		 {
 			foreach($usr_ids as $user_id)
 			{
 				 $usercondition = "user_id ="."'".$user_id."'";
 						 $this->db->select('*');
 						 $this->db->from('bzz_user_images');
 						 $this->db->where($usercondition);
+						 if($limit)
+						{
+							
+						$this->db->limit($limit);
+						
+						}else{
+						$this->db->limit(3);
+						}
 						 $query = $this->db->get();
 						 if($query->num_rows > 0)
 						 {
@@ -1200,10 +1215,9 @@ public function user_frnds_by_id($limit)
 					}
 					
 			return $userdata;
-		} else {
-		return false;
-		}
-   
+		 }else
+		 return false;
+		
 
 }
 
@@ -1259,8 +1273,9 @@ public function user_frnds_by_id($limit)
 		$id = $user_id;
 	    $condition = "(user_id ='".$id."' OR friend_id='".$id."') AND request_status='Y'";
 		if($addedusers!='')
+		{
 		$condition.= " AND (user_id NOT IN (".$addedusers.") AND friend_id NOT IN (".$addedusers.") )";
-		
+		}
 		 $this->db->select('*');
 			 $this->db->from('bzz_user_event_invites');
 			 $this->db->where('user_id',$id);

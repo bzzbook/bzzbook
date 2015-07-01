@@ -333,10 +333,95 @@ public function send_event_invitation_to_frnds($event_id,$invited_users)
 */
 
  $this->db->insert('bzz_user_event_invites',$up_data);
+ 
+			$invited_users = $this->friendsmodel->invite_friends_to_user_event();
+			//print_r($invited_users);
+			$list = "";
+		    if($invited_users) { foreach($invited_users as $users){
+				
+				
+				
+           $list .= " <li>
+		   <div class='col-md-3 friendsimg'>
+              <img src='".base_url()."uploads/".$users['image']."' alt='".$users['name']."' style='width:32px; height:32px;'></div>
+              <div class='col-md-8 names'>
+			  <a href=''>".$users['name']."</a></div>
+			  
+                <div class='col-md-2 names'>
+				
+				<button class='btn btn-primary btn-xs' id='invite_btn' onclick='send_invite(".$users['id'].",".$event_id.");' type='button'>Invite</button>
+			
+                </div>
+            </li>";
+             } }else $list = "No Friends Found To Invite!..";
+			 
+			 echo $list;
+	
  }
 }
  
  }
  
+ 
+ 
+   public function editEventDetails($id)
+	{
+		$this->db->select('*');
+		$this->db->from('bzz_user_events');
+		$this->db->where('event_id',$id);
+		$query = $this->db->get();
+		if ($query->num_rows() > 0) {
+			return $query->result();
+		} else {
+		return false;
+		}
+	}
+	
+	public function send_invite_to_frnd($frnd_id,$event_id)
+	{
+	
+		$id = $this->session->userdata('logged_in')['account_id'];
+		
+		$up_data = 
+		array(
+		'event_id'=>$event_id,
+		'frnd_id'=>$frnd_id,
+		'user_id'=>$id,
+		'invitation_status'=>'',
+		);
+		 $this->db->insert('bzz_user_event_invites',$up_data);
+		
+		
+			$invited_users = $this->friendsmodel->invite_friends_to_user_event();
+			//print_r($invited_users);
+			$list = "";
+		    if($invited_users) { foreach($invited_users as $users){
+				
+				
+				
+           $list .= " <li>
+		   <div class='col-md-3 friendsimg'>
+              <img src='".base_url()."uploads/".$users['image']."' alt='".$users['name']."' style='width:32px; height:32px;'></div>
+              <div class='col-md-8 names'>
+			  <a href=''>".$users['name']."</a></div>
+			  
+                <div class='col-md-2 names'>
+				
+				<button class='btn btn-primary btn-xs' id='invite_btn' onclick='send_invite(".$users['id'].",".$event_id.");' type='button'>Invite</button>
+			
+                </div>
+            </li>";
+             } }else $list = "No Friends Found To Invite!..";
+			 
+			 echo $list;
+	
+	}
+	
+	
+	function post_event_buzz($data){
+		 $this->db->insert('bzz_user_event_posts',$data);
+		 return $this->db->insert_id();
+	}
+	
  }
 ?>

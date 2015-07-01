@@ -379,6 +379,19 @@ class Signg_in extends CI_Controller {
 		 echo "success";
 	 }	   
    }
+   
+     function eventinsertlinks($pid,$uid){
+	   $data=array(
+	       'like_on'=>$pid,
+	       'liked_by'=>$uid,
+		   
+	   );
+	 $res=$this->customermodel->eventinsertlinks($data);
+	 if($res){		 
+		 echo "success";
+	 }	   
+   }
+   
    function commentinsertlinks($pid,$uid){
 	   $data=array(
 	       'like_on'=>$pid,
@@ -386,6 +399,20 @@ class Signg_in extends CI_Controller {
 		   
 	   );
 	 $res=$this->customermodel->commentinsertlinks($data);
+	 if($res){
+		 
+		 echo "success";
+	 }	   
+   }
+   
+   
+      function event_comment_insertlinks($pid,$uid){
+	   $data=array(
+	       'like_on'=>$pid,
+	       'liked_by'=>$uid,
+		   
+	   );
+	 $res=$this->customermodel->event_comment_insert_links($data);
 	 if($res){
 		 
 		 echo "success";
@@ -436,6 +463,21 @@ class Signg_in extends CI_Controller {
 	   redirect('profiles');
 	   
    }
+     public function write_event_comment($id){
+		
+	   $data=array(
+	   'comment_content'=>$this->input->post('write_comment'),
+	   'commented_on'=>$id,
+	   'commented_by'=>$this->input->post('posted_by'),
+	   'uploadedfiles' => $this->doupload('uploadCommentPhotos'.$id)
+	   );
+	  $event_id = $this->input->post('event_id');
+	  //$data['uploadedfiles'] = $this->doupload('uploadCommentPhotos');
+	   $res=$this->customermodel->write_event_comments($data);
+	  // $res=$this->customer->write_comments($data);
+	   redirect('profile/eventview/'.$event_id);
+	   
+   }
     public function write_cmp_comment($cmp_post_id,$cmp_id){
 		
 	   $data=array(
@@ -474,6 +516,37 @@ class Signg_in extends CI_Controller {
 		$this->db->where($condition);
 		$query = $this->db->get();
 		if ($query->num_rows() == 1) {
+			echo true;
+		} else {
+		    echo false;
+		}
+	   
+   }
+      public function username_check($user_name)
+   {
+	    $condition ="username ="."'".$user_name."'";
+		$this->db->select('*');
+		$this->db->from('bzz_users');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		if ($query->num_rows() >= 1) {
+			echo true;
+		} else {
+		    echo false;
+		}
+	   
+   }
+   
+   
+   
+   public function user_email_check($user_email)
+   {
+	    $condition ="user_email ="."'".$user_email."'";
+		$this->db->select('*');
+		$this->db->from('bzz_users');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		if ($query->num_rows() >= 1) {
 			echo true;
 		} else {
 		    echo false;
