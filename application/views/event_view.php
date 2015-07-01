@@ -1,4 +1,4 @@
-<?php session_start();
+<?php //session_start();
 	  if(empty($user_id))
 	  $curr_user_id = $this->session->userdata('logged_in')['account_id'];
 	  else
@@ -111,12 +111,12 @@
              <div class="col-md-4">
              <div class="col-md-1"><a href="javascript:document.getElementById('uploaduserevent_Photos').click()" ><i class="fa fa-camera"></i></a></div>
              <div class="col-md-1"><a href="javascript:void(0);" onclick="showeventtaginput('added_tag_frnds','tag_search');"><i class="fa fa-user-plus"></i></a></div>
-             <div class="col-md-1"><i class="fa  fa-meh-o"></i></div>
+            <!-- <div class="col-md-1"><i class="fa  fa-meh-o"></i></div>
              <div class="col-md-1"><i class="fa  fa-map-marker"></i></div>
-             
+             -->
              </div>
              <div class="">
-             <div class="col-md-6 meeting"><i class="fa fa-calendar"></i>Piligrims meet</div>
+             <div class="col-md-6 meeting"><i class="fa fa-calendar"></i><?php echo $event->event_name; ?></div>
               <div class="col-md-2"><div class="btn3 btn-yellow ad_ing "><a href="javascript:{}" onclick="document.getElementById('event_post_one').submit(); return false;">Post</a></div></div>
              </div>
              <div class="clearfix"></div>
@@ -200,13 +200,15 @@
           </div>
         </div>
         
-        <h6>RECENT ACTIVITY</h6>
+        
         <div class="posts">
         
           <?php 
 		    $user_id = $this->session->userdata('logged_in')['account_id'];
 	  $products = $this->customermodel->All_event_posts($event->event_id);
-	  if($products):
+	  if($products): ?>
+      <h6>RECENT ACTIVITY</h6>
+      <?php 
 	  foreach( $products as $row):
 	  $hrsago = $this->customermodel->get_time_difference_php($row->posted_time);
       $posted_id=$row->posted_by;

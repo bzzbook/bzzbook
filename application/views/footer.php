@@ -2057,11 +2057,11 @@ var new_content = "<span  class='bc_mail_ids' id='"+user_id+"'>"+name+"<a onclic
  $('#selected_bc_friends').html(new_content+cur_content);
  $('#search_bc_friends').focus();
  $('#auto_bc_suggest').hide();
-var addedusers = $('#added_bc_users').val()
+var addedusers = $('#added_bc_users_test').val()
 if(addedusers!='')
-$('#added_bc_users').val(addedusers+','+user_id)
+$('#added_bc_users_test').val(addedusers+','+user_id)
 else
-$('#added_bc_users').val(user_id)
+$('#added_bc_users_test').val(user_id)
 
 }
 
