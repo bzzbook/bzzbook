@@ -1183,14 +1183,14 @@ public function user_frnds_by_id($limit)
 						 $this->db->select('*');
 						 $this->db->from('bzz_user_images');
 						 $this->db->where($usercondition);
-						 if($limit)
+					/*	 if($limit)
 						{
 							
 						$this->db->limit($limit);
 						
 						}else{
 						$this->db->limit(3);
-						}
+						}*/
 						 $query = $this->db->get();
 						 if($query->num_rows > 0)
 						 {
