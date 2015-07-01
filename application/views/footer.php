@@ -7,7 +7,21 @@
 	  $_SESSION['username'] = $curr_user_data[0]->username; // Must be already set
 	 // echo $curr_user_data[0]->username;
 	  ?>
-      <div id="online-friends"></div>
+<!--      <div id="online-friends"></div>
+-->
+<div class="wrapper">
+
+    <div class="toggle">
+
+    <ul id="online-friends"></ul>
+     <div class="clearfix"></div>
+<div  class="rig_bottoms">
+<div class="col-md-1"><i class="fa fa-search "></i></div>
+<div class="col-md-8"><input type="text"></div>
+<div class="col-md-1"><i class="fa  fa-external-link"></i></div>
+</div>
+    </div></div>
+
 <?php
 $upload_path = "uploads/";							
 $thumb_width = "150";						

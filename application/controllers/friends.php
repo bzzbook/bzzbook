@@ -189,11 +189,13 @@ public function get_friend_invitation($limit=''){
 public function get_online_frnds(){
 
 $friends = $this->friendsmodel->get_online_frnds();  
-if($friends){ foreach($friends as $frnd){ echo "<p><a href='javascript:void(0)' onclick='chatWith(&#39;".$frnd['username']."&#39;)' ><img src='".base_url().'uploads/'.$frnd['image']."' width='50px' height='50px' title='".$frnd['name']."' /><img style='margin-bottom:22px;margin-left:3px' src='".base_url(); 
+if($friends){ foreach($friends as $frnd){ echo "<a href='javascript:void(0)' onclick='chatWith(&#39;".$frnd['username']."&#39;)' ><li><div class='col-md-2 rig_img'><img src='".base_url().'uploads/'.$frnd['image']."' title='".$frnd['name']."' /></div>
+    <div class='col-md-8 rig_box'> <p>".$frnd['name']."</p></div>
+    <div class='col-md-2 rig_mobile'><img src='".base_url(); 
 if($frnd['last_active']>(time()-900))
-echo "images/online-icon.png' width='8px' height='8px'  /></a></p>"; 
+echo "images/green.png'  /></div><div class='clearfix'></div></li></a>"; 
 else
-echo "images/offline-icon.jpg' width='8px' height='8px'  /></a></p>"; 
+echo "images/grey.png'  /></div><div class='clearfix'></div></li></a>"; 
 }}
 exit(0);
 }
