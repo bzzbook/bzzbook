@@ -1,13 +1,13 @@
-<?php session_start();
+<?php //session_start();
 	  if(empty($user_id))
 	  $curr_user_id = $this->session->userdata('logged_in')['account_id'];
 	  else
 	  $curr_user_id = $user_id; 
-	  $curr_user_data= $this->customermodel->profiledata($curr_user_id);
-	  $_SESSION['username'] = $curr_user_data[0]->username; // Must be already set
+	 // $curr_user_data= $this->customermodel->profiledata($curr_user_id);
+	  //$_SESSION['username'] = $curr_user_data[0]->username; // Must be already set
 	 // echo $curr_user_data[0]->username;
 	  ?>
-<div id="online-friends"></div>
+
    <?php $image = $this->profile_set->get_profile_pic($user_id);	?>
     <section class="col-lg-6 col-md-6 col-sm-5 col-xs-12 coloumn2">
       <div class="updateStatus" id="updateStatus">

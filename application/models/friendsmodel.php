@@ -46,6 +46,7 @@ class Friendsmodel extends CI_Model {
 				if ($query->num_rows() == 1) {
 					$result = $query->result_array();	
 					$frnd['name'] = $result[0]['user_firstname'].' '.$result[0]['user_lastname'];	
+					$frnd['username'] = $result[0]['username'];
 					$this->db->select('*');
 				$this->db->from('bzz_user_images');
 				if($friend['friend_id']==$id)
@@ -1332,56 +1333,26 @@ public function user_frnds_by_id($limit)
    }
 
    public function get_online_frnds(){
-   $frnds = $this->getfriends(); 
-   if($frnds){
-	   $friends = '';
-	foreach($frnds as $frnd){
-	$friends  .= $frnd['id'].','; 	
-	}
-	$friends = rtrim($friends,',');
-	$condition = "user_id IN (".$friends.")";
-	$this->db->select('*');
-	$this->db->from('bzz_user_activity_log');
-	$this->db->where($condition);
-	$query = $this->db->get();
-	if ($query->num_rows() >0) {
-		
-			$friends = $query->result_array();
-			$frnds = array();
-			foreach($friends as $friend)
-			{
-			    $condition = "user_id =" . "'" . $friend['user_id'] . "'";
-				$this->db->select('*');
-				$this->db->from('bzz_userinfo');
-				$this->db->where($condition);
-				$query = $this->db->get();
-				$frnd = array();
-				if ($query->num_rows() == 1) {
-					$result = $query->result_array();	
-					//$frnd['name'] = $result[0]['user_firstname'].' '.$result[0]['user_lastname'];	
-					$frnd['name'] = $result[0]['username'];
-					$frnd['last_active'] = $friend['last_active'];
-					$this->db->select('*');
-				$this->db->from('bzz_user_images');
-				$this->db->where($condition);
-				$this->db->order_by('user_imageinfo_id','desc');
-				$query = $this->db->get();
-				$result = $query->result_array();
-				if($result)
-				$frnd['image'] = $result[0]['user_img_thumb'];
-				else
-				$frnd['image'] =  'default_profile_pic.png';
-				$frnd['id'] = $friend['user_id'];
-				$frnds[] = $frnd;				
-				}				
+	   $frnds = $this->getfriends(); 
+	   if($frnds){
+			$friends = array();
+			foreach($frnds as $frnd){
+			//$friends  .= $frnd['id'].','; 	
+			$condition = "user_id = '".$frnd['id']."'";
+			$this->db->select('*');
+			$this->db->from('bzz_user_activity_log');
+			$this->db->where($condition);
+			$query = $this->db->get();
+				if ($query->num_rows() == 1) {		
+						$user_activity = $query->result_array();
+						$frnd['last_active'] = $user_activity[0]['last_active'];		
+				}else{ $frnd['last_active'] = 0;}
+				$friends[] = $frnd;
 			}
-			return $frnds;
-		
-	}else{ return false; }
-   }else
-   {
-	   return false;
-   }
+			return $friends;
+	   }else{
+		   return false;
+	   }
    }
 
 	
