@@ -2031,7 +2031,7 @@ function showtaginput(){
 //business card ghostpost
 function keyupevent_bc(){
 	var value = $('#search_bc_friends').val();
-	var addedusers = $('#added_bc_users').val();
+	var addedusers = $('#added_bc_users_test').val();
 	if(value!='')
 	{	
 	url="<?php echo base_url(); ?>friends/getfriend_bc_suggestion/"+value+"/"+addedusers;

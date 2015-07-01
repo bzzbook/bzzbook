@@ -371,7 +371,7 @@
 	  ?>
           
           </div>
-          <div class="new_events">
+          <!-- <div class="new_events">
             <div class="col-md-2 leftimg"><a href=""><img alt="" src="<?php echo base_url(); ?>images/fd1.png"></a></div>
             <div class="col-md-8"><textarea rows="2" cols="35" placeholder="Write a comment..."></textarea></div>
             <div class="col-md-2"><i class="fa fa-camera" data-toggle="tooltip" data-placement="top" title="test on top"></i> <i class="fa  fa-meh-o"></i></div>
@@ -402,7 +402,7 @@
             <div class="col-md-8"><textarea rows="2" cols="35" placeholder="Write a comment..."></textarea></div>
             <div class="col-md-2"><i class="fa fa-camera" data-toggle="tooltip" data-placement="top" title="test on top"></i> <i class="fa  fa-meh-o"></i></div>
             <div class="clearfix"></div>
-          </div>
+          </div> -->
       </div>
     </section>
     <section class="col-lg-4 col-md-3 col-sm-3 col-xs-12 coloumn3 nopad-right">

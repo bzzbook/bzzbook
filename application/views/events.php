@@ -180,7 +180,7 @@
     <div class="modal-content">
       <div id="comperrormsg"></div>
       <div class="modal-header">
-       <form name="event_form" id="event_form" action="<?php echo base_url(); ?>events/create_user_event" onsubmit="return validateCompanyForm();" method="post">
+       <form name="event_form" id="event_form" action="<?php echo base_url(); ?>events/create_user_event"  method="post">
           
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabe"><select name="event_type"><option value="1">Create Private Event</option><option value="2">Create Public Event</option></select></h4>
@@ -201,6 +201,8 @@
               <div class="input-group">
                 <div class="input-group-addon"><i class="fa fa-fw"></i></div>
                 <input type="text" id="event_location" name="event_location" class="form-control" placeholder="Add a place?">
+                    <input type="hidden" name="user_event_action" id="user_event_action" value="add">
+                 <input type="hidden" value="" name="event_form_id" >
               </div>
             </div>
             
@@ -221,17 +223,7 @@
            
             </div>
             <div class="clearfix"></div>
-         <!-- <div class="Works">
-              <input type="checkbox" class="outside">
-              <span>Guests can invite friends</span> </div>
-         
-          <div class="col-md-1"><i class="fa fa-calendar"></i></div>
-          <div class="col-md-11 coming_even">
-          <p>You're creating a private event.</p>
-          <span>Only people invited by hosts or guests can see this.</span>
-          </div>-->
-          
-       
+
       
         <div class="publics col-md-12">
             <div class="btn3 btn-black" onclick="document.getElementById('event_form').submit();">Create</div>
