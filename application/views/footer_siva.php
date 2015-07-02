@@ -95,7 +95,7 @@ else
 var addedusers = $('#invitedusers').val();	
 
 	var len = addedusers.length;
-	alert(len);
+	//alert(len);
 	var newval = '';
 	if(len == 1 || len == 2)
 	{ 
