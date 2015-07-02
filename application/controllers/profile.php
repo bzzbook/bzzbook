@@ -431,7 +431,17 @@ public function showfavs()
 			
 			// image insertion into db
             $file_id = $this->profile_set->insert_profile_pic($data['file_name'],$img_thumb,$img_fav);
-			redirect('/profile/profile_setting');
+			if(isset($_SERVER['HTTP_REFERER']))
+                {
+                    $redirect_to = str_replace(base_url(),'',$_SERVER['HTTP_REFERER']);
+                }
+                else
+                {
+                    $redirect_to = $this->uri->uri_string();
+                }            
+
+                redirect($redirect_to);
+			//redirect('/profile/profile_setting');
 		}
 	} 
 	

@@ -262,7 +262,7 @@
          
          <input type="hidden" id="invitedusers" name="invitedusers" />
          
-         <div id="autosuggest_invite_frnds">
+         <div id="autosuggest_invite_frnds" >
          
          </div>
        </div>

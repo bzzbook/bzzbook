@@ -43,7 +43,7 @@ class EventModel extends CI_Model {
 	{
         $id = $this->session->userdata('logged_in')['account_id'];
 		$condition = "a.event_id = ". "'" .$event_id."'";
-		$this->db->select('a.event_id,a.event_name,a.event_location,a.event_details,a.event_date,a.event_time,a.event_type,a.event_created_by,b.frnd_id,b.invitation_status');
+		$this->db->select('a.event_id,a.event_name,a.event_location,a.event_banner,a.event_details,a.event_date,a.event_time,a.event_type,a.event_created_by,b.frnd_id,b.invitation_status');
 		$this->db->from('bzz_user_events a');
 		$this->db->join('bzz_user_event_invites b', 'b.event_id=a.event_id and b.frnd_id='.$id, 'left');
 		$this->db->where($condition);
@@ -392,7 +392,7 @@ public function send_event_invitation_to_frnds($event_id,$invited_users)
 		 $this->db->insert('bzz_user_event_invites',$up_data);
 		
 		
-			$invited_users = $this->friendsmodel->invite_friends_to_user_event();
+			$invited_users = $this->friendsmodel->invite_friends_to_user_event($name='',$addedusers='',$user_id='',$limit='4');
 			//print_r($invited_users);
 			$list = "";
 		    if($invited_users) { foreach($invited_users as $users){
@@ -421,6 +421,34 @@ public function send_event_invitation_to_frnds($event_id,$invited_users)
 	function post_event_buzz($data){
 		 $this->db->insert('bzz_user_event_posts',$data);
 		 return $this->db->insert_id();
+	}
+	
+	
+	
+	
+	public function insert_event_banner_pic($banner_img,$event_id)
+	{
+		   $data = array(
+            'event_banner' => $banner_img,
+		
+        );
+		echo "aesfsdfasdf";
+		echo $banner_img;
+		echo $event_id;
+       $this->db->where('event_id',$event_id);
+	   if($this->db->update('bzz_user_events',$data))
+	   {
+		return true;
+		
+	   }
+	   return false;
+        /*return $this->db->insert_id();
+			
+			 $image = $this->profile_set->get_profile_pic();
+		 
+		$figure= "<figure class='cmplogo'><img src='".base_url()."uploads/".$image[0]->user_img_thumb."' alt='".base_url()."uploads/".$image[0]->user_img_thumb."'></figure>";
+		
+  echo $figure;*/
 	}
 	
  }

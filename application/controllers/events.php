@@ -260,5 +260,54 @@ public function send_event_post_two()
 
 						return $names;
 }
+
+
+public function event_banner_upload()
+	{
+		
+		$event_id = $this->input->post('event_id');
+		echo $event_id;
+		
+		$config['upload_path'] = './uploads/';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$config['create_thumb'] = TRUE;
+		$config['max_size']	= '';
+		$config['max_width']  = '';
+		$config['max_height']  = '';
+
+		$this->load->library('upload', $config);
+
+		if ( ! $this->upload->do_upload())
+		{
+			$error = array('error' => $this->upload->display_errors());
+
+			//$this->load->view('uploadform', $error);
+		}
+		else
+		{
+			$data = $this->upload->data();
+	  	  // print_r($data);
+		    $path = $data['full_path'];
+		    $config['image_library'] = 'gd2';
+			$config['source_image'] = $path;
+			$config['create_thumb'] = TRUE;
+			$config['maintain_ratio'] = FALSE;
+			//$config['upload_path'] = './uploads/thumbs/';
+			//$config['new_image'] = './uploads/thumbs/';
+			$config['thumb_marker'] = '_banner';
+			$config['width'] = 815;
+			$config['height'] = 247;
+
+			$this->load->library('image_lib', $config);
+			$this->image_lib->initialize($config);
+			$this->image_lib->resize();
+			$img_thumb = $data['raw_name'].'_banner'.$data['file_ext'];
+
+			// image insertion into db
+            $file_id = $this->eventmodel->insert_event_banner_pic($img_thumb,$event_id);
+			redirect('/profile/eventview/'.$event_id);
+		}
+	} 
+
 }
 ?>

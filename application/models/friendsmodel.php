@@ -1122,7 +1122,14 @@ public function user_frnds_by_id($limit)
 	    $condition = "(user_id ='" .$id. "' or friend_id ='".$id."') AND request_status='Y'";
 		$this->db->select('user_id,friend_id');
 		$this->db->from('bzz_userfriends');
-		
+			 if($limit)
+						{
+							
+						$this->db->limit($limit);
+						
+						}else{
+						$this->db->limit(4);
+						}
 	
 		$this->db->where($condition);
 		$query = $this->db->get();
@@ -1183,14 +1190,7 @@ public function user_frnds_by_id($limit)
 						 $this->db->select('*');
 						 $this->db->from('bzz_user_images');
 						 $this->db->where($usercondition);
-					/*	 if($limit)
-						{
-							
-						$this->db->limit($limit);
-						
-						}else{
-						$this->db->limit(3);
-						}*/
+				
 						 $query = $this->db->get();
 						 if($query->num_rows > 0)
 						 {
@@ -1265,10 +1265,7 @@ public function user_frnds_by_id($limit)
   {
 	  
 	    $id = $this->session->userdata('logged_in')['account_id'];
-			 
-			
-			 
- 
+		
 		if($user_id!='')
 		$id = $user_id;
 	    $condition = "(user_id ='".$id."' OR friend_id='".$id."') AND request_status='Y'";
