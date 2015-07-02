@@ -18,9 +18,25 @@
         <section class="visitorBox">
           <div class="visitiBoxInner">
           <div class="change_event">
-           <?php if($curr_user_id!=$event->event_created_by) ?> <a href="#"><span aria-hidden="true" class="glyphicon glyphicon-camera change-photo"><em>Change Event Photo</em></span></a>
+           <?php if($curr_user_id!=$event->event_created_by) ?> <a href="javascript:void(0);" onclick="javascript:document.getElementById('event_banner').click()"><span aria-hidden="true" class="glyphicon glyphicon-camera change-photo"><em>Change Event Photo</em></span></a>
+           
+           
+           
+          
+           
+           
+           
             </div>
-            <figure class="compCover_innside"><img class="img-responsive" src="<?php echo base_url(); ?>images/about_banner.jpg" alt=""></figure>
+             <?php $attr = array('id' => 'upload_event_banner', 'name' => 'upload_event_banner'); ?> 
+              <?php echo form_open_multipart('events/event_banner_upload',$attr);?>
+              
+              <input type="hidden" name="event_id" value="<?php echo $event->event_id; ?>" />
+              <input type="file" name="userfile"  id="event_banner" style="display:none;" />
+            
+              
+              
+              </form>
+            <figure class="compCover_innside"><img class="img-responsive" src="<?php echo base_url(); ?>uploads/<?php if(!empty($event->event_banner)) echo $event->event_banner; else echo 'about_banner.jpg'; ?>" alt=""></figure>
             <div class="textbox_banner"><p><?php echo date('M',strtotime($event->event_date)); ?></p><span><?php echo date('d',strtotime($event->event_date)); ?></span>
             <h3><?php echo $event->event_name; ?></h3>
             </div>
@@ -80,7 +96,7 @@
  <ul role="tablist" class="nav nav-tabs">
  <li class="active" role="presentation"><a data-toggle="tab" role="tab" aria-controls="profile" href="#write" aria-expanded="true"><i class="fa fa-envelope-o"></i>Write Post</a></li>
 <li role="presentation" class=""><a href="javascript:document.getElementById('uploaduserevent_Photos').click()"><i class="fa fa-file-photo-o"></i>Add Photo / Video</a></li>
-       <li role="presentation" class=""><a data-toggle="tab" role="tab" aria-controls="settings" href="#ask" aria-expanded="false"><i class="fa fa-file-text-o"></i>Ask Question</a></li>
+     <!--  <li role="presentation" class=""><a data-toggle="tab" role="tab" aria-controls="settings" href="#ask" aria-expanded="false"><i class="fa fa-file-text-o"></i>Ask Question</a></li> -->
           </ul>
           <div id="uploadPhotoseventPreview" style=" margin:5px 5px 5px 5px;"></div><div id="tetsdiv" ></div>
           <!-- Tab panes -->
@@ -439,18 +455,20 @@
                             
                 <div class="friendslist">
                 <ul id="invite_frnds">
-               <?php $invite_frnds = $this->friendsmodel->invite_friends_to_user_event();
+               <?php $invite_frnds = $this->friendsmodel->user_frnds_by_id($limit = '4');
+			   //	print_r($invite_frnds);
+			//	exit;
                  if($invite_frnds) {
-					
+				
 					foreach($invite_frnds as $in_frnds)
 					{ ?>
                 
                 <li id="invites_list">
                 <div class="col-md-3 friendsimg">
-                <img alt="" src="<?php echo base_url(); ?>uploads/<?php echo $in_frnds['image']; ?>"  style="width:32px; height:32px;">
+                <img alt="" src="<?php echo base_url(); ?>uploads/<?php echo $in_frnds[0]['user_img_thumb']; ?>"  style="width:32px; height:32px;">
                 </div>
-                <div class="col-md-8 names"><a href=""><?php echo $in_frnds['name']; ?></a></div>
-                <div class="col-md-2 names"><button class="btn btn-primary btn-xs" id="invite_btn" onclick="send_invite(<?php echo $in_frnds['id']; ?>,<?php echo $event->event_id; ?>);" type="button">Invite</button>
+                <div class="col-md-8 names"><a href=""><?php echo $in_frnds[0]['user_firstname']." ".$in_frnds[0]['user_lastname']; ?></a></div>
+                <div class="col-md-2 names"><button class="btn btn-primary btn-xs" id="invite_btn" onclick="send_invite(<?php echo $in_frnds[0]['user_id']; ?>,<?php echo $event->event_id; ?>);" type="button">Invite</button>
                
                 </div>
                 </li>

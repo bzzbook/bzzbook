@@ -1544,9 +1544,18 @@ $('#addJobForm').submit( function( event){
 	
 $('#pfpic').change(function()
 {
-	$('#upload_pfpic').ajaxSubmit();
+	$('#upload_pfpic').submit();
 	//$(".cmplogo").html(data);
-	location.reload(true);
+	//location.reload(true);
+});	
+
+$('#event_banner').change(function()
+{
+	
+	$('#upload_event_banner').submit();
+	//location.reload(true);
+	//$(".cmplogo").html(data);
+	//location.reload(true);
 });	
 </script>
 

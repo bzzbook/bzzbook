@@ -2209,7 +2209,7 @@ border-color: -moz-use-text-color #ddd #ccc; border-image: none; border-style: n
 .textbox_banner{ border: 2px solid #fff; text-align:center; border-radius: 8px; bottom: 5%; color: #fff; display: block;float: left; height: 60px;
 left: 2%; position: absolute; width: 60px;}
 .textbox_banner span{ font-weight:bold; font-size:20px;}
-.textbox_banner h3{ bottom: 14px; color: #ffffff; font-size: 30px; font-weight: bold; left: 73px; letter-spacing: 1px; position: absolute;}
+.textbox_banner h3{ bottom: 0px; color: #ffffff; font-size: 30px; font-weight: bold; left: 73px; letter-spacing: 1px; position: absolute;}
 .company .visitorBox .visitiBoxInner .compCover_innside img{ width:100%;}
 .compCover_innside img{ width:100% !important; }
 .change_event{ float:right;}
@@ -2226,8 +2226,13 @@ left: 75%; margin-top:5% !important; height:25px; width:20% !important;}
 .invite_imge{ width:48px; height:48px; overflow:hidden; padding:0px;}
 .invites_right  h5{ text-transform:uppercase; color:#737373; font-weight:normal;}
 .invite_right_small img{ width:30px; height:30px; overflow:hidden;}
-.invite_right_small{ margin-top:10px;}
+
+.invite_right_small{ margin-top:10px; }
+#online-friends{  }
+
+/*.invite_right_small{ margin-top:10px;} */
 /*#online-friends{  
+>>>>>>> 9662931acef33525169ce6e69c3baae2702beade
     position: fixed;
 	right:0;
     top: 170px;
@@ -2306,3 +2311,16 @@ left: 75%; margin-top:5% !important; height:25px; width:20% !important;}
 .rig_bottoms{ display:block; padding-top:15px; color:#000; position:absolute; bottom:0px;}
 .rig_bottoms input{ border:1px solid #a5a4a4; }
 
+
+
+
+div.mousescroll {
+    overflow: hidden;
+}
+div.mousescroll:hover {
+    overflow-y: scroll;
+}
+ul {
+    list-style-type: none;
+}
+.slimScrollDiv { border: 1px solid #ccc; margin:10px; }
