@@ -3,7 +3,10 @@ user_event_edit();
 
 function invite_event_frnds(keyword,added_users,suggestion_box){
 	var value = $('#'+keyword).val();
-	var addedusers = $('#'+added_users).val();
+	var addedusersbefore = $('#'+added_users).val();
+	var addedusers = addedusersbefore.replace(/,$/, '');
+	//var addedusers = addedusersbefore.trim(',');
+	//alert(addedusers);
 	if(value!='')
 	{	
 	url="<?php echo base_url(); ?>friends/getinvitefriendsuggestion/"+value+"/"+addedusers;
@@ -99,13 +102,16 @@ var addedusers = $('#invitedusers').val();
 		$('#invitedusers').val(newval);
 	}else
 {	
-var addeduserstrimmed = addedusers.trim(','); 
+ 
+var addeduserstrimmed = addedusers.replace(/,$/, '');
+
 var after_removed = addeduserstrimmed.replace(user_id,'');	
 var final_users = after_removed.replace(',,',',');
 removeaddedfrnd(user_id);
 if($('#invitedusers').val(final_users) == ',')
+
 $('#invitedusers').val('');
-alert(final_users);
+//alert(final_users);
 $('#img_div'+user_id).find('img').remove();
 $('#img_div'+user_id).append('<img id="img_succ'+user_id+'" src="<?php echo base_url().'images/round2.png'; ?>"/>');
 }
