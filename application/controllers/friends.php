@@ -196,7 +196,7 @@ if($frnd['last_active']>(time()-900))
 echo "images/green.png'  /></div><div class='clearfix'></div></li></a>"; 
 else
 echo "images/grey.png'  /></div><div class='clearfix'></div></li></a>"; 
-}}
+}}else echo '';
 exit(0);
 }
 

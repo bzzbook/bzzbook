@@ -118,6 +118,27 @@ class EventModel extends CI_Model {
 		}
 		return false;
 	}
+	public function get_past_event()
+	{
+         $id = $this->session->userdata('logged_in')['account_id'];
+		$condition = "(a.event_created_by = " .$id." OR b.frnd_id=".$id.") AND a.event_date < NOW()";
+		$this->db->select('a.event_id,a.event_name,a.event_location,a.event_details,a.event_date,a.event_time,a.event_type,a.event_created_by,b.frnd_id,b.invitation_status');
+		$this->db->from('bzz_user_events a'); 
+		$this->db->join('bzz_user_event_invites b', 'b.event_id=a.event_id and b.frnd_id='.$id, 'left');
+		$this->db->where($condition);
+		$this->db->order_by('a.event_date','desc');   
+		$this->db->order_by('a.event_time','desc');      
+		$query = $this->db->get(); 
+		
+		$event_data = $query->result();
+		//echo $this->db->last_query(); exit;
+		//print_r($event_data);exit;
+		if(!empty($event_data))
+		{
+			return $event_data;
+		}
+		return false;
+	}
 	public function get_invites()
 	{
          $id = $this->session->userdata('logged_in')['account_id'];
