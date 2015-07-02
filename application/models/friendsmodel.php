@@ -1131,7 +1131,7 @@ public function user_frnds_by_id($limit)
 						$this->db->limit($limit);
 						
 						}else{
-						$this->db->limit(4);
+						$this->db->limit(9);
 						}
 	
 		$this->db->where($condition);
