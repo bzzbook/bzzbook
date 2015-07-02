@@ -3,7 +3,10 @@ user_event_edit();
 
 function invite_event_frnds(keyword,added_users,suggestion_box){
 	var value = $('#'+keyword).val();
-	var addedusers = $('#'+added_users).val();
+	var addedusersbefore = $('#'+added_users).val();
+	var addedusers = addedusersbefore.replace(/,$/, '');
+	//var addedusers = addedusersbefore.trim(',');
+	//alert(addedusers);
 	if(value!='')
 	{	
 	url="<?php echo base_url(); ?>friends/getinvitefriendsuggestion/"+value+"/"+addedusers;
@@ -61,8 +64,8 @@ function addinvitedfriends(user_id,name,image){
 	/*alert(user_id);
 	alert(name);
 	alert(image);*/
-	//$('.selected_image').find('img').remove();
-	//$('.selected_image').append('<img class="col-md-2 selected_image" src="<?php echo base_url().'images/round3.png'; ?>"/>');
+	$('#img_div'+user_id).find('img').remove();
+	$('#img_div'+user_id).append('<img id="img_succ'+user_id+'" src="<?php echo base_url().'images/round3.png'; ?>"/>');
 
 var cur_content = $('#invited_friends').html();
 var users_check = $('#invitedusers').val();
@@ -87,7 +90,33 @@ $('#invitedusers').val(addedusers+','+user_id)
 else
 $('#invitedusers').val(user_id)
 }
+else
+{
+var addedusers = $('#invitedusers').val();	
 
+	var len = addedusers.length;
+	//alert(len);
+	var newval = '';
+	if(len == 1 || len == 2)
+	{ 
+		$('#invitedusers').val(newval);
+	}else
+{	
+ 
+var addeduserstrimmed = addedusers.replace(/,$/, '');
+
+var after_removed = addeduserstrimmed.replace(user_id,'');	
+var final_users = after_removed.replace(',,',',');
+removeaddedfrnd(user_id);
+if($('#invitedusers').val(final_users) == ',')
+
+$('#invitedusers').val('');
+//alert(final_users);
+$('#img_div'+user_id).find('img').remove();
+$('#img_div'+user_id).append('<img id="img_succ'+user_id+'" src="<?php echo base_url().'images/round2.png'; ?>"/>');
+}
+
+}
 }
 
 function addinvitedfriendsmain(invited_users,eventid)
@@ -135,7 +164,7 @@ $('.invite_friends_modal').click(function()
 	
 });
 
-$('#all_friends_invites').scroll(function()
+$('#scroll-new').scroll(function()
 		{
 			var value = $('.data_count').attr("id").substr(5);
 			
@@ -670,10 +699,11 @@ $('#event_banner').change(function()
 
 
 //invalid name call 
-              $('#all_friends_invites').slimscroll({
+              $('#scroll-new').slimscroll({
                   color: '#00f',
                   size: '10px',
-                  width: '50px',
-                  height: '150px'                  
-              });
+				  width: '324px',
+				  float: 'left',
+                  height: '400px'            
+              }); 
 </script>

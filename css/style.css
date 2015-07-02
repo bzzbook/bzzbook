@@ -2319,9 +2319,9 @@ div.mousescroll {
     overflow: hidden;
 }
 div.mousescroll:hover {
-    overflow-y: scroll;
+   overflow-y: scroll;
 }
 ul {
     list-style-type: none;
 }
-.slimScrollDiv { border: 1px solid #ccc; margin:10px; }
+.slimScrollDiv { border: 1px solid #ccc; margin:10px; width: 324px; float:left; height: 200px;  }

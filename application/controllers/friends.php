@@ -169,7 +169,7 @@ public function get_friend_invitation($limit=''){
 	//echo $data_count;
 	if($invitations){
 		
-	echo $data= "<div class='data_count invited' id='count".$data_count."'><h5>Friends ( ".$data_count." )</h5>";
+	//echo $data= "<div class='data_count invited' id='count".$data_count."'><h5>Friends ( ".$data_count." )</h5>";
 	foreach($invitations as $invitation){
 		if(!empty($invitation[0]['user_img_name']))
 		{
@@ -178,7 +178,7 @@ public function get_friend_invitation($limit=''){
 		{
 			$image = 'default_profile_pic.png';
 		}
-	echo "<div class='as_frnd_container'><div class='col-md-2 invite_imge'><img src='".base_url().'uploads/'.$image."' alt='No Image' style='width:48px; height:48px;'/></div><div class='col-md-8'><h6>".$invitation[0]['user_firstname']." ".$invitation[0]['user_lastname']."</h6><p>visakhapatnam</p></div><div class='col-md-2 selected_image'><img src='" .base_url()."images/round1.png' alt='' onclick='addinvitedfriends(".$invitation[0]['user_id'].",&#39;".$invitation[0]['user_firstname']." ".$invitation[0]['user_lastname']."&#39;,&#39;".$image."&#39;)' /></div><div class='clearfix'></div></div></div>";
+	echo "<a href='javascript:void(0);' onclick='addinvitedfriends(".$invitation[0]['user_id'].",&#39;".$invitation[0]['user_firstname']." ".$invitation[0]['user_lastname']."&#39;,&#39;".$image."&#39;)'><div class='as_frnd_container'><div class='col-md-2 invite_imge'><img src='".base_url().'uploads/'.$image."' alt='No Image' style='width:48px; height:48px;'/></div><div class='col-md-8'><h6>".$invitation[0]['user_firstname']." ".$invitation[0]['user_lastname']."</h6><p>visakhapatnam</p></div><div class='col-md-2 selected_image' id='img_div".$invitation[0]['user_id']."'><img id='img_succ".$invitation[0]['user_id']."' src='" .base_url()."images/round1.png' alt='' /></div><div class='clearfix'></div></div></div></a>";
 	
 	
 	}

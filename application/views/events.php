@@ -312,9 +312,10 @@
          </div>
        </div>
         </form>
-         <div class="invited col-md-7">
+        <div class="row">
+         <div class="invited col-md-7 mousescroll"  id="scroll-new">
    
-        <div class="invitebox" id="all_friends_invites" >
+        <div class="invitebox" id="all_friends_invites">
        <!-- <div class="col-md-2 invite_imge"><img src="<?php echo base_url(); ?>images/logo.png" alt=""></div>
         <div class="col-md-8">
         <h6>your name</h6>
@@ -329,8 +330,8 @@
       
         
            <div class="col-md-5 invites_right">
-           <div class="col-md-10"><h5>Selected</h5></div>
-            <div class="col-md-2">5</div>
+      <!--     <div class="col-md-10"><h5>Selected</h5></div>
+            <div class="col-md-2">5</div>-->
             <div class="clearfix"></div>
             
              <div class="invite_right_small" id="invited_friends">
@@ -338,6 +339,7 @@
             </div>
          
             
+           </div>
            </div>
            <div class="clearfix"></div>
         <div class="publics col-md-12">
