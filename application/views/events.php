@@ -59,12 +59,12 @@
               <p><a href=""><?php echo $event->event_location; ?></a></p>
              <div class="event-btns event-btns<?php echo $event->event_id; ?>" id="eventBtns<?php echo $event->event_id; ?>"> 
              	  <?php if($event->event_created_by==$curr_user_id) {?>
-                  <p></p><div class="invitebtn invite_friends_modal" id="user_events<?php  echo $event->event_id;  ?>"><i class="fa fa-envelope-o "></i>  Invite</div><input type="submit" value="Hosting" class="hostbtn adings nocursor">
+                  <div class="invitebtn invite_friends_modal" id="user_events<?php  echo $event->event_id;  ?>"><i class="fa fa-envelope-o "></i>  Invite</div><input type="submit" value="Hosting" class="hostbtn adings nocursor">
                   <?php }else{ if(!$event->invitation_status){ ?>
-                  <p></p>
+                  
                   <input type="button" value="Decline" class="gngSts adings" onclick="updateGoingStatus(<?php echo $event->event_id; ?>,3)"><input type="button" value="Maybe" class="gngSts adings" onclick="updateGoingStatus(<?php echo $event->event_id; ?>,2)"><input type="button" value="Join" class="gngSts adings" onclick="updateGoingStatus(<?php echo $event->event_id; ?>,1)">
                   
-                  <?php }else{ ?> <p></p><label><select id="goingsts<?php echo $event->event_id; ?>" name="goingsts<?php echo $event->event_id; ?>" onchange="updateGoingStatus(<?php echo $event->event_id; ?>)" ><option value="1" <?php if($event->invitation_status==1) echo "selected='selected'"; ?>>Going</option><option value="2" <?php if($event->invitation_status==2) echo "selected='selected'"; ?>>Maybe</option><option value="3" <?php if($event->invitation_status==3) echo "selected='selected'"; ?>>Not going</option></select></label> <?php } } ?>
+                  <?php }else{ ?> <label><select id="goingsts<?php echo $event->event_id; ?>" name="goingsts<?php echo $event->event_id; ?>" onchange="updateGoingStatus(<?php echo $event->event_id; ?>)" ><option value="1" <?php if($event->invitation_status==1) echo "selected='selected'"; ?>>Going</option><option value="2" <?php if($event->invitation_status==2) echo "selected='selected'"; ?>>Maybe</option><option value="3" <?php if($event->invitation_status==3) echo "selected='selected'"; ?>>Not going</option></select></label> <?php } } ?>
                   </div>
                   
               </div>
@@ -107,9 +107,9 @@
              <?php if($invite->event_created_by==$curr_user_id) {?>
                   <div class="btn2 invitebtn invite_friends_modal" id="user_events<?php  echo $event->event_id;  ?>"><i class="fa fa-envelope-o "></i>  Invite</div><input type="submit" value="Hosting" class="hostbtn adings">
                   <?php }else{ if(!$invite->invitation_status){  ?>
-                  <p></p><input type="button" value="Decline" class="gngSts adings" onclick="updateGoingStatus(<?php echo $invite->event_id; ?>,3)"><input type="button" value="Maybe" class="gngSts adings" onclick="updateGoingStatus(<?php echo $invite->event_id; ?>,2)"><input type="button" value="Join" class="gngSts adings" onclick="updateGoingStatus(<?php echo $invite->event_id; ?>,1)">
+                  <input type="button" value="Decline" class="gngSts adings" onclick="updateGoingStatus(<?php echo $invite->event_id; ?>,3)"><input type="button" value="Maybe" class="gngSts adings" onclick="updateGoingStatus(<?php echo $invite->event_id; ?>,2)"><input type="button" value="Join" class="gngSts adings" onclick="updateGoingStatus(<?php echo $invite->event_id; ?>,1)">
                   
-                  <?php  }else{ ?> <p></p><label><select id="goingsts<?php echo $invite->event_id; ?>" name="goingsts<?php echo $invite->event_id; ?>" onchange="updateGoingStatus(<?php echo $invite->event_id; ?>,this.value)" ><option value="1" <?php if($invite->invitation_status==1) echo "selected='selected'"; ?>>Going</option><option value="2" <?php if($invite->invitation_status==2) echo "selected='selected'"; ?>>Maybe</option><option value="3" <?php if($invite->invitation_status==3) echo "selected='selected'"; ?>>Not going</option></select></label> <?php } } ?>
+                  <?php  }else{ ?> <label><select id="goingsts<?php echo $invite->event_id; ?>" name="goingsts<?php echo $invite->event_id; ?>" onchange="updateGoingStatus(<?php echo $invite->event_id; ?>,this.value)" ><option value="1" <?php if($invite->invitation_status==1) echo "selected='selected'"; ?>>Going</option><option value="2" <?php if($invite->invitation_status==2) echo "selected='selected'"; ?>>Maybe</option><option value="3" <?php if($invite->invitation_status==3) echo "selected='selected'"; ?>>Not going</option></select></label> <?php } } ?>
                   </div>
                   
               </div>
