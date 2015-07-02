@@ -6031,6 +6031,23 @@ function updateGoingStatus(event_id,status)
 	 
 		});
 }*/
+
+    $(window).scroll(function(){
+   
+	var scrollTop = $(window).scrollTop();
+	var topheight = 170;
+	if(scrollTop<170)
+	{
+		var newtop = topheight - scrollTop;
+	}
+	else{
+		var newtop = 0;
+	}
+	$('.wrapper').css({top: newtop}); 
+	$('.toggle').css({height: '98%'}); 
+    });
+	
+
 function testclick()
 {
 		url="<?php echo base_url(); ?>api/customer/cust_sign_up";

@@ -2273,6 +2273,7 @@ left: 75%; margin-top:5% !important; height:25px; width:20% !important;}
     float:left;
     text-align: left;
     padding-top:0%;
+	border-left:1px solid #e5e6e9;
 }
 
 /* toggle style when wrapper is hovered */
@@ -2295,7 +2296,7 @@ left: 75%; margin-top:5% !important; height:25px; width:20% !important;}
     background-color:;
     float:right;
 }
-.wrapper a{ color:#000;}
+.wrapper a{ color:#000; font-family:Verdana, Geneva, sans-serif; font-size:12px;}
 .wrapper a:hover{ color:#000; text-decoration:none; }
 .wrapper li{border-bottom:1px solid #e5e6e9; }
 .wrapper:hover li{ border-bottom:1px solid #e5e6e9 #dfe0e4 #d0d1d5;  }

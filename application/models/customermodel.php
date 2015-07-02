@@ -67,6 +67,7 @@ class Customermodel extends CI_Model {
 		}	
 	   $friends[] =  $id;
 	   $friends = array_unique($friends);
+	  // print_r($friends); exit;
 	   $this->db->select('*');
 	   $this->db->from('bzz_posts');
 /*	   $this->db->where($condition);
@@ -77,11 +78,13 @@ class Customermodel extends CI_Model {
 			$posts = array();
 			foreach($result as $res){
 		    $friend_ids = explode(',',$res->posted_to);
-			if(($res->posted_to==0 && in_array($res->posted_by,$friends)) || ($res->isGhostpost==1 && in_array($res->posted_by,$friends)) || ($res->posted_by==$id && $id==$cur_usr_id) || (in_array($id, $friend_ids) && $id==$cur_usr_id) ||  in_array($pst_usr_id, $friend_ids) || ($res->posted_by==$id && in_array($cur_usr_id, $friend_ids)))
+				
+			if(($res->posted_to==0 && in_array($res->posted_by,$friends)) || ($res->isGhostpost==1 && in_array($res->posted_by,$friends)) || ($res->posted_by==$id && $id==$cur_usr_id) || (in_array($id, $friend_ids) && $id==$cur_usr_id) ||  (!empty($pst_usr_id) && in_array($pst_usr_id, $friend_ids)) || ($res->posted_by==$id && in_array($cur_usr_id, $friend_ids)))
 			{
 				$posts[] = $res;
 			}
 			}
+			
 			return $posts;
 	   } 
 	   else 
