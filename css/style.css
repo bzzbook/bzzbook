@@ -2017,6 +2017,14 @@ top: -35px; }
 #hosting .thisweek_right p a:hover{ text-decoration:underline;}
 #hosting .coming_date{ display:block; position:absolute; top:0; color:#fff; padding-left:15%; text-align:center;}
 
+#past .thisweek{ position: relative; border-bottom:1px solid #d8d8d8; margin-bottom:8px;}
+#past .coming_date{ display:block; position:absolute; top:0; color:#fff; padding-left:15%; text-align:center;}
+#past .thisweek_right h5{ font-size:18px; font-weight:500;}
+#past .thisweek_right span{ font-size:14px; color:#5890ff;}
+#past .thisweek_right p{ font-size:14px;}
+#past .thisweek_right p a{ color:#353535;}
+#past .thisweek_right p a:hover{ text-decoration:underline;}
+#past .coming_date{ display:block; position:absolute; top:0; color:#fff; padding-left:15%; text-align:center;}
 
 .adings{ margin-top:3px;}
 .event-btns{ float:left;}
@@ -2236,12 +2244,12 @@ left: 75%; margin-top:5% !important; height:25px; width:20% !important;}
 
 /*1-07-2015 right side subscribe open */
 .wrapper{ position:fixed;
-    width:270px;
+    width:230px;
     height:100%;
-    background-color:#ccc;
+    background-color:#fff ;
     top:170px;
     right:0;
-    margin-right:-200px;
+    margin-right:-165px;
 	padding:0px;
     /* Makes opening smoothly */
     transition: margin-right ease 1s;
@@ -2261,7 +2269,7 @@ left: 75%; margin-top:5% !important; height:25px; width:20% !important;}
     display:block;
     width:100%;
     height:73%;
-    background-color:#ccc;
+    background-color:#fff ;
     float:left;
     text-align: left;
     padding-top:0%;
@@ -2269,7 +2277,7 @@ left: 75%; margin-top:5% !important; height:25px; width:20% !important;}
 
 /* toggle style when wrapper is hovered */
 .wrapper:hover .toggle{
-	background-color: #ccc;
+	background-color: #fff;
     color: white;
 }
 
@@ -2288,17 +2296,18 @@ left: 75%; margin-top:5% !important; height:25px; width:20% !important;}
     float:right;
 }
 .wrapper a{ color:#000;}
-.wrapper a:hover{ color:#fff; text-decoration:none; }
-.wrapper li{border-bottom:1px solid #ccc; }
-.wrapper:hover li{ border-bottom:1px solid #a5a4a4; }
+.wrapper a:hover{ color:#000; text-decoration:none; }
+.wrapper li{border-bottom:1px solid #e5e6e9; }
+.wrapper:hover li{ border-bottom:1px solid #e5e6e9 #dfe0e4 #d0d1d5;  }
 .wrapper .rig_box{display:none;}
 .wrapper:hover .rig_box{display:block;}
 .wrapper ul{ margin:0px; padding:0px; list-style:none;}
 .wrapper li{ padding:5px 0 0 0; min-height:45px;}
-.wrapper .rig_img img{ width:32px; height:32px; padding-left:0px;}
+.wrapper li:hover{ background:#efefef; }
+.wrapper .rig_img img{ width:32px; height:32px; padding:0px; }
 .wrapper p{ padding-top:8px;}
 .wrapper .rig_mobile{ padding:8px 0 0 0;}
-.wrapper .rig_mobile img{ padding-left:5px;}
+.wrapper .rig_mobile img{ padding-left:15px;}
 .rig_bottoms{ display:block; padding-top:15px; color:#000; position:absolute; bottom:0px;}
 .rig_bottoms input{ border:1px solid #a5a4a4; }
 

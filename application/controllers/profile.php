@@ -117,6 +117,7 @@ public function events()
 		$data['events'] = $this->eventmodel->get_events_and_invites();
 		$data['invites'] = $this->eventmodel->get_invites();
 		$data['hosts'] = $this->eventmodel->get_event_hosts();
+		$data['past'] = $this->eventmodel->get_past_event();
 		$this->load->view('full_content_view',$data);
 	//$this->load->view('events');
 }

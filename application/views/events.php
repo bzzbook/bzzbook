@@ -1,5 +1,5 @@
 <?php $curr_user_id = $this->session->userdata('logged_in')['account_id']; ?>
-<section class="col-lg-3 col-md-3 col-sm-4 col-xs-12 coloumn1">
+<?php /*?><section class="col-lg-3 col-md-3 col-sm-4 col-xs-12 coloumn1">
       <aside>
         <?php $this->load->view('left_bar_profile'); ?>
         <div class="sideNav_inside">
@@ -15,16 +15,17 @@
      
         </div>
       </aside>
-    </section>
-    <section class="col-lg-6 col-md-6 col-sm-5 col-xs-12 coloumn2 pfSettings">
+    </section><?php */?>
+    <section class="col-lg-9 col-md-9 col-sm-5 col-xs-12 coloumn2 pfSettings">
       <div class="upcoming">
         <div role="tabpanel"> 
           <!-- Nav tabs -->
           <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#all" aria-controls="profile" role="tab" data-toggle="tab">All</a></li>
+            <li role="presentation" class="active"><a href="#all" aria-controls="profile" role="tab" data-toggle="tab">Upcoming</a></li>
             <li role="presentation"><a href="#invites" aria-controls="messages" role="tab" data-toggle="tab">Invites</a></li>
 <!--            <li role="presentation"><a href="#saved" aria-controls="settings" role="tab" data-toggle="tab">Saved</a></li>
 -->           <li role="presentation"><a href="#hosting" aria-controls="settings" role="tab" data-toggle="tab">Hosting</a></li>
+				<li role="presentation"><a href="#past" aria-controls="settings" role="tab" data-toggle="tab">Past</a></li>
           <div class="right_event">
 <!--          <input type="button" onclick="testclick()" />
 -->            <div data-target="#events_upcoming" data-toggle="modal" class="btn2 btn-black2"><i class="fa fa-plus"></i>Create</div>
@@ -46,13 +47,13 @@
 				
 			 ?>  
             <div class="thisweek">
-              <div class="col-md-3"><img class="event_img" alt="" src="<?php echo base_url()."uploads/".$image[0]->user_img_thumb; ?>">
+              <div class="col-md-2"><img class="event_img" alt="" src="<?php echo base_url()."uploads/".$image[0]->user_img_thumb; ?>">
               <div class="coming_date">
               <p class="event_month"><?php echo date('M',strtotime($event->event_date)); ?></p>
              <p class="event_date"><?php echo date('d',strtotime($event->event_date)); ?></p>
               </div>
               </div>
-              <div class="col-md-9 thisweek_right">
+              <div class="col-md-10 thisweek_right">
               <h5><a href="<?php echo base_url().'profile/eventview/'.$event->event_id; ?>"><?php echo $event->event_name; ?></a></h5>
               <span><?php echo date('l',strtotime($event->event_date)); ?>, <?php echo date('M',strtotime($event->event_date)); ?> <?php echo date('d',strtotime($event->event_date)); ?></span>
               <p><a href=""><?php echo $event->event_location; ?></a></p>
@@ -92,13 +93,13 @@
 				
 			 ?>  
             <div class="thisweek">
-              <div class="col-md-3"><img class="event_img" alt="" src="<?php echo base_url()."uploads/".$image[0]->user_img_thumb; ?>">
+              <div class="col-md-2"><img class="event_img" alt="" src="<?php echo base_url()."uploads/".$image[0]->user_img_thumb; ?>">
               <div class="coming_date">
               <p class="event_month"><?php echo date('M',strtotime($invite->event_date)); ?></p>
              <p class="event_date"><?php echo date('d',strtotime($invite->event_date)); ?></p>
               </div>
               </div>
-              <div class="col-md-9 thisweek_right">
+              <div class="col-md-10 thisweek_right">
               <h5><a href="<?php echo base_url().'profile/eventview/'.$invite->event_id; ?>"><?php echo $invite->event_name ?></a></h5>
               <span><?php echo date('l',strtotime($invite->event_date)); ?>, <?php echo date('M',strtotime($invite->event_date)); ?> <?php echo date('d',strtotime($invite->event_date)); ?></span>
               <p><a href=""><?php echo $invite->event_location; ?></a></p>
@@ -143,13 +144,13 @@
 				
 			 ?>  
             <div class="thisweek">
-              <div class="col-md-3"><img class="event_img" alt="" src="<?php echo base_url()."uploads/".$image[0]->user_img_thumb; ?>">
+              <div class="col-md-2"><img class="event_img" alt="" src="<?php echo base_url()."uploads/".$image[0]->user_img_thumb; ?>">
               <div class="coming_date">
               <p class="event_month"><?php echo date('M',strtotime($host->event_date)); ?></p>
              <p class="event_date"><?php echo date('d',strtotime($host->event_date)); ?></p>
               </div>
               </div>
-              <div class="col-md-9 thisweek_right">
+              <div class="col-md-10 thisweek_right">
               <h5><a href="<?php echo base_url().'profile/eventview/'.$host->event_id; ?>"><?php echo $host->event_name; ?></a></h5>
               <span><?php echo date('l',strtotime($host->event_date)); ?>, <?php echo date('M',strtotime($host->event_date)); ?> <?php echo date('d',strtotime($host->event_date)); ?></span>
               <p><a href=""><?php echo $host->event_location; ?></a></p>
@@ -158,6 +159,50 @@
                   <div class="btn2 invitebtn invite_friends_modal" id="user_events<?php  echo $host->event_id;  ?>"><i class="fa fa-envelope-o "></i>  Invite</div><input type="submit" value="Hosting" class="hostbtn adings">
                   <?php }else{ ?>
                   <input type="button" value="Decline" class="gngSts adings" onclick="updateGoingStatus(<?php echo $host->event_id; ?>,3)"><input type="button" value="Maybe" class="gngSts adings" onclick="updateGoingStatus(<?php echo $host->event_id; ?>,2)"><input type="button" value="Join" class="gngSts adings" onclick="updateGoingStatus(<?php echo $host->event_id; ?>,1)">
+                  
+                  <?php } ?>
+                  </div>
+                  
+              </div>
+               <div class="clear"></div>
+             </div>
+             <?php }
+			  	   endif;
+			   ?>
+
+            </div>
+            <div role="tabpanel" class="tab-pane" id="past">
+              <!--<div class="alltabboxes">        
+              <div class="alltabimages"><img src="images/pf_pic.png" alt=""></div>
+              <p>Have friends over or plan a night out. </p>
+              <p><a href="">Create an Event.</a></p>
+             </div>-->
+             
+            <?php if($hosts):
+				foreach($past as $pevent){ 
+				
+				$image = $this->profile_set->get_profile_pic($pevent->event_created_by);
+				if(empty($image))
+				$image = "default_profile_pic.png";
+				$get_profiledata = $this->customermodel->profiledata($pevent->event_created_by);
+				
+			 ?>  
+            <div class="thisweek">
+              <div class="col-md-2"><img class="event_img" alt="" src="<?php echo base_url()."uploads/".$image[0]->user_img_thumb; ?>">
+              <div class="coming_date">
+              <p class="event_month"><?php echo date('M',strtotime($pevent->event_date)); ?></p>
+             <p class="event_date"><?php echo date('d',strtotime($pevent->event_date)); ?></p>
+              </div>
+              </div>
+              <div class="col-md-10 thisweek_right">
+              <h5><a href="<?php echo base_url().'profile/eventview/'.$pevent->event_id; ?>"><?php echo $pevent->event_name; ?></a></h5>
+              <span><?php echo date('l',strtotime($pevent->event_date)); ?>, <?php echo date('M',strtotime($pevent->event_date)); ?> <?php echo date('d',strtotime($pevent->event_date)); ?></span>
+              <p><a href=""><?php echo $pevent->event_location; ?></a></p>
+             <div class="event-btns" id="eventBtns<?php echo $pevent->event_id; ?>"> 
+             <?php if($pevent->event_created_by==$curr_user_id) {?>
+                  <?php /*?><div class="btn2 invitebtn invite_friends_modal" id="user_events<?php  echo $pevent->event_id;  ?>"><i class="fa fa-envelope-o "></i>  Invite</div><?php */?><input type="submit" value="Hosting" class="hostbtn adings">
+                  <?php }else{ ?>
+                  <input type="button" value="Decline" class="gngSts adings" onclick="updateGoingStatus(<?php echo $pevent->event_id; ?>,3)"><input type="button" value="Maybe" class="gngSts adings" onclick="updateGoingStatus(<?php echo $pevent->event_id; ?>,2)"><input type="button" value="Join" class="gngSts adings" onclick="updateGoingStatus(<?php echo $pevent->event_id; ?>,1)">
                   
                   <?php } ?>
                   </div>
