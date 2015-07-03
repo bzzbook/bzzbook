@@ -15,12 +15,12 @@
 
     <ul id="online-friends"></ul>
      <div class="clearfix"></div>
-
-    </div><div  class="rig_bottoms">
+<div  class="rig_bottoms">
 <div class="col-md-1"><i class="fa fa-search "></i></div>
 <div class="col-md-8"><input type="text"></div>
 <div class="col-md-1"><i class="fa  fa-external-link"></i></div>
-</div></div>
+</div>
+    </div></div>
 
 <?php
 $upload_path = "uploads/";							
@@ -1953,13 +1953,19 @@ function removefrndfromtagging(user_id){
 	}
 	else if(addedusers.indexOf(user_id)==0){
 	
-	if(addedusers.indexOf(',')>1){
+	if(addedusers.indexOf(',')>-1){
 	newval = addedusers.replace(user_id+',','');  }
 	else{
 	newval = addedusers.replace(user_id,'');  }
 	}
-	else
+	else{
+	if(addedusers.indexOf(user_id+',')>-1)
 	newval = addedusers.replace(user_id+',','');
+	else if(addedusers.indexOf(','+user_id)>1)
+	newval = addedusers.replace(','+user_id,'');
+	else
+	newval = addedusers.replace(user_id,'');
+	}
 	$('#tagaddedusers').val(newval);
 	$('#'+user_id).remove();
 	
