@@ -1969,6 +1969,7 @@ function removefrndfromtagging(user_id){
 	$('#tagaddedusers').val(newval);
 	$('#'+user_id).remove();
 	
+	
 	$('#token'+user_id).remove();	
 	$('#withTokens').hide();
 	var nooftags = $('#tagaddedusers').val();	
