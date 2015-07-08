@@ -334,7 +334,42 @@ class Customermodel extends CI_Model {
 		}
 		
    }
-   
+   public function photocommentinsertlinks($data)
+   {
+	    $pid=$data['like_on'];
+	    $aid=$data['liked_by'];
+		$photo = $data['photo_name'];
+	   // $like=$data['like'];
+	    $condition = "like_on =" . $pid . " AND photo_name = '".$photo."' AND liked_by =".$aid;
+	    $this->db->select('*');
+		$this->db->from('bzz_photo_comment_likes');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		$like_count = count($this->customermodel->commentlikedata($pid));
+		if($query->num_rows()>0){
+			$res=$query->result();
+			$res_like=$res[0]->like_status;			
+			if($res_like == 'Y' ){
+				$slike="N";
+			}
+			else if($res_like == 'N'){
+				$slike="Y";
+			}
+			
+		$data1 = array('like_status' => $slike);
+        $this->db->where($condition);
+  		$this->db->update('bzz_photo_comment_likes',$data1);	
+	    $data1 = array('like_status' => $slike,'like_count' => $like_count);
+			echo json_encode($data1);
+		}
+		else{
+	    $this->db->insert('bzz_photo_comment_likes',$data);
+			$data1 = array('like_status' => 'Y','like_count' =>$like_count);
+			echo json_encode($data1);
+		}
+		
+   }
+
        public function event_comment_insert_links($data)
    {
 	    $pid=$data['like_on'];
@@ -458,8 +493,8 @@ class Customermodel extends CI_Model {
 		return $query->result();
 		
    }
-   public function photocommentlikedata($cid){
-	    $condition = "like_on =" . "'" . $cid . "' AND like_status = 'Y'";
+   public function photocommentlikedata($cid,$photo){
+	    $condition = "like_on ='" . $cid . "' AND photo_name ='".$photo."' AND like_status = 'Y'";
 		$this->db->select('*');
 		$this->db->from('bzz_photo_comment_likes');
 		$this->db->where($condition);
@@ -468,6 +503,7 @@ class Customermodel extends CI_Model {
 		return $query->result();
 		
    }
+  
    
    
       public function eventcommentlikedata($cid){

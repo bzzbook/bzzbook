@@ -450,11 +450,11 @@ public function search_member()
 	{
 		$curr_user_id = $this->session->userdata('logged_in')['account_id'];
 		$image = $this->profile_set->get_profile_pic($curr_user_id);
-		echo "<div id='res_comments".$post_id."' class='nano' style='min-height:150px;max-height:440px;'><div class='nano-content'>";
+		echo "<div id='res_comments".$post_id."' class='nano' style='min-height:150px;max-height:420px;'><div class='nano-content'>";
            	       $comments_details = $this->customermodel->photo_comments_data($post_id,$photo_name);
 			       for($i=0;$i<count($comments_details);$i++){
 				   // foreach($comments_details as $row_comment):
-			       if($i<=4){ $com_user_data = $this->customermodel->profiledata($comments_details[$i]->user_id); 	  $hrsago = $this->customermodel->get_time_difference_php($comments_details[$i]->commented_time);
+			        $com_user_data = $this->customermodel->profiledata($comments_details[$i]->user_id); 	  $hrsago = $this->customermodel->get_time_difference_php($comments_details[$i]->commented_time);
 
                    echo "<div class='commentBox' style='margin:10px;'>";
             echo "<figure> <a href='".base_url()."profile/post/".$com_user_data[0]->user_id."'><img style='width:50px;float:left;' src='".base_url()."uploads/"; if(!empty($com_user_data[0]->user_img_thumb)) echo $com_user_data[0]->user_img_thumb; else echo 'default_profile_pic.png';
@@ -471,10 +471,10 @@ public function search_member()
 			
 			echo "<div style='padding-top:15px;'><img width='200px' height='200px' src='".base_url().'uploads/'.$commentfiles[0]."/></div>"; 
 			} 
-			echo $hrsago; 
+			echo $hrsago."&nbsp;"; 
 			
 					
-			        $comment_likes = $this->customermodel->commentlikedata($comments_details[$i]->cmt_id);
+			        $comment_likes = $this->customermodel->photocommentlikedata($comments_details[$i]->cmt_id,$photo_name);
 					$current_user_com_like_data = $this->customermodel->currentuser_photo_commentlikedata($comments_details[$i]->cmt_id);
 					if($current_user_com_like_data){
 					//if(sizeof($comment_likes)>0){
@@ -486,12 +486,12 @@ public function search_member()
 //					 if(@$user_id == $user_id && $like=='Y'){
 						 
 					
-				echo "<a href='javascript:void(0);' onclick='commentlikefun(".$comments_details[$i]->cmt_id.','.$curr_user_id.','.count($comment_likes).")  id='cmt_link_like".$comments_details[$i]->cmt_id."' style='padding-right:0px;'>Unlike";
+				echo "<a href='javascript:void(0);' onclick='photocommentlikefun(".$comments_details[$i]->cmt_id.','.$curr_user_id.','.count($comment_likes).',&#39;'.$photo_name."&#39;)'  id='photo_cmt_link_like".$comments_details[$i]->cmt_id."' style='padding-right:0px;'>Unlike";
                
 			}else{
-				echo "<a href='javascript:void(0);' onclick='commentlikefun(".$comments_details[$i]->cmt_id.','.$curr_user_id.','.count($comment_likes).")' id='cmt_link_like".$comments_details[$i]->cmt_id."' style='padding-right:0px;'>Like";
+				echo "<a href='javascript:void(0);' onclick='photocommentlikefun(".$comments_details[$i]->cmt_id.','.$curr_user_id.','.count($comment_likes).',&#39;'.$photo_name."&#39;)' id='photo_cmt_link_like".$comments_details[$i]->cmt_id."' style='padding-right:0px;'>Like";
 			 }
-			 echo "</a>&nbsp;<span id='cmt_like_count".$comments_details[$i]->cmt_id."'>";
+			 echo "</a>&nbsp;<span id='photo_cmt_like_count".$comments_details[$i]->cmt_id."'>";
 			 $like_count = count($comment_likes); 
 			 if($like_count>0) 
 			 echo "<img src='".base_url()."images/like_myphotos.png' alt=''>".$like_count.'&nbsp;&nbsp;';
@@ -502,13 +502,13 @@ public function search_member()
           </div>";
 			
 				   }
-				   }
+				   
 				   
 				   // endforeach;
 		    
-             if(count($comments_details)>4){ 
+             /*if(count($comments_details)>4){ 
             echo "<a href='#' onclick='view_comments(".$post_id.")' style='font-size:12px;'>View More</a>";
-             }
+             }*/
 		 
          echo  "</div></div>";
 		 echo "<div class='commentBox' style='margin-top:20px;'>
@@ -534,6 +534,25 @@ top: 7px;' href='javascript:document.getElementById(&#39;uploadCommentPhotos".$p
 
 		
 		
+	}
+	public function getpostcontent($post_id){
+		$post_data = $this->customermodel->getPostById($post_id);
+		$post_user_id = $post_data[0]->posted_by;
+		$image = $this->profile_set->get_profile_pic($post_user_id);
+		$com_user_data = $this->customermodel->profiledata($post_user_id);
+		if($image[0]->user_img_thumb!='')
+		$image = $image[0]->user_img_thumb;
+		else
+		$image = 'default_profile_pic.png';
+		echo "<div class='userImg'>
+<figure>
+<img src='".base_url().'uploads/'.$image."'>
+</figure>
+<span class='userDetails'>".$com_user_data[0]->user_firstname.' '.$com_user_data[0]->user_lastname."<em>".date('j-M-Y', strtotime($post_data[0]->posted_on))."</em></span>
+</div>
+<div class='userContent'>
+<p>".$post_data[0]->post_content."</p>
+</div>";
 	}
 	
 

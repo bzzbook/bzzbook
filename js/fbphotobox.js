@@ -55,10 +55,12 @@
 			
 			// Handle left right click event
 			this.leftArrow.click(function() {
+				
 				var image = $('.' + $this.settings.containerClassName + ' .' + $this.settings.imageClassName).get($this.leftArrow.attr("data-prev-index"));
 				if (image) $this.show($(image));
 			});
 			this.rightArrow.click(function() {
+				
 				var image = $('.' + $this.settings.containerClassName + ' .' + $this.settings.imageClassName).get($this.rightArrow.attr("data-next-index"));
 				if (image) $this.show($(image));
 			});
@@ -92,7 +94,7 @@
 			$(".fbphotobox-tag").remove();
 			var currDiv = $(image).closest('div').attr('id');
 			//var index = $('.' + this.settings.containerClassName + ' .' + this.settings.imageClassName).index(image);
-			$(".fbphotobox-image-content").html('');
+			
 			var cur_post_id = currDiv.replace("fbphotobox", ""); 
 			var image_src = image.attr("fbphotobox-src");
 			var img_path_arr = image_src.split("/"); 
@@ -152,15 +154,7 @@
 										'</td></tr></table>',
 									'</div>',
 									'<div class="fbphotobox-container-left-footer">',
-										'<div class="userImg">',
-											'<figure>',
-												'<img src="images/post_writer.png">',
-											'</figure>',
-											'<span class="userDetails">Aaliyah<em>13-Apr-2015</em></span>',
-										'</div>',
-										'<div class="userContent">',
-										'<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. <a href="#">View More</a></p>',
-										'</div>',
+										
 									'</div>',
 									//'<div class="fbphotobox-container-left-footer-bg"></div>',
 								'</div>',

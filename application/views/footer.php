@@ -657,6 +657,37 @@ function commentlikefun(pid,uid,count){
        });	
 }
 
+function photocommentlikefun(pid,uid,count,photoname){
+	var posted_by=pid;
+	var user_id=uid;
+	url="<?php echo base_url();?>signg_in/photocommentinsertlinks/"+pid+"/"+uid+"/"+photoname;
+	  $.ajax({
+        type: "POST",
+        url: url,
+        data: { liked_by: pid, like_on : uid} ,
+        success: function(html)
+        {   
+			info = JSON.parse(html);
+         if(info.like_status == 'N'){
+		 	//$("#like_ajax"+pid).html("Unlike");
+			$("#photo_cmt_link_like"+pid).html("Like");
+			var newval = info.like_count-1;
+			if(newval<=0)
+			{$("#photo_cmt_like_count"+pid).html('');}
+			else
+		    $("#photo_cmt_like_count"+pid).html('<img src="<?php echo base_url(); ?>images/like_myphotos.png" alt="">&nbsp;('+newval+')&nbsp;&nbsp;');
+
+		 }			
+		  else{
+			//$("#like_ajax"+pid).html("Like");
+			$("#photo_cmt_link_like"+pid).html("Unlike");
+	        $("#photo_cmt_like_count"+pid).html('<img src="<?php echo base_url(); ?>images/like_myphotos.png" alt="">&nbsp;'+(info.like_count+1)+'&nbsp;&nbsp;');
+
+		  }
+        }
+       });	
+}
+
 
 function cmplikefun(pid,uid,count){
 	var posted_by=pid;
@@ -1228,7 +1259,7 @@ function getconversations(msg_id,sent_by)
 }
 function getPostComments(post_id,photo_name)
 {
- image = "<?php echo base_url(); ?>images/loading.gif";
+ image = "<img width='80px' style='margin-left:150px;' src='<?php echo base_url(); ?>images/loading.gif' />";
  $(".fbphotobox-image-content").html(image);
  url="<?php echo base_url(); ?>customer/getpostcomments/"+post_id+"/"+photo_name;
   $.ajax({
@@ -1239,6 +1270,18 @@ function getPostComments(post_id,photo_name)
 		
    $(".fbphotobox-image-content").html(data);
    $(".nano").nanoScroller();
+  },
+  cache: false
+  });
+  url="<?php echo base_url(); ?>customer/getpostcontent/"+post_id;
+  $.ajax({
+        type: "POST",
+        url: url,
+        success: function(data)
+        {   
+		
+   $(".fbphotobox-container-left-footer").html(data);
+  
   },
   cache: false
   });

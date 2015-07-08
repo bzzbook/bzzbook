@@ -404,6 +404,18 @@ class Signg_in extends CI_Controller {
 		 echo "success";
 	 }	   
    }
+   function photocommentinsertlinks($pid,$uid,$photoname){
+	   $data=array(
+	       'like_on'=>$pid,
+	       'liked_by'=>$uid,
+		   'photo_name'=>$photoname
+	   );
+	 $res=$this->customermodel->photocommentinsertlinks($data);
+	 if($res){
+		 
+		 echo "success";
+	 }	   
+   }
    
    
       function event_comment_insertlinks($pid,$uid){
