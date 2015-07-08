@@ -323,6 +323,26 @@ class EventModel extends CI_Model {
 		}	   
  }
  
+   public function event_going_sts_frm_suggestion($event_id,$cr_by,$status)
+ {
+		$id = $this->session->userdata('logged_in')['account_id'];		
+		
+		
+		 $data['invitation_status'] = $status;
+		 $data['user_id'] = $cr_by;
+		 $data['event_id'] = $event_id;
+		 $data['frnd_id'] = $id;
+		 
+		 if($this->db->insert('bzz_user_event_invites',$data))
+		 return true;
+		 else
+		 return false;
+			   
+ }
+ 
+ 
+ 
+ 
 public function send_event_invitation_to_frnds($event_id,$invited_users)
  {
 	 $frnds_ids = explode(',',$invited_users);
@@ -471,6 +491,118 @@ public function send_event_invitation_to_frnds($event_id,$invited_users)
 		
   echo $figure;*/
 	}
+
+public function user_event_suggestions()
+{
+
+	    $id = $this->session->userdata('logged_in')['account_id'];
+	    $condition = "(user_id ='".$id."' OR friend_id = '".$id."') AND request_status='Y'";
+		$this->db->select('user_id,friend_id');
+		$this->db->from('bzz_userfriends');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		$friends = $query->result_array();
+		//print_r($friends);
+		
+		$users = array();
+		foreach($friends as $frnds)
+		{
+			$users[] = $frnds['user_id'];
+			$users[] = $frnds['friend_id'];
+		}
+		$users = array_unique($users); 
+
+
+
+if($users)
+{  
+$user_events = array();  
+    $all_users_cr_events = array();
+	foreach($users as $user)
+	{
+		
+		$this->db->select('event_id');
+		$this->db->from('bzz_user_events');
+		$this->db->where('event_created_by',$user);
+		$query = $this->db->get();
+		$events = $query->result_array();
+		
+		foreach($events as $event)
+		{
+			if($user == $id){
+			$user_events[] = $event['event_id'];
+			}else
+			$all_users_cr_events[] = $event['event_id'];
+		}
+		
+		
+		$this->db->select('event_id');
+		$condition = "frnd_id =".$user." AND (invitation_status = '1' OR invitation_status = '2')";
+		$this->db->from('bzz_user_event_invites');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		$events_invites = $query->result_array();
+		
+	
+		foreach($events_invites as $invite)
+		{
+			if($user == $id){
+			$user_events[] = $invite['event_id'];
+			}else
+			$all_users_cr_events[] = $invite['event_id'];
+		}
+		
+	}
+	
+	
+}
+//print_r($user_events);  
+  //print_r($all_users_cr_events);
+
+$all_events = array_merge(array_unique($all_users_cr_events),array_unique($user_events));
+//print_r($all_events);
+$suggest_events = array_diff(array_unique($all_events),$user_events);
+
+//print_r($suggest_events);
+//exit;  
+if($suggest_events)
+{
+	$eventdata = array();
+	
+	foreach($suggest_events as $event)
+	{
+		$this->db->select('*');
+		$this->db->from('bzz_user_events');
+		$this->db->where('event_id',$event);
+		$query = $this->db->get();
+		if($query->num_rows() > 0)
+		{
+		$event_data = $query->result_array();
+	}
+	  $eventdata[] = $event_data;
+	}
+	
+//print_r($eventdata);
+return $eventdata;
+}
+	
+}
+
+public function get_count_of_people($id)
+{
+	
+	$condition = "event_id = ".$id." AND (invitation_status = '1' OR invitation_status = '2')";
+	$this->db->select('*');
+	$this->db->from('bzz_user_event_invites');
+	$this->db->where($condition);
+	$query = $this->db->get();
+	if($query->num_rows() > 0)
+	{
+	return $query->result_array();
+	
+	}
+	
+}
 	
  }
 ?>

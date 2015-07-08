@@ -163,8 +163,11 @@ public function getfriend_bc_suggestion($name,$addeduser=''){
 }
 
 public function get_friend_invitation($limit=''){
-	$invitations = $this->friendsmodel->user_frnds_by_id($limit);
-
+	
+	//echo $_POST['event_id'];
+	
+	$invitations = $this->friendsmodel->user_frnds_by_id($limit,$_POST['event_id']);
+//print_r($invitations);
     $data_count =  count($invitations);	
 	//echo $data_count;
 	if($invitations){
@@ -184,14 +187,18 @@ public function get_friend_invitation($limit=''){
 	}
 	}
 	else
-	echo 'No match found';
+	echo 'No Friends found';
 }
 public function get_online_frnds(){
 
 $friends = $this->friendsmodel->get_online_frnds();  
-if($friends){ foreach($friends as $frnd){ echo "<a href='javascript:void(0)' onclick='chatWith(&#39;".$frnd['username']."&#39;)' ><li><div class='col-md-2 rig_img'><img src='".base_url().'uploads/'.$frnd['image']."' title='".$frnd['name']."' /></div>
-    <div class='col-md-8 rig_box'> <p>".$frnd['name']."</p></div>
-    <div class='col-md-2 rig_mobile'><img src='".base_url(); 
+if($friends){ foreach($friends as $frnd){ 
+echo "<a href='javascript:void(0)' onclick='chatWith(&#39;".$frnd['username']."&#39;)' ><li><div class='col-md-2 rig_img'><img src='".base_url().'uploads/'.$frnd['image']."' title='".$frnd['name']."' /></div>";
+
+$name = character_limiter($frnd['name'],12);
+
+echo"<div class='col-md-8 rig_box'> <p>".$name."</p></div>
+<div class='col-md-2 rig_mobile'><img src='".base_url(); 
 if($frnd['last_active']>(time()-900))
 echo "images/green.png'  /></div><div class='clearfix'></div></li></a>"; 
 else

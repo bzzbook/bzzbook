@@ -339,6 +339,7 @@ public function get_mn_cmp_list()
 				// friends following companies
 				$id = $this->session->userdata('logged_in')['account_id'];
 			    $condition = "(user_id ='".$user."' OR user_id='".$user."')  AND follow_status='Y'" ;
+				// check once
 				//$this->db->distinct();
 				$this->db->select('companyinfo_id');
 				$this->db->from('bzz_cmp_follow'); 

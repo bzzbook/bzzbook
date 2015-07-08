@@ -148,6 +148,62 @@ public function change_event_going_sts($event_id,$status)
 		 else
 		return false;
 	}
+	
+public function change_event_going_sts_frm_sugg($event_id,$cr_by,$status)
+	{
+		 $result = $this->eventmodel->event_going_sts_frm_suggestion($event_id,$cr_by,$status);
+		 //if($result)
+		  
+		 $event_suggestions = $this->eventmodel->user_event_suggestions();
+		// print_r($event_suggestions);
+		// exit;
+		 if($event_suggestions){
+			 $list = "";
+			 foreach($event_suggestions as $suggestion)
+			 {
+				 
+				$list.=" <div class='col-md-2 event_pic'><a href='".base_url()."profile/eventview/".$suggestion[0]['event_id']."'><img alt='' class='event_sug_img' src='".base_url()."uploads/";
+		
+		
+		if(!empty($suggestion[0]['event_banner'])) $image =  $suggestion[0]['event_banner']; else $image = "default_profile_pic.png";
+		
+		 $list .= "".$image."'></a>
+            
+              </div>
+              <div class='col-md-10 thisweek_sug_right'>
+              <h5><a href='".base_url()."profile/eventview/".$suggestion[0]['event_id']."'>";
+			  
+			  
+			  
+			  if($suggestion[0]['event_name'])  $name = character_limiter($suggestion[0]['event_name'],15); 
+			  
+			  $list.= "".$name."'</a></h5>
+ 
+              <p><a href=''>".$suggestion[0]['event_location']."</a></p><p>";
+			  
+			  
+			  
+			  $event_guests = $this->eventmodel->get_count_of_people($suggestion[0]['event_id']); if($event_guests) { $count =  ' guests '.count($event_guests); } else $count ='guests 0'; 
+			  
+			  
+			  
+			 $list.= "".$count."' </p>
+			 
+             <p><a onclick='updateGoingStatus_frm_suggestions(".$suggestion[0]['event_id'].",".$suggestion[0]['event_created_by'].",1);'>join</a></p><p><a onclick='updateGoingStatus_frm_suggestions(".$suggestion[0]['event_id'].",".$suggestion[0]['event_created_by'].",2);'> May be</a></p>
+                  
+              </div>
+               <div class='clear'></div>";
+				 
+		 
+				 
+			 }
+			 echo $list;
+			 
+		 }else{
+		 echo "No Event Suggestions Found..";
+		 }
+	
+	}
 
 
 public function send_event_invitation()

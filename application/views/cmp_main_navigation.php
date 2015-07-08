@@ -1,5 +1,5 @@
 <?php 
- $result = $this->profile_set->get_userinfo();
+ $result = $this->profile_set->get_userinfo($user_id = '');
  $name = $result[0]['user_firstname']." ".$result[0]['user_lastname'];
  $companies = $this->companies->get_mn_cmp_list();
 // $id = $this->session->userdata('cmp_id');

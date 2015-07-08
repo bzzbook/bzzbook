@@ -2209,7 +2209,8 @@ border-color: -moz-use-text-color #ddd #ccc; border-image: none; border-style: n
 .textbox_banner{ border: 2px solid #fff; text-align:center; border-radius: 8px; bottom: 5%; color: #fff; display: block;float: left; height: 60px;
 left: 2%; position: absolute; width: 60px;}
 .textbox_banner span{ font-weight:bold; font-size:20px;}
-.textbox_banner h3{ bottom: 0px; color: #ffffff; font-size: 30px; font-weight: bold; left: 73px; letter-spacing: 1px; position: absolute;}
+.textbox_banner h3{bottom: 22px; color: #ffffff; display: -moz-inline-box; font-size: 27px; font-weight: bold; left: 73px; letter-spacing: 1px;
+    position: relative;}
 .company .visitorBox .visitiBoxInner .compCover_innside img{ width:100%;}
 .compCover_innside img{ width:100% !important; }
 .change_event{ float:right;}
@@ -2325,3 +2326,17 @@ ul {
     list-style-type: none;
 }
 .slimScrollDiv { border: 1px solid #ccc; margin:10px; width: 324px; float:left; height: 200px;  }
+.event_pic{ margin-left:-15px;}
+.event_sug_img{ width: 75px; }
+.event_month { font-size:10px; font-weight:600; margin-top: 10px; }
+.event_date { font-size:14px; font-weight: 700;
+  margin-top: -5px; }
+  
+.thisweek_sug_right h5{ font-size:17px; font-weight:400;  margin-right: -14px;}
+.thisweek_sug_right span{ font-size:13px; color:#5890ff;}
+.thisweek_sug_right p{ font-size:14px; margin-left: 40px; }
+.thisweek_sug_right p a{ color:#353535; margin-left:0px;}
+.thisweek_sug_right p a:hover{ text-decoration:underline;}
+
+.thisweek_sug_right a{ margin-left: 40px; }
+.thisweek_sug_right > span{ margin-left: 40px;  }

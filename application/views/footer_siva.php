@@ -92,32 +92,15 @@ $('#invitedusers').val(user_id)
 }
 else
 {
-var addedusers = $('#invitedusers').val();	
 
-	var len = addedusers.length;
-	//alert(len);
-	var newval = '';
-	if(len == 1 || len == 2)
-	{ 
-		$('#invitedusers').val(newval);
-	}else
-{	
- 
-var addeduserstrimmed = addedusers.replace(/,$/, '');
-
-var after_removed = addeduserstrimmed.replace(user_id,'');	
-var final_users = after_removed.replace(',,',',');
 removeaddedfrnd(user_id);
-if($('#invitedusers').val(final_users) == ',')
 
-$('#invitedusers').val('');
-//alert(final_users);
 $('#img_div'+user_id).find('img').remove();
 $('#img_div'+user_id).append('<img id="img_succ'+user_id+'" src="<?php echo base_url().'images/round2.png'; ?>"/>');
 }
 
 }
-}
+
 
 function addinvitedfriendsmain(invited_users,eventid)
 {
@@ -146,14 +129,25 @@ function addinvitedfriendsmain(invited_users,eventid)
 
 $('.invite_friends_modal').click(function()
 {
-	var event_id = $('.invite_friends_modal').attr("id").substr(11);
-	
+	var event_id = $(this).attr("id").substr(11);
+	//alert(event_id);
 	url="<?php echo base_url(); ?>friends/get_friend_invitation/";
 	//base_url="<?php // echo base_url(); ?>";
-	$.post( url)
+	$.post( url,  { event_id: event_id })
 	.done(function( data ) {
 	//	info = JSON.parse(data);
 			$('#event_invite_friends').modal('toggle');
+			//alert(data.length);
+			if(data.length < 20)
+			{
+			$('#invites_modal_disp').hide();
+			$('#no_result_data').show();
+			$('#no_result_data').html('<span>No Friends Are Available To Invite!..</span>');
+			}else{
+			$('#invites_modal_disp').show();
+			$('#no_result_data').hide();
+			}
+			
 			$('#all_friends_invites').html(data);
 			$("input[name=event_id]").val(event_id);
 
@@ -254,7 +248,7 @@ function send_invite(frnd_id,event_id)
 
 uploadimagesdisplay("uploaduserevent_Photos","uploadPhotoseventPreview","tetsdiv");
 uploadimagesdisplay("uploaduserevent_Photos1","uploadPhotoseventPreview","tetsdiv");
-
+uploadimagesdisplay("uploaduserevent_comment_Photos","uploadPhotoseventcmtPreview","tetsdiv");
 
 
 
@@ -323,7 +317,7 @@ function tagkeyupeventone(tagsearchfriends,tagaddedusers,tagautosuggest){
 function addfrndforeventtagging(user_id,name)
 {
 var cur_content = $('#added_tag_frnds').html();
-var new_content = "<span id='"+user_id+"'>"+name+"<a onclick='removefrndfromeventtagging("+user_id+")'><img class='as_close_btn' src='<?php echo base_url().'images/close_btn.png'; ?>'/></a></span>";
+var new_content ="<span id='"+user_id+"'>"+name+"<a onclick='removefrndfromeventtagging("+user_id+")'><img class='as_close_btn' src='<?php echo base_url().'images/close_btn.png'; ?>'/></a></span>";
  $('#added_tag_frnds').html(new_content+cur_content);
  $('#tag_search').focus();
  $('#tag_auto_suggest').hide();
@@ -338,10 +332,11 @@ $('#added_tag_users').val(user_id)
 }
 	
 
-function removefrndfromeventtagging(user_id){
+function removefrndfromeventtagging(user_id)
+{
 	
 	
-	var addedusers = $('#tagaddedusers1').val();
+	var addedusers = $('#added_tag_users').val();
 	var len = addedusers.length;
 	var newval = '';
 	if(len==1)
@@ -353,15 +348,23 @@ function removefrndfromeventtagging(user_id){
 	}
 	else if(addedusers.indexOf(user_id)==0){
 	
-	if(addedusers.indexOf(',')>1){
+	if(addedusers.indexOf(',')>-1){
 	newval = addedusers.replace(user_id+',','');  }
 	else{
 	newval = addedusers.replace(user_id,'');  }
 	}
-	else
+	else{
+	if(addedusers.indexOf(user_id+',')>-1)
 	newval = addedusers.replace(user_id+',','');
-	$('#tagaddedusers1').val(newval);
+	else if(addedusers.indexOf(','+user_id)>1)
+	newval = addedusers.replace(','+user_id,'');
+	else
+	newval = addedusers.replace(user_id,'');
+	}
+	$('#added_tag_users').val(newval);
 	$('#'+user_id).remove();
+	
+
 }
 
 function showeventtaginput(taggedfriends,tagsearchfriends){
@@ -374,6 +377,9 @@ function showeventtaginput(taggedfriends,tagsearchfriends){
 
 function removeaddedfrnd(user_id){
 	
+	$('#img_div'+user_id).find('img').remove();
+    $('#img_div'+user_id).append('<img id="img_succ'+user_id+'" src="<?php echo base_url().'images/round2.png'; ?>"/>');
+
 	var addedusers = $('#invitedusers').val();
 	var len = addedusers.length;
 	var newval = '';
@@ -384,12 +390,27 @@ function removeaddedfrnd(user_id){
 	else if(addedusers.indexOf(user_id)==(len-1)){
 	newval = addedusers.replace(','+user_id,'');
 	}
-	else if(addedusers.indexOf(user_id)==0)
+	else if(addedusers.indexOf(user_id)==0){
+	
+	if(addedusers.indexOf(',')>-1){
+	newval = addedusers.replace(user_id+',','');  }
+	else{
+	newval = addedusers.replace(user_id,'');  }
+	}
+	else{
+	if(addedusers.indexOf(user_id+',')>-1)
 	newval = addedusers.replace(user_id+',','');
+	else if(addedusers.indexOf(','+user_id)>1)
+	newval = addedusers.replace(','+user_id,'');
 	else
-	newval = addedusers.replace(user_id+',','');
+	newval = addedusers.replace(user_id,'');
+	}
 	$('#invitedusers').val(newval);
 	$('#'+user_id).remove();
+	
+
+
+
 }
 
 
@@ -456,11 +477,6 @@ function events_commentlikefun(pid,uid,count){
        });	
 }
 
-$('#event_banner').change(function()
-{
-	alert('sadsd');
-	//$('#upload_event_banner').submit();
-});
 
 
 </script>
@@ -700,10 +716,94 @@ $('#event_banner').change(function()
 
 //invalid name call 
               $('#scroll-new').slimscroll({
-                  color: '#00f',
+                  color: '#5890FF',
                   size: '10px',
 				  width: '324px',
 				  float: 'left',
-                  height: '400px'            
+                  height: '400px',
+				             
               }); 
+			  
+			  
+			
+			
+			
+			
+ function updateGoingStatus_frm_suggestions(event_id,cr_by,status)
+{
+	//alert(status);
+//	if(status=='')
+//	
+//	{ status = document.getElementById('goingsts'+event_id).value; }
+	url="<?php echo base_url(); ?>events/change_event_going_sts_frm_sugg/"+event_id+"/"+cr_by+"/"+status;
+	$.ajax({
+		
+		type: "POST",
+		dataType: 'text',
+        url: url
+		}).done(function(data){ 
+		if(data){
+			
+			$('#event_sugg_div').html(data);
+			}
+	 
+		});
+}
+</script>
+<script>
+
+$('body').delegate('.xyzzyx','keypress',function(e) {
+	
+    if(e.which == 32 || e.which == 13) {
+
+	url = "<?php echo base_url(); ?>signg_in/post_comment_by_ajax/";
+$("#send_comment_ajax").on('submit',(function(e) {
+e.preventDefault();
+//$("#message").empty();
+//$('#loading').show();
+$.ajax({
+url: url, // Url to which the request is send
+type: "POST",             // Type of request to be send, called as method
+data: new FormData(this), // Data sent to server, a set of key/value pairs (i.e. form fields and values)
+contentType: false,       // The content type used when sending data to the server.
+cache: false,             // To unable request pages to be cached
+processData:false,        // To send DOMDocument or non processed data file it is set to false
+success: function(data)   // A function to be called if request succeeds
+{
+//$('#loading').hide();
+//$("#message").html(data);
+}
+});
+}));
+
+// Function to preview image after validation
+$(function() {
+$(".abccba").change(function() {
+$("#message").empty(); // To remove the previous error message
+var file = this.files[0];
+var imagefile = file.type;
+var match= ["image/jpeg","image/png","image/jpg"];
+if(!((imagefile==match[0]) || (imagefile==match[1]) || (imagefile==match[2])))
+{
+$('#previewing').attr('src','noimage.png');
+$("#message").html("<p id='error'>Please Select A valid Image File</p>"+"<h4>Note</h4>"+"<span id='error_message'>Only jpeg, jpg and png Images type allowed</span>");
+return false;
+}
+else
+{
+var reader = new FileReader();
+reader.onload = imageIsLoaded;
+reader.readAsDataURL(this.files[0]);
+}
+});
+});
+function imageIsLoaded(e) {
+$(".abccba").css("color","green");
+$('#image_preview').css("display", "block");
+$('#previewing').attr('src', e.target.result);
+$('#previewing').attr('width', '250px');
+$('#previewing').attr('height', '230px');
+}; 
+}
+});
 </script>

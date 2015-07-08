@@ -1118,7 +1118,7 @@ public function user_frnds($frnd_id)
 }return false;
 }
 
-public function user_frnds_by_id($limit)
+public function user_frnds_by_id($limit,$event_id)
 {
 	
 	    $id = $this->session->userdata('logged_in')['account_id'];
@@ -1146,10 +1146,12 @@ public function user_frnds_by_id($limit)
 			}
 		}
 		
-	//	print_r($frnds);
+		//print_r($frnds);
 		     $this->db->select('frnd_id');
 			 $this->db->from('bzz_user_event_invites');
-			 $this->db->where('user_id',$id);
+			  $condition =  "user_id =" . "'" . $id . "'" . " AND " . "event_id = ". "'" .$event_id."'";
+			 $this->db->where($condition);
+			
 			 $query = $this->db->get();
 			 $data =  $query->result_array();
 			  if($data)
@@ -1162,7 +1164,7 @@ public function user_frnds_by_id($limit)
 			 
 			// print_r($invited_users);
 			 
-		
+	
 		$all_users = array_merge($frnds,$invited_users);
 		//print_r($all_users);
 		

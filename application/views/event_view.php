@@ -7,11 +7,15 @@
 	  $_SESSION['username'] = $curr_user_data[0]->username; // Must be already set
 	 // echo $curr_user_data[0]->username;
      $image = $this->profile_set->get_profile_pic($curr_user_id);	
-
+	
  if($event){ $get_profiledata = $this->customermodel->profiledata($event->event_created_by);
  			 $no_of_invites = $this->eventmodel->get_noofinvites($event->event_id);
 			 $no_of_going = $this->eventmodel->get_noofgoing($event->event_id);
 			 $no_of_maybe = $this->eventmodel->get_noofmaybe($event->event_id);
+		
+			  $event_suggestions = $this->eventmodel->user_event_suggestions();
+			
+
   ?>
 <section class="col-lg-9 col-md-9 nopad">
       <div class="col-xs-12 ProfileView inr_baner">
@@ -19,10 +23,6 @@
           <div class="visitiBoxInner">
           <div class="change_event">
            <?php if($curr_user_id!=$event->event_created_by) ?> <a href="javascript:void(0);" onclick="javascript:document.getElementById('event_banner').click()"><span aria-hidden="true" class="glyphicon glyphicon-camera change-photo"><em>Change Event Photo</em></span></a>
-           
-           
-           
-          
            
            
            
@@ -455,9 +455,9 @@
                             
                 <div class="friendslist">
                 <ul id="invite_frnds">
-               <?php $invite_frnds = $this->friendsmodel->user_frnds_by_id($limit = '4');
+               <?php $invite_frnds = $this->friendsmodel->user_frnds_by_id($limit = '4',$event->event_id);
 			   //	print_r($invite_frnds);
-			//	exit;
+			
                  if($invite_frnds) {
 				
 					foreach($invite_frnds as $in_frnds)
@@ -479,6 +479,39 @@
                 <p><a href="">show more friends</a></p>
                  </div>
            </div>
+            <div class="pendingRequest tabnumbers" id="event_sugg_div">
+         
+             <?php
+			 if($event_suggestions)
+			 {
+			  foreach($event_suggestions as $suggestion)
+			 {
+				 if($suggestion[0]['event_id'] != $this->uri->segment(3,0))
+				 {
+				 ?>
+                 
+          
+                     <div class="thisweek" >
+              <div class="col-md-2 event_pic">
+              
+              <a href="<?php echo base_url(); ?>profile/eventview/<?php echo $suggestion[0]['event_id']; ?>"><img alt="" class="event_sug_img" src="<?php echo base_url(); ?>uploads/<?php if(!empty($suggestion[0]['event_banner'])) echo $suggestion[0]['event_banner']; else echo 'default_profile_pic.png'; ?>"></a>
+            
+              </div>
+              <div class="col-md-10 thisweek_sug_right">
+              <h5><a href="<?php echo base_url('profile/eventview/'.$suggestion[0]['event_id']); ?>"><?php if($suggestion[0]['event_name'])  $name = character_limiter($suggestion[0]['event_name'],15); echo $name ; ?></a></h5>
+ 
+              <p><a href=""><?php echo $suggestion[0]['event_location']; ?></a></p>
+             <p> <?php $event_guests = $this->eventmodel->get_count_of_people($suggestion[0]['event_id']); if($event_guests) { echo " guests ".count($event_guests); } else echo "guests 0"?> </p>
+             <p><a onclick="updateGoingStatus_frm_suggestions(<?php echo $suggestion[0]['event_id']; ?>,<?php echo $suggestion[0]['event_created_by']; ?>,1);">join</a></p><p><a onclick="updateGoingStatus_frm_suggestions(<?php echo $suggestion[0]['event_id']; ?>,<?php echo $suggestion[0]['event_created_by']; ?>,2)";> May be</a></p>
+                  
+              </div>
+               <div class="clear"></div>
+             </div>
+            
+
+            
+            <?php }} }else { echo "No Event Suggestions are Available!..."; } ?>
+            </div>
            
           <!----------anil------>
         

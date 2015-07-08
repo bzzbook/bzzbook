@@ -310,18 +310,19 @@
          <div id="autosuggest_invite_frnds" >
          
          </div>
+         <div id="no_result_data"></div>
        </div>
         </form>
-        <div class="row">
+        <div class="row" id="invites_modal_disp">
          <div class="invited col-md-7 mousescroll"  id="scroll-new">
    
         <div class="invitebox" id="all_friends_invites">
-       <!-- <div class="col-md-2 invite_imge"><img src="<?php echo base_url(); ?>images/logo.png" alt=""></div>
+       <!-- <div class="col-md-2 invite_imge"><img src="<?php // echo base_url(); ?>images/logo.png" alt=""></div>
         <div class="col-md-8">
         <h6>your name</h6>
         <p>visakhapatnam</p>
         </div>
-        <div class="col-md-2"><img src="<?php echo base_url(); ?>images/round1.png" alt=""></div>
+        <div class="col-md-2"><img src="<?php  // echo base_url(); ?>images/round1.png" alt=""></div>
         <div class="clearfix"></div>-->
        </div>
         
