@@ -7,6 +7,18 @@ class Customermodel extends CI_Model {
    		parent::__construct(); 
   		
     } 
+	 public function get_user_id($access_token){
+	    
+	    $condition = "access_token = '" . $access_token . "' AND conf_status = 'Y'";
+		$this->db->select('*');
+		$this->db->from('bzz_confirmation');
+		$this->db->where($condition);
+		if($query = $this->db->get())
+				return $query->result();
+		else
+				return false;
+		
+   }
 	
 	function post_buzz($data){
 		 $this->db->insert('bzz_posts',$data);
@@ -446,6 +458,16 @@ class Customermodel extends CI_Model {
 		return $query->result();
 		
    }
+   public function photocommentlikedata($cid){
+	    $condition = "like_on =" . "'" . $cid . "' AND like_status = 'Y'";
+		$this->db->select('*');
+		$this->db->from('bzz_photo_comment_likes');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		//return $query->num_rows();
+		return $query->result();
+		
+   }
    
    
       public function eventcommentlikedata($cid){
@@ -471,7 +493,17 @@ class Customermodel extends CI_Model {
 		return $query->result();
 		
    }
-   
+   public function currentuser_photo_commentlikedata($cid){
+	    $id = $this->session->userdata('logged_in')['account_id'];
+	    $condition = "like_on ='".$cid."' AND liked_by='".$id."'  AND like_status = 'Y'";
+		$this->db->select('*');
+		$this->db->from('bzz_photo_comment_likes');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		//return $query->num_rows();
+		return $query->result();
+		
+   }
    
       public function currentusereventcommentlikedata($cid){
 	    $id = $this->session->userdata('logged_in')['account_id'];
@@ -497,6 +529,9 @@ class Customermodel extends CI_Model {
    public function write_comments($data){
 	    $this->db->insert('bzz_postcomments',$data);
    }
+   public function write_photo_comments($data){
+	    $this->db->insert('bzz_post_image_comments',$data);
+   }
    public function write_event_comments($data){
 	    $this->db->insert('bzz_event_postcomments',$data);
    }
@@ -507,6 +542,15 @@ class Customermodel extends CI_Model {
 	   $condition = "commented_on =" . "'" . $pid . "' and (comment_content != '' OR uploadedfiles!='')";
 		$this->db->select('*');
 		$this->db->from('bzz_postcomments');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		//return $query->num_rows();
+		return $query->result(); 
+   }
+   public function photo_comments_data($pid,$image){
+	   $condition = "post_id =" . "'" . $pid . "' AND  img_commented_on ='".$image."'  AND (comment != '' OR uploaded_files!='')";
+		$this->db->select('*');
+		$this->db->from('bzz_post_image_comments');
 		$this->db->where($condition);
 		$query = $this->db->get();
 		//return $query->num_rows();

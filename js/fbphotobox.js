@@ -90,10 +90,24 @@
 		},
 		show: function(image) {
 			$(".fbphotobox-tag").remove();
-			var index = $('.' + this.settings.containerClassName + ' .' + this.settings.imageClassName).index(image);
+			var currDiv = $(image).closest('div').attr('id');
+			//var index = $('.' + this.settings.containerClassName + ' .' + this.settings.imageClassName).index(image);
+			$(".fbphotobox-image-content").html('');
+			var cur_post_id = currDiv.replace("fbphotobox", ""); 
+			var image_src = image.attr("fbphotobox-src");
+			var img_path_arr = image_src.split("/"); 
+			var img_name = img_path_arr[img_path_arr.length-1];
+			getPostComments(cur_post_id,img_name);
+			
+			
+			var index = $('#'+currDiv+' .photo').index(image);
+		    var totImgs = $('#'+currDiv+' .photo').length - 1;
+			var nextIndex = index + 1;
+			if(totImgs<nextIndex)
+			nextIndex = -1;
 			this.fbpMainImage.attr('fbp-index', index);
 			this.leftArrow.attr("data-prev-index", index - 1);
-			this.rightArrow.attr("data-next-index", index + 1);
+			this.rightArrow.attr("data-next-index", nextIndex);
 			this.fbpMainImage.attr('alt', image.attr('alt'));
 			this.fbpMainImage.posX = image.offset().left;
 			this.fbpMainImage.posY = image.offset().top;
@@ -281,6 +295,7 @@
 				
 				//handle left right arrow
 				var index = parseInt(this.fbpMainImage.attr('fbp-index'));
+			
 				if (index - 1 < 0) {
 					this.leftArrow.hide();
 					$(".fc-left-arrow a").hide();
@@ -289,7 +304,7 @@
 					this.leftArrow.show();
 					$(".fc-left-arrow a").show();
 				}
-				if (index + 1 >= $('.' + this.settings.containerClassName + ' .' + this.settings.imageClassName).length) {
+				if (index + 1 >= $('.' + this.settings.containerClassName + ' .' + this.settings.imageClassName).length || this.rightArrow.attr("data-next-index")==-1 ) {
 					this.rightArrow.hide();
 					$(".fc-right-arrow a").hide();
 				}

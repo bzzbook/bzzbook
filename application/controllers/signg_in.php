@@ -463,6 +463,22 @@ class Signg_in extends CI_Controller {
 	   redirect('profiles');
 	   
    }
+   public function write_photo_comment($id,$image){
+		
+	   $data=array(
+	   'comment'=>$this->input->post('write_comment'),
+	   'post_id'=>$this->input->post('post_id'),
+	   'user_id'=>$this->input->post('posted_by'),
+	   'img_commented_on'=>$image,
+	   'uploaded_files' => $this->doupload('uploadCommentPhotos'.$id)
+	   );
+	  
+	  //$data['uploadedfiles'] = $this->doupload('uploadCommentPhotos');
+	   $res=$this->customermodel->write_photo_comments($data);
+	  // $res=$this->customer->write_comments($data);
+	   redirect('profiles');
+	   
+   }
      public function write_event_comment($id){
 		
 	   $data=array(

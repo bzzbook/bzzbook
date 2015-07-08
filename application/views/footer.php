@@ -96,6 +96,7 @@ $(function () {
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script> 
 <script src="<?php echo base_url(); ?>js/fbphotobox.js"></script>
 <script src="<?php echo base_url(); ?>js/custom.js"></script> 
+<script src="<?php echo base_url(); ?>js/jquery.nanoscroller.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>js/chat.js"></script>
 <script>
 		$( document ).ready(function() {
@@ -1225,15 +1226,19 @@ function getconversations(msg_id,sent_by)
   cache: false
   });
 }
-function getPostComments(post_id)
+function getPostComments(post_id,photo_name)
 {
- url="<?php echo base_url(); ?>customer/getpostcomments/"+post_id;
+ image = "<?php echo base_url(); ?>images/loading.gif";
+ $(".fbphotobox-image-content").html(image);
+ url="<?php echo base_url(); ?>customer/getpostcomments/"+post_id+"/"+photo_name;
   $.ajax({
         type: "POST",
         url: url,
         success: function(data)
         {   
+		
    $(".fbphotobox-image-content").html(data);
+   $(".nano").nanoScroller();
   },
   cache: false
   });
@@ -6123,7 +6128,8 @@ function showOnlineFriends(){
 		cache: false
 		});
 }
-window.setInterval(showOnlineFriends, 5000);
+window.setInterval(showOnlineFriends,5000);
+
 </script>
 <script language="javascript">print_country("con");</script><!--  //for groups   --> 
 <script language="javascript">print_country("contries");</script> <!-- //for companies-->

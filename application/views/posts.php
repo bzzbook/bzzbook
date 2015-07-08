@@ -107,16 +107,16 @@
 			 {
 			 $up_files = explode(',',$row->uploaded_files);
 			 $i = 0;
-			 echo "<div class='fbphotobox'>";
+			 echo "<div id='fbphotobox".$row->post_id."' class='fbphotobox'>";
 			 foreach($up_files as $file)
 			 {
 				 if($i==0)
 				 {
 					 echo " 
-    <a onclick='getPostComments(".$row->post_id.")'><img class='photo' fbphotobox-src='".base_url()."uploads/".$file."' src='".base_url()."uploads/".$file."' style='width:100%'/></a>";
+    <a onclick='getPostComments(".$row->post_id.",&#39;".$file."&#39;)'><img class='photo' fbphotobox-src='".base_url()."uploads/".$file."' src='".base_url()."uploads/".$file."' style='width:100%'/></a>";
 				 }
 				 else
-				 	 echo "<a onclick='getPostComments(".$row->post_id.")'><img class='photo' fbphotobox-src='".base_url()."uploads/".$file."' src='".base_url()."uploads/".$file."' style='width:24%;float:left;margin:.5%; height:83px'/></a>";
+				 	 echo "<a onclick='getPostComments(".$row->post_id.",&#39;".$file."&#39;)'><img class='photo' fbphotobox-src='".base_url()."uploads/".$file."' src='".base_url()."uploads/".$file."' style='width:24%;float:left;margin:.5%; height:83px'/></a>";
 				 $i++;
 			 }
 			 echo "</div>";

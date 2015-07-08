@@ -13,13 +13,12 @@ class posts extends CI_Controller {
 	{
 		
 	}
-	public function getposts($user_id=''){
+	public function getposts($access_token){
 	
-	  if(empty($user_id))
-	  $user_id = $this->session->userdata('logged_in')['account_id'];
-	  else
-	  $user_id = $user_id;	
-	  
+	  $user_res = $this->customermodel->get_user_id($access_token);
+	
+	  $user_id =  $user_res[0]->user_id;
+	  if($user_id)
 	  $allposts = $this->customermodel->All_Posts($user_id);
 	  if($allposts):
 	  $posts = array();
