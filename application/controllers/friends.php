@@ -189,9 +189,9 @@ public function get_friend_invitation($limit=''){
 	else
 	echo 'No Friends found';
 }
-public function get_online_frnds(){
+public function get_online_frnds($name=''){
 
-$friends = $this->friendsmodel->get_online_frnds();  
+$friends = $this->friendsmodel->get_online_frnds($name);  
 if($friends){ foreach($friends as $frnd){ 
 echo "<a href='javascript:void(0)' onclick='chatWith(&#39;".$frnd['username']."&#39;)' ><li><div class='col-md-2 rig_img'><img src='".base_url().'uploads/'.$frnd['image']."' title='".$frnd['name']."' /></div>";
 

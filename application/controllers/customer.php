@@ -450,7 +450,7 @@ public function search_member()
 	{
 		$curr_user_id = $this->session->userdata('logged_in')['account_id'];
 		$image = $this->profile_set->get_profile_pic($curr_user_id);
-		echo "<div id='res_comments".$post_id."' class='nano' style='min-height:150px;max-height:420px;'><div class='nano-content'>";
+		echo "<div id='res_comments".$post_id."' class='nano' ><div class='nano-content'>";
            	       $comments_details = $this->customermodel->photo_comments_data($post_id,$photo_name);
 			       for($i=0;$i<count($comments_details);$i++){
 				   // foreach($comments_details as $row_comment):

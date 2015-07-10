@@ -1,4 +1,13 @@
 <script type="text/javascript">
+function myfunction(){
+	
+	var fkdsfjl = document.getElementById('input_search_frnds').value;
+	if(fkdsfjl){
+	}
+	else
+	showOnlineFriends();
+}
+window.setInterval(myfunction,5000);
 user_event_edit();
 
 function invite_event_frnds(keyword,added_users,suggestion_box){

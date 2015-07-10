@@ -1349,8 +1349,8 @@ public function user_frnds_by_id($limit,$event_id)
 		}
    }
 
-   public function get_online_frnds(){
-	   $frnds = $this->getfriends(); 
+   public function get_online_frnds($name){
+	   $frnds = $this->getfriends($name); 
 	   if($frnds){
 			$friends = array();
 			foreach($frnds as $frnd){

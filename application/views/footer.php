@@ -15,12 +15,14 @@
 
     <ul id="online-friends"></ul>
      <div class="clearfix"></div>
-<div  class="rig_bottoms">
+
+    </div>
+    <div  class="rig_bottoms">
 <div class="col-md-1"><i class="fa fa-search "></i></div>
-<div class="col-md-8"><input type="text"></div>
+<div class="col-md-8"><input id="input_search_frnds" type="text" onkeyup="showOnlineFriends(this.value)"  /></div>
 <div class="col-md-1"><i class="fa  fa-external-link"></i></div>
 </div>
-    </div></div>
+    </div>
 
 <?php
 $upload_path = "uploads/";							
@@ -6099,7 +6101,8 @@ function updateGoingStatus(event_id,status)
 		var newtop = 0;
 	}
 	$('.wrapper').css({top: newtop}); 
-	$('.toggle').css({height: '98%'}); 
+	
+	
     });
 	
 
@@ -6129,6 +6132,7 @@ document.addEventListener("click", function(){
 		});
 });
 $( window ).load(function() {
+	
 	showOnlineFriends();
    url="<?php echo base_url(); ?>profile/event_log";
 		$.ajax({
@@ -6140,6 +6144,7 @@ $( window ).load(function() {
 		});
 });
 $(window).on('unload', function(){
+		
         url="<?php echo base_url(); ?>profile/remove_event_log";
 		$.ajax({
         url: url,
@@ -6160,8 +6165,14 @@ window.onbeforeunload = function(){
 		cache: false
 		});
 }
-function showOnlineFriends(){
-	 url="<?php echo base_url(); ?>friends/get_online_frnds";
+
+function showOnlineFriends(name){
+	 
+	 if(name)
+	 url="<?php echo base_url(); ?>friends/get_online_frnds/"+name;
+	 else
+	 url="<?php echo base_url(); ?>friends/get_online_frnds/";
+	
 		$.ajax({
         url: url,
 		success: function(data)
@@ -6171,7 +6182,8 @@ function showOnlineFriends(){
 		cache: false
 		});
 }
-window.setInterval(showOnlineFriends,5000);
+
+
 
 </script>
 <script language="javascript">print_country("con");</script><!--  //for groups   --> 
