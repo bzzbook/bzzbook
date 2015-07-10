@@ -676,7 +676,7 @@ float:right; margin-top:10px;
 .btn3{ 
 font-family:font-size:12px; font-family: 'Roboto', sans-serif; font-weight:300;	
 display: inline-block;
-margin-bottom: 0px;
+margin-bottom: 15px;
 font-weight: normal;
 text-align: center;
 vertical-align: middle;
@@ -699,7 +699,7 @@ float:right; margin-top:10px;
 }
 .btn-green {
     background-color: #609b34;
-      color: #fff; margin-right:10px; float:left;
+      color: #fff; margin-right:10px; float:right;
 }
 .btn-yellow{background-color: #fcc434;
        color: #242424;}
@@ -2342,3 +2342,4 @@ ul {
 
 .thisweek_sug_right a{ margin-left: 40px; }
 .thisweek_sug_right > span{ margin-left: 40px;  }
+.event_delete_link {float: left; padding-top: 13px; }

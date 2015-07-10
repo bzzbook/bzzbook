@@ -6182,7 +6182,10 @@ function showOnlineFriends(name){
 		cache: false
 		});
 }
-
+window.setInterval(function(){
+  showOnlineFriends();
+  get_unread_messages();
+},5000);
 
 
 </script>

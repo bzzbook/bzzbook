@@ -242,8 +242,17 @@ public function deletetrashmsgs($values)
 	echo "Success";
 	
 }
+public function get_msgs_count()
+{
 
-
+	$data = $this->messages->getUnReadMessages();
+	if($data)
+	{
+		echo count($data);
+	}else
+	
+	echo "0";
+}
 
 }
 ?>

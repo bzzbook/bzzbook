@@ -173,7 +173,7 @@ $('#scroll-new').scroll(function()
 			
 			
 	       var value = parseInt(value) +5;
-		   console.log(value);
+		  // console.log(value);
 			
 			url="<?php echo base_url(); ?>friends/get_friend_invitation/"+value;
 			$.post( url)
@@ -815,4 +815,108 @@ $('#previewing').attr('height', '230px');
 }; 
 }
 });
+
+
+ $(window).scroll(function() {   
+   if($(window).scrollTop() + $(window).height() == $(document).height()) {
+	  
+	   var last_id = $('#last_id').val();
+	
+	   $('#posts_content_div').find('#post'+last_id).after('<article id="loader_img"><img style="margin-left:240px; margin-bottom:8px;" src="<?php echo base_url(); ?>images/block_loader.gif" /></article>');
+
+	url = "<?php echo base_url(); ?>customer/get_posts/";
+	$.ajax({
+		type: "POST",
+		data: { last_id : last_id },
+		url : url,
+		success : function(html)
+		{
+
+		    $('#posts_content_div').find('#loader_img').remove();
+			$('#posts_content_div').find('#last_id').remove();
+	      	$('#posts_content_div').append(html);		
+	
+		
+		}
+	});
+	
+	
+
+
+	   
+	   
+	   
+       
+   }
+});
+
+/*
+ $(document).load(function() {   
+
+	//var lang_data = $('#addedlangs').val();
+ var posts_count = 5;
+  // var posts_count = parseInt(posts_count) +5;
+//  alert(posts_count);
+ 
+	url = "<?php echo base_url(); ?>customer/get_posts/";
+	$.ajax({
+		type: "POST",
+		data: { posts_count : posts_count},
+		url : url,
+		success : function(html)
+		{
+			//alert('succes');
+			//$('#language_disp').hide();
+			//$('#updateStatus #posts').html("");
+			$('#posts').remove();
+	      	$('#posts').html(html);		
+	
+		
+		}
+	});
+	
+
+});*/
+function delete_user_event()
+{
+	var event_id = $('#user_event_form_id').val();
+	
+	
+	   if (confirm("You want to Cancel This Event ") == true) {
+		   	url="<?php echo base_url();?>events/delete_event/"+event_id;
+	 $.ajax({
+		url: url,
+		success: function(html)
+		{   					
+			if(html == true)
+			{
+			 
+		url="<?php echo base_url(); ?>profile/events";
+	  window.location.replace(url);	
+			}
+		}
+		
+	   });
+       
+    } 
+
+}
+//mesages count display in left navigation
+ get_unread_messages();
+function get_unread_messages()
+{
+	
+	
+	url = "<?php echo base_url(); ?>message/get_msgs_count/";
+		$.ajax({
+        url: url,
+		success: function(html)
+        {  
+
+		    $('#un_read_msg_count').html('');
+			$('#un_read_msg_count').html(html);
+		},
+		cache: false
+		});
+}
 </script>

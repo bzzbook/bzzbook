@@ -535,6 +535,17 @@ top: 7px;' href='javascript:document.getElementById(&#39;uploadCommentPhotos".$p
 		
 		
 	}
+public function get_posts()
+{
+	$user_id = $this->session->userdata('logged_in')['account_id'];
+	$data['products'] = $this->customermodel->All_Posts($user_id,$_POST['last_id']);
+	if($data)
+	{
+		$this->load->view('all_posts_inner',$data);
+	}
+	else 
+	return false;
+}
 	public function getpostcontent($post_id){
 		$post_data = $this->customermodel->getPostById($post_id);
 		$post_user_id = $post_data[0]->posted_by;

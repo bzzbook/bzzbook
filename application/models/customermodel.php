@@ -54,7 +54,7 @@ class Customermodel extends CI_Model {
 		 else
 		 return false;
 	}
-	public function All_Posts($pst_usr_id){
+	public function All_Posts($pst_usr_id,$last_id = ''){
 		if(empty($pst_usr_id))
   	    $id = $this->session->userdata('logged_in')['account_id'];
 		else
@@ -81,7 +81,16 @@ class Customermodel extends CI_Model {
 	   $friends = array_unique($friends);
 	  // print_r($friends); exit;
 	   $this->db->select('*');
+	   if($last_id != '')
+	   {
+	   $condition = "post_id <" . "'" . $last_id . "'" ;
+	   
+	   $this->db->where($condition);
+	   }
 	   $this->db->from('bzz_posts');
+	
+	   $this->db->limit(10);
+	
 /*	   $this->db->where($condition);
 */	   $this->db->order_by("post_id","desc");
 	   $query = $this->db->get();

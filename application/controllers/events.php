@@ -189,7 +189,7 @@ public function change_event_going_sts_frm_sugg($event_id,$cr_by,$status)
 			  
 			 $list.= "".$count."' </p>
 			 
-             <p><a onclick='updateGoingStatus_frm_suggestions(".$suggestion[0]['event_id'].",".$suggestion[0]['event_created_by'].",1);'>join</a></p><p><a onclick='updateGoingStatus_frm_suggestions(".$suggestion[0]['event_id'].",".$suggestion[0]['event_created_by'].",2);'> May be</a></p>
+             <div class='col-md-3' style='margin-left:-13px;'><p><a onclick='updateGoingStatus_frm_suggestions(".$suggestion[0]['event_id'].",".$suggestion[0]['event_created_by'].",1);'>join</a></p></div><div class='col-md-3'><p style='width:50px!important;'><a onclick='updateGoingStatus_frm_suggestions(".$suggestion[0]['event_id'].",".$suggestion[0]['event_created_by'].",2);'> May be</a></p></div>
                   
               </div>
                <div class='clear'></div>";
@@ -364,6 +364,17 @@ public function event_banner_upload()
 			redirect('/profile/eventview/'.$event_id);
 		}
 	} 
+
+
+
+public function delete_event($event_id)
+{
+		$this->db->where('event_id',$event_id);
+		if($this->db->delete('bzz_user_events'))
+		echo true;
+		else
+		echo false;
+}
 
 }
 ?>
