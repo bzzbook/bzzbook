@@ -1,4 +1,3 @@
-
     <?php 
 	 if(empty($user_id))
 	  $curr_user_id = $this->session->userdata('logged_in')['account_id'];
@@ -73,7 +72,7 @@
 			 {
 			 $up_files = explode(',',$row->uploaded_files);
 			 $i = 0;
-			 echo "<div class='fbphotobox'>";
+			 echo "<div class='fbphotobox' id='fbphotobox".$row->post_id."'>";
 			 foreach($up_files as $file)
 			 {
 				 if($i==0)

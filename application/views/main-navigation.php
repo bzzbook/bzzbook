@@ -24,7 +24,7 @@
              <li> <a  href="<?php echo base_url()."profile/business_details/".$profile_id; ?>">Business Card</a></li>
             <li> <a  href="<?php echo base_url()."company/my_companies/".$profile_id; ?>">Companies</a></li>
           </ul>
-          <div class="pull-right viewAs">
+          <?php /*?><div class="pull-right viewAs">
             <p>Viewing as:</p>
             <select class="form-control" id="profile_interchange" >
               <optgroup label="Your Personal profile">
@@ -37,7 +37,7 @@
        
               </optgroup>
             </select>
-          </div>
+          </div><?php */?>
         </div>
         <!-- /.nav-collapse --> 
       </div>
