@@ -765,8 +765,11 @@ $('body').delegate('.xyzzyx','keypress',function(e) {
 	
     if(e.which == 32 || e.which == 13) {
 
-	url = "<?php echo base_url(); ?>signg_in/post_comment_by_ajax/";
-$("#send_comment_ajax").on('submit',(function(e) {
+
+$(".send_comment_ajax").on('submit',(function(e) {
+	 var post_id = $(this).find('.post_id_for_dyn_post').val();
+
+	 url = "<?php echo base_url(); ?>signg_in/post_comment_by_ajax/";
 e.preventDefault();
 //$("#message").empty();
 //$('#loading').show();
@@ -779,13 +782,15 @@ cache: false,             // To unable request pages to be cached
 processData:false,        // To send DOMDocument or non processed data file it is set to false
 success: function(data)   // A function to be called if request succeeds
 {
-//$('#loading').hide();
-//$("#message").html(data);
+	
+$('#res_comments'+post_id).append(data);
+$('#write_comment'+post_id).val('');
+//$('#uploadCommentPhotos'+post_id).val('');
 }
 });
 }));
 
-// Function to preview image after validation
+/* Function to preview image after validation
 $(function() {
 $(".abccba").change(function() {
 $("#message").empty(); // To remove the previous error message
@@ -805,7 +810,7 @@ reader.onload = imageIsLoaded;
 reader.readAsDataURL(this.files[0]);
 }
 });
-});
+}); */
 function imageIsLoaded(e) {
 $(".abccba").css("color","green");
 $('#image_preview').css("display", "block");

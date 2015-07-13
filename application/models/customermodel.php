@@ -592,6 +592,17 @@ class Customermodel extends CI_Model {
 		//return $query->num_rows();
 		return $query->result(); 
    }
+      public function comments_data_desc($pid){
+	   $condition = "commented_on =" . "'" . $pid . "' and (comment_content != '' OR uploadedfiles!='')";
+		$this->db->select('*');
+		$this->db->from('bzz_postcomments');
+		$this->db->where($condition);
+		$this->db->order_by('postcomments_id','desc');
+		$query = $this->db->get();
+		
+		//return $query->num_rows();
+		return $query->result(); 
+   }
    public function photo_comments_data($pid,$image){
 	   $condition = "post_id =" . "'" . $pid . "' AND  img_commented_on ='".$image."'  AND (comment != '' OR uploaded_files!='')";
 		$this->db->select('*');
@@ -977,5 +988,22 @@ class Customermodel extends CI_Model {
 			redirect('signg_in');
 		}
    }
+   
+public function individual_Posts($post_id)
+{
+	  $this->db->select('*');
+	   
+	   $this->db->where('post_id',$post_id);
+	 
+	   $this->db->from('bzz_posts');
+	
+	   $this->db->limit(1);
+	
+	   $query = $this->db->get();
+   	   if ($query->num_rows() == 1)
+	    {
+	   	return $query->result();
+       }
+}
  }
 ?>
