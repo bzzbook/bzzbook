@@ -596,6 +596,7 @@ class Customermodel extends CI_Model {
 	   $condition = "commented_on =" . "'" . $pid . "' and (comment_content != '' OR uploadedfiles!='')";
 		$this->db->select('*');
 		$this->db->from('bzz_postcomments');
+		$this->db->limit(1);
 		$this->db->where($condition);
 		$this->db->order_by('postcomments_id','desc');
 		$query = $this->db->get();

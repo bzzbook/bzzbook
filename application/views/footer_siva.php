@@ -765,15 +765,17 @@ $('body').delegate('.xyzzyx','keypress',function(e) {
 	
     if(e.which == 32 || e.which == 13) {
 
-
-$(".send_comment_ajax").on('submit',(function(e) {
-	 var post_id = $(this).find('.post_id_for_dyn_post').val();
+ var post_id = $('#post_id_for_dyn_post').val();
+$("#send_comment_ajax"+post_id).on('submit',(function(d) {
+	
 
 	 url = "<?php echo base_url(); ?>signg_in/post_comment_by_ajax/";
-e.preventDefault();
+alert(post_id);
+d.preventDefault();
 //$("#message").empty();
 //$('#loading').show();
 $.ajax({
+	
 url: url, // Url to which the request is send
 type: "POST",             // Type of request to be send, called as method
 data: new FormData(this), // Data sent to server, a set of key/value pairs (i.e. form fields and values)
