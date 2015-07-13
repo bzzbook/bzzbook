@@ -2342,3 +2342,24 @@ ul {
 
 .thisweek_sug_right a{ margin-left: 40px; }
 .thisweek_sug_right > span{ margin-left: 40px;  }
+
+
+
+/* Image comment pop up styling */
+
+.nano-content .commentBox{margin: 0px 5px 2px 5px; background: #f3f3f3;}
+.nano-content .commentBox figure img{ width:40px;float:left; margin:8px 0px 8px 8px;}
+.nano-content .commentBox .postAComment{ margin-left:55px }
+.nano-content .commentBox .postAComment .postACommentInner { padding:5px; }
+.nano-content .commentBox .postAComment .pfname { color:#5A5998; font-family: 'Roboto', sans-serif; font-size:14px; font-weight:500; }
+.nano-content .commentBox .postAComment .date { color:black; font-family: 'Roboto', sans-serif; font-size:13px; font-weight:300;}
+.nano-content .commentBox .postAComment .time{ color:black; font-family: 'Roboto', sans-serif; font-size:11px; font-weight:300; }
+.cmt_upload_file { padding-top:15px; }
+.cmt_upload_file img { width:200px; height:200px; }
+.postACommentInner .like{ font-family: 'Roboto', sans-serif; font-size:12px; font-weight:500;}
+.thumb img{ width:14px; }
+.likecount { font-family: 'Roboto', sans-serif; font-size:12px; }
+.postACommentInner em{ font-family: 'Roboto', sans-serif; font-size:12px; font-style:normal; }
+
+.fbphotobox-main-container{   min-width: 960px;
+  min-height: 520px; }

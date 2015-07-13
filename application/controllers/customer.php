@@ -456,22 +456,22 @@ public function search_member()
 				   // foreach($comments_details as $row_comment):
 			        $com_user_data = $this->customermodel->profiledata($comments_details[$i]->user_id); 	  $hrsago = $this->customermodel->get_time_difference_php($comments_details[$i]->commented_time);
 
-                   echo "<div class='commentBox' style='margin:10px;'>";
-            echo "<figure> <a href='".base_url()."profile/post/".$com_user_data[0]->user_id."'><img style='width:50px;float:left;' src='".base_url()."uploads/"; if(!empty($com_user_data[0]->user_img_thumb)) echo $com_user_data[0]->user_img_thumb; else echo 'default_profile_pic.png';
+                   echo "<div class='commentBox' >";
+            echo "<figure> <a href='".base_url()."profile/post/".$com_user_data[0]->user_id."'><img src='".base_url()."uploads/"; if(!empty($com_user_data[0]->user_img_thumb)) echo $com_user_data[0]->user_img_thumb; else echo 'default_profile_pic.png';
 			echo "' alt='".base_url()."uploads/";
 			if(!empty($image[0]->user_img_thumb)) echo $image[0]->user_img_thumb; else echo 'default_profile_pic.png';
 			echo "'></a></figure>
-            <div class='postAComment' style='margin-left:60px'> 
-            	<div class='postACommentInner'><span class='pfname' style='color:#5A5998;'><a href='".base_url().'profile/post/'.$com_user_data[0]->user_id."'>".ucfirst($com_user_data[0]->user_firstname)."&nbsp;".ucfirst($com_user_data[0]->user_lastname)."</a></span> <span class='date' style='color:black;'>";
+            <div class='postAComment' > 
+            	<div class='postACommentInner'><span class='pfname' ><a href='".base_url().'profile/post/'.$com_user_data[0]->user_id."'>".ucfirst($com_user_data[0]->user_firstname)."&nbsp;".ucfirst($com_user_data[0]->user_lastname)."</a></span> <span class='date'>";
 			/*if($hr_final<24){?><?php echo $hr_final;?>hr<?php }else{
 				echo  str_replace("-"," ",$days)."days ago";
 			}*/ echo $comments_details[$i]->comment."</span><br />";
 			$commentfiles = explode(',',$comments_details[$i]->uploaded_files); 
 			if(!empty($comments_details[$i]->uploaded_files)) { 
 			
-			echo "<div style='padding-top:15px;'><img width='200px' height='200px' src='".base_url().'uploads/'.$commentfiles[0]."/></div>"; 
+			echo "<div class='cmt_upload_file' ><img src='".base_url().'uploads/'.$commentfiles[0]."/></div>"; 
 			} 
-			echo $hrsago."&nbsp;"; 
+			echo "<span class='time'>".$hrsago."&nbsp;</span>"; 
 			
 					
 			        $comment_likes = $this->customermodel->photocommentlikedata($comments_details[$i]->cmt_id,$photo_name);
@@ -486,15 +486,15 @@ public function search_member()
 //					 if(@$user_id == $user_id && $like=='Y'){
 						 
 					
-				echo "<a href='javascript:void(0);' onclick='photocommentlikefun(".$comments_details[$i]->cmt_id.','.$curr_user_id.','.count($comment_likes).',&#39;'.$photo_name."&#39;)'  id='photo_cmt_link_like".$comments_details[$i]->cmt_id."' style='padding-right:0px;'>Unlike";
+				echo "<a href='javascript:void(0);' class='like' onclick='photocommentlikefun(".$comments_details[$i]->cmt_id.','.$curr_user_id.','.count($comment_likes).',&#39;'.$photo_name."&#39;)'  id='photo_cmt_link_like".$comments_details[$i]->cmt_id."' style='padding-right:0px;'>Unlike";
                
 			}else{
-				echo "<a href='javascript:void(0);' onclick='photocommentlikefun(".$comments_details[$i]->cmt_id.','.$curr_user_id.','.count($comment_likes).',&#39;'.$photo_name."&#39;)' id='photo_cmt_link_like".$comments_details[$i]->cmt_id."' style='padding-right:0px;'>Like";
+				echo "<a href='javascript:void(0);' class='like' onclick='photocommentlikefun(".$comments_details[$i]->cmt_id.','.$curr_user_id.','.count($comment_likes).',&#39;'.$photo_name."&#39;)' id='photo_cmt_link_like".$comments_details[$i]->cmt_id."' style='padding-right:0px;'>Like";
 			 }
-			 echo "</a>&nbsp;<span id='photo_cmt_like_count".$comments_details[$i]->cmt_id."'>";
+			 echo "</a>&nbsp;<span class='likecount' id='photo_cmt_like_count".$comments_details[$i]->cmt_id."'>";
 			 $like_count = count($comment_likes); 
 			 if($like_count>0) 
-			 echo "<img src='".base_url()."images/like_myphotos.png' alt=''>".$like_count.'&nbsp;&nbsp;';
+			 echo "<img class='thumb' src='".base_url()."images/like_myphotos.png' alt=''>".$like_count.'&nbsp;&nbsp;';
 		     echo "</span></div>
                     
               </div>

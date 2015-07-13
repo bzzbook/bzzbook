@@ -55,13 +55,21 @@
 			
 			// Handle left right click event
 			this.leftArrow.click(function() {
+				var prevIndex = $this.leftArrow.attr("data-prev-index");
 				
-				var image = $('.' + $this.settings.containerClassName + ' .' + $this.settings.imageClassName).get($this.leftArrow.attr("data-prev-index"));
+				var indexArr = prevIndex.split('#');
+				
+				/*var image = $('.' + $this.settings.containerClassName + ' .' + $this.settings.imageClassName).get($this.leftArrow.attr("data-prev-index"));*/
+				var image = $('#' + indexArr[0]+" .photo").get(indexArr[1]);
 				if (image) $this.show($(image));
 			});
 			this.rightArrow.click(function() {
+				var nextIndex = $this.rightArrow.attr("data-next-index");
 				
-				var image = $('.' + $this.settings.containerClassName + ' .' + $this.settings.imageClassName).get($this.rightArrow.attr("data-next-index"));
+				var indexArr = nextIndex.split('#');
+				
+				/*var image = $('.' + $this.settings.containerClassName + ' .' + $this.settings.imageClassName).get($this.rightArrow.attr("data-next-index"));*/
+				var image = $('#' + indexArr[0]+" .photo").get(indexArr[1]);
 				if (image) $this.show($(image));
 			});
 			
@@ -94,8 +102,11 @@
 			$(".fbphotobox-tag").remove();
 			var currDiv = $(image).closest('div').attr('id');
 			//var index = $('.' + this.settings.containerClassName + ' .' + this.settings.imageClassName).index(image);
-			
+			if(currDiv=='fbphotobox-all')
+			var cur_post_id = $(image).attr('id');
+			else
 			var cur_post_id = currDiv.replace("fbphotobox", ""); 
+			
 			var image_src = image.attr("fbphotobox-src");
 			var img_path_arr = image_src.split("/"); 
 			var img_name = img_path_arr[img_path_arr.length-1];
@@ -108,8 +119,9 @@
 			if(totImgs<nextIndex)
 			nextIndex = -1;
 			this.fbpMainImage.attr('fbp-index', index);
-			this.leftArrow.attr("data-prev-index", index - 1);
-			this.rightArrow.attr("data-next-index", nextIndex);
+			var prevIndex = parseInt(index - 1);
+			this.leftArrow.attr("data-prev-index", currDiv+'#'+prevIndex);
+			this.rightArrow.attr("data-next-index", currDiv+'#'+nextIndex);
 			this.fbpMainImage.attr('alt', image.attr('alt'));
 			this.fbpMainImage.posX = image.offset().left;
 			this.fbpMainImage.posY = image.offset().top;
@@ -143,12 +155,12 @@
 									'<div class="fbphotobox-container-left-header">',
 										'<a title="Full Screen" class="fbphotobox-fc-btn fbphotobox-a"></a>',
 									'</div>',
-									'<div data-prev-index="" class="left-arrow">',
+									'<div current-div="" data-prev-index="" class="left-arrow">',
 										'<table style="height:100%"><tr><td style="vertical-align:middle;">',
 											'<a class="fbphotobox-a" title="Previous"></a>',
 										'</td></tr></table>',
 									'</div>',
-									'<div data-next-index="" class="right-arrow">',
+									'<div current-div="" data-next-index="" class="right-arrow">',
 										'<table style="height:100%;"><tr><td style="vertical-align:middle;">',
 											'<a class="fbphotobox-a" title="Next"></a>',
 										'</td></tr></table>',
@@ -298,7 +310,9 @@
 					this.leftArrow.show();
 					$(".fc-left-arrow a").show();
 				}
-				if (index + 1 >= $('.' + this.settings.containerClassName + ' .' + this.settings.imageClassName).length || this.rightArrow.attr("data-next-index")==-1 ) {
+				var datanextindex = this.rightArrow.attr("data-next-index").split("#")[1];
+				if (index + 1 >= $('.' + this.settings.containerClassName + ' .' + this.settings.imageClassName).length || datanextindex==-1 ) {
+					
 					this.rightArrow.hide();
 					$(".fc-right-arrow a").hide();
 				}
