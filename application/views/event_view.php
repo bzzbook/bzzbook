@@ -502,7 +502,7 @@
  
               <p><a href=""><?php echo $suggestion[0]['event_location']; ?></a></p>
              <p> <?php $event_guests = $this->eventmodel->get_count_of_people($suggestion[0]['event_id']); if($event_guests) { echo " guests ".count($event_guests); } else echo "guests 0"?> </p>
-             <p><a onclick="updateGoingStatus_frm_suggestions(<?php echo $suggestion[0]['event_id']; ?>,<?php echo $suggestion[0]['event_created_by']; ?>,1);">join</a></p><p><a onclick="updateGoingStatus_frm_suggestions(<?php echo $suggestion[0]['event_id']; ?>,<?php echo $suggestion[0]['event_created_by']; ?>,2)";> May be</a></p>
+             <div class="col-md-3" style="margin-left:-13px;"><p><a onclick="updateGoingStatus_frm_suggestions(<?php echo $suggestion[0]['event_id']; ?>,<?php echo $suggestion[0]['event_created_by']; ?>,1);">join</a></p></div><div class="col-md-3"><p style="width:50px!important;"><a onclick="updateGoingStatus_frm_suggestions(<?php echo $suggestion[0]['event_id']; ?>,<?php echo $suggestion[0]['event_created_by']; ?>,2)";> May be</a></p></div>
                   
               </div>
                <div class="clear"></div>
@@ -619,7 +619,7 @@
                 <div class="input-group-addon"><i class="fa fa-fw"></i></div>
                 <input type="text" id="event_location" name="event_location" class="form-control" placeholder="Add a place?">
                 <input type="hidden" name="user_event_action" id="user_event_action" value="add">
-                 <input type="hidden" value="" name="event_form_id" >
+                 <input type="hidden" value="" name="event_form_id" id="user_event_form_id">
               </div>
             </div>
             
@@ -653,6 +653,7 @@
        
       
         <div class="publics col-md-12">
+        <a class="event_delete_link" href="javascript:void(0);" onclick="delete_user_event();">Cancel Event</a>
             <div class="btn3 btn-black" id="event_cr_btn" onclick="document.getElementById('event_form').submit();">Create</div>
               <div class="btn3 btn-black" id="event_edit_btn" onclick="document.getElementById('event_form').submit();" style="display:none">Update</div>
             <div class="btn3 btn-green" data-dismiss="modal">cancel</div>

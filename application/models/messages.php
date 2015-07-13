@@ -378,5 +378,25 @@ class Messages extends CI_Model {
 	//   return false;
 	   	   
    }
+
+ public function getUnReadMessages(){
+    $reciever_id = $this->session->userdata('logged_in')['account_id'];  
+	$condition = "recieved_by =" . "'" . $reciever_id .  "'AND read_status ='N'";
+	$this->db->select('*');
+	$this->db->from('bzz_messages');
+	$this->db->where($condition);
+	$this->db->order_by('sent_date','desc');
+	$query = $this->db->get();
+	if($query->num_rows()>0)
+	{
+     return $query->result_array();
+	}
+ }
+
+
 }
+
+
+
+
 ?>
