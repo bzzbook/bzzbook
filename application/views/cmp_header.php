@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <?php
 $session_data = $this->session->userdata('logged_in');
+$result = $this->profile_set->get_userinfo($user_id = '');
+ $name = $result[0]['user_firstname']." ".$result[0]['user_lastname'];
+ $companies = $this->companies->get_mn_cmp_list();
 ?>
 <html lang="en">
 <head>
@@ -48,6 +51,12 @@ $session_data = $this->session->userdata('logged_in');
         <div class="userImg"> <img src="<?php echo base_url();?>uploads/<?php if(!empty($image[0]->user_img_thumb)) echo $image[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" alt="<?php echo base_url();?>uploads/<?php if(!empty($image[0]->user_img_thumb)) echo $image[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>"> </div>
         <a href="#" role="button"  class="dropdown-toggle userName" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Logged in as:<span><?php echo  $session_data['email']; ?></span></a>
         <ul  role="menu" class="dropdown-menu">
+        <li><a href="<?php echo base_url(); ?>profile" tabindex="-1" role="menuitem" title="user profile"><i class="fa fa-user"> </i> 
+<?php echo $name ?></a></li>
+        <?php foreach($companies as $cmp):?>
+        <li>
+<a href="<?php echo base_url(); ?>company/company_disp/<?php echo $cmp->companyinfo_id ?>" tabindex="-1" role="menuitem" title="company profile"><i class="fa fa-building-o"> </i> <?php echo $cmp->cmp_name ?></a></li>
+		<?php endforeach;?>
           <li><a href="<?php echo base_url(); ?>signg_in/sign_out" tabindex="-1" role="menuitem">Logout</a></li>
         </ul>
       </div>
