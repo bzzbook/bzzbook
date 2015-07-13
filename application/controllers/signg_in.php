@@ -493,8 +493,6 @@ class Signg_in extends CI_Controller {
    }
  public function post_comment_by_ajax()
    {
-	
-	 
 	 $file_name = "uploadCommentPhotos".$_POST['post_id'];
 	
 	   if(isset($_FILES[$file_name]["type"]) && !empty($_FILES[$file_name]["type"][0]))
@@ -502,7 +500,6 @@ class Signg_in extends CI_Controller {
 {
 	
 	
-
 $validextensions = array("jpeg", "jpg", "png");
 
 $filename = implode("",$_FILES[$file_name]["name"]);
@@ -531,7 +528,6 @@ $targetPath = $config['upload_path'].$_FILES[$file_name]['name'][0]; // Target p
 move_uploaded_file($sourcePath,$targetPath) ; 
 
 
-
 $data=array(
 	   'comment_content'=> $_POST['write_comment'],
 	   'commented_on'=> $_POST['post_id'],
@@ -542,7 +538,8 @@ $data=array(
 //print_r($data);
 
   $res=$this->customermodel->write_comments($data);
-
+  $data['post_id'] = $_POST['post_id'];
+  echo $this->load->view('single_post',$data);  
 
 }
  }
