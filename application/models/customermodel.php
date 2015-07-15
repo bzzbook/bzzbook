@@ -575,7 +575,7 @@ class Customermodel extends CI_Model {
 	    $this->db->insert('bzz_postcomments',$data);
    }
    public function write_photo_comments($data){
-	    $this->db->insert('bzz_post_image_comments',$data);
+	  return $this->db->insert('bzz_post_image_comments',$data);
    }
    public function write_event_comments($data){
 	    $this->db->insert('bzz_event_postcomments',$data);

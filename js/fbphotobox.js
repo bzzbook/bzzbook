@@ -110,7 +110,7 @@
 			var image_src = image.attr("fbphotobox-src");
 			var img_path_arr = image_src.split("/"); 
 			var img_name = img_path_arr[img_path_arr.length-1];
-			getPostComments(cur_post_id,img_name);
+			getPostComments_photospage(cur_post_id,img_name);
 			
 			
 			var index = $('#'+currDiv+' .photo').index(image);

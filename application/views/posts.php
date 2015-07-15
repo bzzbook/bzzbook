@@ -44,6 +44,7 @@
       </div>
      <div class="posts" id="posts_content_div">
 	<?php  $data['products'] = $this->customermodel->All_Posts($user_id);
+		   $data['image'] = $image;
 	 $this->load->view('all_posts_inner',$data);?>
       </div>
       

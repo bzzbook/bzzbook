@@ -1259,7 +1259,36 @@ function getconversations(msg_id,sent_by)
   cache: false
   });
 }
-function getPostComments(post_id,photo_name)
+function getPostComments(post_id)
+{
+ image = "<img width='80px' style='margin-left:150px;' src='<?php echo base_url(); ?>images/loading.gif' />";
+ $(".fbphotobox-image-content").html(image);
+ url="<?php echo base_url(); ?>customer/getpostcomments/"+post_id;
+  $.ajax({
+        type: "POST",
+        url: url,
+        success: function(data)
+        {   
+		
+   $(".fbphotobox-image-content").html(data);
+   $(".nano").nanoScroller();
+  },
+  cache: false
+  });
+  url="<?php echo base_url(); ?>customer/getpostcontent/"+post_id;
+  $.ajax({
+        type: "POST",
+        url: url,
+        success: function(data)
+        {   
+		
+   $(".fbphotobox-container-left-footer").html(data);
+  
+  },
+  cache: false
+  });
+}
+function getPostComments_photospage(post_id,photo_name)
 {
  image = "<img width='80px' style='margin-left:150px;' src='<?php echo base_url(); ?>images/loading.gif' />";
  $(".fbphotobox-image-content").html(image);
@@ -1288,7 +1317,39 @@ function getPostComments(post_id,photo_name)
   cache: false
   });
 }
+function postComSub(e,post_id,photo_name){
+e.preventDefault();
+url = "<?php echo base_url(); ?>signg_in/write_photo_comment/"+post_id+"/"+photo_name;
+ var formObj = $('form#imgCmtForm')[0];
 
+//$("#message").empty();
+//$('#loading').show();
+$.ajax({
+	 
+url: url, // Url to which the request is send
+type: "POST",             // Type of request to be send, called as method
+data: new FormData(formObj), // Data sent to server, a set of key/value pairs (i.e. form fields and values)
+contentType: false,       // The content type used when sending data to the server.
+cache: false,             // To unable request pages to be cached
+processData:false,        // To send DOMDocument or non processed data file it is set to false
+success: function(data)   // A function to be called if request succeeds
+{
+	if(data==' success')
+	getPostComments_photospage(post_id,photo_name);
+	else
+	$('.commentBox-error').html(data);
+//$('#res_comments'+post_id).append(data);
+//$('#write_comment'+post_id).val('');
+//var commentboxcont = $('#commentBox'+post_id).html();
+//$('#commentBox'+post_id).html('');
+//$('#uploadCommentPhotos'+post_id).val('');
+//$('#commentBox'+post_id).html(commentboxcont);
+
+}
+});
+
+
+}
 /* fuction to mark as read and mark un-read */
 
 function  onchangeMore(){

@@ -446,7 +446,7 @@ public function search_member()
 			redirect('/profile/my_photos');
 	}	
 	}
-	public function getpostcomments($post_id,$photo_name)
+	public function getpostcomments($post_id,$photo_name='')
 	{
 		$curr_user_id = $this->session->userdata('logged_in')['account_id'];
 		$image = $this->profile_set->get_profile_pic($curr_user_id);
@@ -469,7 +469,7 @@ public function search_member()
 			$commentfiles = explode(',',$comments_details[$i]->uploaded_files); 
 			if(!empty($comments_details[$i]->uploaded_files)) { 
 			
-			echo "<div class='cmt_upload_file' ><img src='".base_url().'uploads/'.$commentfiles[0]."/></div>"; 
+			echo "<div class='cmt_upload_file' ><img src='".base_url().'uploads/'.$commentfiles[0]."'/></div>"; 
 			} 
 			echo "<span class='time'>".$hrsago."&nbsp;</span>"; 
 			
@@ -512,6 +512,7 @@ public function search_member()
 		 
          echo  "</div></div>";
 		 echo "<div class='commentBox' style='margin-top:20px;'>
+		 	<span class='commentBox-error'></span>
             <figure style='margin-left:10px; float:left;' ><img style='width:50px;' src='".base_url()."uploads/";
 			if(!empty($image[0]->user_img_thumb)) echo $image[0]->user_img_thumb; else echo 'default_profile_pic.png';
             
@@ -519,13 +520,13 @@ public function search_member()
             <div class='postAComment' style='margin-left:70px;'> 
             	<div class='postACommentInner' style='position: absolute;
 width: 260px;'>
-                           <form action='".base_url()."signg_in/write_photo_comment/".$post_id."/".$photo_name."' method='post' style='width:100% !important;' enctype='multipart/form-data' autocomplete='off'>
+                           <form onsubmit='postComSub(event,".$post_id.",&#39;".$photo_name."&#39;);' action='".base_url()."signg_in/write_photo_comment/".$post_id."/".$photo_name."' id='imgCmtForm' method='post' style='width:100% !important;' enctype='multipart/form-data' autocomplete='off'>
             <a style='position: absolute;
 right: 10px;
-top: 7px;' href='javascript:document.getElementById(&#39;uploadCommentPhotos".$post_id."&#39;).click();javascript:document.getElementById(&#39;write_comment".$post_id."&#39;).focus(); ' class='upload'><span aria-hidden='true' class='glyphicon glyphicon-camera'></span></a>
+top: 7px;' href='javascript:document.getElementById(&#39;uploadImgCommentPhotos".$post_id."&#39;).click();javascript:document.getElementById(&#39;write_comment".$post_id."&#39;).focus(); ' class='upload'><span aria-hidden='true' class='glyphicon glyphicon-camera'></span></a>
  <input type='text' class='form-control comment' placeholder='Write a Comment...' name='write_comment' id='write_comment".$post_id."'>                             <input type='hidden' name='post_id' value='".$post_id."'>
                <input type='hidden' name='posted_by' value='".$curr_user_id."'>
-               <input type='file' name='uploadCommentPhotos".$post_id."[]' id='uploadCommentPhotos".$post_id."' style='display:none;' />
+               <input type='file' name='uploadImgCommentPhotos".$post_id."[]' id='uploadImgCommentPhotos".$post_id."' style='display:none;' />
 </form>
               <em>Press Enter to post.</em> </div>
               </div>
@@ -551,7 +552,7 @@ public function get_posts()
 		$post_user_id = $post_data[0]->posted_by;
 		$image = $this->profile_set->get_profile_pic($post_user_id);
 		$com_user_data = $this->customermodel->profiledata($post_user_id);
-		if($image[0]->user_img_thumb!='')
+		if($image)
 		$image = $image[0]->user_img_thumb;
 		else
 		$image = 'default_profile_pic.png';

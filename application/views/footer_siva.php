@@ -760,18 +760,15 @@ function events_commentlikefun(pid,uid,count){
 }
 </script>
 <script>
-
 $('body').delegate('.xyzzyx','keypress',function(e) {
 	
     if(e.which == 32 || e.which == 13) {
 
- var post_id = $('#post_id_for_dyn_post').val();
+ var post_id = $(this).attr('post_id');
 $("#send_comment_ajax"+post_id).on('submit',(function(d) {
-	
-
-	 url = "<?php echo base_url(); ?>signg_in/post_comment_by_ajax/";
-alert(post_id);
+url = "<?php echo base_url(); ?>signg_in/post_comment_by_ajax/";
 d.preventDefault();
+
 //$("#message").empty();
 //$('#loading').show();
 $.ajax({
@@ -787,9 +784,14 @@ success: function(data)   // A function to be called if request succeeds
 	
 $('#res_comments'+post_id).append(data);
 $('#write_comment'+post_id).val('');
-//$('#uploadCommentPhotos'+post_id).val('');
+var commentboxcont = $('#commentBox'+post_id).html();
+$('#commentBox'+post_id).html('');
+$('#uploadCommentPhotos'+post_id).val('');
+$('#commentBox'+post_id).html(commentboxcont);
+
 }
 });
+
 }));
 
 /* Function to preview image after validation
@@ -822,7 +824,6 @@ $('#previewing').attr('height', '230px');
 }; 
 }
 });
-
 
  $(window).scroll(function() {   
    if($(window).scrollTop() + $(window).height() == $(document).height()) {
