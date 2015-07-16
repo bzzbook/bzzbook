@@ -1599,5 +1599,25 @@ if($data['frm_clg_years'] == '0')
 		$this->db->where('user_id',$id);
         $this->db->delete('bzz_user_activity_log'); 
 	}
+	
+	
+	public function get_user_accounts($user_id='')
+	{
+	if(!empty($user_id))
+	$id = $user_id;
+	else
+	$id = $this->session->userdata('logged_in')['account_id'];
+	
+		$this->db->select('*');
+		$this->db->from('bzz_other_accounts');
+		$this->db->where('user_id',$id);
+		$query = $this->db->get();
+		
+		if($query->num_rows() > 0)
+		{
+			return $query->result_array();
+		}else
+		return false;
+	}
 }
 ?>

@@ -5,7 +5,9 @@
           <div class="visitiBoxInner">
             <figure class="compCover"><img alt="" src="<?php echo base_url(); ?>images/about_banner.jpg" class="img-responsive"></figure>
              <?php  $image = $this->profile_set->get_profile_pic($id);
-			         $data = $this->profile_set->get_userinfo($id); ?>
+			         $data = $this->profile_set->get_userinfo($id);
+			
+					  ?>
                          <?php $attr = array('id' => 'upload_pfpic', 'name' => 'upload_file'); ?> 
               <?php echo form_open_multipart('profile/do_upload',$attr);?>
             <div class="profileLogo">
@@ -128,7 +130,46 @@
           <div class="card_left3"><i class="fa fa-twitter"></i></div>
           <div class="card_right">
           <h5>Twitter:</h5>
-          <h6>Aaliyah@twitter</h6>
+          <?php if($accounts_data){
+					 $i = 0 ;
+					$accounts = array();
+			  foreach ($accounts_data as $data)
+			  {
+				 
+				  
+				  if($data['account_type'] == 'twitter')
+				  {
+					  $accounts[] = $data['account_name'];
+					  $i++; 
+				  }
+			  }?> <h6><?php if(!empty($accounts))
+				   
+				   {
+					  // print_r($accounts);
+					  $j = 1;
+					   foreach($accounts as $acc)
+					   {
+						   
+						    echo $acc;
+						
+							if(count($accounts) == 1)
+							{
+								echo ".";
+							}else if($j >= count($accounts))
+					   {
+						   echo ".";
+					   }else
+							
+							echo ",";
+							$j++;
+					   }
+				   }else
+				   echo "Not Available";
+				   
+				  ?></h6>
+			<?php } ?>
+          
+          
           </div>
           <div class="clear"></div>
           </div>
@@ -137,7 +178,47 @@
           <div class="right_cards3"><i class="fa fa-facebook"></i></div>
           <div class="card_right">
           <h5>Facebook:</h5>
-          <h6>Aaliyah@facebook</h6>
+                 <?php if($accounts_data){
+					 $i = 0 ;
+					$accounts = array();
+			  foreach ($accounts_data as $data)
+			  {
+				 
+				  
+				  if($data['account_type'] == 'facebook')
+				  {
+					  $accounts[] = $data['account_name'];
+					  $i++; 
+				  }
+			  }?>
+                   <h6><?php if(!empty($accounts))
+				   
+				   {
+					  // print_r($accounts);
+					  $j = 1;
+					   foreach($accounts as $acc)
+					   {
+						   
+						    echo $acc;
+						
+							if(count($accounts) == 1)
+							{
+								echo ".";
+							}else if($j >= count($accounts))
+					   {
+						   echo ".";
+					   }else
+							
+							echo ",";
+							$j++;
+					   }
+				   }else
+				   echo "Not Available";
+				   
+				  ?></h6>
+			<?php } ?>
+          
+          
           </div>
           <div class="clear"></div>
           </div>
@@ -146,7 +227,47 @@
           <div class="card_left4"><i class="fa fa-pinterest-p"></i></div>
           <div class="card_right">
           <h5>Pinterest:</h5>
-          <h6>aaliyah@gmail.com</h6>
+               <?php if($accounts_data){
+					 $i = 0 ;
+					$accounts = array();
+			  foreach ($accounts_data as $data)
+			  {
+				 
+				  
+				  if($data['account_type'] == 'pinterest')
+				  {
+					  $accounts[] = $data['account_name'];
+					  $i++; 
+				  }
+			  }?>
+                   <h6><?php if(!empty($accounts))
+				   
+				   {
+					  // print_r($accounts);
+					  $j = 1;
+					   foreach($accounts as $acc)
+					   {
+						   
+						    echo $acc;
+						
+							if(count($accounts) == 1)
+							{
+								echo ".";
+							}else if($j >= count($accounts))
+					   {
+						   echo ".";
+					   }else
+							
+							echo ",";
+							$j++;
+					   }
+				   }else
+				   echo "Not Available";
+				   
+				  ?></h6>
+			<?php } ?>
+          
+          
           </div>
           <div class="clear"></div>
           </div>
@@ -155,7 +276,46 @@
           <div class="right_cards4"><i class="fa fa-linkedin"></i></div>
           <div class="card_right">
           <h5>linkedin:</h5>
-          <h6>Aaliyah@linkedin</h6>
+                <?php if($accounts_data){
+					 $i = 0 ;
+					$accounts = array();
+			  foreach ($accounts_data as $data)
+			  {
+				 
+				  
+				  if($data['account_type'] == 'linked_in')
+				  {
+					  $accounts[] = $data['account_name'];
+					  $i++; 
+				  }
+			  }?>
+                   <h6><?php if(!empty($accounts))
+				   
+				   {
+					  // print_r($accounts);
+					  $j = 1;
+					   foreach($accounts as $acc)
+					   {
+						   
+						    echo $acc;
+						
+							if(count($accounts) == 1)
+							{
+								echo ".";
+							}else if($j >= count($accounts))
+					   {
+						   echo ".";
+					   }else
+							
+							echo ",";
+							$j++;
+					   }
+				   }else
+				   echo "Not Available";
+				   
+				  ?></h6>
+			<?php } ?>
+          
           </div>
           <div class="clear"></div>
           </div>

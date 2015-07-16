@@ -63,6 +63,7 @@ public function business_details($user_id='')
 	if(!empty($user_id))
 	$data['user_id'] = $user_id;
 	$data['profile_info'] = $this->profile_set->get_user_profileinfo($user_id);
+	$data['accounts_data'] = $this->profile_set->get_user_accounts($user_id);
 	$data['content']='my_business_card';
 	$this->load->view('full_content_view',$data);
 	//$this->load->view('business_details',$data);

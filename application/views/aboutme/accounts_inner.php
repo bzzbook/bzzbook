@@ -1,5 +1,17 @@
 <?php 
-	  $accounts_data = $this->profile_set->get_other_accounts_by_id(); 
+
+	
+						  $cur_user_id ='';
+						 if(isset($user_id))
+						{
+						
+						$cur_user_id = $user_id;
+						}else
+						{
+							
+						$cur_user_id = $this->session->userdata('logged_in')['account_id'];
+							}
+	  $accounts_data = $this->profile_set->get_other_accounts_by_id($cur_user_id); 
 	// print_r($mobile_data);
 	
 	 
