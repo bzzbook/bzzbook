@@ -6,6 +6,7 @@
 <?php $result = $this->profile_set->get_userinfo($user_id='');
  $name = $result[0]['user_firstname']." ".$result[0]['user_lastname'];
  $companies = $this->companies->get_mn_cmp_list();
+ $unread_count = $this->mdlnotifications->get_unread_count();
  ?> 
 
 <section class="mainNav">
@@ -23,7 +24,19 @@
             <li> <a  href="<?php echo base_url()."profile/my_photos/".$profile_id; ?>">Photos</a></li>
              <li> <a  href="<?php echo base_url()."profile/business_details/".$profile_id; ?>">Business Card</a></li>
             <li> <a  href="<?php echo base_url()."company/my_companies/".$profile_id; ?>">Companies</a></li>
+           <!-- <li><a href="javascript:void(0)" class="dropdown-toggle"  id="ntfc-list" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Notification's</a>
+            <div class="dropdown-menu" aria-labelledby="ntfc-list">
+			<a href="#">sfsf</a>
+
+          </div>
+          </li>-->
           </ul>
+          <div class="pull-right viewAs"><a href="javascript:void(0)" id="nfc-bar"  class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="fa fa-globe fa-2x"></i></a><div id="ntfc_count"><?php echo $unread_count; ?></div>
+          <div class="dropdown-menu ntfc-list" aria-labelledby="ntfc-list">
+          <h3>Notifications</h3>
+          <div id="notification-box"></div>
+          </div>
+</div>
           <?php /*?><div class="pull-right viewAs">
             <p>Viewing as:</p>
             <select class="form-control" id="profile_interchange" >

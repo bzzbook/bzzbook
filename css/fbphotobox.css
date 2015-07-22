@@ -3,7 +3,7 @@
 .fbphotobox-fc-main-container { margin: auto; position: fixed; z-index: 400; left: 0px; top: 0px; right: 0px; bottom: 0px; background-color: black; display: none; }
 .fbphotobox-fc-main-container:hover { cursor: pointer; }
 .fbphotobox-main-container { margin: auto; display: none; position: fixed; z-index: 200; top: 0px; right: 0px; left: 0px; bottom: 0px; border: 1px solid #000; border-radius: 2px; }
-.fbphotobox-container-left { float: left; position: relative; }
+.fbphotobox-container-left { float: left; position: relative; display:flex !important; min-width:600px !important; min-height:600px !important; }
 .fbphotobox-container-left:hover { cursor: pointer; }
 .fbphotobox-container-left table td { text-align: center; vertical-align: middle; height: 100% }
 .fbphotobox-container-right { float: right; background-color: white; }

@@ -1259,11 +1259,11 @@ function getconversations(msg_id,sent_by)
   cache: false
   });
 }
-function getPostComments(post_id)
+function getPostComments(post_id,photo_name)
 {
  image = "<img width='80px' style='margin-left:150px;' src='<?php echo base_url(); ?>images/loading.gif' />";
  $(".fbphotobox-image-content").html(image);
- url="<?php echo base_url(); ?>customer/getpostcomments/"+post_id;
+ url="<?php echo base_url(); ?>customer/getpostcomments/"+post_id+"/"+photo_name;
   $.ajax({
         type: "POST",
         url: url,
@@ -1319,6 +1319,7 @@ function getPostComments_photospage(post_id,photo_name)
 }
 function postComSub(e,post_id,photo_name){
 e.preventDefault();
+
 url = "<?php echo base_url(); ?>signg_in/write_photo_comment/"+post_id+"/"+photo_name;
  var formObj = $('form#imgCmtForm')[0];
 
@@ -1334,8 +1335,9 @@ cache: false,             // To unable request pages to be cached
 processData:false,        // To send DOMDocument or non processed data file it is set to false
 success: function(data)   // A function to be called if request succeeds
 {
-	if(data==' success')
+	if(data==' success'){
 	getPostComments_photospage(post_id,photo_name);
+	}
 	else
 	$('.commentBox-error').html(data);
 //$('#res_comments'+post_id).append(data);
@@ -5454,6 +5456,33 @@ $(document).ready(function(){
 		}else{ $("#suggesstion-box").hide(); }
 	});
 });
+$(document).ready(function(){
+	$("#nfc-bar").click(showNotifications);
+	 });
+
+function showNotifications(){
+
+		//$('.dropAnimate').removeClass('dropAnimate');
+		
+		var req_url = "<?php  echo base_url(); ?>notifications/getNotifications";
+		
+		$.ajax({
+		type: "POST",
+		url: req_url,
+		beforeSend: function(){
+			$("#notification-box").css("background","#FFF url(<?php  echo base_url(); ?>images/LoaderIcon.gif) no-repeat 165px");
+		},
+		success: function(data){
+			$("#notification-box").show();
+			$("#notification-box").html(data);
+			$("#notification-box").css("background","#FFF");
+		}
+		});
+		
+
+	
+}
+
 
 function selectCountry(val) {
 $("#header-search").val(val);
@@ -6243,10 +6272,14 @@ function showOnlineFriends(name){
 		cache: false
 		});
 }
+
 window.setInterval(function(){
   showOnlineFriends();
   get_unread_messages();
+ 
 },5000);
+
+
 
 
 </script>

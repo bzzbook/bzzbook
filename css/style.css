@@ -2315,8 +2315,19 @@ left: 75%; margin-top:5% !important; height:25px; width:20% !important;}
 .rig_bottoms{ display:block; padding-top:15px; color:#000; position:absolute; bottom:0px; }
 .rig_bottoms input{ border:1px solid #a5a4a4; }
 
-
-
+.ntfc-list{ min-width:30%; margin-right:-3%;}
+.ntfc-list h3{ border-bottom:1px solid #EBEBEB; padding:10px 15px; }
+.ntfc-list ul li{ padding:5px 5px 5px; display:flex; clear:both; border-bottom: 1px solid #EBEBEB;}
+.ntfc-list ul li .member-search-name .ntf_user{ color:#999; font-weight:600; font-size:14px;}
+.ntfc-list ul li .member-search-name .ntf_msg{ color:#999; font-weight:100;}
+.ntfc-list ul li .member-search-name .ntf_msg a{ height:auto !important; line-height:normal !important; font-weight:100; color:#999; text-decoration:underline; font-size:12px; padding:0 !important;}
+#ntfc_count { position: absolute;
+background: #FFF none repeat scroll 0% 0%;
+border-radius: 2px;
+top: 5px;
+right: -9px;
+font-size: 12px;
+padding: 0 4px; }
 
 div.mousescroll {
     overflow: hidden;
@@ -2367,3 +2378,5 @@ ul {
 =======
 .event_delete_link {float: left; padding-top: 13px; }
 >>>>>>> a52cc8b64f26ccf2268ada1fdae1b74570ce93e7
+
+

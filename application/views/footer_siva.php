@@ -7,7 +7,30 @@ function myfunction(){
 	else
 	showOnlineFriends();
 }
+function insertNotifications(){	 
+		url="<?php echo base_url(); ?>notifications";	
+		$.ajax({
+        url: url,
+		success: function(data)
+        {  
+		},
+		cache: false
+		});
+}
+function getNtfcCount(){	 
+		url="<?php echo base_url(); ?>notifications/getNtfsCount";	
+		$.ajax({
+        url: url,
+		success: function(data)
+        {  
+			if(data!=''){ $('#ntfc_count').html(data); }
+		},
+		cache: false
+		});
+}
 window.setInterval(myfunction,5000);
+window.setInterval(insertNotifications,3000);
+window.setInterval(getNtfcCount,2000);
 user_event_edit();
 
 function invite_event_frnds(keyword,added_users,suggestion_box){
