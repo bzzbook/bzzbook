@@ -112,11 +112,16 @@ class Mdlnotifications extends CI_Model {
 										$lastItem = array_pop($sliced_array);
 									$content['verb'] .= ' and '.$lastItem;
 									}
-									if($count_names>=2){
+									if($count_names>=2 && $count_names<=4){
 									$lastItem = array_pop($sliced_array); // c
 									$text = implode(', ', $sliced_array); // a, b
 									$text .= ' and '.$lastItem;
 									$content['verb'].=', '.$text;
+									}
+									if($count_names>4){
+										$text = implode(', ', $sliced_array);
+										$text .= ' and '.($count_names-4)." others";
+										$content['verb'].=', '.$text;
 									}
 									 $notification = array(
 								   'user_id' => $tag,
