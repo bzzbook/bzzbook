@@ -106,11 +106,11 @@ a.previous { display: none; }
         
         <li><a href="<?php echo base_url(); ?>profile" tabindex="-1" role="menuitem" title="user profile"><i class="fa fa-user"> </i> 
 <?php echo $name ?></a></li>
-         <?php foreach($companies as $cmp):?>
+         <?php if($companies): foreach($companies as $cmp):?>
          
                   <li>
 <a href="<?php echo base_url(); ?>company/company_disp/<?php echo $cmp->companyinfo_id ?>" tabindex="-1" role="menuitem" title="company profile"><i class="fa fa-building-o"> </i> <?php echo $cmp->cmp_name ?></a></li>
-                 <?php endforeach;?> 
+                 <?php endforeach; endif;?> 
           
           <li><a href="<?php echo base_url(); ?>signg_in/sign_out" tabindex="-1" role="menuitem"><i class="fa fa-sign-out"> </i> 
 Logout</a></li>

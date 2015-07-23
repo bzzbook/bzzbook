@@ -2319,6 +2319,7 @@ left: 75%; margin-top:5% !important; height:25px; width:20% !important;}
 .ntfc-list h3{ border-bottom:1px solid #EBEBEB; padding:10px 15px; }
 .ntfc-list ul li{ padding:5px 5px 5px; display:flex; clear:both; border-bottom: 1px solid #EBEBEB;}
 .ntfc-list ul li .member-search-name .ntf_user{ color:#999; font-weight:600; font-size:14px;}
+.ntf_msg a{ color:#999 !important; font-weight:600 !important; font-size:14px !important;}
 .ntfc-list ul li .member-search-name .ntf_msg{ color:#999; font-weight:100;}
 .ntfc-list ul li .member-search-name .ntf_msg a{ height:auto !important; line-height:normal !important; font-weight:100; color:#999; text-decoration:underline; font-size:12px; padding:0 !important;}
 #ntfc_count { position: absolute;

@@ -10,6 +10,10 @@ class Notifications extends CI_Controller {
 		
 		//$this->load->model('notifications');
 		$this->mdlnotifications->post_notifications();
+		$this->mdlnotifications->like_notifications();
+		$this->mdlnotifications->comment_notifications();
+		
+		
 	}
 	public function getNotifications(){
 		$this->mdlnotifications->getNotifications();
