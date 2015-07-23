@@ -293,7 +293,7 @@ class customer extends CI_Controller {
 				$headers = 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
              
                 $to = $this->input->post('email');
-                $from = "no-reply@www.bzzbook.com";
+                $from = 'support@bzzbook.com';
                 $subject = "invitaion for friend";
                 $message = 'hai friends';
                 $this -> load -> library('email');

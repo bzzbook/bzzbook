@@ -1317,6 +1317,10 @@ function getPostComments_photospage(post_id,photo_name)
   cache: false
   });
 }
+
+
+
+
 function postComSub(e,post_id,photo_name){
 e.preventDefault();
 
@@ -6276,6 +6280,7 @@ function showOnlineFriends(name){
 window.setInterval(function(){
   showOnlineFriends();
   get_unread_messages();
+
  
 },5000);
 

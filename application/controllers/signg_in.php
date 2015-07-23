@@ -155,38 +155,62 @@ class Signg_in extends CI_Controller {
 	 $this->load->model('customermodel');
 	 $session_data = $this->session->userdata('logged_in');
 	 $data['posted_by'] = $session_data['account_id'];
-	 $data['post_content'] = $this->input->post('posts');
-	 $data['uploaded_files'] = $this->doupload();
-	 if($this->input->post('addedusers')!='')
+	   $up_res = $this->ajax_image_upload('uploadPhotos');
+	   if($up_res['status'])
+	   $file_name = $up_res['message'];
+	   else
+	   $file_name = '';
+	   
+	 $data['post_content'] = $_POST['posts'];
+	 $data['uploaded_files'] = $file_name;
+	 if($_POST['addedusers']!='')
 	 {
-		 $data['posted_to'] = $this->input->post('addedusers');
+		 $data['posted_to'] = $_POST['addedusers'];
 		 $data['isGhostpost'] = 1;
-		  if($this->input->post('tagaddedusers')!='')
-		  $data['tagged_friends'] = $this->input->post('tagaddedusers');
+		  if($_POST['tagaddedusers']!='')
+		  $data['tagged_friends'] = $_POST['tagaddedusers'];
 		 $this->customermodel->post_buzz($data); 
 	 }
-	 else if($this->input->post('post_group')==0)
+	 else if($_POST['post_group']==0)
 	 {
 		  $data['posted_to']='';
-		  if($this->input->post('tagaddedusers')!='')
-		  $data['tagged_friends'] = $this->input->post('tagaddedusers');
+		  if($_POST['tagaddedusers']!='')
+		  $data['tagged_friends'] = $_POST['tagaddedusers'];
 		   $this->customermodel->post_buzz($data);
-		   echo "post saved successfully..."; 
-		   redirect('profiles');
+		  // echo "post saved successfully..."; 
+		  // redirect('profiles');
+	$user_id = $this->session->userdata('logged_in')['account_id'];
+	$data['products'] = $this->customermodel->All_Posts($user_id);
+	if($data)
+	{
+	echo $this->load->view('all_posts_inner',$data);
+	}
 	 }
 	 else
 	 {
-		 $result = $this->profile_set->get_groupmembers($this->input->post('post_group'));
+		 $result = $this->profile_set->get_groupmembers($_POST['post_group']);
 		 $data['posted_to'] = $result[0]['group_members'];
 		 if($this->input->post('tagaddedusers')!='')
-		 $data['tagged_friends'] = $this->input->post('tagaddedusers');
+		 $data['tagged_friends'] = $_POST['tagaddedusers'];
 		 $this->customermodel->post_buzz($data);
 	 }
-	 echo "post saved successfully..."; 
-	 redirect('profiles');
+	
+	
+	$user_id = $this->session->userdata('logged_in')['account_id'];
+	$data['products'] = $this->customermodel->All_Posts($user_id);
+	if($data)
+	{
+	echo $this->load->view('all_posts_inner',$data);
+	}
+	
+
+	 //redirect('profiles');
 	 // redirect(site_url('customer_controller/view_post'));
 	 // redirect(site_url('customer/view_post'));
    }
+   
+
+   
     public function send_cmp_post($cmp_id)
   {
 	 
@@ -506,12 +530,16 @@ class Signg_in extends CI_Controller {
 	   
    }
  public function ajax_image_upload($file_name){
+	 
+	
 	
 	if(isset($_FILES[$file_name]["type"]) && !empty($_FILES[$file_name]["type"][0]))	
 	{		
 		$validextensions = array("jpeg", "jpg", "png");
 		
-		$filename = implode("",$_FILES[$file_name]["name"]);
+	
+		
+		$filename = implode(",",$_FILES[$file_name]["name"]);
 		
 		$temporary = explode(".",$filename);
 		
@@ -766,10 +794,10 @@ $data_a=array(
 		$mail = $usermail;
 		//$this->load->library('encrypt');
 		//$usermail = $this->encrypt->encode($usermail);
-		$user_name = 'Sivaprasad';
+		$user_name = 'bzzBook';
 		//;$this->load->library('email',$config);
 		$this->email->set_newline("\r\n");
-		$this->email->from('sprasad96@gmail.com',$user_name);
+		$this->email->from('support@bzzbook.com',$user_name);
 		$this->email->to($mail,'user');
 		$this->email->subject('bzzbook Pasword Reset');
 		$message = "Please Click Below Link To Resest Your Acount Password  \n";
@@ -823,6 +851,99 @@ if($this->email->send()){
    //Email Failed To Send
    echo $this->email->print_debugger();
 }
+}
+ 
+ 
+public function recent_posts($recent_post_id)
+{
+  	    $id = $this->session->userdata('logged_in')['account_id'];
+		
+		$cur_usr_id = $this->session->userdata('logged_in')['account_id'];
+	    $condition = "(user_id ='" . $id . "' OR friend_id ='".$id."') AND request_status = 'Y'";
+		$this->db->select('*');
+		$this->db->from('bzz_userfriends');
+		$this->db->where($condition);
+		$query = $this->db->get();
+			$friends = array();
+		if ($query->num_rows() > 0) {
+			$res = $query->result();
+			if($res)
+			{
+			foreach($res as $friend)	
+			{
+			   $friends[] =	$friend->friend_id;
+			   $friends[] = $friend->user_id;
+			}
+			}
+		}	
+	   $friends[] =  $id;
+	   $friends = array_unique($friends);
+	  // print_r($friends); exit;
+	   $this->db->select('*');
+	   
+	   $this->db->from('bzz_posts');
+	$user_time_condition  = "post_id > '".$recent_post_id."' AND posted_on >= DATE_ADD( NOW(), INTERVAL - 5 MINUTE ) AND isGhostpost=0 ORDER BY post_id DESC";	
+	   //$this->db->limit(10);
+	
+   $this->db->where($user_time_condition);
+//   $this->db->order_by("post_id","desc");
+	   $query = $this->db->get();
+   	   if ($query->num_rows() > 0) {
+	   		$result =  $query->result();
+			$data = array();
+			foreach($result as $res){
+		    $friend_ids = explode(',',$res->posted_to);
+				
+			if(($res->posted_to==0 && in_array($res->posted_by,$friends)) || ($res->isGhostpost==1 && in_array($res->posted_by,$friends)) || ($res->posted_by==$id && $id==$cur_usr_id) || (in_array($id, $friend_ids) && $id==$cur_usr_id) ||  (!empty($pst_usr_id) && in_array($pst_usr_id, $friend_ids)) || ($res->posted_by==$id && in_array($cur_usr_id, $friend_ids)))
+			{
+				$data['products'][] = $res;
+			}
+			}
+			
+			if(!empty($data))
+			{
+			echo $this->load->view('all_posts_inner',$data);	
+			}
+			
+			   } 
+	   else 
+	   echo false;
+   
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+/*	
+
+		$user_time_condition  = "post_id > '".$recent_post_id."' AND posted_on >= DATE_ADD( NOW(), INTERVAL - 5 MINUTE ) AND isGhostpost=0 ORDER BY post_id DESC";	
+			$this->db->select('*');
+			$this->db->from('bzz_posts');
+			$this->db->where($user_time_condition);
+			$query = $this->db->get();
+			
+			if ($query->num_rows() >0){
+					
+				$data['products'] = $query->result();
+	
+			}
+	
+	if(!empty($data))
+	{
+		echo $this->load->view('all_posts_inner',$data);
+	}else
+	{
+		echo false;
+	}
+	*/
 }
  
  }

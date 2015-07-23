@@ -387,10 +387,10 @@ class Messages extends CI_Model {
 	$this->db->where($condition);
 	$this->db->order_by('sent_date','desc');
 	$query = $this->db->get();
-	if($query->num_rows()>0)
-	{
-     return $query->result_array();
-	}
+	if ($query->num_rows() >0){					
+				return $query->num_rows();
+			}
+			return false;
  }
 
 

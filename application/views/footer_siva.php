@@ -852,6 +852,7 @@ $('#previewing').attr('height', '230px');
    if($(window).scrollTop() + $(window).height() == $(document).height()) {
 	  
 	   var last_id = $('#last_id').val();
+	  // alert(last_id);
 	
 	   $('#posts_content_div').find('#post'+last_id).after('<article id="loader_img"><img style="margin-left:240px; margin-bottom:8px;" src="<?php echo base_url(); ?>images/block_loader.gif" /></article>');
 
@@ -943,11 +944,83 @@ function get_unread_messages()
         url: url,
 		success: function(html)
         {  
-
-		    $('#un_read_msg_count').html('');
+		if(html!='')
+		{
+		    //$('.un_read_msg_count').html('');
 			$('#un_read_msg_count').html(html);
+        }
+		},
+		cache: false
+		});
+			
+}
+
+function postsubmitajax(e,my_form)
+{
+	//alert(my_form);
+
+//e.preventDefault();
+//$('#'+my_form).submit();
+url = "<?php echo  base_url(); ?>signg_in/send_post/";
+var formObj = $('form#my_form')[0];
+
+$.ajax({
+	 
+url: url, // Url to which the request is send
+type: "POST",             // Type of request to be send, called as method
+data: new FormData(formObj), // Data sent to server, a set of key/value pairs (i.e. form fields and values)
+contentType: false,       // The content type used when sending data to the server.
+cache: false,             // To unable request pages to be cached
+processData:false,        // To send DOMDocument or non processed data file it is set to false
+success: function(data)   // A function to be called if request succeeds
+{
+
+$('#posts_content_div').html('');
+$('#dummypost').html('');
+$('#my_form').trigger("reset");
+$('#posts_content_div').html(data);
+$('#withTokens').html('');
+$('#taggedfriends').find('span').html('');
+
+
+}
+
+});
+
+ //var formObj = $('form#imgCmtForm')[0];
+
+//alert('sivaprasad');
+}
+
+
+function get_recent_posts(post_id)
+{
+	url = "<?php echo base_url(); ?>signg_in/recent_posts/"+post_id;
+		$.ajax({
+        url: url,
+		success: function(html)
+        {  
+		if(html!='')
+		{
+		    //$('.un_read_msg_count').html('');
+			 //$('#un_read_msg_count').html(html);
+			 $('#posts_content_div').prepend(html);
+        }
 		},
 		cache: false
 		});
 }
+window.setInterval(function(){
+
+
+//$('#posts_content_div').first()
+
+
+var post_id = $('#posts_content_div > :first-child').attr("id").substr(4);
+  get_recent_posts(post_id);
+//var id = sub_str(4,post_id);
+//alert(post_id);
+ 
+},5000);  
+
 </script>

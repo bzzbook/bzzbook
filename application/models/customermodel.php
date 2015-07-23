@@ -1006,5 +1006,60 @@ public function individual_Posts($post_id)
 	   	return $query->result();
        }
 }
+
+
+	public function individualPost($post_id){
+		if(empty($pst_usr_id))
+  	    $id = $this->session->userdata('logged_in')['account_id'];
+		else
+		$id = $pst_usr_id;
+		$cur_usr_id = $this->session->userdata('logged_in')['account_id'];
+	    $condition = "(user_id ='" . $id . "' OR friend_id ='".$id."') AND request_status = 'Y'";
+		$this->db->select('*');
+		$this->db->from('bzz_userfriends');
+		$this->db->where($condition);
+		$query = $this->db->get();
+			$friends = array();
+		if ($query->num_rows() > 0) {
+			$res = $query->result();
+			if($res)
+			{
+			foreach($res as $friend)	
+			{
+			   $friends[] =	$friend->friend_id;
+			   $friends[] = $friend->user_id;
+			}
+			}
+		}	
+	   $friends[] =  $id;
+	   $friends = array_unique($friends);
+	 
+	   $this->db->select('*');
+	
+	   $this->db->from('bzz_posts');
+	
+	   
+	
+     $this->db->where('post_id',$post_id);
+	
+	   $query = $this->db->get();
+   	   if ($query->num_rows() > 0) {
+	   		$result =  $query->result();
+			$posts = array();
+			foreach($result as $res){
+		    $friend_ids = explode(',',$res->posted_to);
+				
+			if(($res->posted_to==0 && in_array($res->posted_by,$friends)) || ($res->isGhostpost==1 && in_array($res->posted_by,$friends)) || ($res->posted_by==$id && $id==$cur_usr_id) || (in_array($id, $friend_ids) && $id==$cur_usr_id) ||  (!empty($pst_usr_id) && in_array($pst_usr_id, $friend_ids)) || ($res->posted_by==$id && in_array($cur_usr_id, $friend_ids)))
+			{
+				$posts[] = $res;
+			}
+			}
+			
+			return $posts;
+	   } 
+	   else 
+	   return false;
+   }
+
  }
 ?>

@@ -19,15 +19,14 @@
         </ul>
    
         <div id="uploadPhotosdvPreview"></div>
-        <?php $attr = array('name' => 'post_form', 'id' =>'my_form', 'enctype'=>"multipart/form-data") ?>
-        <?php 
-		echo form_open('signg_in/send_post',$attr) ?>
+         <form name = "post_form" id = "my_form" enctype = "multipart/form-data" method = "POST" action="<?php echo  base_url(); ?>signg_in/send_post" onsubmit="postsubmitajax();" />
         <input type="file" name="uploadPhotos[]" id="uploadPhotos" multiple="multiple" style="display:none;" />
         
 <!--        <textarea cols="" rows="" name="posts" id="posts" class="form-control" placeholder="What's Buzzing?"></textarea>
 -->       
 		<div class="post-content" style="width:100%; min-height:75px;" onclick="document.getElementById('dummypost').focus();"><div contenteditable="true" style="min-height:20px; min-width:10px; padding:8px; float:left;" id="dummypost" onkeyup="takeInputToPost()"></div><div id="withTokens" style="display:none; padding:8px; float:left">--With </div><div style="clear:both;"></div></div>
         <input type="hidden" id="posts" name="posts" />
+        <input type="reset" style="display:none;"/>
 		<div id="hiddentokens" style="display:none;"></div>
         <div id="selectedfriends"><div id="search_frnd_wrapper"><input type="text" name="txtsearch" id="searchfriends" onkeyup="keyupevent();" /><input type="hidden" id="addedusers" name="addedusers" /><div id="autosuggest"></div></div></div>
         <div id="taggedfriends"><div id="tag_frnd_wrapper"><input type="text" name="tagsearch" id="tagsearchfriends" onkeyup="tagkeyupevent();" /><input type="hidden" id="tagaddedusers" name="tagaddedusers" /><div id="tagautosuggest"></div></div></div>
@@ -38,7 +37,7 @@
 		}
 		
 		
-		} ?></select> <a href="javascript:{}" onclick="document.getElementById('my_form').submit(); return false;">Post</a> </div>
+		} ?></select> <a href="javascript:void(0);" onclick="postsubmitajax('event','my_form');">Post</a> </div>
         <?php echo form_close(); ?>
         <div class="clear"></div>
       </div>

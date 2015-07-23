@@ -19,7 +19,7 @@ class Friendsmodel extends CI_Model {
 		$condition.= " AND (user_id NOT IN (".$addedusers.") AND friend_id NOT IN (".$addedusers.") )";
 		if($limit!='')
 		$condition .=" LIMIT 0,".$limit;
-		//echo $condition ; exit;
+		 // echo $condition ; exit;
 		$this->db->select('*');
 		$this->db->from('bzz_userfriends');
 		$this->db->where($condition);
@@ -40,7 +40,7 @@ class Friendsmodel extends CI_Model {
 				if($addedusers!=''){
 					$condition.= " AND user_id NOT IN (".$addedusers.")";
 				}
-				
+				//echo $condition ; exit;
 				$this->db->select('*');
 				$this->db->from('bzz_userinfo');
 				$this->db->where($condition);
@@ -73,6 +73,7 @@ class Friendsmodel extends CI_Model {
 				
 			}
 			return $frnds;
+			
 		} else {
 		return false;
 		}
@@ -1059,7 +1060,7 @@ $searchblock .= "<figure class='member-sug-pic'><img src='" . base_url() ."uploa
  }
 
 }
-//search events  as per search input
+//search company events  as per search input
 
 
 
@@ -1079,7 +1080,7 @@ if($specific_search=='' || $specific_search=='events'){
 	  $searchblock .= "<li class='col-md-12' onclick='location.href=&#39;".base_url()."events/get_event_byid/".$req['event_id']."/".$req['event_cr_cmp']."&#39;'>
         	<div class='member-search-sug'>";
 			$searchblock .= "<div class='categoryBlock'>";
-			if($i==0) { $searchblock .="Events"; }
+			if($i==0) { $searchblock .="Company Events"; }
 			$searchblock .="</div>";
 			if(!empty($req['event_image'])){
 $searchblock .= "<figure class='member-sug-pic'><img src='" . base_url() ."uploads/".$req['event_image']."' alt='". $req['event_name'] . " '></figure>";
@@ -1098,6 +1099,49 @@ $searchblock .= "<figure class='member-sug-pic'><img src='" . base_url() ."uploa
  } 
  }
 }
+
+// query to get user events
+
+if($specific_search=='' || $specific_search=='events'){
+ $this->db->select('*'); 
+	$this->db->from('bzz_user_events');
+	$this->db->like('event_name',$value); 
+	$this->db->or_like('event_location',$value); 
+	 
+	$this->db->limit($limit);
+	$query = $this->db->get();
+	$userdata = $query->result_array();
+    if($userdata) {
+	  $i = 0;
+	  foreach($userdata as $req){
+	
+	  $searchblock .= "<li class='col-md-12' onclick='location.href=&#39;".base_url()."profile/eventview/".$req['event_id']."&#39;'>
+        	<div class='member-search-sug'>";
+			$searchblock .= "<div class='categoryBlock'>";
+			if($i==0) { $searchblock .="User Events"; }
+			$searchblock .="</div>";
+			if(!empty($req['event_banner'])){
+$searchblock .= "<figure class='member-sug-pic'><img src='" . base_url() ."uploads/".$req['event_banner']."' alt='". $req['event_name'] . " '></figure>";
+			}else{
+				$searchblock .= "<figure class='member-sug-pic'><img src='" . base_url() ."uploads/default_profile_pic.png'></figure>";
+			}
+
+		$searchblock .= " <div class='member-search-name'>
+            <h4>". $req['event_name']."</h4>";
+			
+			$searchblock .= "<h6>Location: ".$req['event_location']."</h6>";
+ 
+               $searchblock .= "</div></li>	";
+			   $i++;
+	
+ } 
+ }
+}
+
+
+
+
+
 
 
 $searchblock .= "</ul>"; 
@@ -1351,6 +1395,7 @@ public function user_frnds_by_id($limit,$event_id)
 
    public function get_online_frnds($name){
 	   $frnds = $this->getfriends($name); 
+	  
 	   if($frnds){
 			$friends = array();
 			foreach($frnds as $frnd){

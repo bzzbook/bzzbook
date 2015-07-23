@@ -889,7 +889,7 @@ public function send_business_card()
 		$profile_info = $this->profile_set->get_user_profileinfo(); 
 		
 		$this->email->set_newline("\r\n");
-		$this->email->from('www.bzzbook.com',$user_name);
+		$this->email->from('support@bzzbook.com',$user_name);
 		$this->email->to($emails);
 		$this->email->subject('bzzbook Busines Card');
 		$this->email->set_mailtype("html");
@@ -919,7 +919,7 @@ public function send_business_card()
 		$profile_info = $this->profile_set->get_user_profileinfo(); 
 		
 		$this->email->set_newline("\r\n");
-		$this->email->from('www.bzzbook.com',$user_name);
+		$this->email->from('support@bzzbook.com',$user_name);
 		$this->email->to($data);
 		$this->email->subject('bzzbook Busines Card');
 		$this->email->set_mailtype("html");

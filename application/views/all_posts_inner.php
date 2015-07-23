@@ -6,6 +6,8 @@
 	  
 	  
 	  $posts_count = count($products);
+	
+	
 	  if($products){
 	  foreach( $products as $row):
 	  

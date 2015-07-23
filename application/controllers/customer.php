@@ -116,7 +116,7 @@ class customer extends CI_Controller {
 		$mail = $user_data[0]['user_email'];
 		$this->load->library('email');
 		$this->email->set_newline("\r\n");
-		$this->email->from('mr.s.sivaprasad@gmail.com',$username);
+		$this->email->from('support@bzzbook.com');
 		$this->email->to($mail);
 		$this->email->subject('Confirmation mail for account activation');
 		$message = "Please Click Below Link To Activate Your Acount  \n";
@@ -165,7 +165,7 @@ class customer extends CI_Controller {
 				$headers = 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
              
                 $to = $this->input->post('email');
-                $from = "no-reply@www.bzzbook.com";
+                $from = "support@bzzbook.com";
                 $subject = "invitaion for friend";
                 $message = 'hai friends';
                 $this -> load -> library('email');
