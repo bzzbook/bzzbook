@@ -170,6 +170,13 @@ class Signg_in extends CI_Controller {
 		  if($_POST['tagaddedusers']!='')
 		  $data['tagged_friends'] = $_POST['tagaddedusers'];
 		 $this->customermodel->post_buzz($data); 
+		 $user_id = $this->session->userdata('logged_in')['account_id'];
+	$data['products'] = $this->customermodel->All_Posts($user_id);
+	if($data)
+	{
+	echo $this->load->view('all_posts_inner',$data);
+	}
+	
 	 }
 	 else if($_POST['post_group']==0)
 	 {
@@ -193,15 +200,16 @@ class Signg_in extends CI_Controller {
 		 if($this->input->post('tagaddedusers')!='')
 		 $data['tagged_friends'] = $_POST['tagaddedusers'];
 		 $this->customermodel->post_buzz($data);
-	 }
-	
-	
-	$user_id = $this->session->userdata('logged_in')['account_id'];
+		 $user_id = $this->session->userdata('logged_in')['account_id'];
 	$data['products'] = $this->customermodel->All_Posts($user_id);
 	if($data)
 	{
 	echo $this->load->view('all_posts_inner',$data);
 	}
+	
+	 }
+	
+	
 	
 
 	 //redirect('profiles');

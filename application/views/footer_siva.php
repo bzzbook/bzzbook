@@ -785,9 +785,16 @@ function events_commentlikefun(pid,uid,count){
 <script>
 $('body').delegate('.xyzzyx','keypress',function(e) {
 	
-    if(e.which == 32 || e.which == 13) {
-
+	
  var post_id = $(this).attr('post_id');
+	 var keycode = (e.keyCode ? e.keyCode : e.which);
+     if(keycode == '13' && $('#write_comment'+post_id).val() != ''){
+	
+   // if(e.which == 32 || e.which == 13) {
+
+ 
+
+ 
 $("#send_comment_ajax"+post_id).on('submit',(function(d) {
 url = "<?php echo base_url(); ?>signg_in/post_comment_by_ajax/";
 d.preventDefault();
@@ -811,7 +818,7 @@ var commentboxcont = $('#commentBox'+post_id).html();
 $('#commentBox'+post_id).html('');
 $('#uploadCommentPhotos'+post_id).val('');
 $('#commentBox'+post_id).html(commentboxcont);
-
+$('#write_comment'+post_id).html('');
 }
 });
 
@@ -846,6 +853,8 @@ $('#previewing').attr('width', '250px');
 $('#previewing').attr('height', '230px');
 }; 
 }
+
+	
 });
 
  $(window).scroll(function() {   
@@ -853,8 +862,11 @@ $('#previewing').attr('height', '230px');
 	  
 	   var last_id = $('#last_id').val();
 	  // alert(last_id);
-	
-	   $('#posts_content_div').find('#post'+last_id).after('<article id="loader_img"><img style="margin-left:240px; margin-bottom:8px;" src="<?php echo base_url(); ?>images/block_loader.gif" /></article>');
+	   
+	 $('#posts_content_div').find('#loader_img').remove();
+        $('#posts_content_div').find('#post'+last_id).after('<article id="loader_img"><img style="margin-left:240px; margin-bottom:8px;" src="<?php echo base_url(); ?>images/block_loader.gif" /></article>');
+    
+	   setTimeout(function() {
 
 	url = "<?php echo base_url(); ?>customer/get_posts/";
 	$.ajax({
@@ -873,7 +885,7 @@ $('#previewing').attr('height', '230px');
 	});
 	
 	
-
+}, 2000);
 
 	   
 	   
@@ -961,6 +973,13 @@ function postsubmitajax(e,my_form)
 
 //e.preventDefault();
 //$('#'+my_form).submit();
+
+	// $('#posts_content_div').find('#loader_img').remove();
+        $('#posts_content_div').prepend('<article id="loading_img"><img style="margin-left:240px; margin-bottom:8px;" src="<?php echo base_url(); ?>images/block_loader.gif" /></article>');
+    
+	   setTimeout(function() {
+
+
 url = "<?php echo  base_url(); ?>signg_in/send_post/";
 var formObj = $('form#my_form')[0];
 
@@ -975,10 +994,12 @@ processData:false,        // To send DOMDocument or non processed data file it i
 success: function(data)   // A function to be called if request succeeds
 {
 
-$('#posts_content_div').html('');
+//$('#posts_content_div').html('');
 $('#dummypost').html('');
 $('#my_form').trigger("reset");
-$('#posts_content_div').html(data);
+//$('#posts_content_div').html('');
+$('#posts_content_div').find('#loading_img').remove();
+$('#posts_content_div').prepend().html(data);
 $('#withTokens').html('');
 $('#taggedfriends').find('span').html('');
 
@@ -987,6 +1008,7 @@ $('#taggedfriends').find('span').html('');
 
 });
 
+	   },5000);
  //var formObj = $('form#imgCmtForm')[0];
 
 //alert('sivaprasad');

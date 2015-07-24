@@ -2355,7 +2355,8 @@ ul {
 
 .thisweek_sug_right a{ margin-left: 40px; }
 .thisweek_sug_right > span{ margin-left: 40px;  }
-<<<<<<< HEAD
+.buzzerhorn { height:30px; }
+
 
 
 
@@ -2377,8 +2378,7 @@ ul {
 
 .fbphotobox-main-container{   min-width: 960px;
   min-height: 520px; }
-=======
+
 .event_delete_link {float: left; padding-top: 13px; }
->>>>>>> a52cc8b64f26ccf2268ada1fdae1b74570ce93e7
 
 
