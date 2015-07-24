@@ -114,6 +114,7 @@ header .search .input-group .input-group-btn ul li a:hover{ background:url(../im
 .midbody .coloumn2 .updateStatus .updateControls a+a{ background:#2f2f2f;}
 .midbody .coloumn2 .posts{ margin-bottom:15px; }
 .midbody .coloumn2 .posts article{background: #fff; border: 1px solid; border-color: #e5e6e9 #dfe0e4 #d0d1d5; border-radius: 2px; margin-bottom:15px; padding:15px 15px 0 15px;}
+.midbody .coloumn2 .posts .asasasa article{ margin-bottom:0px; border:2px solid #74aaf7; margin-top:15px; border-radius:4px;}
 .coloumn2 .posts article.ghostpost {background: #e1e0e0 none repeat scroll 0 0 !important; position:relative;}
 .coloumn2 .posts article.ghostpostside:after{ background:url(../images/ghost-post.png) 0 0; content:""; width:40px; height:50px; position:absolute; right:-7px; top:-12px; }
 .posts article .pfInfo{ display:flex; margin-bottom:15px;}
