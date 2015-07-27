@@ -34,7 +34,7 @@
           <div class="pull-right viewAs"><a href="javascript:void(0)" id="nfc-bar"  class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><!--<i class="fa fa-globe fa-2x"></i>--><img class="buzzerhorn" src="<?php echo base_url()."images/hornlogo.png"; ?>" /></a><div id="ntfc_count"><?php echo $unread_count; ?></div>
           <div class="dropdown-menu ntfc-list" aria-labelledby="ntfc-list">
           <h3>Notifications</h3>
-          <div id="notification-box"></div>
+          <div id="notification-box"><div class="nano"><div class="nano-content"</div></div>
           </div>
 </div>
           <?php /*?><div class="pull-right viewAs">

@@ -12,8 +12,11 @@ class Notifications extends CI_Controller {
 		$this->mdlnotifications->post_notifications();
 		$this->mdlnotifications->like_notifications();
 		$this->mdlnotifications->comment_notifications();
+		$this->mdlnotifications->share_notifications();
 		
-		
+		$this->mdlnotifications->cmt_like_notifications();
+		$this->mdlnotifications->photo_cmt_notifications();
+		$this->mdlnotifications->photo_cmt_like_ntfc();
 	}
 	public function getNotifications(){
 		$this->mdlnotifications->getNotifications();

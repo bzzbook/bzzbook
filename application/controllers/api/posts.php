@@ -13,13 +13,13 @@ class posts extends CI_Controller {
 	{
 		
 	}
-	public function getposts($access_token){
+	public function getposts($access_token,$last_id=''){
 	
 	  $user_res = $this->customermodel->get_user_id($access_token);
 	
 	  $user_id =  $user_res[0]->user_id;
 	  if($user_id)
-	  $allposts = $this->customermodel->All_Posts($user_id);
+	  $allposts = $this->customermodel->All_Posts($user_id,$last_id);
 	  if($allposts):
 	  $posts = array();
 	  foreach( $allposts as $row):

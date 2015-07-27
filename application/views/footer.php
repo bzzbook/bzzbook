@@ -5480,6 +5480,8 @@ function showNotifications(){
 			$("#notification-box").show();
 			$("#notification-box").html(data);
 			$("#notification-box").css("background","#FFF");
+			$(".nano").nanoScroller();
+			$(".nano-content").css("max-height","300px");
 		}
 		});
 		

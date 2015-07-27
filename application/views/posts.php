@@ -19,7 +19,7 @@
         </ul>
    
         <div id="uploadPhotosdvPreview"></div>
-         <form name = "post_form" id = "my_form" enctype = "multipart/form-data" method = "POST" action="<?php echo  base_url(); ?>signg_in/send_post" onsubmit="postsubmitajax();" />
+         <form name = "post_form" id = "my_form" enctype = "multipart/form-data" method = "POST" action="<?php echo  base_url(); ?>signg_in/send_post" />
         <input type="file" name="uploadPhotos[]" id="uploadPhotos" multiple="multiple" style="display:none;" />
         
 <!--        <textarea cols="" rows="" name="posts" id="posts" class="form-control" placeholder="What's Buzzing?"></textarea>
@@ -37,7 +37,7 @@
 		}
 		
 		
-		} ?></select> <a href="javascript:void(0);" onclick="postsubmitajax('event','my_form');">Post</a> </div>
+		} ?></select> <a href="javascript:void(0);" onclick="postsubmitajax('my_form');">Post</a> </div>
         <?php echo form_close(); ?>
         <div class="clear"></div>
       </div>

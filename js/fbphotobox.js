@@ -50,6 +50,7 @@
 			
 			// Setup click trigger
 			$('.' + this.settings.containerClassName).on("click", "." + this.settings.imageClassName, function() {
+				
 				$this.show($(this));
 			});
 			

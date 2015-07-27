@@ -1,4 +1,50 @@
 <script type="text/javascript">
+function postsubmitajax(my_form)
+{
+	//alert(my_form);
+
+//e.preventDefault();
+//$('#'+my_form).submit();
+
+	// $('#posts_content_div').find('#loader_img').remove();
+        
+
+url = "<?php echo  base_url(); ?>signg_in/send_post/";
+var formObj = $('form#my_form')[0];
+
+$.ajax({
+	 
+url: url, // Url to which the request is send
+type: "POST",             // Type of request to be send, called as method
+data: new FormData(formObj), // Data sent to server, a set of key/value pairs (i.e. form fields and values)
+contentType: false,       // The content type used when sending data to the server.
+cache: false,             // To unable request pages to be cached
+processData:false,
+beforeSend: function(){ $('#posts_content_div').prepend('<article id="loading_img"><img style="margin-left:240px; margin-bottom:8px;" src="<?php echo base_url(); ?>images/block_loader.gif" /></article>'); },        // To send DOMDocument or non processed data file it is set to false
+success: function(data)   // A function to be called if request succeeds
+{
+
+//$('#posts_content_div').html('');
+
+$('#dummypost').html('');
+$('#withTokens').html('');
+$('#taggedfriends').find('span').html('');
+$('#my_form').trigger("reset");
+//$('#posts_content_div').html('');
+setTimeout(function(){ $('#posts_content_div').find('#loading_img').remove(); },5000);
+//$('#posts_content_div').prepend(data);
+
+
+
+}
+
+});
+
+	  
+ //var formObj = $('form#imgCmtForm')[0];
+
+//alert('sivaprasad');
+}
 function myfunction(){
 	
 	var fkdsfjl = document.getElementById('input_search_frnds').value;
@@ -967,52 +1013,7 @@ function get_unread_messages()
 			
 }
 
-function postsubmitajax(e,my_form)
-{
-	//alert(my_form);
 
-//e.preventDefault();
-//$('#'+my_form).submit();
-
-	// $('#posts_content_div').find('#loader_img').remove();
-        $('#posts_content_div').prepend('<article id="loading_img"><img style="margin-left:240px; margin-bottom:8px;" src="<?php echo base_url(); ?>images/block_loader.gif" /></article>');
-    
-	   setTimeout(function() {
-
-
-url = "<?php echo  base_url(); ?>signg_in/send_post/";
-var formObj = $('form#my_form')[0];
-
-$.ajax({
-	 
-url: url, // Url to which the request is send
-type: "POST",             // Type of request to be send, called as method
-data: new FormData(formObj), // Data sent to server, a set of key/value pairs (i.e. form fields and values)
-contentType: false,       // The content type used when sending data to the server.
-cache: false,             // To unable request pages to be cached
-processData:false,        // To send DOMDocument or non processed data file it is set to false
-success: function(data)   // A function to be called if request succeeds
-{
-
-//$('#posts_content_div').html('');
-$('#dummypost').html('');
-$('#my_form').trigger("reset");
-//$('#posts_content_div').html('');
-$('#posts_content_div').find('#loading_img').remove();
-$('#posts_content_div').prepend().html(data);
-$('#withTokens').html('');
-$('#taggedfriends').find('span').html('');
-
-
-}
-
-});
-
-	   },5000);
- //var formObj = $('form#imgCmtForm')[0];
-
-//alert('sivaprasad');
-}
 
 
 function get_recent_posts(post_id)
