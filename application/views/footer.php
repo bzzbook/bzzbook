@@ -619,12 +619,14 @@ function likefun(pid,uid,count){
          if(info.like_status == 'N'){
 		 	//$("#like_ajax"+pid).html("Unlike");
 			$("#link_like"+pid).html("Like");
+			   $("#like_count"+pid).html('');
 		    $("#like_count"+pid).html('<img src="<?php echo base_url(); ?>images/like_myphotos.png" alt="">&nbsp;'+(info.like_count-1)+'&nbsp;&nbsp;');
 
 		 }			
 		  else{
 			//$("#like_ajax"+pid).html("Like");
 			$("#link_like"+pid).html("Unlike");
+			   $("#like_count"+pid).html('');
 	        $("#like_count"+pid).html('<img src="<?php echo base_url(); ?>images/like_myphotos.png" alt="">&nbsp;'+(info.like_count+1)+'&nbsp;&nbsp;');
 
 		  }

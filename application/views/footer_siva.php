@@ -834,9 +834,9 @@ $('body').delegate('.xyzzyx','keypress',function(e) {
 	
  var post_id = $(this).attr('post_id');
 	 var keycode = (e.keyCode ? e.keyCode : e.which);
-     if(keycode == '13' && $('#write_comment'+post_id).val() != ''){
+     if(keycode == '13'){
 	
-   // if(e.which == 32 || e.which == 13) {
+   // if(e.which == 32 || e.which == 13) {  && $('#write_comment'+post_id).val() != ''
 
  
 
@@ -1013,11 +1013,61 @@ function get_unread_messages()
 			
 }
 
+function postsubmitajax(e,my_form)
+{
+	//alert(my_form);
 
+//e.preventDefault();
+//$('#'+my_form).submit();
+
+	// $('#posts_content_div').find('#loader_img').remove();
+        $('#posts_content_div').prepend('<article id="loading_img"><img style="margin-left:240px; margin-bottom:8px;" src="<?php echo base_url(); ?>images/block_loader.gif" /></article>');
+    
+	   setTimeout(function() {
+
+
+url = "<?php echo  base_url(); ?>signg_in/send_post/";
+var formObj = $('form#my_form')[0];
+
+$.ajax({
+	 
+url: url, // Url to which the request is send
+type: "POST",             // Type of request to be send, called as method
+data: new FormData(formObj), // Data sent to server, a set of key/value pairs (i.e. form fields and values)
+contentType: false,       // The content type used when sending data to the server.
+cache: false,             // To unable request pages to be cached
+processData:false,        // To send DOMDocument or non processed data file it is set to false
+success: function(data)   // A function to be called if request succeeds
+{
+
+//$('#posts_content_div').html('');
+$('#dummypost').html('');
+$('#my_form').trigger("reset");
+//$('#posts_content_div').html('');
+$('#posts_content_div').find('#loading_img').remove();
+$('#uploadPhotosdvPreview').html('');
+
+$('#withTokens').html('');
+$('#taggedfriends').find('span').html('');
+$('#posts_content_div').prepend().html(data);
+
+
+}
+
+});
+
+	   },5000);
+ //var formObj = $('form#imgCmtForm')[0];
+
+//alert('sivaprasad');
+}
 
 
 function get_recent_posts(post_id)
 {
+	
+	   $('#posts_content_div').find('#loading_img').remove();
+	
 	url = "<?php echo base_url(); ?>signg_in/recent_posts/"+post_id;
 		$.ajax({
         url: url,
@@ -1027,6 +1077,10 @@ function get_recent_posts(post_id)
 		{
 		    //$('.un_read_msg_count').html('');
 			 //$('#un_read_msg_count').html(html);
+		/*	   $('#posts_content_div').prepend('<article id="loading_img"><img style="margin-left:240px; margin-bottom:8px;" src="<?php // echo base_url(); ?>images/block_loader.gif" /></article>');
+ 
+			 $('#posts_content_div').find('#loading_img').fadeOut(5000);*/
+		
 			 $('#posts_content_div').prepend(html);
         }
 		},
@@ -1045,5 +1099,118 @@ var post_id = $('#posts_content_div > :first-child').attr("id").substr(4);
 //alert(post_id);
  
 },5000);  
+
+
+// dynamic display of post likes
+function get_recent_post_likes()
+{
+	url = "<?php echo base_url(); ?>signg_in/get_recent_post_likes/";
+		$.ajax({
+        url: url,
+		accepts: "application/json; charset=utf-8",
+		success: function(data)
+        {  
+		
+		var results = $.parseJSON(data);
+
+$.each(results, function(i, result) {
+
+	$('#posts_content_div').find('#post'+result.post_id).find('#like_count'+result.post_id).remove();
+		$('#posts_content_div').find('#post'+result.post_id).find('#link_like'+result.post_id).append('<span id="like_count'+result.post_id+'"><img alt="" src="<?php echo base_url(); ?>images/like_myphotos.png">'+result.likes+'</span>');
+ 
+});	
+
+			
+      
+		},
+		cache: false
+		});
+}
+
+
+// get recent comments data
+
+function get_recent_comments()
+{
+	url = "<?php echo base_url(); ?>signg_in/get_recent_post_comments/";
+		$.ajax({
+        url: url,
+		accepts: "application/json; charset=utf-8",
+		success: function(data)
+        {  
+		//alert(data);
+	var comments = $.parseJSON(data);
+
+$.each(comments, function(i, comment) {
+	
+	
+	
+	var last_cmnt = $('#res_comments'+comment.commented_on).children('div').last().attr('id').substr(16);
+	//alert(last_cmnt);//children().last().
+	get_dynamic_comments_count(comment.commented_on);
+	
+	
+	url = "<?php echo base_url(); ?>signg_in/get_recent_single_post_data/";
+		$.ajax({
+        url: url,
+		type: "POST",
+		data : { postcomments_id : comment.postcomments_id, comment_content : comment.comment_content, commented_on : comment.commented_on, commented_by : comment.commented_by, commented_time : comment.commented_time, uploadedfiles : comment.uploadedfiles, last_comment : last_cmnt},
+		success: function(data)
+        { 
+	
+	$('#res_comments'+comment.commented_on).append(data);
+	
+	
+	},
+		cache: false
+		});
+	
+	
+
+	$('#posts_content_div').find('#post'+result.post_id).find('#like_count'+result.post_id).remove();
+		$('#posts_content_div').find('#post'+result.post_id).find('#link_like'+result.post_id).append('<span id="like_count'+result.post_id+'"><img alt="" src="<?php echo base_url(); ?>images/like_myphotos.png">'+result.likes+'</span>');
+ 
+});	
+
+			
+      
+		},
+		cache: false
+		});
+}
+
+
+function get_dynamic_comments_count(post_id)
+{
+
+
+url = "<?php echo base_url(); ?>signg_in/comment_count_data/"+post_id;
+		$.ajax({
+        url: url,
+		success: function(data)
+        {  
+		if(data)
+		{
+		
+			// $('#posts_content_div').prepend(html);
+			$('#posts_content_div').find('#post_comment_count'+post_id).remove();
+			$('#posts_content_div').find('#link_comment'+post_id).append('<span id="post_comment_count'+post_id+'" class="comment_count" style="margin-left:5px;">('+data+' )</span>'); 
+        }
+		},
+		cache: false
+		});
+
+}
+
+window.setInterval(function(){
+
+
+//var post_id = $('#posts_content_div > :first-child').attr("id").substr(4);
+  get_recent_post_likes();
+  get_recent_comments();
+
+},5000);  
+
+
 
 </script>

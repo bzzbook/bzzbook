@@ -663,7 +663,7 @@ else
 echo "<span id='invalid'>***Invalid file Size or Type***<span>";
 }
 	
-}else
+}else if($_POST['write_comment'] != '')
 {
 $data_a=array(
 	   'comment_content'=> $_POST['write_comment'],
@@ -678,6 +678,8 @@ $data_a=array(
             
   $data['post_id'] = $_POST['post_id'];
   echo $this->load->view('single_post',$data);  
+}else{
+	return false;
 }
    }
 
@@ -916,43 +918,98 @@ public function recent_posts($recent_post_id)
 			   } 
 	   else 
 	   echo false;
-   
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-/*	
 
-		$user_time_condition  = "post_id > '".$recent_post_id."' AND posted_on >= DATE_ADD( NOW(), INTERVAL - 5 MINUTE ) AND isGhostpost=0 ORDER BY post_id DESC";	
-			$this->db->select('*');
-			$this->db->from('bzz_posts');
-			$this->db->where($user_time_condition);
-			$query = $this->db->get();
-			
-			if ($query->num_rows() >0){
-					
-				$data['products'] = $query->result();
-	
+}
+
+//dynamic display of likes count
+
+public function get_recent_post_likes()
+{
+	$this->db->select('like_on');   
+    $this->db->from('bzz_likes');
+	$user_like_condition  = "datetime >= DATE_ADD( NOW(), INTERVAL - 5 MINUTE ) ORDER BY like_id DESC";	
+	   
+    $this->db->where($user_like_condition);
+	   $query = $this->db->get();
+   	   if ($query->num_rows() > 0) {
+	   		$result =  $query->result_array();
+			$data =  array();
+			foreach($result as $res)
+			{
+				$data[] =  $res['like_on'];
 			}
-	
-	if(!empty($data))
+			$result = array_unique($data);
+			//print_r($result);
+			$like = array();
+			$like_data =  array();
+			foreach($result as $res)
+			{
+				$condition = "like_on = '".$res."' AND like_status = 'Y'";	
+				$this->db->select('*');
+				$this->db->from('bzz_likes');
+				$this->db->where($condition);
+				$query = $this->db->get();
+				$likes = $query->num_rows();
+				$like_data['post_id'] = $res;
+				$like_data['likes'] = $likes;
+				$like[] = $like_data;
+			}
+			echo json_encode($like);
+	//	print_r($like);
+		//	print_r($like);
+}
+
+}
+
+public function get_recent_post_comments()
+{
+	$this->db->select('*');   
+    $this->db->from('bzz_postcomments');
+	$user_like_condition  = "commented_time >= DATE_ADD( NOW(), INTERVAL - 5 MINUTE ) ORDER BY postcomments_id DESC";	
+	   
+    $this->db->where($user_like_condition);
+	   $query = $this->db->get();
+   	   if ($query->num_rows() > 0) {
+	   		$result =  $query->result_array();
+			
+			echo json_encode($result);
+	//	print_r($like);
+		//	print_r($like);
+}
+
+}
+
+public function get_recent_single_post_data()
+{
+	if($_POST['postcomments_id'] > $_POST['last_comment'])
 	{
-		echo $this->load->view('all_posts_inner',$data);
+	
+	$data['postcomments_id'] = $_POST['postcomments_id'];
+	$data['comment_content'] = $_POST['comment_content'];
+	$data['commented_on'] = $_POST['commented_on'];
+	$data['commented_by'] = $_POST['commented_by'];
+	$data['commented_time'] = $_POST['commented_time'];
+	$data['uploadedfiles'] = $_POST['uploadedfiles'];
+	$data['last_comment'] = $_POST['last_comment'];
+	
+	echo $this->load->view('single_comment',$data);
 	}else
 	{
 		echo false;
 	}
-	*/
 }
- 
+
+public function comment_count_data($pid){
+	   
+		$this->db->select('*');
+		$this->db->from('bzz_postcomments');
+		$this->db->where('commented_on',$pid);
+		$query = $this->db->get();
+		//return $query->num_rows();
+		echo $query->num_rows();
+		
+   }
+
+
  }
 ?>

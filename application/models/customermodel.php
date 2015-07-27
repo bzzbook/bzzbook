@@ -458,6 +458,19 @@ class Customermodel extends CI_Model {
 		return $query->result();
 		
    }
+   
+   
+     public function comment_count_data($pid){
+	   
+		$this->db->select('*');
+		$this->db->from('bzz_postcomments');
+		$this->db->where('commented_on',$pid);
+		$query = $this->db->get();
+		//return $query->num_rows();
+		return $query->result();
+		
+   }
+   
       public function eventlikedata($pid){
 	    $condition = "like_on =" . "'" . $pid . "' AND like_status = 'Y'";
 		$this->db->select('*');
