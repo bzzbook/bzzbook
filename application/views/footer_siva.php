@@ -858,13 +858,17 @@ processData:false,        // To send DOMDocument or non processed data file it i
 success: function(data)   // A function to be called if request succeeds
 {
 	
+var link = $('#view_more_link'+post_id);
+$('#view_more_link'+post_id).remove();
 $('#res_comments'+post_id).append(data);
+$('#res_comments'+post_id).append(link)
 $('#write_comment'+post_id).val('');
 var commentboxcont = $('#commentBox'+post_id).html();
 $('#commentBox'+post_id).html('');
 $('#uploadCommentPhotos'+post_id).val('');
 $('#commentBox'+post_id).html(commentboxcont);
 $('#write_comment'+post_id).html('');
+
 }
 });
 
@@ -1216,8 +1220,8 @@ function view_more_comments(post_id){
 	
 	//$comments_details = $this->customermodel->comments_data($row->post_id);
 	
-//	alert(post_id);
-//	alert(last_comment_id);
+alert(post_id);
+	alert(last_comment_id);
 	
 	url = "<?php echo base_url(); ?>signg_in/comments_data_viewmore/"+post_id+"/"+last_comment_id;
 		$.ajax({

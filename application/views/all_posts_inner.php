@@ -165,7 +165,7 @@
 				   // endforeach;
 		    ?>
             <?php if(count($comments_details)>4){ ?>
-            <a href="javascript:void(0);" id="cccccc<?php echo $row->post_id;?>" onclick="view_more_comments(<?php echo $row->post_id;?>)" style="font-size:12px;">View More</a>
+            <a href="javascript:void(0);" id="view_more_link<?php echo $row->post_id;?>" onclick="view_more_comments(<?php echo $row->post_id;?>)" style="font-size:12px;">View More</a>
             <?php } ?>
           </div>
           <div class="commentBox<?php if($row->isGhostpost==1) echo ' hidethis'; ?>" id="commentBox<?php echo $row->post_id;?>">
