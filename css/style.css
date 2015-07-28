@@ -741,12 +741,13 @@ border-radius: 90px 90px 90px 90px; height: 110px; width: 110px; overflow: hidde
 .about-user-details h4{ background: #fbc436 none repeat scroll 0 0;
     border-bottom: 1px solid #d3d6db;
     color: #fff;
-    font-size: 15px;
+    font-size: 18px;
     height: 34px;
     line-height: 34px;
     margin-bottom: 20px;
     padding: 0 15px; }
 .about-user-details h4 span{ margin-right:10px; position:relative; /*top:3px;*/}
+.about-user-details h4 span .buss_card_head_img{ }
 .about-user-details h4 span.glyphicon{ color:#606060 !important;}
 .about-user-details .events li .btn2 a{ color:#fff;}
 
@@ -829,8 +830,8 @@ modal { position: absolute; }
 .myfriends .friendInfo h3 a{ color:#000; text-transform:capitalize; font-size:15px;}
 .mfSearch{ background:#fbc436;}
 .mfSearch h4{ margin:0; border:none;}
-.mfSearch .input-group{ margin-top:10px;}
-.mfSearch .input-group .form-control{ background:#fff; border-radius:0;}
+.mfSearch .input-group{/* margin-top:10px; */ padding-top:5px;}
+.mfSearch .input-group .form-control{ background:#fff; border-radius:0; height:24px; font-size:12px;}
 .mfSearch .input-group .input-group-btn .btn{ text-align:center; top:0; background:#000; color:#fff;}
 
 .searchfriends .groupEditBlock  .fdblock  figure{ width:35% !important;}
@@ -1651,7 +1652,7 @@ color: #E8E8E8; }
 
 .located{ margin-bottom:14px;}
 .located .input-group-addon{ background:none;}
-.located .input-group .form-control:last-child, .input-group-addon:last-child, .input-group-btn:last-child > .btn, .input-group-btn:last-child > .btn-group > .btn, .input-group-btn:last-child > .dropdown-toggle, .input-group-btn:first-child > .btn:not(:first-child), .input-group-btn:first-child > .btn-group:not(:first-child) > .btn{ border-left:none; padding:0px !important;}
+.located .input-group .form-control:last-child, .input-group-addon:last-child, .input-group-btn:last-child > .btn, .input-group-btn:last-child > .btn-group > .btn, .input-group-btn:last-child > .dropdown-toggle, .input-group-btn:first-child > .btn:not(:first-child), .input-group-btn:first-child > .btn-group:not(:first-child) > .btn{ border-left:none; padding:0px !important; padding-left:12px; padding-top:2px;}
 .located label{ font-weight:300;}
 
 

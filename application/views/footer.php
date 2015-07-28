@@ -719,7 +719,8 @@ function cmplikefun(pid,uid,count){
         }
        });	
 }
-function saveAsFav(pid){
+// old save as functionality
+/*function saveAsFav(pid){
 	
 	url="<?php echo base_url();?>signg_in/saveasfav/"+pid;
 	  $.ajax({
@@ -731,13 +732,7 @@ function saveAsFav(pid){
 			alert('saved favorite successfully');
         }
        });	
-}
-
-function view_comments(id){
-	$('#res_comments'+id).hide();
-	$('#res_comments_viewmore'+id).show();
-}
-
+}*/
 
 
  
@@ -1749,6 +1744,17 @@ function sharePost(post_id){
 					$.post( url )
 					.done(function( data ) {
 						$('#sharePostPopup').html(data);
+						
+					});
+}
+
+
+function saveAsFav(post_id){
+	url="<?php echo base_url(); ?>profile/get_post_byid_for_save_fav/"+post_id;
+					$.post( url )
+					.done(function( data ) {
+						//alert(data);
+						$('#save_as_fav_popup').html(data);
 						
 					});
 }

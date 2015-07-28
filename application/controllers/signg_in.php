@@ -981,7 +981,7 @@ public function get_recent_post_comments()
 
 public function get_recent_single_post_data()
 {
-	if($_POST['postcomments_id'] > $_POST['last_comment'])
+	if($_POST['postcomments_id'] > $_POST['last_comment'] )
 	{
 	
 	$data['postcomments_id'] = $_POST['postcomments_id'];
@@ -1010,6 +1010,52 @@ public function comment_count_data($pid){
 		
    }
 
+
+   public function comments_data_viewmore($pid,$last_comment_id = '' ){
+	   if($last_comment_id == '')
+	   {
+	   $condition = "commented_on =" . "'" . $pid . "' and (comment_content != '' OR uploadedfiles!='')";
+	   }else{
+	   $condition = "commented_on =" . "'" . $pid . "' and postcomments_id >" ."'".$last_comment_id ."'and (comment_content != '' OR uploadedfiles!='')";  
+	   }
+		
+		$this->db->select('*');
+		$this->db->from('bzz_postcomments');
+		$this->db->where($condition);		
+		$this->db->limit(5);
+		$query = $this->db->get();
+		$data['comments'] = $query->result_array(); 
+		echo $this->load->view('viewmore_comment',$data);
+   }
+
+public function save_fav_category_search($search_keyword,$user_id)
+{
+	
+	$this->db->select('*')->from('bzz_save_fav_categories')->like('category_name', $search_keyword, 'both');
+	$query = $this->db->get();
+	$list= '';
+	if( $query->num_rows >= 1)
+	{
+		
+	}else
+	{
+	echo  $list = "<div class='new_cat_create' onclick='create_ave_fav_category(&#39".$search_keyword."&#39,".$user_id.");' style='height:36px; width:273px; border:2px solid grey;'> create category:".$search_keyword." </div> ";
+	}
+
+}
+
+public function save_fav_create_category($category_name,$user_id)
+{
+	$data['category_name'] = $category_name;
+	$data['created_by'] = $user_id;
+	if($this->db->insert('bzz_save_fav_categories',$data))
+	{
+		echo true;
+	}else{
+		echo false;
+	}
+}
+	
 
  }
 ?>

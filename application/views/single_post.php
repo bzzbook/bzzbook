@@ -2,7 +2,6 @@
 	
 	  $curr_user_id = $this->session->userdata('logged_in')['account_id'];
 	  
-	  
 	  $products = $this->customermodel->individual_Posts($post_id);
 	  $posts_count = count($products);
 	  if($products){

@@ -1094,7 +1094,7 @@ window.setInterval(function(){
 
 
 var post_id = $('#posts_content_div > :first-child').attr("id").substr(4);
-  get_recent_posts(post_id);
+get_recent_posts(post_id);
 //var id = sub_str(4,post_id);
 //alert(post_id);
  
@@ -1145,8 +1145,8 @@ $.each(comments, function(i, comment) {
 	
 	
 	
-	var last_cmnt = $('#res_comments'+comment.commented_on).children('div').last().attr('id').substr(16);
-	//alert(last_cmnt);//children().last().
+	var last_comment = $('#res_comments'+comment.commented_on).children('div').last().attr('id').substr(16);
+	//alert(last_comment);//children().last().
 	get_dynamic_comments_count(comment.commented_on);
 	
 	
@@ -1154,19 +1154,26 @@ $.each(comments, function(i, comment) {
 		$.ajax({
         url: url,
 		type: "POST",
-		data : { postcomments_id : comment.postcomments_id, comment_content : comment.comment_content, commented_on : comment.commented_on, commented_by : comment.commented_by, commented_time : comment.commented_time, uploadedfiles : comment.uploadedfiles, last_comment : last_cmnt},
+		data : { postcomments_id : comment.postcomments_id, comment_content : comment.comment_content, commented_on : comment.commented_on, commented_by : comment.commented_by, commented_time : comment.commented_time, uploadedfiles : comment.uploadedfiles, last_comment : last_comment},
 		success: function(data)
         { 
+	//alert(data);
+	 var link = $('#view_more_link'+comment.commented_on);
+  $('#view_more_link'+comment.commented_on).remove();
+		
 	
 	$('#res_comments'+comment.commented_on).append(data);
 	
-	
+		$('#res_comments'+comment.commented_on).append(link)
 	},
 		cache: false
 		});
 	
 	
-
+  var link = $('#view_more_link'+post_id);
+  $('#view_more_link'+post_id).remove();
+		
+		$('#res_comments'+post_id).append(link);
 	$('#posts_content_div').find('#post'+result.post_id).find('#like_count'+result.post_id).remove();
 		$('#posts_content_div').find('#post'+result.post_id).find('#link_like'+result.post_id).append('<span id="like_count'+result.post_id+'"><img alt="" src="<?php echo base_url(); ?>images/like_myphotos.png">'+result.likes+'</span>');
  
@@ -1200,6 +1207,84 @@ url = "<?php echo base_url(); ?>signg_in/comment_count_data/"+post_id;
 		cache: false
 		});
 
+}
+
+
+function view_more_comments(post_id){
+	
+	var last_comment_id = $('#res_comments'+post_id).children('div').last().attr('id').substr(16);
+	
+	//$comments_details = $this->customermodel->comments_data($row->post_id);
+	
+//	alert(post_id);
+//	alert(last_comment_id);
+	
+	url = "<?php echo base_url(); ?>signg_in/comments_data_viewmore/"+post_id+"/"+last_comment_id;
+		$.ajax({
+        url: url,
+		success: function(data)
+        {  
+		if(data)
+		{
+		var link = $('#view_more_link'+post_id); 	
+		$('#view_more_link'+post_id).remove();
+		$('#res_comments'+post_id).append(data);
+		$('#res_comments'+post_id).append(link);
+        }
+		},
+		cache: false
+		});
+	
+	
+	
+	
+}
+
+function get_save_fav_categories(user_id)
+{
+	alert(user_id);
+	var cat_search = $('#category_search').val();
+	alert(cat_search);
+	
+		url = "<?php echo base_url(); ?>signg_in/save_fav_category_search/"+cat_search+"/"+user_id;
+		$.ajax({
+        url: url,
+		success: function(data)
+        {  
+		if(data)
+		{
+		//var link = $('#view_more_link'+post_id); 	
+		//$('#view_more_link'+post_id).remove();
+		//$('#res_comments'+post_id).append(data);
+		//$('#res_comments'+post_id).append(link);
+        $('#categories').append(data);
+		}
+		},
+		cache: false
+		});
+	
+	
+	
+}
+
+function create_ave_fav_category(search_key_word,user_id)
+{
+	//alert(search_key_word);
+	//	alert(id);
+		
+		url = "<?php echo base_url(); ?>signg_in/save_fav_create_category/"+search_key_word+"/"+user_id;
+		$.ajax({
+        url: url,
+		success: function(data)
+        {  
+		if(data)
+		{
+		
+      //  $('#categories').append(data);
+		}
+		},
+		cache: false
+		});
 }
 
 window.setInterval(function(){

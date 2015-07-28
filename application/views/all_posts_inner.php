@@ -119,13 +119,14 @@
             <?php    
 			}else{?>
 				<a href="javascript:void(0);" onclick="likefun('<?php echo $row->post_id;?>','<?php echo $curr_user_id;?>',<?php echo count($get_likedetails); ?>)"  id="link_like<?php echo $row->post_id;?>" style="padding-right:0px;">Like
-			<?php }?></a><span id="like_count<?php echo $row->post_id;?>"><?php  $like_count = count($get_likedetails); if($like_count>0) echo '<img src="'.base_url().'images/like_myphotos.png" alt="">'.$like_count.'&nbsp;&nbsp;'; ?></span><a href="javascript:document.getElementById('write_comment<?php echo $row->post_id; ?>').focus()" id="link_comment<?php echo $row->post_id;?>">Comment</a><span class="comment_count" id="post_comment_count<?php echo $row->post_id;?>"><?php  $comment_count = count($get_comment_details); if($comment_count>0) echo "(".$comment_count.")" ; ?></span><a href="javascript:void(0)" onclick="sharePost(<?php echo $row->post_id; ?>)" data-toggle="modal" data-target="#myModal">Share</a> <a href="javascript:void(0)" onclick="saveAsFav('<?php echo $row->post_id;?>')"><span>Save As Favorite</span></a></div>
+			<?php }?></a><span id="like_count<?php echo $row->post_id;?>"><?php  $like_count = count($get_likedetails); if($like_count>0) echo '<img src="'.base_url().'images/like_myphotos.png" alt="">'.$like_count.'&nbsp;&nbsp;'; ?></span><a href="javascript:document.getElementById('write_comment<?php echo $row->post_id; ?>').focus()" id="link_comment<?php echo $row->post_id;?>">Comment</a><span class="comment_count" id="post_comment_count<?php echo $row->post_id;?>"><?php  $comment_count = count($get_comment_details); if($comment_count>0) echo "(".$comment_count.")" ; ?></span><a href="javascript:void(0)" onclick="sharePost(<?php echo $row->post_id; ?>)" data-toggle="modal" data-target="#myModal">Share</a> <?php if(!empty($row->uploaded_files)) { ?><a href="javascript:void(0)" onclick="saveAsFav('<?php echo $row->post_id;?>')" data-toggle="modal" data-target="#save_as_fav_modal"><span>Save As Favorite</span></a><?php } ?></div>
             <div id="res_comments<?php echo $row->post_id;?>">
             <?php   
 			       $comments_details = $this->customermodel->comments_data($row->post_id);
 			       for($i=0;$i<count($comments_details);$i++){
 				   // foreach($comments_details as $row_comment):
-			       if($i<=4){ $com_user_data = $this->customermodel->profiledata($comments_details[$i]->commented_by); 	  $hrsago = $this->customermodel->get_time_difference_php($comments_details[$i]->commented_time);
+			       if($i<=4){ $com_user_data = $this->customermodel->profiledata($comments_details[$i]->commented_by); 	  
+				   $hrsago = $this->customermodel->get_time_difference_php($comments_details[$i]->commented_time);
 ?>
                    <div class="commentBox<?php if($row->isGhostpost==1) echo 'hidethis'; ?>" id="post_comments_id<?php echo $comments_details[$i]->postcomments_id; ?>">
             <figure> <a href="<?php echo base_url().'profile/user/'.$com_user_data[0]->user_id; ?>"><img src="<?php echo base_url();?>uploads/<?php if(!empty($com_user_data[0]->user_img_thumb))echo $com_user_data[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" alt="<?php echo base_url();?>uploads/<?php if(!empty($image[0]->user_img_thumb)) echo $image[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>"></a></figure>
@@ -164,11 +165,11 @@
 				   // endforeach;
 		    ?>
             <?php if(count($comments_details)>4){ ?>
-            <a href="#" onclick="view_comments('<?php echo $row->post_id;?>')" style="font-size:12px;">View More</a>
+            <a href="javascript:void(0);" id="cccccc<?php echo $row->post_id;?>" onclick="view_more_comments(<?php echo $row->post_id;?>)" style="font-size:12px;">View More</a>
             <?php } ?>
           </div>
           <div class="commentBox<?php if($row->isGhostpost==1) echo ' hidethis'; ?>" id="commentBox<?php echo $row->post_id;?>">
-            <figure><img src="<?php echo base_url();?>uploads/<?php if(!empty($image[0]->user_img_thumb)) echo $image[0]->user_img_thumb; else echo 'default_profile_pic.png';; ?>" alt=""></figure>
+            <figure><img src="<?php echo base_url();?>uploads/<?php if(!empty($image[0]->user_img_thumb)) echo $image[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" alt=""></figure>
             <div class="postAComment"> 
             	<div class="postACommentInner">
                            <form method="post" style="width:100% !important;" enctype="multipart/form-data" autocomplete="off" class="send_comment_ajax" id="send_comment_ajax<?php echo $row->post_id;?>" >
