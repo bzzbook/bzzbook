@@ -43,7 +43,7 @@
 ?> 
       </div>
 <section class="about-user-details business_card">
-        <h4><span><img src="<?php echo base_url(); ?>images/business_card.png" alt=""></span>My Business Card</h4>
+        <h4><span><img src="<?php echo base_url(); ?>images/business_card.png" alt="" class="buss_card_head_img"></span>My Business Card</h4>
           <section class="col-lg-12 col-md-12 col-sm-5 col-xs-12 coloumn2 business_card_inner">
            <div class="col-md-10 card_box">
            <h3>

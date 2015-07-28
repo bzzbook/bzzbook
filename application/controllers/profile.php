@@ -686,6 +686,7 @@ public function showfavs()
 	}
 	
 	public function get_post_byid($post_id){
+		
 		$row = $this->customermodel->getPostById($post_id);
 		$row = $row[0];
 		$posted_id=$row->posted_by;
@@ -741,6 +742,70 @@ public function showfavs()
 			 
 			 echo $content;
 	}
+	
+	public function get_post_byid_for_save_fav($post_id)
+	{
+		
+		
+		$row = $this->customermodel->getPostById($post_id);
+		$row = $row[0];
+		$posted_id=$row->posted_by;
+	 	$get_profiledata = $this->customermodel->profiledata($posted_id);
+	    $user_id = $this->session->userdata('logged_in')['account_id'];
+		
+		$attr = array('name' => 'save_as_fav_form', 'id' =>'save_as_fav_form', 'enctype'=>"multipart/form-data");
+      	
+		$content = form_open('signg_in/share_post',$attr)."<input type='file' name='uploadPhotos[]' id='uploadPhotos' multiple='multiple' style='display:none;' />
+        <div class='posts row'><article>
+
+          <div class='userContent col-md-8'>";
+		  
+		  if(!empty($row->uploaded_files))
+			 {
+			 $up_files = explode(',',$row->uploaded_files);
+			 $i = 0;
+			 foreach($up_files as $file)
+			 {
+				 if($i==0)
+				 {
+					 $content .= "<img src='".base_url()."uploads/".$file."' style='width:100%'/>";
+				 }
+				 else
+				 	 $content .= "<img src='".base_url()."uploads/".$file."' style='width:24%;float:left;margin:.5%; height:83px'/>";
+				 $i++;
+			 }
+			 $content .= "<div style='clear:both'></div>";
+			 } 
+             
+             $content .="</figure>
+            ";
+			
+			$str_leng=strlen($row->post_content);
+			  if($str_leng>50){
+				$content .= "<div id='popmsg".$row->post_id."'>".substr($row->post_content,0,50)."...<a href='#' onclick='popmyfunc(".$row->post_id.")'>more</a>"."</div><div id='popdes".$row->post_id."' style='display:none'>".$row->post_content."<a href='#' onclick='popmyfunc(".$row->post_id.")'>less</a></div>
+          </div><div id='categories' class='col-md-4' style='height:500px; width:200px; border-color:2px solid blue;'></div></article></div><textarea cols='' rows='' name='share_post_content' id='posts' class='form-control' placeholder='say something...'></textarea><div class='updateControls'> <button id='sharePostBtn'>Post</button> <select name='post_group' id='post_group'><option value='0'>Public</option>"; 
+			 }else{
+				$content .= substr($row->post_content,0,50)."</p>
+          </div><div id='categories'  class='col-md-4' style='height:589px; width:294px; margin-top:5px; border:2px solid blue; '><input type='text' id='category_search' onkeyup='get_save_fav_categories(".$user_id.")' /></div></article></div><textarea cols='' rows='' name='share_post_content' id='posts' class='form-control' placeholder='say something...'></textarea><div class='updateControls'> <button id='sharePostBtn'>Post</button> <select name='post_group' id='post_group'><option value='0'>Public</option>";
+		  
+			 }
+		$groups = $this->profile_set->get_user_groups(); if($groups) { 
+		foreach($groups as $group)
+		{
+			$content.="<option value='".$group['group_id']."'>".$group['group_name']."</option>";
+		}
+		
+		
+		} 
+		$content.="</select> </div><input type='hidden' id='uploaded_files' name='uploaded_files' value='".$row->uploaded_files."'><input type='hidden' id='uploaded_files' name='post_content' id='post_content' value='".$row->post_content."'>".form_close();
+			
+			 
+			 echo $content;
+	
+		
+		
+	}
+	
 	public function get_cmp_post_byid($post_id){
 		$row = $this->customermodel->getCmpPostById($post_id);
 		$row = $row[0];
