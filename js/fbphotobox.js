@@ -1,5 +1,7 @@
 (function($) {
+	
 	function FBPhotoBox(opts) {
+		
 		this.settings = $.extend({}, $.fn.fbPhotoBox.defaults, opts);
 		this.bodyDimension = {width:0,height:0};
 		this.bodyDimension.width = $('body').width();
@@ -12,6 +14,7 @@
 	
 	FBPhotoBox.prototype = {
 		init: function() {
+			
 			var $this = this;
 			this.initDOM();
 			this.initSettings();
@@ -410,7 +413,7 @@
 		}
 	};
 		
-	$.fn.fbPhotoBox = function(options) {
+	$.fn.fbPhotoBox = function(options) { 
 		var args = Array.prototype.slice.call(arguments, 1);
 		var item = $("body");
 		var instance = item.data('FBPhotoBox');
