@@ -6,6 +6,8 @@ $cmp_reqs =$cmps;
 }else{
 $cmp_reqs = $this->companies->get_initial_companies($limit = 2);
 }
+
+if($cmp_reqs) {
 ?> 
  
  <div class="pendingRequest">
@@ -34,3 +36,4 @@ $cmp_reqs = $this->companies->get_initial_companies($limit = 2);
           <a href="<?php echo base_url('company/view_all_other_cmps'); ?>" class="link">View all</a> 
           
  </div>
+ <?php } ?>

@@ -62,7 +62,7 @@ header .search .input-group .input-group-btn ul li a:hover{ background:url(../im
 .mainNav nav .viewAs select option{font-size:13px; color:#6e6e6e; font-weight:300;}
 
 .midbody .coloumn1 aside{ border-top:none; margin-bottom:24px;}
-.midbody .coloumn1 .profile{ background:#efeded;}
+.midbody .coloumn1 .profile{ background:#efeded;  margin-top:15px;}
 .midbody .coloumn1 .profile .img{ float:left; width:58px; height:58px; overflow:hidden;}
 .midbody .coloumn1 .profile .details{ float:left; color:#737373; font-size:15px; padding:9px 10px;}
 .midbody .coloumn1 .profile .details a{ font-size:12px; color:#a2a2a2; background:url(../images/settings_icon.png) no-repeat right center; background-size:11px 11px; padding-right:15px;}
@@ -101,8 +101,8 @@ header .search .input-group .input-group-btn ul li a:hover{ background:url(../im
 .midbody ad img{ width:100%;}
 
 /*.midbody .coloumn2{ padding:0;}*/
-.midbody .coloumn2 .updateStatus{ background:#f9f8f8; border:1px solid #ececec; border-top:none; margin-bottom:15px;}
-.midbody .coloumn2 .updateStatus ul{ border-bottom:1px solid #ececec; display:flex;}
+.midbody .coloumn2 .updateStatus{ background:#f9f8f8; border:1px solid #ececec; border-top:none; margin-bottom:15px; margin-top:15px;}
+.midbody .coloumn2 .updateStatus ul{ border-bottom:1px solid #ececec; display:flex;  border-top:1px solid #ececec;}
 .midbody .coloumn2 .updateStatus ul li{ list-style:none; float:left; height:60px; line-height:60px;}
 .midbody .coloumn2 .updateStatus ul li a{ font-size:12px; font-weight:400; color:#727272; padding:5px 0 5px 55px; white-space:nowrap;}
 .midbody .coloumn2 .updateStatus ul li:nth-child(2) a{background: rgba(0, 0, 0, 0) url("../images/update_status_icon1.png") no-repeat scroll 19px center; padding-left: 45px;}
@@ -168,7 +168,7 @@ header .search .input-group .input-group-btn ul li a:hover{ background:url(../im
 
 .midbody .coloumn3 aside .latestFriends ul li:nth-child(3n) {  margin-right: 0;}
 
-.midbody .ad img{ width:100%;}
+.midbody .ad img{ width:100%; margin-top:15px;}
 
 .midbody .coloumn3 aside .companies{background: #f3f3f3 none repeat scroll 0 0; border: 1px solid #ececec; margin: 15px 0; padding: 18px 12px;}
 .midbody .coloumn3 aside .companies ul li{ display:flex;}
@@ -288,7 +288,7 @@ footer.home h3 em{ color:#fdc70f; font-style:normal;}
 @media screen\9 {.fileinput-button input { filter: alpha(opacity=0); font-size: 100%; height: 100%; }}
 .pfSettings .smbtn{ background:#609b34; border:none; margin-bottom:20px; font-size:15px; color:#fff; font-weight:500; padding:3px 8px; -webkit-border-radius:3px; border-radius:3px; float:right;}
 .pfSettings .tab-pane textarea{height:70px !important; margin-bottom:20px !important;}
-.pfSettings .add{ background:#2f2f2f; border:none; margin-bottom:20px; font-size:15px; color:#fff; font-weight:500; padding:3px 8px; -webkit-border-radius:3px; border-radius:3px; float:right;}
+.pfSettings .add{ background:#609b34; border:none; margin-bottom:20px; font-size:15px; color:#fff; font-weight:500; padding:3px 8px; -webkit-border-radius:3px; border-radius:3px; float:right;}
 .pfSettings .radio label{ font-weight:300;}
 
 
@@ -452,7 +452,7 @@ border: 0px solid gainsboro;}
 .groupProperty .groupBlock.pull-right{ text-align:right;}
 .groupProperty .groupBlock p{ font-size:15px; line-height:30px;}
 .groupProperty{ border-top:1px solid #ebebeb;}
-.groupProperty:first-child, .EduProperty:first-child, .EventProperty:first-child{background: none repeat scroll 0 0 #333333; color: #ffffff;}
+.groupProperty:first-child, .EduProperty:first-child, .EventProperty:first-child{background: none repeat scroll 0 0 #d3d3d3; color: #ffffff;}
 .groupProperty:first-child .groupBlock h3, .EduProperty:first-child .groupBlock h3, .jobProperty:first-child .jobBlock h3, .EventProperty:first-child .EventBlock h3{color: #ffffff;}
 
 .ajax-upload-dragdrop{ border:none !important; width:auto !important; padding:0 !important;}
@@ -710,8 +710,8 @@ float:right; margin-top:10px;
 .ProfileView .cmpLeft{ padding:0;}
 .ProfileView .visitorBox .visitiBoxInner{background:#f9f8f8; margin:-1px 0 10px 0; position:relative; }
 .ProfileView .visitorBox .visitiBoxInner .compCover{ width:100%; height:auto; overflow:hidden; position:relative;}
-.ProfileView .visitorBox .visitiBoxInner .compCover img{ width:100%; }
-.ProfileView .visitorBox .visitiBoxInner .profileLogo{ position:absolute; width:258px; height:223px; left:0px; top:35px; overflow:hidden;}
+.ProfileView .visitorBox .visitiBoxInner .compCover img{ width:100%; margin-top:15px;}
+.ProfileView .visitorBox .visitiBoxInner .profileLogo{ position:absolute; width:258px; height:223px; left:0px; top:50px; overflow:hidden;}
 .ProfileView .visitorBox .visitiBoxInner .profileLogo .cmplogo img{ width:100%; height:110px;}
 .ProfileView .visitorBox .visitiBoxInner .profileLogo .cmplogo{ border: 3px solid #fbc436; -webkit-border-radius: 90px 90px 90px 90px;
 border-radius: 90px 90px 90px 90px; height: 110px; width: 110px; overflow: hidden; margin:0 auto;}
@@ -728,10 +728,10 @@ border-radius: 90px 90px 90px 90px; height: 110px; width: 110px; overflow: hidde
 .ProfileView .visitorBox .visitiBoxInner .change-photo em{ font-size:9px; font-style:normal; position:relative; top:-2px; left:10px; font-family: 'Roboto', sans-serif; } 
 .ProfileView .visitorBox .visitiBoxInner .profileLogo .cmplogo .change-photo em{ font-size:9px; font-style:normal; position:relative; top:-2px; left:10px; font-family: 'Roboto', sans-serif; } 
 
-.profile-name {  bottom: 110px;  color: #ffffff; width:146px; text-align:center;  font-size: 18px;  font-weight: bold;  letter-spacing: 1px;  position: absolute;  left: 59px; clear:both; margin-bottom:-31px;}
+.profile-name {  bottom: 110px;  color: #ffffff; width:146px; text-align:center;  font-size: 18px;  font-weight: bold;  letter-spacing: 1px;  position: absolute;  left: 59px; clear:both; margin-bottom:-25px;}
 
 
-.compCover::before { background: none repeat scroll 0 0 #000;  content: "";  height: 100%;  position: absolute;  width:30%; opacity:0.6;}
+.compCover::before { background: none repeat scroll 0 0 #000;  content: "";  height: 100%;  position: absolute;  width:30%; opacity:0.6; margin-top:15px;}
 .ProfileView .coloumn1 aside, .ProfileView .coloumn2 .updateStatus{border-top:1px solid #e9e9e9;}
 .nopad{ padding:0 !important;}
 .nopad-right{ padding-right:0 !important;}

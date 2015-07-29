@@ -7,6 +7,8 @@ $add_frnd_reqs = $this->friendsmodel->finding_friends($limit = 2);
 }else{
 $add_frnd_reqs = $frnds;
 }
+if($add_frnd_reqs)
+{
 ?> 
  
  <div class="pendingRequest">
@@ -33,3 +35,4 @@ $add_frnd_reqs = $frnds;
           <?php } ?>
           
  </div>
+ <?php } ?>

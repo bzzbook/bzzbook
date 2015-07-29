@@ -78,6 +78,16 @@ public function post($user_id='')
 }
 public function user($user_id='')
 {	
+
+ $curr_user_id = $this->session->userdata('logged_in')['account_id'];
+if($curr_user_id != $user_id && $user_id != '')
+{
+	$data['user_id'] = $user_id ;
+	$data['visited_user_id'] =  $curr_user_id;
+	$this->db->insert('bzz_user_profile_visit',$data);
+}
+
+
   	  $data['user_id'] = $user_id;
 	  $data['content']='users_profile';
 	  $this->load->view('full_content_view',$data);

@@ -1016,7 +1016,7 @@ function get_unread_messages()
 		});
 			
 }
-
+/*
 function postsubmitajax(e,my_form)
 {
 	//alert(my_form);
@@ -1066,7 +1066,7 @@ $('#posts_content_div').prepend().html(data);
 //alert('sivaprasad');
 }
 
-
+*/
 function get_recent_posts(post_id)
 {
 	
@@ -1079,12 +1079,7 @@ function get_recent_posts(post_id)
         {  
 		if(html!='')
 		{
-		    //$('.un_read_msg_count').html('');
-			 //$('#un_read_msg_count').html(html);
-		/*	   $('#posts_content_div').prepend('<article id="loading_img"><img style="margin-left:240px; margin-bottom:8px;" src="<?php // echo base_url(); ?>images/block_loader.gif" /></article>');
- 
-			 $('#posts_content_div').find('#loading_img').fadeOut(5000);*/
-		
+
 			 $('#posts_content_div').prepend(html);
         }
 		},
@@ -1114,9 +1109,9 @@ function get_recent_post_likes()
 		accepts: "application/json; charset=utf-8",
 		success: function(data)
         {  
-		
-		var results = $.parseJSON(data);
-
+		//alert(data);
+		var results = JSON.parse(data);
+//alert(results);
 $.each(results, function(i, result) {
 
 	$('#posts_content_div').find('#post'+result.post_id).find('#like_count'+result.post_id).remove();
@@ -1143,7 +1138,7 @@ function get_recent_comments()
 		success: function(data)
         {  
 		//alert(data);
-	var comments = $.parseJSON(data);
+	var comments = JSON.parse(data);
 
 $.each(comments, function(i, comment) {
 	
@@ -1168,18 +1163,11 @@ $.each(comments, function(i, comment) {
 	
 	$('#res_comments'+comment.commented_on).append(data);
 	
-		$('#res_comments'+comment.commented_on).append(link)
+		$('#res_comments'+comment.commented_on).append(link);
 	},
 		cache: false
 		});
 	
-	
-  var link = $('#view_more_link'+post_id);
-  $('#view_more_link'+post_id).remove();
-		
-		$('#res_comments'+post_id).append(link);
-	$('#posts_content_div').find('#post'+result.post_id).find('#like_count'+result.post_id).remove();
-		$('#posts_content_div').find('#post'+result.post_id).find('#link_like'+result.post_id).append('<span id="like_count'+result.post_id+'"><img alt="" src="<?php echo base_url(); ?>images/like_myphotos.png">'+result.likes+'</span>');
  
 });	
 
@@ -1220,8 +1208,8 @@ function view_more_comments(post_id){
 	
 	//$comments_details = $this->customermodel->comments_data($row->post_id);
 	
-alert(post_id);
-	alert(last_comment_id);
+//alert(post_id);
+	//alert(last_comment_id);
 	
 	url = "<?php echo base_url(); ?>signg_in/comments_data_viewmore/"+post_id+"/"+last_comment_id;
 		$.ajax({
@@ -1246,9 +1234,9 @@ alert(post_id);
 
 function get_save_fav_categories(user_id)
 {
-	alert(user_id);
+	//alert(user_id);
 	var cat_search = $('#category_search').val();
-	alert(cat_search);
+	//alert(cat_search);
 	
 		url = "<?php echo base_url(); ?>signg_in/save_fav_category_search/"+cat_search+"/"+user_id;
 		$.ajax({
@@ -1295,7 +1283,7 @@ window.setInterval(function(){
 
 
 //var post_id = $('#posts_content_div > :first-child').attr("id").substr(4);
-  get_recent_post_likes();
+   get_recent_post_likes();
   get_recent_comments();
 
 },5000);  

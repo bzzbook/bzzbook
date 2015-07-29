@@ -1,5 +1,7 @@
 <?php 
 $result =  $this->companies->following_companies_list($limit=1);
+if($result)
+{
 ?>
 <div class="companies">
           <h3>Companies I’m Following! </h3>
@@ -16,3 +18,4 @@ $result =  $this->companies->following_companies_list($limit=1);
                <?php endforeach; } else echo "No Details Found";?>      
           </ul>
         </div>
+        <?php } ?>

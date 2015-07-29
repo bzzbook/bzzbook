@@ -1,6 +1,8 @@
 <?php 
 //$this->load->model('friendsmodel'); 
 $frnd_reqs = $this->friendsmodel->getPendingRequests($limit = 2);
+if($frnd_reqs)
+{
 //print_r($frnd_reqs);
 ?> 
  
@@ -27,3 +29,4 @@ $frnd_reqs = $this->friendsmodel->getPendingRequests($limit = 2);
           <a href="<?php echo base_url('friends/view_all_pending_reqs'); ?>" class="link">View all</a> 
           <?php } ?>
  </div>
+ <?php } ?>

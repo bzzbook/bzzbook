@@ -1,4 +1,5 @@
 <?php $frnds = $this->friendsmodel->latest_frnds($limit = 3); 
+if($frnds){
 ?>
 <div class="latestFriends">
           <h3>Latest Friends</h3>
@@ -12,3 +13,4 @@
           <a href="<?php echo base_url('friends/view_all_latest_frnds'); ?>" class="link">More Friends</a> 
           <?php } ?>
           </div>
+          <?php } ?>

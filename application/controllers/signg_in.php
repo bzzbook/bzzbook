@@ -954,7 +954,8 @@ public function get_recent_post_likes()
 				$like_data['likes'] = $likes;
 				$like[] = $like_data;
 			}
-			echo json_encode($like);
+		//	print_r($like);
+			echo json_encode($like, JSON_FORCE_OBJECT);
 	//	print_r($like);
 		//	print_r($like);
 }
@@ -971,8 +972,8 @@ public function get_recent_post_comments()
 	   $query = $this->db->get();
    	   if ($query->num_rows() > 0) {
 	   		$result =  $query->result_array();
-			
-			echo json_encode($result);
+			//print_r($result);
+			echo json_encode($result,JSON_FORCE_OBJECT);
 	//	print_r($like);
 		//	print_r($like);
 }
