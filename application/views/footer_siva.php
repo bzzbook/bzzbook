@@ -1,4 +1,22 @@
 <script type="text/javascript">
+function removefrnd(user_id){
+	var addedusers = $('#addedusers').val();
+	var len = addedusers.length;
+	var newval = '';
+	if(len==1)
+	{ 
+		newval = '';
+	}
+	else if(addedusers.indexOf(user_id)==(len-1)){
+	newval = addedusers.replace(','+user_id,'');
+	}
+	else if(addedusers.indexOf(user_id)==0)
+	newval = addedusers.replace(user_id+',','');
+	else
+	newval = addedusers.replace(user_id+',','');
+	$('#addedusers').val(newval);
+	$('#'+user_id).remove();
+}
 function postsubmitajax(my_form)
 {
 	//alert(my_form);
@@ -1076,9 +1094,9 @@ $('#posts_content_div').prepend().html(data);
 function get_recent_posts(post_id)
 {
 	
-	   $('#posts_content_div').find('#loading_img').remove();
 	
-	url = "<?php echo base_url(); ?>signg_in/recent_posts/"+post_id;
+	
+		url = "<?php echo base_url(); ?>signg_in/recent_posts/"+post_id;
 		$.ajax({
         url: url,
 		success: function(html)
@@ -1102,9 +1120,8 @@ window.setInterval(function(){
 
 //$('#posts_content_div').first()
 
-
+   $('#posts_content_div').find('#loading_img').remove();
 var post_id = $('#posts_content_div > :first-child').attr("id").substr(4);
-//alert(post_id);
 get_recent_posts(post_id);
 //var id = sub_str(4,post_id);
 //alert(post_id);
@@ -1123,16 +1140,12 @@ function get_recent_post_likes()
         {  
 		
 		var results = $.parseJSON(data);
-
-$.each(results, function(i, result) {
-
-	$('#posts_content_div').find('#post'+result.post_id).find('#like_count'+result.post_id).remove();
-		$('#posts_content_div').find('#post'+result.post_id).find('#link_like'+result.post_id).append('<span id="like_count'+result.post_id+'"><img alt="" src="<?php echo base_url(); ?>images/like_myphotos.png">'+result.likes+'</span>');
- 
-});	
-
-			
-      
+		if(results.success=='true'){
+		$.each(results.likes, function(i, result) {
+		$('#posts_content_div').find('#post'+result.post_id).find('#like_count'+result.post_id).remove();
+		$('#posts_content_div').find('#post'+result.post_id).find('#link_like'+result.post_id).append('<span id="like_count'+result.post_id+'"><img alt="" src="<?php echo base_url(); ?>images/like_myphotos.png">'+result.likes+'</span>'); 
+		});	
+		}      
 		},
 		cache: false
 		});
@@ -1150,10 +1163,16 @@ function get_recent_comments()
 		success: function(data)
         {  
 		//alert(data);
-	var comments = $.parseJSON(data);
-
-$.each(comments, function(i, comment) {
+	var result = $.parseJSON(data);
+if(result.success=='true'){
+$.each(result.comments, function(i, comment) {
 	
+	 var last_comment = 0;
+	if($('#res_comments'+comment.commented_on).children().length > 0 ) {
+     // do something
+	 last_comment = $('#res_comments'+comment.commented_on).children('div').last().attr('id').substr(16);
+
+	}
 	
 	
 	var last_comment = $('#res_comments'+comment.commented_on).children('div').last().attr('id').substr(16);
@@ -1182,6 +1201,7 @@ $.each(comments, function(i, comment) {
 	
  
 });	
+}
 
 			
       
