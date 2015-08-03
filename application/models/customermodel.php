@@ -9,12 +9,25 @@ class Customermodel extends CI_Model {
     } 
 	 public function get_user_id($access_token){
 	    
-	    $condition = "access_token = '" . $access_token . "' AND conf_status = 'Y'";
+	    $condition = "bzz_confirmation.access_token = '" . $access_token . "' AND conf_status = 'Y'";
 		$this->db->select('*');
 		$this->db->from('bzz_confirmation');
+		$this->db->join('bzz_users','bzz_users.user_id = bzz_confirmation.user_id');
 		$this->db->where($condition);
-		if($query = $this->db->get())
+		if($query = $this->db->get()){
+			$user_res = $query->result();
+			if($user_res){
+				$sess_array = array(		   					
+							'email' =>$user_res[0]->user_email,
+						    'password' =>$user_res[0]->password,
+							'account_id' =>$user_res[0]->user_id							
+						   );		
+       			$this->session->set_userdata('logged_in',$sess_array);
 				return $query->result();
+			}else{
+				return false;
+			}
+		}
 		else
 				return false;
 		

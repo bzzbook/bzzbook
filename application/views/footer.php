@@ -2038,24 +2038,7 @@ $('#tagaddedusers').val(user_id);
 	}
 	$("#withTokens").show();
 }
-function removefrnd(user_id){
-	var addedusers = $('#addedusers').val();
-	var len = addedusers.length;
-	var newval = '';
-	if(len==1)
-	{ 
-		newval = '';
-	}
-	else if(addedusers.indexOf(user_id)==(len-1)){
-	newval = addedusers.replace(','+user_id,'');
-	}
-	else if(addedusers.indexOf(user_id)==0)
-	newval = addedusers.replace(user_id+',','');
-	else
-	newval = addedusers.replace(user_id+',','');
-	$('#addedusers').val(newval);
-	$('#'+user_id).remove();
-}
+
 function removefrndfromtagging(user_id){
 	
 	
