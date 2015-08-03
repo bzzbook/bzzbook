@@ -1755,9 +1755,26 @@ function saveAsFav(post_id){
 					.done(function( data ) {
 						//alert(data);
 						$('#save_as_fav_popup').html(data);
-						
+						var user_categories = get_user_categories();
+						alert(user_categories);
 					});
 }
+
+function user_categories()
+{
+	 url="<?php echo base_url();?>profile/get_categories/";
+				 $.ajax({
+			        url: url,
+        			success: function(html)
+			        {   
+            			if(html == true)
+							alert("Information Updated");
+						else
+							alert("Something went wrong Please try after sometime");
+			        }
+			       });
+}
+
 function shareCmpPost(post_id){
 	url="<?php echo base_url(); ?>profile/get_cmp_post_byid/"+post_id;
 					$.post( url )
@@ -6070,6 +6087,17 @@ $('.life_events_disp').click(function()
 			});
 			
 	});
+	
+	
+		$('#drop_down_list_user').click(function(){	
+	//	alert('hai');
+				
+			$('.drop_down_list_user_and_cmp').toggleClass("dropAnimate");
+			});
+			
+	
+	
+	
 function updateGoingStatus(event_id,status)
 {
 	alert(status);

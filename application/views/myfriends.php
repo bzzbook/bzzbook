@@ -86,7 +86,7 @@ $friends = $this->friendsmodel->getfriends('','',$id);
         	<div class="fdblock">
         	<figure class="myfriendspfpic"><img alt="<?php echo base_url();?>uploads/<?php echo $frnd['image'] ?>" src="<?php echo base_url();?>uploads/<?php echo $frnd['image'] ?>" ></figure>
             <div class="friendInfo">
-            	<h3><a href="<?php echo base_url().'profile/user/'.$frnd['id']; ?>"><?php echo $frnd['name']?></a></h3>
+            	<h3><a href="<?php echo base_url().'profile/user/'.$frnd['id']; ?>"><?php echo character_limiter($frnd['name'],10); ?></a></h3>
                 <span>( <?php $friendscount = $this->friendsmodel->get_frnds_frnds($frnd['id']); if($friendscount) echo count($friendscount); else echo '0' ;?> friends)</span>
                 <div class="select">
                 	<select onchange="movetogroup(<?php echo $frnd['id']; ?>,this.value)">

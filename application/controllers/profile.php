@@ -80,11 +80,32 @@ public function user($user_id='')
 {	
 
  $curr_user_id = $this->session->userdata('logged_in')['account_id'];
-if($curr_user_id != $user_id && $user_id != '')
+ $query = $this->db->select('*')->from('bzz_user_profile_visit')->where('user_id',$curr_user_id)->get();
+ $result = $query->result_array();
+ print_r($result);
+ $user_ids = array();
+foreach($result as $res)
+
 {
+  $user_ids[] = $res['visited_user_id'];	
+}
+
+
+if($curr_user_id != $user_id && $user_id != '' && $user_id != 0 && !in_array($curr_user_id,$user_ids))
+{
+	
 	$data['user_id'] = $user_id ;
 	$data['visited_user_id'] =  $curr_user_id;
 	$this->db->insert('bzz_user_profile_visit',$data);
+}else if($curr_user_id != $user_id && $user_id != 0 && in_array($user_id,$user_ids))
+{
+	
+	$data['user_id'] = $user_id ;
+	$data['visited_user_id'] =  $curr_user_id;
+	$condition = "user_id =" . "'" . $curr_user_id . "'" . " AND " . "visited_user_id = "  . "'" . $user_id . "'";
+	
+	$this->db->where($condition);
+	$this->db->update('bzz_user_profile_visit',$data);
 }
 
 
@@ -1542,7 +1563,20 @@ public function add_school()
 	
   }
 
-
+public function get_categories()
+{
+	$id = $this->session->userdata('logged_in')['account_id'];
+	$this->db->select('*')->from('bzz_save_fav_categories')->where('created_by',$id);
+	$query = $this->db->get();
+	if($query->num_rows() > 0)
+	{
+		//print_r($query->result_array());
+		echo true;
+	}else
+	{
+		echo false;
+	}
+}
 
 }
 ?>

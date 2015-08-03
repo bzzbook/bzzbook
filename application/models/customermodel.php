@@ -685,7 +685,8 @@ class Customermodel extends CI_Model {
 		'companies_to_follow'=>$data['cmps_to_follow'],
 		'companies_im_following'=>$data['user_following_cmps'],	
 		'your_add_two'=>$data['your_add_two'],
-		'my_companies'=>$data['my_cmps']
+		'my_companies'=>$data['my_cmps'],
+		'recent_viewers'=>$data['visited_users']
 		);
 		
 		$this->db->where('user_id',$id);
@@ -708,6 +709,7 @@ class Customermodel extends CI_Model {
 		$data['companies_im_following'] = 'y';	
 		$data['your_add_two'] = 'y';
 		$data['my_companies'] = 'y';
+		$data['recent_viewers'] = 'y';
 		$data['user_id'] = $user_id;
 	    if($this->db->insert('bzz_sidebar_display_settings',$data))
 		return true;

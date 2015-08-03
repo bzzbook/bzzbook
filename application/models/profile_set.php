@@ -1619,5 +1619,55 @@ if($data['frm_clg_years'] == '0')
 		}else
 		return false;
 	}
+	
+	
+public function visited_users($user_id='')	
+{
+	if(!empty($user_id))
+	$id = $user_id;
+	else
+	$id = $this->session->userdata('logged_in')['account_id'];	
+	$query = $this->db->select('visited_user_id')->from('bzz_user_profile_visit')->where('user_id',$id)->get();
+ 	if($query->num_rows() > 0)
+	{
+		$user_ids = $query->result_array();
+	//	print_r($user_ids);
+		
+		foreach($user_ids as $user_id)
+			{
+				 $usercondition = "user_id ="."'".$user_id['visited_user_id']."'";
+						 $this->db->select('*');
+						 $this->db->from('bzz_user_images');
+						 $this->db->where($usercondition);
+				
+						 $query = $this->db->get();
+						 if($query->num_rows > 0)
+						 {
+							$this->db->select('*');
+							$this->db->from('bzz_users');
+							$this->db->join('bzz_user_images','bzz_users.user_id=bzz_user_images.user_id AND bzz_users.user_id='.$user_id['visited_user_id']);
+							$this->db->join('bzz_userinfo','bzz_users.user_id=bzz_userinfo.user_id');
+							$this->db->order_by('bzz_user_images.user_imageinfo_id','desc');
+							$query = $this->db->get();
+							$user_data =  $query->result_array();
+							
+						 }else{
+							  $this->db->select('*');
+							// $this->db->limit(2);
+							  $this->db->from('bzz_users');
+							  $this->db->join('bzz_userinfo','bzz_users.user_id=bzz_userinfo.user_id AND bzz_users.user_id='.$user_id['visited_user_id']);
+							 // $this->db->where($followercondition);
+							  $query = $this->db->get(); 
+							   $user_data =  $query->result_array();
+						 }
+						  $userdata[] = $user_data;
+					}
+		
+//	print_r($userdata);
+	}else{
+	return false;
+	}
+	
+}
 }
 ?>

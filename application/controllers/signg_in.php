@@ -174,7 +174,7 @@ class Signg_in extends CI_Controller {
 	$data['products'] = $this->customermodel->All_Posts($user_id);
 	if($data)
 	{
-	echo $this->load->view('all_posts_inner',$data);
+	echo $this->load->view('recent_posts',$data);
 	}
 	
 	 }
@@ -190,7 +190,7 @@ class Signg_in extends CI_Controller {
 	$data['products'] = $this->customermodel->All_Posts($user_id);
 	if($data)
 	{
-	echo $this->load->view('all_posts_inner',$data);
+	echo $this->load->view('recent_posts',$data);
 	}
 	 }
 	 else
@@ -204,7 +204,7 @@ class Signg_in extends CI_Controller {
 	$data['products'] = $this->customermodel->All_Posts($user_id);
 	if($data)
 	{
-	echo $this->load->view('all_posts_inner',$data);
+	echo $this->load->view('recent_posts',$data);
 	}
 	
 	 }
@@ -912,7 +912,7 @@ public function recent_posts($recent_post_id)
 			
 			if(!empty($data))
 			{
-			echo $this->load->view('all_posts_inner',$data);	
+			echo $this->load->view('recent_posts',$data);	
 			}
 			
 			   } 
@@ -954,8 +954,7 @@ public function get_recent_post_likes()
 				$like_data['likes'] = $likes;
 				$like[] = $like_data;
 			}
-		//	print_r($like);
-			echo json_encode($like, JSON_FORCE_OBJECT);
+			echo json_encode($like);
 	//	print_r($like);
 		//	print_r($like);
 }
@@ -972,8 +971,8 @@ public function get_recent_post_comments()
 	   $query = $this->db->get();
    	   if ($query->num_rows() > 0) {
 	   		$result =  $query->result_array();
-			//print_r($result);
-			echo json_encode($result,JSON_FORCE_OBJECT);
+			
+			echo json_encode($result);
 	//	print_r($like);
 		//	print_r($like);
 }
