@@ -1631,7 +1631,11 @@ public function visited_users($user_id='')
  	if($query->num_rows() > 0)
 	{
 		$user_ids = $query->result_array();
+<<<<<<< HEAD
 	//	print_r($user_ids);
+=======
+		print_r($user_ids);
+>>>>>>> 76edf0577617552b595e1d2cbbb2b52e6de4c92e
 		
 		foreach($user_ids as $user_id)
 			{
@@ -1663,7 +1667,11 @@ public function visited_users($user_id='')
 						  $userdata[] = $user_data;
 					}
 		
+<<<<<<< HEAD
 //	print_r($userdata);
+=======
+	print_r($userdata);
+>>>>>>> 76edf0577617552b595e1d2cbbb2b52e6de4c92e
 	}else{
 	return false;
 	}
