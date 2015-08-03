@@ -48,7 +48,7 @@
 
 
 ?>
-<div class="commentBox <?php if($row->isGhostpost==1) echo 'hidethis'; ?>" id="post_comments_id<?php echo $comments_details[$i]->postcomments_id; ?>">
+<div class="commentBox" id="post_comments_id<?php echo $comments_details[$i]->postcomments_id; ?>">
             <figure> <a href="<?php echo base_url().'profile/user/'.$com_user_data[0]->user_id; ?>"><img src="<?php echo base_url();?>uploads/<?php if(!empty($com_user_data[0]->user_img_thumb))echo $com_user_data[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" alt="<?php echo base_url();?>uploads/<?php if(!empty($image[0]->user_img_thumb)) echo $image[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>"></a></figure>
             <div class="postAComment"> 
             	<div class="postACommentInner"><span class="pfname" style="color:#5A5998;"><a href="<?php echo base_url().'profile/user/'.$com_user_data[0]->user_id; ?>"><?php echo ucfirst($com_user_data[0]->user_firstname)."&nbsp;".ucfirst($com_user_data[0]->user_lastname);?></a></span> <span class="date" style="color:black;">

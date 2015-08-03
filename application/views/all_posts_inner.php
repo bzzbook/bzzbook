@@ -128,7 +128,7 @@
 			       if($i<=4){ $com_user_data = $this->customermodel->profiledata($comments_details[$i]->commented_by); 	  
 				   $hrsago = $this->customermodel->get_time_difference_php($comments_details[$i]->commented_time);
 ?>
-                   <div class="commentBox<?php if($row->isGhostpost==1) echo 'hidethis'; ?>" id="post_comments_id<?php echo $comments_details[$i]->postcomments_id; ?>">
+                   <div class="commentBox <?php if($row->isGhostpost==1) echo 'hidethis'; ?>" id="post_comments_id<?php echo $comments_details[$i]->postcomments_id; ?>">
             <figure> <a href="<?php echo base_url().'profile/user/'.$com_user_data[0]->user_id; ?>"><img src="<?php echo base_url();?>uploads/<?php if(!empty($com_user_data[0]->user_img_thumb))echo $com_user_data[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" alt="<?php echo base_url();?>uploads/<?php if(!empty($image[0]->user_img_thumb)) echo $image[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>"></a></figure>
             <div class="postAComment"> 
             	<div class="postACommentInner"><span class="pfname" style="color:#5A5998;"><a href="<?php echo base_url().'profile/user/'.$com_user_data[0]->user_id; ?>"><?php echo ucfirst($com_user_data[0]->user_firstname)."&nbsp;".ucfirst($com_user_data[0]->user_lastname);?></a></span> <span class="date" style="color:black;">
@@ -168,8 +168,8 @@
             <a href="javascript:void(0);" id="view_more_link<?php echo $row->post_id;?>" onclick="view_more_comments(<?php echo $row->post_id;?>)" style="font-size:12px;">View More</a>
             <?php } ?>
           </div>
-          <div class="commentBox<?php if($row->isGhostpost==1) echo ' hidethis'; ?>" id="commentBox<?php echo $row->post_id;?>">
-            <figure><img src="<?php echo base_url();?>uploads/<?php if(!empty($image[0]->user_img_thumb)) echo $image[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" alt=""></figure>
+          <div class="commentBox <?php if($row->isGhostpost==1) echo ' hidethis'; ?>" id="commentBox<?php echo $row->post_id;?>">
+            <figure><img src="<?php echo base_url();?>uploads/<?php if(!empty($get_profiledata[0]->user_img_thumb)) echo $get_profiledata[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" alt=""></figure>
             <div class="postAComment"> 
             	<div class="postACommentInner">
                            <form method="post" style="width:100% !important;" enctype="multipart/form-data" autocomplete="off" class="send_comment_ajax" id="send_comment_ajax<?php echo $row->post_id;?>" >

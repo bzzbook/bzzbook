@@ -101,8 +101,9 @@ a.previous { display: none; }
         <div class="userImg">
          <img class="headeruserimg" src="<?php echo base_url();?>uploads/<?php if(!empty($image[0]->user_img_thumb)) echo $image[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" alt=""> 
         </div>
-        <a href="#" role="button"  class="dropdown-toggle userName" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Logged in as:<span><?php echo  $session_data['email']; ?></span></a>
-        <ul  role="menu" class="dropdown-menu">
+        <a href="#" class="userName" id="drop_down_list_user" >Logged in as:<span><?php echo $name; ?></span></a>
+           <div class="drop_down_list_user_and_cmp" id="drop_down_list_user_and_cmp">
+        <ul>
         
         <li><a href="<?php echo base_url(); ?>profile" tabindex="-1" role="menuitem" title="user profile"><i class="fa fa-user"> </i> 
 <?php echo $name ?></a></li>
@@ -115,6 +116,8 @@ a.previous { display: none; }
           <li><a href="<?php echo base_url(); ?>signg_in/sign_out" tabindex="-1" role="menuitem"><i class="fa fa-sign-out"> </i> 
 Logout</a></li>
         </ul>
+        </div>
+ 
       </div>
     </div>
   </section>

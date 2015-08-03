@@ -1,4 +1,6 @@
-<?php $result = $this->companies->companies_list($limit=2); ?>
+<?php $result = $this->companies->companies_list($limit=2);
+if($result){
+ ?>
 <div class="companies">
           <h3>My Companies </h3>
             <ul>
@@ -18,3 +20,4 @@
                             <?php endforeach; } else echo "No Details Found";?>
 </ul>
         </div>
+        <?php } ?>

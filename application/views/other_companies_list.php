@@ -6,6 +6,8 @@ $cmp_reqs =$cmps;
 }else{
 $cmp_reqs = $this->companies->get_initial_companies($limit = 2);
 }
+
+if($cmp_reqs) {
 ?> 
  
  <div class="pendingRequest">
@@ -17,7 +19,7 @@ $cmp_reqs = $this->companies->get_initial_companies($limit = 2);
             <li>
               <figure><img src="<?php echo base_url()?>uploads/<?php echo $req['company_image'] ?>" alt="<?php echo base_url()?>uploads/<?php echo $req['company_image'] ?>"></figure>
               <div class="disc">
-                <h4><?php echo $req['cmp_name'] ?></h4>
+                <h4><?php echo character_limiter($req['cmp_name'], 15); ?></h4>
                 <div class="dcBtn"><a href="<?php echo base_url("company/company_disp/".$req['companyinfo_id']); ?>"> View </a>
                   <a href="javascript:void(0);" id="sidebar_follow<?php echo $req['companyinfo_id']; ?>" onclick="cmpFollow(<?php echo $req['companyinfo_id']; ?>);"> Follow </a>
               <!--  <a href="javascript:void(0);"  onclick="cmpFollow(<?php //echo $req['companyinfo_id']; ?>);"> Follow </a>
@@ -34,3 +36,4 @@ $cmp_reqs = $this->companies->get_initial_companies($limit = 2);
           <a href="<?php echo base_url('company/view_all_other_cmps'); ?>" class="link">View all</a> 
           
  </div>
+ <?php } ?>

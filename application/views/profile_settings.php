@@ -479,6 +479,26 @@
                   No </label>
                   </div>
               </div>
+              
+              
+              <div class="radio">
+                <label for="notifications">Profile Visited Users:</label>
+                <div class="pull-right">
+                <label class="radio-inline">
+                	<?php
+						if($sidebardata[0]->recent_viewers  == 'Y')
+							$user_visits_check = "checked";
+						else
+							$user_visits_check = "checked";
+					?>
+                  <input type="radio" id="inlineRadio1" value="Y" name="visited_users" <?php echo @$user_visits_check?>>
+                  Yes </label>
+                <label class="radio-inline">
+                  <input type="radio" id="inlineRadio2" value="N" name="visited_users" <?php echo @$user_visits_check?>>
+                  No </label>
+                  </div>
+              </div>
+              
               <div class="filed col-md-12">
                 <input type="submit" class="fmbtn" value="Save Changes">
               </div>

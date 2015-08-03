@@ -1,6 +1,8 @@
 <?php 
 //$this->load->model('friendsmodel'); 
 $frnd_reqs = $this->friendsmodel->getPendingRequests($limit = 2);
+if($frnd_reqs)
+{
 //print_r($frnd_reqs);
 ?> 
  
@@ -11,7 +13,7 @@ $frnd_reqs = $this->friendsmodel->getPendingRequests($limit = 2);
             <li>
               <figure><img src="<?php echo base_url().'uploads/'.$req['image']; ?>" alt="<?php echo $req['image']; ?>"></figure>
               <div class="disc">
-                <h4><?php echo $req['name']; ?></h4>
+                <h4><?php echo character_limiter($req['name'],15); ?></h4>
                 <div class="dcBtn"><a href="javascript:void(0);" id="pend_frnd_accept<?php echo $req['id']; ?>" onclick="acceptFrnd(<?php echo $req['id']; ?>);">Confirm</a><a id="pend_frnd_deny<?php echo $req['id']; ?>" href="javascript:void(0);" onclick="denyFrnd(<?php echo $req['id']; ?>);">Deny</a> <a id="pend_frnd_block<?php echo $req['id']; ?>" href="javascript:void(0);" onclick="blockFrnd(<?php echo $req['id']; ?>);">Block</a></div>
                 </div>
             </li>
@@ -27,3 +29,4 @@ $frnd_reqs = $this->friendsmodel->getPendingRequests($limit = 2);
           <a href="<?php echo base_url('friends/view_all_pending_reqs'); ?>" class="link">View all</a> 
           <?php } ?>
  </div>
+ <?php } ?>

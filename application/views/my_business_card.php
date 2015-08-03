@@ -6,6 +6,7 @@
             <figure class="compCover"><img alt="" src="<?php echo base_url(); ?>images/about_banner.jpg" class="img-responsive"></figure>
              <?php  $image = $this->profile_set->get_profile_pic($id);
 			         $data = $this->profile_set->get_userinfo($id);
+					// print_r($data);
 			
 					  ?>
                          <?php $attr = array('id' => 'upload_pfpic', 'name' => 'upload_file'); ?> 
@@ -56,7 +57,10 @@
 		  ?>
 		   
 		   </h3>
-           <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+           
+           <?php if(!empty($data[0]['user_industry'])) { ?><p class="buss_card_data">Industry: <?php echo $data[0]['user_industry']; ?></p> <?php } ?>
+           <?php if(!empty($data[0]['profession'])) { ?> <p class="buss_card_data">Job Position: <?php echo $data[0]['profession']; ?></p> <?php } ?>
+           <?php if(!empty($data[0]['aboutme'])) { ?> <p class="buss_card_data">About Me: <?php echo $data[0]['aboutme']; ?></p> <?php } ?>
            </div>
             <div class="col-md-2 photos"><img src="<?php echo base_url();?>uploads/<?php if(!empty($profile_info[0]['user_img_thumb'])) echo $profile_info[0]['user_img_thumb']; else echo 'default_profile_pic.png'; ?>" alt=""></div>
           </section>

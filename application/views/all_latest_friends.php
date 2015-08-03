@@ -7,7 +7,7 @@
           <div class="visitiBoxInner">
             <figure class="compCover"><img alt="" src="<?php echo base_url(); ?>images/about_banner.jpg" class="img-responsive"></figure>
               <?php  $image = $this->profile_set->get_profile_pic();
-			         $data = $this->profile_set->get_userinfo(); ?>
+			         $data = $this->profile_set->get_userinfo($user_id = ''); ?>
                       <?php $attr = array('id' => 'upload_pfpic', 'name' => 'upload_file'); ?> 
               <?php echo form_open_multipart('profile/do_upload',$attr);?>
             <div class="profileLogo">
@@ -47,7 +47,7 @@
         	<div class="fdblock">
         	<figure class="myfriendspfpic"><img src="<?php if(!empty($req[0]['user_img_thumb'])) { echo base_url().'uploads/'.$req[0]['user_img_thumb']; }else echo base_url().'uploads/default_profile_pic.png'; ?>" alt="<?php echo $req[0]['user_firstname'] . " " .$req[0]['user_lastname']; ?>"></figure>
             <div class="friendInfo">
-            	<h3><a href="<?php echo base_url().'profile/friend/'.$req[0]['user_id']; ?>"><?php echo $req[0]['user_firstname'] . " " .$req[0]['user_lastname']; ?></a></h3>
+            	<h3><a href="<?php echo base_url().'profile/friend/'.$req[0]['user_id']; ?>"><?php echo character_limiter($req[0]['user_firstname'] . " " .$req[0]['user_lastname'],10); ?></a></h3>
                 <p><?php echo $req[0]['user_jobtype']; ?></p>
                 <p><?php echo $req[0]['user_cmpname']; ?></p>
             </div>
