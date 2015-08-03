@@ -1175,7 +1175,6 @@ $.each(result.comments, function(i, comment) {
 	}
 	
 	
-	var last_comment = $('#res_comments'+comment.commented_on).children('div').last().attr('id').substr(16);
 	//alert(last_comment);//children().last().
 	get_dynamic_comments_count(comment.commented_on);
 	
