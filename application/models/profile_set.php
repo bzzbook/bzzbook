@@ -1632,7 +1632,7 @@ public function visited_users($user_id='')
 	{
 		$user_ids = $query->result_array();
 
-		
+		print_r($user_ids);
 		foreach($user_ids as $user_id)
 			{
 				 $usercondition = "user_id ="."'".$user_id['visited_user_id']."'";
@@ -1662,6 +1662,7 @@ public function visited_users($user_id='')
 						 }
 						  $userdata[] = $user_data;
 					}
+					print_r($userdata);
 		
 	}else{
 	return false;
