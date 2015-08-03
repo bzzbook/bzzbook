@@ -14,7 +14,7 @@ $add_frnd_reqs = $frnds;
           <div class="visitiBoxInner">
             <figure class="compCover"><img alt="" src="<?php echo base_url(); ?>images/about_banner.jpg" class="img-responsive"></figure>
               <?php  $image = $this->profile_set->get_profile_pic();
-			         $data = $this->profile_set->get_userinfo(); ?>
+			         $data = $this->profile_set->get_userinfo($user_id = ''); ?>
                       <?php $attr = array('id' => 'upload_pfpic', 'name' => 'upload_file'); ?> 
               <?php echo form_open_multipart('profile/do_upload',$attr);?>
             <div class="profileLogo">
@@ -54,7 +54,7 @@ $add_frnd_reqs = $frnds;
         	<div class="fdblock">
         	<figure class="myfriendspfpic"><img  src="<?php if(!empty($req[0]['user_img_thumb'])) { echo base_url().'uploads/'.$req[0]['user_img_thumb']; }else echo base_url().'uploads/default_profile_pic.png'; ?>" alt="<?php echo $req[0]['user_firstname'] . " " .$req[0]['user_lastname']; ?>"></figure>
             <div class="friendInfo">
-            	<h3><a href="<?php echo base_url().'profile/friend/'.$req[0]['user_id']; ?>"><?php echo $req[0]['user_firstname'] . " " .$req[0]['user_lastname']; ?></a></h3>
+            	<h3><a href="<?php echo base_url().'profile/friend/'.$req[0]['user_id']; ?>"><?php echo character_limiter($req[0]['user_firstname'] . " " .$req[0]['user_lastname'],10); ?></a></h3>
                 <span>( <?php $friendscount = $this->friendsmodel->get_frnds_frnds($req[0]['user_id']); if($friendscount) echo count($friendscount); else echo '0' ;?> friends)</span>
                  <div class="disc"><div class="dcBtn"><a href="javascript:void(0);" id="addFrnd<?php echo $req[0]['user_id']; ?>" onclick="addFollowerFrnd(<?php echo $req[0]['user_id']; ?>);">Add Friend</a></div></div>
             </div>

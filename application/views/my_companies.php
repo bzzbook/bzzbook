@@ -45,7 +45,7 @@ $result1 = $this->companies->following_companies_list(0,$uid);
       </div>
       <section class="about-user-details">
         <h4><span aria-hidden="true" class="glyphicon glyphicon-user"></span> My Companies
-         <?php if(empty($user_id)) { ?> <button data-toggle="modal" data-target="#AddCompany" class="btn2 btn-black" type="button">Add Company</button><?php } ?>
+         <?php if(empty($user_id)) { ?> <button data-toggle="modal" data-target="#AddCompany" class="btn2 btn-black my_cmp_btn" type="button">Add Company</button><?php } ?>
         </h4>
         <div class="about-user-details-inner" >
           <section class="my_companys col-lg-12 col-md-12 col-sm-5 col-xs-12 coloumn2 aboutme">

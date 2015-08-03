@@ -124,7 +124,7 @@ $profiledata = $this->customermodel->profiledata($id);
 <div class="myphotos-uploadbtn1 btn-black fileinput-button"> <span>Upload Video</span> 
                 <!-- The file input field used as target for the file upload widget -->
               <form action="" class="uploadvideoform" method="post" enctype="multipart/form-data">
-             <input name="userfile" id="userfile" size="20" required="" type="file">
+             <input name="userfile" id="userfile" size="20" required="" type="file" >
              </form>    
                 </div><?php } ?></h4>
          	<div class="userPhotos">
