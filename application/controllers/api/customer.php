@@ -97,8 +97,8 @@ class customer extends CI_Controller {
 	   $password = substr($string_shuffled, 1, 4);   
 	   
 	   // Authorisation details.
-	$username = "vijaykumar.satyamsetti@gmail.com";
-	$hash = "e1166106b263ba6708d74efc9d475be428f98233";
+	$username = "vijaykumar@ayatas.com";
+	$hash = "ccb66e8f7e8e72edd3debe43956d8c6d00b8868a";
 
 	// Configuration variables. Consult http://api.txtlocal.com/docs for more info.
 	$test = "0";
@@ -238,8 +238,8 @@ class customer extends CI_Controller {
 				$password = substr($string_shuffled, 1, 4);   
 				   
 				// Authorisation details.
-				$username = "vijaykumar.satyamsetti@gmail.com";
-				$hash = "e1166106b263ba6708d74efc9d475be428f98233";
+				$username = "vijaykumar@ayatas.com";
+				$hash = "ccb66e8f7e8e72edd3debe43956d8c6d00b8868a";
 				
 				// Configuration variables. Consult http://api.txtlocal.com/docs for more info.
 				$test = "0";
