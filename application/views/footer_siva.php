@@ -1319,6 +1319,52 @@ window.setInterval(function(){
 
 },5000);  
 
+function delete_post(post_id)
+{
+//alert(post_id);
 
+	if (confirm("Delete Your Post From bzzBook") == true) {
+	url="<?php echo base_url();?>profile/deletePost/"+post_id;
+	 $.ajax({
+		url: url,
+		type: "POST",
+		success: function(data)
+		{   					
+			if(data == true)
+			$('#post'+post_id).remove();
+			else
+			return false;
+
+		}
+		
+	   });
+       
+    } 
+	
+}
+
+function hide_post(post_id,user_id)
+{
+
+
+	if (confirm("Hide Your Post From bzzBook") == true) {
+	url="<?php echo base_url();?>profile/hidePost/"+post_id+"/"+user_id;
+	 $.ajax({
+		url: url,
+		type: "POST",
+		success: function(data)
+		{   					
+			if(data == true)
+			$('#post'+post_id).remove();
+			else
+			return false;
+
+		}
+		
+	   });
+       
+    } 
+	
+}
 
 </script>

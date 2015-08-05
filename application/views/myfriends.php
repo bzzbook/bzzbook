@@ -5,8 +5,10 @@ if(isset($user_id))
 $id = $user_id;
 $myfrnd = $this->friendsmodel->user_frnds($user_id);
 }
-$friends = $this->friendsmodel->getfriends('','',$id);  
+$friends = $this->friendsmodel->getfriends($name='',$addedusers='',$id,$limit='')
 ?>
+
+
 
 <section class="col-lg-9 col-md-9 nopad">
       <div class="col-xs-12 ProfileView">

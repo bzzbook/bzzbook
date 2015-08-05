@@ -68,6 +68,18 @@
 			  }?> 
 			  <?php if($row->shared==1) echo " shared a post "; ?> </span></h5>
               <a href="#" class="date"><?php  echo $hrsago; ?></a> </div>
+              <div class="dropdown posts_dropdown_main_div">
+  
+   <a class="post_hide_or_del dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    <span class="caret"></span>
+    </a>
+
+  <ul class="dropdown-menu posts_dropdown " aria-labelledby="dropdownMenu1">
+   
+   <?php if($row->posted_by == $user_id){?><li><a onclick="delete_post(<?php echo $row->post_id; ?>)"><i class="fa fa-ban"></i>Delete Post</a></li><li><a onclick="hide_post(<?php echo $row->post_id; ?>,<?php echo $user_id; ?>)"><i class="fa fa-eye-slash"></i>Hide Post</a></li><?php }else{ ?><li><a onclick="hide_post(<?php echo $row->post_id; ?>,<?php echo $user_id; ?>)"><i class="fa fa-eye-slash"></i> Hide Post</a></li><?php } ?>
+   
+  </ul>
+</div>
           </div>
           <?php if(!empty($row->share_post_content)) echo "<div>".$row->share_post_content."</div>"; ?>
           <div class="userContent <?php if($row->isGhostpost==1) echo 'hidethis'; ?>"  > <?php if(!empty($row->uploaded_files))

@@ -77,48 +77,26 @@ public function post($user_id='')
 	// $this->load->view('posts');
 }
 public function user($user_id='')
-{
-  if($user_id!='' && is_string($user_id)){	
-  $query = $this->db->select('user_id')->from('bzz_users')->where('username',$user_id)->get();
-  $result = $query->result_array();
-  if($result)
-  $user_id = $result[0]['user_id'];
-  }
-
+{	
  $curr_user_id = $this->session->userdata('logged_in')['account_id'];
- $query = $this->db->select('*')->from('bzz_user_profile_visit')->where('user_id',$curr_user_id)->get();
- $result = $query->result_array();
-// print_r($result);
- $user_ids = array();
-foreach($result as $res)
-
-{
-  $user_ids[] = $res['visited_user_id'];	
-}
-
-
-if($curr_user_id != $user_id && $user_id != '' && $user_id != 0 && !in_array($curr_user_id,$user_ids))
-{
-	
-	$data['user_id'] = $user_id ;
-	$data['visited_user_id'] =  $curr_user_id;
-	$this->db->insert('bzz_user_profile_visit',$data);
-}else if($curr_user_id != $user_id && $user_id != 0 && in_array($user_id,$user_ids))
-{
-	
-	$data['user_id'] = $user_id ;
-	$data['visited_user_id'] =  $curr_user_id;
-	$condition = "user_id =" . "'" . $curr_user_id . "'" . " AND " . "visited_user_id = "  . "'" . $user_id . "'";
-	
-	$this->db->where($condition);
-	$this->db->update('bzz_user_profile_visit',$data);
-}
-
+ 
+ if($this->db->select('*')->from('bzz_users')->where('user_id',$user_id)->get()->num_rows() > 0){
+		if($this->db->select('*')->from('bzz_user_profile_visit')->where('user_id',$user_id)->where('visited_user_id',$curr_user_id)->get()->num_rows() > 0){
+			$data['user_id'] = $user_id ;
+	     	$data['visited_user_id'] =  $curr_user_id;
+			$data['visited_time'] =  date("Y-m-d H:i:s");
+		 	$this->db->update('bzz_user_profile_visit',$data);
+		}else{
+		 $data['user_id'] = $user_id ;
+	     $data['visited_user_id'] =  $curr_user_id;
+		 $this->db->insert('bzz_user_profile_visit',$data);
+		}
+ }
 
   	  $data['user_id'] = $user_id;
 	  $data['content']='users_profile';
 	  $this->load->view('full_content_view',$data);
-	// $this->load->view('posts');
+
 }
 public function message()
   { 
@@ -1168,6 +1146,53 @@ public function deletehometown()
 	else
 	return false;
 }
+
+
+public function deletePost($post_id)
+{
+	
+	$comments_query = $this->db->select('*')->from('bzz_postcomments')->where('commented_on',$post_id)->get();
+	if($comments_query->num_rows() > 0)
+	{
+	$this->db->where('commented_on',$post_id);
+	$this->db->delete('bzz_postcomments');
+	}
+	
+	$hidden_posts_query = $this->db->select('*')->from('bzz_hidden_posts')->where('hidden_post_id',$post_id)->get();
+	if($hidden_posts_query->num_rows() > 0)
+	{
+	$this->db->where('hidden_post_id',$post_id);
+	$this->db->delete('bzz_hidden_posts');
+	}
+	
+	$likes_query = $this->db->select('*')->from('bzz_likes')->where('like_on',$post_id)->get();
+	if($likes_query->num_rows() > 0)
+	{
+	$this->db->where('like_on',$post_id);
+	$this->db->delete('bzz_likes');
+	}
+
+	$this->db->where('post_id', $post_id);
+    if($this->db->delete('bzz_posts')) 
+	echo true;
+	else
+	echo false;
+}
+
+
+public function hidePost($post_id,$user_id)
+{
+	$data = array(
+	'hidden_post_id' => $post_id,
+	'hide_by_user' => $user_id
+	);
+	if($this->db->insert('bzz_hidden_posts',$data))
+	echo true;
+	else
+	echo false;
+
+}
+
    public function deleteothaccount()
 {
 	if($this->profile_set->del_oth_acc_by_id($_POST['account_id']))

@@ -1663,6 +1663,7 @@ public function visited_users($user_id='')
 						  $userdata[] = $user_data;
 					}
 				//	print_r($userdata);
+				return $userdata;
 		
 	}else{
 	return false;

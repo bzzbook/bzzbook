@@ -873,6 +873,7 @@ if($this->email->send()){
 public function recent_posts($recent_post_id)
 {
   	    $id = $this->session->userdata('logged_in')['account_id'];
+		$hidden_posts = $this->customermodel->get_hidden_posts($id);
 		
 		$cur_usr_id = $this->session->userdata('logged_in')['account_id'];
 	    $condition = "(user_id ='" . $id . "' OR friend_id ='".$id."') AND request_status = 'Y'";
@@ -900,6 +901,11 @@ public function recent_posts($recent_post_id)
 	   $this->db->from('bzz_posts');
 	$user_time_condition  = "post_id > '".$recent_post_id."' AND posted_on >= DATE_ADD( NOW(), INTERVAL - 5 MINUTE ) AND isGhostpost=0 ORDER BY post_id DESC";	
 	   //$this->db->limit(10);
+	   
+	    if(!empty($hidden_posts))
+	 {
+	   $this->db->where_not_in('post_id',$hidden_posts);
+	 }
 	
    $this->db->where($user_time_condition);
 //   $this->db->order_by("post_id","desc");

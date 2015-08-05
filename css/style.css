@@ -117,7 +117,7 @@ header .search .input-group .input-group-btn ul li a:hover{ background:url(../im
 .midbody .coloumn2 .posts .asasasa article{ margin-bottom:0px; border:2px solid #74aaf7; margin-top:15px; border-radius:4px;}
 .coloumn2 .posts article.ghostpost {background: #e1e0e0 none repeat scroll 0 0 !important; position:relative;}
 .coloumn2 .posts article.ghostpostside:after{ background:url(../images/ghost-post.png) 0 0; content:""; width:40px; height:50px; position:absolute; right:-7px; top:-12px; }
-.posts article .pfInfo{ display:flex; margin-bottom:15px;}
+.posts article .pfInfo{ display:flex; margin-bottom:15px; position:relative}
 .posts article .pfInfo .pfImg{ border:1px solid #ccc; margin-right:10px;}
 .posts article .pfInfo .pfImg{ width:50px; height:50px;}
 .posts article .pfInfo .pfImg img{ width:100%; height:100%; }
@@ -2399,4 +2399,10 @@ ul {
 .comment_count { margin-left:-6px; margin-right:10px; font-size:12px;}
 .buss_card_data { font-family: roboto; font-size: 15px; margin: 5px;}
 .my_cmp_btn { margin-top:4px; line-height:7px;}
-
+.posts_dropdown_main_div{position:absolute; right:0px;}
+.post_hide_or_del{color:#b5b5b5;}
+.post_hide{ left:350px;}
+.posts_dropdown{margin-left: -147px;}
+.posts_dropdown li{ font-size:12px; margin-top:2px;}
+.posts_dropdown li+li { margin-top:2px;}
+.posts_dropdown li a i{margin-right:5px;}

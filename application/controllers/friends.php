@@ -82,6 +82,12 @@ public function view_all_reqs()
 	  //$this->load->view('posts');	
 }
 
+public function view_all_recent_users()
+{
+	      $data['content']='all_recent_profile_viewers';
+	     $this->load->view('full_content_view',$data);
+}
+
 public function view_all_pending_reqs()
 {  
          //$data['friends'] = $this->friendsmodel->getfriends();	
@@ -189,6 +195,7 @@ public function get_friend_invitation($limit=''){
 	else
 	echo 'No Friends found';
 }
+
 public function get_online_frnds($name=''){
 
 $friends = $this->friendsmodel->get_online_frnds($name);  
@@ -206,6 +213,46 @@ echo "images/grey.png'  /></div><div class='clearfix'></div></li></a>";
 }}else echo '';
 exit(0);
 }
+
+	public function get_frnds_frnds()
+	{
+		$id = '4';
+		// $this->session->userdata('logged_in')['account_id'];
+		$condition = "(user_id ='".$id."' OR friend_id='".$id."') AND request_status='Y'";
+		
+		$this->db->select('*');
+		$this->db->from('bzz_userfriends');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		
+		
+		if($query->num_rows() > 0) {
+			$friends = $query->result_array();
+			$frnds = array();
+			foreach($friends as $friend)
+			{
+				$frnds[] = $friend['user_id'];
+				$frnds[] = $friend['friend_id'];	
+			}
+		
+	
+		if(!empty($frnds))
+			{
+		$usr_ids = array_unique($frnds);
+		
+		$key = array_search($id,$usr_ids);
+		if($key!==false)
+		{
+  		unset($usr_ids[$key]);
+		}
+		}	
+		
+	print_r($usr_ids);
+		
+		}
+		return false;
+
+	}
 
 }
 ?>

@@ -171,7 +171,7 @@
 				   echo "Not Available";
 				   
 				  ?></h6>
-			<?php } ?>
+			<?php } else echo "Not Available"; ?>
           
           
           </div>
@@ -220,7 +220,7 @@
 				   echo "Not Available";
 				   
 				  ?></h6>
-			<?php } ?>
+			<?php }else echo "Not Available"; ?>
           
           
           </div>
@@ -269,7 +269,7 @@
 				   echo "Not Available";
 				   
 				  ?></h6>
-			<?php } ?>
+			<?php } else echo "Not Available"; ?>
           
           
           </div>
@@ -318,7 +318,7 @@
 				   echo "Not Available";
 				   
 				  ?></h6>
-			<?php } ?>
+			<?php } else echo "Not Available"; ?>
           
           </div>
           <div class="clear"></div>

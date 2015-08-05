@@ -19,20 +19,43 @@ class Friendsmodel extends CI_Model {
 		$condition.= " AND (user_id NOT IN (".$addedusers.") AND friend_id NOT IN (".$addedusers.") )";
 		if($limit!='')
 		$condition .=" LIMIT 0,".$limit;
-		 // echo $condition ; exit;
+		  
 		$this->db->select('*');
 		$this->db->from('bzz_userfriends');
 		$this->db->where($condition);
 		$query = $this->db->get();
 		if ($query->num_rows() >0) {
+			//echo $this->db->last_query();
+				
 			$friends = $query->result_array();
-			$frnds = array();
+			
 			foreach($friends as $friend)
 			{
-				if($friend['friend_id']==$id)
-			    $condition = "user_id =" . "'" . $friend['user_id'] . "'";
-				else
-				$condition = "user_id =" . "'" . $friend['friend_id'] . "'";
+				$frnds[] = $friend['user_id'];
+				$frnds[] = $friend['friend_id'];	
+			}
+		
+				if(!empty($frnds))
+			{
+		$usr_ids = array_unique($frnds);
+		
+		$key = array_search($id,$usr_ids);
+		if($key!==false)
+		{
+  		unset($usr_ids[$key]);
+		}
+			
+			}
+			
+			//print_r($usr_ids);
+			//exit;
+			$frnds = array();
+			foreach($usr_ids as $usr_id)
+			{
+				//if($friend['friend_id']==$id)
+			    $condition = "user_id =" . "'" . $usr_id . "'";
+				//else
+				//$condition = "user_id =" . "'" . $friend['friend_id'] . "'";
 				if($name!='')
 				{
 					$condition.= " AND (user_firstname LIKE '%".$name."%' OR user_lastname LIKE '%".$name."%' )"; 
@@ -45,18 +68,22 @@ class Friendsmodel extends CI_Model {
 				$this->db->from('bzz_userinfo');
 				$this->db->where($condition);
 				$query = $this->db->get();
+				
 				$frnd = array();
 				if ($query->num_rows() == 1) {
 					$result = $query->result_array();	
+					
 					$frnd['name'] = $result[0]['user_firstname'].' '.$result[0]['user_lastname'];	
 					$frnd['username'] = $result[0]['username'];
 					$this->db->select('*');
 				$this->db->from('bzz_user_images');
-				if($friend['friend_id']==$id)
+				/*if($friend['friend_id']==$id)
 			    $condition = "user_id =" . "'" . $friend['user_id'] . "'";
 				else
 				$condition = "user_id =" . "'" . $friend['friend_id'] . "'";
-				$this->db->where($condition);
+				*/
+				$condition = "user_id =" . "'" . $usr_id . "'";
+				$this->db->where('user_id',$usr_id);
 				$this->db->order_by('user_imageinfo_id','desc');
 				$query = $this->db->get();
 				$result = $query->result_array();
@@ -324,17 +351,42 @@ class Friendsmodel extends CI_Model {
 	
 	public function get_frnds_frnds($id)
 	{
+		
 		//$id = $this->session->userdata('logged_in')['account_id'];
-		$condition = "user_id =" . "'" . $id .  "' AND request_status='Y'";
-		$this->db->select('friend_id');
+		$condition = "(user_id ='".$id."' OR friend_id='".$id."') AND request_status='Y'";
+		
+		$this->db->select('*');
 		$this->db->from('bzz_userfriends');
 		$this->db->where($condition);
 		$query = $this->db->get();
-		if($query->num_rows()>0)
+		
+		
+		if($query->num_rows() > 0) {
+			$friends = $query->result_array();
+			$frnds = array();
+			foreach($friends as $friend)
+			{
+				$frnds[] = $friend['user_id'];
+				$frnds[] = $friend['friend_id'];	
+			}
+		
+	
+		if(!empty($frnds))
+			{
+		$usr_ids = array_unique($frnds);
+		
+		$key = array_search($id,$usr_ids);
+		if($key!==false)
 		{
-			return $result = $query->result();
+  		unset($usr_ids[$key]);
 		}
-	return false;
+		}	
+		
+	return($usr_ids);
+		
+		}
+		return false;
+
 	}
 	
 	public function appendFriend($frndid,$groupid)

@@ -68,10 +68,19 @@ class Customermodel extends CI_Model {
 		 return false;
 	}
 	public function All_Posts($pst_usr_id,$last_id = ''){
+	
 		if(empty($pst_usr_id))
   	    $id = $this->session->userdata('logged_in')['account_id'];
 		else
 		$id = $pst_usr_id;
+		
+		
+		$hidden_posts = $this->get_hidden_posts($id);
+	 
+	// print_r($hidden_posts);
+	// exit;
+	   
+		
 		$cur_usr_id = $this->session->userdata('logged_in')['account_id'];
 	    $condition = "(user_id ='" . $id . "' OR friend_id ='".$id."') AND request_status = 'Y'";
 		$this->db->select('*');
@@ -100,15 +109,19 @@ class Customermodel extends CI_Model {
 	   
 	   $this->db->where($condition);
 	   }
+	  
 	   $this->db->from('bzz_posts');
-	
+	 if(!empty($hidden_posts))
+	 {
+	   $this->db->where_not_in('post_id',$hidden_posts);
+	 }
 	   $this->db->limit(10);
-	
-/*	   $this->db->where($condition);
-*/	   $this->db->order_by("post_id","desc");
+	   $this->db->order_by("post_id","desc");
 	   $query = $this->db->get();
    	   if ($query->num_rows() > 0) {
 	   		$result =  $query->result();
+			// $this->db->last_query();
+			//exit;
 			$posts = array();
 			foreach($result as $res){
 		    $friend_ids = explode(',',$res->posted_to);
@@ -125,6 +138,28 @@ class Customermodel extends CI_Model {
 	   return false;
    }
    
+   
+   public function get_hidden_posts($id= '')
+   {
+	   if(empty($id))
+  	    $id = $this->session->userdata('logged_in')['account_id'];
+		else
+		$id = $id;
+	   
+	 $query = $this->db->select('hidden_post_id')->from('bzz_hidden_posts')->where('hide_by_user',$id)->get();
+	 if($query->num_rows() > 0)
+	 {
+	 $hidden_post_ids = $query->result_array();
+	 $data =  array();
+	 foreach($hidden_post_ids as $post_id)
+	 {
+		 $data[] = $post_id['hidden_post_id'];
+	 }
+	 return $data;
+	 }else {
+	 return false;
+	 }
+   }
    public function All_event_posts($event_id)
    {
 	   $this->db->select('*');
