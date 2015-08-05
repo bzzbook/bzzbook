@@ -48,6 +48,9 @@ class Signg_in extends CI_Controller {
 							'account_id' =>$result[0]['user_id']
 							
 						   );
+						    $curr_user_data= $this->customermodel->profiledata($result[0]['user_id']);
+	 						$_SESSION['username'] = $curr_user_data[0]->username;
+							
 		
         $this->session->set_userdata('logged_in',$sess_array);
 	//	print_r($this->session->userdata);
@@ -108,6 +111,9 @@ class Signg_in extends CI_Controller {
 							'account_id' =>$result[0]['user_id']
 							
 						   );
+						   $curr_user_data= $this->customermodel->profiledata($result[0]['user_id']);
+	 					   $_SESSION['username'] = $curr_user_data[0]->username;
+						   
 		
         $this->session->set_userdata('logged_in',$sess_array);
 		// setting user activity log in database to maintain user online status

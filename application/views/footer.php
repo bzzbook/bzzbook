@@ -1,10 +1,11 @@
-<?php session_start();
-	  if(empty($user_id))
-	  $curr_user_id = $this->session->userdata('logged_in')['account_id'];
-	  else
-	  $curr_user_id = $user_id; 
-	  $curr_user_data= $this->customermodel->profiledata($curr_user_id);
-	  $_SESSION['username'] = $curr_user_data[0]->username; // Must be already set
+<?php 
+	//session_start();
+//	  if(empty($user_id))
+//	  $curr_user_id = $this->session->userdata('logged_in')['account_id'];
+//	  else
+//	  $curr_user_id = $user_id; 
+//	  $curr_user_data= $this->customermodel->profiledata($curr_user_id);
+//	  $_SESSION['username'] = $curr_user_data[0]->username; // Must be already set
 	 // echo $curr_user_data[0]->username;
 	  ?>
 <!--      <div id="online-friends"></div>

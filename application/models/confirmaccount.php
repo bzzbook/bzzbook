@@ -11,6 +11,7 @@ class confirmaccount extends CI_Model {
 	   
 	   public function confirmUserAccount($conf_code)
 	   {
+		 
 		 $condition = "conf_code =" . "'" . $conf_code . "'";
 		 $this->db->select('*');
 		 $this->db->from('bzz_users');

@@ -77,12 +77,18 @@ public function post($user_id='')
 	// $this->load->view('posts');
 }
 public function user($user_id='')
-{	
+{
+  if($user_id!='' && is_string($user_id)){	
+  $query = $this->db->select('user_id')->from('bzz_users')->where('username',$user_id)->get();
+  $result = $query->result_array();
+  if($result)
+  $user_id = $result[0]['user_id'];
+  }
 
  $curr_user_id = $this->session->userdata('logged_in')['account_id'];
  $query = $this->db->select('*')->from('bzz_user_profile_visit')->where('user_id',$curr_user_id)->get();
  $result = $query->result_array();
- print_r($result);
+// print_r($result);
  $user_ids = array();
 foreach($result as $res)
 

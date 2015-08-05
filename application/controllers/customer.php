@@ -120,7 +120,7 @@ class customer extends CI_Controller {
 		$this->email->to($mail);
 		$this->email->subject('Confirmation mail for account activation');
 		$message = "Please Click Below Link To Activate Your Acount  \n";
-		$message .= "www.bzzbook.com/confirmation/confirm/".$user_data[0]['conf_code'];
+		$message .= base_url()."confirmation/confirm/".$user_data[0]['conf_code'];
 		$this->email->message($message);
 		if($this->email->send())
 		{

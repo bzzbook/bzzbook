@@ -17,7 +17,7 @@ class confirmation extends CI_Controller {
 	if($conf_code != '')
 	{
 		$user = $this->confirmaccount->confirmUserAccount($conf_code);
-		if(!empty($user))
+		if($user)
 		{
 			
 			$this->session->set_flashdata('activation_success','Your Account Hasbeen Activated You Can Login into Your Account!...');
