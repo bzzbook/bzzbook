@@ -1530,7 +1530,7 @@ function  onchangeMore(){
         });
     });
   
-    function showResponse(responseText, statusText, xhr, $form){
+    <?php /*?>function showResponse(responseText, statusText, xhr, $form){
 		
 	    if(responseText.indexOf('.')>0){
 			$("#loadingimage").html('');
@@ -1540,6 +1540,100 @@ function  onchangeMore(){
 	    	$('#viewimage').html('<img class="preview" alt="" src="<?php echo base_url().$upload_path; ?>'+responseText.trim()+'"   id="thumbnail" />');
 	    	$('#filename').val(responseText.trim()); 
 			$('#thumbnail').imgAreaSelect({  aspectRatio: '1:1', handles: true  , onSelectChange: preview });
+		}else{
+			alert('please select file first');
+			$('#thumbviewimage').html(responseText.trim());
+	    	$('#viewimage').html(responseText.trim());
+		}
+    }<?php */?>
+	function showResponse(responseText, statusText, xhr, $form){
+		
+	    if(responseText.indexOf('.')>0){
+			$("#loadingimage").html('');
+			$('.crop_set_preview').show();
+			$('.crop_box').height(350);
+			$('#thumbviewimage').html('<img src="<?php echo base_url().$upload_path;?>'+responseText.trim()+'"   style="position: relative;" alt="Thumbnail Preview" />');
+	    	$('#viewimage').html('<img class="preview" alt="" src="<?php echo base_url().$upload_path; ?>'+responseText.trim()+'"   id="thumbnail" />');
+			var required;
+			var img = new Image();
+			img.onload = function() {
+			 required = Math.floor((360*this.height)/this.width);
+			 $('#filename').val(responseText.trim()); 
+			var ias = $('#thumbnail').imgAreaSelect({  aspectRatio: '1:1', handles: true  , onSelectChange: preview, instance: true, movable: true, resizable : false });
+			
+			ias.setSelection(0, 0, required, required, true);
+			ias.setOptions({ show: true });
+			ias.update();
+			}
+			var src = $('#thumbnail').attr('src');
+			img.src = src;
+	    	
+		}else{
+			alert('please select file first');
+			$('#thumbviewimage').html(responseText.trim());
+	    	$('#viewimage').html(responseText.trim());
+		}
+    }
+	
+	/* profile pic upload and crop functionality  */
+	 $(document).ready(function() {
+        $('#submitbtn').click(function() {
+			$('.pfpic').hide();
+			$('.upload').hide();
+            $("#viewimage").html('');
+            $("#loadingimage").html('<img src="<?php echo base_url(); ?>cropimage/images/loading.gif" />');
+            $(".uploadform").ajaxForm({
+            	url: '<?php echo base_url(); ?>profile/upload_thumb',
+                success:    showProfilPicResponse 
+            });
+        });
+    });
+	function showProfilPicResponse(responseText, statusText, xhr, $form){
+		
+	    if(responseText.indexOf('.')>0){
+			$("#loadingimage").html('');
+			$('.crop_set_preview').show();
+			$('.crop_box').height(350);
+			$('#thumbviewimage').html('<img src="<?php echo base_url().$upload_path;?>'+responseText.trim()+'"   style="position: relative;" alt="Thumbnail Preview" />');
+	    	$('#viewimage').html('<div></div><img class="preview" alt="" src="<?php echo base_url().$upload_path; ?>'+responseText.trim()+'"   id="thumbnail" />');
+			$('#viewimage img').css('max-width','100%');
+			var divwidth = $('#viewimage').width();
+			$('#viewimage img').css('max-height','100%');
+			$('.crop_preview_box_big').css({"background": "none", "border": "none"})
+			var required;
+			var img = new Image();
+			img.onload = function() {
+			 if(this.height<=this.width){
+			 $('#w').val(this.height);
+			 $('#h').val(this.height);
+			 if(this.width<divwidth)
+			 width = this.width;
+			 else
+			 width = divwidth;
+			 required = Math.floor((width*this.height)/this.width);
+			 }
+			 else{
+				 $('#w').val(this.width);
+				 $('#h').val(this.width);
+				  required = this.width;
+			// required = Math.floor((width*this.height)/this.width);
+			 }
+			 $('#x1').val(0);
+			 $('#y1').val(0);
+			 $('#x2').val(required);
+			 $('#y2').val(required);
+			 
+			 alert(required);
+			 $('#filename').val(responseText.trim()); 
+			var ias = $('#thumbnail').imgAreaSelect({  aspectRatio: '1:1', handles: true  , onSelectChange: preview, instance: true, movable: true, resizable : false, persistent: true });
+			
+			ias.setSelection(0, 0, required, required, true);
+			ias.setOptions({ show: true });
+			ias.update();
+			}
+			var src = $('#thumbnail').attr('src');
+			img.src = src;
+	    	
 		}else{
 			alert('please select file first');
 			$('#thumbviewimage').html(responseText.trim());

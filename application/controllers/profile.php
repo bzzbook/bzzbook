@@ -401,16 +401,31 @@ public function showfavs()
 		$config['max_height']  = '';
 
 		$this->load->library('upload', $config);
-
-		if ( ! $this->upload->do_upload())
-		{
-			$error = array('error' => $this->upload->display_errors());
-
-			//$this->load->view('uploadform', $error);
-		}
-		else
-		{
-			$data = $this->upload->data();
+		$upload_path = "uploads/";				
+						
+		$thumb_width = "600";						
+		$thumb_height = "600";	
+	if (isset($_POST["upload_thumbnail"])) {
+	
+			$filename = $_POST['filename'];
+		
+			$large_image_location = $upload_path.$_POST['filename'];
+			$thumb_image_location = $upload_path."thumb_".$_POST['filename'];
+		
+			$x1 = $_POST["x1"];
+			$y1 = $_POST["y1"];
+			$x2 = $_POST["x2"];
+			$y2 = $_POST["y2"];
+			$w = $_POST["w"];
+			$h = $_POST["h"];
+			
+			$scale = $thumb_width/$w;
+			$cropped = $this->resizeThumbnailImage($thumb_image_location, $large_image_location,$w,$h,$x1,$y1,$scale);
+			//echo $_SERVER['DOCUMENT_ROOT']; echo dirname(__FILE__); exit;
+			$data['full_path'] = $_SERVER['DOCUMENT_ROOT']."/bzzbook/uploads/".$cropped;
+			$split = explode('.',$cropped);
+			$data['raw_name'] = $split[0];
+			$data['file_ext'] = '.'.$split[1];
 	  	  // print_r($data);
 		    $path = $data['full_path'];
 		    $config['image_library'] = 'gd2';
@@ -437,8 +452,8 @@ public function showfavs()
 		//	$config_fav['upload_path'] = './uploads/favorite/';
 			//$config_fav['new_image'] = './uploads/favorite/';
 			$config_fav['thumb_marker'] = '_fav';
-			$config_fav['width'] = 62;
-			$config_fav['height'] = 62;
+			$config_fav['width'] = 150;
+			$config_fav['height'] = 150;
 
 			$this->load->library('image_lib', $config_fav);
 			$this->image_lib->initialize($config_fav);
@@ -446,8 +461,11 @@ public function showfavs()
 			$img_fav = $data['raw_name'].'_fav'.$data['file_ext'];
 			
 			
+			
+			
+			
 			// image insertion into db
-            $file_id = $this->profile_set->insert_profile_pic($data['file_name'],$img_thumb,$img_fav);
+            $file_id = $this->profile_set->insert_profile_pic($cropped,$img_thumb,$img_fav);
 			if(isset($_SERVER['HTTP_REFERER']))
                 {
                     $redirect_to = str_replace(base_url(),'',$_SERVER['HTTP_REFERER']);

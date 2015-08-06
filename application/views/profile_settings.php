@@ -19,16 +19,44 @@
             <div role="tabpanel" class="tab-pane active" id="post_board">
              <?php $image = $this->profile_set->get_profile_pic(); 	?>
 			            <!-- <?php //echo base_url(); ?>images/pf_pic.png -->
-              <figure class="pfpic"><span>Profile Pic</span><img src="<?php echo base_url();?>uploads/<?php if(!empty($image[0]->user_img_thumb)) echo $image[0]->user_img_thumb; else echo 'default_profile_pic.png';  ?>" alt="" height="159" width="146"></figure>
-               <?php $attr = array('id' => 'upload_file', 'name' => 'upload_file'); ?> 
-              <?php echo form_open_multipart('profile/do_upload',$attr);?>
+              <figure class="pfpic"><span>Profile Pic</span><img src="<?php echo base_url();?>uploads/<?php if(!empty($image[0]->user_img_fav)) echo $image[0]->user_img_fav; else echo 'default_profile_pic.png';  ?>" alt="" height="159" width="146"></figure>
+              
+              <div class="crop_set_preview" style="display:none; width:100%; padding:0;">
+			<div class="crop_preview_left" style="width:100%; padding:0;"> 
+				<div class="crop_preview_box_big" id='viewimage' style="width:100%; height:auto; text-align:center;"> 
+					
+				</div>
+			</div>
+			<div class="crop_preview_right" style="margin:0 auto; float:none;">
+				
+				<div style="display:none;" class="crop_preview_box_small" id='thumbviewimage' style="position:relative; overflow:hidden;"> </div>
+				
+				<form name="thumbnail" action="<?php echo base_url();?>profile/do_upload" method="post">
+					<input type="hidden" name="x1" value="" id="x1" />
+					<input type="hidden" name="y1" value="" id="y1" />
+					<input type="hidden" name="x2" value="" id="x2" />
+					<input type="hidden" name="y2" value="" id="y2" />
+					<input type="hidden" name="w" value="" id="w" />
+					<input type="hidden" name="h" value="" id="h" />
+					<input type="hidden" name="wr" value="" id="wr" />
+					
+					<input type="hidden" name="filename" value="" id="filename" />
+                       <div class="crop_preview_submit"><input type="submit" name="upload_thumbnail" value="Save Thumbnail" id="save_thumb" class="submit_button" /><input type="button" class="cancel_button" onclick="location.href = '<?php echo base_url(); ?>profile/profile_setting';" value="Cancel" /> </div>
+				</form>
+				
+			</div>
+		</div>
+               <?php //$attr = array('id' => 'upload_file', 'name' => 'upload_file'); ?> 
+              <?php //echo form_open_multipart('profile/do_upload',$attr);?>
+              <form class="uploadform" method="post" enctype="multipart/form-data" action='' name="photo">	
+
            <div class="upload"> <span class="btn btn-success fileinput-button"> <span>Change Picture</span> 
                 <!-- The file input field used as target for the file upload widget -->
-             <input type="file" name="userfile" id="userfile" size="20" required/>
+             <input type="file" name="imagefile" id="imagefile" size="20" required/>
                  
                 </span> 
                <!-- <input type="hidden" value="" name="status" id="status"/> -->
-                 <input type="submit" class="btn btn-success" value="upload"></div>
+                 <input type="submit" name="submitbtn" id="submitbtn"  class="btn btn-success" value="Upload"></div>
                  </form>
                  
          <?php /*?><section>
