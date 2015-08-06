@@ -20,8 +20,9 @@
              <?php $image = $this->profile_set->get_profile_pic(); 	?>
 			            <!-- <?php //echo base_url(); ?>images/pf_pic.png -->
               <figure class="pfpic"><span>Profile Pic</span><img src="<?php echo base_url();?>uploads/<?php if(!empty($image[0]->user_img_fav)) echo $image[0]->user_img_fav; else echo 'default_profile_pic.png';  ?>" alt="" height="159" width="146"></figure>
-              
+              <div id="loadingimage"></div>
               <div class="crop_set_preview" style="display:none; width:100%; padding:0;">
+              
 			<div class="crop_preview_left" style="width:100%; padding:0;"> 
 				<div class="crop_preview_box_big" id='viewimage' style="width:100%; height:auto; text-align:center;"> 
 					

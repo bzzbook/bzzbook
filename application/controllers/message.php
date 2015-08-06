@@ -61,7 +61,7 @@ function doupload($filename='',$notrequired='') {
 					$_FILES['userfile']['tmp_name'] = $value['tmp_name'][$s];
 					$_FILES['userfile']['error']       = $value['error'][$s];
 					$_FILES['userfile']['size']    = $value['size'][$s];  
-						$config['upload_path'] = './uploads/';
+						$config['upload_path'] = DIR_FILE_PATH;
 						$type = $_FILES['userfile']['type'];
 						$config['allowed_types'] = 'gif|jpg|png|csv|psd|xls|pdf|ppd|zip|xlsx|doc|docx|mpeg|mov|avi|mpg|txt|word';
 						

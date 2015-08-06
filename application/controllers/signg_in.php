@@ -283,7 +283,7 @@ class Signg_in extends CI_Controller {
 					$_FILES['userfile']['tmp_name'] = $value['tmp_name'][$s];
 					$_FILES['userfile']['error']       = $value['error'][$s];
 					$_FILES['userfile']['size']    = $value['size'][$s];  
-						$config['upload_path'] = './uploads/';
+						$config['upload_path'] = DIR_FILE_PATH;
 						$type = $_FILES['userfile']['type'];
 						$config['allowed_types'] = 'gif|jpg|png';
 						
@@ -573,8 +573,8 @@ class Signg_in extends CI_Controller {
 		else
 		{
 		
-		
-		$config['upload_path'] = './uploads/';
+		$config['upload_path'] = DIR_FILE_PATH; 
+		//$config['upload_path'] = './uploads/';
 		$sourcePath = $_FILES[$file_name]['tmp_name'][0]; // Storing source path of the file in a variable
 		//$targetPath = "F:\/xampp\/htdocs\/bzzbook\/uploads\/".$_FILES[$file_name]['name'][0];
 		$targetPath = $config['upload_path'].$_FILES[$file_name]['name'][0]; // Target path where file is to be stored
@@ -642,7 +642,7 @@ else
 {
 
 
-$config['upload_path'] = './uploads/';
+$config['upload_path'] = DIR_FILE_PATH;
 $sourcePath = $_FILES[$file_name]['tmp_name'][0]; // Storing source path of the file in a variable
 //$targetPath = "F:\/xampp\/htdocs\/bzzbook\/uploads\/".$_FILES[$file_name]['name'][0];
 $targetPath = $config['upload_path'].$_FILES[$file_name]['name'][0]; // Target path where file is to be stored

@@ -27,7 +27,7 @@ class Events extends CI_Controller {
 	public function create_event()
 	{
 		
-		$config['upload_path'] = './uploads/';
+		$config['upload_path'] = DIR_FILE_PATH;
 		$config['allowed_types'] = 'gif|jpg|png|jpeg';
 	    //$config['create_thumb'] = TRUE;
 		$config['max_size']	= '';
@@ -289,7 +289,7 @@ public function send_event_post_two()
 					$_FILES['userfile']['tmp_name'] = $value['tmp_name'][$s];
 					$_FILES['userfile']['error']       = $value['error'][$s];
 					$_FILES['userfile']['size']    = $value['size'][$s];  
-						$config['upload_path'] = './uploads/';
+						$config['upload_path'] = DIR_FILE_PATH;
 						$type = $_FILES['userfile']['type'];
 						$config['allowed_types'] = 'gif|jpg|png';
 						
@@ -324,7 +324,7 @@ public function event_banner_upload()
 		$event_id = $this->input->post('event_id');
 		echo $event_id;
 		
-		$config['upload_path'] = './uploads/';
+		$config['upload_path'] = DIR_FILE_PATH;
 		$config['allowed_types'] = 'gif|jpg|png';
 		$config['create_thumb'] = TRUE;
 		$config['max_size']	= '';

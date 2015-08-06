@@ -1530,7 +1530,7 @@ function  onchangeMore(){
         });
     });
   
-    <?php /*?>function showResponse(responseText, statusText, xhr, $form){
+    function showResponse(responseText, statusText, xhr, $form){
 		
 	    if(responseText.indexOf('.')>0){
 			$("#loadingimage").html('');
@@ -1545,8 +1545,8 @@ function  onchangeMore(){
 			$('#thumbviewimage').html(responseText.trim());
 	    	$('#viewimage').html(responseText.trim());
 		}
-    }<?php */?>
-	function showResponse(responseText, statusText, xhr, $form){
+    }
+	<?php /*?>function showResponse(responseText, statusText, xhr, $form){
 		
 	    if(responseText.indexOf('.')>0){
 			$("#loadingimage").html('');
@@ -1573,12 +1573,13 @@ function  onchangeMore(){
 			$('#thumbviewimage').html(responseText.trim());
 	    	$('#viewimage').html(responseText.trim());
 		}
-    }
+    }<?php */?>
 	
 	/* profile pic upload and crop functionality  */
 	 $(document).ready(function() {
         $('#submitbtn').click(function() {
 			$('.pfpic').hide();
+			
 			$('.upload').hide();
             $("#viewimage").html('');
             $("#loadingimage").html('<img src="<?php echo base_url(); ?>cropimage/images/loading.gif" />');
@@ -1591,7 +1592,6 @@ function  onchangeMore(){
 	function showProfilPicResponse(responseText, statusText, xhr, $form){
 		
 	    if(responseText.indexOf('.')>0){
-			$("#loadingimage").html('');
 			$('.crop_set_preview').show();
 			$('.crop_box').height(350);
 			$('#thumbviewimage').html('<img src="<?php echo base_url().$upload_path;?>'+responseText.trim()+'"   style="position: relative;" alt="Thumbnail Preview" />');
@@ -1623,7 +1623,7 @@ function  onchangeMore(){
 			 $('#x2').val(required);
 			 $('#y2').val(required);
 			 
-			 alert(required);
+			// alert(required);
 			 $('#filename').val(responseText.trim()); 
 			var ias = $('#thumbnail').imgAreaSelect({  aspectRatio: '1:1', handles: true  , onSelectChange: preview, instance: true, movable: true, resizable : false, persistent: true });
 			
@@ -1631,8 +1631,13 @@ function  onchangeMore(){
 			ias.setOptions({ show: true });
 			ias.update();
 			}
-			var src = $('#thumbnail').attr('src');
+			$("#thumbnail").bind('load', function() {
+    // do stuff
+	$("#loadingimage").html('');
+	var src = $('#thumbnail').attr('src');
 			img.src = src;
+  });
+			
 	    	
 		}else{
 			alert('please select file first');

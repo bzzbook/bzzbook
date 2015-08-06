@@ -393,7 +393,7 @@ public function showfavs()
   
 	 function do_upload()
 	{
-		$config['upload_path'] = './uploads/';
+		//$config['upload_path'] = './uploads/';
 		$config['allowed_types'] = 'gif|jpg|png';
 		$config['create_thumb'] = TRUE;
 		$config['max_size']	= '';

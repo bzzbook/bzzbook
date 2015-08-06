@@ -425,7 +425,7 @@ mail($to,$subject,$txt,$headers);*/
   }
   public function upload_pic()
   {
-	    $config['upload_path'] = './uploads/';
+	    $config['upload_path'] = DIR_FILE_PATH;
 		$config['allowed_types'] = 'gif|jpg|png';
 		$config['max_size']	= '';
 		$config['max_width']  = '';
@@ -488,7 +488,7 @@ public function search_member()
 
 	public function do_upload()
 	{
-		$config['upload_path'] = './uploads/';
+		$config['upload_path'] = DIR_FILE_PATH;
 		$config['allowed_types'] = 'gif|jpg|png';
 		$config['create_thumb'] = TRUE;
 		$config['max_size']	= '';
@@ -551,7 +551,7 @@ public function search_member()
 	public function my_photos()
 	{
 		
-		$config['upload_path'] = './uploads/';
+		$config['upload_path'] = DIR_FILE_PATH;
 		$config['allowed_types'] = 'gif|jpg|png';
 		$config['create_thumb'] = TRUE;
 		$config['max_size']	= '';

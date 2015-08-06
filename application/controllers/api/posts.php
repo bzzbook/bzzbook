@@ -160,7 +160,7 @@ class posts extends CI_Controller {
 		{
 		
 		
-		$config['upload_path'] = './uploads/';
+		$config['upload_path'] = DIR_FILE_PATH;
 		$sourcePath = $_FILES[$file_name]['tmp_name'][0]; // Storing source path of the file in a variable
 		//$targetPath = "F:\/xampp\/htdocs\/bzzbook\/uploads\/".$_FILES[$file_name]['name'][0];
 		$targetPath = $config['upload_path'].$_FILES[$file_name]['name'][0]; // Target path where file is to be stored

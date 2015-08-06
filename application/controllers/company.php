@@ -75,7 +75,7 @@ class Company extends CI_Controller {
 public function addcompany()
 	{
 		
-	    $config['upload_path'] = './uploads/';
+	    $config['upload_path'] = DIR_FILE_PATH;
 		$config['allowed_types'] = 'gif|jpg|png';
 		$config['max_size']	= '';
 		$config['max_width']  = '';
@@ -140,7 +140,7 @@ public function addcompany()
 	public function applyjob($cmp_id,$job_id)
 	{
 		
-	    $config['upload_path'] = './uploads/';
+	    $config['upload_path'] = DIR_FILE_PATH;
 		$config['allowed_types'] = 'pdf|doc|docx';
 		$config['max_size']	= '2048';
 		$config['max_width']  = '';
@@ -254,7 +254,7 @@ public function get_company_info_byid($id)
 public function pic_upload()
 {
 	
-		$config['upload_path'] = './uploads/';
+		$config['upload_path'] = DIR_FILE_PATH;
 		$config['allowed_types'] = 'gif|jpg|png';
 		$config['create_thumb'] = TRUE;
 		$config['max_size']	= '';
