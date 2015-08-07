@@ -30,8 +30,8 @@
     <div class="col-md-5 col-sm-5 col-xs-12 leftCol">
       <div class="lp_video">
         <video width="" height="" controls >
-          <source src="http://bzzbook.com/videos/intro.mp4" type="video/mp4">
-          <source src="http://bzzbook.com/videos/intro.ogv" type="video/ogg">
+          <source src="<?php echo base_url(); ?>videos/intro.mp4" type="video/mp4">
+          <source src="<?php echo base_url(); ?>videos/intro.ogv" type="video/ogg">
           Your browser does not support HTML5 video. </video>
       </div>
       <p>Begin today with a better way to connect with friends, colleagues, and customers. Make Bzzbook your one stop shop for all your social media needs. Sign up today and be a part of the future of social media.</p>

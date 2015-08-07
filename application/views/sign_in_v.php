@@ -212,8 +212,8 @@ echo "</div>";
     <div class="col-md-6">
       <div id="video_player" class="flowplayer" >
         <video width="" height="" controls>
-           <source src="http://bzzbook.com/videos/intro.mp4" type="video/mp4">
-          <source src="http://bzzbook.com/videos/intro.ogv" type="video/ogg">
+           <source src="<?php echo base_url(); ?>videos/intro.mp4" type="video/mp4">
+          <source src="<?php echo base_url(); ?>videos/intro.ogv" type="video/ogg">
           Your browser does not support HTML5 video. </video>
       </div>
     </div>

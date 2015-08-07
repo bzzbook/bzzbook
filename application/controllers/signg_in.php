@@ -817,7 +817,7 @@ $data_a=array(
 		$this->email->to($mail,'user');
 		$this->email->subject('bzzbook Pasword Reset');
 		$message = "Please Click Below Link To Resest Your Acount Password  \n";
-		$message .= "www.bzzbook.com/signg_in/pwd_reset/".$usermail;
+		$message .= base_url()."signg_in/pwd_reset/".$usermail;
 		$this->email->message($message);
 		if($this->email->send())
 		{
