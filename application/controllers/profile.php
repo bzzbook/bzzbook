@@ -422,7 +422,7 @@ public function showfavs()
 			$scale = $thumb_width/$w;
 			$cropped = $this->resizeThumbnailImage($thumb_image_location, $large_image_location,$w,$h,$x1,$y1,$scale);
 			//echo $_SERVER['DOCUMENT_ROOT']; echo dirname(__FILE__); exit;
-			$data['full_path'] = $_SERVER['DOCUMENT_ROOT']."/bzzbook/uploads/".$cropped;
+			$data['full_path'] = DIR_FILE_PATH.$cropped;
 			$split = explode('.',$cropped);
 			$data['raw_name'] = $split[0];
 			$data['file_ext'] = '.'.$split[1];

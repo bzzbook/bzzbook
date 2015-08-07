@@ -10,7 +10,7 @@
 	  ?>
 <!--      <div id="online-friends"></div>
 -->
-<div class="wrapper">
+<!--<div class="wrapper">
 
     <div class="toggle">
 
@@ -21,6 +21,24 @@
     <div  class="rig_bottoms">
 <div class="col-md-1"><i class="fa fa-search "></i></div>
 <div class="col-md-8"><input id="input_search_frnds" type="text" onkeyup="showOnlineFriends(this.value)"  /></div>
+<div class="col-md-1"><i class="fa  fa-external-link"></i></div>
+</div>
+    </div>-->
+    
+    <div class="wrapper">
+
+    <div class="toggle" style="">
+
+    <ul id="online-friends"></ul>
+     <div class="clearfix"></div>
+
+    </div>
+   <div class="toggle" style="bottom:28px; position:absolute;">
+      <ul id="online-friends-search"></ul>
+      <div class="clearfix"></div>
+      </div> <div  class="rig_bottoms">
+<div class="col-md-1"><i class="fa fa-search "></i></div>
+<div class="col-md-8"><input id="input_search_frnds" type="text" onkeyup="onetwo(this.value)"  /></div>
 <div class="col-md-1"><i class="fa  fa-external-link"></i></div>
 </div>
     </div>
@@ -6381,21 +6399,22 @@ window.onbeforeunload = function(){
 		});
 }
 
-function showOnlineFriends(name){
-	 
-	 if(name)
-	 url="<?php echo base_url(); ?>friends/get_online_frnds/"+name;
-	 else
-	 url="<?php echo base_url(); ?>friends/get_online_frnds/";
-	
-		$.ajax({
+function showOnlineFriends(){
+  
+//  if(name)
+ // url="<?php// echo base_url(); ?>friends/get_online_frnds/"+name;
+ // else
+  url="<?php echo base_url(); ?>friends/get_online_frnds/";
+ 
+  $.ajax({
         url: url,
-		success: function(data)
-        {  
-			$('#online-friends').html(data);
-		},
-		cache: false
-		});
+  success: function(data)
+        { 
+ 
+   $('#online-friends').html(data);
+  },
+  cache: false
+  });
 }
 
 window.setInterval(function(){

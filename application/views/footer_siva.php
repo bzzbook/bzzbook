@@ -1367,4 +1367,26 @@ function hide_post(post_id,user_id)
 	
 }
 
+function onetwo(name){
+  
+if(name!=''){
+	$('#online-friends-search').show();
+  url="<?php echo base_url(); ?>friends/get_online_frnds/"+name;
+ 
+ 
+  $.ajax({
+        url: url,
+  success: function(data)
+        { 
+   $('#online-friends').hide();
+   $('#online-friends-search').html(data);
+  },
+  cache: false
+  });
+}else{
+	$('#online-friends').show();
+	$('#online-friends-search').hide();
+}
+}
+
 </script>
