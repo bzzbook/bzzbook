@@ -86,6 +86,7 @@
 
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Large modal</button>
 -->
+<!--
 <div class="modal fade bs-example-modal-lg" tabindex="-1" id="save_as_fav_modal" role="dialog" aria-labelledby="myLargeModalLabel">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -99,6 +100,109 @@
     </div>
   </div>
 </div>
+
+-->
+<div class="modal fade pin-it-column target01 " tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="save_as_fav_modal" >
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="imgHolder-pinit">
+                        <div class="img-content-block">
+                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-wrap="false">
+  <!-- Wrapper for slides -->
+  
+  </div>                           
+                           
+                        </div>
+                    </div>
+                    <div class="pin-categories-pinit">
+                        <div class="pinBoard">
+                            <h3>Pick a board</h3>
+       <label><i class="fa fa-search"></i><input type="text" placeholder="Search" onkeyup="get_save_fav_categories(this.value);" id="save_fav_category_search"/></label>                            
+                        </div>
+                        <div class="user-option-block">
+                            <div class="scroll-pane" id="categories"> 
+
+                               <!-- <div class="board-option-pin">
+                                    <span class="icon-img" style="background:url(<?php echo base_url(); ?>images/sweetgirl.png)"></span>
+                                    <p>Lorem Ipsum</p>
+                                    <a href="#" class="pinIcon">Pin it</a>
+                                </div>
+
+                                 <div class="board-option-pin">
+                                    <span class="icon-img" style="background:url(<?php echo base_url(); ?>images/sweetgirl.png)"></span>
+                                    <p>Lorem Ipsum</p>
+                                    <a href="#" class="pinIcon">Pin it</a>
+                                </div>    
+                                                          
+                                <div class="board-option-pin">
+                                    <span class="icon-img" style="background:url(<?php echo base_url(); ?>images/sweetgirl.png)"></span>
+                                    <p>Lorem Ipsum</p>
+                                    <a href="#" class="pinIcon">Pin it</a>
+                                </div>
+
+                                <div class="board-option-pin">
+                                    <span class="icon-img" style="background:url(<?php echo base_url(); ?>images/sweetgirl.png)"></span>
+                                    <p>Lorem Ipsum</p>
+                                    <a href="#" class="pinIcon">Pin it</a>
+                                </div>
+
+                                <div class="board-option-pin">
+                                    <span class="icon-img" style="background:url(<?php echo base_url(); ?>images/sweetgirl.png)"></span>
+                                    <p>Lorem Ipsum</p>
+                                    <a href="#" class="pinIcon">Pin it</a>
+                                </div>
+
+                                <div class="board-option-pin">
+                                    <span class="icon-img" style="background:url(<?php echo base_url(); ?>images/sweetgirl.png)"></span>
+                                    <p>Lorem Ipsum</p>
+                                    <a href="#" class="pinIcon">Pin it</a>
+                                </div>
+
+                                <div class="board-option-pin">
+                                    <span class="icon-img" style="background:url(<?php echo base_url(); ?>images/sweetgirl.png)"></span>
+                                    <p>Lorem Ipsum</p>
+                                    <a href="#" class="pinIcon">Pin it</a>
+                                </div>
+
+                                <div class="board-option-pin">
+                                    <span class="icon-img" style="background:url(<?php echo base_url(); ?>images/sweetgirl.png)"></span>
+                                    <p>Lorem Ipsum</p>
+                                    <a href="#" class="pinIcon">Pin it</a>
+                                </div>
+
+                                <div class="board-option-pin">
+                                    <span class="icon-img" style="background:url(<?php echo base_url(); ?>images/sweetgirl.png)"></span>
+                                    <p>Lorem Ipsum</p>
+                                    <a href="#" class="pinIcon">Pin it</a>
+                                </div>
+
+                                <div class="board-option-pin">
+                                    <span class="icon-img" style="background:url(<?php echo base_url(); ?>images/sweetgirl.png)"></span>
+                                    <p>Lorem Ipsum</p>
+                                    <a href="#" class="pinIcon">Pin it</a>
+                                </div>
+
+                                <div class="board-option-pin">
+                                    <span class="icon-img" style="background:url(<?php echo base_url(); ?>images/sweetgirl.png)"></span>
+                                    <p>Lorem Ipsum</p>
+                                    <a href="#" class="pinIcon">Pin it</a>
+                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
 
 
 <script>

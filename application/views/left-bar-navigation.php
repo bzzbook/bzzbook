@@ -8,7 +8,7 @@
             <span id="un_read_msg_count" class="un_read_msg_count"><?php echo $unreadmesages; ?></span>
 			<?php } ?>
            </a></li>
-          <!--  <li><a href="#">Buzzers ! <span>20</span></a></li>  -->
+           <!--<li><a href="#">Buzzers ! <span>20</span></a></li> -->
             <li><a href="<?php echo base_url(); ?>profile/groups">My Groups</a></li>
             <li><a href="<?php echo base_url(); ?>profile/jobs">Opportunities</a></li>
             <li><a href="<?php echo base_url(); ?>profile/events">My Events</a></li>

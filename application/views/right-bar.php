@@ -4,7 +4,7 @@
    {
    foreach($data as $data){
  // exit; ?>
-    <section class="col-lg-3 col-md-3 col-sm-3 col-xs-12 coloumn3">
+    <section class="col-lg-3 col-md-3 col-sm-3 col-xs-12 coloumn3" id="right_bar">
       
        <aside> 
        <?php if($data->pend_frnd_requests == 'Y') {$this->load->view('pending-frnd-req'); }?>

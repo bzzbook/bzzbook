@@ -420,11 +420,11 @@ class Friendsmodel extends CI_Model {
 		else
 		return false;
 	}
-// latest frnds worked bt sp 8-4-2015
+// latest frnds worked by sp 8-4-2015
 public function latest_frnds($limit)
 {
 	    $id = $this->session->userdata('logged_in')['account_id'];
-	    $condition = "(user_id ='" .$id. "' or friend_id ='".$id."') AND request_status='Y'";
+	    $condition = "(user_id ='" .$id. "' or friend_id ='".$id."') AND request_status='Y' AND requested_time >= DATE_ADD( NOW(), INTERVAL - 5 MINUTE ) ";
 		$this->db->select('user_id,friend_id');
 		$this->db->from('bzz_userfriends');
 		$this->db->order_by('userfriends_id','desc');

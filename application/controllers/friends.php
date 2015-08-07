@@ -253,6 +253,29 @@ exit(0);
 		return false;
 
 	}
+	
+public function get_latest_frnds()
+{
+	
+	$frnds = $this->friendsmodel->latest_frnds($limit = 3);
+	$list ='' ;
+	if($frnds)
+	{
+	$list ='<div class="latestFriends">
+          <h3>Latest Friends</h3>
+          <ul id="latest_frnds_by_time">';
+	 foreach($frnds as $frnd) { 
+		if(!empty($frnd[0]['user_img_thumb'])) { 
+		$list .='<li><a href="'.base_url().'profile/user/'.$frnd[0]['user_id'].'" class="latestfrnds"><img src="'.base_url().'uploads/'.$frnd[0]['user_img_thumb'].'"></a><a href="#"><img style="width:auto; height:auto; padding-left:6px;" src="'.base_url().'images/like.png" alt=""></a></li>';
+		 }else
+		 $list .='<li><a href="'.base_url().'profile/user/'.$frnd[0]['user_id'].'" class="latestfrnds"><img src="'.base_url().'uploads/default_profile_pic.png" alt="'.$frnd[0]['user_firstname'] . " " .$frnd[0]['user_lastname'].'"></a><a href="#"><img style="width:auto; height:auto; padding-left:6px;" src="'.base_url().'images/like.png" alt=""></a></li>';
+		}
+		$list .='</ul><div class="clear"></div><a href="'.base_url().'friends/view_all_latest_frnds" class="link">More Friends</a></div>';
+	echo $list;
+	}
+	//else
+	//echo "No Latest friends Available";
+}
 
 }
 ?>

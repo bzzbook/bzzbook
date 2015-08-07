@@ -1103,13 +1103,7 @@ function get_recent_posts(post_id)
         {  
 		if(html!='')
 		{
-		    //$('.un_read_msg_count').html('');
-			 //$('#un_read_msg_count').html(html);
-		/*	   $('#posts_content_div').prepend('<article id="loading_img"><img style="margin-left:240px; margin-bottom:8px;" src="<?php // echo base_url(); ?>images/block_loader.gif" /></article>');
- 
-			 $('#posts_content_div').find('#loading_img').fadeOut(5000);*/
-		
-			 $('#posts_content_div').prepend(html);
+		 $('#posts_content_div').prepend(html);
         }
 		},
 		cache: false
@@ -1263,38 +1257,52 @@ function view_more_comments(post_id){
 	
 }
 
-function get_save_fav_categories(user_id)
+function get_save_fav_categories(cat_search)
 {
 	//alert(user_id);
-	var cat_search = $('#category_search').val();
-	//alert(cat_search);
-	
-		url = "<?php echo base_url(); ?>signg_in/save_fav_category_search/"+cat_search+"/"+user_id;
+	//var cat_search = $('#category_search').val();
+//	alert(cat_search);
+	if(cat_search.length > 0 )
+	{
+		url = "<?php echo base_url(); ?>signg_in/save_fav_category_search/"+cat_search;
 		$.ajax({
         url: url,
 		success: function(data)
         {  
 		if(data)
 		{
-		//var link = $('#view_more_link'+post_id); 	
-		//$('#view_more_link'+post_id).remove();
-		//$('#res_comments'+post_id).append(data);
-		//$('#res_comments'+post_id).append(link);
-        $('#categories').append(data);
+		$('#create_new_category').remove();
+        $('.user-option-block #categories').prepend(data);
 		}
 		},
 		cache: false
 		});
 	
+	}else{
+	$('#create_new_category').remove();
+}
+}
+function get_save_fav_user_categories()
+{
 	
+		url = "<?php echo base_url(); ?>signg_in/save_fav_user_categories/";
+		$.ajax({
+        url: url,
+		success: function(data)
+        {  
+		if(data)
+		{
+		
+        $('.user-option-block #categories').append(data);
+		}
+		},
+		cache: false
+		});
 	
 }
 
-function create_ave_fav_category(search_key_word,user_id)
+function create_save_fav_category(search_key_word,user_id)
 {
-	//alert(search_key_word);
-	//	alert(id);
-		
 		url = "<?php echo base_url(); ?>signg_in/save_fav_create_category/"+search_key_word+"/"+user_id;
 		$.ajax({
         url: url,
@@ -1302,13 +1310,67 @@ function create_ave_fav_category(search_key_word,user_id)
         {  
 		if(data)
 		{
-		
-      //  $('#categories').append(data);
+	    $('#save_fav_category_search').val('');
+		$('.user-option-block #categories').html('');
+        $('.user-option-block #categories').append(data);
 		}
 		},
 		cache: false
 		});
 }
+
+function insert_save_as_favorite()
+{
+	
+var category_id = $('#category_id').val();
+var post_content = $('#post_content').val();
+var uploaded_file = $('.active #uploaded_files').val();
+
+/*alert(category_id);
+alert(post_content);
+alert(uploaded_file);*/
+
+	url = "<?php echo base_url(); ?>signg_in/insert_save_as_fav/";
+		$.ajax({
+		type: "POST",
+        url: url,
+		data : {category_id:category_id, post_content:post_content, uploaded_file:uploaded_file},
+	
+		success: function()
+        {  
+		
+		},
+		cache: false
+		});
+}
+
+
+function get_latest_friends_of_user()
+{
+		
+		url = "<?php echo base_url(); ?>friends/get_latest_frnds/";
+		$.ajax({
+        url: url,
+		success: function(html)
+        {  
+		//alert(html);
+		if(html)
+		{
+			//alert(html);
+			//$('.latestFriends').show();	
+	    	//$('#latest_frnds_by_time').find('li').remove();
+	 	$('.testing123').html('');	
+		 $('.testing123').append(html);
+		}
+		else
+		{
+			$('.latestFriends').hide();
+		}},
+		cache: false
+		});
+}
+
+
 
 window.setInterval(function(){
 
@@ -1316,6 +1378,7 @@ window.setInterval(function(){
 //var post_id = $('#posts_content_div > :first-child').attr("id").substr(4);
    get_recent_post_likes();
   get_recent_comments();
+  get_latest_friends_of_user();
 
 },5000);  
 
@@ -1367,7 +1430,7 @@ function hide_post(post_id,user_id)
 	
 }
 
-function onetwo(name){
+function search_online_friends(name){
   
 if(name!=''){
 	$('#online-friends-search').show();
@@ -1387,6 +1450,33 @@ if(name!=''){
 	$('#online-friends').show();
 	$('#online-friends-search').hide();
 }
-}
 
 </script>
+ <script type="text/javascript">
+$(function() {
+    // init carousel
+    $('.carousel').carousel({
+        pause: true,        // init without autoplay (optional)
+        interval: false,    // do not autoplay after sliding (optional)
+        wrap:false          // do not loop
+    });
+    // init carousels with hidden left control:
+    $('.carousel').children('.left.carousel-control').hide();
+});
+
+// execute function after sliding:
+$('.carousel').on('slid.bs.carousel', function () {
+    // This variable contains all kinds of data and methods related to the carousel
+    var carouselData = $(this).data('bs.carousel');
+    // get current index of active element
+    var currentIndex = carouselData.getItemIndex(carouselData.$element.find('.item.active'));
+
+    // hide carousel controls at begin and end of slides
+    $(this).children('.carousel-control').show();
+    if(currentIndex == 0){
+        $(this).children('.left.carousel-control').fadeOut();
+    }else if(currentIndex+1 == carouselData.$items.length){
+        $(this).children('.right.carousel-control').fadeOut();
+    }
+});
+    </script>

@@ -10,22 +10,7 @@
 	  ?>
 <!--      <div id="online-friends"></div>
 -->
-<!--<div class="wrapper">
-
-    <div class="toggle">
-
-    <ul id="online-friends"></ul>
-     <div class="clearfix"></div>
-
-    </div>
-    <div  class="rig_bottoms">
-<div class="col-md-1"><i class="fa fa-search "></i></div>
-<div class="col-md-8"><input id="input_search_frnds" type="text" onkeyup="showOnlineFriends(this.value)"  /></div>
-<div class="col-md-1"><i class="fa  fa-external-link"></i></div>
-</div>
-    </div>-->
-    
-    <div class="wrapper">
+<div class="wrapper">
 
     <div class="toggle" style="">
 
@@ -38,7 +23,7 @@
       <div class="clearfix"></div>
       </div> <div  class="rig_bottoms">
 <div class="col-md-1"><i class="fa fa-search "></i></div>
-<div class="col-md-8"><input id="input_search_frnds" type="text" onkeyup="onetwo(this.value)"  /></div>
+<div class="col-md-8"><input id="input_search_frnds" type="text" onkeyup="search_online_friends(this.value)"  /></div>
 <div class="col-md-1"><i class="fa  fa-external-link"></i></div>
 </div>
     </div>
@@ -1872,9 +1857,13 @@ function saveAsFav(post_id){
 					$.post( url )
 					.done(function( data ) {
 						//alert(data);
-						$('#save_as_fav_popup').html(data);
-						var user_categories = get_user_categories();
-						alert(user_categories);
+					    $('#save_fav_category_search').val('');
+						$('#categories').html('');
+						$('#carousel-example-generic').html(data);
+						//var user_categories =
+					
+						 get_save_fav_user_categories();
+						//alert(user_categories);
 					});
 }
 
@@ -1915,7 +1904,7 @@ function shareCmpPost(post_id){
 //cmp_privacy form & email notifications updatte by sp
 
 	$("form[name=about_cmp]").submit(function(event){
-		alert("hai");
+		//alert("hai");
 			   url="<?php echo base_url();?>company/updateabout/<?php echo $this->uri->segment(3,0) ?>";
 				 $.ajax({
         			type: "POST",
