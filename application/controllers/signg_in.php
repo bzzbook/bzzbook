@@ -1059,11 +1059,17 @@ public function save_fav_category_search($search_keyword)
 		$categories = $query->result_array();
 		foreach($categories as $category)
 		{
-		$list .='<div class="board-option-pin">
-                                    <span class="icon-img" style="background:url('.base_url().'images/sweetgirl.png)"></span>
-                                    <input type="hidden" id="category_id" value="'.$category['category_id'].'" />
+			$data = $this->save_as_favorites_m->get_category_image($category['category_id']);
+			
+			if(!empty($data[0]['favorite_image']))
+			$data = $data[0]['favorite_image'];
+			else
+			$data = 'default_profile_pic.png';
+			
+		$list .='<div class="board-option-pin search_result">
+                                    <span class="icon-img" style="background:url('.base_url().'uploads/'.$data.')"></span>
 									<p>'.$category['category_name'].'</p>
-                                    <a onclick="insert_save_as_favorite()" class="pinIcon">Pin it</a>
+                                     <a onclick="insert_save_as_favorite('.$category['category_id'].')" class="pinIcon">Add</a>
                                 </div>';
 		}
 		
@@ -1093,11 +1099,17 @@ public function save_fav_user_categories()
 		$categories = $query->result_array();
 		foreach($categories as $category)
 		{
+			$data = $this->save_as_favorites_m->get_category_image($category['category_id']);
+			
+			if(!empty($data[0]['favorite_image']))
+			$data = $data[0]['favorite_image'];
+			else
+			$data = 'default_profile_pic.png';
+			
 		$list .='<div class="board-option-pin">
-                                    <span class="icon-img" style="background:url(<?php echo base_url(); ?>images/sweetgirl.png)"></span>
-                                    <input type="hidden" id="category_id" value="'.$category['category_id'].'" />
+                                    <span class="icon-img" style="background:url( '.base_url().'uploads/'.$data.')"></span>
 									<p>'.$category['category_name'].'</p>
-                                    <a onclick="insert_save_as_favorite()" class="pinIcon">Pin it</a>
+                                    <a onclick="insert_save_as_favorite('.$category['category_id'].')" class="pinIcon">Add</a>
                                 </div>';
 		}
 		
@@ -1147,14 +1159,39 @@ public function save_fav_create_category($category_name,$user_id)
 	$data['created_by'] = $user_id;
 	if($this->db->insert('bzz_save_fav_categories',$data))
 	{
-		
-		echo $this->save_fav_user_categories();
+		echo $this->db->insert_id();
 	
 		
 	}else{
 		echo false;
 	}
+	
 }
+public function get_all_favorites_by_cat_id($category_id)
+{
+	$data = $this->save_as_favorites_m->get_all_favorites_by_category_id($category_id);
+	  $favorites = array();
+		foreach($data as $result):
+		
+		$favorites_data['favorite_id'] = $result['favorite_id'];
+		$favorites_data['favorite_image'] = $result['favorite_image'];
+		$favorites_data['favorite_post_content'] = $result['favorite_post_content'];
+		$favorites_data['category_id'] = $result['category_id'];
+		$favorites_data['created_time'] = $result['created_time'];
+		$favorites_data['favorite_by_user_id'] = $result['favorite_by_user_id'];
+		
+		$favorites[] = $favorites_data;
+		
+	endforeach;
+	
+	$data['content']='my_favorites_display';
+	//$data['favorites'] = json_encode($favorites);
+	$data['favorites'] = json_encode(array('result' => $favorites));
+	$this->load->view('full_content_view',$data);
+
+	
+}
+	
 	
 
  }
