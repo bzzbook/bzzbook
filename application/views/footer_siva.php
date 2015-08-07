@@ -1450,6 +1450,7 @@ if(name!=''){
 	$('#online-friends').show();
 	$('#online-friends-search').hide();
 }
+}
 
 </script>
  <script type="text/javascript">
