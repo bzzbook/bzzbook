@@ -1,4 +1,4 @@
-<div class="testing123">
+<div class="latest_frnds_demo">
 <?php $frnds = $this->friendsmodel->latest_frnds($limit = 3); 
 if($frnds){
 ?>

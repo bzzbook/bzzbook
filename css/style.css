@@ -2178,7 +2178,7 @@ top: -35px; }
 
 
 /**eventsinners**/
-.banner_inerfields .colorbox{ background:#ececec; padding:3px;}
+.banner_inerfields .colorbox{ background:#ececec; padding:3px; height:38px;}
 .banner_inerfields p{color: #727272; font-size: 14px; font-weight: 400; padding: 5px 0 5px 15px; white-space: nowrap;}
 .banner_inerfields p i{ padding-right:5px;}
 .nopad .ProfileView.inr_baner{ padding-right: 0 !important;}
@@ -2226,10 +2226,10 @@ border-color: -moz-use-text-color #ddd #ccc; border-image: none; border-style: n
 .textbox_banner{ border: 2px solid #fff; text-align:center; border-radius: 8px; bottom: 5%; color: #fff; display: block;float: left; height: 60px;
 left: 2%; position: absolute; width: 60px;}
 .textbox_banner span{ font-weight:bold; font-size:20px;}
-.textbox_banner h3{bottom: 22px; color: #ffffff; display: -moz-inline-box; font-size: 27px; font-weight: bold; left: 73px; letter-spacing: 1px;
+.textbox_banner h3{bottom: 45px; color: #ffffff; display: -moz-inline-box; font-size: 27px; font-weight: bold; left: 73px; letter-spacing: 1px;
     position: relative;}
 .company .visitorBox .visitiBoxInner .compCover_innside img{ width:100%;}
-.compCover_innside img{ width:100% !important; }
+.compCover_innside img{ width:100% !important; margin-top:15px; }
 .change_event{ float:right;}
 .change_event .change-photo{ top:0px !important; margin:0 !important;  
 left: 75%; margin-top:5% !important; height:25px; width:20% !important;}
@@ -2636,5 +2636,189 @@ a.pinIcon {
 /* line 143, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
 a.pinIcon:hover, a.pinIcon:focus, a.pinIcon:active {
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.3); }
+
+/*# sourceMappingURL=style.css.map */
+
+/* pin group block for all boards */
+
+/* line 1, D:/Abid/Works/Plugins/bizbook/HTML/pinGroup/style.scss */
+.pin-groupBlock {
+  background: #e8e8e8; }
+  /* line 2, D:/Abid/Works/Plugins/bizbook/HTML/pinGroup/style.scss */
+  .pin-groupBlock .pin-groupTop {
+    border-bottom: 3px solid #fbc436;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+	margin-top:15px;
+    border-top: 1px solid #ccc; }
+    /* line 6, D:/Abid/Works/Plugins/bizbook/HTML/pinGroup/style.scss */
+    .pin-groupBlock .pin-groupTop .AboutUser {
+      margin: 0 auto;
+      float: none;
+      padding: 20px 0 10px; }
+      /* line 7, D:/Abid/Works/Plugins/bizbook/HTML/pinGroup/style.scss */
+      .pin-groupBlock .pin-groupTop .AboutUser div {
+        font-weight: 700; }
+        /* line 8, D:/Abid/Works/Plugins/bizbook/HTML/pinGroup/style.scss */
+        .pin-groupBlock .pin-groupTop .AboutUser div p {
+          font-weight: 400; }
+      /* line 10, D:/Abid/Works/Plugins/bizbook/HTML/pinGroup/style.scss */
+      .pin-groupBlock .pin-groupTop .AboutUser span.user-img {
+        display: block;
+        width: 45px;
+        height: 45px;
+        margin: 0 auto;
+        border-radius: 45px;
+        background-position: center center !important;
+        background-size: cover !important;
+        border: 1px solid #696969;
+        margin-bottom: 10px; }
+      /* line 11, D:/Abid/Works/Plugins/bizbook/HTML/pinGroup/style.scss */
+      .pin-groupBlock .pin-groupTop .AboutUser h3 {
+        margin: 0px;
+        padding: 0px; }
+  /* line 15, D:/Abid/Works/Plugins/bizbook/HTML/pinGroup/style.scss */
+  .pin-groupBlock .pin-groupBottom {
+    background: #efefef;
+    padding: 10px 0 50px;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc; }
+    /* line 21, D:/Abid/Works/Plugins/bizbook/HTML/pinGroup/style.scss */
+    .pin-groupBlock .pin-groupBottom .col-md-3 {
+      padding-left: 5px;
+      padding-right: 5px; }
+    /* line 23, D:/Abid/Works/Plugins/bizbook/HTML/pinGroup/style.scss */
+    .pin-groupBlock .pin-groupBottom .pin-group-detail {
+      background: #e8e8e8;
+      padding: 10px;
+      border-radius: 3px;
+      border: 1px solid #ccc; }
+      /* line 28, D:/Abid/Works/Plugins/bizbook/HTML/pinGroup/style.scss */
+      .pin-groupBlock .pin-groupBottom .pin-group-detail span.user-img {
+        display: block;
+        width: 100%;
+        height: 160px;
+        margin: 0 auto;
+        border-radius: 2px;
+        background-position: center center !important;
+        background-size: cover !important;
+        border: 1px solid #696969;
+        margin-bottom: 10px; }
+      /* line 29, D:/Abid/Works/Plugins/bizbook/HTML/pinGroup/style.scss */
+      .pin-groupBlock .pin-groupBottom .pin-group-detail h3 {
+        margin: 0px;
+        padding: 0px;
+        font-size: 16px;
+        padding-bottom: 10px; }
+    /* line 32, D:/Abid/Works/Plugins/bizbook/HTML/pinGroup/style.scss */
+    .pin-groupBlock .pin-groupBottom .otherImages .thumgIcon {
+      float: left;
+      width: 30%; }
+      /* line 33, D:/Abid/Works/Plugins/bizbook/HTML/pinGroup/style.scss */
+      .pin-groupBlock .pin-groupBottom .otherImages .thumgIcon.aligncent {
+        margin-left: 5%; }
+    /* line 35, D:/Abid/Works/Plugins/bizbook/HTML/pinGroup/style.scss */
+    .pin-groupBlock .pin-groupBottom .otherImages span {
+      display: block;
+      width: 100%;
+      height: 65px;
+      margin: 0 auto;
+      border-radius: 2px;
+      background-position: center center !important;
+      background-size: cover !important;
+      border: 1px solid #696969;
+      margin-bottom: 10px; }
+
+/*# sourceMappingURL=style.css.map */
+
+
+/*pins grid display*/
+/* line 1, D:/Abid/Works/Plugins/bizbook/HTML/pin/style.scss */
+.pin-images-grp {
+  background: #e8e8e8;
+  padding: 10px 0px 0 0px;
+  margin-top:15px; }
+  /* line 5, D:/Abid/Works/Plugins/bizbook/HTML/pin/style.scss */
+  .pin-images-grp .pin-images-grp-inner {
+    margin: 0 8px;
+    border: 1px solid #ccc;
+    border-bottom: 0px solid #ccc;
+    line-height: 90px !important;
+    text-align: center; }
+    /* line 10, D:/Abid/Works/Plugins/bizbook/HTML/pin/style.scss */
+    .pin-images-grp .pin-images-grp-inner span {
+      font-size: 35px;
+      font-weight: 700; }
+  /* line 12, D:/Abid/Works/Plugins/bizbook/HTML/pin/style.scss */
+  .pin-images-grp .imageHolder {
+    margin-left: -10px; }
+    /* line 14, D:/Abid/Works/Plugins/bizbook/HTML/pin/style.scss */
+    .pin-images-grp .imageHolder .item {
+      width: 210px; }
+      /* line 15, D:/Abid/Works/Plugins/bizbook/HTML/pin/style.scss */
+      .pin-images-grp .imageHolder .item a {
+        text-decoration: none; }
+        /* line 16, D:/Abid/Works/Plugins/bizbook/HTML/pin/style.scss */
+        .pin-images-grp .imageHolder .item a:hover img {
+          opacity: 0.8; }
+      /* line 19, D:/Abid/Works/Plugins/bizbook/HTML/pin/style.scss */
+      .pin-images-grp .imageHolder .item span {
+        background: #fff;
+        display: block;
+        -webkit-border-bottom-right-radius: 5px;
+        -webkit-border-bottom-left-radius: 5px;
+        -moz-border-radius-bottomright: 5px;
+        -moz-border-radius-bottomleft: 5px;
+        border-bottom-right-radius: 5px;
+        border-bottom-left-radius: 5px;
+        padding: 10px 5px;
+        color: #636363; }
+      /* line 26, D:/Abid/Works/Plugins/bizbook/HTML/pin/style.scss */
+      .pin-images-grp .imageHolder .item .innerItem {
+        margin: 10px;
+        border: 1px solid #ccc;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px; }
+      /* line 29, D:/Abid/Works/Plugins/bizbook/HTML/pin/style.scss */
+      .pin-images-grp .imageHolder .item img {
+        width: 100%;
+        height: auto;
+        -webkit-border-top-left-radius: 5px;
+        -webkit-border-top-right-radius: 5px;
+        -moz-border-radius-topleft: 5px;
+        -moz-border-radius-topright: 5px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px; }
+  /* line 37, D:/Abid/Works/Plugins/bizbook/HTML/pin/style.scss */
+  .pin-images-grp .info-bar {
+    line-height: 35px;
+    background: #fbc436;
+    padding: 5px 10px;
+    margin: 0 8px; }
+    /* line 39, D:/Abid/Works/Plugins/bizbook/HTML/pin/style.scss */
+    .pin-images-grp .info-bar:after {
+      content: "";
+      display: block;
+      clear: both;
+      height: 1px; }
+    /* line 40, D:/Abid/Works/Plugins/bizbook/HTML/pin/style.scss */
+    .pin-images-grp .info-bar span.user-img {
+      display: block;
+      width: 35px;
+      height: 35px;
+      margin: 0 auto;
+      border-radius: 35px;
+      background-position: center center !important;
+      background-size: cover !important;
+      border: 1px solid #696969;
+      float: left; }
+    /* line 41, D:/Abid/Works/Plugins/bizbook/HTML/pin/style.scss */
+    .pin-images-grp .info-bar p {
+      float: left;
+      margin: 0px;
+      padding: 0px;
+      margin-left: 15px; }
 
 /*# sourceMappingURL=style.css.map */

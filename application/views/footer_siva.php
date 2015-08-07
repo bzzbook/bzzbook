@@ -1261,17 +1261,18 @@ function get_save_fav_categories(cat_search)
 {
 	//alert(user_id);
 	//var cat_search = $('#category_search').val();
-//	alert(cat_search);
+//	alert(cat_search);  
 	if(cat_search.length > 0 )
 	{
 		url = "<?php echo base_url(); ?>signg_in/save_fav_category_search/"+cat_search;
 		$.ajax({
         url: url,
-		success: function(data)
+		success: function(data)  
         {  
 		if(data)
 		{
 		$('#create_new_category').remove();
+		$('.user-option-block').find('.search_result').remove();
         $('.user-option-block #categories').prepend(data);
 		}
 		},
@@ -1280,6 +1281,7 @@ function get_save_fav_categories(cat_search)
 	
 	}else{
 	$('#create_new_category').remove();
+	$('.user-option-block').find('.search_result').remove();
 }
 }
 function get_save_fav_user_categories()
@@ -1307,28 +1309,34 @@ function create_save_fav_category(search_key_word,user_id)
 		$.ajax({
         url: url,
 		success: function(data)
-        {  
+        { 
+		//alert("hai"); 
 		if(data)
 		{
-	    $('#save_fav_category_search').val('');
-		$('.user-option-block #categories').html('');
-        $('.user-option-block #categories').append(data);
+			var data = data.trim();
+			insert_save_as_favorite(data);
+	  //  $('#save_fav_category_search').val('');
+	//	$('.user-option-block #categories').html('');
+      //  $('.user-option-block #categories').append(data);
 		}
 		},
 		cache: false
 		});
 }
 
-function insert_save_as_favorite()
+function insert_save_as_favorite(category_id)
 {
-	
-var category_id = $('#category_id').val();
+//if(category_id != '')	
+//var category_id = $('#category_id').val();
+//else
+//alert('prasad'+category_id+'siva');
+var category_id = category_id;
 var post_content = $('#post_content').val();
 var uploaded_file = $('.active #uploaded_files').val();
 
-/*alert(category_id);
-alert(post_content);
-alert(uploaded_file);*/
+//alert(category_id);
+//alert(post_content);
+//alert(uploaded_file);
 
 	url = "<?php echo base_url(); ?>signg_in/insert_save_as_fav/";
 		$.ajax({
@@ -1338,7 +1346,9 @@ alert(uploaded_file);*/
 	
 		success: function()
         {  
-		
+		 url="<?php echo base_url(); ?>signg_in/get_all_favorites_by_cat_id/"+category_id;
+	
+	   window.location.replace(url);
 		},
 		cache: false
 		});
@@ -1359,8 +1369,8 @@ function get_latest_friends_of_user()
 			//alert(html);
 			//$('.latestFriends').show();	
 	    	//$('#latest_frnds_by_time').find('li').remove();
-	 	$('.testing123').html('');	
-		 $('.testing123').append(html);
+	 	$('.latest_frnds_demo').html('');	
+		 $('.latest_frnds_demo').append(html);
 		}
 		else
 		{

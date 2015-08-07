@@ -173,7 +173,7 @@ public function showfavs()
 {
 	$data['user_id'] = '';
 	$data['content']='my_favorites';
-	$this->load->view('template-view',$data);
+	$this->load->view('full_content_view',$data);
 	//$this->load->view('jobs');
 }
  public function addgroup()
