@@ -99,6 +99,7 @@ class customer extends CI_Controller {
 		  'conf_code' => $user_data[0]['conf_code'],
 		  'conf_status' => 'N',
 		  'user_id' => $user_id,
+		  'access_token' => $user_info['access_token']
 		);
 		$this->load->model('confirmaccount');
 		$this->confirmaccount->confirmation_insert($confirmation);
