@@ -8,7 +8,7 @@ $favorites = $this->save_as_favorites_m->get_all_favorites();
             <div class="pin-groupBlock">
                 <div class="pin-groupTop">
                     <div class="col-md-4 AboutUser text-center">
-                        <span class="user-img" style="background:url(<?php echo base_url(); ?>images/sweetgirl.png)"></span>
+                        <span class="user-img" style="background:url(<?php echo base_url(); ?>uploads/sweetgirl.png)"></span>
                         <h3>Shiva Prasad</h3>
                         <div class="col-md-6"><?php echo count($categories); ?><p>Boards</p></div>
                         <div class="col-md-6"><?php echo count($favorites); ?> <p>Pins</p></div>

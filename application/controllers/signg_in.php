@@ -1169,7 +1169,7 @@ public function save_fav_create_category($category_name,$user_id)
 }
 public function get_all_favorites_by_cat_id($category_id)
 {
-	$data = $this->save_as_favorites_m->get_all_favorites_by_category_id($category_id);
+	/*$data = $this->save_as_favorites_m->get_all_favorites_by_category_id($category_id);
 	  $favorites = array();
 		foreach($data as $result):
 		
@@ -1182,11 +1182,11 @@ public function get_all_favorites_by_cat_id($category_id)
 		
 		$favorites[] = $favorites_data;
 		
-	endforeach;
+	endforeach;*/
 	
 	$data['content']='my_favorites_display';
 	//$data['favorites'] = json_encode($favorites);
-	$data['favorites'] = json_encode(array('result' => $favorites));
+	//$data['favorites'] = json_encode(array('result' => $favorites));
 	$this->load->view('full_content_view',$data);
 
 	
