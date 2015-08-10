@@ -849,6 +849,79 @@ public function showfavs()
 	echo $content;	
 	}
 	
+	public function get_favs_byid_for_save_fav($fav_id)
+	{
+		
+		
+		$row = $this->customermodel->getFavById($fav_id);
+		$row = $row[0];
+		$posted_id=$row->favorite_by_user_id;
+	 	$get_profiledata = $this->customermodel->profiledata($posted_id);
+	    $user_id = $this->session->userdata('logged_in')['account_id'];
+		
+		/*$attr = array('name' => 'save_as_fav_form', 'id' =>'save_as_fav_form', 'enctype'=>"multipart/form-data");
+      	
+		$content = form_open('signg_in/save_favorites',$attr)."<input type='file' name='uploadPhotos[]' id='uploadPhotos' multiple='multiple' style='display:none;' />
+    <div class='posts row'><article>
+
+          <div class='userContent col-md-8'>";*/
+		  $content = '';
+
+	
+			$str_leng=strlen($row->favorite_post_content);
+			  if($str_leng>50){
+				$content .= "<span class='content' id='popmsg".$row->favorite_id."'>".substr($row->favorite_post_content,0,50)."...<a href='#' onclick='popmyfunc(".$row->favorite_id.")'>more</a>"."</span><div id='popdes".$row->favorite_id."' style='display:none'>".$row->favorite_post_content."<a href='#' onclick='popmyfunc(".$row->favorite_id.")'>less</a></div></span>"; 
+			 }else{
+				$content .= "<span class='content' id='popmsg".$row->favorite_id."'>".substr($row->favorite_post_content,0,50)."</span><input type='hidden' name='post_content' id='post_content' value='".$row->favorite_post_content."'>";			
+				 }
+
+			 
+			 $content .= '<div class="carousel-inner" role="listbox">';
+			 		  if(!empty($row->favorite_image))
+			 {
+			 $up_files = explode(',',$row->favorite_image);
+			 $i = 0;
+			 foreach($up_files as $file)
+			 {
+				if($i == 0)
+				{
+					$content .='<div class="item active">';
+				}else
+				{
+					$content .='<div class="item">';
+				}
+				
+				
+		
+				// $content .= "<img src='".base_url()."uploads/".$file."' style='width:100%'/>";
+		$content .= '<div class="imageThumb"><span style="background:url('.base_url()."uploads/".$file.')"></div><input type="hidden" id="uploaded_files" name="uploaded_files" value='.$file.' /></div>';
+
+ 
+					
+			
+				 $i++;
+			 }
+			 
+			 }
+			 
+			 $content .=' <!-- Controls -->
+  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div> ';
+			
+			 
+			 
+            	
+		
+	echo $content;	
+	}
+	
 	public function get_cmp_post_byid($post_id){
 		$row = $this->customermodel->getCmpPostById($post_id);
 		$row = $row[0];

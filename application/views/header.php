@@ -2,7 +2,7 @@
 <?php
 $session_data = $this->session->userdata('logged_in');
 $result = $this->profile_set->get_userinfo($user_id='');
- $name = $result[0]['user_firstname']." ".$result[0]['user_lastname'];
+$name = $result[0]['user_firstname']." ".$result[0]['user_lastname'];
 $companies = $this->companies->get_mn_cmp_list();
 ?>
 <html lang="en"><head>

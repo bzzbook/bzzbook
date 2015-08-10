@@ -1,5 +1,7 @@
 <?php 
-
+$result = $this->profile_set->get_userinfo($user_id='');
+$name = $result[0]['user_firstname']." ".$result[0]['user_lastname'];
+$image = $this->profile_set->get_profile_pic(); 
 $categories = $this->save_as_favorites_m->get_favorite_categories();
 $favorites = $this->save_as_favorites_m->get_all_favorites();
 //print_r($categories);
@@ -8,8 +10,8 @@ $favorites = $this->save_as_favorites_m->get_all_favorites();
             <div class="pin-groupBlock">
                 <div class="pin-groupTop">
                     <div class="col-md-4 AboutUser text-center">
-                        <span class="user-img" style="background:url(<?php echo base_url(); ?>uploads/sweetgirl.png)"></span>
-                        <h3>Shiva Prasad</h3>
+                        <span class="user-img" style="background:url(<?php echo base_url(); ?>uploads/<?php if(!empty($image[0]->user_img_thumb)) echo $image[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>)"></span>
+                        <h3><?php echo $name; ?></h3>
                         <div class="col-md-6"><?php echo count($categories); ?><p>Boards</p></div>
                         <div class="col-md-6"><?php echo count($favorites); ?> <p>Pins</p></div>
                        <!-- <div class="col-md-4">12 <p>Likes</p></div> -->
@@ -41,10 +43,13 @@ $favorites = $this->save_as_favorites_m->get_all_favorites();
                         <?php
 									
 						
-						$i = 0;
-						foreach($favorie_images as $image)
+						$i = 4;
+						for($i=0;$i<4;$i++)
 						{
-							
+							if($i<count($favorie_images))
+							$image = $favorie_images[$i];
+							else
+							$image['favorite_image']= '';
 							if($i == 0)
 						 { ?>
                         
@@ -55,21 +60,21 @@ $favorites = $this->save_as_favorites_m->get_all_favorites();
         <div class="thumgIcon pull-right"><span style="background:url(<?php echo base_url(); ?>uploads/empty_category.png)"></span></div>-->
                                 
                                 
-						<?php	}else if($i == 1) { ?>
+						<?php	} else if($i == 1) { ?>
                           
-      <div class="thumgIcon"><span style="background:url(<?php echo base_url(); ?>uploads/<?php if($image['favorite_image'])echo $image['favorite_image']; else  echo "empty_category.png"; ?>)"></span></div>
+      <div class="thumgIcon"><span style="background:url(<?php echo base_url(); ?>uploads/<?php if($image['favorite_image']) echo $image['favorite_image']; else  echo "empty_category.png"; ?>)"></span></div>
 
 						<?php } else if($i == 2) { ?>
                         
-                          <div class="thumgIcon aligncent"><span style="background:url(<?php echo base_url(); ?>uploads/<?php if($image['favorite_image'])echo $image['favorite_image']; else  echo "empty_category.png"; ?>)"></span></div>
+                          <div class="thumgIcon aligncent"><span style="background:url(<?php echo base_url(); ?>uploads/<?php if($image['favorite_image']) echo $image['favorite_image']; else  echo "empty_category.png"; ?>)"></span></div>
      
                         
                         <?php } else if($i == 3) { ?>
-                        <div class="thumgIcon pull-right"><span style="background:url(<?php echo base_url(); ?>uploads/<?php if($image['favorite_image'])echo $image['favorite_image']; else  echo "empty_category.png"; ?>)"></span></div>
+                        <div class="thumgIcon pull-right"><span style="background:url(<?php echo base_url(); ?>uploads/<?php if($image['favorite_image']) echo $image['favorite_image']; else  echo "empty_category.png"; ?>)"></span></div>
                         	
 						<?php }
 						
-	$i++;
+	
 						 } ?>
                             
         
