@@ -2687,7 +2687,7 @@ a.pinIcon:hover, a.pinIcon:focus, a.pinIcon:active {
     /* line 21, D:/Abid/Works/Plugins/bizbook/HTML/pinGroup/style.scss */
     .pin-groupBlock .pin-groupBottom .col-md-3 {
       padding-left: 5px;
-      padding-right: 5px; }
+      padding-right: 5px; margin-bottom:10px; }
     /* line 23, D:/Abid/Works/Plugins/bizbook/HTML/pinGroup/style.scss */
     .pin-groupBlock .pin-groupBottom .pin-group-detail {
       background: #f3f3f3;
@@ -2703,7 +2703,7 @@ a.pinIcon:hover, a.pinIcon:focus, a.pinIcon:active {
         border-radius: 2px;
         background-position: center center !important;
         background-size: cover !important;
-        border: 1px solid #696969;
+        border: 1px solid #ccc;
         margin-bottom: 10px; }
       /* line 29, D:/Abid/Works/Plugins/bizbook/HTML/pinGroup/style.scss */
       .pin-groupBlock .pin-groupBottom .pin-group-detail h3 {
@@ -2727,7 +2727,7 @@ a.pinIcon:hover, a.pinIcon:focus, a.pinIcon:active {
       border-radius: 2px;
       background-position: center center !important;
       background-size: cover !important;
-      border: 1px solid #696969;
+      border: 1px solid #ccc;
       margin-bottom: 10px; }
 
 /*# sourceMappingURL=style.css.map */
