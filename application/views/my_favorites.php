@@ -37,6 +37,7 @@ $favorites = $this->save_as_favorites_m->get_all_favorites();
                         <div class="pin-group-detail">
                             <h3><?php echo $category['category_name']; ?></h3>
 					 <a href="<?php echo base_url();?>signg_in/get_all_favorites_by_cat_id/<?php echo $category['category_id']; ?>">
+                   <!--  <a href="javascript:void(0)" onclick="get_favorite_images()" -->
                         <?php
 									
 						

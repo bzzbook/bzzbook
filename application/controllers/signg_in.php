@@ -1169,8 +1169,8 @@ public function save_fav_create_category($category_name,$user_id)
 }
 public function get_all_favorites_by_cat_id($category_id)
 {
-	/*$data = $this->save_as_favorites_m->get_all_favorites_by_category_id($category_id);
-	  $favorites = array();
+	$favorites_data = $this->save_as_favorites_m->get_all_favorites_by_category_id($category_id);
+	  /*$favorites = array();
 		foreach($data as $result):
 		
 		$favorites_data['favorite_id'] = $result['favorite_id'];
@@ -1186,9 +1186,20 @@ public function get_all_favorites_by_cat_id($category_id)
 	
 	$data['content']='my_favorites_display';
 	//$data['favorites'] = json_encode($favorites);
-	//$data['favorites'] = json_encode(array('result' => $favorites));
-	$this->load->view('full_content_view',$data);
+	//$data['favorites'] = json_encode(array('total'=> 20,'result' => $favorites));
+	
 
+	
+	
+	$this->load->view('full_content_view',$data);
+if( ! write_file('./data/favorites.json', $favorites_data))
+{
+     echo 'Unable to write the file';
+}
+else
+{
+     echo 'File written!';
+}
 	
 }
 	
