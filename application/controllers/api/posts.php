@@ -130,10 +130,11 @@ class posts extends CI_Controller {
 		exit(0);
 	}
 	 public function ajax_image_upload($file_name){
+		 
 	 
-	
-	
-	if(isset($_FILES[$file_name]["type"]) && !empty($_FILES[$file_name]["type"][0]))	
+	$n =  count($_FILES[$file_name]['name']);
+	for($i=0;$i<$n;$i++){
+	if(isset($_FILES[$file_name]["type"]) && !empty($_FILES[$file_name]["type"][$i]))	
 	{		
 		$validextensions = array("jpeg", "jpg", "png");
 		
@@ -146,24 +147,24 @@ class posts extends CI_Controller {
 		$file_extension = end($temporary);
 		
 		
-		if((($_FILES[$file_name]["type"][0] == "image/png") || ($_FILES[$file_name]["type"][0] == "image/jpg") || ($_FILES[$file_name]["type"][0] == "image/jpeg")
-		) && ($_FILES[$file_name]["size"][0] < 1000000)//Approx. 100kb files can be uploaded.
+		if((($_FILES[$file_name]["type"][$i] == "image/png") || ($_FILES[$file_name]["type"][$i] == "image/jpg") || ($_FILES[$file_name]["type"][$i] == "image/jpeg")
+		) && ($_FILES[$file_name]["size"][$i] < 1000000)//Approx. 100kb files can be uploaded.
 		&& in_array($file_extension, $validextensions)) {
 			
-		if ($_FILES[$file_name]["error"][0] > 0)
+		if ($_FILES[$file_name]["error"][$i] > 0)
 		{
 		$file_upload['status'] = false;
 		$file_upload['error_code'] = 2;
-		$file_upload['message'] =  "Return Code: " . $_FILES[$file_name]["error"][0] . "<br/><br/>";
+		$file_upload['message'] =  "Return Code: " . $_FILES[$file_name]["error"][$i] . "<br/><br/>";
 		}
 		else
 		{
 		
-		
-		$config['upload_path'] = DIR_FILE_PATH;
-		$sourcePath = $_FILES[$file_name]['tmp_name'][0]; // Storing source path of the file in a variable
+		$config['upload_path'] = DIR_FILE_PATH; 
+		//$config['upload_path'] = './uploads/';
+		$sourcePath = $_FILES[$file_name]['tmp_name'][$i]; // Storing source path of the file in a variable
 		//$targetPath = "F:\/xampp\/htdocs\/bzzbook\/uploads\/".$_FILES[$file_name]['name'][0];
-		$targetPath = $config['upload_path'].$_FILES[$file_name]['name'][0]; // Target path where file is to be stored
+		$targetPath = $config['upload_path'].$_FILES[$file_name]['name'][$i]; // Target path where file is to be stored
 		move_uploaded_file($sourcePath,$targetPath) ; 
 		$file_upload['status'] = true;
 		$file_upload['message'] =  $filename;
@@ -189,14 +190,17 @@ class posts extends CI_Controller {
 		$file_upload['error_code'] = 3;
 		$file_upload['message'] =  "<span id='invalid'>***Invalid file Size or Type***<span>";
 		}
-		return $file_upload;
+		
 	}else{
 		$file_upload['status'] = false;
 		$file_upload['error_code'] = 1;
 		$file_upload['message'] =  "File not uploaded";
 	}
+	}
+	return $file_upload;
 	 
-}
+
+		 }
 	
 
 
