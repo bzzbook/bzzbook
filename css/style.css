@@ -2748,8 +2748,8 @@ a.pinIcon:hover, a.pinIcon:focus, a.pinIcon:active {
     text-align: center; }
     /* line 10, D:/Abid/Works/Plugins/bizbook/HTML/pin/style.scss */
     .pin-images-grp .pin-images-grp-inner span {
-      font-size: 35px;
-      font-weight: 700; }
+      font-size: 26px;
+      font-weight: 500; }
   /* line 12, D:/Abid/Works/Plugins/bizbook/HTML/pin/style.scss */
   .pin-images-grp .imageHolder {
     margin-left: -10px; }
@@ -2824,3 +2824,5 @@ a.pinIcon:hover, a.pinIcon:focus, a.pinIcon:active {
 	  .bottomRadius{ border-bottom-left-radius:5px; border-bottom-right-radius:5px; }
 
 /*# sourceMappingURL=style.css.map */
+
+.photo{ max-width:100%; }

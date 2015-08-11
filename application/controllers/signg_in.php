@@ -1079,7 +1079,7 @@ public function save_fav_category_search($search_keyword)
 	$list .='<div class="board-option-pin CreateBoard" id="create_new_category">
                                     <a href="javascript:void(0)" onclick="create_save_fav_category(&#39'.$search_keyword.'&#39,'.$user_id.');">
                                         <span class="icon-create fa fa-plus"></span>
-                                        <p>Create a Board : '.$search_keyword.' </p>
+                                        <p>Create a Board : '.urldecode($search_keyword).' </p>
                                     </a>                                  
                                 </div>';
 	}
@@ -1155,7 +1155,7 @@ public function insert_save_as_fav()
 
 public function save_fav_create_category($category_name,$user_id)
 {
-	$data['category_name'] = $category_name;
+	$data['category_name'] = urldecode($category_name);
 	$data['created_by'] = $user_id;
 	if($this->db->insert('bzz_save_fav_categories',$data))
 	{

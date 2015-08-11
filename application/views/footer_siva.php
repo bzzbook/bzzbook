@@ -1319,6 +1319,7 @@ function get_save_fav_user_categories()
 
 function create_save_fav_category(search_key_word,user_id)
 {
+		alert(search_key_word);
 		url = "<?php echo base_url(); ?>signg_in/save_fav_create_category/"+search_key_word+"/"+user_id;
 		$.ajax({
         url: url,
@@ -1347,7 +1348,6 @@ function insert_save_as_favorite(category_id)
 var category_id = category_id;
 var post_content = $('#post_content').val();
 var uploaded_file = $('.active #uploaded_files').val();
-alert(uploaded_file);
 //alert(category_id);
 //alert(post_content);
 //alert(uploaded_file);
