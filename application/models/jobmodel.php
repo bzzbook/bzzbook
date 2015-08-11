@@ -197,14 +197,43 @@ return false;
 {
 	$user_id = $this->session->userdata('logged_in')['account_id'];
 	$query = $this->db->select('job_seaking_options')->from('bzz_userinfo')->where('user_id',$user_id)->get();
+	if($query->num_rows() > 0)
+	{
 	$job_interests = $query->result_array();
 	
 	$data = explode(",",$job_interests[0]['job_seaking_options']);
 //	print_r($data);
+	}
+   $query = $this->db->select('hidden_job_id')->from('bzz_hidden_jobs')->where('user_id',$user_id)->get();
+	if($query->num_rows() > 0)
+	{
+		$hidden_jobs = $query->result_array();
+		$unwanted_jobs =  array();
+		foreach ( $hidden_jobs as $hide_job)
+		{
+			$unwanted_jobs[] = $hide_job['hidden_job_id'];
+		}
+		
+	}
 	
+
+	 $this->db->select('*');
+	 $this->db->from('jobs');
+	 $this->db->join('bzz_companyinfo', 'bzz_companyinfo.companyinfo_id = jobs.company_posted_by');
+
+	 
+	 if(!empty($data)) {
+	 $this->db->where_in('job_category',$data);
+	 }
+	 if(!empty($hidden_jobs))
+	 {
+	 $this->db->where_not_in('job_id',$unwanted_jobs);
+	 }
 	
-	$query = $this->db->select('*')->from('jobs')->join('bzz_companyinfo', 'bzz_companyinfo.companyinfo_id = jobs.company_posted_by')->where_in('job_category',$data)->order_by('post_date','desc')->get();
+	 $this->db->order_by('post_date','desc');
+	 $query = $this->db->get();
 	$jobs = $query->result_array();
+	
 	if($query->num_rows() > 0)
 	{
 	

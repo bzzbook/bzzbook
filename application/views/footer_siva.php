@@ -1485,26 +1485,57 @@ $('#save_fav_category_search').focus();
 
 $('.searchBlock .originalBlock a').click(function () {
 
-alert($(this).attr('id'));
-var job_id = $(this).attr('id').substr(5);
 
-url="<?php echo base_url();?>jobs/hide_a_job/";
+var job_id = $(this).attr('id').substr(8);
+//alert(job_id);
+
+$('#originalBlock'+job_id).hide();
+$('#overlayBlock'+job_id).show();
+$(setTimeout(function () {
+
+  url="<?php echo base_url();?>jobs/hide_a_job/";
 	 $.ajax({
-		 data : { job_id :  job_id},
+		data : { job_id :  job_id},
 		url: url,
 		type: "POST",
-		success: function(data)
-		{   					
-		
+		success: function()
+		{   
+					
+		$('#job_block'+job_id).hide();
 
+		}
+		
+	   });
+	   		 }),10000);
+
+});
+
+$('.searchBlock .overlayBlock a').click(function () {
+
+var job_id = $(this).attr('id').substr(10);
+
+url="<?php echo base_url();?>jobs/remove_hide_a_job/";
+	 $.ajax({
+		data : { job_id :  job_id},
+		url: url,
+		type: "POST",
+		success: function()
+		{   					
+		$('#job_block'+job_id).show();
+		$('#originalBlock'+job_id).show();
+		$('#overlayBlock'+job_id).hide();
 		}
 		
 	   });
 
 
-
 });
 
+$('#advanced_job_search').click(function()
+{
+	$('#adv_job_search').submit();
+
+});
 
 </script>
  <script type="text/javascript">
@@ -1552,13 +1583,13 @@ $('.carousel').on('slid.bs.carousel', function () {
           
         });
 
-        $(".searchBlock a.fa").click(function (e) {
+        /*$(".searchBlock a.fa").click(function (e) {
             e.preventDefault();
             $(this).parent().parent().toggleClass('removed');
         });
         $(".searchBlock .overlayBlock a").click(function (e) {
             e.preventDefault();
             $(this).parent().parent().parent().toggleClass('removed');
-        });
+        });*/
 
     </script>
