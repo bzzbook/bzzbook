@@ -282,7 +282,7 @@
 				 if($i==0)
 				 {
 					 echo " 
-    <a onclick='getPostComments(".$row->post_id.")'><img class='photo' fbphotobox-src='".base_url()."uploads/".$file."' src='".base_url()."uploads/".$file."' style='width:100%'/></a>";
+    <a onclick='getPostComments(".$row->post_id.")'><img class='photo' fbphotobox-src='".base_url()."uploads/".$file."' src='".base_url()."uploads/".$file."' /></a>";
 				 }
 				 else
 				 	 echo "<a onclick='getPostComments(".$row->post_id.")'><img class='photo' fbphotobox-src='".base_url()."uploads/".$file."' src='".base_url()."uploads/".$file."' style='width:24%;float:left;margin:.5%; height:83px'/></a>";
