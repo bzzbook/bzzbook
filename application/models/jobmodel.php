@@ -24,6 +24,7 @@ class Jobmodel extends CI_Model {
 		'job_how_to_apply'=>$data['how_to_apply'],
 		'job_description'=>$data['job_desc'],
 		'job_requirements'=>$data['req_skills'],
+		'country'=>$data['country'],
 		'user_id'=>$this->session->userdata('logged_in')['account_id']
 		);
 		
@@ -190,5 +191,32 @@ return false;
 //		$this->load->view('template-view',$data);
 		}
 		return false;
- }}
+ }
+ 
+ public function get_jobs_by_industries()
+{
+	$user_id = $this->session->userdata('logged_in')['account_id'];
+	$query = $this->db->select('job_seaking_options')->from('bzz_userinfo')->where('user_id',$user_id)->get();
+	$job_interests = $query->result_array();
+	
+	$data = explode(",",$job_interests[0]['job_seaking_options']);
+//	print_r($data);
+	
+	
+	$query = $this->db->select('*')->from('jobs')->join('bzz_companyinfo', 'bzz_companyinfo.companyinfo_id = jobs.company_posted_by')->where_in('job_category',$data)->order_by('post_date','desc')->get();
+	$jobs = $query->result_array();
+	if($query->num_rows() > 0)
+	{
+	
+	return $jobs;
+	}else
+	return false;
+	//echo count($jobs);
+	//print_r($jobs);
+	
+	
+}
+ 
+ 
+ }
 ?>

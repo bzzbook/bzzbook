@@ -614,6 +614,9 @@ class Mdlnotifications extends CI_Model {
 				}
 				else{
 				$jsondata = json_decode($req['content_json']);
+				
+				//print_r($jsondata);
+				
 				$searchblock .= " <li onclick='location.href=&#39;".base_url()."posts/getpost/".$req['post_id']."&#39;'>
 				<div class='member-search-sug'>";
 				
@@ -623,9 +626,11 @@ class Mdlnotifications extends CI_Model {
 				}else{
 				$searchblock .= "<figure class='member-sug-pic'><img src='" . base_url() ."uploads/default_profile_pic.png' alt='". $jsondata['user_name']."'></figure>";
 				}
+			if(isset($jsondata->user_name))
+			{
+				$searchblock .= "<div class='member-search-name'><span class='ntf_user'>".$jsondata->user_name."</span> <span class='ntf_msg'>";
+			}
 				
-				$searchblock .= " <div class='member-search-name'>
-				<span class='ntf_user'>". $jsondata->user_name ."</span> <span class='ntf_msg'>";
 				if(isset($jsondata->verb))
 				$searchblock .= $jsondata->verb."</span>";
 				

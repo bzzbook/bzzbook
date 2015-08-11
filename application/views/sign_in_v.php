@@ -157,9 +157,7 @@ echo "</div>";
             name="user_name" id="user_name" placeholder="User name" >
             
           </div>
-       
-         
-          <div class="field col-md-6">
+         <div class="field col-md-6">
             <input type="text" class="form-control"  data-rule-required="true" data-msg-required="please enter your email" 
             data-rule-email="true" data-msg-email="please enter a valid email address" name="email" id="email" placeholder="E-mail" >
           </div>
@@ -191,14 +189,38 @@ echo "</div>";
               Female </label>
           </div>
           </div>
+          
+          
+      
+           
+           
           <div class="col-md-6">
             <div class="sbButtons field col-md-6">
             <input type="submit" value="Sign Up Now">
            </div>
            </div>
           </div>
-          <p>Lorem ipsum dolor sit amet, at choro omnium partiendo qui, nec nulla voluptua ex, te homero dissentiunt usu. Et vis latine epicuri voluptaria, <a href="#">posse veniam legimus eu ius</a>. Odio albucius ne vis, nec ad scaevola philosophia. Vide nominavi</p>
+          
+                 <div class="field col-md-6">
+         <input type="checkbox" name="job_seaker" value="job_seaker" onClick="disp_job_industries()" > Are you Job Seaker?
+           </div>
+          
+          <div class="scroll-pane">
+           <div class="col-md-6" style="display:none; height:100px; width:300px; " id="job_seaking_option" >
+           
         
+				 <?php 
+				 $industry = $this->lookup->get_lookup_industry();
+				 foreach($industry as $industries):?>
+                 <div>
+                 <input type="checkbox" name="job_seaker_industries[]" value="<?php echo $industries->lookup_id; ?>" ><span style="margin-left:5px; font-size:14px;"><?php echo $industries->lookup_value; ?></span>
+                 </div>            
+                 <?php endforeach;?> 
+                
+         </div> 
+         </div>
+        <!--  <p>Lorem ipsum dolor sit amet, at choro omnium partiendo qui, nec nulla voluptua ex, te homero dissentiunt usu. Et vis latine epicuri voluptaria, <a href="#">posse veniam legimus eu ius</a>. Odio albucius ne vis, nec ad scaevola philosophia. Vide nominavi</p>
+        -->
         </form>
       </div>
       
@@ -395,6 +417,12 @@ if(user_email == '')
 
 });
 
+
+function disp_job_industries()
+{
+$('#job_seaking_option').toggle();
+
+}
 </script>
 <?php 
 $data = $this->session->flashdata('email_status');

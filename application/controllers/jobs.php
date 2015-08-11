@@ -93,6 +93,58 @@ class Jobs extends CI_Controller {
 	 $this->load->view('template-view',$data);
   }
   
+  
+
+  
+public function get_jobs_by_search($industries = '',$job_category = '', $country = '')
+{
+	$user_id = $this->session->userdata('logged_in')['account_id'];
+	$query = $this->db->select('job_seaking_options')->from('bzz_userinfo')->where('user_id',$user_id)->get();
+	$job_interests = $query->result_array();
+	
+	$data = explode(",",$job_interests[0]['job_seaking_options']);
+	print_r($data);
+	
+	
+	 $this->db->select('*');
+	$this->db->from('jobs');
+	if($industries != '')
+	{
+	$this->db->where_in('job_category',$industries);
+	}
+	if($job_category != '')
+	{
+		$this->db->where_in('job_type',$job_category);
+	}
+	
+	if($country != '')
+	{
+		$this->db->where_in('country',$country);
+	}
+	
+	
+	
+	$this->db->order_by('post_date','desc');
+	$query = $this->db->get();
+	
+	$jobs = $query ->result_array();
+	echo count($jobs);
+	print_r($jobs);
+	
+	
+}
+
+
+public function hide_a_job()
+{
+	if($this->db->select('*')->from('bzz_hidden_jobs')->where('user_id',$user_id)->where('hidden_job_id',$_POST['job_id'])->get()->num_rows() > 0)
+	{
+		
+		}
+	
+	$_POST['job_id'];
+}
+  
 }
 
 

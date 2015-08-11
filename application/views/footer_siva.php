@@ -1273,6 +1273,7 @@ function get_save_fav_categories(cat_search)
 		{
 		$('#create_new_category').remove();
 		$('.user-option-block').find('.search_result').remove();
+		$('#categories').find('.CreateBoard').remove();
         $('.user-option-block #categories').prepend(data);
 		}
 		},
@@ -1294,7 +1295,7 @@ function get_save_fav_user_categories()
         {  
 		if(data)
 		{
-		
+		$('#categories').html('');
         $('.user-option-block #categories').append(data);
 		}
 		},
@@ -1462,6 +1463,35 @@ if(name!=''){
 }
 }
 
+function create_cat_focus()
+{
+$('#save_fav_category_search').focus();
+}
+
+
+$('.searchBlock .originalBlock a').click(function () {
+
+alert($(this).attr('id'));
+var job_id = $(this).attr('id').substr(5);
+
+url="<?php echo base_url();?>jobs/hide_a_job/";
+	 $.ajax({
+		 data : { job_id :  job_id},
+		url: url,
+		type: "POST",
+		success: function(data)
+		{   					
+		
+
+		}
+		
+	   });
+
+
+
+});
+
+
 </script>
  <script type="text/javascript">
 $(function() {
@@ -1490,4 +1520,31 @@ $('.carousel').on('slid.bs.carousel', function () {
         $(this).children('.right.carousel-control').fadeOut();
     }
 });
+
+
+
+        $(".advancedSearchControl span").click(function () {
+            $(".advancedSearch-block").slideToggle("slow");
+
+            $(this).children('i').toggleClass(function () {
+                if ($(this).is(".fa-angle-double-down")) {
+                    $(this).removeClass('fa-angle-double-down');
+                    return "fa-angle-double-up";
+                } else {
+                    $(this).removeClass('fa-angle-double-up');
+                    return "fa-angle-double-down";
+                }
+            });
+          
+        });
+
+        $(".searchBlock a.fa").click(function (e) {
+            e.preventDefault();
+            $(this).parent().parent().toggleClass('removed');
+        });
+        $(".searchBlock .overlayBlock a").click(function (e) {
+            e.preventDefault();
+            $(this).parent().parent().parent().toggleClass('removed');
+        });
+
     </script>

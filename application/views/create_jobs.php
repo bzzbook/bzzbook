@@ -61,7 +61,7 @@
                   <select class="medium" name="job_category" id="job_category">
                     <option value="">Industry</option>
 				 <?php foreach($industry as $industries):?>
-                 <option value="<?php echo $industries->lookup_value ?>"><?php echo $industries->lookup_value ?></option>
+                 <option value="<?php echo $industries->lookup_id; ?>"><?php echo $industries->lookup_value; ?></option>
                  <?php endforeach;?> 
                  </select> 
                   </span> </div>
@@ -103,6 +103,17 @@
 							}
 				   ?></select>
                   </span> </div>
+                  
+                  
+                  <div class="col-md-6 forms">
+                  <label>Country:*</label>
+                  <span>
+                 <select class="medium" name="country" id="country">
+			<option value="">Select Country</option>
+			</select> 
+                  </span> </div>
+                  
+                  
               </div>
               <div class="forms col-md-10">
                 <p>* You may enter up to 6 keywords. Keywords are terms used to search for your job posting.</p>

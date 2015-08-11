@@ -63,7 +63,13 @@ class customer extends CI_Controller {
 		$user['conf_code'] = $confirmation_code;
 		$user['access_token'] = md5(time());
 		$this->load->model('person');
+		if(!empty ($_POST['job_seaker_industries']) )
+		{
+		$options = $_POST['job_seaker_industries'];
+		$data = implode(",",$options);
 		
+		$user_info['job_seaking_options'] =  $data;
+		}
 		$user_info['user_phoneno'] = $this->input->post('phone_number');		
 		$user_info['user_firstname'] = $this->input->post('firstname');
 		$user_info['user_lastname'] = $this->input->post('lastname');

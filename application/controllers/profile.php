@@ -164,9 +164,13 @@ public function delete_group($group_id)
 
 public function jobs()
 {
-	     $data['content']='user_cmp_jobs';
-	     $this->load->view('template-view',$data);
-	//$this->load->view('jobs');
+	   //  $data['content']='user_cmp_jobs';
+	   //  $this->load->view('template-view',$data);
+	   //  $this->load->view('jobs');
+	   
+	   $data['content']='user_interested_jobs';
+	   $this->load->view('full_right_content_view',$data);
+	   
 }
 
 public function showfavs()

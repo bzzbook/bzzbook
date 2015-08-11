@@ -1102,10 +1102,10 @@ public function save_fav_user_categories()
 			$data = $this->save_as_favorites_m->get_category_image($category['category_id']);
 			
 			if(!empty($data[0]['favorite_image']))
-			$data = $data[0]['favorite_image'];
-			else
+		{	$data = $data[0]['favorite_image'];
+		}else{
 			$data = 'default_profile_pic.png';
-			
+		}
 		$list .='<div class="board-option-pin">
                                     <span class="icon-img" style="background:url( '.base_url().'uploads/'.$data.')"></span>
 									<p>'.$category['category_name'].'</p>
@@ -1115,10 +1115,10 @@ public function save_fav_user_categories()
 		
 	}else
 	{
-	echo  $list .='<div class="board-option-pin CreateBoard">
-                                    <a href="javascript:void(0)" onclick="create_save_fav_category(&#39'.$search_keyword.'&#39,'.$user_id.');">
+	$list .='<div class="board-option-pin CreateBoard">
+                                    <a href="javascript:void(0)" onclick="create_cat_focus();">
                                         <span class="icon-create fa fa-plus"></span>
-                                        <p>Create a Board : '.$search_keyword.' </p>
+                                        <p>Create a Board : </p>
                                     </a>                                  
                                 </div>';
 	}
