@@ -139,10 +139,28 @@ public function hide_a_job()
 {
 	if($this->db->select('*')->from('bzz_hidden_jobs')->where('user_id',$user_id)->where('hidden_job_id',$_POST['job_id'])->get()->num_rows() > 0)
 	{
+		$data = array(
+		'user_id' => $user_id,
+		'hidden_job_id' => $_POST['job_id'],
+		'hidden_time' => date("Y-m-d H:i:s")
+		);
 		
-		}
+		$this->db->update('bzz_hidden_jobs',$data);
+		$this->db->where('user_id',$user_id);
+		$this->db->where('hidden_job_id',$_POST['job_id']);
+		
+	}else{
+		
+		$insert_data = array(
+		'user_id' => $user_id,
+		'hidden_job_id' => $_POST['job_id'],
+		);
+		
+		$this->db->insert('bzz_hidden_jobs',$insert_data);
+		
+	}
 	
-	$_POST['job_id'];
+	
 }
   
 }
