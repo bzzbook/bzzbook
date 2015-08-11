@@ -1079,7 +1079,7 @@ public function save_fav_category_search($search_keyword)
 	$list .='<div class="board-option-pin CreateBoard" id="create_new_category">
                                     <a href="javascript:void(0)" onclick="create_save_fav_category(&#39'.$search_keyword.'&#39,'.$user_id.');">
                                         <span class="icon-create fa fa-plus"></span>
-                                        <p>Create a Board : '.$search_keyword.' </p>
+                                        <p>Create a Board : '.urldecode($search_keyword).' </p>
                                     </a>                                  
                                 </div>';
 	}
@@ -1155,7 +1155,7 @@ public function insert_save_as_fav()
 
 public function save_fav_create_category($category_name,$user_id)
 {
-	$data['category_name'] = $category_name;
+	$data['category_name'] = urldecode($category_name);
 	$data['created_by'] = $user_id;
 	if($this->db->insert('bzz_save_fav_categories',$data))
 	{
@@ -1169,8 +1169,10 @@ public function save_fav_create_category($category_name,$user_id)
 }
 public function get_all_favorites_by_cat_id($category_id)
 {
-	$favorites_data = $this->save_as_favorites_m->get_all_favorites_by_category_id($category_id);
-	  /*$favorites = array();
+	$data = $this->save_as_favorites_m->get_all_favorites_by_category_id($category_id);
+	$cat_result = $this->save_as_favorites_m->get_category_name($category_id);
+ 
+	  $favorites = array();
 		foreach($data as $result):
 		
 		$favorites_data['favorite_id'] = $result['favorite_id'];
@@ -1182,24 +1184,24 @@ public function get_all_favorites_by_cat_id($category_id)
 		
 		$favorites[] = $favorites_data;
 		
-	endforeach;*/
-	
+	endforeach;
+	$data['category_name'] = $cat_result[0]['category_name'];
 	$data['content']='my_favorites_display';
 	//$data['favorites'] = json_encode($favorites);
-	//$data['favorites'] = json_encode(array('total'=> 20,'result' => $favorites));
+	//$data['favorites'] = json_encode(array('total'=> count($favorites),'result' => $favorites));
 	
-
+	$data['favorites'] = $favorites;
 	
 	
 	$this->load->view('full_content_view',$data);
-if( ! write_file('./data/favorites.json', $favorites_data))
-{
-     echo 'Unable to write the file';
-}
-else
-{
-     echo 'File written!';
-}
+//if( ! write_file('./data/favorites.json', $data['favorites']))
+//{
+//     echo 'Unable to write the file';
+//}
+//else
+//{
+//     echo 'File written!';
+//}
 	
 }
 	

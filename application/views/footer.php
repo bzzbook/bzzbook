@@ -10,6 +10,33 @@
 	  ?>
 <!--      <div id="online-friends"></div>
 -->
+<div class="modal fade pin-it-column target01 " tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="save_as_fav_modal" >
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="imgHolder-pinit">
+                        <div class="img-content-block">
+                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-wrap="false">
+  <!-- Wrapper for slides -->
+  
+  </div>                           
+                           
+                        </div>
+                    </div>
+                    <div class="pin-categories-pinit">
+                        <div class="pinBoard">
+                            <h3>Pick a board</h3>
+       <label><i class="fa fa-search"></i><input type="text" placeholder="Search" onkeyup="get_save_fav_categories(this.value);" id="save_fav_category_search"/></label>                            
+                        </div>
+                        <div class="user-option-block">
+                            <div class="scroll-pane" id="categories"> 
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
 <div class="wrapper">
 
     <div class="toggle" style="">
@@ -1862,6 +1889,20 @@ function saveAsFav(post_id){
 						$('#carousel-example-generic').html(data);
 						//var user_categories =
 				
+						 get_save_fav_user_categories();
+						//alert(user_categories);
+					});
+}
+function saveFavAsFav(fav_id){
+	url="<?php echo base_url(); ?>profile/get_favs_byid_for_save_fav/"+fav_id;
+					$.post( url )
+					.done(function( data ) {
+						//alert(data);
+					    $('#save_fav_category_search').val('');
+						$('#categories').html('');
+						$('#carousel-example-generic').html(data);
+						//var user_categories =
+					
 						 get_save_fav_user_categories();
 						//alert(user_categories);
 					});

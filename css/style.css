@@ -2522,7 +2522,7 @@ ul {
       /* line 37, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
       .pin-it-column .pin-categories-pinit .user-option-block .board-option-pin:hover {
         border: 1px solid #e9e9e9;
-        background: #efefef; }
+        background: #f3f3f3; }
         /* line 40, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
         .pin-it-column .pin-categories-pinit .user-option-block .board-option-pin:hover a.pinIcon {
           display: block; }
@@ -2643,7 +2643,7 @@ a.pinIcon:hover, a.pinIcon:focus, a.pinIcon:active {
 
 /* line 1, D:/Abid/Works/Plugins/bizbook/HTML/pinGroup/style.scss */
 .pin-groupBlock {
-  background: #e8e8e8; }
+  background: #f3f3f3; }
   /* line 2, D:/Abid/Works/Plugins/bizbook/HTML/pinGroup/style.scss */
   .pin-groupBlock .pin-groupTop {
     border-bottom: 3px solid #fbc436;
@@ -2675,11 +2675,11 @@ a.pinIcon:hover, a.pinIcon:focus, a.pinIcon:active {
         margin-bottom: 10px; }
       /* line 11, D:/Abid/Works/Plugins/bizbook/HTML/pinGroup/style.scss */
       .pin-groupBlock .pin-groupTop .AboutUser h3 {
-        margin: 0px;
+        margin: 15px;
         padding: 0px; }
   /* line 15, D:/Abid/Works/Plugins/bizbook/HTML/pinGroup/style.scss */
   .pin-groupBlock .pin-groupBottom {
-    background: #efefef;
+    background: #f3f3f3;
     padding: 10px 0 50px;
     border-left: 1px solid #ccc;
     border-right: 1px solid #ccc;
@@ -2687,10 +2687,10 @@ a.pinIcon:hover, a.pinIcon:focus, a.pinIcon:active {
     /* line 21, D:/Abid/Works/Plugins/bizbook/HTML/pinGroup/style.scss */
     .pin-groupBlock .pin-groupBottom .col-md-3 {
       padding-left: 5px;
-      padding-right: 5px; }
+      padding-right: 5px; margin-bottom:10px; }
     /* line 23, D:/Abid/Works/Plugins/bizbook/HTML/pinGroup/style.scss */
     .pin-groupBlock .pin-groupBottom .pin-group-detail {
-      background: #e8e8e8;
+      background: #f3f3f3;
       padding: 10px;
       border-radius: 3px;
       border: 1px solid #ccc; }
@@ -2703,7 +2703,7 @@ a.pinIcon:hover, a.pinIcon:focus, a.pinIcon:active {
         border-radius: 2px;
         background-position: center center !important;
         background-size: cover !important;
-        border: 1px solid #696969;
+        border: 1px solid #ccc;
         margin-bottom: 10px; }
       /* line 29, D:/Abid/Works/Plugins/bizbook/HTML/pinGroup/style.scss */
       .pin-groupBlock .pin-groupBottom .pin-group-detail h3 {
@@ -2727,7 +2727,7 @@ a.pinIcon:hover, a.pinIcon:focus, a.pinIcon:active {
       border-radius: 2px;
       background-position: center center !important;
       background-size: cover !important;
-      border: 1px solid #696969;
+      border: 1px solid #ccc;
       margin-bottom: 10px; }
 
 /*# sourceMappingURL=style.css.map */
@@ -2736,7 +2736,7 @@ a.pinIcon:hover, a.pinIcon:focus, a.pinIcon:active {
 /*pins grid display*/
 /* line 1, D:/Abid/Works/Plugins/bizbook/HTML/pin/style.scss */
 .pin-images-grp {
-  background: #e8e8e8;
+  background: #f3f3f3;
   padding: 10px 0px 0 0px;
   margin-top:15px; }
   /* line 5, D:/Abid/Works/Plugins/bizbook/HTML/pin/style.scss */
@@ -2748,8 +2748,8 @@ a.pinIcon:hover, a.pinIcon:focus, a.pinIcon:active {
     text-align: center; }
     /* line 10, D:/Abid/Works/Plugins/bizbook/HTML/pin/style.scss */
     .pin-images-grp .pin-images-grp-inner span {
-      font-size: 35px;
-      font-weight: 700; }
+      font-size: 26px;
+      font-weight: 500; }
   /* line 12, D:/Abid/Works/Plugins/bizbook/HTML/pin/style.scss */
   .pin-images-grp .imageHolder {
     margin-left: -10px; }
@@ -2820,6 +2820,7 @@ a.pinIcon:hover, a.pinIcon:focus, a.pinIcon:active {
       margin: 0px;
       padding: 0px;
       margin-left: 15px; }
+<<<<<<< HEAD
 	  
 .scroll-pane {
     height: calc(100%);
@@ -3153,5 +3154,11 @@ a.pinIcon:hover, a.pinIcon:focus, a.pinIcon:active {
       .searchBlocks .searchBlock .originalBlock h2 a {
         font-size: 15px;
         color: #000; }
+=======
+	  .noBorder{ border:0 !important; }
+	  .bottomRadius{ border-bottom-left-radius:5px; border-bottom-right-radius:5px; }
 
 /*# sourceMappingURL=style.css.map */
+>>>>>>> 336c9b5f6a31d84694ea3bb21065cc6a7076dd49
+
+.photo{ max-width:100%; }

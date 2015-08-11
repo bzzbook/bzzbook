@@ -7,7 +7,16 @@ class Save_as_favorites_m extends CI_Model {
    		parent::__construct(); 
   		
     } 
-
+public function get_category_name($cat_id){
+	$query = $this->db->select('category_name')->from('bzz_save_fav_categories')->where('category_id',$cat_id)->get(); 
+	if($query->num_rows() > 0)
+	{
+		return $query->result_array();
+	}else
+	{
+		return false;
+	}
+}
 public function get_favorite_categories()
 {
 	

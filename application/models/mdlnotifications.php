@@ -21,13 +21,14 @@ class Mdlnotifications extends CI_Model {
 			$this->db->from('bzz_posts');
 			$this->db->where($user_time_condition);
 			$query = $this->db->get();
-			$this->db->last_query();
+			
 			if ($query->num_rows() >0){
 					
 				$posts = $query->result_array();
 			
 					if($posts){
 						$myfriends = $this->friendsmodel->getfriends();
+						
 						if($myfriends){
 							$content = array();
 							$content['user_image'] = $my_img;
@@ -66,7 +67,7 @@ class Mdlnotifications extends CI_Model {
 								$this->db->from('bzz_notifications');
 								$this->db->where($check_exits);
 								$query = $this->db->get();
-								$this->db->last_query();
+								
 								if ($query->num_rows() == 0){
 								
 								$this->db->insert('bzz_notifications',$notification);
@@ -90,7 +91,7 @@ class Mdlnotifications extends CI_Model {
 								$this->db->from('bzz_notifications');
 								$this->db->where($check_exits);
 								$query = $this->db->get();
-								$this->db->last_query();
+								
 								if ($query->num_rows() == 0){						
 									
 									$mes_name = array();
@@ -153,7 +154,7 @@ class Mdlnotifications extends CI_Model {
 			$this->db->join('bzz_posts','bzz_likes.like_on = bzz_posts.post_id','inner');
 			$this->db->where($user_time_condition);
 			$query = $this->db->get();
-			$this->db->last_query();
+			
 			if ($query->num_rows() >0){
 					
 				$likes = $query->result_array();
@@ -184,7 +185,7 @@ class Mdlnotifications extends CI_Model {
 			$this->db->join('bzz_posts','bzz_posts.post_id = bzz_postcomments.commented_on','inner');
 			$this->db->where($user_time_condition);
 			$query = $this->db->get();
-			echo $this->db->last_query();
+			
 			if ($query->num_rows() >0){
 					
 				$likes = $query->result_array();
@@ -215,7 +216,7 @@ class Mdlnotifications extends CI_Model {
 			//$this->db->join('bzz_posts','bzz_posts.post_id = bzz_postcomments.commented_on','inner');
 			$this->db->where($user_time_condition);
 			$query = $this->db->get();
-			echo $this->db->last_query();
+			
 			if ($query->num_rows() >0){
 					
 				$likes = $query->result_array();
@@ -246,7 +247,7 @@ class Mdlnotifications extends CI_Model {
 			$this->db->join('bzz_posts','bzz_posts.post_id = bzz_post_image_comments.post_id','inner');
 			$this->db->where($user_time_condition);
 			$query = $this->db->get();
-			echo $this->db->last_query();
+			
 			if ($query->num_rows() >0){
 					
 				$likes = $query->result_array();

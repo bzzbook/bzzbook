@@ -91,10 +91,11 @@ class Friendsmodel extends CI_Model {
 				$frnd['image'] = $result[0]['user_img_thumb'];
 				else
 				$frnd['image'] =  'default_profile_pic.png';
-				if($friend['friend_id']==$id)
+				/*if($friend['friend_id']==$id)
 				$frnd['id'] = $friend['user_id'];
 				else
-				$frnd['id'] = $friend['friend_id'];
+				$frnd['id'] = $friend['friend_id'];*/
+				$frnd['id'] = $usr_id;
 				$frnds[] = $frnd;				
 				}
 				

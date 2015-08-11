@@ -1022,6 +1022,19 @@ class Customermodel extends CI_Model {
 		return false;
 		}
    }
+    public function getFavById($id){
+	    $condition = "favorite_id =" . "'" . $id . "'";
+		$this->db->select('*');
+		$this->db->from('bzz_save_as_favorites');
+		$this->db->where($condition);
+		$this->db->limit(1);
+		$query = $this->db->get();
+		if ($query->num_rows() == 1) {
+			return $query->result();
+		} else {
+		return false;
+		}
+   }
    public function getCmpPostById($id){
 	    $condition = "cmp_post_id =" . "'" . $id . "'";
 		$this->db->select('*');
