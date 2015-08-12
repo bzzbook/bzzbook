@@ -3160,3 +3160,14 @@ a.pinIcon:hover, a.pinIcon:focus, a.pinIcon:active {
 /*# sourceMappingURL=style.css.map */
 
 .photo{ max-width:100%; }
+
+.fav-img {
+        display: block;
+        width: 100%;
+        height: 75px;
+        margin: 0 auto;
+        border-radius: 2px;
+        background-position: center center !important;
+        background-size: cover !important;
+        border: 1px solid #ccc;
+        margin-bottom: 0px; }

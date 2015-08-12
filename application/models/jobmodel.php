@@ -246,6 +246,52 @@ return false;
 	
 }
  
+public function jobs_search()
+{
+
+	$user_id = $this->session->userdata('logged_in')['account_id'];
+
+   $query = $this->db->select('hidden_job_id')->from('bzz_hidden_jobs')->where('user_id',$user_id)->get();
+	if($query->num_rows() > 0)
+	{
+		$hidden_jobs = $query->result_array();
+		$unwanted_jobs =  array();
+		foreach ( $hidden_jobs as $hide_job)
+		{
+			$unwanted_jobs[] = $hide_job['hidden_job_id'];
+		}
+		
+	}
+	
+
+	 $this->db->select('*');
+	 $this->db->from('jobs');
+	 $this->db->join('bzz_companyinfo', 'bzz_companyinfo.companyinfo_id = jobs.company_posted_by');
+    $this->db->like('job_title',$value,'both');  
+	$this->db->or_like('job_keyword',$value,'both'); 
+	$this->db->or_like('job_requirements',$value,'both');
+	 
+	
+	 $this->db->order_by('post_date','desc');
+	 $query = $this->db->get();
+	$jobs = $query->result_array();
+	
+	if($query->num_rows() > 0)
+	{
+	
+	return $jobs;
+	}else
+	return false;
+	//echo count($jobs);
+	//print_r($jobs);
+	
+	
+	
+} 
+//get recruiter jobs {get_jobs in jobmodel controller...........}
+//apply {further functionality }
+//share functionality
+//similar jobs
  
  }
 ?>
