@@ -15,6 +15,7 @@ $jobs = $this->jobmodel->get_jobs_by_industries();
                     <div class="search"><button>Search</button></div>
                 </div>
                 <div class="advancedSearch-block">
+                <form method="POST" action="<?php echo base_url('jobs/get_jobs_by_search'); ?>" name="adv_job_search" id="adv_job_search" >
                     <div class="inner-Block">
                         <div class="advanced-search-fields" id="advanced-search-fields" style="display: block;">
                             <div class="country field col-md-6">
@@ -72,13 +73,14 @@ $jobs = $this->jobmodel->get_jobs_by_industries();
                                     </div>
 
                                 </div>
-                                <div class="search"><button>Search</button> <a class="more-options" href="#">More options</a></div>
+                                <div class="search"><button id="advanced_job_search">Search</button> <a class="more-options" href="#"></a></div>
                             </div>
 
 
                         </div>
                         <div class="clearfix"></div>
                     </div>
+                    </form>
                 </div>
 
                 <div class="advancedSearchControl"><span>Advanced Search <i class="fa fa-angle-double-down"></i></span></div>
@@ -95,10 +97,10 @@ $jobs = $this->jobmodel->get_jobs_by_industries();
                 <?php 
                 foreach($jobs as $job)
                 { ?>
-                <div class="searchBlock col-md-3">
+                <div class="searchBlock col-md-3" id="job_block<?php echo $job['job_id'];?>">
                    
-                    <div class="originalBlock">
-                        <a href="#" id="job_list<?php echo $job['job_id'];?>"  class="fa fa-close"></a>
+                    <div class="originalBlock" id="originalBlock<?php echo $job['job_id'];?>">
+                        <a href="javascript:void(0);" id="job_list<?php echo $job['job_id'];?>"  class="fa fa-close"></a>
                         <img src="<?php echo base_url();?>uploads/<?php if(!empty($job['company_image'])) echo $job['company_image']; else echo 'default_profile_pic.png'?>" />
                         <h2><a href="#"><?php echo $job['job_title']; ?></a></h2>
                         <p>
@@ -116,8 +118,8 @@ $jobs = $this->jobmodel->get_jobs_by_industries();
 						}} ?>
                         </p>
                     </div>
-                    <div class="overlayBlock">
-                        <span>You won't see this job anymore •  <a href="#">Undo</a></span>
+                    <div class="overlayBlock" id="overlayBlock<?php echo $job['job_id'];?>" style="display:none;">
+                        <span>You won't see this job anymore •  <a href="javascript:void(0);" id="undo_block<?php echo $job['job_id'];?>">Undo</a></span>
                     </div>
                 </div>
 
