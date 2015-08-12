@@ -544,7 +544,7 @@ class Signg_in extends CI_Controller {
 	   
    }
  public function ajax_image_upload($file_name){
-	 
+	//print_r($_FILES); exit(0);
 	$n =  count($_FILES[$file_name]['name']);
 
 	for($i=0;$i<$n;$i++){

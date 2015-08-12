@@ -129,45 +129,55 @@ class posts extends CI_Controller {
 		echo json_encode($data);
 		exit(0);
 	}
-	 public function ajax_image_upload($file_name){
-		 
-	 
+	public function ajax_image_upload($file_name){
+	//print_r($_FILES); exit(0);
 	$n =  count($_FILES[$file_name]['name']);
 	for($i=0;$i<$n;$i++){
-	if(isset($_FILES[$file_name]["type"]) && !empty($_FILES[$file_name]["type"][$i]))	
+	if($n==1){
+		$filetype = $_FILES[$file_name]["type"];
+		$filename = $_FILES[$file_name]["name"];
+		$filesize = $_FILES[$file_name]["size"];
+		$fileerror = $_FILES[$file_name]["error"];
+		$tempname = $_FILES[$file_name]['tmp_name'];
+		$filenames = $_FILES[$file_name]["name"];
+	}else{
+		$filetype = $_FILES[$file_name]["type"][$i];
+		$filename = $_FILES[$file_name]["name"][$i];
+		$filesize = $_FILES[$file_name]["size"][$i];
+		$fileerror = $_FILES[$file_name]["error"][$i];
+		$tempname = $_FILES[$file_name]['tmp_name'][$i];
+		$filenames = implode(",",$_FILES[$file_name]["name"]);
+	}
+	if(isset($filetype) && !empty($filetype))	
 	{		
 		$validextensions = array("jpeg", "jpg", "png");
-		
-	
-		
-		$filename = implode(",",$_FILES[$file_name]["name"]);
 		
 		$temporary = explode(".",$filename);
 		
 		$file_extension = end($temporary);
 		
 		
-		if((($_FILES[$file_name]["type"][$i] == "image/png") || ($_FILES[$file_name]["type"][$i] == "image/jpg") || ($_FILES[$file_name]["type"][$i] == "image/jpeg")
-		) && ($_FILES[$file_name]["size"][$i] < 1000000)//Approx. 100kb files can be uploaded.
+		if((($filetype == "image/png") || ($filetype == "image/jpg") || ($filetype == "image/jpeg")
+		) && ($filesize < 1000000)//Approx. 100kb files can be uploaded.
 		&& in_array($file_extension, $validextensions)) {
 			
-		if ($_FILES[$file_name]["error"][$i] > 0)
+		if ($fileerror > 0)
 		{
 		$file_upload['status'] = false;
 		$file_upload['error_code'] = 2;
-		$file_upload['message'] =  "Return Code: " . $_FILES[$file_name]["error"][$i] . "<br/><br/>";
+		$file_upload['message'] =  "Return Code: " . $fileerror . "<br/><br/>";
 		}
 		else
 		{
 		
 		$config['upload_path'] = DIR_FILE_PATH; 
 		//$config['upload_path'] = './uploads/';
-		$sourcePath = $_FILES[$file_name]['tmp_name'][$i]; // Storing source path of the file in a variable
+		$sourcePath = $tempname; // Storing source path of the file in a variable
 		//$targetPath = "F:\/xampp\/htdocs\/bzzbook\/uploads\/".$_FILES[$file_name]['name'][0];
-		$targetPath = $config['upload_path'].$_FILES[$file_name]['name'][$i]; // Target path where file is to be stored
+		$targetPath = $config['upload_path'].$filename; // Target path where file is to be stored
 		move_uploaded_file($sourcePath,$targetPath) ; 
 		$file_upload['status'] = true;
-		$file_upload['message'] =  $filename;
+		$file_upload['message'] =  $filenames;
 		
 		/*$data=array(
 			   'comment_content'=> $_POST['write_comment'],
@@ -197,9 +207,10 @@ class posts extends CI_Controller {
 		$file_upload['message'] =  "File not uploaded";
 	}
 	}
+	//echo json_encode($file_upload); exit(0);
 	return $file_upload;
 	 
-
+	
 		 }
 	
 

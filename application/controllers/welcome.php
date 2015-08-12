@@ -25,7 +25,7 @@ class Welcome extends CI_Controller {
 		$data = array('content'=>'posts','user_id'=>'');
 		$this->load->view('template-view',$data);
 		}else{
-		$this->load->view('landing');
+		$this->load->view('sign_in_v');
 		}
 	}
 }
