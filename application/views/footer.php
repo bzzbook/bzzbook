@@ -131,6 +131,7 @@ $(function () {
 <script src="<?php echo base_url(); ?>js/custom.js"></script> 
 <script src="<?php echo base_url(); ?>js/jquery.nanoscroller.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>js/chat.js"></script>
+<?php $this->load->view('footer_siva'); ?>
 <script>
 		$( document ).ready(function() {
 		$('.select').jqTransform({ imgPath: '' });
