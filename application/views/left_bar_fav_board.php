@@ -1,15 +1,22 @@
+<?php 
+$favorite_boards = $this->save_as_favorites_m->get_favorite_categories();
+
+if($favorite_boards)
+{
+	?>
 <div class="myPhotos">
-          <h3>Favorites Board!</h3>
+ <h3>Favorites Board!</h3>
           <ul>
-            <li><a href="#"><img src="<?php echo base_url(); ?>images/p1.png" alt=""></a></li>
-            <li><a href="#"><img src="<?php echo base_url(); ?>images/p2.png" alt=""></a></li>
-            <li><a href="#"><img src="<?php echo base_url(); ?>images/p1.png" alt=""></a></li>
-            <li><a href="#"><img src="<?php echo base_url(); ?>images/p2.png" alt=""></a></li>
-            <li><a href="#"><img src="<?php echo base_url(); ?>images/p1.png" alt=""></a></li>
-            <li><a href="#"><img src="<?php echo base_url(); ?>images/p2.png" alt=""></a></li>
-            <li><a href="#"><img src="<?php echo base_url(); ?>images/p1.png" alt=""></a></li>
-            <li><a href="#"><img src="<?php echo base_url(); ?>images/p2.png" alt=""></a></li>
-            <li><a href="#"><img src="<?php echo base_url(); ?>images/p1.png" alt=""></a></li>
+<?php foreach($favorite_boards as $board) { 
+$data = $this->save_as_favorites_m->get_category_image($board['category_id']);
+
+?>
+         
+            <li><a href="<?php echo base_url('signg_in/get_all_favorites_by_cat_id/'.$board['category_id']); ?>"><img class="fav-img" src="<?php echo base_url(); ?>uploads/<?php echo $data[0]['favorite_image']; ?>" alt=""></a></li>
+         
+         <?php } ?>
           </ul>
           <div class="clear"></div>
         </div>
+        
+        <?php } ?>

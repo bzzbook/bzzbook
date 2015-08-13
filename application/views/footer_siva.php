@@ -1489,9 +1489,8 @@ $('.searchBlock .originalBlock a').click(function () {
 var job_id = $(this).attr('id').substr(8);
 //alert(job_id);
 
-$('#originalBlock'+job_id).hide();
-$('#overlayBlock'+job_id).show();
-$(setTimeout(function () {
+
+
 
   url="<?php echo base_url();?>jobs/hide_a_job/";
 	 $.ajax({
@@ -1500,13 +1499,14 @@ $(setTimeout(function () {
 		type: "POST",
 		success: function()
 		{   
-					
-		$('#job_block'+job_id).hide();
-
+		//$('#job_block'+job_id).toggleClass('removed');
+		$('#originalBlock'+job_id).hide();
+		$('#overlayBlock'+job_id).fadeIn().delay(5000).fadeOut();
+	    $('#job_block'+job_id).fadeOut(5000);
 		}
 		
 	   });
-	   		 }),10000);
+	   	
 
 });
 
@@ -1520,10 +1520,11 @@ url="<?php echo base_url();?>jobs/remove_hide_a_job/";
 		url: url,
 		type: "POST",
 		success: function()
-		{   					
-		$('#job_block'+job_id).show();
-		$('#originalBlock'+job_id).show();
-		$('#overlayBlock'+job_id).hide();
+		{  
+		$('#job_block'+job_id).stop();		
+		$('#job_block'+job_id).fadeIn('fast');
+		$('#originalBlock'+job_id).fadeIn('fast').css('display','block');
+		$('#overlayBlock'+job_id).css('display','none');
 		}
 		
 	   });
@@ -1582,14 +1583,15 @@ $('.carousel').on('slid.bs.carousel', function () {
             });
           
         });
+		
 
-        /*$(".searchBlock a.fa").click(function (e) {
+        $(".searchBlock a.fa").click(function (e) {
             e.preventDefault();
             $(this).parent().parent().toggleClass('removed');
         });
         $(".searchBlock .overlayBlock a").click(function (e) {
             e.preventDefault();
             $(this).parent().parent().parent().toggleClass('removed');
-        });*/
+        });
 
     </script>

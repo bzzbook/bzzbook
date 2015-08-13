@@ -101,8 +101,7 @@ public function get_jobs_by_search()
 	
 
 $country =  $_POST['country'];
-$industries = $_POST['job_search_industries'];
-$job_category = $_POST['job_search_job_type'];
+
 $postal_code =  $_POST['postalCode'];
 
 
@@ -116,13 +115,13 @@ $postal_code =  $_POST['postalCode'];
 	
 	$this->db->select('*');
 	$this->db->from('jobs');
-	if($industries != '')
+	if(!empty($_POST['job_search_industries']))
 	{
-	$this->db->where_in('job_category',$industries);
+	$this->db->where_in('job_category',$_POST['job_search_industries']);
 	}
-	if($job_category != '')
+	if(!empty($_POST['job_search_job_type']))
 	{
-		$this->db->where_in('job_type',$job_category);
+		$this->db->where_in('job_type',$_POST['job_search_job_type']);
 	}
 	
 	if($country != '')
@@ -134,7 +133,7 @@ $postal_code =  $_POST['postalCode'];
 	
 	$this->db->order_by('post_date','desc');
 	$query = $this->db->get();
-	//echo $this->db->last_query();
+	echo $this->db->last_query();
 	$jobs = $query ->result_array();
 	echo count($jobs);
  //print_r($jobs);
