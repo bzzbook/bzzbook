@@ -66,6 +66,7 @@ $('#posts').val('');
 $('#taggedfriends #tagaddedusers').html('');
 $('#taggedfriends').find('span').remove();
 $('#my_form').trigger("reset");
+$('#uploadPhotosdvPreview').html('');
 //$('#posts_content_div').html('');
 //$('#posts_content_div').find('#last_id').remove();
 $('#selectedfriends #addedusers').html('');

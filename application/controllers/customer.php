@@ -70,6 +70,16 @@ class customer extends CI_Controller {
 		
 		$user_info['job_seaking_options'] =  $data;
 		}
+		
+		
+		if(!empty ($_POST['job_seaker_jobtypes']) )
+		{
+		$options = $_POST['job_seaker_jobtypes'];
+		$data = implode(",",$options);
+		
+		$user_info['job_seaker_jobtypes'] =  $data;
+		}
+		
 		$user_info['user_phoneno'] = $this->input->post('phone_number');		
 		$user_info['user_firstname'] = $this->input->post('firstname');
 		$user_info['user_lastname'] = $this->input->post('lastname');

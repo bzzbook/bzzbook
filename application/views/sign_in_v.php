@@ -190,23 +190,20 @@ echo "</div>";
           </div>
           </div>
           
+        
+          </div>
+          <div class="row" >
           
-      
-           
-           
-          <div class="col-md-6">
-            <div class="sbButtons field col-md-6">
-            <input type="submit" value="Sign Up Now">
-           </div>
+          
+                 <div class="field col-md-12">
+         <input type="checkbox" name="job_seaker" value="job_seaker" onClick="disp_job_industries()" > Are you Job Seaker?
            </div>
           </div>
           
-                 <div class="field col-md-6">
-         <input type="checkbox" name="job_seaker" value="job_seaker" onClick="disp_job_industries()" > Are you Job Seaker?
-           </div>
-          
+          <div class="row">
+          <div class="ind_jobtype_head" style="display:none; margin-left:15px;"><h2>Select Industry</h2></div>
           <div class="scroll-pane">
-           <div class="col-md-6" style="display:none; height:100px; width:300px; " id="job_seaking_option" >
+           <div class="col-md-6 job_seaking_option" style="display:none; height:100px; width:300px;">
            
         
 				 <?php 
@@ -219,6 +216,30 @@ echo "</div>";
                 
          </div> 
          </div>
+         
+                   <div class="ind_jobtype_head" style="display:none; margin-top:10px; margin-left:15px;"><h2>Select Job Type</h2></div>
+         <div class="scroll-pane">
+           <div class="col-md-6 job_seaking_option" style="display:none; height:100px; width:300px; "  >
+           
+        
+				 <?php 
+				 $jobtypes =  $this->lookup->get_lookup_jobtype();
+				 foreach($jobtypes as $jobtype):?>
+                 <div>
+                 <input type="checkbox" name="job_seaker_jobtypes[]" value="<?php echo $jobtype->lookup_id; ?>" ><span style="margin-left:5px; font-size:14px;"><?php echo $jobtype->lookup_value; ?></span>
+                 </div>            
+                 <?php endforeach;?> 
+                
+         </div> 
+         </div>
+         
+         
+         <div class="col-md-6">
+            <div class="sbButtons field col-md-6">
+            <input type="submit" value="Sign Up Now">
+           </div>
+           </div>
+           </div>
         <!--  <p>Lorem ipsum dolor sit amet, at choro omnium partiendo qui, nec nulla voluptua ex, te homero dissentiunt usu. Et vis latine epicuri voluptaria, <a href="#">posse veniam legimus eu ius</a>. Odio albucius ne vis, nec ad scaevola philosophia. Vide nominavi</p>
         -->
         </form>
@@ -420,7 +441,8 @@ if(user_email == '')
 
 function disp_job_industries()
 {
-$('#job_seaking_option').toggle();
+	$('.ind_jobtype_head').toggle();
+$('.job_seaking_option').toggle();
 
 }
 </script>
