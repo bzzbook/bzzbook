@@ -1575,7 +1575,7 @@ if($data['frm_clg_years'] == '0')
 		$this->db->from('bzz_user_activity_log');
 		$this->db->where('user_id', $id);
 		$query = $this->db->get();
-		print_r($query->result_array());
+		//print_r($query->result_array());
 		if ($query->num_rows() > 0) {
 			$data = array(
 			   'last_active' => time() 			   

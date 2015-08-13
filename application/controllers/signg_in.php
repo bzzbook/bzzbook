@@ -116,9 +116,11 @@ class Signg_in extends CI_Controller {
 						   
 		
         $this->session->set_userdata('logged_in',$sess_array);
+		
 		// setting user activity log in database to maintain user online status
 		$this->profile_set->update_last_active_time();
 	//	print_r($this->session->userdata);
+	
 		$result = $this->sign_inm->read_user_information($sess_array);
 		if($result != false){
 			$data = array(
