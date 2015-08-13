@@ -21,7 +21,7 @@ $(document).ready(function() {
 				$(".fbphotobox img").fbPhotoBox("addTags",
 						[{x:0.3,y:0.3,w:0.3,h:0.3}]
 				);
-				$(".fbphotobox-image-content").html('<div style="font-size:16px;">'+$(this).attr("alt")+'</div>'+$(this).attr("src"));
+				$(".fbphotobox-image-content").html();
 			}
 		});
 		
