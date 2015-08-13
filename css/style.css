@@ -2864,8 +2864,17 @@ a.pinIcon:hover, a.pinIcon:focus, a.pinIcon:active {
       padding: 0px;
       margin-left: 15px; }
 	  
-	  
+	  .info-bar a{ color:#636363;}
 .scroll-pane {
+ 
+    
+    height: calc(100%);
+  
+    overflow: auto;
+    width: 100%;
+}	  
+
+.scroll-pane-sign_up {
     border: 1px solid #ccc;
     border-radius: 5px;
     height: calc(100%);
