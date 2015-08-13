@@ -135,11 +135,11 @@ class posts extends CI_Controller {
 	for($i=0;$i<$n;$i++){
 	if($n==1){
 		$filetype = $_FILES[$file_name]["type"];
-		$filename = $_FILES[$file_name]["name"];
+		$filename = time().'_'.$_FILES[$file_name]["name"];
 		$filesize = $_FILES[$file_name]["size"];
 		$fileerror = $_FILES[$file_name]["error"];
 		$tempname = $_FILES[$file_name]['tmp_name'];
-		$filenames = $_FILES[$file_name]["name"];
+		$filenames = $filename;
 	}else{
 		$filetype = $_FILES[$file_name]["type"][$i];
 		$filename = $_FILES[$file_name]["name"][$i];
@@ -148,6 +148,7 @@ class posts extends CI_Controller {
 		$tempname = $_FILES[$file_name]['tmp_name'][$i];
 		$filenames = implode(",",$_FILES[$file_name]["name"]);
 	}
+	//echo $filenames; exit(0);
 	if(isset($filetype) && !empty($filetype))	
 	{		
 		$validextensions = array("jpeg", "jpg", "png");
