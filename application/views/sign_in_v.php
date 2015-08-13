@@ -202,7 +202,7 @@ echo "</div>";
           
           <div class="row">
           <div class="ind_jobtype_head" style="display:none; margin-left:30px;"><h2>Select Industry</h2></div>
-          <div class="scroll-pane" style="display:none;">
+          <div class="scroll-pane-sign_up" style="display:none;">
            <div class="col-md-6 job_seaking_option" style="display:none; height:100px; width:300px;">
            
         
@@ -218,7 +218,7 @@ echo "</div>";
          </div>
          
                    <div class="ind_jobtype_head" style="display:none; margin-top:10px; margin-left:30px;"><h2>Select Job Type</h2></div>
-         <div class="scroll-pane" style="display:none;">
+         <div class="scroll-pane-sign_up" style="display:none;">
            <div class="col-md-6 job_seaking_option" style="display:none; height:100px; width:300px; "  >
            
         
@@ -443,7 +443,7 @@ function disp_job_industries()
 {
 $('.ind_jobtype_head').toggle();
 $('.job_seaking_option').toggle();
-$('.scroll-pane').toggle();
+$('.scroll-pane-sign_up').toggle();
 
 }
 </script>
