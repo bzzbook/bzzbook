@@ -104,10 +104,14 @@ $profiledata = $this->customermodel->profiledata($id);
       <section class="about-user-details">
         <h4><span aria-hidden="true" class="glyphicon glyphicon-picture"></span> My Photos (<?php if($data) echo count($data); else echo " Photos not uploaded ";  ?>)</h4>
          	<div class="userPhotos">
-             <?php if($data){  foreach($data as $image){ ?>
+             <?php if($data){  foreach($data as $image){ $fileimage = explode('.',$image['image_thumb']); 
+			 $default_img = $fileimage[0].'_default.'.$fileimage[1]; 
+			 $extended_img = $fileimage[0].'_extended.'.$fileimage[1]; 
+
+			 ?>
             	  <div class="fbphotobox photoThumb col-md-3" id="fbphotobox-all">
                 	<?php /*?><a href="<?php  echo base_url();?>uploads/<?php echo $image['image_thumb']; ?>" class="mpView" data-lightbox="example-1" data-lightbox="my_photos"><img src="<?php echo base_url(); ?>images/mp_view.png" alt=""></a><?php */?>
-                	<figure><img id="<?php echo $image['post_id'] ?>" class="photo" fbphotobox-src="<?php echo base_url();?>uploads/<?php echo $image['image_thumb']; ?>" src="<?php echo base_url();?>uploads/<?php echo $image['image_thumb']; ?>" width="100%" height="100%" alt=""></figure>
+                	<figure><img id="<?php echo $image['post_id'] ?>" class="photo" fbphotobox-src="<?php echo base_url();?>uploads/<?php echo $extended_img; ?>" src="<?php echo base_url();?>uploads/<?php echo $default_img; ?>" width="100%" height="100%" alt=""></figure>
                     <div class="phOptions">
                     <span class="mpImg"><a href="#"><img src="<?php echo base_url(); ?>images/bzz_icon.png" alt=""></a></span>
                     <span class="mpLike"><a href="javascript:void(0)"><img src="<?php echo base_url(); ?>images/like_myphotos.png" alt=""><em><?php echo $image['like_count'];?></em></a></span>

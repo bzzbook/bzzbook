@@ -289,13 +289,23 @@
 			 echo "<div class='fbphotobox'>";
 			 foreach($up_files as $file)
 			 {
+				// $file1 = explode('.',$file);
+//				 if($i==0)
+//				 {
+//					 echo " 
+//    <a onclick='getPostComments(".$row->event_post_id.")'><img class='photo' fbphotobox-src='".base_url()."uploads/".$file."' src='".base_url()."uploads/".$file."' /></a>";
+//				 }
+//				 else
+//				 	 echo "<a onclick='getPostComments(".$row->event_post_id.")'><img class='photo' fbphotobox-src='".base_url()."uploads/".$file."' src='".base_url()."uploads/".$file."' style='width:24%;float:left;margin:.5%; height:83px'/></a>";
+//				 $i++;
+				 $file1 = explode('.',$file);
 				 if($i==0)
 				 {
 					 echo " 
-    <a onclick='getPostComments(".$row->event_post_id.")'><img class='photo' fbphotobox-src='".base_url()."uploads/".$file."' src='".base_url()."uploads/".$file."' /></a>";
+    <a onclick='getPostComments(".$row->post_id.",&#39;".$file."&#39;)'><img class='photo' fbphotobox-src='".base_url()."uploads/".$file1[0].'_extended.'.$file1[1]."' src='".base_url()."uploads/".$file1[0].'_default.'.$file1[1]."' /></a>";
 				 }
 				 else
-				 	 echo "<a onclick='getPostComments(".$row->event_post_id.")'><img class='photo' fbphotobox-src='".base_url()."uploads/".$file."' src='".base_url()."uploads/".$file."' style='width:24%;float:left;margin:.5%; height:83px'/></a>";
+				 	 echo "<a onclick='getPostComments(".$row->post_id.",&#39;".$file."&#39;)'><img class='photo' fbphotobox-src='".base_url()."uploads/".$file1[0].'_extended.'.$file1[1]."' src='".base_url()."uploads/".$file1[0].'_default.'.$file1[1]."' style='width:24%;float:left;margin:.5%; height:83px'/></a>";
 				 $i++;
 			 }
 			 echo "</div>";

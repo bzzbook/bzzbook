@@ -74,7 +74,7 @@ class posts extends CI_Controller {
 	 $data['posted_by'] = $user_id;
 	   $up_res = $this->ajax_image_upload('uploadPhotos');
 	   if($up_res['status'])
-	   $file_name = $up_res['message'];
+	   $file_name = implode(',',$up_res['files']);
 	   else
 	   $file_name = '';
 	   
@@ -130,25 +130,18 @@ class posts extends CI_Controller {
 		exit(0);
 	}
 	public function ajax_image_upload($file_name){
+	
 	//print_r($_FILES); exit(0);
 	$n =  count($_FILES[$file_name]['name']);
+	//print_r($_FILES[$file_name]);
 	for($i=0;$i<$n;$i++){
-	if($n==1){
-		$filetype = $_FILES[$file_name]["type"];
-		$filename = time().'_'.$_FILES[$file_name]["name"];
-		$filesize = $_FILES[$file_name]["size"];
-		$fileerror = $_FILES[$file_name]["error"];
-		$tempname = $_FILES[$file_name]['tmp_name'];
-		$filenames = $filename;
-	}else{
+	
 		$filetype = $_FILES[$file_name]["type"][$i];
-		$filename = $_FILES[$file_name]["name"][$i];
+		$filename = time().'_'.$_FILES[$file_name]["name"][$i];
 		$filesize = $_FILES[$file_name]["size"][$i];
 		$fileerror = $_FILES[$file_name]["error"][$i];
 		$tempname = $_FILES[$file_name]['tmp_name'][$i];
-		$filenames = implode(",",$_FILES[$file_name]["name"]);
-	}
-	//echo $filenames; exit(0);
+
 	if(isset($filetype) && !empty($filetype))	
 	{		
 		$validextensions = array("jpeg", "jpg", "png");
@@ -178,20 +171,42 @@ class posts extends CI_Controller {
 		$targetPath = $config['upload_path'].$filename; // Target path where file is to be stored
 		move_uploaded_file($sourcePath,$targetPath) ; 
 		$file_upload['status'] = true;
-		$file_upload['message'] =  $filenames;
+		$file_upload['files'][] =  $filename;
 		
-		/*$data=array(
-			   'comment_content'=> $_POST['write_comment'],
-			   'commented_on'=> $_POST['post_id'],
-			   'commented_by'=> $_POST['posted_by'],
-			   'uploadedfiles' => $filename
-			   );
-			   
-		//print_r($data);
-		
-		  $res=$this->customermodel->write_comments($data);
-		  $data['post_id'] = $_POST['post_id'];
-		  echo $this->load->view('single_post',$data);  */
+		    $path = DIR_FILE_PATH.$filename;
+		    $config['allowed_types'] = 'gif|jpg|png';
+			$config['create_thumb'] = TRUE;
+			$config['max_size']	= '';
+			$config['max_width']  = '';
+			$config['max_height']  = '';
+		    $config['image_library'] = 'gd2';
+			$config['create_thumb'] = TRUE;
+			$config['maintain_ratio'] = TRUE;
+			$config['source_image'] = $path;
+			
+			list($imagewidth, $imageheight, $imageType) = getimagesize($path);
+			if($imagewidth>523){
+				$default_width = 523;
+				$entended_width = 900;
+			}else{
+				$default_width = $imagewidth;
+				$entended_width = $imagewidth;
+			}
+			$config['thumb_marker'] = '_default';
+			$config['width'] = $default_width;
+			$config['height'] = 1;
+			$config['master_dim'] = 'width';
+			$this->load->library('image_lib', $config);
+			$this->image_lib->initialize($config);
+			$this->image_lib->resize();
+			
+			$config['thumb_marker'] = '_extended';
+			$config['width'] = $entended_width;
+			$config['height'] = 1;
+			$config['master_dim'] = 'width';
+			$this->load->library('image_lib', $config);
+			$this->image_lib->initialize($config);
+			$this->image_lib->resize();
 		
 		}
 		 }
@@ -199,7 +214,7 @@ class posts extends CI_Controller {
 		{
 		$file_upload['status'] = false;
 		$file_upload['error_code'] = 3;
-		$file_upload['message'] =  "<span id='invalid'>***Invalid file Size or Type***<span>";
+		$file_upload['message'] =  "<span id='invalid'>***Image size should be less than 2mb and image should be in jpg,png,gif format***<span>";
 		}
 		
 	}else{
@@ -212,7 +227,8 @@ class posts extends CI_Controller {
 	return $file_upload;
 	 
 	
-		 }
+		 
+	}
 	
 
 
