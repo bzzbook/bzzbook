@@ -163,7 +163,7 @@ class Signg_in extends CI_Controller {
 	 $data['posted_by'] = $session_data['account_id'];
 	   $up_res = $this->ajax_image_upload('uploadPhotos');
 	   if($up_res['status'])
-	   $file_name = $up_res['message'];
+	   $file_name = implode(',',$up_res['files']);
 	   else
 	   $file_name = '';
 	   
@@ -543,58 +543,155 @@ class Signg_in extends CI_Controller {
 	   }
 	   
    }
- public function ajax_image_upload($file_name){
+// public function ajax_image_upload($file_name){
+//	//print_r($_FILES); exit(0);
+//	$n =  count($_FILES[$file_name]['name']);
+//
+//	for($i=0;$i<$n;$i++){
+//	if(isset($_FILES[$file_name]["type"]) && !empty($_FILES[$file_name]["type"][$i]))	
+//	{		
+//		$validextensions = array("jpeg", "jpg", "png");
+//		
+//	
+//		
+//		$filename = implode(",",$_FILES[$file_name]["name"]);
+//		echo $filename;
+//		$temporary = explode(".",$filename);
+//		print_r($temporary); echo "<br>";
+//		$file_extension = end($temporary);
+//		echo $file_extension;
+//		exit;
+//		
+//		if((($_FILES[$file_name]["type"][$i] == "image/png") || ($_FILES[$file_name]["type"][$i] == "image/jpg") || ($_FILES[$file_name]["type"][$i] == "image/jpeg")
+//		) && ($_FILES[$file_name]["size"][$i] < 1000000)//Approx. 100kb files can be uploaded.
+//		&& in_array($file_extension, $validextensions)) {
+//			
+//		if ($_FILES[$file_name]["error"][$i] > 0)
+//		{
+//		$file_upload['status'] = false;
+//		$file_upload['error_code'] = 2;
+//		$file_upload['message'] =  "Return Code: " . $_FILES[$file_name]["error"][$i] . "<br/><br/>";
+//		}
+//		else
+//		{
+//		
+//		$config['upload_path'] = DIR_FILE_PATH; 
+//		//$config['upload_path'] = './uploads/';
+//		$sourcePath = $_FILES[$file_name]['tmp_name'][$i]; // Storing source path of the file in a variable
+//		//$targetPath = "F:\/xampp\/htdocs\/bzzbook\/uploads\/".$_FILES[$file_name]['name'][0];
+//		$targetPath = $config['upload_path'].$_FILES[$file_name]['name'][$i]; // Target path where file is to be stored
+//		move_uploaded_file($sourcePath,$targetPath) ; 
+//		$file_upload['status'] = true;
+//		$file_upload['message'] =  $filename;
+//		
+//		/*$data=array(
+//			   'comment_content'=> $_POST['write_comment'],
+//			   'commented_on'=> $_POST['post_id'],
+//			   'commented_by'=> $_POST['posted_by'],
+//			   'uploadedfiles' => $filename
+//			   );
+//			   
+//		//print_r($data);
+//		
+//		  $res=$this->customermodel->write_comments($data);
+//		  $data['post_id'] = $_POST['post_id'];
+//		  echo $this->load->view('single_post',$data);  */
+//		
+//		}
+//		 }
+//		else
+//		{
+//		$file_upload['status'] = false;
+//		$file_upload['error_code'] = 3;
+//		$file_upload['message'] =  "<span id='invalid'>***Invalid file Size or Type***<span>";
+//		}
+//		
+//	}else{
+//		$file_upload['status'] = false;
+//		$file_upload['error_code'] = 1;
+//		$file_upload['message'] =  "File not uploaded";
+//	}
+//	}
+//	return $file_upload;
+//	 
+//}
+public function ajax_image_upload($file_name){
 	//print_r($_FILES); exit(0);
 	$n =  count($_FILES[$file_name]['name']);
-
+	//print_r($_FILES[$file_name]);
 	for($i=0;$i<$n;$i++){
-	if(isset($_FILES[$file_name]["type"]) && !empty($_FILES[$file_name]["type"][$i]))	
+	
+		$filetype = $_FILES[$file_name]["type"][$i];
+		$filename = time().'_'.$_FILES[$file_name]["name"][$i];
+		$filesize = $_FILES[$file_name]["size"][$i];
+		$fileerror = $_FILES[$file_name]["error"][$i];
+		$tempname = $_FILES[$file_name]['tmp_name'][$i];
+
+	if(isset($filetype) && !empty($filetype))	
 	{		
 		$validextensions = array("jpeg", "jpg", "png");
-		
-	
-		
-		$filename = implode(",",$_FILES[$file_name]["name"]);
 		
 		$temporary = explode(".",$filename);
 		
 		$file_extension = end($temporary);
 		
 		
-		if((($_FILES[$file_name]["type"][$i] == "image/png") || ($_FILES[$file_name]["type"][$i] == "image/jpg") || ($_FILES[$file_name]["type"][$i] == "image/jpeg")
-		) && ($_FILES[$file_name]["size"][$i] < 1000000)//Approx. 100kb files can be uploaded.
+		if((($filetype == "image/png") || ($filetype == "image/jpg") || ($filetype == "image/jpeg")
+		) && ($filesize < 1000000)//Approx. 100kb files can be uploaded.
 		&& in_array($file_extension, $validextensions)) {
 			
-		if ($_FILES[$file_name]["error"][$i] > 0)
+		if ($fileerror > 0)
 		{
 		$file_upload['status'] = false;
 		$file_upload['error_code'] = 2;
-		$file_upload['message'] =  "Return Code: " . $_FILES[$file_name]["error"][$i] . "<br/><br/>";
+		$file_upload['message'] =  "Return Code: " . $fileerror . "<br/><br/>";
 		}
 		else
 		{
 		
 		$config['upload_path'] = DIR_FILE_PATH; 
 		//$config['upload_path'] = './uploads/';
-		$sourcePath = $_FILES[$file_name]['tmp_name'][$i]; // Storing source path of the file in a variable
+		$sourcePath = $tempname; // Storing source path of the file in a variable
 		//$targetPath = "F:\/xampp\/htdocs\/bzzbook\/uploads\/".$_FILES[$file_name]['name'][0];
-		$targetPath = $config['upload_path'].$_FILES[$file_name]['name'][$i]; // Target path where file is to be stored
+		$targetPath = $config['upload_path'].$filename; // Target path where file is to be stored
 		move_uploaded_file($sourcePath,$targetPath) ; 
 		$file_upload['status'] = true;
-		$file_upload['message'] =  $filename;
+		$file_upload['files'][] =  $filename;
 		
-		/*$data=array(
-			   'comment_content'=> $_POST['write_comment'],
-			   'commented_on'=> $_POST['post_id'],
-			   'commented_by'=> $_POST['posted_by'],
-			   'uploadedfiles' => $filename
-			   );
-			   
-		//print_r($data);
-		
-		  $res=$this->customermodel->write_comments($data);
-		  $data['post_id'] = $_POST['post_id'];
-		  echo $this->load->view('single_post',$data);  */
+		    $path = DIR_FILE_PATH.$filename;
+		    $config['allowed_types'] = 'gif|jpg|png';
+			$config['create_thumb'] = TRUE;
+			$config['max_size']	= '';
+			$config['max_width']  = '';
+			$config['max_height']  = '';
+		    $config['image_library'] = 'gd2';
+			$config['create_thumb'] = TRUE;
+			$config['maintain_ratio'] = TRUE;
+			$config['source_image'] = $path;
+			
+			list($imagewidth, $imageheight, $imageType) = getimagesize($path);
+			if($imagewidth>523){
+				$default_width = 523;
+				$entended_width = 900;
+			}else{
+				$default_width = $imagewidth;
+				$entended_width = $imagewidth;
+			}
+			$config['thumb_marker'] = '_default';
+			$config['width'] = $default_width;
+			$config['height'] = 1;
+			$config['master_dim'] = 'width';
+			$this->load->library('image_lib', $config);
+			$this->image_lib->initialize($config);
+			$this->image_lib->resize();
+			
+			$config['thumb_marker'] = '_extended';
+			$config['width'] = $entended_width;
+			$config['height'] = 1;
+			$config['master_dim'] = 'width';
+			$this->load->library('image_lib', $config);
+			$this->image_lib->initialize($config);
+			$this->image_lib->resize();
 		
 		}
 		 }
@@ -602,7 +699,7 @@ class Signg_in extends CI_Controller {
 		{
 		$file_upload['status'] = false;
 		$file_upload['error_code'] = 3;
-		$file_upload['message'] =  "<span id='invalid'>***Invalid file Size or Type***<span>";
+		$file_upload['message'] =  "<span id='invalid'>***Image size should be less than 2mb and image should be in jpg,png,gif format***<span>";
 		}
 		
 	}else{
@@ -611,9 +708,11 @@ class Signg_in extends CI_Controller {
 		$file_upload['message'] =  "File not uploaded";
 	}
 	}
+	//echo json_encode($file_upload); exit(0);
 	return $file_upload;
 	 
-}
+	
+		 }
  public function post_comment_by_ajax()
    {
 	
