@@ -2753,14 +2753,13 @@ a.pinIcon:hover, a.pinIcon:focus, a.pinIcon:active {
   /* line 5, D:/Abid/Works/Plugins/bizbook/HTML/pin/style.scss */
   .pin-images-grp .pin-images-grp-inner {
     margin: 0 8px;
-    border: 1px solid #ccc;
     border-bottom: 0px solid #ccc;
-    line-height: 90px !important;
+    line-height: 40px !important;
     text-align: center; }
     /* line 10, D:/Abid/Works/Plugins/bizbook/HTML/pin/style.scss */
     .pin-images-grp .pin-images-grp-inner span {
-      font-size: 26px;
-      font-weight: 500; }
+      font-size: 22px;
+      font-weight: 400; }
   /* line 12, D:/Abid/Works/Plugins/bizbook/HTML/pin/style.scss */
   .pin-images-grp .imageHolder {
     margin-left: -10px; }
