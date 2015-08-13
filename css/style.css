@@ -902,7 +902,12 @@ width: 73.7%; !important;}
 .boxunderline{ border-bottom:1px solid #bbbbbb; color:#aeaeae; font-size:12px;  line-height: 33px; margin-top: -20px;}
 .addcompany{ float:left; padding:20px 0px; }
 .upload_cv label{   margin-top: -24px; padding: 5px;}
-.upload_cv .input-group-btn:last-child > .btn, .input-group-btn:last-child > .btn-group{ background:#e2e2e2;}
+.upload_cv .input-group-btn:last-child > .btn, .input-group-btn:last-child > .btn-group{ background:#e2e2e2; font-size: 13px;
+    height: 33px;
+    line-height: 30px;
+	width:90px;
+	}
+.group-span-filestyle .btn .glyphicon { margin-left:5px; margin-right:3px;}	
 
 <!----------follow open--------->
 .about-user-details .following{ border:2px solid #000 !important;  margin-bottom: 28px !important;}

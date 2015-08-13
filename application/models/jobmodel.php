@@ -204,6 +204,16 @@ return false;
 	$data = explode(",",$job_interests[0]['job_seaking_options']);
 //	print_r($data);
 	}
+	
+	$query = $this->db->select('job_seaker_jobtypes')->from('bzz_userinfo')->where('user_id',$user_id)->get();
+	if($query->num_rows() > 0)
+	{
+	$job_types = $query->result_array();
+	
+	$jobtypes= explode(",",$job_types[0]['job_seaker_jobtypes']);
+//	print_r($data);
+	}
+	
    $query = $this->db->select('hidden_job_id')->from('bzz_hidden_jobs')->where('user_id',$user_id)->get();
 	if($query->num_rows() > 0)
 	{
@@ -225,6 +235,10 @@ return false;
 	 if(!empty($data)) {
 	 $this->db->where_in('job_category',$data);
 	 }
+	 if(!empty($jobtypes)) {
+	 $this->db->where_in('job_type',$jobtypes);
+	 }
+	 
 	 if(!empty($hidden_jobs))
 	 {
 	 $this->db->where_not_in('job_id',$unwanted_jobs);
@@ -248,6 +262,31 @@ return false;
  
 public function jobs_search()
 {
+	
+	 $this->db->select('*');
+	 $this->db->from('lookup');
+	 $this->db->like('lookup_value',$search,'both');  
+	 $query = $this->db->get();
+	 if($query->num_rows() > 0)
+	{
+		$job_lookups = $query->result_array();
+		$job_type = array();
+		$industries = array();
+		
+		foreach($job_lookups as $look_up)
+		{
+			if($look_up['lookup_category'] == 'Job Type')
+			{
+				$job_type[] = $look_up['lookup_id'];
+			}else
+			if($look_up['lookup_category'] == 'Industry')
+			{
+				$industries[] = $look_up['lookup_id'];
+			}
+			
+		}
+		
+	}
 
 	$user_id = $this->session->userdata('logged_in')['account_id'];
 
@@ -267,14 +306,17 @@ public function jobs_search()
 	 $this->db->select('*');
 	 $this->db->from('jobs');
 	 $this->db->join('bzz_companyinfo', 'bzz_companyinfo.companyinfo_id = jobs.company_posted_by');
-    $this->db->like('job_title',$value,'both');  
-	$this->db->or_like('job_keyword',$value,'both'); 
-	$this->db->or_like('job_requirements',$value,'both');
+     $this->db->like('job_title',$value,'both');  
+     $this->db->or_like('job_keyword',$value,'both'); 
+	 $this->db->or_like('job_requirements',$value,'both');
+	 $this->db->where_in('job_category',$industries);
+	 $this->db->where_in('job_type',$job_type);
 	 
 	
 	 $this->db->order_by('post_date','desc');
 	 $query = $this->db->get();
-	$jobs = $query->result_array();
+	 $jobs = $query->result_array();
+	 echo $this->db->last_query();
 	
 	if($query->num_rows() > 0)
 	{

@@ -50,7 +50,7 @@
                    <select class="medium" name="job_type" id="job_type">
                     <option value="">Job Type</option>
 				<?php foreach($jobtype as $job):?>
-                <option value="<?php echo $job->lookup_value ?>"><?php echo $job->lookup_value ?></option>
+                <option value="<?php echo $job->lookup_id ?>"><?php echo $job->lookup_value ?></option>
                 <?php endforeach;?> 
                 </select>
                 </span> 
