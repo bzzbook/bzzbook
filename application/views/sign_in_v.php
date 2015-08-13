@@ -172,7 +172,7 @@ echo "</div>";
             name="password" id="password" placeholder="Password" >
           </div>
           <div class="field col-md-6 dob">
-            <div data-date-viewmode="years" data-date-format="dd-mm-yyyy" data-date="12-02-2012" id="dateYears" 
+            <div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2012-02-12" id="dateYears" 
             class="input-group-bt date">
               <input type="text" name="dob" placeholder="dd-mm-yyyy" size="16" class="form-control" data-rule-required="true" data-msg-required="please enter your Birth date" >
               <span aria-hidden="true" class="add-on glyphicon glyphicon-calendar"></span> </div>
@@ -180,7 +180,7 @@ echo "</div>";
           <!--<p>Why do I need to provide my birthday?</p> -->
           <div class="row"> 
           <div clas="col-md-6">
-          <div class="filed rdbtns col-md-6">
+          <div class="filed rdbtns col-md-6" style="padding-left: 18px; padding-top: 15px;">
             <label class="checkbox-inline">
               <input type="radio" name="gender" id="inlineRadio2" value="m" checked="checked">
               Male </label>
@@ -196,13 +196,13 @@ echo "</div>";
           
           
                  <div class="field col-md-12">
-         <input type="checkbox" name="job_seaker" value="job_seaker" onClick="disp_job_industries()" > Are you Job Seaker?
+         <input type="checkbox" name="job_seaker" value="job_seaker" onClick="disp_job_industries()" style="margin-left:15px;" /> Are you Job Seaker?
            </div>
           </div>
           
           <div class="row">
-          <div class="ind_jobtype_head" style="display:none; margin-left:15px;"><h2>Select Industry</h2></div>
-          <div class="scroll-pane">
+          <div class="ind_jobtype_head" style="display:none; margin-left:30px;"><h2>Select Industry</h2></div>
+          <div class="scroll-pane" style="display:none;">
            <div class="col-md-6 job_seaking_option" style="display:none; height:100px; width:300px;">
            
         
@@ -217,8 +217,8 @@ echo "</div>";
          </div> 
          </div>
          
-                   <div class="ind_jobtype_head" style="display:none; margin-top:10px; margin-left:15px;"><h2>Select Job Type</h2></div>
-         <div class="scroll-pane">
+                   <div class="ind_jobtype_head" style="display:none; margin-top:10px; margin-left:30px;"><h2>Select Job Type</h2></div>
+         <div class="scroll-pane" style="display:none;">
            <div class="col-md-6 job_seaking_option" style="display:none; height:100px; width:300px; "  >
            
         
@@ -441,8 +441,9 @@ if(user_email == '')
 
 function disp_job_industries()
 {
-	$('.ind_jobtype_head').toggle();
+$('.ind_jobtype_head').toggle();
 $('.job_seaking_option').toggle();
+$('.scroll-pane').toggle();
 
 }
 </script>

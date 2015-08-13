@@ -8,7 +8,7 @@ $favorites = $this->save_as_favorites_m->get_all_favorites();
  ?>
         <div class="col-md-9">
             <div class="pin-groupBlock">
-                <div class="pin-groupTop">
+                <?php /*?><div class="pin-groupTop">
                     <div class="col-md-4 AboutUser text-center">
                         <span class="user-img" style="background:url(<?php echo base_url(); ?>uploads/<?php if(!empty($image[0]->user_img_thumb)) echo $image[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>)"></span>
                         <h3><?php echo $name; ?></h3>
@@ -17,7 +17,14 @@ $favorites = $this->save_as_favorites_m->get_all_favorites();
                        <!-- <div class="col-md-4">12 <p>Likes</p></div> -->
                         <div class="clearfix"></div>
                     </div>
+                </div><?php */?>
+                <div class="info-bar">
+                    <span class="user-img" style="background:url(<?php echo base_url(); ?>uploads/<?php if(!empty($image[0]->user_img_thumb)) echo $image[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>)"></span><p><?php echo $name; ?></p>
+                     <span class="pull-right" ><p>Pins</p><?php echo "(".count($favorites).")"; ?> </span>
+                    <span class="pull-right" style="margin-left:5px;"><p>Boards</p><?php echo "(".count($categories).")"; ?></span>
+                   
                 </div>
+                
                 <div class="pin-groupBottom">
                 
                 <?php 

@@ -205,7 +205,7 @@ return false;
 //	print_r($data);
 	}
 	
-	$query = $this->db->select('job_seaker_jobtypes')->from('bzz_userinfo')->where('user_id',$user_id)->get();
+	$query = $this->db->select(' ccccc')->from('bzz_userinfo')->where('user_id',$user_id)->get();
 	if($query->num_rows() > 0)
 	{
 	$job_types = $query->result_array();
