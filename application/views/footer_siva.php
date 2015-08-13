@@ -55,10 +55,9 @@ processData:false,
 beforeSend: function(){ $('#posts_content_div').prepend('<article id="loading_img"><img style="margin-left:240px; margin-bottom:8px;" src="<?php echo base_url(); ?>images/block_loader.gif" /></article>'); },        // To send DOMDocument or non processed data file it is set to false
 success: function(data)   // A function to be called if request succeeds
 {
+$('#uploadPhotosdvPreview').html('');
 
 //$('#posts_content_div').html('');
-$('#posts_content_div').find('#loading_img').remove(); 
-
 $('#dummypost').html('');
 $('#withTokens').html('');
 $('#tagaddedusers').val('');
@@ -66,12 +65,13 @@ $('#posts').val('');
 $('#taggedfriends #tagaddedusers').html('');
 $('#taggedfriends').find('span').remove();
 $('#my_form').trigger("reset");
-$('#uploadPhotosdvPreview').html('');
 //$('#posts_content_div').html('');
 //$('#posts_content_div').find('#last_id').remove();
 $('#selectedfriends #addedusers').html('');
 $('#selectedfriends').find('span').remove();
 $('#posts_content_div').prepend(data);
+$('#posts_content_div').find('#loading_img').remove(); 
+
 
 
 
