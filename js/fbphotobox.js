@@ -407,7 +407,7 @@
 				left: leftTo,
 				width: to.widthSrc,
 				height: to.heightSrc
-			}, {duration:500, easing:'easeInOutCubic', complete: function() {
+			}, {duration:10, easing:'easeInOutCubic', complete: function() {
 				callbackFunc();
 			}, queue:false});
 		}

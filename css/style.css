@@ -2449,6 +2449,7 @@ ul {
 .posts_dropdown li+li { margin-top:2px;}
 .posts_dropdown li a i{margin-right:5px;}
 
+/*# sourceMappingURL=style.css.map */
 
 /* favorites new styles designs*/
 
@@ -2685,6 +2686,7 @@ a.pinIcon:hover, a.pinIcon:focus, a.pinIcon:active {
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.3); }
 
 /*# sourceMappingURL=style.css.map */
+
 
 
 /* pin group block for all boards */
@@ -3421,8 +3423,141 @@ a.pinIcon:hover, a.pinIcon:focus, a.pinIcon:active {
       font-size: 12px;
       line-height: 18px; }
 
-/*# sourceMappingURL=style.css.map */
+		
+		.postImages .image-loader-container {
+  position: absolute;
+  top: 50%;
+  left: 50%; }
 
+/* line 143, D:/Abid/Application/telerik/bzzbook/Bzzbook/Bzzbook/css/style.scss */
+.postImages span {
+  display: block;
+  overflow: hidden;
+  height: 300px;
+  position: relative;
+  background-size: cover !important; }
+  /* line 143, D:/Abid/Application/telerik/bzzbook/Bzzbook/Bzzbook/css/style.scss */
+  .postImages span i {
+    display: none; }
+
+/* line 146, D:/Abid/Application/telerik/bzzbook/Bzzbook/Bzzbook/css/style.scss */
+.postImages img {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  top: 1%; }
+.postImages.post-data-2 span {
+  width: 100%;
+  height: 200px;  border-bottom: 2px solid #fff; }
+.postImages.post-data-2 a + a span {
+    width: 100%;
+    float: left;
+    position: relative;
+    height: 200px; }
+
+   
+
+/* line 149, D:/Abid/Application/telerik/bzzbook/Bzzbook/Bzzbook/css/style.scss */
+.postImages.post-data-3 span {
+  width: 100%;
+  height: 300px;  border-bottom: 2px solid #fff; }
+  /* line 150, D:/Abid/Application/telerik/bzzbook/Bzzbook/Bzzbook/css/style.scss */
+  .postImages.post-data-3 a + a span {
+    width: 50%;
+    float: left;
+    position: relative;
+    height: 150px; }
+    /* line 151, D:/Abid/Application/telerik/bzzbook/Bzzbook/Bzzbook/css/style.scss */
+    .postImages.post-data-3 a + a  + a span:after {
+      content: "";
+      position: absolute;
+      left: 0px;
+      border-left: 2px solid #fff;
+      height: 150%; }
+
+/* line 156, D:/Abid/Application/telerik/bzzbook/Bzzbook/Bzzbook/css/style.scss */
+.postImages.post-data-4 span {
+  width: 100%; height:300px; border-bottom: 2px solid #fff;
+ }
+  /* line 157, D:/Abid/Application/telerik/bzzbook/Bzzbook/Bzzbook/css/style.scss */
+  .postImages.post-data-4 a + a span {
+    width: 33.3%;
+    float: left;
+    position: relative;
+    height: 150px; }
+    /* line 159, D:/Abid/Application/telerik/bzzbook/Bzzbook/Bzzbook/css/style.scss */
+    .postImages.post-data-4 a + a + a span:after {
+      content: "";
+      position: absolute;
+      left: 0px;
+      border-left: 2px solid #fff;
+      height: 100%; }
+
+/* line 166, D:/Abid/Application/telerik/bzzbook/Bzzbook/Bzzbook/css/style.scss */
+.postImages.post-data-5 span {
+  width: 50%;
+  height: 225px;
+  float: left;  border-bottom: 2px solid #fff; }
+  /* line 167, D:/Abid/Application/telerik/bzzbook/Bzzbook/Bzzbook/css/style.scss */
+  .postImages.post-data-5 a + a span {
+    width: 50%;
+    float: left;
+    position: relative;
+    height: 150px;  border-left: 2px solid #fff; }
+    /* line 168, D:/Abid/Application/telerik/bzzbook/Bzzbook/Bzzbook/css/style.scss */
+    .postImages.post-data-5 a + a + a span {
+      height: 150px;  border-left: 2px solid #fff; }
+      /* line 169, D:/Abid/Application/telerik/bzzbook/Bzzbook/Bzzbook/css/style.scss */
+      .postImages.post-data-5 a + a + a + a span {
+        height: 225px;
+        margin-top: -75px; }
+        /* line 170, D:/Abid/Application/telerik/bzzbook/Bzzbook/Bzzbook/css/style.scss */
+        .postImages.post-data-5 a + a + a + a + a span {
+          height: 150px;
+          margin-top: 0px;  border-left: 2px solid #fff; }
+		  
+		  
+		 .morePics .postImages span {
+  width: 50%;
+  height: 225px;
+  float: left; }
+  /* line 180, D:/Abid/Application/telerik/bzzbook/Bzzbook/Bzzbook/css/style.scss */
+  .morePics .postImages span i {
+    display: none; }
+  /* line 181, D:/Abid/Application/telerik/bzzbook/Bzzbook/Bzzbook/css/style.scss */
+  .morePics .postImages a + a span {
+    width: 50%;
+    float: left;
+    position: relative;
+    height: 150px; }
+    /* line 182, D:/Abid/Application/telerik/bzzbook/Bzzbook/Bzzbook/css/style.scss */
+    .morePics .postImages a + a + a span {
+      height: 150px; }
+      /* line 183, D:/Abid/Application/telerik/bzzbook/Bzzbook/Bzzbook/css/style.scss */
+      .morePics .postImages a + a + a + a span {
+        height: 225px;
+        margin-top: -75px; }
+        /* line 184, D:/Abid/Application/telerik/bzzbook/Bzzbook/Bzzbook/css/style.scss */
+        .morePics .postImages a + a + a + a + a span {
+          height: 150px;
+          margin-top: 0px;
+          position: relative; }
+          /* line 185, D:/Abid/Application/telerik/bzzbook/Bzzbook/Bzzbook/css/style.scss */
+          .morePics .postImages a + a + a + a + a span i {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0px;
+            bottom: 0px;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            display: block;
+            line-height: 132px;
+            text-align: center;
+            font-size: 24px; }
+          /* line 186, D:/Abid/Application/telerik/bzzbook/Bzzbook/Bzzbook/css/style.scss */
+          .morePics .postImages a + a + a + a + a + a span {
+            display: none; font-style:normal; }
 
 /*job description page*/
 /* line 1, D:/Abid/Works/Plugins/bizbook/HTML/jobAbout/style.scss */

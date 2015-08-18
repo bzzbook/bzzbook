@@ -1319,6 +1319,8 @@ function getPostComments(post_id,photo_name)
 }
 function getPostComments_photospage(post_id,photo_name)
 {
+ var photo_name = photo_name.replace("_default.", ".");
+ var photo_name = photo_name.replace("_extended.", ".");
  image = "<img width='80px' style='margin-left:150px;' src='<?php echo base_url(); ?>images/loading.gif' />";
  $(".fbphotobox-image-content").html(image);
  url="<?php echo base_url(); ?>customer/getpostcomments/"+post_id+"/"+photo_name;
@@ -1551,7 +1553,7 @@ function  onchangeMore(){
 	// image croping function for profile settings page--> End
 	
     $(document).ready(function() {
-        $('#submitbtn').click(function() {
+        $('#myphotos_submitbtn').click(function() {
             $("#viewimage").html('');
             $("#loadingimage").html('<img src="<?php echo base_url(); ?>cropimage/images/loading.gif" />');
             $(".uploadform").ajaxForm({

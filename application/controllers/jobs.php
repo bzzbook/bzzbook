@@ -169,9 +169,9 @@ public function remove_hide_a_job()
 public function disp_all_cmp_jobs($id)
 	{
 
-	$data['company_jobs'] =  $this->jobmodel->getJobs($id); 
+	$data['jobs'] =  $this->jobmodel->getJobs($id); 
 	//print_r($data);
-    $data['content']='individual_company_jobs_list';
+    $data['content']='user_searched_jobs_list';
     $this->load->view('full_right_content_view',$data);
 	}  
 	
@@ -180,8 +180,8 @@ public function similarjobs()
 {
 	
 	
-	$data['similar_jobs'] = $this->jobmodel->get_similar_jobs($_GET['company_id'],$_GET['job_title'],$_GET['job_keyword'],$_GET['country'],$_GET['company_country'],$_GET['company_name']);
-	$data['content']='similar_jobs';
+	$data['jobs'] = $this->jobmodel->get_similar_jobs($_GET['company_id'],$_GET['job_title'],$_GET['job_keyword'],$_GET['country'],$_GET['company_country'],$_GET['company_name']);
+	$data['content']='user_searched_jobs_list';
     $this->load->view('full_right_content_view',$data);
 	
 }

@@ -464,10 +464,7 @@ public function showfavs()
 			$this->image_lib->resize();
 			$img_fav = $data['raw_name'].'_fav'.$data['file_ext'];
 			
-			
-			
-			
-			
+		
 			// image insertion into db
             $file_id = $this->profile_set->insert_profile_pic($cropped,$img_thumb,$img_fav);
 			if(isset($_SERVER['HTTP_REFERER']))
@@ -565,6 +562,43 @@ public function showfavs()
 			 $data['posted_by'] = $session_data['account_id'];
 			 $data['post_content'] = $this->input->post('posts');
 			 $data['uploaded_files'] = $cropped;
+			 
+			
+			$path =DIR_FILE_PATH.$cropped;
+		    $config['allowed_types'] = 'gif|jpg|png';
+			$config['create_thumb'] = TRUE;
+			$config['max_size']	= '';
+			$config['max_width']  = '';
+			$config['max_height']  = '';
+		    $config['image_library'] = 'gd2';
+			$config['create_thumb'] = TRUE;
+			$config['maintain_ratio'] = TRUE;
+			$config['source_image'] = $path;
+			
+			list($imagewidth, $imageheight, $imageType) = getimagesize($path);
+			if($imagewidth>523){
+				$default_width = 523;
+				$entended_width = 900;
+			}else{
+				$default_width = $imagewidth;
+				$entended_width = $imagewidth;
+			}
+			$config['thumb_marker'] = '_default';
+			$config['width'] = $default_width;
+			$config['height'] = 1;
+			$config['master_dim'] = 'width';
+			$this->load->library('image_lib', $config);
+			$this->image_lib->initialize($config);
+			$this->image_lib->resize();
+			
+			$config['thumb_marker'] = '_extended';
+			$config['width'] = $entended_width;
+			$config['height'] = 1;
+			$config['master_dim'] = 'width';
+			$this->load->library('image_lib', $config);
+			$this->image_lib->initialize($config);
+			$this->image_lib->resize();
+			
 			 
 			 if($this->input->post('post_group')==0)
 			 {

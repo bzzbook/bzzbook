@@ -5,13 +5,14 @@ $name = $result[0]['user_firstname']." ".$result[0]['user_lastname'];
 $image = $this->profile_set->get_profile_pic();  ?>
 <div class="col-md-9">
             <div class="pin-images-grp">
-                <div class="pin-images-grp-inner">
-                    <span><?php echo $category_name; ?>(<?php echo count($favorites) ?>)</span>                   
-                </div>
+                
                 <div class="info-bar">
                     <span class="user-img" style="background:url(<?php echo base_url(); ?>uploads/<?php if(!empty($image[0]->user_img_thumb)) echo $image[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>)"></span><p><?php echo $name; ?></p>
                     <span class="pull-right"><a  href="javascript:window.history.go(-1);"><i class="fa fa-backward"></i>
 Back to boards</a></span>
+                </div>
+                <div class="pin-images-grp-inner">
+                    <span><?php echo $category_name; ?>(<?php echo count($favorites) ?>)</span>                   
                 </div>
                 <div class="imageHolder" id="imgWaterfall">
                     <?php /*?><script type="text/x-handlebars-template" id="waterfall-tpl">
