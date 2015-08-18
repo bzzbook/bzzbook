@@ -9,6 +9,7 @@ $('.fdblock .friendInfo .disc .dcBtn a').centerImage();
 // For comments pop
 
 $(document).ready(function() {
+	
 		$(".fbphotobox img").fbPhotoBox({
 			rightWidth: 360,
 			leftBgColor: "black",

@@ -68,6 +68,7 @@ class posts extends CI_Controller {
 	
 	
 	public function send_post($access_token){
+	
 	$user_res = $this->customermodel->get_user_id($access_token);	
 	$user_id =  $user_res[0]->user_id;
 	if($user_id){ 
@@ -81,7 +82,7 @@ class posts extends CI_Controller {
 	   
 	 $data['post_content'] = $_POST['posts'];
 	 $data['uploaded_files'] = $file_name;
-	 if($_POST['addedusers']!='')
+	 if($_POST['addedusers']!='' && $_POST['addedusers']!='undefined')
 	 {
 		 $data['posted_to'] = $_POST['addedusers'];
 		 $data['isGhostpost'] = 1;
@@ -138,20 +139,20 @@ class posts extends CI_Controller {
 	//print_r($_FILES[$file_name]);
 	for($i=0;$i<$n;$i++){
 	
-		if($n==1){
+		/*if($n==1){
 		$filetype = $_FILES[$file_name]["type"];
 		$filename = time().'_'.$_FILES[$file_name]["name"];
 		$filesize = $_FILES[$file_name]["size"];
 		$fileerror = $_FILES[$file_name]["error"];
 		$tempname = $_FILES[$file_name]['tmp_name'];
 		}
-		else{
+		else{*/
 		$filetype = $_FILES[$file_name]["type"][$i];
-		$filename = time().'_'.$_FILES[$file_name]["name"][$i];
+		$filename = time().'_'.str_replace(' ', '-', $_FILES[$file_name]["name"][$i]);
 		$filesize = $_FILES[$file_name]["size"][$i];
 		$fileerror = $_FILES[$file_name]["error"][$i];
 		$tempname = $_FILES[$file_name]['tmp_name'][$i];
-		}
+		//}
 
 	if(isset($filetype) && !empty($filetype))	
 	{		
