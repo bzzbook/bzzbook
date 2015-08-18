@@ -199,6 +199,18 @@ public function job_description($job_id,$cmp_id)
     $this->load->view('full_right_content_view',$data);
 	
 }
+
+public function get_jobs_by_search_bar()
+{
+	
+	if(isset($_POST['job_search_bar'])){
+	
+	$data['jobs'] = $this->jobmodel->job_search_by_searchbar($_POST['job_search_bar']);
+	$data['content']='user_searched_jobs_list';
+    $this->load->view('full_right_content_view',$data);
+	}
+	
+}
 }
 
 

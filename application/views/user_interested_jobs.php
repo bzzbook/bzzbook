@@ -11,11 +11,14 @@ $jobs = $this->jobmodel->get_jobs_by_industries();
                         <span class="fa  fa-group"></span>
                         <p>Jobs</p>
                     </div>
+                     <form method="POST" action="<?php echo base_url('jobs/get_jobs_by_search_bar'); ?>" name="adv_job_search_bar" id="adv_job_search_bar" >
                     <div class="field-Holder">
-                    
-                    <input placeholder="Search by Job title, keyword, or Company Name" class="SearchJob" /></div>
+                   
+                    <input placeholder="Search by Job title, keyword, or Company Name" class="SearchJob" name="job_search_bar" /></div>
                     <div class="search"><input class="job_search_button" type="submit" value="Search" /></div>
+                    
                 </div>
+                </form>
                 <div class="advancedSearch-block">
                 <form method="POST" action="<?php echo base_url('jobs/get_jobs_by_search'); ?>" name="adv_job_search" id="adv_job_search" >
                     <div class="inner-Block">

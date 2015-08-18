@@ -432,6 +432,34 @@ public function get_job_applicants($job_id)
 	return false;
 	}
 }
+
+public function job_search_by_searchbar($data)
+{
+	 
+	 $this->db->select('*');
+	 $this->db->from('jobs');
+	 $this->db->join('bzz_companyinfo', 'bzz_companyinfo.companyinfo_id = jobs.company_posted_by');
+
+	 $this->db->like('job_title',$data,'both');
+	 $this->db->or_like('job_keyword',$data,'both');
+	 $this->db->or_like('country',$data,'both');
+	 $this->db->or_like('company_country',$data,'both');
+	 $this->db->or_like('cmp_name',$data,'both');
+	  $this->db->or_like('job_state',$data,'both');
+	 $this->db->or_like('job_city',$data,'both');
+	 ;
+	 $this->db->order_by('post_date','desc');
+	 $query = $this->db->get();
+	 $jobs = $query->result_array();
+
+	if($query->num_rows() > 0)
+	{
+	//print_r($jobs);
+	return $jobs;
+	}else
+	return false;
+	
+}
  
  }
 ?>

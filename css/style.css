@@ -2927,7 +2927,7 @@ a.pinIcon:hover, a.pinIcon:focus, a.pinIcon:active {
 /* new jobs search*/
 /* line 1, D:/Abid/Works/Plugins/bizbook/HTML/jobSearch/style.scss */
 .jobSearchBar {
-  background: #ffde88;
+  background: #efeded;
   margin-top: 15px;
   padding-top: 10px;
   border-bottom: 1px solid #ccc;
@@ -3192,11 +3192,13 @@ a.pinIcon:hover, a.pinIcon:focus, a.pinIcon:active {
     padding: 0px 10px;
     line-height: 50px;
     border-bottom: 1px solid #ccc;
-    font-size: 20px; }
+    font-size: 16px;
+	font-weight:400; }
   /* line 98, D:/Abid/Works/Plugins/bizbook/HTML/jobSearch/style.scss */
   .searchBlocks p {
     margin: 0px;
-    padding: 5px 10px 20px; }
+    padding: 5px 10px 20px; 
+	font-size: 14px;}
   /* line 99, D:/Abid/Works/Plugins/bizbook/HTML/jobSearch/style.scss */
   .searchBlocks .searchBlock {
     position: relative; }
@@ -3375,11 +3377,13 @@ a.pinIcon:hover, a.pinIcon:focus, a.pinIcon:active {
           text-decoration: none;
           display: block;
           float: left;
-          line-height: 25px; }
-        /* line 44, D:/Abid/Works/Plugins/bizbook/HTML/JobSearchNew/style.scss */
+          line-height: 25px; 
+		  font-size:15px;
+		  font-weight:300;}
+        /* line 44, D:/Abid/Works/Plugins/bizbook/HTML/JobSearchNew/style.scss 
         .JobsSearchLayout .jobSearchListing .job_search .moreOptions ul li a:hover {
           text-decoration: none; }
-      /* line 46, D:/Abid/Works/Plugins/bizbook/HTML/JobSearchNew/style.scss */
+      /* line 46, D:/Abid/Works/Plugins/bizbook/HTML/JobSearchNew/style.scss 
       .JobsSearchLayout .jobSearchListing .job_search .moreOptions ul li:hover {
         padding: 0 0 0 0px; }
   /* line 52, D:/Abid/Works/Plugins/bizbook/HTML/JobSearchNew/style.scss */
