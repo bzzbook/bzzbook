@@ -5,17 +5,17 @@
             <figure class="compCover"><img alt="" src="<?php echo base_url(); ?>images/about_banner.jpg" class="img-responsive"></figure>
               <?php 
 			  
-						 $id = '';
-						  $cur_user_id ='';
+						// $id = '';
+						// $cur_user_id ='';
 						 if(isset($user_id))
 						{
 						$id = $user_id;
-						$cur_user_id = $user_id;
+						//$cur_user_id = $user_id;
 						}else
 						{
-							$id =  $this->session->userdata('logged_in')['account_id'];
-						$cur_user_id = $this->session->userdata('logged_in')['account_id'];
-							}
+					  		$id =  $this->session->userdata('logged_in')['account_id'];
+						//    $cur_user_id = $this->session->userdata('logged_in')['account_id'];
+						}
 						
 			  		 $image = $this->profile_set->get_profile_pic();
 			         $data = $this->profile_set->get_userinfo($id); 
@@ -132,7 +132,7 @@
                       <li>
                         <div class="tophead">WORK EXPERIENCE</div>
                       <?php if(empty($organization_details)) { ?>
-                               <?php if($id == $this->session->userdata('logged_in')['account_id'] || $id='') { ?>
+                               <?php if($id == $this->session->userdata('logged_in')['account_id']) { ?>
                          
                          <div class="iner_lefts"><i class="fa fa-plus"></i></div>
                         <div class="inner_rights boxs">
@@ -206,7 +206,7 @@
                       <?php if(empty($college_details)) { ?>
                       
                       
-                      <?php if($id == $this->session->userdata('logged_in')['account_id'] || $id='') { ?>
+                      <?php if($id == $this->session->userdata('logged_in')['account_id']) { ?>
                          
                          <div class="iner_lefts"><i class="fa fa-plus"></i></div>
                         <div class="inner_rights boxs">
@@ -258,7 +258,7 @@
                      <?php  if(empty($result[0]->location) && empty($result[0]->hometown)) { ?>
                      
                      
-                        <?php if($id == $this->session->userdata('logged_in')['account_id'] || $id='') { ?>
+                        <?php if($id == $this->session->userdata('logged_in')['account_id']) { ?>
                          <div class="iner_lefts"><i class="fa fa-plus"></i></div>
                         <div class="inner_rights boxs">
                           <h3><a  href="javascript:void(0)" id="move_to_places">Add a Location</a></h3>
@@ -343,7 +343,7 @@
                         <h3><a href="#"><?php echo $orgdetails->org_name;?></a></h3>
                         <p><?php echo $orgdetails->position;?></p>
                         </div>
-                        <?php if(!$cur_user_id) { ?>
+                        <?php if($id == $this->session->userdata('logged_in')['account_id']) { ?>
                         <div class="sm_rightside" >
                         <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid">
@@ -357,7 +357,7 @@
                          <?php } ?>
                         </div>
                         <?php } else { ?>
-              <?php if($cur_user_id != $this->session->userdata('logged_in')['account_id']) { ?>
+              <?php if($id != $this->session->userdata('logged_in')['account_id']) { ?>
                          
                          <div class="iner_lefts"><i class="fa fa-globe"></i></div>
                          <div class="inner_rights boxs">
@@ -533,7 +533,7 @@
 						?>
                         </a></h3>
                         </div>
-                        <?php if(!$cur_user_id) { ?>
+                        <?php if($id == $this->session->userdata('logged_in')['account_id']) { ?>
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="pf_skills_edit()"><i class="fa fa-pencil"></i></a></div>
@@ -600,7 +600,7 @@
                         <div class="sm_rightbox"><h3><a href="#"><?php echo $clgdetails->college_name;?></a></h3>
                         <p><?php echo $clgdetails->concentration1;?> <?php echo $clgdetails->concentration2;?> <?php echo $clgdetails->concentration3;?></p>
                         </div>
-                        <?php if(!$cur_user_id) { ?>
+                        <?php if($id == $this->session->userdata('logged_in')['account_id']) { ?>
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" class="college_edit" id="college_edit<?php echo $clgdetails->college_id; ?>" onclick="college_edit()"><i class="fa fa-pencil"></i></a></div>
@@ -613,7 +613,7 @@
 						 </div>
 						 <?php }else { ?>
             
-                           <?php if($cur_user_id != $this->session->userdata('logged_in')['account_id']) { ?>
+                           <?php if($id != $this->session->userdata('logged_in')['account_id']) { ?>
                          
                          <div class="iner_lefts"><i class="fa fa-globe"></i></div>
                          <div class="inner_rights boxs">
@@ -789,7 +789,7 @@
                         <div class="sm_rightbox"><h3><a href="#"><?php echo $schdetails->school_name;?></a></h3>
                         <p> </p>
                         </div>
-                        <?php if(!$cur_user_id) { ?>
+                        <?php if($id == $this->session->userdata('logged_in')['account_id']) { ?>
                          <div class="sm_rightside">
                         <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" class="school_edit" id="school_edit<?php echo $schdetails->school_id; ?>" onclick="school_edit()"><i class="fa fa-pencil"></i></a></div>
@@ -800,7 +800,7 @@
                         </div>
                          <?php } ?></div><?php }else{ ?>
                          
-                           <?php if($cur_user_id != $this->session->userdata('logged_in')['account_id']) { ?>
+                           <?php if($id != $this->session->userdata('logged_in')['account_id']) { ?>
                          
                          <div class="iner_lefts"><i class="fa fa-globe"></i></div>
                          <div class="inner_rights boxs">
@@ -970,7 +970,7 @@
                         <div class="sm_rightbox"><h3><a href="#"><?php echo $result[0]->location; ?></a></h3>
                         <p>Current city</p>
                         </div>
-                         <?php if(!$cur_user_id) { ?>
+                         <?php if($id == $this->session->userdata('logged_in')['account_id']) { ?>
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="current_city_edit()"><i class="fa fa-pencil"></i></a></div>
@@ -1021,10 +1021,9 @@
                       <li id="hometown-li">
                       <div class="tophead">Hometown</div>
                         
-                         <?php if(empty($result[0]->hometown)) { ?>
-                         
-                         
-                        <?php if($id != $this->session->userdata('logged_in')['account_id']) { ?>
+                         <?php if(empty($result[0]->hometown)) 
+						 { 
+						  if($id != $this->session->userdata('logged_in')['account_id']) { ?>
                          
                          <div class="iner_lefts"><i class="fa fa-globe"></i></div>
                          <div class="inner_rights boxs">
@@ -1045,7 +1044,11 @@
                         <div class="sm_rightbox"><h3><a href="#"><?php echo $result[0]->hometown; ?></a></h3>
                         <p>Home Town</p>
                         </div>
-                        <?php if(!$cur_user_id) { ?>
+                        <?php
+						//echo $id;
+						//echo $cur_user_id;
+						
+						 if($id == $this->session->userdata('logged_in')['account_id']) { ?>
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="home_town_edit()"><i class="fa fa-pencil"></i></a></div>
@@ -1129,7 +1132,7 @@
                         <div class="sm_rightbox"><h3><a href="#"><?php echo $data['mobile_no']; ?></a></h3>
                         <p>mobile</p>
                         </div>
-                        <?php if(!$cur_user_id) { ?>
+                        <?php if($id == $this->session->userdata('logged_in')['account_id']) { ?>
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="mbl_edit()"  class="mobile_edit" id="mobile_edit<?php echo $data['mobile_id']; ?>"><i class="fa fa-pencil"></i></a></div>
@@ -1272,7 +1275,7 @@
                         <?php if($data) { if($data[1]) {  echo $data[1].','; } } ?>
 						<?php if($data) { if($data[2]) {  echo $data[2].'.'; } } ?></p>
                         </div>
-                        <?php if(!$cur_user_id) { ?>
+                        <?php if($id == $this->session->userdata('logged_in')['account_id']) { ?>
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="address_edit()"><i class="fa fa-pencil"></i></a></div>
@@ -1469,7 +1472,7 @@
                         <div class="sm_rightbox"><h3><a href="#"><?php echo $result[0]->website; ?></a></h3>
                         <p>website</p>
                         </div>
-                        <?php if(!$cur_user_id) { ?>
+                        <?php if($id == $this->session->userdata('logged_in')['account_id']) { ?>
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="website_edit()"><i class="fa fa-pencil"></i></a></div>
@@ -1552,7 +1555,7 @@
 						 ?></a></h3>
                         
                         </div>
-                        <?php if(!$cur_user_id) { ?>
+                        <?php if($id == $this->session->userdata('logged_in')['account_id']) { ?>
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="interests_edit()"><i class="fa fa-pencil"></i></a></div>
@@ -1613,27 +1616,8 @@
                       <li id="language-li"> 
                         
  						<!-- <div class="tophead">Languages</div> -->
-                        <?php if(empty($result[0]->languages)) { ?>
-                        
-                        
-                                                
-                        <?php  if(!empty($user_id)) { ?>
-                         
-                         
-                         <div class="iner_lefts"><i class="fa fa-globe"></i></div>
-                         <div class="inner_rights boxs">
-                          <h3>Language Details Not found...</h3>
-                          <div class="graphic"></div>
-                         </div>
-                         <div class="clearfix"></div>
-                        
-                          
-					  <?php } else { ?>
-					
-                    
-                        <div class="iner_boxleft" id="lang1"><a href="javascript:void(0)" id="add_language"><i class="fa fa-plus"></i>Add a language</a></div> <?php } } else { ?>
-                        
-                        <div id="language_val_display">
+                        <?php if(!empty($result[0]->languages)) { ?>
+                            <div id="language_val_display">
                         <div class="sm_leftbox"></div>
                         <div class="sm_rightbox"><h3><a href="#">
 						<?php 
@@ -1645,7 +1629,7 @@
 						?>
                         </a></h3>
                         </div>
-                        <?php if(!$cur_user_id) { ?>
+                        <?php if($id == $this->session->userdata('logged_in')['account_id']) { ?>
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="languages_edit()"><i class="fa fa-pencil"></i></a></div>
@@ -1655,6 +1639,22 @@
                         </div>
                         <div class="clearfix"></div>
                         
+                        <?php } else if($id != $this->session->userdata('logged_in')['account_id']) { ?>
+                        
+                        
+                         <div class="iner_lefts"><i class="fa fa-globe"></i></div>
+                         <div class="inner_rights boxs">
+                          <h3>Language Details Not found...</h3>
+                          <div class="graphic"></div>
+                         </div>
+                         <div class="clearfix"></div>
+                        
+                          
+					  <?php } else { ?>
+					
+                    
+                        <div class="iner_boxleft" id="lang1"><a href="javascript:void(0)" id="add_language"><i class="fa fa-plus"></i>Add a language</a></div> 
+                    
                         
                         
                         <?php } ?>
@@ -1704,11 +1704,28 @@
                       <li id="relegion-li"> 
                         <!--<div class="tophead">Basic Information</div>-->
                        
-                        <?php if(empty($result[0]->religious)) {?>
+                        <?php if(!empty($result[0]->religious)) {?>
                         
-                                               
-                        <?php  if(!empty($user_id)) { ?>
-                         
+                           <div id="relegious_val_disp">
+                        <div class="sm_leftbox"></div>
+                        <div class="sm_rightbox"><h3><a href="#">
+						<?php  
+						$data = explode('|@|',$result[0]->religious);
+						echo $data[0];
+						 ?></a></h3>
+                        <p><?php echo $data[1]; ?></p>
+                        </div>
+                        <?php if($id == $this->session->userdata('logged_in')['account_id']) { ?>
+                        <div class="sm_rightside">
+                        <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
+                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="relegious_edit()"><i class="fa fa-pencil"></i></a></div>
+                        <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_relegion_belief()"><i class="fa fa-times"></i></a></div>
+                        </div>
+                        <?php } ?>
+                        </div>
+                        <div class="clearfix"></div>
+                        
+                        <?php } else if($id != $this->session->userdata('logged_in')['account_id']) { ?>
                          
                          <div class="iner_lefts"><i class="fa fa-globe"></i></div>
                          <div class="inner_rights boxs">
@@ -1724,29 +1741,8 @@
                          <div class="iner_boxleft" id="relegious"><a href="javascript:void(0)" id="add_relegious"><i class="fa fa-plus"></i>Add your religious views</a></div>
                         
                         
-                        <?php } } else { ?>
-                        
-                          <div id="relegious_val_disp">
-                        <div class="sm_leftbox"></div>
-                        <div class="sm_rightbox"><h3><a href="#">
-						<?php  
-						$data = explode('|@|',$result[0]->religious);
-						echo $data[0];
-						 ?></a></h3>
-                        <p><?php echo $data[1]; ?></p>
-                        </div>
-                        <?php if(!$cur_user_id) { ?>
-                        <div class="sm_rightside">
-                        <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
-                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="relegious_edit()"><i class="fa fa-pencil"></i></a></div>
-                        <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_relegion_belief()"><i class="fa fa-times"></i></a></div>
-                        </div>
                         <?php } ?>
-                        </div>
-                        <div class="clearfix"></div>
-                        
-                         <?php } ?>
-                        
+                    
                         <div class="inner_rights boxs">
                         
                           <div class="birth birt_bottom col-md-12" id="relegious_disp" style="display:none;">
@@ -1784,28 +1780,8 @@
                       </li>
                       <li id="political-li"> 
                         <!--<div class="tophead">Basic Information</div>-->
-                               <?php if(empty($result[0]->political)) { ?>
-                               
-                                                        
-                        <?php  if(!empty($user_id)) { ?>
-                         
-                         
-                         <div class="iner_lefts"><i class="fa fa-globe"></i></div>
-                         <div class="inner_rights boxs">
-                          <h3>Political Views Are Not found...</h3>
-                          <div class="graphic"></div>
-                         </div>
-                         <div class="clearfix"></div>
-                        
-                          
-					  <?php } else { ?>
-					
-                    
-                        <div class="iner_boxleft" id="political"><a href="javascript:void(0)" id="add_political"><i class="fa fa-plus"></i>Add your political views</a></div>
-                        
-                        <?php } } else { ?>
-                        
-                        <div id="political_val_disp">
+                               <?php if(!empty($result[0]->political)) { ?>
+                               <div id="political_val_disp">
                         <div class="sm_leftbox"></div>
                         <div class="sm_rightbox"><h3><a href="#">
 						<?php  
@@ -1814,7 +1790,7 @@
 						 ?></a></h3>
                         <p><?php echo $p_data[1]; ?></p>
                         </div>
-                        <?php if(!$cur_user_id){ ?>
+                        <?php if($id == $this->session->userdata('logged_in')['account_id']){ ?>
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="political_edit()"><i class="fa fa-pencil"></i></a></div>
@@ -1822,6 +1798,23 @@
                         </div>
                         <?php } ?>
                         </div>
+                                                        
+                       <?php }else if($id != $this->session->userdata('logged_in')['account_id']) { ?>
+                         
+                         
+                         <div class="iner_lefts"><i class="fa fa-globe"></i></div>
+                         <div class="inner_rights boxs">
+                          <h3>Political Views Are Not found...</h3>
+                          <div class="graphic"></div>
+                         </div>
+                         <div class="clearfix"></div>
+                            
+					  <?php }else{ ?>
+					
+                    
+                        <div class="iner_boxleft" id="political"><a href="javascript:void(0)" id="add_political"><i class="fa fa-plus"></i>Add your political views</a></div>
+                        
+                                               
                         <?php } ?>
                         <div class="inner_rights boxs">
                                                      
@@ -1866,10 +1859,25 @@
                     <ul class="relations">
                       <li id="relation-li">
                         <div class="tophead">Relationship</div>
-                        <?php if(empty($result[0]->relationshipstatus)) { ?>
-                        
+                        <?php if(!empty($result[0]->relationshipstatus)) { ?>
+                        <div id="relation">
+                            <div class="relation_box col-md-12">
+                              <div class="col-md-8" style="margin-left:-40px;">
+                                <div class="col-md-2 relationss"> <i class="fa fa-heart"></i></div>
+                                <div class="col-md-10">
+                                  <h3><?php echo $result[0]->relationshipstatus; ?></h3>
+                                </div>
+                              </div>
+                              <?php if($id == $this->session->userdata('logged_in')['account_id']) { ?>
+                              <div class="col-md-4 rightblock ">
+                                <div class="col-md-3 family" style="display:none;"><a href="#"><i class="fa fa-globe"></i></a></div>
+                                <div class="col-md-9 com_rig" ><a href="javascript:void(0)"  onclick="edit_relation()"><i class="fa fa-pencil"></i></a> </div>
+                              </div>
+                              <?php } ?>
+                            </div>
+                          </div>
                                                  
-                        <?php  if(!empty($user_id)) { ?>
+                        <?php  } else if($id !== $this->session->userdata('logged_in')['account_id']) { ?>
                          
                          
                          <div class="iner_lefts"><i class="fa fa-globe"></i></div>
@@ -1888,24 +1896,7 @@
                           <a href="javascript:void(0)" id="relation_status"><h3>Add your relationship status</h3></a>
                           
                         </div>
-                        <?php } }else { ?>
-                        <div id="relation">
-                            <div class="relation_box col-md-12">
-                              <div class="col-md-8" style="margin-left:-40px;">
-                                <div class="col-md-2 relationss"> <i class="fa fa-heart"></i></div>
-                                <div class="col-md-10">
-                                  <h3><?php echo $result[0]->relationshipstatus; ?></h3>
-                                </div>
-                              </div>
-                              <?php if(!$cur_user_id) { ?>
-                              <div class="col-md-4 rightblock ">
-                                <div class="col-md-3 family" style="display:none;"><a href="#"><i class="fa fa-globe"></i></a></div>
-                                <div class="col-md-9 com_rig" ><a href="javascript:void(0)"  onclick="edit_relation()"><i class="fa fa-pencil"></i></a> </div>
-                              </div>
-                              <?php } ?>
-                            </div>
-                          </div>
-							<?php } ?>
+                        <?php } ?>
                         <div class="clearfix"></div>
                       </li>
                       
@@ -1973,7 +1964,7 @@
                         <div class="sm_rightbox"><h3><a href="#"><?php echo $family['member_name']; ?> </a></h3>
                         <p><?php echo $family['member_relation']; ?></p>
                         </div>
-                        <?php if(!$cur_user_id) { ?>
+                        <?php if($id == $this->session->userdata('logged_in')['account_id']) { ?>
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" class="family_edit" onclick="family_edit()" id="family_edit<?php echo $family['fam_member_id']; ?>"><i class="fa fa-pencil"></i></a></div>
@@ -1987,7 +1978,7 @@
                    		<?php }else { ?>
                         
                                                  
-                        <?php  if(!empty($user_id)) { ?>
+                        <?php  if($id != $this->session->userdata('logged_in')['account_id'])  { ?>
                          
                          
                          <div class="iner_lefts"><i class="fa fa-users"></i></div>
@@ -2059,7 +2050,7 @@
                             <div class="graphic"></div>
                           </div>
                            <?php if(!empty($family_members)) { ?>
-                           <?php if(empty($user_id)) { ?>
+                           <?php if($id = $this->session->userdata('logged_in')['account_id']) { ?>
                         <a href="javascript:void(0)" id="add_family_link_disp" class="work_edu_side_links">add a family member</a>
                         <div id="family_mem_down_block">
                          <div class="iner_lefts" id="add_f_member_down1" style="display:none;"><i class="fa fa-plus"></i></div>
@@ -2087,12 +2078,19 @@
                   
                       <li id="aboutme-li">
                         <div class="tophead">About You</div>
-                        <?php if(empty($result[0]->aboutme)) { ?>
+                        <?php if(!empty($result[0]->aboutme)) { ?>
                         
-                                               
-                        <?php  if(!empty($user_id)) { ?>
+                            <div id="aboutme_val_disp">
+                      
+                        <div class="sm_rightbox"><h3><a href="#"><?php echo $result[0]->aboutme ; ?></a></h3>
+                           </div>
+                        </div>                    
+                        <?php  }else if($id == $this->session->userdata('logged_in')['account_id']) { ?>
                          
                          
+                            <div class="iner_boxleft"><a href="javascript:void(0)" id="aboutme_a"><i class="fa fa-plus"></i>Write some details about yourself</a></div>
+                         
+                            <?php } else {?>
                          <div class="iner_lefts"><i class="fa fa-globe"></i></div>
                          <div class="inner_rights boxs">
                           <h3>About him Details Not found...</h3>
@@ -2101,30 +2099,18 @@
                          <div class="clearfix"></div>
                         
                           
-					  <?php } else { ?>
+					  <?php } ?>
 					
-                    
-                        <div class="iner_boxleft"><a href="javascript:void(0)" id="aboutme_a"><i class="fa fa-plus"></i>Write some details about yourself</a></div>
-                         <?php } } else { ?>
-                        <div id="aboutme_val_disp">
-                      
-                        <div class="sm_rightbox"><h3><a href="#"><?php echo $result[0]->aboutme ; ?></a></h3>
-                       
-                        </div>
-                        <?php if(!$cur_user_id) { ?>
+                        <?php if($id == $this->session->userdata('logged_in')['account_id'] && !empty($result[0]->aboutme)) { ?>
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
-                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="about_me_edit()"><i class="fa fa-pencil"></i></a></div>
+                       <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="about_me_edit()"><i class="fa fa-pencil"></i></a></div>
                         <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_about_me()"><i class="fa fa-times"></i></a></div>
                         </div>
                         <?php } ?>
-                        </div>
+                    
                         <div class="clearfix"></div>
-                         
-                         
-                         
-                         
-                         <?php } ?>
+                       
                         <div class="clearfix"></div>
                      
                       </li>
@@ -2193,7 +2179,7 @@
                         <div class="sm_rightbox"><h3><a href="#"><?php echo $nicname['nic_name']; ?></a></h3>
                         <p><?php echo $nicname['nic_name_type']; ?></p>
                         </div>
-                        <?php if(!$cur_user_id) { ?>
+                        <?php if($id == $this->session->userdata('logged_in')['account_id']) { ?>
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="nick_edit()" class="nick_edit" id="nick_edit<?php echo $nicname['nic_name_id']; ?>"><i class="fa fa-pencil"></i></a></div>
@@ -2207,12 +2193,12 @@
                             </div>
                           <?php } else { ?>
                                                  
-                        <?php  if(!empty($user_id)) { ?>
+                        <?php  if($id != $this->session->userdata('logged_in')['account_id']) { ?>
                          
                          
                          <div class="iner_lefts"><i class="fa fa-globe"></i></div>
                          <div class="inner_rights boxs">
-                          <h3>About him Details Not found...</h3>
+                          <h3> his NickName Details Not found...</h3>
                           <div class="graphic"></div>
                          </div>
                          <div class="clearfix"></div>
@@ -2276,7 +2262,7 @@
                         </div>
                         <div class="clearfix"></div>
                           <?php if(!empty($nick_names)) { ?>
-                            <?php  if(empty($user_id)) { ?>
+                            <?php  if(empty($id)) { ?>
                         <a href="javascript:void(0)" id="add_nicname_link_disp" class="work_edu_side_links">add Nick Name</a>
                         <div id="nicname_down_block">
                         <div class="iner_boxleft othnames" id="other_name_down_view" style="display:none;"><a href="javascript:void(0)" 
@@ -2291,43 +2277,49 @@
                       
                       <li id="favquotes-li">
                         <div class="tophead">Favorite Quotes</div>
-                        <?php if(empty($result[0]->favquotes)) { ?>
+                        <?php if(!empty($result[0]->favquotes)) { ?>
                         
-                                                  
-                        <?php  if(!empty($user_id)) { ?>
+                        
+                            <div id="favquotes_val_disp">
+                      
+                        <div class="sm_rightbox"><h3><a href="#"><?php echo $result[0]->favquotes ; ?></a></h3>
+                       
+                        </div>
+                        </div>
+                        
+                        <?php } else if($id == $this->session->userdata('logged_in')['account_id']) { ?>
+                        
+                             <div class="iner_boxleft"><a href="javascript:void(0)" id="fav_quotes"><i class="fa fa-plus"></i>Add your favorite quotations</a></div>
                          
-                         
-                         <div class="iner_lefts"><i class="fa fa-globe"></i></div>
+                        <?php } else {?>
+                        <div class="iner_lefts"><i class="fa fa-globe"></i></div>
                          <div class="inner_rights boxs">
                           <h3>Favorite Quotes Details Not found...</h3>
                           <div class="graphic"></div>
                          </div>
                          <div class="clearfix"></div>
                         
+                        <?php } ?>
+                                           
+  
+                        
                           
-					  <?php } else { ?>
+					  <?php if($id == $this->session->userdata('logged_in')['account_id'] && !empty($result[0]->favquotes)) { ?>
 					
+                     
                     
-                        <div class="iner_boxleft"><a href="javascript:void(0)" id="fav_quotes"><i class="fa fa-plus"></i>Add your favorite quotations</a></div>
-                        
-                      <?php } } else { ?>  
-                        
-                        
-                        <div id="favquotes_val_disp">
-                      
-                        <div class="sm_rightbox"><h3><a href="#"><?php echo $result[0]->favquotes ; ?></a></h3>
-                       
-                        </div>
-                        <?php if(!$cur_user_id) { ?>
+                     
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
                         <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="fav_quotes_edit()"><i class="fa fa-pencil"></i></a></div>
                         <div class="col-md-3 com_rig"><a href="javascript:void(0)" onclick="del_fav_quotes()"><i class="fa fa-times"></i></a></div>
                         </div>
-                        <?php } ?>
-                        </div>
+                       
+                        
+                      <?php } ?>
+                        
                         <div class="clearfix"></div>
-                        <?php } ?>
+                        
                         <div class="clearfix"></div>
                       </li>
                       
@@ -2399,13 +2391,7 @@
 						
 					 foreach($life_events_data as $events)
 					  {
-						
-					
 						 $years_data = explode('-',$events['exact_date']); 
-						// print_r($years_data[0]);
-						// echo "     ";
-						
-						
 						
 						  if($i == $years_data[0])
 						  {
@@ -2582,7 +2568,9 @@
                         <div class="clearfix"></div>
                       </li>
 					 <?php } }
-					 } }} else { ?>
+					 } }} else 
+					 
+					 { ?>
                       <li>
                                 <div class="inner_rights">
                                
@@ -2590,7 +2578,11 @@
                         </div>
                         <div class="clearfix"></div>
                       </li>
-                     <?php } ?>
+                     <?php } 
+					 
+					 if($id == $this->session->userdata('logged_in')['account_id'])
+					 {
+					 ?>
                   
                       <li>
                         <div class="iner_lefts"><i class="fa fa-plus"></i></div>
@@ -2692,15 +2684,11 @@
      </table>
 </div>
 </div>
-                        
-                        
-                          
+     
                         </div>
                         <div class="clearfix"></div>
-                      
-                      
-                      
-                                            </li>
+                                       </li>
+                                       <?php } ?>
                     </ul>
                   </div>
                 </div>

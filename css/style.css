@@ -540,6 +540,37 @@ border-top-right-radius: 5px; }
 
 
 
+#Apply_for_Job .modal-title{ font-weight:700; color:#fff;  }
+#Apply_for_Job .modal-header{ background:#fbc436 !important; -webkit-border-top-left-radius: 5px;
+-webkit-border-top-right-radius: 5px;
+-moz-border-radius-topleft: 5px;
+-moz-border-radius-topright: 5px;
+border-top-left-radius: 5px;
+border-top-right-radius: 5px; }
+#Apply_for_Job h2{ background:url(../images/settings_icon1.png) no-repeat 0 center; padding:0 0 0 30px; height:42px; line-height:42px; font-size:18px;}
+#Apply_for_Job .nav-tabs{ background:#fbc436; border-bottom:3px solid #1c1c1c; margin-bottom:15px;}
+#Apply_for_Job .nav-tabs li a{ font-size:14px; color:#fff; border-radius:0; border:none;}
+#Apply_for_Job .nav-tabs > li.active > a, #AddCompany .nav-tabs > li.active > a:hover, #AddCompany .nav-tabs > li.active > a:focus{ background:#000; border:none; color:#fff;}
+#Apply_for_Job .nav > li > a:hover, #AddCompany .nav > li > a:focus{ background:#000;}
+#Apply_for_Job .pfpic{ text-align:center; float:none !important; padding:20px 0;}
+#Apply_for_Job .pfpic span{ display:block;}
+#Apply_for_Job .modal-body{ padding:0 10px;}
+#Apply_for_Job .modal-body h4{ font-size:15px; color:#353535; font-weight:500; padding-bottom:10px; border-bottom:1px solid #d8d8d8; margin-bottom:20px;}
+#Apply_for_Job .modal-body .form-control{  border: 1px solid #e3e3e3;  box-shadow: none;  color: #a8a8a8;  font-size: 12px;  font-weight: 300;   height:32px; margin-bottom:26px; border-radius:3px; }
+#Apply_for_Job .modal-body .fmbtn{ border-radius:2px; border:none; background:#609b34; color:#fff; font-size:12px; font-weight:700; height:34px; padding:0 10px; margin-bottom:20px;}
+
+#Apply_for_Job .upload{ text-align:center; margin-bottom:15px;} 
+.fileinput-button { position: relative; overflow: hidden; }
+.fileinput-button input { position: absolute; top: 0; right: 0; margin: 0; opacity: 0; -ms-filter: 'alpha(opacity=0)'; font-size: 200px; direction: ltr; cursor: pointer; }
+/* Fixes for IE < 8 */
+@media screen\9 {.fileinput-button input { filter: alpha(opacity=0); font-size: 100%; height: 100%; }}
+#Apply_for_Job .smbtn{ background:#609b34; border:none; margin-bottom:20px; font-size:15px; color:#fff; font-weight:500; padding:3px 8px; -webkit-border-radius:3px; border-radius:3px; float:right;}
+#Apply_for_Job .modal-body textarea{height:70px !important; margin-bottom:20px !important;}
+#Apply_for_Job .add{ background:#2f2f2f; border:none; margin-bottom:20px; font-size:15px; color:#fff; font-weight:500; padding:3px 8px; -webkit-border-radius:3px; border-radius:3px; float:right;}
+#Apply_for_Job .radio label{ font-weight:300;}
+
+
+
 /*My Messages*/
 .messageSt h2{ background:url(../images/sideNav.png) no-repeat 0 8px; padding:0 0 0 35px; height:42px; line-height:42px; font-size:18px;}
 .messageSt .nav-tabs{ background:#fbc436; border-bottom:3px solid #1c1c1c; margin-bottom:15px;}
@@ -2419,14 +2450,15 @@ ul {
 .posts_dropdown li a i{margin-right:5px;}
 
 
-/* style for modal form save as favoite  */
+/* favorites new styles designs*/
+
 /* line 1, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
 .pin-it-column {
   font-family: 'Roboto', sans-serif; }
   /* line 2, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
   .pin-it-column .modal-dialog {
     margin: 30px auto;
-    width: 780px; }
+    width: 90%; }
   /* line 5, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
   .pin-it-column .pin-categories-pinit {
     width: 290px;
@@ -2518,7 +2550,8 @@ ul {
           height: 35px;
           border-radius: 35px;
           float: left;
-          border: 1px solid #e9e9e9; }
+          border: 1px solid #e9e9e9; 
+		  }
         /* line 34, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
         .pin-it-column .pin-categories-pinit .user-option-block .board-option-pin p {
           padding: 0px;
@@ -2533,7 +2566,7 @@ ul {
       /* line 37, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
       .pin-it-column .pin-categories-pinit .user-option-block .board-option-pin:hover {
         border: 1px solid #e9e9e9;
-        background: #f3f3f3; }
+        background: #efefef; }
         /* line 40, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
         .pin-it-column .pin-categories-pinit .user-option-block .board-option-pin:hover a.pinIcon {
           display: block; }
@@ -2560,7 +2593,7 @@ ul {
   .pin-it-column .imgHolder-pinit {
     width: calc(100% - 300px);
     float: left;
-    background: #d9d9d9;
+  background: #d9d9d9;
     height: 650px;
     display: table; }
     /* line 64, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
@@ -2568,37 +2601,40 @@ ul {
       display: table-cell;
       vertical-align: middle;
       align-content: center;
+      position: relative;
       width: 300px; }
-      /* line 68, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
-      .pin-it-column .imgHolder-pinit .img-content-block .carousel.slide {
-        width: 300px;
-        margin: 0 auto; }
-      /* line 72, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
-      .pin-it-column .imgHolder-pinit .img-content-block .carousel-control.right, .pin-it-column .imgHolder-pinit .img-content-block .carousel-control.left {
-        background: none; }
-      /* line 75, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
+      /* line 69, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
       .pin-it-column .imgHolder-pinit .img-content-block span.content {
         border-radius: 0px;
-        -webkit-border-bottom-right-radius: 5px;
-        -webkit-border-bottom-left-radius: 5px;
-        -moz-border-radius-bottomright: 5px;
-        -moz-border-radius-bottomleft: 5px;
-        border-bottom-right-radius: 5px;
-        border-bottom-left-radius: 5px;
         position: absolute;
         width: 100%;
         height: auto;
         bottom: 0px;
         background: #fff;
-        font-size: 18px;
+        font-size: 12px;
         line-height: 25px;
         padding: 10px 5px;
         z-index: 99; }
+      /* line 77, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
+      .pin-it-column .imgHolder-pinit .img-content-block .carousel.slide {
+        width: 90%;
+        margin: 0 auto; }
+        /* line 80, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
+        .pin-it-column .imgHolder-pinit .img-content-block .carousel.slide img {
+          border-radius: 5px;
+          display: block;
+          width: 100%;
+          height: auto;
+          
+          margin: 0 auto; }
       /* line 83, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
+      .pin-it-column .imgHolder-pinit .img-content-block .carousel-control.right, .pin-it-column .imgHolder-pinit .img-content-block .carousel-control.left {
+        background: none; }
+      /* line 87, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
       .pin-it-column .imgHolder-pinit .img-content-block .imageThumb {
         vertical-align: middle;
         border-radius: 5px; }
-        /* line 88, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
+        /* line 91, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
         .pin-it-column .imgHolder-pinit .img-content-block .imageThumb span {
           height: 400px;
           position: relative;
@@ -2607,29 +2643,29 @@ ul {
           display: block;
           background-position: center center !important;
           background-size: cover !important; }
-  /* line 106, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
+  /* line 109, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
   .pin-it-column .modal-content {
     border-radius: 0px;
     padding: 10px; }
 
-/* line 112, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
+/* line 115, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
 p {
   margin: 0 0 1.5em; }
 
-/* line 116, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
+/* line 119, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
 .scroll-pane::-webkit-scrollbar {
   width: 1em; }
 
-/* line 120, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
+/* line 123, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
 .scroll-pane::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); }
 
-/* line 124, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
+/* line 127, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
 .scroll-pane::-webkit-scrollbar-thumb {
   background-color: #cbcbcb;
   outline: 1px solid #fff; }
 
-/* line 129, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
+/* line 132, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
 a.pinIcon {
   display: inline-block;
   vertical-align: middle;
@@ -2644,11 +2680,12 @@ a.pinIcon {
   -webkit-transition-property: box-shadow;
   transition-property: box-shadow; }
 
-/* line 143, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
+/* line 146, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
 a.pinIcon:hover, a.pinIcon:focus, a.pinIcon:active {
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.3); }
 
 /*# sourceMappingURL=style.css.map */
+
 
 /* pin group block for all boards */
 
@@ -2942,7 +2979,7 @@ a.pinIcon:hover, a.pinIcon:focus, a.pinIcon:active {
   .jobSearchBar .search {
     padding-top: 10px; }
     /* line 17, D:/Abid/Works/Plugins/bizbook/HTML/jobSearch/style.scss */
-    .jobSearchBar .search button {
+    .jobSearchBar .search .job_search_button {
       height: 30px;
       border-radius: 4px;
       background: #609b34;
@@ -3227,3 +3264,339 @@ a.pinIcon:hover, a.pinIcon:focus, a.pinIcon:active {
         background-size: cover !important;
         border: 1px solid #ccc;
         margin-bottom: 0px; }
+		
+		
+/* line 2, D:/Abid/Works/Plugins/bizbook/HTML/JobSearchNew/style.scss */
+.JobsSearchLayout h2, .JobsSearchLayout h3 {
+  margin: 0px; }
+
+/* line 3, D:/Abid/Works/Plugins/bizbook/HTML/JobSearchNew/style.scss */
+.JobsSearchLayout h2.mainHead {
+  background: #fbc436;
+  padding: 5px;
+  color: #fff;
+  font-size: 20px;
+  line-height: 24px;
+  margin-top:15px; }
+  /* line 7, D:/Abid/Works/Plugins/bizbook/HTML/JobSearchNew/style.scss */
+  .JobsSearchLayout h2.mainHead:after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 1px;
+    clear: both; }
+  /* line 9, D:/Abid/Works/Plugins/bizbook/HTML/JobSearchNew/style.scss */
+  .JobsSearchLayout h2.mainHead span.searchColumn {
+    font-size: 12px; }
+    /* line 11, D:/Abid/Works/Plugins/bizbook/HTML/JobSearchNew/style.scss */
+    .JobsSearchLayout h2.mainHead span.searchColumn input {
+      font-size: 10px;
+      height: 24px;
+      border: none;
+      background: #e3e3e3;
+      padding: 0 0 0 10px;
+      color: #7e7e7e;
+      -webkit-border-top-left-radius: 2px;
+      -webkit-border-bottom-left-radius: 2px;
+      -moz-border-radius-topleft: 2px;
+      -moz-border-radius-bottomleft: 2px;
+      border-top-left-radius: 2px;
+      border-bottom-left-radius: 2px; }
+    /* line 17, D:/Abid/Works/Plugins/bizbook/HTML/JobSearchNew/style.scss */
+    .JobsSearchLayout h2.mainHead span.searchColumn button {
+      background: #6e6e6e;
+      border: none;
+      height: 24px;
+      -webkit-border-top-right-radius: 2px;
+      -webkit-border-bottom-right-radius: 2px;
+      -moz-border-radius-topright: 2px;
+      -moz-border-radius-bottomright: 2px;
+      border-top-right-radius: 2px;
+      border-bottom-right-radius: 2px; }
+
+/* line 27, D:/Abid/Works/Plugins/bizbook/HTML/JobSearchNew/style.scss */
+.JobsSearchLayout .jobSearchListing {
+  border: 1px solid #ccc;
+  border-top: 0px none; }
+  /* line 30, D:/Abid/Works/Plugins/bizbook/HTML/JobSearchNew/style.scss */
+  .JobsSearchLayout .jobSearchListing .job_search + .job_search:before {
+    content: "";
+    display: block;
+    width: 99%;
+    height: 1px;
+    clear: both;
+    margin: 0 auto;
+    background: #ccc; }
+  /* line 31, D:/Abid/Works/Plugins/bizbook/HTML/JobSearchNew/style.scss */
+  .JobsSearchLayout .jobSearchListing .job_search:after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 1px;
+    clear: both; }
+  /* line 32, D:/Abid/Works/Plugins/bizbook/HTML/JobSearchNew/style.scss */
+  .JobsSearchLayout .jobSearchListing .job_search .optionBox {
+    float: left;
+    width: 35px;
+    padding: 15px 10px 10px 10px; }
+  /* line 33, D:/Abid/Works/Plugins/bizbook/HTML/JobSearchNew/style.scss */
+  .JobsSearchLayout .jobSearchListing .job_search .moreOptions {
+    width: 195px;
+    float: left;
+    padding-top: 10px; }
+    /* line 35, D:/Abid/Works/Plugins/bizbook/HTML/JobSearchNew/style.scss */
+    .JobsSearchLayout .jobSearchListing .job_search .moreOptions ul {
+      list-style: none;
+      margin: 0px;
+      padding: 0px; }
+      /* line 39, D:/Abid/Works/Plugins/bizbook/HTML/JobSearchNew/style.scss */
+      .JobsSearchLayout .jobSearchListing .job_search .moreOptions ul li {
+        transition: padding 0.5s ease;
+        line-height: 25px;
+        padding: 0 0 0 10px;
+        clear: both; }
+        /* line 41, D:/Abid/Works/Plugins/bizbook/HTML/JobSearchNew/style.scss */
+        .JobsSearchLayout .jobSearchListing .job_search .moreOptions ul li:after {
+          content: "";
+          display: block;
+          width: 100%;
+          height: 1px;
+          clear: both; }
+        /* line 42, D:/Abid/Works/Plugins/bizbook/HTML/JobSearchNew/style.scss */
+        .JobsSearchLayout .jobSearchListing .job_search .moreOptions ul li i {
+          float: left;
+          line-height: 25px;
+          margin-right: 5px; }
+        /* line 43, D:/Abid/Works/Plugins/bizbook/HTML/JobSearchNew/style.scss */
+        .JobsSearchLayout .jobSearchListing .job_search .moreOptions ul li a {
+          color: #505050;
+          text-decoration: none;
+          display: block;
+          float: left;
+          line-height: 25px; }
+        /* line 44, D:/Abid/Works/Plugins/bizbook/HTML/JobSearchNew/style.scss */
+        .JobsSearchLayout .jobSearchListing .job_search .moreOptions ul li a:hover {
+          text-decoration: none; }
+      /* line 46, D:/Abid/Works/Plugins/bizbook/HTML/JobSearchNew/style.scss */
+      .JobsSearchLayout .jobSearchListing .job_search .moreOptions ul li:hover {
+        padding: 0 0 0 0px; }
+  /* line 52, D:/Abid/Works/Plugins/bizbook/HTML/JobSearchNew/style.scss */
+  .JobsSearchLayout .jobSearchListing .job_search .aboutJob {
+    margin: 10px 0;
+    width: calc(100% - 230px);
+    padding: 0 10px 3px;
+    float: left;
+    position: relative; }
+    /* line 53, D:/Abid/Works/Plugins/bizbook/HTML/JobSearchNew/style.scss */
+    .JobsSearchLayout .jobSearchListing .job_search .aboutJob:hover {
+      background: #efeded; }
+    /* line 57, D:/Abid/Works/Plugins/bizbook/HTML/JobSearchNew/style.scss */
+    .JobsSearchLayout .jobSearchListing .job_search .aboutJob h2 {
+      font-size: 16px;
+      color: #4574b6;
+      text-decoration: underline;
+      line-height: 30px; }
+      /* line 58, D:/Abid/Works/Plugins/bizbook/HTML/JobSearchNew/style.scss */
+      .JobsSearchLayout .jobSearchListing .job_search .aboutJob h2 a {
+        color: #4574b6;
+        text-decoration: underline; }
+    /* line 60, D:/Abid/Works/Plugins/bizbook/HTML/JobSearchNew/style.scss */
+    .JobsSearchLayout .jobSearchListing .job_search .aboutJob h3 {
+      font-size: 12px;
+      line-height: 18px;
+      font-weight: 700;
+      color: #505050; }
+    /* line 61, D:/Abid/Works/Plugins/bizbook/HTML/JobSearchNew/style.scss */
+    .JobsSearchLayout .jobSearchListing .job_search .aboutJob .excrept {
+      padding: 2px 0 5px 0;
+      font-size: 12px;
+      line-height: 15px;
+      color: #909090; }
+    /* line 65, D:/Abid/Works/Plugins/bizbook/HTML/JobSearchNew/style.scss */
+    .JobsSearchLayout .jobSearchListing .job_search .aboutJob span.dated {
+      position: absolute;
+      bottom: 2px;
+      right: 10px;
+      color: #a8a8a8;
+      font-size: 12px;
+      line-height: 18px; }
+
+/*# sourceMappingURL=style.css.map */
+
+
+/*job description page*/
+/* line 1, D:/Abid/Works/Plugins/bizbook/HTML/jobAbout/style.scss */
+.aboutJobDescription {
+  font-family: 'Roboto', sans-serif;
+  margin-top: 15px; }
+  /* line 4, D:/Abid/Works/Plugins/bizbook/HTML/jobAbout/style.scss */
+  .aboutJobDescription h3, .aboutJobDescription h2, .aboutJobDescription h1, .aboutJobDescription p {
+    margin: 0px;
+    padding: 0px; }
+  /* line 5, D:/Abid/Works/Plugins/bizbook/HTML/jobAbout/style.scss */
+  .aboutJobDescription .headTag {
+    background: #efeded;
+    display: table;
+    width: 100%;
+    height: 130px; }
+    /* line 10, D:/Abid/Works/Plugins/bizbook/HTML/jobAbout/style.scss */
+    .aboutJobDescription .headTag .logo {
+      text-align: center;
+      display: table-cell;
+      width: 160px;
+      vertical-align: middle;
+      border-right: 1px solid #adadad; }
+      /* line 11, D:/Abid/Works/Plugins/bizbook/HTML/jobAbout/style.scss */
+      .aboutJobDescription .headTag .logo img {
+        width: 100%;
+        height: auto;
+        max-width: 110px; }
+    /* line 13, D:/Abid/Works/Plugins/bizbook/HTML/jobAbout/style.scss */
+    .aboutJobDescription .headTag .data {
+      float: left;
+      padding-left: 10px;
+      margin-top: 10px;
+      color: #4f4f4f; }
+      /* line 14, D:/Abid/Works/Plugins/bizbook/HTML/jobAbout/style.scss */
+      .aboutJobDescription .headTag .data h3 {
+        margin: 10px 0;
+        font-weight: bold; }
+      /* line 15, D:/Abid/Works/Plugins/bizbook/HTML/jobAbout/style.scss */
+      .aboutJobDescription .headTag .data p.area {
+        font-size: 20px; }
+        /* line 16, D:/Abid/Works/Plugins/bizbook/HTML/jobAbout/style.scss */
+        .aboutJobDescription .headTag .data p.area span {
+          color: #507ba0;
+          font-size: 20px; }
+      /* line 18, D:/Abid/Works/Plugins/bizbook/HTML/jobAbout/style.scss */
+      .aboutJobDescription .headTag .data span {
+        font-size: 14px; }
+    /* line 21, D:/Abid/Works/Plugins/bizbook/HTML/jobAbout/style.scss */
+    .aboutJobDescription .headTag .totalApplicants {
+      float: right;
+      width: 130px;
+      text-align: center;
+      color: #4f4f4f;
+      padding-top: 30px; }
+      /* line 22, D:/Abid/Works/Plugins/bizbook/HTML/jobAbout/style.scss */
+      .aboutJobDescription .headTag .totalApplicants span {
+        font-size: 30px; }
+      /* line 23, D:/Abid/Works/Plugins/bizbook/HTML/jobAbout/style.scss */
+      .aboutJobDescription .headTag .totalApplicants p {
+        font-size: 16px; }
+  /* line 26, D:/Abid/Works/Plugins/bizbook/HTML/jobAbout/style.scss */
+  .aboutJobDescription .aboutBlock {
+    background: #efeded;
+    margin-top: 15px; }
+    /* line 27, D:/Abid/Works/Plugins/bizbook/HTML/jobAbout/style.scss */
+    .aboutJobDescription .aboutBlock h2 {
+      background: #929292;
+      float: left;
+      font-size: 16px;
+      padding: 0 30px;
+      line-height: 40px;
+      font-weight: 400;
+      color: #fff; }
+  /* line 30, D:/Abid/Works/Plugins/bizbook/HTML/jobAbout/style.scss */
+  .aboutJobDescription .DescriptionTag .jobSection {
+    margin: 20px 30px 20px;
+    padding: 20px 0; }
+    /* line 31, D:/Abid/Works/Plugins/bizbook/HTML/jobAbout/style.scss */
+    .aboutJobDescription .DescriptionTag .jobSection + .jobSection {
+      border-top: 1px solid #ccc; }
+    /* line 32, D:/Abid/Works/Plugins/bizbook/HTML/jobAbout/style.scss */
+    .aboutJobDescription .DescriptionTag .jobSection h3 {
+      font-size: 20px;
+      font-weight: 400;
+      padding-bottom: 10px;
+      line-height: 35px;
+      color: #4f4f4f; }
+      /* line 33, D:/Abid/Works/Plugins/bizbook/HTML/jobAbout/style.scss */
+      .aboutJobDescription .DescriptionTag .jobSection h3 i {
+        font-size: 35px; }
+    /* line 35, D:/Abid/Works/Plugins/bizbook/HTML/jobAbout/style.scss */
+    .aboutJobDescription .DescriptionTag .jobSection p {
+      font-size: 14px;
+      line-height: 30px;
+      color: #4f4f4f; }
+    /* line 36, D:/Abid/Works/Plugins/bizbook/HTML/jobAbout/style.scss */
+    .aboutJobDescription .DescriptionTag .jobSection p.exp {
+
+      color: #959595; }
+    /* line 37, D:/Abid/Works/Plugins/bizbook/HTML/jobAbout/style.scss */
+    .aboutJobDescription .DescriptionTag .jobSection ul {
+      margin: 0px;
+      padding: 0px; }
+      /* line 39, D:/Abid/Works/Plugins/bizbook/HTML/jobAbout/style.scss */
+      .aboutJobDescription .DescriptionTag .jobSection ul li {
+        list-style: none;
+        line-height: 25px; }
+  /* line 42, D:/Abid/Works/Plugins/bizbook/HTML/jobAbout/style.scss */
+  .aboutJobDescription .DescriptionTag .companySection {
+    margin: 10px 30px 20px;
+    padding: 10px 0; }
+    /* line 43, D:/Abid/Works/Plugins/bizbook/HTML/jobAbout/style.scss */
+    .aboutJobDescription .DescriptionTag .companySection p {
+      font-size: 14px;
+      line-height: 30px;
+      color: #4f4f4f;
+      line-height: 25px; }
+    /* line 44, D:/Abid/Works/Plugins/bizbook/HTML/jobAbout/style.scss */
+    .aboutJobDescription .DescriptionTag .companySection .otherJobs {
+      margin-top: 20px; }
+      /* line 47, D:/Abid/Works/Plugins/bizbook/HTML/jobAbout/style.scss */
+      .aboutJobDescription .DescriptionTag .companySection .otherJobs .jobMore {
+        margin: 10px 15px 10px -15px; }
+        /* line 49, D:/Abid/Works/Plugins/bizbook/HTML/jobAbout/style.scss */
+        .aboutJobDescription .DescriptionTag .companySection .otherJobs .jobMore h3 {
+          color: #507ba0;
+          font-size: 16px; }
+          /* line 50, D:/Abid/Works/Plugins/bizbook/HTML/jobAbout/style.scss */
+          .aboutJobDescription .DescriptionTag .companySection .otherJobs .jobMore h3 a {
+            color: #507ba0; }
+  /* line 56, D:/Abid/Works/Plugins/bizbook/HTML/jobAbout/style.scss */
+  .aboutJobDescription .DescriptionTag .similarJob {
+    margin-top: 20px; }
+    /* line 57, D:/Abid/Works/Plugins/bizbook/HTML/jobAbout/style.scss */
+    .aboutJobDescription .DescriptionTag .similarJob:after {
+      content: "";
+      height: 1px;
+      width: 100%;
+      display: block;
+      clear: both; }
+    /* line 59, D:/Abid/Works/Plugins/bizbook/HTML/jobAbout/style.scss */
+    .aboutJobDescription .DescriptionTag .similarJob .img {
+      display: table;
+      width: calc(50% - 20px);
+      float: left;
+      margin-right: 20px;
+      margin-bottom: 20px; }
+      /* line 60, D:/Abid/Works/Plugins/bizbook/HTML/jobAbout/style.scss */
+      .aboutJobDescription .DescriptionTag .similarJob .img .imgHolder {
+        width: 100%;
+        display: table-cell;
+        text-align: center;
+        vertical-align: middle;
+        height: 100px;
+        background: #fff; }
+        /* line 61, D:/Abid/Works/Plugins/bizbook/HTML/jobAbout/style.scss */
+        .aboutJobDescription .DescriptionTag .similarJob .img .imgHolder img {
+          height: 80%;
+          width: auto; }
+    /* line 64, D:/Abid/Works/Plugins/bizbook/HTML/jobAbout/style.scss */
+    .aboutJobDescription .DescriptionTag .similarJob .content {
+      float: left;
+      width: 50%; }
+      /* line 65, D:/Abid/Works/Plugins/bizbook/HTML/jobAbout/style.scss */
+      .aboutJobDescription .DescriptionTag .similarJob .content h3 {
+        line-height: 18px;
+        padding-bottom: 10px; }
+        /* line 66, D:/Abid/Works/Plugins/bizbook/HTML/jobAbout/style.scss */
+        .aboutJobDescription .DescriptionTag .similarJob .content h3 a {
+          color: #507ba0;
+          font-size: 16px; }
+      /* line 68, D:/Abid/Works/Plugins/bizbook/HTML/jobAbout/style.scss */
+      .aboutJobDescription .DescriptionTag .similarJob .content p {
+        line-height: 18px; }
+
+/*# sourceMappingURL=style.css.map */

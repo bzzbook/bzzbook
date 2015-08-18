@@ -25,6 +25,9 @@ class Jobmodel extends CI_Model {
 		'job_description'=>$data['job_desc'],
 		'job_requirements'=>$data['req_skills'],
 		'country'=>$data['country'],
+		'job_state'=>$data['state'],
+		'job_city'=>$data['job_city'],
+		'experience'=> $data['job_exp'],
 		'user_id'=>$this->session->userdata('logged_in')['account_id']
 		);
 		
@@ -205,7 +208,7 @@ return false;
 //	print_r($data);
 	}
 	
-	$query = $this->db->select(' ccccc')->from('bzz_userinfo')->where('user_id',$user_id)->get();
+	$query = $this->db->select('*')->from('bzz_userinfo')->where('user_id',$user_id)->get();
 	if($query->num_rows() > 0)
 	{
 	$job_types = $query->result_array();
@@ -255,7 +258,7 @@ return false;
 	}else
 	return false;
 	//echo count($jobs);
-	//print_r($jobs);
+	print_r($jobs);
 	
 	
 }
@@ -324,16 +327,111 @@ public function jobs_search()
 	return $jobs;
 	}else
 	return false;
-	//echo count($jobs);
-	//print_r($jobs);
-	
-	
 	
 } 
-//get recruiter jobs {get_jobs in jobmodel controller...........}
-//apply {further functionality }
-//share functionality
-//similar jobs
+
+ public function get_jobs_by_searchblock($country,$postal_code,$industries,$jobtype)
+
+ {
+ 
+	$this->db->select('*');
+	$this->db->from('jobs');
+	
+	if(!empty($country))
+	{
+	$this->db->where('country',$country);
+	}
+	if($industries != '')
+	{
+	$this->db->where_in('job_category',$industries);
+	}
+	if($jobtype != '')
+	{
+		$this->db->where_in('job_type',$jobtype);
+	}
+	$this->db->join('bzz_companyinfo', 'bzz_companyinfo.companyinfo_id = jobs.company_posted_by');
+
+	
+	$this->db->order_by('post_date','desc');
+	$query = $this->db->get();
+	//echo $this->db->last_query();
+	if($query->num_rows() > 0 )
+	{
+	$jobs = $query ->result_array();		
+	return $jobs;
+	}else
+	return false;
+
+ }
+ 
+ public function get_job_type($lookup_id)
+ {
+	$query =  $this->db->select('lookup_value')->from('lookup')->where('lookup_id',$lookup_id)->get();
+	 if($query->num_rows() > 0)
+	 {
+		 return $query->result_array();
+	 }else
+	 return false;
+	 
+ }
+
+ public function get_similar_jobs($company_id,$job_title,$job_keyword,$country,$company_country,$company_name)
+ {
+	 
+	 $this->db->select('*');
+	 $this->db->from('jobs');
+	 $this->db->join('bzz_companyinfo', 'bzz_companyinfo.companyinfo_id = jobs.company_posted_by');
+
+	 $this->db->like('job_title',$job_title,'both');
+	 $this->db->or_like('job_keyword',$job_keyword,'both');
+	 $this->db->or_like('country',$country,'both');
+	 $this->db->or_like('company_country',$company_country,'both');
+	 $this->db->or_like('cmp_name',$company_name,'both');
+	 // $this->db->where('company_posted_by',$company_id);  
+     //$this->db->or_where('job_title',$job_title);
+	 $this->db->order_by('post_date','desc');
+	 $query = $this->db->get();
+	 $simiarjobs = $query->result_array();
+	// echo $this->db->last_query();
+//	exit;
+	if($query->num_rows() > 0)
+	{
+	
+	return $simiarjobs;
+	}else
+	return false;
+	 
+ }
+ 
+ public function get_job_details($job_id)
+ {
+	 
+	$this->db->select('*');
+	$this->db->from('jobs');
+	$this->db->where('job_id',$job_id);
+	$this->db->join('bzz_companyinfo', 'bzz_companyinfo.companyinfo_id = jobs.company_posted_by');
+	$this->db->order_by('post_date','desc');
+	$query = $this->db->get();
+	//echo $this->db->last_query();
+	if($query->num_rows() > 0 )
+	{
+	$jobs = $query ->result_array();		
+	return $jobs;
+	}else
+	return false;
+	 
+ }
+public function get_job_applicants($job_id)
+{
+	$query = $this->db->select('*')->from('bzz_job_applications')->where('job_id',$job_id)->get();
+
+	if($query->num_rows() > 0)
+	{
+		 return $query->result_array();
+	}else{ 
+	return false;
+	}
+}
  
  }
 ?>

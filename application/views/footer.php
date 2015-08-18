@@ -1743,7 +1743,7 @@ $(document).ready(function () {
 $('#addJobForm').submit( function( event){
 						
 					var errors = '';
-					if($("#job_title").val()=='' || $("#job_type").val()=="" || $("#job_category").val()==0 || $("#job_salary").val()=='' || $("#salary_basis").val()=='' || $("#job_keywords").val()=='' || $("#job_company_name").val()=='' || $("#cont_name").val()=='' || $("#cont_email").val()=='' || $("#job_desc").val()=='' || $("#req_skills").val()=='' || $("#country").val == '' )
+					if($("#job_title").val()=='' || $("#job_type").val()=="" || $("#job_category").val()==0 || $("#job_salary").val()=='' || $("#salary_basis").val()=='' || $("#job_keywords").val()=='' || $("#job_company_name").val()=='' || $("#cont_name").val()=='' || $("#cont_email").val()=='' || $("#job_desc").val()=='' || $("#req_skills").val()=='' || $("#country").val == '' || $("#job_exp").val == '' )
 					{
 						
 						$("#jobformerrors").html("Fields with '*' are mandatory, Please fill them...");
@@ -1887,7 +1887,7 @@ function saveAsFav(post_id){
 						//alert(data);
 					    $('#save_fav_category_search').val('');
 						$('#categories').html('');
-						$('#carousel-example-generic').html(data);
+						$('.img-content-block').html(data);
 						//var user_categories =
 				
 						 get_save_fav_user_categories();

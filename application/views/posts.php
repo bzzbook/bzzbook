@@ -107,10 +107,10 @@
                 <div class="modal-content">
                     <div class="imgHolder-pinit">
                         <div class="img-content-block">
-                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-wrap="false">
+                        
   <!-- Wrapper for slides -->
   
-  </div>                           
+                        
                            
                         </div>
                     </div>

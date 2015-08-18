@@ -11,8 +11,10 @@ $jobs = $this->jobmodel->get_jobs_by_industries();
                         <span class="fa  fa-group"></span>
                         <p>Jobs</p>
                     </div>
-                    <div class="field-Holder"><input placeholder="Search by Job title, keyword, or Company Name" class="SearchJob" /></div>
-                    <div class="search"><button>Search</button></div>
+                    <div class="field-Holder">
+                    
+                    <input placeholder="Search by Job title, keyword, or Company Name" class="SearchJob" /></div>
+                    <div class="search"><input class="job_search_button" type="submit" value="Search" /></div>
                 </div>
                 <div class="advancedSearch-block">
                 <form method="POST" action="<?php echo base_url('jobs/get_jobs_by_search'); ?>" name="adv_job_search" id="adv_job_search" >
@@ -29,7 +31,7 @@ $jobs = $this->jobmodel->get_jobs_by_industries();
                             </div>
                             <div class="zip field col-md-6">
                                 <label class="field-label" for="postalCode">Zip code</label><br />
-                                <input type="text" value="530016" maxlength="10" size="9" id="postalCode" name="postalCode">
+                                <input type="text" maxlength="10" size="9" id="postalCode" name="postalCode">
                             </div>
                             <div class="clearfix"></div>
                             <div class="industry field col-md-6">
@@ -73,7 +75,7 @@ $jobs = $this->jobmodel->get_jobs_by_industries();
                                     </div>
 
                                 </div>
-                                <div class="search"><button id="advanced_job_search">Search</button> <a class="more-options" href="#"></a></div>
+                                <div class="search"><button class="job_search_button" id="advanced_job_search">Search</button> <a class="more-options" href="#"></a></div>
                             </div>
 
 

@@ -302,10 +302,10 @@
 				 if($i==0)
 				 {
 					 echo " 
-    <a onclick='getPostComments(".$row->post_id.",&#39;".$file."&#39;)'><img class='photo' fbphotobox-src='".base_url()."uploads/".$file1[0].'_extended.'.$file1[1]."' src='".base_url()."uploads/".$file1[0].'_default.'.$file1[1]."' /></a>";
+    <a onclick='getPostComments(".$row->event_post_id.",&#39;".$file."&#39;)'><img class='photo' fbphotobox-src='".base_url()."uploads/".$file1[0].'_extended.'.$file1[1]."' src='".base_url()."uploads/".$file1[0].'_default.'.$file1[1]."' /></a>";
 				 }
 				 else
-				 	 echo "<a onclick='getPostComments(".$row->post_id.",&#39;".$file."&#39;)'><img class='photo' fbphotobox-src='".base_url()."uploads/".$file1[0].'_extended.'.$file1[1]."' src='".base_url()."uploads/".$file1[0].'_default.'.$file1[1]."' style='width:24%;float:left;margin:.5%; height:83px'/></a>";
+				 	 echo "<a onclick='getPostComments(".$row->event_post_id.",&#39;".$file."&#39;)'><img class='photo' fbphotobox-src='".base_url()."uploads/".$file1[0].'_extended.'.$file1[1]."' src='".base_url()."uploads/".$file1[0].'_default.'.$file1[1]."' style='width:24%;float:left;margin:.5%; height:83px'/></a>";
 				 $i++;
 			 }
 			 echo "</div>";

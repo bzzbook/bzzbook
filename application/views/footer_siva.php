@@ -1522,7 +1522,8 @@ url="<?php echo base_url();?>jobs/remove_hide_a_job/";
 		type: "POST",
 		success: function()
 		{  
-		$('#job_block'+job_id).stop();		
+		$('#overlayBlock'+job_id).stop();		
+		$('#job_block'+job_id).stop();	
 		$('#job_block'+job_id).fadeIn('fast');
 		$('#originalBlock'+job_id).fadeIn('fast').css('display','block');
 		$('#overlayBlock'+job_id).css('display','none');
@@ -1570,9 +1571,10 @@ $('.carousel').on('slid.bs.carousel', function () {
 
 
 
-        $(".advancedSearchControl span").click(function () {
-            $(".advancedSearch-block").slideToggle("slow");
-
+      $(".advancedSearchControl span").click(function () {
+			 $(".advancedSearch-block").slideToggle("slow");
+				//alert("Test Block");
+				$('#adv_job_search').get(0).reset();
             $(this).children('i').toggleClass(function () {
                 if ($(this).is(".fa-angle-double-down")) {
                     $(this).removeClass('fa-angle-double-down');
@@ -1585,7 +1587,7 @@ $('.carousel').on('slid.bs.carousel', function () {
           
         });
 		
-
+/*
         $(".searchBlock a.fa").click(function (e) {
             e.preventDefault();
             $(this).parent().parent().toggleClass('removed');
@@ -1594,5 +1596,5 @@ $('.carousel').on('slid.bs.carousel', function () {
             e.preventDefault();
             $(this).parent().parent().parent().toggleClass('removed');
         });
-
+*/
     </script>

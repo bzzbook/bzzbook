@@ -73,7 +73,7 @@
                   <span>
                   <input type="text" class="medium" name="job_salary" id="job_salary">
                   </span> </div>
-                <div class="col-md-3 forms">
+                <div class="col-md-4 forms">
                   <label>Duration:*</label>
                   <span>
                   <select  class="large" name="salary_basis" id="salary_basis">
@@ -85,12 +85,8 @@
                    
                   </select>
                   </span> </div>
-                <div class="col-md-5 forms">
-                  <label>keywords:*</label>
-                  <span>
-                  <input type="text" class="large" name="job_keywords" id="job_keywords">
-                  </span> </div>
-                   <div class="col-md-6 forms">
+                
+                   <div class="col-md-4 forms">
                   <label>Company:*</label>
                   <span>
                   <select class="medium" name="job_company_name" id="job_company_name">
@@ -103,15 +99,40 @@
 							}
 				   ?></select>
                   </span> </div>
-                  
-                  
-                  <div class="col-md-6 forms">
+                  <div class="col-md-4 forms">
                   <label>Country:*</label>
                   <span>
-                 <select class="medium" name="country" id="country">
+                <select class="medium" name="country" onchange="print_state('state',this.selectedIndex);" id="country">
 			<option value="">Select Country</option>
 			</select> 
                   </span> </div>
+                  <div class="col-md-4 forms">
+                  <label>State:*</label>
+                  <span>
+                <select class="medium" name="state" id="state">
+           <option value="">Select State</option>
+           </select>
+                  </span> </div>
+                  <div class="col-md-4 forms">
+                  <label>City:*</label>
+                  <span>
+                  <input type="text" class="medium"  name="job_city" id="job_exp" >  
+                  </span> </div>
+                  
+                  <div class="col-md-4 forms">
+                  <label>Experience:*</label>
+                  <span>
+                  <input type="text"  class="large" name="job_exp" id="job_exp" placeholder="example 0-1 years"> 
+                  </span> </div>
+                  
+                  
+                  
+                  <div class="col-md-8 forms">
+                  <label>keywords:*</label>
+                  <span>
+                  <input type="text" class="large" name="job_keywords" id="job_keywords">
+                  </span> </div>
+                  
                   
                   
               </div>

@@ -99,45 +99,25 @@ class Jobs extends CI_Controller {
 public function get_jobs_by_search()
 {
 	
-
-$country =  $_POST['country'];
-
-$postal_code =  $_POST['postalCode'];
-
-
-	$user_id = $this->session->userdata('logged_in')['account_id'];
-	$query = $this->db->select('job_seaking_options')->from('bzz_userinfo')->where('user_id',$user_id)->get();
-	$job_interests = $query->result_array();
 	
-	$data = explode(",",$job_interests[0]['job_seaking_options']);
-	//print_r($data);
-	
-	
-	$this->db->select('*');
-	$this->db->from('jobs');
-	if(!empty($_POST['job_search_industries']))
+	if(isset($_POST['job_search_industries']))
 	{
-	$this->db->where_in('job_category',$_POST['job_search_industries']);
-	}
-	if(!empty($_POST['job_search_job_type']))
+		$industries = $_POST['job_search_industries'];
+	}else
 	{
-		$this->db->where_in('job_type',$_POST['job_search_job_type']);
+		$industries = ''; 
 	}
-	
-	if($country != '')
+	if(isset($_POST['job_search_job_type']))
 	{
-		$this->db->where('country',$country);
+		$job_types = $_POST['job_search_job_type'];
+	}else{
+			$job_types = '';
 	}
-	
-	
-	
-	$this->db->order_by('post_date','desc');
-	$query = $this->db->get();
-	echo $this->db->last_query();
-	$jobs = $query ->result_array();
-	echo count($jobs);
- //print_r($jobs);
-	
+
+  $data['jobs'] = $this->jobmodel->get_jobs_by_searchblock($_POST['country'],$_POST['postalCode'],$industries,$job_types);
+   
+   $data['content']='user_searched_jobs_list';
+   $this->load->view('full_right_content_view',$data);
 	
 }
 
@@ -184,8 +164,41 @@ public function remove_hide_a_job()
 	}
 	return false;
 }
+
+
+public function disp_all_cmp_jobs($id)
+	{
+
+	$data['company_jobs'] =  $this->jobmodel->getJobs($id); 
+	//print_r($data);
+    $data['content']='individual_company_jobs_list';
+    $this->load->view('full_right_content_view',$data);
+	}  
+	
+	
+public function similarjobs()
+{
+	
+	
+	$data['similar_jobs'] = $this->jobmodel->get_similar_jobs($_GET['company_id'],$_GET['job_title'],$_GET['job_keyword'],$_GET['country'],$_GET['company_country'],$_GET['company_name']);
+	$data['content']='similar_jobs';
+    $this->load->view('full_right_content_view',$data);
+	
+}
   
-  
+public function job_description($job_id,$cmp_id)
+{
+	
+	$data['job_applicants'] = $this->jobmodel->get_job_applicants($job_id);
+	$data['job_desc'] = $this->jobmodel->get_job_details($job_id);
+	$data['company_jobs'] =  $this->jobmodel->getJobs($cmp_id); 
+	$job_data = $this->jobmodel->get_job_details($job_id);
+
+	$data['similar_jobs'] = $this->jobmodel->get_similar_jobs($job_data[0]['companyinfo_id'],$job_data[0]['job_title'],$job_data[0]['job_keyword'],$job_data[0]['country'],$job_data[0]['company_country'],$job_data[0]['cmp_name']);
+	$data['content']='job_full_description';
+    $this->load->view('full_right_content_view',$data);
+	
+}
 }
 
 

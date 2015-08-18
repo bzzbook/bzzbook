@@ -797,15 +797,9 @@ public function showfavs()
 
           <div class='userContent col-md-8'>";*/
 		  $content = '';
-
-	
-			$str_leng=strlen($row->post_content);
-			  if($str_leng>50){
-				$content .= "<span class='content' id='popmsg".$row->post_id."'>".substr($row->post_content,0,50)."...<a href='#' onclick='popmyfunc(".$row->post_id.")'>more</a>"."</span><div id='popdes".$row->post_id."' style='display:none'>".$row->post_content."<a href='#' onclick='popmyfunc(".$row->post_id.")'>less</a></div></span>"; 
-			 }else{
-				$content .= "<span class='content' id='popmsg".$row->post_id."'>".substr($row->post_content,0,50)."</span><input type='hidden' name='post_content' id='post_content' value='".$row->post_content."'>";			
-				 }
-
+		
+				$content .= "<span class='content'>".character_limiter($row->post_content,200)."</span>";			
+			$content .='<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-wrap="false">';
 			 
 			 $content .= '<div class="carousel-inner" role="listbox">';
 			 		  if(!empty($row->uploaded_files))
@@ -822,20 +816,27 @@ public function showfavs()
 					$content .='<div class="item">';
 				}
 				
+				list($imagewidth, $imageheight, $imageType) = getimagesize(DIR_FILE_PATH.$file);
+   if($imagewidth<400){
+    $max_width = $imagewidth;
+    $max_height = $imageheight;
+   }else{
+    $max_width = '';
+    $max_height = '';
+   }
 				
 		
 				// $content .= "<img src='".base_url()."uploads/".$file."' style='width:100%'/>";
-		$content .= '<div class="imageThumb"><span style="background:url('.base_url()."uploads/".$file.')"></div><input type="hidden" id="uploaded_files" name="uploaded_files" value='.$file.' /></div>';
+		$content .= '<div class="imageThumb"><img class="img-responsive" src="'.base_url().'uploads/'.$file.'" style="width:'.$max_width.'px; height:'.$max_height.'px;"></div><input type="hidden" id="uploaded_files" name="uploaded_files" value='.$file.' /></div>';
 
- 
-					
+ 	
 			
 				 $i++;
 			 }
 			 
 			 }
 			 
-			 $content .=' <!-- Controls -->
+			 $content .=' <!-- Controls --></div>
   <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
     <span class="sr-only">Previous</span>
@@ -844,11 +845,9 @@ public function showfavs()
     <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
-</div> ';
+</div>';
 			
-			 
-			 
-            	
+	        	
 		
 	echo $content;	
 	}
