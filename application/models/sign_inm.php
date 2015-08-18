@@ -48,7 +48,7 @@ class sign_inm extends CI_Model {
 	 	public function read_user_information($sess_array) {
 
 		$condition = "user_email =" . "'" . $sess_array['email'] . "' ORDER BY bzz_user_images.user_imageinfo_id DESC";
-		$this->db->select('*');
+		$this->db->select('*,bzz_users.user_id');
 		$this->db->from('bzz_users');
 		$this->db->join('bzz_userinfo','bzz_users.user_id=bzz_userinfo.user_id');
 		$this->db->join('bzz_user_images', 'bzz_users.user_id=bzz_user_images.user_id','left');

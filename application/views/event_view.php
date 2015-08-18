@@ -286,7 +286,14 @@
 			 {
 			 $up_files = explode(',',$row->uploaded_files);
 			 $i = 0;
-			 echo "<div class='fbphotobox'>";
+			 $tot_images = count($up_files);
+			 if($tot_images>5){
+			 $tot_images = 5;
+			 $morePics = 'morePics';
+			 }else{
+			  $morePics = '';
+			 }
+			 echo "<div class='userContent ".$morePics."'><div class='fbphotobox  postImages post-data-".$tot_images."'>";
 			 foreach($up_files as $file)
 			 {
 				// $file1 = explode('.',$file);
@@ -299,16 +306,11 @@
 //				 	 echo "<a onclick='getPostComments(".$row->event_post_id.")'><img class='photo' fbphotobox-src='".base_url()."uploads/".$file."' src='".base_url()."uploads/".$file."' style='width:24%;float:left;margin:.5%; height:83px'/></a>";
 //				 $i++;
 				 $file1 = explode('.',$file);
-				 if($i==0)
-				 {
-					 echo " 
-    <a onclick='getPostComments(".$row->post_id.",&#39;".$file."&#39;)'><img class='photo' fbphotobox-src='".base_url()."uploads/".$file1[0].'_extended.'.$file1[1]."' src='".base_url()."uploads/".$file1[0].'_default.'.$file1[1]."' /></a>";
-				 }
-				 else
-				 	 echo "<a onclick='getPostComments(".$row->post_id.",&#39;".$file."&#39;)'><img class='photo' fbphotobox-src='".base_url()."uploads/".$file1[0].'_extended.'.$file1[1]."' src='".base_url()."uploads/".$file1[0].'_default.'.$file1[1]."' style='width:24%;float:left;margin:.5%; height:83px'/></a>";
-				 $i++;
+				 echo " 
+    <a onclick='getPostComments(".$row->event_post_id.",&#39;".$file."&#39;)'><span class='photo' style='background:url(".base_url()."uploads/".$file1[0].'_default.'.$file1[1].") center center no-repeat' fbphotobox-src='".base_url()."uploads/".$file1[0].'_extended.'.$file1[1]."' ><i>+ ".(count($up_files)-5)."</i></span</a>";
 			 }
-			 echo "</div>";
+ 			 echo '<div class="clearfix"></div>';
+			 echo "</div></div>";
 			 echo "<div style='clear:both'></div>";
 			 } ?> </figure>
 <?php /*?>            <h3>The Interpreter-TranslatorFree - Android Apps on Google Play</h3>

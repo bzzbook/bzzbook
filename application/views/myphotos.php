@@ -59,7 +59,7 @@ $profiledata = $this->customermodel->profiledata($id);
 	<div class="crop_set_upload">
 		<div class="crop_upload_label">Upload files: </div>
 		<div class="crop_select_image"><div class="file_browser"><input type="file" name="imagefile" id="imagefile" class="hide_broswe" /></div></div>
-		<div class="crop_select_image"><input type="submit" value="Upload" class="upload_button" name="submitbtn" id="submitbtn" /></div><div id="loadingimage" style="padding-top:15px;"></div>
+		<div class="crop_select_image"><input type="submit" value="Upload" class="upload_button" name="submitbtn" id="myphotos_submitbtn" /></div><div id="loadingimage" style="padding-top:15px;"></div>
 	</div>
 </form>			
 		<div class="crop_set_preview" style="display:none;">
@@ -104,14 +104,13 @@ $profiledata = $this->customermodel->profiledata($id);
       <section class="about-user-details">
         <h4><span aria-hidden="true" class="glyphicon glyphicon-picture"></span> My Photos (<?php if($data) echo count($data); else echo " Photos not uploaded ";  ?>)</h4>
          	<div class="userPhotos">
-             <?php if($data){  foreach($data as $image){ $fileimage = explode('.',$image['image_thumb']); 
-			 $default_img = $fileimage[0].'_default.'.$fileimage[1]; 
-			 $extended_img = $fileimage[0].'_extended.'.$fileimage[1]; 
+             <?php if($data){  foreach($data as $image){ $fileimage = $image['image_thumb']; 
+			
 
 			 ?>
             	  <div class="fbphotobox photoThumb col-md-3" id="fbphotobox-all">
                 	<?php /*?><a href="<?php  echo base_url();?>uploads/<?php echo $image['image_thumb']; ?>" class="mpView" data-lightbox="example-1" data-lightbox="my_photos"><img src="<?php echo base_url(); ?>images/mp_view.png" alt=""></a><?php */?>
-                	<figure><img id="<?php echo $image['post_id'] ?>" class="photo" fbphotobox-src="<?php echo base_url();?>uploads/<?php echo $extended_img; ?>" src="<?php echo base_url();?>uploads/<?php echo $default_img; ?>" width="100%" height="100%" alt=""></figure>
+                	<figure><img id="<?php echo $image['post_id'] ?>" class="photo" fbphotobox-src="<?php echo base_url();?>uploads/<?php echo $fileimage; ?>" src="<?php echo base_url();?>uploads/<?php echo $fileimage; ?>" width="100%" height="100%" alt=""></figure>
                     <div class="phOptions">
                     <span class="mpImg"><a href="#"><img src="<?php echo base_url(); ?>images/bzz_icon.png" alt=""></a></span>
                     <span class="mpLike"><a href="javascript:void(0)"><img src="<?php echo base_url(); ?>images/like_myphotos.png" alt=""><em><?php echo $image['like_count'];?></em></a></span>

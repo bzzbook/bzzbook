@@ -1553,7 +1553,7 @@ function  onchangeMore(){
 	// image croping function for profile settings page--> End
 	
     $(document).ready(function() {
-        $('#submitbtn').click(function() {
+        $('#myphotos_submitbtn').click(function() {
             $("#viewimage").html('');
             $("#loadingimage").html('<img src="<?php echo base_url(); ?>cropimage/images/loading.gif" />');
             $(".uploadform").ajaxForm({
