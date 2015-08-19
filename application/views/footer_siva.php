@@ -71,7 +71,7 @@ $('#selectedfriends #addedusers').html('');
 $('#selectedfriends').find('span').remove();
 $('#posts_content_div').prepend(data);
 $('#posts_content_div').find('#loading_img').remove(); 
-window.location.reload();
+//window.location.reload();
 
 
 

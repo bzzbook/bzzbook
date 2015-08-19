@@ -1290,6 +1290,7 @@ function getconversations(msg_id,sent_by)
 }
 function getPostComments(post_id,photo_name)
 {
+ call_fbphotobox();
  image = "<img width='80px' style='margin-left:150px;' src='<?php echo base_url(); ?>images/loading.gif' />";
  $(".fbphotobox-image-content").html(image);
  url="<?php echo base_url(); ?>customer/getpostcomments/"+post_id+"/"+photo_name;

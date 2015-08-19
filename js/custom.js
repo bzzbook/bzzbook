@@ -7,7 +7,26 @@ $('.curentUser .userImg img').centerImage();
 $('.fdblock .friendInfo .disc .dcBtn a').centerImage();
 
 // For comments pop
-
+function call_fbphotobox(){
+	
+	
+		$(".fbphotobox img").fbPhotoBox({
+			rightWidth: 360,
+			leftBgColor: "black",
+			rightBgColor: "white",
+			footerBgColor: "black",
+			overlayBgColor: "#222",
+			containerClassName: 'fbphotobox',
+			imageClassName: 'photo',
+			onImageShow: function() {
+				$(".fbphotobox img").fbPhotoBox("addTags",
+						[{x:0.3,y:0.3,w:0.3,h:0.3}]
+				);
+				$(".fbphotobox-image-content").html();
+			}
+		});
+	
+}
 $(document).ready(function() {
 	
 		$(".fbphotobox img").fbPhotoBox({
@@ -26,9 +45,6 @@ $(document).ready(function() {
 			}
 		});
 		
-		/*$("button").click(function() {
-			$( ".fbphotobox" ).append('<img class="photo" fbphotobox-src="images/dummy-1760x990-Mosque.jpg" src="images/dummy-1760x990-Mosque.jpg"/><img class="photo" fbphotobox-src="images/dummy-1920x2560-Goemetry.jpg" src="images/dummy-1920x2560-Goemetry.jpg"/>');
-		});*/
 	});	
 $(document).ready(function(){
 	// Controls the Dropdown Visiblility ON	
