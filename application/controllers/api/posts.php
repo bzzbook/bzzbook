@@ -131,6 +131,18 @@ class posts extends CI_Controller {
 		echo json_encode($data);
 		exit(0);
 	}
+	public function get_user_groups($access_token){
+		$user_res = $this->customermodel->get_user_id($access_token);	
+		$groups = $this->profile_set->get_user_groups();
+		if($groups)
+		$data = array('success'=> true,'result'=>$groups);
+		else
+		$data = array('success'=> false,'result'=>'No suggestions found');
+		
+		echo json_encode($data);
+		exit(0);
+	}
+	
 	public function ajax_image_upload($file_name){
 	
 	//print_r($_FILES); exit(0);

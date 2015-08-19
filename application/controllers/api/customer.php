@@ -68,6 +68,22 @@ class customer extends CI_Controller {
 		$user['otp_timestamp'] = time();
 		$user['access_token'] = md5(time());
 		$this->load->model('person');
+		if(!empty ($_POST['job_seaker_industries']) )
+		{
+		$options = $_POST['job_seaker_industries'];
+		$data = implode(",",$options);
+		
+		$user_info['job_seaking_options'] =  $data;
+		}
+		
+		
+		if(!empty ($_POST['job_seaker_jobtypes']) )
+		{
+		$options = $_POST['job_seaker_jobtypes'];
+		$data = implode(",",$options);
+		
+		$user_info['job_seaker_jobtypes'] =  $data;
+		}
 		
 		$user_info['user_phoneno'] = $this->input->post('phone_number');		
 		$user_info['user_firstname'] = $this->input->post('firstname');
@@ -639,6 +655,25 @@ public function search_member()
 		
 		
 	}
+	public function get_industries(){
+		$industries = $this->lookup->get_lookup_industry();
+		if($industries)
+		$data = array('success'=> true,'result'=>$industries);
+		else
+		$data = array('success'=> false,'result'=>'No suggestions found');	
+		echo json_encode($data);
+		exit(0);
+	}
+	public function get_jobtypes(){
+		$jobtypes =  $this->lookup->get_lookup_jobtype();
+		if($jobtypes)
+		$data = array('success'=> true,'result'=>$jobtypes);
+		else
+		$data = array('success'=> false,'result'=>'No suggestions found');	
+		echo json_encode($data);
+		exit(0);
+	}
+	
 	
 
 }
