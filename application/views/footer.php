@@ -13,6 +13,7 @@
 <div class="modal fade pin-it-column target01 " tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="save_as_fav_modal" >
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
+                <div class="fav_add_success"></div>
                     <div class="imgHolder-pinit">
                         <div class="img-content-block">
                         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-wrap="false">
@@ -144,7 +145,7 @@ $(function () {
    $('#change_pwd').hide();
    $('#pf_pwd_change').validate();
    $(".message").fadeOut(6000);
- 
+
   $('#dummypost').focusin(function() 
    {
    $('#updateControls').show();
@@ -1893,8 +1894,8 @@ function saveAsFav(post_id){
 						$('#categories').html('');
 						$('.img-content-block').html(data);
 						//var user_categories =
-				
-						 get_save_fav_user_categories();
+						
+						get_save_fav_user_categories();
 						//alert(user_categories);
 					});
 }
@@ -1905,7 +1906,7 @@ function saveFavAsFav(fav_id){
 						//alert(data);
 					    $('#save_fav_category_search').val('');
 						$('#categories').html('');
-						$('#carousel-example-generic').html(data);
+						$('.img-content-block').html(data);
 						//var user_categories =
 					
 						 get_save_fav_user_categories();

@@ -12,7 +12,7 @@ $add_frnd_reqs = $frnds;
       <div class="col-xs-12 ProfileView">
         <section class="visitorBox">
           <div class="visitiBoxInner">
-            <figure class="compCover"><img alt="" src="<?php echo base_url(); ?>images/about_banner.jpg" class="img-responsive"></figure>
+            <figure class="compCover" ><img alt="" src="<?php echo base_url(); ?>images/about_banner.jpg" class="img-responsive"></figure>
               <?php  $image = $this->profile_set->get_profile_pic();
 			         $data = $this->profile_set->get_userinfo($user_id = ''); ?>
                       <?php $attr = array('id' => 'upload_pfpic', 'name' => 'upload_file'); ?> 

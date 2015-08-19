@@ -7,7 +7,7 @@ $cmp_following = $this->companies->following_companies_list();
   <div class="row">
     <section class="visitorBox col-xs-12">
       <div class="visitiBoxInner">
-        <figure class="compCover"><img class="img-responsive" src="<?php echo base_url(); ?>images/url.jpg" alt=""></figure>
+        <figure class="compCoverban"><img class="img-responsive" src="<?php echo base_url(); ?>images/url.jpg" alt=""></figure>
         <div class="companyDetails">
           <div class="col-md-9">
             <div class="cmpContent">

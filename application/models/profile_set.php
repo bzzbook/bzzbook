@@ -1635,7 +1635,11 @@ public function visited_users($user_id='')
 		//print_r($user_ids);
 		foreach($user_ids as $user_id)
 			{
-				 $usercondition = "user_id ="."'".$user_id['visited_user_id']."'";
+				if($user_id['visited_user_id'] != $id)
+				{
+				
+				
+			        	 $usercondition = "user_id ="."'".$user_id['visited_user_id']."'";
 						 $this->db->select('*');
 						 $this->db->from('bzz_user_images');
 						 $this->db->where($usercondition);
@@ -1661,10 +1665,11 @@ public function visited_users($user_id='')
 							   $user_data =  $query->result_array();
 						 }
 						  $userdata[] = $user_data;
-					}
+					
+	
 				//	print_r($userdata);
 				return $userdata;
-		
+			}}
 	}else{
 	return false;
 	}

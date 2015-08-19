@@ -85,6 +85,8 @@ public function user($user_id='')
 			$data['user_id'] = $user_id ;
 	     	$data['visited_user_id'] =  $curr_user_id;
 			$data['visited_time'] =  date("Y-m-d H:i:s");
+			$this->db->where('user_id',$user_id);
+			$this->db->where('visited_user_id',$curr_user_id);
 		 	$this->db->update('bzz_user_profile_visit',$data);
 		}else{
 		 $data['user_id'] = $user_id ;
@@ -824,15 +826,10 @@ public function showfavs()
 	 	$get_profiledata = $this->customermodel->profiledata($posted_id);
 	    $user_id = $this->session->userdata('logged_in')['account_id'];
 		
-		/*$attr = array('name' => 'save_as_fav_form', 'id' =>'save_as_fav_form', 'enctype'=>"multipart/form-data");
-      	
-		$content = form_open('signg_in/save_favorites',$attr)."<input type='file' name='uploadPhotos[]' id='uploadPhotos' multiple='multiple' style='display:none;' />
-    <div class='posts row'><article>
-
-          <div class='userContent col-md-8'>";*/
+		
 		  $content = '';
 		
-				$content .= "<span class='content'>".character_limiter($row->post_content,200)."</span>";			
+				$content .= "<span class='content'>".character_limiter($row->post_content,200)."</span><input type='hidden' name='post_content' id='post_content' value='".$row->post_content."'>";			
 			$content .='<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-wrap="false">';
 			 
 			 $content .= '<div class="carousel-inner" role="listbox">';
@@ -896,22 +893,12 @@ public function showfavs()
 	 	$get_profiledata = $this->customermodel->profiledata($posted_id);
 	    $user_id = $this->session->userdata('logged_in')['account_id'];
 		
-		/*$attr = array('name' => 'save_as_fav_form', 'id' =>'save_as_fav_form', 'enctype'=>"multipart/form-data");
-      	
-		$content = form_open('signg_in/save_favorites',$attr)."<input type='file' name='uploadPhotos[]' id='uploadPhotos' multiple='multiple' style='display:none;' />
-    <div class='posts row'><article>
 
-          <div class='userContent col-md-8'>";*/
-		  $content = '';
-
-	
-			$str_leng=strlen($row->favorite_post_content);
-			  if($str_leng>50){
-				$content .= "<span class='content' id='popmsg".$row->favorite_id."'>".substr($row->favorite_post_content,0,50)."...<a href='#' onclick='popmyfunc(".$row->favorite_id.")'>more</a>"."</span><div id='popdes".$row->favorite_id."' style='display:none'>".$row->favorite_post_content."<a href='#' onclick='popmyfunc(".$row->favorite_id.")'>less</a></div></span>"; 
-			 }else{
-				$content .= "<span class='content' id='popmsg".$row->favorite_id."'>".substr($row->favorite_post_content,0,50)."</span><input type='hidden' name='post_content' id='post_content' value='".$row->favorite_post_content."'>";			
-				 }
-
+    
+     $content = '';
+		
+				$content .= "<span class='content'>".character_limiter($row->favorite_post_content,200)."</span><input type='hidden' name='post_content' id='post_content' value='".$row->favorite_post_content."'>";			
+			$content .='<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-wrap="false">';
 			 
 			 $content .= '<div class="carousel-inner" role="listbox">';
 			 		  if(!empty($row->favorite_image))
@@ -928,20 +915,27 @@ public function showfavs()
 					$content .='<div class="item">';
 				}
 				
+				list($imagewidth, $imageheight, $imageType) = getimagesize(DIR_FILE_PATH.$file);
+   if($imagewidth<400){
+    $max_width = $imagewidth;
+    $max_height = $imageheight;
+   }else{
+    $max_width = '';
+    $max_height = '';
+   }
 				
 		
 				// $content .= "<img src='".base_url()."uploads/".$file."' style='width:100%'/>";
-		$content .= '<div class="imageThumb"><span style="background:url('.base_url()."uploads/".$file.')"></div><input type="hidden" id="uploaded_files" name="uploaded_files" value='.$file.' /></div>';
+		$content .= '<div class="imageThumb"><img class="img-responsive" src="'.base_url().'uploads/'.$file.'" style="width:'.$max_width.'px; height:'.$max_height.'px;"></div><input type="hidden" id="uploaded_files" name="uploaded_files" value='.$file.' /></div>';
 
- 
-					
+ 	
 			
 				 $i++;
 			 }
 			 
 			 }
 			 
-			 $content .=' <!-- Controls -->
+			 $content .=' <!-- Controls --></div>
   <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
     <span class="sr-only">Previous</span>
@@ -950,13 +944,17 @@ public function showfavs()
     <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
-</div> ';
+</div>';
 			
-			 
-			 
-            	
+	        	
 		
-	echo $content;	
+	echo $content;
+    
+    
+    
+    
+    
+    
 	}
 	
 	public function get_cmp_post_byid($post_id){
