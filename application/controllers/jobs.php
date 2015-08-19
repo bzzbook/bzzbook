@@ -166,10 +166,10 @@ public function remove_hide_a_job()
 }
 
 
-public function disp_all_cmp_jobs($id)
+public function disp_all_cmp_jobs($cmp_id,$job_id)
 	{
 
-	$data['jobs'] =  $this->jobmodel->getJobs($id); 
+	$data['jobs'] =  $this->jobmodel->get_cmp_Jobs_data($cmp_id,$job_id); 
 	//print_r($data);
     $data['content']='user_searched_jobs_list';
     $this->load->view('full_right_content_view',$data);
@@ -180,7 +180,7 @@ public function similarjobs()
 {
 	
 	
-	$data['jobs'] = $this->jobmodel->get_similar_jobs($_GET['company_id'],$_GET['job_title'],$_GET['job_keyword'],$_GET['country'],$_GET['company_country'],$_GET['company_name']);
+	$data['jobs'] = $this->jobmodel->get_similar_jobs($_GET['job_id'],$_GET['company_id'],$_GET['job_title'],$_GET['job_keyword'],$_GET['country'],$_GET['company_country'],$_GET['company_name']);
 	$data['content']='user_searched_jobs_list';
     $this->load->view('full_right_content_view',$data);
 	
@@ -191,10 +191,10 @@ public function job_description($job_id,$cmp_id)
 	
 	$data['job_applicants'] = $this->jobmodel->get_job_applicants($job_id);
 	$data['job_desc'] = $this->jobmodel->get_job_details($job_id);
-	$data['company_jobs'] =  $this->jobmodel->getJobs($cmp_id); 
+	$data['company_jobs'] =  $this->jobmodel->get_cmp_Jobs_data($cmp_id,$job_id); 
 	$job_data = $this->jobmodel->get_job_details($job_id);
-
-	$data['similar_jobs'] = $this->jobmodel->get_similar_jobs($job_data[0]['companyinfo_id'],$job_data[0]['job_title'],$job_data[0]['job_keyword'],$job_data[0]['country'],$job_data[0]['company_country'],$job_data[0]['cmp_name']);
+	
+	$data['similar_jobs'] = $this->jobmodel->get_similar_jobs($job_data[0]['job_id'],$job_data[0]['companyinfo_id'],$job_data[0]['job_title'],$job_data[0]['job_keyword'],$job_data[0]['country'],$job_data[0]['company_country'],$job_data[0]['cmp_name']);
 	$data['content']='job_full_description';
     $this->load->view('full_right_content_view',$data);
 	

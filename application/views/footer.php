@@ -1766,6 +1766,7 @@ $('#addJobForm').submit( function( event){
 						$(".joblisting").html(data);
 						$('#addJobForm').trigger("reset");
 						$( "#canceladdjob" ).trigger( "click" );
+						
 					});
 					}
 					event.preventDefault();

@@ -12,6 +12,8 @@
 		$('#waterfall-loading').hide();
     </script>
 <script type="text/javascript">
+$('#adv_job_search_bar').get(0).reset();
+$('#company_form').get(0).reset();
 
 function removefrnd(user_id){
 	var addedusers = $('#addedusers').val();
@@ -1576,6 +1578,7 @@ $('.carousel').on('slid.bs.carousel', function () {
 			 $(".advancedSearch-block").slideToggle("slow");
 				//alert("Test Block");
 				$('#adv_job_search').get(0).reset();
+					
             $(this).children('i').toggleClass(function () {
                 if ($(this).is(".fa-angle-double-down")) {
                     $(this).removeClass('fa-angle-double-down');

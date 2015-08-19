@@ -5,11 +5,12 @@
                    
                    
              <?php
+			
 				   if($jobs)
 				   { 
-				   foreach($jobs as $job) { ?>
-                   
-                   
+				   foreach($jobs as $job) 
+                  
+                   { ?>
                     <div class="job_search">
                         <div class="optionBox"></div>
                         <div class="aboutJob"><a href="<?php echo base_url('jobs/job_description/'.$job['job_id'].'/'.$job['company_posted_by']) ?>">
@@ -34,9 +35,9 @@
                                 <li><a href="#" data-target="#Apply_for_Job" data-toggle="modal"><i class="fa fa-hand-o-up"></i> Apply</a></li>
                                 <li>
                                
-                            <a href="<?php echo base_url('jobs/similarjobs?company_id='.$job["company_posted_by"].'&job_title='.$job['job_title'].'&job_keyword='.$job['job_keyword'].'&country='.$job['country'].'&company_country='. $job['company_country'].'&company_name='. $job['cmp_name'].''); ?>"><i class="fa fa-search"></i> Similar jobs</a></li>
+                            <a href="<?php echo base_url('jobs/similarjobs?job_id='.$job['job_id'].'&company_id='.$job["company_posted_by"].'&job_title='.$job['job_title'].'&job_keyword='.$job['job_keyword'].'&country='.$job['country'].'&company_country='. $job['company_country'].'&company_name='. $job['cmp_name'].''); ?>"><i class="fa fa-search"></i> Similar jobs</a></li>
                                 <li><a href="#"><i class="fa fa-share-square-o"></i> Share </a></li>
-                                <li><a href="<?php echo base_url('jobs/disp_all_cmp_jobs/'.$job['company_posted_by'])?>"><i class="fa fa-briefcase"></i> All Jobs by this Company</a></li>
+                                <li><a href="<?php echo base_url('jobs/disp_all_cmp_jobs/'.$job['company_posted_by'].'/'.$job['job_id'])?>"><i class="fa fa-briefcase"></i> All Jobs by this Company</a></li>
                                 <li><a href="<?php echo base_url('company/company_disp/'.$job['company_posted_by'])?>"><i class="fa fa-building"></i> Company Profile</a></li>
                             </ul>
                         </div>
@@ -100,7 +101,7 @@
                         
                     </div>
 
-<?php } } ?>
+<?php } }else {?><div style="margin:0px 10px; padding-top:15px;"> <p>No Jobs Found Based On Your Search...</p></div><?php } ?>
 
 
 

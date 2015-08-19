@@ -32,16 +32,18 @@
                         <p class="exp">Experience : <?php echo $job_desc[0]['experience']; ?></p>
                         <ul>
                         <?php 
-						$data = explode(',',$job_desc[0]['job_description']);
+						$data = explode('.',$job_desc[0]['job_description']);
 						
 						foreach($data as $data) { ?>
-                        
-                            <li><i class="fa fa-angle-right"></i><?php echo $data; ?></li>
+                        <?php if(!empty($data))
+						{?>
+                            <li><i class="fa fa-angle-right"></i><?php  echo $data; ?></li>
+                         
                           <!--  <li><i class="fa fa-angle-right"></i> Donec sit amet nisl ut risus imperdiet sodales.</li>
                             <li><i class="fa fa-angle-right"></i> Nulla sed nibh non lectus faucibus bibendum nec placerat nibh.</li>
                             <li><i class="fa fa-angle-right"></i> Curabitur placerat diam eget elementum vehicula.</li>
                             <li><i class="fa fa-angle-right"></i> Quisque id mi et neque interdum imperdiet ut non enim.</li>-->
-                            <?php } ?>
+                            <?php }  } ?>
                         </ul>
                         <!--<p>Expected Salary: 1500-2500</p>-->
                     </div>
@@ -50,15 +52,17 @@
                         <p>Skills required</p>                       
                         <ul>
                            <?php 
-						$requirements = explode(',',$job_desc[0]['job_requirements']);
+						$requirements = explode('.',$job_desc[0]['job_requirements']);
 						
 						foreach($requirements as $req) { ?>
+                         <?php if(!empty($req))
+						{?>
                             <li><i class="fa fa-angle-right"></i><?php echo $req; ?></li>
                            <!-- <li><i class="fa fa-angle-right"></i> Donec sit amet nisl ut risus imperdiet sodales.</li>
                             <li><i class="fa fa-angle-right"></i> Nulla sed nibh non lectus faucibus bibendum nec placerat nibh.</li>
                             <li><i class="fa fa-angle-right"></i> Curabitur placerat diam eget elementum vehicula.</li>
                             <li><i class="fa fa-angle-right"></i> Quisque id mi et neque interdum imperdiet ut non enim.</li>-->
-                       <?php } ?>
+                       <?php } } ?>
                         </ul>
                         
                     </div>
@@ -67,7 +71,8 @@
                     <h2>About this company</h2>
                     <div class="clearfix"></div>
                     <div class="companySection">                       
-                        <p><?php echo $job_desc[0]['cmp_about']; ?></p>                      
+                        <p><?php echo $job_desc[0]['cmp_about']; ?></p>  
+                        <?php if($company_jobs) { ?>                    
 
                         <div class="otherJobs">
                             <h4>Other jobs at <?php echo $job_desc[0]['cmp_name']?></h4>
@@ -76,6 +81,8 @@
                             <?php 
 							$i = 0;
 							foreach($company_jobs as $cmp_job) { 
+							
+				
 							
 							if($i == 6)
 							break;
@@ -87,9 +94,10 @@
                           <?php $i++; } ?>
                             <div class="clearfix"></div>
                         </div>
+                        <?php } ?>
                     </div>
                 </div>
-
+<?php if($similar_jobs) { ?>
                 <div class="DescriptionTag aboutBlock">
                     <h2>Similar Jobs</h2>
                     <div class="clearfix"></div>
@@ -101,8 +109,7 @@ $j = 0;
 	 if($j == 4)
 	 break;
 	 
-	 if($job['job_id'] == $job_desc[0]['job_id'])
-	 continue;
+	 
 	  ?>
                        
 
@@ -124,5 +131,6 @@ $j = 0;
                        <div class="clearfix"></div>
                    </div>
                 </div>
+                <?php } ?>
             </div>
         </div>

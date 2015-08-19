@@ -88,7 +88,7 @@ public function managecompanydata($data)
 		'company_image'=>$img_name,
 		'user_id'=>$this->session->userdata('logged_in')['account_id']
 		);*/
-	   if( $this->db->insert('bzz_companyinfo',$data))
+	   if($this->db->insert('bzz_companyinfo',$data))
 	   return $this->db->insert_id();
 	   else
 	   return false;

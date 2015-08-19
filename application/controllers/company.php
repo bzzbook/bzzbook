@@ -113,6 +113,7 @@ public function addcompany()
 		$data['company_fax'] = $this->input->post('company_fax');
 		$data['user_id']= $this->session->userdata('logged_in')['account_id'];
 		
+		
 		 $companyinfo_id = $this->companies->managecompanydata($data);
 		 
 		 $settings['profile_visible'] = 'Y';

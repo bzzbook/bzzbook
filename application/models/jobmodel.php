@@ -58,6 +58,22 @@ class Jobmodel extends CI_Model {
 		$query = $this->db->get();
 		return $query->result_array();
 	}
+	
+	public function get_cmp_Jobs_data($cmp_id,$job_id)
+	{
+			
+		$condition = "companyinfo_id =" . "'".$cmp_id."' and job_id != "."'".$job_id."'";
+		$this->db->select('*');
+		$this->db->from('jobs');
+		$this->db->where($condition);
+		$this->db->join('bzz_companyinfo','bzz_companyinfo.companyinfo_id = jobs.company_posted_by');
+		$query = $this->db->get();
+		return $query->result_array();
+		
+		
+	}
+	
+	
 	public function getapplicants($cmp_id)
 	{
 		$condition = "company_id =" . "'" . $cmp_id . "'";
@@ -375,13 +391,14 @@ public function jobs_search()
 	 
  }
 
- public function get_similar_jobs($company_id,$job_title,$job_keyword,$country,$company_country,$company_name)
+ public function get_similar_jobs($job_id,$company_id,$job_title,$job_keyword,$country,$company_country,$company_name)
  {
 	 
 	 $this->db->select('*');
 	 $this->db->from('jobs');
+	 
 	 $this->db->join('bzz_companyinfo', 'bzz_companyinfo.companyinfo_id = jobs.company_posted_by');
-
+     $this->db->where('job_id !=',$job_id);
 	 $this->db->like('job_title',$job_title,'both');
 	 $this->db->or_like('job_keyword',$job_keyword,'both');
 	 $this->db->or_like('country',$country,'both');
@@ -392,7 +409,7 @@ public function jobs_search()
 	 $this->db->order_by('post_date','desc');
 	 $query = $this->db->get();
 	 $simiarjobs = $query->result_array();
-	// echo $this->db->last_query();
+	//echo $this->db->last_query();
 //	exit;
 	if($query->num_rows() > 0)
 	{
@@ -415,7 +432,7 @@ public function jobs_search()
 	//echo $this->db->last_query();
 	if($query->num_rows() > 0 )
 	{
-	$jobs = $query ->result_array();		
+	$jobs = $query->result_array();		
 	return $jobs;
 	}else
 	return false;
