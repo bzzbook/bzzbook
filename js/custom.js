@@ -27,7 +27,7 @@ function call_fbphotobox(){
 		});
 	
 }
-$(document).ready(function() {
+/*$(document).ready(function() {
 	
 		$(".fbphotobox img").fbPhotoBox({
 			rightWidth: 360,
@@ -45,7 +45,7 @@ $(document).ready(function() {
 			}
 		});
 		
-	});	
+	});	*/
 $(document).ready(function(){
 	// Controls the Dropdown Visiblility ON	
 $('.menuModule a').on('click', function (event) {

@@ -82,15 +82,15 @@
 </div>
           </div>
           <?php if(!empty($row->share_post_content)) echo "<div>".$row->share_post_content."</div>"; ?>
-           <?php if(!empty($row->uploaded_files))
+           <?php 
+			 $morePics = ''; 
+			 if(!empty($row->uploaded_files))
 			 {
 			 $up_files = explode(',',$row->uploaded_files);
 			 $i = 0;
 			 $tot_images = count($up_files);
 			 if($tot_images>5)
 			 $morePics = 'morePics';
-			 else
-			 $morePics = '';
 			 }
 			 ?>
           <div class="userContent <?php echo $morePics.' '; if($row->isGhostpost==1) echo 'hidethis'; ?>"  > <?php if(!empty($row->uploaded_files))

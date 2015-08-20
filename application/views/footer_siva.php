@@ -12,8 +12,29 @@
 		$('#waterfall-loading').hide();
     </script>
 <script type="text/javascript">
-$('#adv_job_search_bar').get(0).reset();
-$('#company_form').get(0).reset();
+/*$('#adv_job_search_bar').get(0).reset();
+$('#company_form').get(0).reset();*/
+function search_online_friends(name){
+  
+if(name!=''){
+	$('#online-friends-search').show();
+  url="<?php echo base_url(); ?>friends/get_online_frnds/"+name;
+ 
+ 
+  $.ajax({
+        url: url,
+  success: function(data)
+        { 
+   $('#online-friends').hide();
+   $('#online-friends-search').html(data);
+  },
+  cache: false
+  });
+}else{
+	$('#online-friends').show();
+	$('#online-friends-search').hide();
+}
+}
 
 function removefrnd(user_id){
 	var addedusers = $('#addedusers').val();
@@ -116,9 +137,9 @@ function getNtfcCount(){
 		cache: false
 		});
 }
-window.setInterval(myfunction,5000);
-window.setInterval(insertNotifications,3000);
-window.setInterval(getNtfcCount,2000);
+//window.setInterval(myfunction,5000);
+//window.setInterval(insertNotifications,3000);
+//window.setInterval(getNtfcCount,2000);
 user_event_edit();
 
 function invite_event_frnds(keyword,added_users,suggestion_box){
@@ -1127,7 +1148,7 @@ function get_recent_posts(post_id)
 		cache: false
 		});
 }
-window.setInterval(function(){
+/*window.setInterval(function(){
 
 
 //$('#posts_content_div').first()
@@ -1139,7 +1160,7 @@ get_recent_posts(post_id);
 //alert(post_id);
  
 },5000);  
-
+*/
 
 // dynamic display of post likes
 function get_recent_post_likes()
@@ -1401,7 +1422,7 @@ function get_latest_friends_of_user()
 
 
 
-window.setInterval(function(){
+/*window.setInterval(function(){
 
 
 //var post_id = $('#posts_content_div > :first-child').attr("id").substr(4);
@@ -1410,7 +1431,7 @@ window.setInterval(function(){
   get_latest_friends_of_user();
 
 },5000);  
-
+*/
 function delete_post(post_id)
 {
 //alert(post_id);
@@ -1459,27 +1480,6 @@ function hide_post(post_id,user_id)
 	
 }
 
-function search_online_friends(name){
-  
-if(name!=''){
-	$('#online-friends-search').show();
-  url="<?php echo base_url(); ?>friends/get_online_frnds/"+name;
- 
- 
-  $.ajax({
-        url: url,
-  success: function(data)
-        { 
-   $('#online-friends').hide();
-   $('#online-friends-search').html(data);
-  },
-  cache: false
-  });
-}else{
-	$('#online-friends').show();
-	$('#online-friends-search').hide();
-}
-}
 
 function create_cat_focus()
 {
@@ -1590,7 +1590,115 @@ $('.carousel').on('slid.bs.carousel', function () {
             });
           
         });
+callcommonAjaxCall();		
+function callcommonAjaxCall(){
+$('#posts_content_div').find('#loading_img').remove();
+var post_id = $('#posts_content_div > :first-child').attr("id").substr(4);
+commonAjaxCall(post_id);
+window.setTimeout(callcommonAjaxCall,10000);
+
+}
+function commonAjaxCall(ajax_post_id){
+
+  url="<?php echo base_url(); ?>common/singlecall/"+ajax_post_id; 
+  $.ajax({
+  url: url,
+  success: function(data){  
+		var result = JSON.parse(data);
+		//showOnlineFriends
+		if(result.showOnlineFriends){
+			var search_text = document.getElementById('input_search_frnds').value;
+			if(search_text!=''){
+				$('#online-friends').html(result.showOnlineFriends);
+			}
+		  
+		}
+		//getNtfcCount
+		if(result.getNtfcCount!=''){ 
+		 $('#ntfc_count').html(result.getNtfcCount); 
+		}else{ 
+		 $('#ntfc_count').html(''); 
+		}
 		
+		//get_recent_posts
+		if(result.get_recent_posts!='')
+		{
+		 $('#posts_content_div').prepend(result.get_recent_posts);
+        }
+		
+		//get_recent_post_likes
+		  
+		if(result.get_recent_post_likes!='')
+		{
+			$.each(result.get_recent_post_likes, function(i, res) {
+			$('#posts_content_div').find('#post'+res.post_id).find('#like_count'+res.post_id).remove();
+			$('#posts_content_div').find('#post'+res.post_id).find('#link_like'+res.post_id).append('<span id="like_count'+res.post_id+'"><img alt="" src="<?php echo base_url(); ?>images/like_myphotos.png">'+res.likes+'</span>'); 
+			});	
+			   
+		}
+		//get_recent_comments 
+		
+		if(result.get_recent_comments!=''){
+			 
+			$.each(result.get_recent_comments, function(i, comment) {
+			
+			var last_comment = 0;
+			if($('#res_comments'+comment.commented_on).children().length > 0 ) {
+			// do something
+			last_comment = $('#res_comments'+comment.commented_on).children('div').last().attr('id').substr(16);
+			
+			}
+			
+			
+			//alert(last_comment);//children().last().
+			get_dynamic_comments_count(comment.commented_on);
+			
+			
+			url = "<?php echo base_url(); ?>signg_in/get_recent_single_post_data/";
+			$.ajax({
+			url: url,
+			type: "POST",
+			data : { postcomments_id : comment.postcomments_id, comment_content : comment.comment_content, commented_on : comment.commented_on, commented_by : comment.commented_by, commented_time : comment.commented_time, uploadedfiles : comment.uploadedfiles, last_comment : last_comment},
+			success: function(data)
+			{ 
+			//alert(data);
+			var link = $('#view_more_link'+comment.commented_on);
+			$('#view_more_link'+comment.commented_on).remove();
+			
+			
+			$('#res_comments'+comment.commented_on).append(data);
+			
+			$('#res_comments'+comment.commented_on).append(link);
+			},
+			cache: false
+			});
+			
+			
+			});	
+			
+		}
+		//get_latest_friends_of_user
+		if(result.get_latest_friends_of_user!='')
+		{			
+	 	 $('.latest_frnds_demo').html('');	
+		 $('.latest_frnds_demo').append(result.get_latest_friends_of_user);
+		}
+		else
+		{
+			$('.latestFriends').hide();
+		}
+		//get_unread_messages
+		if(result.get_unread_messages!='')
+		{
+		    //$('.un_read_msg_count').html('');
+			$('#un_read_msg_count').html(result.get_unread_messages);
+        }
+		
+  },
+  cache: false
+  });
+}
+
 /*
         $(".searchBlock a.fa").click(function (e) {
             e.preventDefault();

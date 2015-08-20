@@ -6452,13 +6452,13 @@ function showOnlineFriends(){
   });
 }
 
-window.setInterval(function(){
+/*window.setInterval(function(){
   showOnlineFriends();
   get_unread_messages();
 
  
 },5000);
-
+*/
 
 
 
