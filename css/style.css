@@ -2459,7 +2459,7 @@ ul {
   /* line 2, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
   .pin-it-column .modal-dialog {
     margin: 30px auto;
-    min-width: 960px; }
+    min-width: 980px; }
   /* line 5, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
   .pin-it-column .pin-categories-pinit {
     width: 290px;
@@ -2501,7 +2501,7 @@ ul {
       font-weight: 500; }
     /* line 23, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
     .pin-it-column .pin-categories-pinit .user-option-block {
-      height: 550px; }
+      height: 400px; }
       /* line 25, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
       .pin-it-column .pin-categories-pinit .user-option-block h2 {
         font-size: 15px;
@@ -2595,7 +2595,7 @@ ul {
     width: calc(100% - 300px);
     float: left;
   background: #d9d9d9;
-    height: 650px;
+    height: 500px;
     display: table; }
     /* line 64, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
     .pin-it-column .imgHolder-pinit .img-content-block {
@@ -2603,7 +2603,7 @@ ul {
       vertical-align: middle;
       align-content: center;
       position: relative;
-      width: 300px; }
+      width: 300px; max-width:600px; }
       /* line 69, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
       .pin-it-column .imgHolder-pinit .img-content-block span.content {
         border-radius: 0px;
@@ -2611,7 +2611,7 @@ ul {
         width: 100%;
         height: auto;
         bottom: 0px;
-        background: #fff;
+        background: rgba(255,255,255,0.5);
         font-size: 12px;
         line-height: 25px;
         padding: 10px 5px;
@@ -2627,7 +2627,7 @@ ul {
           width: auto;
 		  max-width:auto;
           height: auto;	
-		  max-height:500px;	  		  
+		  max-height:400px;	  		  
           margin: 0 auto; }
       /* line 83, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
       .pin-it-column .imgHolder-pinit .img-content-block .carousel-control.right, .pin-it-column .imgHolder-pinit .img-content-block .carousel-control.left {
