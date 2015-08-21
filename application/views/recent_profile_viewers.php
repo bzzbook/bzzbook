@@ -9,7 +9,11 @@ if($visited_users)
  <div class="pendingRequest">
           <h3>Recent Viewers</h3>
           <ul id="add_friends">
-          <?php if($visited_users) { foreach($visited_users as $req){ ?>
+          <?php if($visited_users) { foreach($visited_users as $req){ 
+		  if($req[0]['user_id'] != $this->session->userdata('logged_in')['account_id'])
+		  {
+		  
+		  ?>
             <li>
               <figure><img src="<?php if(!empty($req[0]['user_img_thumb'])) { echo base_url().'uploads/'.$req[0]['user_img_thumb']; }else echo base_url().'uploads/default_profile_pic.png'; ?>" alt="<?php echo $req[0]['user_firstname'] . " " .$req[0]['user_lastname']; ?>"></figure>
               <div class="disc">
@@ -33,25 +37,10 @@ if($visited_users)
 	  <div class="dcBtn"><a id="sidebar_addfrnd<?php echo $req[0]['user_id']; ?>" href="javascript:void(0);" onclick="addFrnd(<?php echo $req[0]['user_id']; ?>);">Add Friend</a></div>
                 </div>
 				   <?php  }} ?>
-                
-                
-                
-                
-                
-              
-                
-                
-                
-                
-                
+             
             </li>
-            <?php } }else echo "No Viewers Found!.."; ?>
-           <?php /*?> <li>
-              <figure><img src="<?php echo base_url(); ?>images/f2.jpg" alt=""></figure>
-              <div class="disc">
-                <h4>Nicholos smith</h4>
-                <a href="#">Confirm</a><a href="#">Deny</a> </div>
-            </li><?php */?>
+            <?php } } }else echo "No Viewers Found!.."; ?>
+         
           </ul>
           <?php if(!empty($visited_users)) { ?>
           <a href="<?php echo base_url('friends/view_all_recent_users'); ?>" class="link">View all</a> 

@@ -630,8 +630,8 @@ border-top-right-radius: 5px; }
 /*Company*/
 .company .cmpLeft{ padding:0;}
 .company .visitorBox .visitiBoxInner{ padding:5px; background:#f9f8f8; margin:15px 0; border:1px solid #e9e9e9; position:relative; }
-.company .visitorBox .visitiBoxInner .compCover{ width:100%; height:300px; overflow:hidden; position:relative;}
-.company .visitorBox .visitiBoxInner .compCover img{ width:100%; }
+.company .visitorBox .visitiBoxInner .compCoverban{ width:100%; height:300px; overflow:hidden; position:relative;}
+.company .visitorBox .visitiBoxInner .compCoverban img{ width:100%; }
 .company .visitorBox .visitiBoxInner .companyDetails{ position:absolute; top:0; width:100%;}
 .company .visitorBox .visitiBoxInner .companyDetails .cmplogo{ display:flex;}
 .company .visitorBox .visitiBoxInner .companyDetails .cmplogo img{ width:100%; height:165px;}
@@ -644,7 +644,7 @@ border-top-right-radius: 5px; }
 .company .visitorBox .visitiBoxInner .companyDetails .cmpContent .smg{ display:inline-block; font-size:14px; color:#fff; background:#609b34; padding:10px 20px; -webkit-border-radius:2px; border-radius:2px; border:none;}
 .company .visitorBox .visitiBoxInner .companyDetails .cmpContent .follow{ display:inline-block; font-size:14px; color:#fff; background:#fbc436; padding:10px 20px; -webkit-border-radius:2px; border-radius:2px; border:none; margin-left:10px;}
 
-.compCover::before { background: none repeat scroll 0 0 #000;  content: "";  height: 100%;  position: absolute;  width: 100%; opacity:0.6;}
+.compCoverban::before { background: none repeat scroll 0 0 #000;  content: "";  height: 100%;  position: absolute;  width: 30%; opacity:0.6;}
 .company .coloumn1 aside, .company .coloumn2 .updateStatus{border-top:1px solid #e9e9e9;}
 
 #companyPf header{ border-top:6px solid #000;}
@@ -762,7 +762,7 @@ border-radius: 90px 90px 90px 90px; height: 110px; width: 110px; overflow: hidde
 .profile-name {  bottom: 110px;  color: #ffffff; width:146px; text-align:center;  font-size: 18px;  font-weight: bold;  letter-spacing: 1px;  position: absolute;  left: 59px; clear:both; margin-bottom:-25px;}
 
 
-.compCover::before { background: none repeat scroll 0 0 #000;  content: "";  height: 100%;  position: absolute;  width:30%; opacity:0.6;}
+.compCover::before { background: none repeat scroll 0 0 #000;  content: "";  height: 100%;  position: absolute;  width:30%; opacity:0.6; margin-top:15px;}
 .ProfileView .coloumn1 aside, .ProfileView .coloumn2 .updateStatus{border-top:1px solid #e9e9e9;}
 .nopad{ padding:0 !important;}
 .nopad-right{ padding-right:0 !important;}
@@ -2459,7 +2459,7 @@ ul {
   /* line 2, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
   .pin-it-column .modal-dialog {
     margin: 30px auto;
-    width: 90%; }
+    min-width: 960px; }
   /* line 5, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
   .pin-it-column .pin-categories-pinit {
     width: 290px;
@@ -2624,9 +2624,10 @@ ul {
         .pin-it-column .imgHolder-pinit .img-content-block .carousel.slide img {
           border-radius: 5px;
           display: block;
-          width: 100%;
-          height: auto;
-          
+          width: auto;
+		  max-width:auto;
+          height: auto;	
+		  max-height:500px;	  		  
           margin: 0 auto; }
       /* line 83, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
       .pin-it-column .imgHolder-pinit .img-content-block .carousel-control.right, .pin-it-column .imgHolder-pinit .img-content-block .carousel-control.left {
@@ -2792,8 +2793,6 @@ a.pinIcon:hover, a.pinIcon:focus, a.pinIcon:active {
   /* line 5, D:/Abid/Works/Plugins/bizbook/HTML/pin/style.scss */
   .pin-images-grp .pin-images-grp-inner {
     margin: 0 8px;
-    border: 1px solid #ccc;
-    border-bottom: 0px solid #ccc;
     line-height: 90px !important;
     text-align: center; }
     /* line 10, D:/Abid/Works/Plugins/bizbook/HTML/pin/style.scss */
@@ -3381,9 +3380,11 @@ a.pinIcon:hover, a.pinIcon:focus, a.pinIcon:active {
           line-height: 30px; 
 		  font-size:14px;
 		  font-weight:300;}
-        /* line 44, D:/Abid/Works/Plugins/bizbook/HTML/JobSearchNew/style.scss 
+        /* line 44, D:/Abid/Works/Plugins/bizbook/HTML/JobSearchNew/style.scss  */
         .JobsSearchLayout .jobSearchListing .job_search .moreOptions ul li a:hover {
-          text-decoration: none; }
+			color: #000;
+			font-weight:400;
+           }
       /* line 46, D:/Abid/Works/Plugins/bizbook/HTML/JobSearchNew/style.scss 
       .JobsSearchLayout .jobSearchListing .job_search .moreOptions ul li:hover {
         padding: 0 0 0 0px; }
@@ -3671,7 +3672,9 @@ a.pinIcon:hover, a.pinIcon:focus, a.pinIcon:active {
       /* line 39, D:/Abid/Works/Plugins/bizbook/HTML/jobAbout/style.scss */
       .aboutJobDescription .DescriptionTag .jobSection ul li {
         list-style: none;
-        line-height: 25px; }
+        line-height: 25px;
+		font-size: 14px;
+		font-weight:300;}
   /* line 42, D:/Abid/Works/Plugins/bizbook/HTML/jobAbout/style.scss */
   .aboutJobDescription .DescriptionTag .companySection {
     margin: 10px 30px 20px;
@@ -3681,7 +3684,8 @@ a.pinIcon:hover, a.pinIcon:focus, a.pinIcon:active {
       font-size: 14px;
       line-height: 30px;
       color: #4f4f4f;
-      line-height: 25px; }
+      line-height: 25px;
+	  font-weight:300; }
     /* line 44, D:/Abid/Works/Plugins/bizbook/HTML/jobAbout/style.scss */
     .aboutJobDescription .DescriptionTag .companySection .otherJobs {
       margin-top: 20px; }

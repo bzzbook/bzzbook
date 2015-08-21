@@ -12,30 +12,10 @@
 		$('#waterfall-loading').hide();
     </script>
 <script type="text/javascript">
-/*$('#adv_job_search_bar').get(0).reset();
-$('#company_form').get(0).reset();*/
-function search_online_friends(name){
-  
-if(name!=''){
-	$('#online-friends-search').show();
-  url="<?php echo base_url(); ?>friends/get_online_frnds/"+name;
- 
- 
-  $.ajax({
-        url: url,
-  success: function(data)
-        { 
-   $('#online-friends').hide();
-   $('#online-friends-search').html(data);
-  },
-  cache: false
-  });
-}else{
-	$('#online-friends').show();
-	$('#online-friends-search').hide();
-}
-}
-
+//$('#adv_job_search_bar')[0].reset();
+//$('#company_form')[0].reset();
+//document.getElementById('adv_job_search_bar').reset();
+//document.getElementById('company_form').reset();
 function removefrnd(user_id){
 	var addedusers = $('#addedusers').val();
 	var len = addedusers.length;
@@ -1386,9 +1366,15 @@ var uploaded_file = $('.active #uploaded_files').val();
 	
 		success: function()
         {  
-		 url="<?php echo base_url(); ?>signg_in/get_all_favorites_by_cat_id/"+category_id;
-	
-	   window.location.replace(url);
+		$('.fav_add_success').html('');
+		$('.fav_add_success').append('<span> Added To Favorites Successfully... </span>');
+		
+		$('.fav_add_success').fadeOut(5000);
+		//$('.fav_add_success').find('span').remove();
+		
+		//$('#save_as_fav_modal').modal('toggle');
+	   // url="<?php //echo base_url(); ?>signg_in/get_all_favorites_by_cat_id/"+category_id;
+	  // window.location.replace(url);
 		},
 		cache: false
 		});
@@ -1480,6 +1466,27 @@ function hide_post(post_id,user_id)
 	
 }
 
+function search_online_friends(name){
+  
+if(name!=''){
+	$('#online-friends-search').show();
+  url="<?php echo base_url(); ?>friends/get_online_frnds/"+name;
+ 
+ 
+  $.ajax({
+        url: url,
+  success: function(data)
+        { 
+   $('#online-friends').hide();
+   $('#online-friends-search').html(data);
+  },
+  cache: false
+  });
+}else{
+	$('#online-friends').show();
+	$('#online-friends-search').hide();
+}
+}
 
 function create_cat_focus()
 {

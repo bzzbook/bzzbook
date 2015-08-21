@@ -105,6 +105,8 @@
 <div class="modal fade pin-it-column target01 " tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="save_as_fav_modal" >
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
+                
+                <div class="fav_add_success"></div>
                     <div class="imgHolder-pinit">
                         <div class="img-content-block">
                         
