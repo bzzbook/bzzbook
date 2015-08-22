@@ -62,10 +62,14 @@ class Jobmodel extends CI_Model {
 	public function get_cmp_Jobs_data($cmp_id,$job_id)
 	{
 			
-		$condition = "companyinfo_id =" . "'".$cmp_id."' and job_id != "."'".$job_id."'";
+		//$condition = "companyinfo_id =" . "'".$cmp_id."' and job_id != "."'".$job_id."'";
 		$this->db->select('*');
 		$this->db->from('jobs');
-		$this->db->where($condition);
+		$this->db->where('companyinfo_id',$cmp_id);
+		if($job_id != '')
+		{
+			$this->db->where('job_id !=',$job_id);
+		}
 		$this->db->join('bzz_companyinfo','bzz_companyinfo.companyinfo_id = jobs.company_posted_by');
 		$query = $this->db->get();
 		return $query->result_array();

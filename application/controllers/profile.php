@@ -664,18 +664,20 @@ public function showfavs()
 	return $filename;
 	}
 	public function add_video(){
+		
+		//print_r($_FILES);
         if (isset($_FILES['userfile']['name']) && $_FILES['userfile']['name'] != '') {
             unset($config);
             $date = date("ymd");
             $configVideo['upload_path'] = 'uploads/';
             $configVideo['max_size'] = '102400';
-            $configVideo['allowed_types'] = 'mp4|ogg|ogv|wmv';
+            $configVideo['allowed_types'] = 'webm|mp4|ogg|ogv|wmv|3GP|3g2|3gpp|avi';
             $configVideo['overwrite'] = FALSE;
             $configVideo['remove_spaces'] = TRUE;
             $video_name = $date.$_FILES['userfile']['name'];
             $configVideo['file_name'] = $video_name;
-
-            $this->load->library('upload', $configVideo);
+//print_r($configVideo);
+            $this->load->library('upload',$configVideo);
             $this->upload->initialize($configVideo);
             if (!$this->upload->do_upload('userfile')) {
                 echo $this->upload->display_errors();

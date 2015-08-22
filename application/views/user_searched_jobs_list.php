@@ -1,6 +1,6 @@
 <div class="col-md-9">
             <div class="JobsSearchLayout">
-                <h2 class="mainHead"><span class="pull-left">Jobs</span>   <span class="pull-right searchColumn"><input type="text" placeholder="Search" /><button><i class="fa fa-search"></i></button></span></h2>
+                <h2 class="mainHead"><span class="pull-left" >Jobs</span>   <span class="pull-right searchColumn"><input type="text" placeholder="Search" /><button><i class="fa fa-search"></i></button></span></h2>
                 <div class="jobSearchListing">
                    
                    

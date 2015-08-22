@@ -18,12 +18,17 @@ class Jobs extends CI_Controller {
 	
 	public function disp_jobs($id)
 	{
-	$this->load->model('jobmodel');
+	//$this->load->model('jobmodel');
 	//$id = $this->session->userdata('cmp_session')['cmp_id'];
 	$data['cmp_info'] =  $this->companies->get_cmp_by_id($id); 
-    $data['content']='create_jobs';
-	$this->load->view('cmp-template-view',$data);
+ //   $data['content']='create_jobs';
+    $data['jobs'] = $this->jobmodel->get_cmp_Jobs_data($id,$job_id = '');
+	$data['content'] = 'all_company_jobs_list';
+	$this->load->view('cmp-right_template-view',$data);
 	}
+	
+	
+	
 	public function job_view($cmp_id,$job_id)
 	{
 		$data['cmp_info'] =  $this->companies->get_cmp_by_id($cmp_id);
@@ -194,11 +199,26 @@ public function job_description($job_id,$cmp_id)
 	$data['company_jobs'] =  $this->jobmodel->get_cmp_Jobs_data($cmp_id,$job_id); 
 	$job_data = $this->jobmodel->get_job_details($job_id);
 	
-	$data['similar_jobs'] = $this->jobmodel->get_similar_jobs($job_data[0]['job_id'],$job_data[0]['companyinfo_id'],$job_data[0]['job_title'],$job_data[0]['job_keyword'],$job_data[0]['country'],$job_data[0]['company_country'],$job_data[0]['cmp_name']);
+	$data['similar_jobs'] = $this->jobmodel->get_similar_jobs($job_data[0]['job_id'],$job_data[0]['companyinfo_id'],$job_data[0]['job_title'],    $job_data[0]['job_keyword'],$job_data[0]['country'],$job_data[0]['company_country'],$job_data[0]['cmp_name']);
 	$data['content']='job_full_description';
     $this->load->view('full_right_content_view',$data);
 	
 }
+
+public function cmp_job_description($job_id,$cmp_id)
+{
+	$data['cmp_info'] =  $this->companies->get_cmp_by_id($cmp_id); 
+	$data['job_applicants'] = $this->jobmodel->get_job_applicants($job_id);
+	$data['job_desc'] = $this->jobmodel->get_job_details($job_id);
+	$data['company_jobs'] =  $this->jobmodel->get_cmp_Jobs_data($cmp_id,$job_id); 
+	$job_data = $this->jobmodel->get_job_details($job_id);
+	
+	$data['similar_jobs'] = $this->jobmodel->get_similar_jobs($job_data[0]['job_id'],$job_data[0]['companyinfo_id'],$job_data[0]['job_title'],    $job_data[0]['job_keyword'],$job_data[0]['country'],$job_data[0]['company_country'],$job_data[0]['cmp_name']);
+	$data['content']='job_full_description';
+    $this->load->view('cmp-right_template-view',$data);
+	
+}
+
 
 public function get_jobs_by_search_bar()
 {

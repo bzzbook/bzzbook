@@ -16,6 +16,30 @@
 //$('#company_form')[0].reset();
 //document.getElementById('adv_job_search_bar').reset();
 //document.getElementById('company_form').reset();
+/*remove_video_controls();
+remove_video_controls()
+{
+	
+$('.remove_video_controls').removeAttribute("controls");
+}*/
+new_one();
+function new_one()
+{
+	
+	 var trigger = $("body").find('[data-toggle="modal"]');
+      trigger.click(function () {
+          var theModal = $(this).data("target"),
+              videoSRC = $(this).attr("data-theVideo"),
+              videoSRCauto = videoSRC + "?autoplay=1";
+          $(theModal + ' iframe').attr('src', videoSRCauto);
+          $(theModal + ' button.close').click(function () {
+              $(theModal + ' iframe').attr('src', videoSRC);
+          });
+          $('.modal').click(function () {
+              $(theModal + ' iframe').attr('src', videoSRC);
+          });
+      });
+}
 function removefrnd(user_id){
 	var addedusers = $('#addedusers').val();
 	var len = addedusers.length;
@@ -1722,4 +1746,10 @@ function commonAjaxCall(ajax_post_id){
             $(this).parent().parent().parent().toggleClass('removed');
         });
 */
+
+// video play in modal form
+
+
+
+
     </script>
