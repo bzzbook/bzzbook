@@ -172,7 +172,7 @@ class Signg_in extends CI_Controller {
 	 $data['post_content'] = $_POST['posts'];
 	 $data['uploaded_files'] = $file_name;
 	 if($data['post_content']=='' && $data['uploaded_files']==''){
-		echo 'empty error'; exit(0); 
+		echo 404; exit;
 	 }
 	 if($_POST['addedusers']!='')
 	 {

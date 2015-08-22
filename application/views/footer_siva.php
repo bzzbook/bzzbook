@@ -58,7 +58,9 @@ processData:false,
 beforeSend: function(){ $('#posts_content_div').prepend('<article id="loading_img"><img style="margin-left:240px; margin-bottom:8px;" src="<?php echo base_url(); ?>images/block_loader.gif" /></article>'); },        // To send DOMDocument or non processed data file it is set to false
 success: function(data)   // A function to be called if request succeeds
 {
-if(data='empty error'){
+
+if(data==404){
+	$('#posts_content_div').find('#loading_img').remove(); 
 alert('Post data should not be empty, please write your status or attach a file to post');
 return false;
 }
@@ -77,7 +79,7 @@ $('#my_form').trigger("reset");
 $('#selectedfriends #addedusers').html('');
 $('#selectedfriends').find('span').remove();
 $('#posts_content_div').prepend(data);
-$('#posts_content_div').find('#loading_img').remove(); 
+
 //window.location.reload();
 
 
