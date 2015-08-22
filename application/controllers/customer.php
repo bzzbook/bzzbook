@@ -71,7 +71,9 @@ class customer extends CI_Controller {
 		$user_info['job_seaking_options'] =  $data;
 		}
 		
-		
+		/*print_r($_POST['job_seaker_industries']);
+		print_r($_POST['job_seaker_jobtypes']);
+		exit(0);*/
 		if(!empty ($_POST['job_seaker_jobtypes']) )
 		{
 		$options = $_POST['job_seaker_jobtypes'];
