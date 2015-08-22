@@ -171,6 +171,9 @@ class Signg_in extends CI_Controller {
 	   
 	 $data['post_content'] = $_POST['posts'];
 	 $data['uploaded_files'] = $file_name;
+	 if($data['post_content']=='' && $data['uploaded_files']==''){
+		echo 404; exit;
+	 }
 	 if($_POST['addedusers']!='')
 	 {
 		 $data['posted_to'] = $_POST['addedusers'];
@@ -619,10 +622,13 @@ class Signg_in extends CI_Controller {
 //}
 public function ajax_image_upload($file_name){
 	//print_r($_FILES); exit(0);
+	
 	$n =  count($_FILES[$file_name]['name']);
 	//print_r($_FILES[$file_name]);
 	for($i=0;$i<$n;$i++){
-	
+		$skiplist = explode(',',$_POST['skipfiles']);
+		if(in_array($_FILES[$file_name]["name"][$i],$skiplist)){
+		}else{
 		$filetype = $_FILES[$file_name]["type"][$i];
 		$filename = time().'_'.$_FILES[$file_name]["name"][$i];
 		$filesize = $_FILES[$file_name]["size"][$i];
@@ -700,7 +706,7 @@ public function ajax_image_upload($file_name){
 		{
 		$file_upload['status'] = false;
 		$file_upload['error_code'] = 3;
-		$file_upload['message'] =  "<span id='invalid'>***Image size should be less than 2mb and image should be in jpg,png,gif format***<span>";
+		$file_upload['message'] =  "<span id='invalid'>***Image size should be less than 4mb and image should be in jpg,png,gif format***<span>";
 		}
 		
 	}else{
@@ -709,8 +715,12 @@ public function ajax_image_upload($file_name){
 		$file_upload['message'] =  "File not uploaded";
 	}
 	}
+	}
 	//echo json_encode($file_upload); exit(0);
+	if(isset($file_upload) && $file_upload)
 	return $file_upload;
+	else
+	return false;
 	 
 	
 		 }

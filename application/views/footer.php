@@ -1815,6 +1815,7 @@ $('#event_banner').change(function()
 window.onload = function () {
     var fileUpload = document.getElementById("uploadPhotos");
     fileUpload.onchange = function () {
+		$('#skipfiles').val('');
         if (typeof (FileReader) != "undefined") {
             var dvPreview = document.getElementById("uploadPhotosdvPreview");
             dvPreview.innerHTML = "";
@@ -1835,25 +1836,32 @@ window.onload = function () {
                 if(regex.test(file.name.toLowerCase())) {
                     var reader = new FileReader();
                     reader.onload = function (e) {
+						
                         var img = document.createElement("IMG");
-                        img.height = "110";
+						var div =  document.createElement("DIV");
+                        img.height = "110";						
                         img.width = "110";
-                        img.src = e.target.result;
-                        dvPreview.appendChild(img);
+                        img.src = e.target.result;						
+						img.id = "previewimg"+i;						
+						div.onclick = function(){
+							var curData = $("#skipfiles").val();
+							if(curData!='')
+							$('#skipfiles').val(curData+','+file.name);
+							else
+							$('#skipfiles').val(file.name);
+							$(this).remove();
+						};
+					
+                        dvPreview.appendChild(div);
+						div.appendChild(img);
                     }
                     reader.readAsDataURL(file);
                 } else {
-                    alert(file.name + " is not a valid image file.");
-                    dvPreview.innerHTML = "";
-                    return false;
-                }
-            }
-        } else {
-            alert("This browser does not support HTML5 FileReader.");
-        }
-    }
-};
-
+                    alert(file.name + " is not a valid image file,Image size should be less than 4mb and image should be in jpg,jpeg,png,gif.");
+                   // dvPreview.innerHTML = "";
+                   // return false;
+                }	
+}
 
 /*$('#uploadPhotos').change(function(){
   startUpload();
@@ -6471,8 +6479,6 @@ function showOnlineFriends(){
  
 },5000);
 */
-
-
 
 
 
