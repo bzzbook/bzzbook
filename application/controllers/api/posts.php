@@ -176,7 +176,7 @@ class posts extends CI_Controller {
 		
 		
 		if((($filetype == "image/png") || ($filetype == "image/jpg") || ($filetype == "image/jpeg")
-		) && ($filesize < 1000000)//Approx. 100kb files can be uploaded.
+		) && ($filesize < 4194304)//Approx. 100kb files can be uploaded.
 		&& in_array($file_extension, $validextensions)) {
 			
 		if ($fileerror > 0)
@@ -238,7 +238,7 @@ class posts extends CI_Controller {
 		{
 		$file_upload['status'] = false;
 		$file_upload['error_code'] = 3;
-		$file_upload['message'] =  "<span id='invalid'>***Image size should be less than 2mb and image should be in jpg,png,gif format***<span>";
+		$file_upload['message'] =  "<span id='invalid'>***Image size should be less than 4mb and image should be in jpg,png,gif format***<span>";
 		}
 		
 	}else{

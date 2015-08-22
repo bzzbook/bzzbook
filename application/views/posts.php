@@ -21,7 +21,7 @@
         <div id="uploadPhotosdvPreview"></div>
          <form name = "post_form" id = "my_form" enctype = "multipart/form-data" method = "POST" action="<?php echo  base_url(); ?>signg_in/send_post" />
         <input type="file" name="uploadPhotos[]" id="uploadPhotos" multiple="multiple" style="display:none;" />
-        
+        <input type="hidden" id="skipfiles" name="skipfiles" /><div id="tempdivholder" style="display:none;" ></div><div id="tempfilename"></div>
 <!--        <textarea cols="" rows="" name="posts" id="posts" class="form-control" placeholder="What's Buzzing?"></textarea>
 -->       
 		<div class="post-content" style="width:100%; min-height:75px;" onclick="document.getElementById('dummypost').focus();"><div contenteditable="true" style="min-height:20px; min-width:10px; padding:8px; float:left;" id="dummypost" onkeyup="takeInputToPost()"></div><div id="withTokens" style="display:none; padding:8px; float:left">--With </div><div style="clear:both;"></div></div>
