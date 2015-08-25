@@ -1,5 +1,5 @@
 <?php 
-	$organization_details = $this->profile_set->getorganizationDetails();
+	$organization_details = $this->profile_set->getorganizationDetails($user_id = '');
 ?>
  <div class="tophead">Work</div>
                          

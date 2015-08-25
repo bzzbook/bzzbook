@@ -4,7 +4,7 @@
 	
 <div id="nicnames_val_disp">
    				  <?php 
-					    $nick_names = $this->profile_set->get_nick_names();
+					    $nick_names = $this->profile_set->get_nick_names($user_id = '');
 					   if(!empty($nick_names))
                     {
                         foreach($nick_names as $nicname)

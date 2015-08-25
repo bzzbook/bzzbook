@@ -1,5 +1,5 @@
 <?php 
-	$user_college_info = $this->profile_set->get_college_details();
+	$user_college_info = $this->profile_set->get_college_details($user_id = '');
 ?>
 
 <div class="tophead"> College</div>

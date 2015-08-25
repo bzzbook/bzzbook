@@ -133,15 +133,6 @@
         </div>
 
 
-
-
-
-
-
-
-
-
-
 <script>
 function takeInputToPost(){
 $("#posts").val($("#dummypost").text());

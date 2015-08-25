@@ -1,5 +1,5 @@
 <?php 
-	 $result = $this->profile_set->save_settings();
+	 $result = $this->profile_set->save_settings($user_id = '');
 ?>
     <div class="tophead">About You</div>
      <div class="iner_boxleft" id="about_me_add" style="display:none;"><a href="javascript:void(0)" id="aboutme_a"><i class="fa fa-plus"></i>Write some details about yourself</a></div>
