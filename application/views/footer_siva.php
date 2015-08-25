@@ -1103,7 +1103,7 @@ function postsubmitajax(e,my_form)
 	   setTimeout(function() {
 
 
-url = "<?php echo  base_url(); ?>signg_in/send_post/";
+url = "<?php //echo  base_url(); ?>signg_in/send_post/";
 var formObj = $('form#my_form')[0];
 
 $.ajax({

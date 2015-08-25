@@ -624,6 +624,8 @@ public function ajax_image_upload($file_name){
 	//print_r($_FILES); exit(0);
 	
 	$n =  count($_FILES[$file_name]['name']);
+	$validextensions = array("jpeg", "jpg", "png");
+	$validvideoextensions = array('webm','mp4','ogg','ogv','wmv','3GP','3g2','3gpp','avi');
 	//print_r($_FILES[$file_name]);
 	for($i=0;$i<$n;$i++){
 		$skiplist = explode(',',$_POST['skipfiles']);
@@ -634,17 +636,46 @@ public function ajax_image_upload($file_name){
 		$filesize = $_FILES[$file_name]["size"][$i];
 		$fileerror = $_FILES[$file_name]["error"][$i];
 		$tempname = $_FILES[$file_name]['tmp_name'][$i];
-
+		
+	
 	if(isset($filetype) && !empty($filetype))	
 	{		
-		$validextensions = array("jpeg", "jpg", "png", "webm");
-		
 		$temporary = explode(".",$filename);
 		
 		$file_extension = end($temporary);
 		
-		
-		if((($filetype == "image/png") || ($filetype == "image/jpg") || ($filetype == "image/jpeg") || ($filetype == "video/webm") )
+		 if (isset($filename) && $filename != '' && ($filesize < 41943040)
+		&& in_array($file_extension, $validvideoextensions)) {
+            unset($config);
+			$_FILES[$file_name]["name"] = $filename;
+			$_FILES[$file_name]["type"] = $filetype;
+			$_FILES[$file_name]["name"] = $filename;
+			$_FILES[$file_name]["size"] = $filesize;
+			$_FILES[$file_name]["error"] = $fileerror; 
+			$_FILES[$file_name]['tmp_name'] = $tempname;
+			
+            $date = date("ymd");
+            $configVideo['upload_path'] = 'uploads/';
+            $configVideo['max_size'] = '41943040';
+            $configVideo['allowed_types'] = 'webm|mp4|ogg|ogv|wmv|3GP|3g2|3gpp|avi';
+            $configVideo['overwrite'] = FALSE;
+            $configVideo['remove_spaces'] = TRUE;
+            $video_name = $date.$filename;
+            $configVideo['file_name'] = $video_name;
+//print_r($configVideo);
+            $this->load->library('upload',$configVideo);
+            $this->upload->initialize($configVideo);
+            if (!$this->upload->do_upload($file_name)) {
+              $file_upload['status'] = false;		
+			  $file_upload['message'] =  $this->upload->display_errors();
+            } else {
+                $videoDetails = $this->upload->data();
+				$file_upload['status'] = true;		
+			    $file_upload['files'][] =  $video_name;
+            }
+        }
+		elseif((($filetype == "image/png") || ($filetype == "image/jpg") || ($filetype == "image/jpeg")
+		) && ($filesize < 4194304)//Approx. 100kb files can be uploaded.
 		&& in_array($file_extension, $validextensions)) {
 			
 		if ($fileerror > 0)
@@ -666,7 +697,7 @@ public function ajax_image_upload($file_name){
 		$file_upload['files'][] =  $filename;
 		
 		    $path = DIR_FILE_PATH.$filename;
-		    $config['allowed_types'] = 'gif|jpg|png|webm';
+		    $config['allowed_types'] = 'gif|jpg|png';
 			$config['create_thumb'] = TRUE;
 			$config['max_size']	= '';
 			$config['max_width']  = '';

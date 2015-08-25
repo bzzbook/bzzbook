@@ -1819,22 +1819,35 @@ window.onload = function () {
         if (typeof (FileReader) != "undefined") {
             var dvPreview = document.getElementById("uploadPhotosdvPreview");
             dvPreview.innerHTML = "";
-            var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp|.webm )$/;
+           
+			var videocount = 0;
             for (var i = 0; i < fileUpload.files.length; i++) {
-                var file = fileUpload.files[i];
-				if(file.type == 'video/webm')
-				{ 
-				if(i == 1)
-				{
-					alert('you can upload only one video file at one time');
-					dvPreview.innerHTML = "";
-				}else if(i == 0){
-				
-				alert('Your File is getting Uploaded!.. Please wait');
-				}
-				}else
-                if(regex.test(file.name.toLowerCase())) {
-                    var reader = new FileReader();
+                var file = fileUpload.files[i]; 
+				 var videoregex = /^([a-zA-Z0-9\s_\\.\-:])+(.mp4|.wmv)$/;
+				 if(videoregex.test(file.name.toLowerCase())){
+				 videocount++;
+				 if(videocount==2){
+					 dvPreview.innerHTML = "";
+				 alert('Please upload one video at a time');
+				 fileUpload.value = '';
+				 
+				 return false;
+				 }
+				 }
+				 previewCreater(file,dvPreview,i);           
+            }
+        } else {
+            alert("This browser does not support HTML5 FileReader.");
+        }
+    }
+};
+function previewCreater(file,dvPreview,i){
+ 
+   var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png)$/;
+   var videoregex = /^([a-zA-Z0-9\s_\\.\-:])+(.mp4|.wmv)$/;
+  if (regex.test(file.name.toLowerCase()) && file.size<=4194304) {                    
+					
+					var reader = new FileReader();
                     reader.onload = function (e) {
 						
                         var img = document.createElement("IMG");
@@ -1856,7 +1869,28 @@ window.onload = function () {
 						div.appendChild(img);
                     }
                     reader.readAsDataURL(file);
-                } else {
+                }
+				else if( videoregex.test(file.name.toLowerCase()) && file.size<=41943040 )
+				{
+					 var img = document.createElement("IMG");
+						var div =  document.createElement("DIV");
+                        img.height = "110";						
+                        img.width = "110";
+                        img.src = '<?php echo base_url()."images/video_preview.jpg" ?>';						
+						img.id = "previewimg"+i;						
+						div.onclick = function(){
+							var curData = $("#skipfiles").val();
+							if(curData!='')
+							$('#skipfiles').val(curData+','+file.name);
+							else
+							$('#skipfiles').val(file.name);
+							$(this).remove();
+						};
+					
+                        dvPreview.appendChild(div);
+						div.appendChild(img);
+				}
+				else {
                     alert(file.name + " is not a valid image file,Image size should be less than 4mb and image should be in jpg,jpeg,png,gif.");
                    // dvPreview.innerHTML = "";
                    // return false;
