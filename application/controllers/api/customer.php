@@ -84,9 +84,9 @@ class customer extends CI_Controller {
 		
 		$user_info['job_seaker_jobtypes'] =  $data;
 		}
-		print_r($_POST['job_seaker_industries']);
+		/*print_r($_POST['job_seaker_industries']);
 		print_r($_POST['job_seaker_jobtypes']);
-		exit(0);
+		exit(0);*/
 		
 		$user_info['user_phoneno'] = $this->input->post('phone_number');		
 		$user_info['user_firstname'] = $this->input->post('firstname');
