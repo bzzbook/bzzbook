@@ -1354,7 +1354,7 @@
                         <div class="sm_rightbox"><h3><a href="#"><?php echo $data['account_name']; ?></a></h3>
                         <p><?php echo $data['account_type']; ?></p>
                         </div>
-                        <?php if(!$id) { ?>
+                        <?php if(!$id){ ?>
                         <div class="sm_rightside">
                         <div class="col-md-3 com_le" style="display:none;"><i class="fa fa-globe"></i></div>
                        <div class="col-md-6 com_mid"><a href="javascript:void(0)" onclick="accounts_edit()"  class="account_edit" id="account_edit<?php echo $data['account_id']; ?>"><i class="fa fa-pencil"></i></a></div>
