@@ -2038,8 +2038,7 @@
                                        <div class="btn3 btn-black" style="display:none;" id="fam_member_down" >Cancel</div>
                                      
                                       <div class="btn3 btn-black" id="close_family_btn" onclick="close_family()">Cancel</div>
-                                     
-                                     
+                                                                          
                                     </div>
                                     <div class="clearfix"></div>
                                   </div>
