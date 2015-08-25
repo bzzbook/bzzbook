@@ -10,6 +10,7 @@
 	  ?>
 <!--      <div id="online-friends"></div>
 -->
+
 <div class="modal fade pin-it-column target01 " tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="save_as_fav_modal" >
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
