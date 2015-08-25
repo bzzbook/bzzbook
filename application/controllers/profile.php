@@ -564,6 +564,7 @@ public function showfavs()
 			 $data['posted_by'] = $session_data['account_id'];
 			 $data['post_content'] = $this->input->post('posts');
 			 $data['uploaded_files'] = $cropped;
+			 $data['album_id'] = $this->input->post('album_id');
 			 
 			
 			$path =DIR_FILE_PATH.$cropped;
@@ -671,7 +672,7 @@ public function showfavs()
             $date = date("ymd");
             $configVideo['upload_path'] = 'uploads/';
             $configVideo['max_size'] = '102400';
-            $configVideo['allowed_types'] = 'webm|mp4|ogg|ogv|wmv|3GP|3g2|3gpp|avi';
+            $configVideo['allowed_types'] = 'webm|mp4|ogg|ogv|wmv|3gp|3g2|3gpp|avi|flv';
             $configVideo['overwrite'] = FALSE;
             $configVideo['remove_spaces'] = TRUE;
             $video_name = $date.$_FILES['userfile']['name'];
@@ -1745,6 +1746,59 @@ public function get_categories()
 	{
 		echo false;
 	}
+}
+
+public function get_albums($search_keyword)
+{
+	
+
+	$user_id = $this->session->userdata('logged_in')['account_id'];
+		$query = $this->db->select('*')->from('bzz_albums')->like('album_name', $search_keyword, 'both')->where('album_cr_by',$user_id)->get();
+	$list= '';
+
+	if( $query->num_rows > 0)
+	{
+		$list .= '<h2>All Albums</h2>';
+		$albums = $query->result_array();
+		foreach($albums as $album)
+		{
+		
+		$list .='<div class="board-option-pin">
+                                  
+									<p>'.$album['album_name'].'</p>
+                                    <a onclick="insert_album_data('.$album['album_name'].')" class="pinIcon">Add</a>
+                                </div>';
+		}
+		
+	}else
+	{
+
+								
+								$list .='<div class="board-option-pin CreateBoard" id="create_new_category">
+                                    <a href="javascript:void(0)" onclick="create_album(&#39'.$search_keyword.'&#39,'.$user_id.');">
+                                        <span class="icon-create fa fa-plus"></span>
+                                        <p>Create a Board : '.urldecode($search_keyword).' </p>
+                                    </a>                                  
+                                </div>';
+	}
+	echo $list;
+}
+
+
+
+public function create_album($category_name,$user_id)
+{
+	$data['album_name'] = urldecode($category_name);
+	$data['album_cr_by'] = $user_id;
+	if($this->db->insert('bzz_albums',$data))
+	{
+		echo $this->db->insert_id();
+	
+		
+	}else{
+		echo false;
+	}
+	
 }
 
 }

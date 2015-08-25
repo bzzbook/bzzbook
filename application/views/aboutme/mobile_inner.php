@@ -1,5 +1,5 @@
 <?php 
-	  $mobile_data = $this->profile_set->get_mbl_nos();
+	  $mobile_data = $this->profile_set->get_mbl_nos($user_id = '');
 	// print_r($mobile_data);
 	
 	 

@@ -1,5 +1,5 @@
 <?php 
-	 $result = $this->profile_set->save_settings();
+	 $result = $this->profile_set->save_settings($user_id = '');
 ?>
    <div class="tophead">Favorite Quotes</div>
     <div class="iner_boxleft" style="display:none;" id="add_fav_quotes"><a href="javascript:void(0)" id="fav_quotes"><i class="fa fa-plus"></i>Add your favorite quotations</a></div>

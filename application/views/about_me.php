@@ -2032,7 +2032,7 @@
                                     <div class="publics col-md-4" style="display:none;">
                                       <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Public <span class="caret"></span></button>
                                     </div>
-                                    <div class="col-md-7" style="margin-left:75px">
+                                    <div class="col-md-8" style="margin-left:48px">
                                       
                                       <input type="submit" class="btn3 btn-green" value="Save Changes" />
                                        <div class="btn3 btn-black" style="display:none;" id="fam_member_down" >Cancel</div>
@@ -2243,7 +2243,7 @@
                                   <div class="publics col-md-2" style="display:none;">
                                     <button aria-expanded="false" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">Public <span class="caret"></span></button>
                                   </div>
-                                   <div class="col-md-5" style="margin-left:75px;">
+                                   <div class="col-md-6" style="margin-left:48px;">
                               
                                     <input type="submit" class="btn3 btn-green" value="Save Changes" />
                                         

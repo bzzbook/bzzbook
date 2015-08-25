@@ -4,7 +4,7 @@
                         <div id="family_val_disp">
    				
         <?php    
-		  $result = $this->profile_set->get_family_members();
+		  $result = $this->profile_set->get_family_members($user_id = '');
 		
 		if(!empty($result))
 		{

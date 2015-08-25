@@ -637,14 +637,15 @@ public function ajax_image_upload($file_name){
 
 	if(isset($filetype) && !empty($filetype))	
 	{		
-		$validextensions = array("jpeg", "jpg", "png", "webm");
+		$validextensions = array("jpeg", "jpg", "png");
 		
 		$temporary = explode(".",$filename);
 		
 		$file_extension = end($temporary);
 		
 		
-		if((($filetype == "image/png") || ($filetype == "image/jpg") || ($filetype == "image/jpeg") || ($filetype == "video/webm") )
+		if((($filetype == "image/png") || ($filetype == "image/jpg") || ($filetype == "image/jpeg")
+		) && ($filesize < 4194304)//Approx. 100kb files can be uploaded.
 		&& in_array($file_extension, $validextensions)) {
 			
 		if ($fileerror > 0)
@@ -666,7 +667,7 @@ public function ajax_image_upload($file_name){
 		$file_upload['files'][] =  $filename;
 		
 		    $path = DIR_FILE_PATH.$filename;
-		    $config['allowed_types'] = 'gif|jpg|png|webm';
+		    $config['allowed_types'] = 'gif|jpg|png';
 			$config['create_thumb'] = TRUE;
 			$config['max_size']	= '';
 			$config['max_width']  = '';

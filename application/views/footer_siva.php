@@ -1355,7 +1355,7 @@ function get_save_fav_user_categories()
 
 function create_save_fav_category(search_key_word,user_id)
 {
-		alert(search_key_word);
+		//alert(search_key_word);
 		url = "<?php echo base_url(); ?>signg_in/save_fav_create_category/"+search_key_word+"/"+user_id;
 		$.ajax({
         url: url,
@@ -1366,9 +1366,7 @@ function create_save_fav_category(search_key_word,user_id)
 		{
 			var data = data.trim();
 			insert_save_as_favorite(data);
-	  //  $('#save_fav_category_search').val('');
-	//	$('.user-option-block #categories').html('');
-      //  $('.user-option-block #categories').append(data);
+	  
 		}
 		},
 		cache: false
@@ -1522,7 +1520,11 @@ function create_cat_focus()
 {
 $('#save_fav_category_search').focus();
 }
+function create_album_focus()
+{
 
+$('#album_search').focus();
+}
 
 $('.searchBlock .originalBlock a').click(function () {
 
@@ -1748,8 +1750,60 @@ function commonAjaxCall(ajax_post_id){
 */
 
 // video play in modal form
+function album_search(search_keyword)
+{
+	
+	//var album_name = $('#album_search').val();
+	//alert(search_keyword);
+	
+	if(search_keyword!='')
+	{	
+	url="<?php echo base_url(); ?>profile/get_albums/"+search_keyword;
+		$.ajax({
+        url: url,
+		success: function(data)  
+        {  
+		if(data)
+		{
+			//alert(data);
+			$('.scroll-pane #create_new_category').remove();
+			$('#albums .scroll-pane').html('');
+			$('#albums .scroll-pane').append(data);
+		}
+		},
+		cache: false
+		});
+	
+	}else
+	{
+		$('.scroll-pane #create_new_category').remove();
+		$('#albums .scroll-pane').html('');
+	}
+
+}
 
 
-
-
+function create_album(album_name,user_id)
+{
+	url = "<?php echo base_url(); ?>profile/create_album/"+album_name+"/"+user_id;
+		$.ajax({
+        url: url,
+		success: function(data)
+        { 
+		//alert("hai"); 
+		if(data)
+		{
+			//var data = data.trim();
+			//insert_save_as_favorite(data);
+			$('#album_search').val('');
+			$('#albums .scroll-pane').html('');
+			$('#album_id').val(data);
+			$('#album_name').html('');
+			$('#album_name').append(album_name);
+	  
+		}
+		},
+		cache: false
+		});
+}
     </script>

@@ -1,5 +1,5 @@
 <?php 
-	$user_school_info = $this->profile_set->get_school_details();
+	$user_school_info = $this->profile_set->get_school_details($user_id = '');
 ?>
 
  <div class="tophead"> High School</div>
