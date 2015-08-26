@@ -93,14 +93,15 @@ $('#uploadPhotosdvPreview').html('');
 //$('#posts_content_div').html('');
 $('#dummypost').html('');
 $('#withTokens').html('');
+$('#addedusers').val('');
 $('#tagaddedusers').val('');
 $('#posts').val('');
-$('#taggedfriends #tagaddedusers').html('');
+//$('#taggedfriends #tagaddedusers').html('');
 $('#taggedfriends').find('span').remove();
 $('#my_form').trigger("reset");
 //$('#posts_content_div').html('');
 //$('#posts_content_div').find('#last_id').remove();
-$('#selectedfriends #addedusers').html('');
+//$('#selectedfriends #addedusers').html('');
 $('#selectedfriends').find('span').remove();
 $('#posts_content_div').prepend(data);
 
