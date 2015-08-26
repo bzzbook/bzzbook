@@ -75,7 +75,7 @@ class common extends CI_Controller {
 	   $this->db->select('*');
 	   
 	   $this->db->from('bzz_posts');
-	$user_time_condition  = "post_id > '".$recent_post_id."' AND posted_on >= DATE_ADD( NOW(), INTERVAL - 5 MINUTE ) AND isGhostpost=0 ORDER BY post_id DESC";	
+	$user_time_condition  = "post_id > '".$recent_post_id."' AND posted_on >= DATE_ADD( NOW(), INTERVAL - 5 MINUTE ) ORDER BY post_id DESC";	
 	   
 	   
 	    if(!empty($hidden_posts))
