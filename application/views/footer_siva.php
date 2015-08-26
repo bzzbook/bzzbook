@@ -1643,11 +1643,14 @@ function commonAjaxCall(ajax_post_id){
   $.ajax({
   url: url,
   success: function(data){  
+  		
 		var result = JSON.parse(data);
 		//showOnlineFriends
 		if(result.showOnlineFriends){
+			
 			var search_text = document.getElementById('input_search_frnds').value;
-			if(search_text!=''){
+			if(!search_text){
+				
 				$('#online-friends').html(result.showOnlineFriends);
 			}
 		  

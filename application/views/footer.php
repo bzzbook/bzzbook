@@ -1824,7 +1824,7 @@ window.onload = function () {
 			var videocount = 0;
             for (var i = 0; i < fileUpload.files.length; i++) {
                 var file = fileUpload.files[i]; 
-				 var videoregex = /^([a-zA-Z0-9\s_\\.\-:])+(.mp4|.wmv)$/;
+				 var videoregex = /^([a-zA-Z0-9\s_\\.\-:])+(.mp4|.wmv|.3gp|.flv)$/;
 				 if(videoregex.test(file.name.toLowerCase())){
 				 videocount++;
 				 if(videocount==2){
@@ -1845,7 +1845,7 @@ window.onload = function () {
 function previewCreater(file,dvPreview,i){
  
    var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png)$/;
-   var videoregex = /^([a-zA-Z0-9\s_\\.\-:])+(.mp4|.wmv)$/;
+   var videoregex = /^([a-zA-Z0-9\s_\\.\-:])+(.mp4|.wmv|.3gp|.flv|.avi)$/;
   if (regex.test(file.name.toLowerCase()) && file.size<=4194304) {                    
 					
 					var reader = new FileReader();
@@ -2416,7 +2416,7 @@ function keyupevent_bc(){
 
 function addfrndtobcpost(user_id,name){
 var cur_content = $('#selected_bc_friends').html();
-var new_content = "<span  class='bc_mail_ids' id='"+user_id+"'>"+name+"<a onclick='removefrnd("+user_id+")'><img class='as_close_btn' src='<?php echo base_url().'images/close_post.png'; ?>'/></a></span>";
+var new_content = "<span  class='bc_mail_ids' id='"+user_id+"'>"+name+"<a onclick='removefrndbcfrnd("+user_id+")'><img class='as_close_btn' src='<?php echo base_url().'images/close_post.png'; ?>'/></a></span>";
  $('#selected_bc_friends').html(new_content+cur_content);
  $('#search_bc_friends').focus();
  $('#auto_bc_suggest').hide();
@@ -2428,8 +2428,8 @@ $('#added_bc_users_test').val(user_id)
 
 }
 
-function removefrnd(user_id){
-	var addedusers = $('#added_bc_users').val();
+function removefrndbcfrnd(user_id){
+	var addedusers = $('#added_bc_users_test').val();
 	var len = addedusers.length;
 	var newval = '';
 	if(len==1)
@@ -2443,7 +2443,7 @@ function removefrnd(user_id){
 	newval = addedusers.replace(user_id+',','');
 	else
 	newval = addedusers.replace(user_id+',','');
-	$('#added_bc_users').val(newval);
+	$('#added_bc_users_test').val(newval);
 	$('#'+user_id).remove();
 }
 
@@ -2927,6 +2927,7 @@ function delete_current_city()
 	
 	
 }
+
 </script>
 <script> // hometown script
 $('body').delegate('#hometown','click',function(){
@@ -6257,6 +6258,7 @@ $('.life_events_disp').click(function()
 				
 	
 });
+
 </script>
 
 <script type="text/javascript">
@@ -6368,7 +6370,7 @@ function updateGoingStatus(event_id,status)
   }
 
 	   function codeAddress(address_location) {
-   // var address = document.getElementById("address").value;
+    var address = document.getElementById("address").value;
     geocoder.geocode( { 'address': address_location}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
         map.setCenter(results[0].geometry.location);

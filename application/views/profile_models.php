@@ -4266,7 +4266,7 @@ iage------>
 
                       <!----------------job_apply_modal --------------------------->
 
-
+<?php /*?>
 
 <div class="modal fade" id="Apply_for_Job" tabindex="-1" role="dialog" aria-labelledby="myModalLabe" aria-hidden="true">
   <div class="modal-dialog">
@@ -4502,6 +4502,7 @@ iage------>
           </div>
         </div>
       </div>
+      </div>
       
       
       <!----------- gallary videos playing modal---------->
@@ -4511,4 +4512,4 @@ iage------>
       
        <!----------- gallary videos playing modal---------- >
       
-      
+      <?php */?>

@@ -632,7 +632,7 @@ public function ajax_image_upload($file_name){
 		if(in_array($_FILES[$file_name]["name"][$i],$skiplist)){
 		}else{
 		$filetype = $_FILES[$file_name]["type"][$i];
-		$filename = time().'_'.$_FILES[$file_name]["name"][$i];
+		$filename = str_replace(' ', '', time().'_'.$_FILES[$file_name]["name"][$i]);
 		$filesize = $_FILES[$file_name]["size"][$i];
 		$fileerror = $_FILES[$file_name]["error"][$i];
 		$tempname = $_FILES[$file_name]['tmp_name'][$i];
@@ -657,7 +657,7 @@ public function ajax_image_upload($file_name){
             $date = date("ymd");
             $configVideo['upload_path'] = 'uploads/';
             $configVideo['max_size'] = '41943040';
-            $configVideo['allowed_types'] = 'webm|mp4|ogg|ogv|wmv|3GP|3g2|3gpp|avi';
+            $configVideo['allowed_types'] = 'webm|mp4|ogg|ogv|wmv|3gp|3g2|3gpp|avi';
             $configVideo['overwrite'] = FALSE;
             $configVideo['remove_spaces'] = TRUE;
             $video_name = $date.$filename;
@@ -670,8 +670,20 @@ public function ajax_image_upload($file_name){
 			  $file_upload['message'] =  $this->upload->display_errors();
             } else {
                 $videoDetails = $this->upload->data();
+				$input = DIR_FILE_PATH.$video_name;
+				$videoname = explode('.',$video_name);
+				$output = DIR_FILE_PATH.$videoname[0].'.mp4';
+				
+				if($this->make_jpg($input, $output)){
 				$file_upload['status'] = true;		
 			    $file_upload['files'][] =  $video_name;
+				return $file_upload;
+				}
+				else{
+				$file_upload['status'] = false;	
+				$file_upload['message'] = 'upload failed due to some error';
+				return false;
+				}
             }
         }
 		elseif((($filetype == "image/png") || ($filetype == "image/jpg") || ($filetype == "image/jpeg")
@@ -703,6 +715,7 @@ public function ajax_image_upload($file_name){
 			$config['max_width']  = '';
 			$config['max_height']  = '';
 		    $config['image_library'] = 'gd2';
+			$config['remove_spaces'] = TRUE;
 			$config['create_thumb'] = TRUE;
 			$config['maintain_ratio'] = TRUE;
 			$config['source_image'] = $path;
@@ -711,9 +724,11 @@ public function ajax_image_upload($file_name){
 			if($imagewidth>523){
 				$default_width = 523;
 				$entended_width = 900;
+				$thumb_width = 170;
 			}else{
 				$default_width = $imagewidth;
 				$entended_width = $imagewidth;
+				$thumb_width = 170;
 			}
 			$config['thumb_marker'] = '_default';
 			$config['width'] = $default_width;
@@ -725,6 +740,14 @@ public function ajax_image_upload($file_name){
 			
 			$config['thumb_marker'] = '_extended';
 			$config['width'] = $entended_width;
+			$config['height'] = 1;
+			$config['master_dim'] = 'width';
+			$this->load->library('image_lib', $config);
+			$this->image_lib->initialize($config);
+			$this->image_lib->resize();
+			
+			$config['thumb_marker'] = '_thumb';
+			$config['width'] = $thumb_width;
 			$config['height'] = 1;
 			$config['master_dim'] = 'width';
 			$this->load->library('image_lib', $config);
@@ -755,6 +778,16 @@ public function ajax_image_upload($file_name){
 	 
 	
 		 }
+public function make_jpg($input, $output) {
+$ffmpegpath = "ffmpeg.exe";
+if(!file_exists($input)){ echo 'file not exists'; return false;}
+$command = "$ffmpegpath -i $input $output";
+
+@exec( $command, $ret );
+if(!file_exists($output)){ echo 'file output not exist'; return false;}
+if(filesize($output)==0) {echo 'file size 0'; return false; }
+return true;
+}
  public function post_comment_by_ajax()
    {
 	

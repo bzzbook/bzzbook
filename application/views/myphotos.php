@@ -58,46 +58,13 @@ $profiledata = $this->customermodel->profiledata($id);
 <form class="uploadform" method="post" enctype="multipart/form-data" action='' name="photo">	
 	<div class="crop_set_upload">
 		<div class="crop_upload_label">Upload files: </div>
-		<div class="crop_select_image"><div class="file_browser"><input type="file" name="imagefile" id="imagefile" class="hide_broswe" /></div></div>
+		<div class="crop_select_image"><div class="file_browser"><input type="file" name="imagefile" id="imagefile" class="hide_broswe" multiple="multiple" /></div></div>
 		<div class="crop_select_image"><input type="submit" value="Upload" class="upload_button" name="submitbtn" id="myphotos_submitbtn" /></div><div id="loadingimage" style="padding-top:15px;"></div>
 	</div>
-</form>			
+		
 		<div class="crop_set_preview" style="display:none;">
-			<div class="crop_preview_left"> 
-				<div class="crop_preview_box_big" id='viewimage'> 
-					
-				</div>
-			</div>	
-         
-			<div class="crop_preview_right">
-				Preview (150x150 px)
-				<div class="crop_preview_box_small" id='thumbviewimage' style="position:relative; overflow:hidden;"> </div>
-				   <form name="thumbnail" action="<?php echo base_url();?>profile/upload_profile_thumb" method="post">
-			
-					<input type="hidden" name="x1" value="" id="x1" />
-					<input type="hidden" name="y1" value="" id="y1" />
-					<input type="hidden" name="x2" value="" id="x2" />
-					<input type="hidden" name="y2" value="" id="y2" />
-					<input type="hidden" name="w" value="" id="w" />
-					<input type="hidden" name="h" value="" id="h" />
-					<input type="hidden" name="wr" value="" id="wr" />
-					
-					<input type="hidden" name="filename" value="" id="filename" />
-                    <textarea cols="" rows="" name="posts" id="posts" class="form-control" placeholder="Say something..."></textarea>
-                   <input type="hidden" id="album_id" value="" name="album_id" style="border:none;"/>
-                      The Image Will be Saved In <span id="album_name"></span> Album.
-					<select name="post_group" id="post_group"><option value="0">Public</option> <?php $groups = $this->profile_set->get_user_groups(); if($groups) { 
-		foreach($groups as $group)
-		{
-			echo "<option value='".$group['group_id']."'>".$group['group_name']."</option>";
-		}
-		
-		
-		} ?></select> <div class="crop_preview_submit"><input type="submit" name="upload_thumbnail" value="Save Thumbnail" id="save_thumb" class="submit_button" /> </div>
-				  </form>
 				
-			</div>
-          
+                   
             <div class="pin-categories-pinit">
                         <div class="pinBoard">
            <label for"search"><i class="fa fa-search"></i><input type="text" id="album_search"  onkeyup="album_search(this.value);" placeholder="Search Albums" /></label> 
@@ -109,8 +76,10 @@ $profiledata = $this->customermodel->profiledata($id);
                             </div>
             
            </div>
-            
+            <div class="clearfix"></div>
 		</div>
+        </form>	
+        <div class="clearfix"></div>
 	</div>
 	<?php } ?>
 </div>
@@ -183,17 +152,17 @@ $video_type = explode('.',$video['video_name']);
           <div class="modal fade" id="videoModal">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header" style="background-color:#fbc436">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Modal title</h4>
+        <h4 class="modal-title">My Videos</h4>
       </div>
       <div class="modal-body">
         <iframe width="100%" height="350" src=""></iframe>
       </div>
-      <div class="modal-footer">
+      <!--<div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+      </div>-->
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->

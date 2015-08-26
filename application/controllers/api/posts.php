@@ -160,7 +160,7 @@ class posts extends CI_Controller {
 		}
 		else{*/
 		$filetype = $_FILES[$file_name]["type"][$i];
-		$filename = time().'_'.str_replace(' ', '-', $_FILES[$file_name]["name"][$i]);
+		$filename = str_replace(' ', '', time().'_'.$_FILES[$file_name]["name"][$i]);
 		$filesize = $_FILES[$file_name]["size"][$i];
 		$fileerror = $_FILES[$file_name]["error"][$i];
 		$tempname = $_FILES[$file_name]['tmp_name'][$i];
@@ -205,6 +205,7 @@ class posts extends CI_Controller {
 			$config['max_height']  = '';
 		    $config['image_library'] = 'gd2';
 			$config['create_thumb'] = TRUE;
+			$config['remove_spaces'] = TRUE;
 			$config['maintain_ratio'] = TRUE;
 			$config['source_image'] = $path;
 			
@@ -212,9 +213,11 @@ class posts extends CI_Controller {
 			if($imagewidth>523){
 				$default_width = 523;
 				$entended_width = 900;
+				$thumb_width = 170;
 			}else{
 				$default_width = $imagewidth;
 				$entended_width = $imagewidth;
+				$thumb_width = 170;
 			}
 			$config['thumb_marker'] = '_default';
 			$config['width'] = $default_width;
@@ -226,6 +229,14 @@ class posts extends CI_Controller {
 			
 			$config['thumb_marker'] = '_extended';
 			$config['width'] = $entended_width;
+			$config['height'] = 1;
+			$config['master_dim'] = 'width';
+			$this->load->library('image_lib', $config);
+			$this->image_lib->initialize($config);
+			$this->image_lib->resize();
+			
+			$config['thumb_marker'] = '_thumb';
+			$config['width'] = $thumb_width;
 			$config['height'] = 1;
 			$config['master_dim'] = 'width';
 			$this->load->library('image_lib', $config);
