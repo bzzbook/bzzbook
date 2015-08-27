@@ -88,16 +88,29 @@
               
           </div>
           <?php if(!empty($row->share_post_content)) echo "<div>".$row->share_post_content."</div>"; ?>
-          <?php $morePics = ''; 
+          <?php $morePics = '';  $file_ext ='';		
 		  	if(!empty($row->uploaded_files))
 			 {
 			 $up_files = explode(',',$row->uploaded_files);
 			 $i = 0;
 			 $tot_images = count($up_files);
+				
+			 if($tot_images==1){
+				
+			 $file_parts = explode('.',$row->uploaded_files);
+			 $file_ext = $file_parts[1];
+			 $validvideoextensions = array('webm','mp4','ogg','ogv','wmv','3gp','3g2','3gpp','avi','mov','flv'); 
+			 }
 			 if($tot_images>5)
 			 $morePics = 'morePics';
 			 }
 			 ?>
+             <?php  if(isset($file_ext) && $file_ext!='' && in_array($file_ext,$validvideoextensions)){?>  
+             <video width="100%"  poster="<?php echo base_url().'uploads/'.$file_parts[0].'.png'; ?>" controls>
+              <source src="<?php echo base_url().'uploads/'.$row->uploaded_files; ?>" type="video/mp4">
+            Your browser does not support the video tag.
+            </video>  
+<?php  }else{ ?>
           <div class="userContent  <?php echo $morePics.' '; if($row->isGhostpost==1) echo 'hidethis'; ?>"  > <?php if(!empty($row->uploaded_files))
 			 {
 			 $up_files = explode(',',$row->uploaded_files);
@@ -123,7 +136,7 @@
 			 echo '<div class="clearfix"></div>';
 			 echo "</div>";
 			 echo "<div style='clear:both'></div>";
-			 } ?> </figure>
+			 } ?> 
 <?php /*?>            <h3>The Interpreter-TranslatorFree - Android Apps on Google Play</h3>
 <?php */?>            <div <?php if($row->shared==1) echo "class='sharedContentDiv' style='border-left: 2px solid #33A6E7; margin-left:10px; padding-left:3px'" ?>><?php $str_leng=strlen($row->post_content);
 			  if($str_leng>50){
@@ -132,7 +145,7 @@
 				echo  $str_des=substr($row->post_content,0,250);
 			 } ?></div>
              
-          </div>
+          </div><?php } ?>
           <?php if($row->isGhostpost==1){ ?>
           <div class="ghostpostBtn" id="ghostpostBtn<?php echo $row->post_id; ?>" onclick="showghostpost(<?php echo $row->post_id.",".$curr_user_id.",'".$row->posted_to."',".$row->posted_by;?>)"></div>
           <?php } ?>

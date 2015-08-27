@@ -1824,7 +1824,7 @@ window.onload = function () {
 			var videocount = 0;
             for (var i = 0; i < fileUpload.files.length; i++) {
                 var file = fileUpload.files[i]; 
-				 var videoregex = /^([a-zA-Z0-9\s_\\.\-:])+(.mp4|.wmv|.3gp|.flv)$/;
+				 var videoregex = /^([a-zA-Z0-9\s_\\.\-:])+('webm','mp4','ogg','ogv','wmv','3GP','3g2','3gpp','avi','mov')$/;
 				 if(videoregex.test(file.name.toLowerCase())){
 				 videocount++;
 				 if(videocount==2){
@@ -1845,7 +1845,7 @@ window.onload = function () {
 function previewCreater(file,dvPreview,i){
  
    var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png)$/;
-   var videoregex = /^([a-zA-Z0-9\s_\\.\-:])+(.mp4|.wmv|.3gp|.flv|.avi)$/;
+   var videoregex = /^([a-zA-Z0-9\s_\\.\-:])+(.webm|.mp4|.ogg|.ogv|.wmv|.3gp|.3g2|.3gpp|.avi|.mov|.flv)$/;
   if (regex.test(file.name.toLowerCase()) && file.size<=4194304) {                    
 					
 					var reader = new FileReader();
@@ -1892,7 +1892,7 @@ function previewCreater(file,dvPreview,i){
 						div.appendChild(img);
 				}
 				else {
-                    alert(file.name + " is not a valid image file,Image size should be less than 4mb and image should be in jpg,jpeg,png,gif.");
+                    alert(file.name + " is not a valid file,image file should be in jpg,jpeg,png,gif and file size should be less than 4mb and video file should be in jpg,jpeg,png,gif.");
                    // dvPreview.innerHTML = "";
                    // return false;
                 }	

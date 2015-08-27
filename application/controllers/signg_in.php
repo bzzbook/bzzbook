@@ -164,6 +164,7 @@ class Signg_in extends CI_Controller {
 	 $session_data = $this->session->userdata('logged_in');
 	 $data['posted_by'] = $session_data['account_id'];
 	   $up_res = $this->ajax_image_upload('uploadPhotos');
+	  // print_r($up_res); exit;
 	   if($up_res['status'])
 	   $file_name = implode(',',$up_res['files']);
 	   else
@@ -625,7 +626,7 @@ public function ajax_image_upload($file_name){
 	
 	$n =  count($_FILES[$file_name]['name']);
 	$validextensions = array("jpeg", "jpg", "png");
-	$validvideoextensions = array('webm','mp4','ogg','ogv','wmv','3GP','3g2','3gpp','avi');
+	$validvideoextensions = array('webm','mp4','ogg','ogv','wmv','3gp','3g2','3gpp','avi','mov','flv');
 	//print_r($_FILES[$file_name]);
 	for($i=0;$i<$n;$i++){
 		$skiplist = explode(',',$_POST['skipfiles']);
@@ -657,7 +658,7 @@ public function ajax_image_upload($file_name){
             $date = date("ymd");
             $configVideo['upload_path'] = 'uploads/';
             $configVideo['max_size'] = '41943040';
-            $configVideo['allowed_types'] = 'webm|mp4|ogg|ogv|wmv|3gp|3g2|3gpp|avi';
+            $configVideo['allowed_types'] = 'webm|mp4|ogg|ogv|wmv|3gp|3g2|3gpp|avi|flv|mov';
             $configVideo['overwrite'] = FALSE;
             $configVideo['remove_spaces'] = TRUE;
             $video_name = $date.$filename;
@@ -673,10 +674,11 @@ public function ajax_image_upload($file_name){
 				$input = DIR_FILE_PATH.$video_name;
 				$videoname = explode('.',$video_name);
 				$output = DIR_FILE_PATH.$videoname[0].'.mp4';
+				$imgoupt = DIR_FILE_PATH.$videoname[0].'.png';
 				
-				if($this->make_jpg($input, $output)){
+				if($this->make_jpg($input, $output,$imgoupt)){
 				$file_upload['status'] = true;		
-			    $file_upload['files'][] =  $video_name;
+			    $file_upload['files'][] =  $videoname[0].'.mp4';
 				return $file_upload;
 				}
 				else{
@@ -778,12 +780,14 @@ public function ajax_image_upload($file_name){
 	 
 	
 		 }
-public function make_jpg($input, $output) {
+public function make_jpg($input, $output, $imgoutput) { 
 $ffmpegpath = "ffmpeg.exe";
 if(!file_exists($input)){ echo 'file not exists'; return false;}
 $command = "$ffmpegpath -i $input $output";
+$imgcommand = "$ffmpegpath -i $input -ss 00:00:02 -vframes 1 $imgoutput";
 
 @exec( $command, $ret );
+@exec( $imgcommand, $ret );
 if(!file_exists($output)){ echo 'file output not exist'; return false;}
 if(filesize($output)==0) {echo 'file size 0'; return false; }
 return true;

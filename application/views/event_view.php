@@ -282,17 +282,29 @@
               <a href="#" class="date"><?php  echo $hrsago; ?></a> </div>
           </div>
         
-          <?php if(!empty($row->uploaded_files))
+          <?php $file_ext =''; if(!empty($row->uploaded_files))
 			 {
 			 $up_files = explode(',',$row->uploaded_files);
 			 $i = 0;
 			 $tot_images = count($up_files);
+			 if($tot_images==1){
+				
+			 $file_parts = explode('.',$row->uploaded_files);
+			 $file_ext = $file_parts[1];
+			 $validvideoextensions = array('webm','mp4','ogg','ogv','wmv','3gp','3g2','3gpp','avi','mov','flv'); 
+			 }
 			 if($tot_images>5){
 			 $tot_images = 5;
 			 $morePics = 'morePics';
 			 }else{
 			  $morePics = '';
 			 }
+			 if(isset($file_ext) && $file_ext!='' && in_array($file_ext,$validvideoextensions)){?>  
+             <video width="100%" poster="<?php echo base_url().'uploads/'.$file_parts[0].'.png'; ?>" controls>
+              <source src="<?php echo base_url().'uploads/'.$row->uploaded_files; ?>" type="video/mp4">
+            Your browser does not support the video tag.
+            </video>  
+<?php  }else{ 
 			 echo "<div class='userContent ".$morePics."'><div class='fbphotobox  postImages post-data-".$tot_images."'>";
 			 foreach($up_files as $file)
 			 {
@@ -322,7 +334,7 @@
 				echo  $str_des=substr($row->posted_content,0,250);
 			 } ?></div>
              
-          
+          <?php } ?>
         
           <div class="sharingLink" ><?php 
 					$get_likedetails = $this->customermodel->eventlikedata($row->event_post_id);

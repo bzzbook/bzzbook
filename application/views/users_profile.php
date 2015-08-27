@@ -273,22 +273,36 @@
           </div>
           <?php if(!empty($row->share_post_content)) echo "<div>".$row->share_post_content."</div>"; ?>
            <?php 
-			 $morePics = ''; 
+			 $morePics = ''; $file_ext ='';
 			 if(!empty($row->uploaded_files))
 			 {
 			 $up_files = explode(',',$row->uploaded_files);
 			 $i = 0;
 			 $tot_images = count($up_files);
+			  if($tot_images==1){
+				
+			 $file_parts = explode('.',$row->uploaded_files);
+			 $file_ext = $file_parts[1];
+			 $validvideoextensions = array('webm','mp4','ogg','ogv','wmv','3gp','3g2','3gpp','avi','mov','flv'); 
+			 }
 			 if($tot_images>5)
 			 $morePics = 'morePics';
 			
 			 }
 			 ?>
-          <div class="userContent <?php  echo $morePics.' '; ?>"> <?php if(!empty($row->uploaded_files))
+              <?php  if(isset($file_ext) && $file_ext!='' && in_array($file_ext,$validvideoextensions)){?>  
+             <video width="100%" poster="<?php echo base_url().'uploads/'.$file_parts[0].'.png'; ?>" controls>
+              <source src="<?php echo base_url().'uploads/'.$row->uploaded_files; ?>" type="video/mp4">
+            Your browser does not support the video tag.
+            </video>  
+<?php  }else{ ?>
+          <div class="userContent <?php  echo $morePics.' '; ?>"> 
+		  <?php  if(!empty($row->uploaded_files))
 			 {
 			 $up_files = explode(',',$row->uploaded_files);
 			 $i = 0;
 			 $tot_images = count($up_files);
+			
 			 if($tot_images>5)
 			 $tot_images = 5;
 			 echo "<div class='fbphotobox  postImages post-data-".$tot_images."'>";
@@ -318,6 +332,7 @@
 				echo  $str_des=substr($row->post_content,0,250);
 			 } ?></div>
           </div>
+          <?php } ?>
           <div class="sharingLink"><?php 
 					$get_likedetails = $this->customermodel->likedata($row->post_id);
 					$current_user_like_data = $this->customermodel->currentuserlikedata($row->post_id);

@@ -116,8 +116,8 @@ $mimes = array(	'hqx'	=>	'application/mac-binhex40',
 
 'flv-application/octet-stream', 'application/octet-stream'),
 'mp4' => array('video/mp4', 'application/octet-stream'),
-'ogg' => array('application/x-ogg', 'application/ogg', 'audio/x-ogg, application/octet-stream'),
-                            'ogv'   =>    array('application/ogv', 'video/ogv') 
+'ogg' => array('application/x-ogg', 'application/ogg', 'audio/x-ogg', 'application/octet-stream'),
+                            'ogv'   =>    array('application/ogg', 'video/ogg') 
 
 
 			);
