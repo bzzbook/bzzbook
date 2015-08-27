@@ -631,9 +631,11 @@ public function ajax_image_upload($file_name){
 	for($i=0;$i<$n;$i++){
 		if(isset($_POST['skipfiles']))
 		{
-		$skiplist = explode(',',$_POST['skipfiles']);
-		if(in_array($_FILES[$file_name]["name"][$i],$skiplist)){
+		$skiplist = explode(',',$_POST['skipfiles']);		
 		}
+		else
+		$skiplist = array();
+		if(in_array($_FILES[$file_name]["name"][$i],$skiplist)){
 		}else{
 		$filetype = $_FILES[$file_name]["type"][$i];
 		$filename = str_replace(' ', '', time().'_'.$_FILES[$file_name]["name"][$i]);
@@ -784,7 +786,7 @@ public function ajax_image_upload($file_name){
 	
 		 }
 public function make_jpg($input, $output, $imgoutput) { 
-$ffmpegpath = $_SERVER['DOCUMENT_ROOT'].'/dev/ffmpeg.exe';
+$ffmpegpath = $_SERVER['DOCUMENT_ROOT'].'/bzzbook/ffmpeg.exe';
 if(!file_exists($input)){ echo 'file not exists'; return false;}
 $command = "$ffmpegpath -i $input $output";
 $imgcommand = "$ffmpegpath -i $input -ss 00:00:02 -vframes 1 $imgoutput";
