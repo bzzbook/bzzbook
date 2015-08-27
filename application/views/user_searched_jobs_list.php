@@ -1,6 +1,6 @@
 <div class="col-md-9">
             <div class="JobsSearchLayout">
-                <h2 class="mainHead"><span class="pull-left" >Jobs</span>   <span class="pull-right searchColumn"><input type="text" placeholder="Search" /><button><i class="fa fa-search"></i></button></span></h2>
+                <h2 class="mainHead"><span class="pull-left" >Jobs</span>   <!--<span class="pull-right searchColumn"><input type="text" placeholder="Search" /><button><i class="fa fa-search"></i></button></span>--></h2>
                 <div class="jobSearchListing">
                    
                    
@@ -12,7 +12,7 @@
                   
                    { ?>
                     <div class="job_search">
-                        <div class="optionBox"></div>
+                        <div class="optionBox" style="width:35px;"></div>
                         <div class="aboutJob"><a href="<?php echo base_url('jobs/job_description/'.$job['job_id'].'/'.$job['company_posted_by']) ?>">
                             <h2><?php echo $job['job_title']; ?></h2>
                             <h3><?php 

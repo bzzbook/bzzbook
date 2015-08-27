@@ -4267,7 +4267,7 @@ iage------>
                       <!----------------job_apply_modal --------------------------->
 
 <?php /*?>
-
+ 
 <div class="modal fade" id="Apply_for_Job" tabindex="-1" role="dialog" aria-labelledby="myModalLabe" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -4320,16 +4320,16 @@ iage------>
   </div>
   
   
-
+<?php */ ?>
 <!----------------------------------------------------------->
 <?php 	
-		
+	/*	
 		$industry= $this->lookup->get_lookup_industry();
         $jobtype  = $this->lookup->get_lookup_jobtype();
 		
-		
-?>
-
+*/		
+ ?>
+<?php /* ?> 
 <div class="modal fade bs-example-modal-lg" id="cr_jobs_modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg"> 
         

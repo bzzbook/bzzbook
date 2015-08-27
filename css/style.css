@@ -3344,8 +3344,8 @@ a.pinIcon:hover, a.pinIcon:focus, a.pinIcon:active {
   /* line 32, D:/Abid/Works/Plugins/bizbook/HTML/JobSearchNew/style.scss */
   .JobsSearchLayout .jobSearchListing .job_search .optionBox {
     float: left;
-    width: 35px;
-    padding: 15px 10px 10px 10px; }
+   /* width: 35px; */
+    padding: 22px 10px 10px 10px; }
   /* line 33, D:/Abid/Works/Plugins/bizbook/HTML/JobSearchNew/style.scss */
   .JobsSearchLayout .jobSearchListing .job_search .moreOptions {
     width: 195px;
@@ -3766,10 +3766,12 @@ a.pinIcon:hover, a.pinIcon:focus, a.pinIcon:active {
     width: 90%; }
   /* line 5, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
   .crop_set_preview .pin-categories-pinit {
-    width: 290px;
+    clear: both;
     float: left;
+    min-height: 100%;
     padding-left: 20px;
-    min-height: 100%;  }
+    width: 290px;
+}
     /* line 6, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
     .crop_set_preview .pin-categories-pinit .pinBoard {
     /*  height: 100px; */ }
@@ -3782,7 +3784,7 @@ a.pinIcon:hover, a.pinIcon:focus, a.pinIcon:active {
         font-family: 'Roboto', sans-serif;
         font-weight: 400;
         padding: 5px;
-        line-height: 35px;
+       /* line-height: 35px; */
         border: 1px solid #c2c2c2;
         display: block; }
         /* line 15, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
@@ -3888,4 +3890,32 @@ a.pinIcon:hover, a.pinIcon:focus, a.pinIcon:active {
       /* line 48, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
       .crop_set_preview .pin-categories-pinit .user-option-block .board-option-pin:hover + .board-option-pin + .board-option-pin {
         border-top: 1px solid #e9e9e9; }
-
+		.JobsSearchLayout .jobSearchListing .applicant_job_search .moreOptions {
+    float: left;
+    margin-left: 5px !important;
+    padding-top: 10px;
+    width: 150px !important;
+}
+.JobsSearchLayout .jobSearchListing .applicant_job_search .aboutJob {
+    float: left;
+    margin: 11px 3px 11px -17px !important;
+    padding: 0 10px 54px;
+    position: relative;
+    width: calc(100% - 297px) !important;
+}
+JobsSearchLayout .jobSearchListing .applicant_job_search .optionBox {
+    float: left;
+    padding: 15px 10px 10px;
+    
+}
+.JobsSearchLayout .jobSearchListing .applicant_job_search .moreOptions ul li i {
+    float: left;
+    /*line-height: 30px;
+    margin-right: 5px;*/
+	width:13px;
+}
+.JobsSearchLayout .jobSearchListing .applicant_job_search .moreOptions ul li i {
+    float: left;
+    line-height: 30px;
+    margin-right: 5px;
+}
