@@ -781,7 +781,7 @@ public function ajax_image_upload($file_name){
 	
 		 }
 public function make_jpg($input, $output, $imgoutput) { 
-$ffmpegpath = "ffmpeg.exe";
+$ffmpegpath = $_SERVER['DOCUMENT_ROOT'].'/dev/ffmpeg.exe';
 if(!file_exists($input)){ echo 'file not exists'; return false;}
 $command = "$ffmpegpath -i $input $output";
 $imgcommand = "$ffmpegpath -i $input -ss 00:00:02 -vframes 1 $imgoutput";
