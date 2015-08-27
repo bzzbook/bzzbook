@@ -21,7 +21,7 @@
            <li> <a  href="<?php echo base_url()."profile/post/"; ?>">Postboard</a></li>
             <li> <a  href="<?php echo base_url()."profile/about_me/".$profile_id; ?>">About</a></li>
             <li> <a  href="<?php echo base_url()."profile/friends/".$profile_id; ?>">Friends</a></li>
-            <li> <a  href="<?php echo base_url()."profile/my_photos/".$profile_id; ?>">Photos</a></li>
+            <li> <a  href="<?php echo base_url()."profile/my_albums/".$profile_id; ?>">Photos</a></li>
              <li> <a  href="<?php echo base_url()."profile/business_details/".$profile_id; ?>">Business Card</a></li>
             <li> <a  href="<?php echo base_url()."company/my_companies/".$profile_id; ?>">Companies</a></li>
            <!-- <li><a href="javascript:void(0)" class="dropdown-toggle"  id="ntfc-list" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Notification's</a>

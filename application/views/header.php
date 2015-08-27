@@ -21,7 +21,7 @@ $companies = $this->companies->get_mn_cmp_list();
 <link href="<?php echo base_url(); ?>css/uploadfile.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>css/datepicker.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>css/nanoscroller.css" rel="stylesheet">
-
+<link href="<?php echo base_url(); ?>css/load_albums.css" rel="stylesheet">
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/jqtransform.css" type="text/css" media="all"/>
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/fbphotobox.css" type="text/css"/>
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css" />

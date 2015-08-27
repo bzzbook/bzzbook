@@ -483,16 +483,31 @@ public function showfavs()
 		}
 	} 
 	
-	public function my_photos($user_id='')
+	public function my_photos($album_id)
 	{
 		//$data['photos'] = $this->profile_set->get_my_pics();
 		//$data['videos'] = $this->profile_set->get_my_videos();
+		$data['photos'] = $this->profile_set->get_my_pics($album_id);
+		
+		//print_r($data);
 		if(!empty($user_id))
 		$data['user_id'] = $user_id;
 		$data['content']='myphotos';
 		$this->load->view('full_content_view',$data);
 		
 	}
+	
+	public function my_albums($user_id='')
+	{
+		//$data['photos'] = $this->profile_set->get_my_pics();
+		//$data['videos'] = $this->profile_set->get_my_videos();
+		if(!empty($user_id))
+		$data['user_id'] = $user_id;
+		$data['content']='myalbums';
+		$this->load->view('full_content_view',$data);
+		
+	}
+	
 	public function upload_thumb()
 	{
 		$file_formats = array("jpg", "png", "gif", "bmp");
@@ -539,7 +554,7 @@ public function showfavs()
 	}
 	public function upload_profile_thumb()
 	{
-		$upload_path = "uploads/";				
+		/*$upload_path = "uploads/";				
 						
 		$thumb_width = "600";						
 		$thumb_height = "600";	
@@ -602,7 +617,6 @@ public function showfavs()
 			$this->image_lib->initialize($config);
 			$this->image_lib->resize();
 			
-			 
 			 if($this->input->post('post_group')==0)
 			 {
 				  $data['posted_to']='';
@@ -620,7 +634,8 @@ public function showfavs()
 			
 			header("location:".base_url().'profile/my_photos');
 			exit();
-		}
+		}*/
+			 
 	}
 	public function resizeThumbnailImage($thumb_image_name, $image, $width, $height, $start_width, $start_height, $scale){
 	list($imagewidth, $imageheight, $imageType) = getimagesize($image);
@@ -1766,7 +1781,7 @@ public function get_albums($search_keyword)
 		$list .='<div class="board-option-pin">
                                   
 									<p>'.$album['album_name'].'</p>
-                                    <a onclick="insert_album_data('.$album['album_name'].')" class="pinIcon">Add</a>
+                                    <a onclick="add_album(&#39'.$album['album_name'].'&#39,'.$album['album_id'].')" class="pinIcon">Add</a>
                                 </div>';
 		}
 		
@@ -1801,5 +1816,26 @@ public function create_album($category_name,$user_id)
 	
 }
 
+public function get_my_profile_pics()
+{
+		$data['profile_pics'] = $this->profile_set->get_profile_images();
+		
+		if(!empty($user_id))
+		$data['user_id'] = $user_id;
+		$data['content']='myphotos';
+		$this->load->view('full_content_view',$data);
+}
+
+public function get_my_timeline_pics()
+{
+		$data['timeline_pics'] = $this->profile_set->get_all_time_line_photos();
+		
+		//print_r($data);
+		//exit;
+		if(!empty($user_id))
+		$data['user_id'] = $user_id;
+		$data['content']='myphotos';
+		$this->load->view('full_content_view',$data);
+}
 }
 ?>

@@ -133,8 +133,18 @@ $(function () {
 <script src="<?php echo base_url(); ?>js/custom.js"></script> 
 <script src="<?php echo base_url(); ?>js/jquery.nanoscroller.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>js/chat.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>js/albumPreviews.js"></script>
 <?php $this->load->view('footer_siva'); ?>
 <script>
+
+$(function() {
+
+	// Initialize the plugin
+	$('.main .album').albumPreviews();
+	
+
+});
+
 		$( document ).ready(function() {
 		$('.select').jqTransform({ imgPath: '' });
 		$('#calYears').datepicker();
@@ -1555,16 +1565,26 @@ function  onchangeMore(){
     }
 	// image croping function for profile settings page--> End
 	
-    $(document).ready(function() {
-        $('#myphotos_submitbtn').click(function() {
-            $("#viewimage").html('');
-            $("#loadingimage").html('<img src="<?php echo base_url(); ?>cropimage/images/loading.gif" />');
-            $(".uploadform").ajaxForm({
-            	url: '<?php echo base_url(); ?>profile/upload_thumb',
-                success:    showResponse 
-            });
-        });
-    });
+   // $(document).ready(function() {
+     /*   $('#myphotos_submitbtn').click(function() {
+           // $("#viewimage").html('');
+           // $("#loadingimage").html('<img src="<?php //echo base_url(); ?>cropimage/images/loading.gif" />');
+          //  $(".uploadform").ajaxForm({
+			
+    
+	url="<?php // echo base_url(); ?>signg_in/save_albums",
+		$(".uploadform").ajaxForm({
+        url: url,
+		type:"POST",
+		success: function()  
+        {  
+		//location.reload();
+		},
+		cache: false
+		});
+	
+		});
+		});*/
   
     function showResponse(responseText, statusText, xhr, $form){
 		

@@ -629,8 +629,11 @@ public function ajax_image_upload($file_name){
 	$validvideoextensions = array('webm','mp4','ogg','ogv','wmv','3gp','3g2','3gpp','avi','mov','flv');
 	//print_r($_FILES[$file_name]);
 	for($i=0;$i<$n;$i++){
+		if(isset($_POST['skipfiles']))
+		{
 		$skiplist = explode(',',$_POST['skipfiles']);
 		if(in_array($_FILES[$file_name]["name"][$i],$skiplist)){
+		}
 		}else{
 		$filetype = $_FILES[$file_name]["type"][$i];
 		$filename = str_replace(' ', '', time().'_'.$_FILES[$file_name]["name"][$i]);
@@ -1386,6 +1389,35 @@ public function get_all_favorites_by_cat_id($category_id)
 	
 }
 	
+	
+	public function save_albums()
+	{
+	 $this->load->model('customermodel');
+	 $session_data = $this->session->userdata('logged_in');
+	 
+	 
+	  $up_res = $this->ajax_image_upload('imagefile');
+	//  echo $up_res['status'];
+	   if($up_res['status'])
+	   $file_name = implode(',',$up_res['files']);
+	   else
+	   $file_name = '';
+	   
+	   
+	 $data['posted_by'] = $session_data['account_id'];
+	 $data['uploaded_files'] = $file_name;
+	 $data['album_id'] = $this->input->post('album_id');
+	  
+	 // print_r($data);
+	  
+	  $data = $this->customermodel->post_buzz($data);
+	  if($data)
+	  {
+		  redirect('profile/my_photos/');
+	  }
+
+
+	}
 	
 
  }

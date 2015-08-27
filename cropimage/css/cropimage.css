@@ -5,6 +5,7 @@
 }*/
 
 .crop_box{
+    height:auto !important; 
 	width: 75.6%;
 	/*height: 400px;*/
 	min-height:58px;
@@ -59,9 +60,10 @@ margin-bottom:20px;
 	cursor:pointer;
 }
 .crop_set_preview{
-	float: left;
-	width: 100%;
-	padding: 20px 0 0 0 ;
+	 float: left;
+    margin-top: -5px;
+    padding: 0 0 0;
+    width: 50%;
 }
 .crop_preview_left{
 	float: left;
@@ -89,7 +91,8 @@ margin-bottom:20px;
 	}
 
 .crop_preview_right textarea{
-	min-height:177px; margin-bottom:20px; }
+	/* min-height:177px;*/ 
+	 margin-bottom:20px; }
 .crop_preview_right #post_group{ height:32px;}
    
 .crop_preview_box_big{

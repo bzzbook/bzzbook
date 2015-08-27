@@ -1754,12 +1754,8 @@ function commonAjaxCall(ajax_post_id){
 */
 
 // video play in modal form
-function album_search(search_keyword)
+function existed_album_search(search_keyword)
 {
-	
-	//var album_name = $('#album_search').val();
-	//alert(search_keyword);
-	
 	if(search_keyword!='')
 	{	
 	url="<?php echo base_url(); ?>profile/get_albums/"+search_keyword;
@@ -1802,12 +1798,28 @@ function create_album(album_name,user_id)
 			$('#album_search').val('');
 			$('#albums .scroll-pane').html('');
 			$('#album_id').val(data);
-			$('#album_name').html('');
-			$('#album_name').append(album_name);
+			//$('#album_name').html('');
+			$('#album_name').show();
+			$('#album_name').append(album_name+'Album');
 	  
 		}
 		},
 		cache: false
 		});
 }
+
+function add_album(album_name,album_id)
+{
+	//alert(album_id);
+	//alert(album_name);
+$('#album_search').val('');
+$('#albums .scroll-pane').html('');
+$('#album_id').val(album_id);
+//$('#album_name').html('');
+$('#album_name').show();
+$('#album_name').append(' '+album_name+'  Album');
+
+}
+
+
     </script>

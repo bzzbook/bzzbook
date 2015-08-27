@@ -547,17 +547,20 @@ public function getcustDetails($id)
    }
 
 
-public function get_my_pics($user_id = '')
+public function get_my_pics($album_id)
 {
 	if(empty($user_id))
 	$id = $this->session->userdata('logged_in')['account_id'];
 	else
 	$id = $user_id;
-	$condition = "posted_by =" . "'" . $id . "' and uploaded_files !=''";
+	//posted_by ='". $id . "'and
+	$condition = "uploaded_files !='' and album_id = ".$album_id."";
 	$this->db->select('*');
 	$this->db->where($condition);
 	$this->db->order_by("post_id", "desc");
 	$query = $this->db->get('bzz_posts');
+	//echo $this->db->last_query();
+	//print_r($query->result_array());
 	if ($query->num_rows() > 0) {
 			$result = $query->result();
 			$pictures = array();
@@ -1675,5 +1678,157 @@ public function visited_users($user_id='')
 	}
 	
 }
+
+
+public function get_my_albums($user_id = '')
+{
+	if(empty($user_id))
+	$id = $this->session->userdata('logged_in')['account_id'];
+	else
+	$id = $user_id;
+	
+	$this->db->select('*');
+	//$this->db->from('bzz_albums');
+	$this->db->where('album_cr_by',$id);
+	$this->db->order_by("album_id", "desc");
+	$query = $this->db->get('bzz_albums');
+	if ($query->num_rows() > 0) {
+	$albums  = $query->result();
+			
+			return $albums;
+	} else {
+	return false;
+	}
+	
+	/*$condition = "posted_by =" . "'" . $id . "' and uploaded_files !=''";
+	$this->db->select('*');
+	$this->db->where($condition);
+	$this->db->order_by("post_id", "desc");
+	$query = $this->db->get('bzz_posts');
+	if ($query->num_rows() > 0) {
+	$albums  = $query->result();
+			
+			return $albums;
+	} else {
+	return false;
+	}*/
+}
+
+
+public function get_album_photos($album_id)
+{
+	
+	$id = $this->session->userdata('logged_in')['account_id'];
+	$condition = "bzz_posts.album_id =". $album_id . " and bzz_posts.uploaded_files !=''";
+	$this->db->select('uploaded_files');
+	$this->db->from('bzz_posts');
+	$this->db->join('bzz_albums','bzz_posts.album_id = bzz_albums.album_id and bzz_albums.album_id ='.$album_id);
+	$this->db->where($condition);
+	$this->db->order_by("bzz_posts.post_id", "desc");
+	$query = $this->db->get();
+	if ($query->num_rows() > 0) {
+		$uploaded_files = array();
+	$albums_data  = $query->result_array();
+	/*foreach($albums_data as $album_data)
+	{
+		$uploaded_files[] = $album_data['uploaded_files']; 
+	}*/
+		//print_r($albums_data);	
+			return $albums_data;
+	} else {
+	return false;
+	}
+}
+
+public function get_time_line_images()
+{
+	
+	
+	$id = $this->session->userdata('logged_in')['account_id'];
+	$condition = "posted_by =". $id . " and bzz_posts.uploaded_files !='' and album_id is NULL";
+	$this->db->select('uploaded_files');
+	$this->db->from('bzz_posts');
+	
+	$this->db->where($condition);
+	$this->db->order_by("post_id", "desc");
+	$query = $this->db->get();
+	if ($query->num_rows() > 0) {
+		$uploaded_files = array();
+	$data  = $query->result_array();
+		
+	return $data;
+	} else {
+	return false;
+	}
+
+	
+}
+
+public function get_profile_images()
+{
+		
+	$id = $this->session->userdata('logged_in')['account_id'];
+	
+	$this->db->select('user_img_name');
+	$this->db->from('bzz_user_images');
+	
+	$this->db->where('user_id',$id);
+	$this->db->order_by("user_imageinfo_id", "desc");
+	$query = $this->db->get();
+	if ($query->num_rows() > 0) {
+		//$uploaded_files = array();
+	$data  = $query->result_array();
+		
+	return $data;
+	} else {
+	return false;
+	}
+}
+public function get_all_time_line_photos()
+{
+	$id = $this->session->userdata('logged_in')['account_id'];
+	$condition = "posted_by =". $id . " and bzz_posts.uploaded_files !='' and album_id is NULL";
+	$this->db->select('*');
+	$this->db->where($condition);
+	$this->db->order_by("post_id", "desc");
+	$query = $this->db->get('bzz_posts');
+	//echo $this->db->last_query();
+	//print_r($query->result_array());
+	if ($query->num_rows() > 0) {
+			$result = $query->result();
+			$pictures = array();
+			foreach($result as $post)
+			{
+				$condition = "like_on =" . "'" . $post->post_id . "' and like_status='Y'";
+				$this->db->select('*');
+				$this->db->where($condition);
+				$query = $this->db->get('bzz_likes');
+				$like_count = count($query->result());
+				
+				$condition = "commented_on =" . "'" . $post->post_id . "'";
+				$this->db->select('*');
+				$this->db->where($condition);
+				$query = $this->db->get('bzz_postcomments');
+				$comment_count = count($query->result());
+				
+				$picture = array();
+				$pics = explode(',',$post->uploaded_files);
+				foreach($pics as $pic)
+				{
+					$picture['post_id'] = $post->post_id;
+					$picture['image_thumb'] = $pic;
+					$picture['like_count'] = $like_count;
+					$picture['comment_count'] = $comment_count;
+					$pictures[] = $picture;
+				}
+			}
+			return $pictures;
+	} else {
+	return false;
+	}
+
+}
+
+
 }
 ?>

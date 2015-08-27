@@ -11,8 +11,11 @@ $cmp_following = $this->companies->following_companies_list();
         <div class="companyDetails">
           <div class="col-md-9">
             <div class="cmpContent">
-              <h2><span class="glyphicon glyphicon-briefcase"></span><?php echo $cmp_info[0]['cmp_name'] ?></h2>
-              <p> <span><?php echo $cmp_info[0]['company_state'] ?>,<?php echo $cmp_info[0]['company_city'] ?></span> <span><?php echo $cmp_info[0]['cmp_industry'] ?></span> <span>Established Since:<?php echo $cmp_info[0]['cmp_estb']; ?></span> <span>Number Of Employees: ( <?php echo $cmp_info[0]['cmp_colleagues'] ?> ) </span> </p>
+              <h2><span class="glyphicon glyphicon-briefcase"></span><?php if(!empty($cmp_info[0]['cmp_name'])) { echo $cmp_info[0]['cmp_name']; } ?></h2>
+              <p> <span><?php if(!empty($cmp_info[0]['company_state'])) echo $cmp_info[0]['company_state']; ?>
+			  <?php if(!empty($cmp_info[0]['company_city'])) echo",".$cmp_info[0]['company_city']; ?></span> 
+              <span><?php if(!empty($cmp_info[0]['cmp_industry']))  echo $cmp_info[0]['cmp_industry']; ?></span> 
+              <span><?php if(!empty($cmp_info[0]['cmp_estb'])) echo "Established Since:".$cmp_info[0]['cmp_estb']; ?></span> <span> <?php if(!empty($cmp_info[0]['cmp_colleagues'])) echo "Number Of Employees: ( ".$cmp_info[0]['cmp_colleagues']." )"; ?> </span> </p>
      			<?php 
 				
 				$companies = array();
