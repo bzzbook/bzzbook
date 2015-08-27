@@ -225,17 +225,22 @@ $profiledata = $this->customermodel->profiledata($id);
                 <?php  if($videos){ foreach($videos as $video){ ?>
 
             	<div class="photoThumb col-md-3">
+                <a class="mpViewvid video_play" data-toggle="modal" data-target="#videoModal" data-theVideo="<?php  echo base_url();?>uploads/<?php  echo $video['video_name']; ?>">
+<img alt="" src="<?php echo base_url(); ?>images/play_myphotos.png">
+</a>
 <?php /*?>                	<a href="#" class="mpViewvid"><img src="<?php echo base_url(); ?>images/play_myphotos.png" alt=""></a>
-<?php */?>                	<figure><video width="185" controls="">
+<?php */?>               <a href="#" class="video_play" data-toggle="modal" data-target="#videoModal" data-theVideo="<?php  echo base_url();?>uploads/<?php  echo $video['video_name']; ?>">
+<figure style="height:105px !important;"><video width="185" class="remove_video_controls">
+
   <source src="<?php  echo base_url();?>uploads/<?php  echo $video['video_name']; ?>" type="video/mp4" >
    <!-- <source type="video/mp4" src="http://bzzbook.com/videos/intro.mp4"></source>
 <source type="video/ogg" src="http://bzzbook.com/videos/intro.ogv"></source> -->
-</video></figure>
-                    <div class="phOptions">
+</video></figure></a>
+                    <!--<div class="phOptions">
                     <span class="mpImg"><a href="#"><img src="<?php echo base_url(); ?>images/bzz_icon.png" alt=""></a></span>
                     <span class="mpLike"><a href="#"><img src="<?php echo base_url(); ?>images/like_myphotos.png" alt=""><em>67</em></a></span>
                     <span class="mpComment"><a href="#"><img src="<?php echo base_url(); ?>images/comments_myphotos.png" alt=""><em>56</em></a></span>
-                    </div>
+                    </div>-->
                 </div>
                
                <?php } }?>
@@ -248,17 +253,14 @@ $profiledata = $this->customermodel->profiledata($id);
           <div class="modal fade" id="videoModal">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header" style="background:#fbc436;">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Modal title</h4>
+        <h4 class="modal-title">My Videos</h4>
       </div>
       <div class="modal-body">
         <iframe width="100%" height="350" src=""></iframe>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+   
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->

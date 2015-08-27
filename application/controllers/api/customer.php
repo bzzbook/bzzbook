@@ -562,7 +562,7 @@ public function search_member()
 			
 			//print_r($data);
 			$file_id = $this->profile_set->add_pics($data['file_name'],$img_thumb,$img_fav);
-			redirect('/profile/my_photos');
+			redirect('/profile/my_albums');
 	}
 
 	}
@@ -590,7 +590,7 @@ public function search_member()
 			$data = $this->upload->data();
 			//print_r($data);
 			$file_id = $this->profile_set->add_pics($data['file_name']);
-			redirect('/profile/my_photos');
+			redirect('/profile/my_albums');
 	}	
 	}
 	public function getpostcomments($post_id)

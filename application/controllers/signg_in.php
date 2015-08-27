@@ -1413,7 +1413,7 @@ public function get_all_favorites_by_cat_id($category_id)
 	  $data = $this->customermodel->post_buzz($data);
 	  if($data)
 	  {
-		  redirect('profile/my_photos/');
+		  redirect('profile/my_albums/');
 	  }
 
 

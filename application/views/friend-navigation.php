@@ -15,7 +15,7 @@
            <li> <a  href="<?php echo base_url(); ?>profile/post/<?php echo $user_profile_id; ?>">Profile</a></li>
             <li> <a  href="<?php echo base_url(); ?>profile/about_me/<?php echo $user_profile_id; ?>">About Me</a></li>
             <li> <a  href="<?php echo base_url(); ?>profile/friends/<?php echo $user_profile_id; ?>">Friends</a></li>
-            <li> <a  href="<?php echo base_url(); ?>profile/my_photos/<?php echo $user_profile_id; ?>">Photos</a></li>
+            <li> <a  href="<?php echo base_url(); ?>profile/my_albums/<?php echo $user_profile_id; ?>">Photos</a></li>
              <li> <a  href="<?php echo base_url(); ?>profile/business_details/<?php echo $user_profile_id; ?>">Business Details</a></li>
             <li> <a  href="<?php echo base_url(); ?>company/my_companies/<?php echo $user_profile_id; ?>">Companies</a></li>
           </ul>

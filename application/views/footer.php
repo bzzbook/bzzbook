@@ -1715,7 +1715,7 @@ function  onchangeMore(){
 		if(responsetxt)
 		{
 		    alert(responsetxt);
-		    var redirect_url = "<?php echo base_url(); ?>"+'profile/my_photos';
+		    var redirect_url = "<?php echo base_url(); ?>"+'profile/my_albums';
 			window.location.replace(redirect_url);
 		}
 	}
