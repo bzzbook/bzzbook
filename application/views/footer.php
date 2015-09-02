@@ -1950,7 +1950,11 @@ function sharePost(post_id){
 
 
 function saveAsFav(post_id){
-	url="<?php echo base_url(); ?>profile/get_post_byid_for_save_fav/"+post_id;
+	
+	call_fav_fbphotobox();
+	
+	/*
+	url="<?php // echo base_url(); ?>profile/get_post_byid_for_save_fav/"+post_id;
 					$.post( url )
 					.done(function( data ) {
 						//alert(data);
@@ -1962,7 +1966,7 @@ function saveAsFav(post_id){
 						get_save_fav_user_categories();
 						//alert(user_categories);
 					});
-}
+*/}
 function saveFavAsFav(fav_id){
 	url="<?php echo base_url(); ?>profile/get_favs_byid_for_save_fav/"+fav_id;
 					$.post( url )

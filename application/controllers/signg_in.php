@@ -164,7 +164,7 @@ class Signg_in extends CI_Controller {
 	 $session_data = $this->session->userdata('logged_in');
 	 $data['posted_by'] = $session_data['account_id'];
 	   $up_res = $this->ajax_image_upload('uploadPhotos');
-	  // print_r($up_res); exit;
+	 //print_r($up_res); exit;
 	   if($up_res['status'])
 	   $file_name = implode(',',$up_res['files']);
 	   else
@@ -172,6 +172,7 @@ class Signg_in extends CI_Controller {
 	   
 	 $data['post_content'] = $_POST['posts'];
 	 $data['uploaded_files'] = $file_name;
+	  $data['video'] = $up_res['video'];
 	 if($data['post_content']=='' && $data['uploaded_files']==''){
 		echo 404; exit;
 	 }
@@ -179,6 +180,7 @@ class Signg_in extends CI_Controller {
 	 {
 		 $data['posted_to'] = $_POST['addedusers'];
 		 $data['isGhostpost'] = 1;
+		 $data['video'] = $up_res['video'];
 		  if($_POST['tagaddedusers']!='')
 		  $data['tagged_friends'] = $_POST['tagaddedusers'];
 		 $this->customermodel->post_buzz($data); 
@@ -195,6 +197,7 @@ class Signg_in extends CI_Controller {
 		  $data['posted_to']='';
 		  if($_POST['tagaddedusers']!='')
 		  $data['tagged_friends'] = $_POST['tagaddedusers'];
+		   $data['video'] = $up_res['video'];
 		   $this->customermodel->post_buzz($data);
 		  // echo "post saved successfully..."; 
 		  // redirect('profiles');
@@ -211,6 +214,7 @@ class Signg_in extends CI_Controller {
 		 $data['posted_to'] = $result[0]['group_members'];
 		 if($this->input->post('tagaddedusers')!='')
 		 $data['tagged_friends'] = $_POST['tagaddedusers'];
+		  $data['video'] = $up_res['video'];
 		 $this->customermodel->post_buzz($data);
 		 $user_id = $this->session->userdata('logged_in')['account_id'];
 	$data['products'] = $this->customermodel->All_Posts($user_id);
@@ -684,6 +688,7 @@ public function ajax_image_upload($file_name){
 				if($this->make_jpg($input, $output,$imgoupt)){
 				$file_upload['status'] = true;		
 			    $file_upload['files'][] =  $videoname[0].'.mp4';
+				$file_upload['video'] = "Y";
 				return $file_upload;
 				}
 				else{
@@ -713,6 +718,7 @@ public function ajax_image_upload($file_name){
 		$targetPath = $config['upload_path'].$filename; // Target path where file is to be stored
 		move_uploaded_file($sourcePath,$targetPath) ; 
 		$file_upload['status'] = true;
+		$file_upload['video'] = "N";
 		$file_upload['files'][] =  $filename;
 		
 		    $path = DIR_FILE_PATH.$filename;

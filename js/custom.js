@@ -10,6 +10,8 @@ $('.fdblock .friendInfo .disc .dcBtn a').centerImage();
 function call_fbphotobox(){
 	
 	
+	//alert($(".fbphotobox img").html());
+	
 		$(".fbphotobox img").fbPhotoBox({
 			rightWidth: 360,
 			leftBgColor: "black",
@@ -19,7 +21,7 @@ function call_fbphotobox(){
 			containerClassName: 'fbphotobox',
 			imageClassName: 'photo',
 			onImageShow: function() {
-				$(".fbphotobox img").fbPhotoBox("addTags",
+			$(".fbphotobox img").fbPhotoBox("addTags",
 						[{x:0.3,y:0.3,w:0.3,h:0.3}]
 				);
 				$(".fbphotobox-image-content").html();
@@ -76,6 +78,29 @@ $(document).on('click', function (e) {
 		$(this).addClass('active');
 	});
 });
+
+// for favourites pop like fb photobox
+
+function call_fav_fbphotobox(){
+	
+	alert("haiii");
+		$(".fbphotobox span").fbPhotoBox({
+			rightWidth: 360,
+			leftBgColor: "black",
+			rightBgColor: "white",
+			footerBgColor: "black",
+			overlayBgColor: "#222",
+			containerClassName: 'fbphotobox',
+			imageClassName: 'photo',
+			onImageShow: function() {
+				$(".fbphotobox span").fbPhotoBox("addTags",
+						[{x:0.3,y:0.3,w:0.3,h:0.3}]
+				);
+				$(".fbphotobox-image-content").html();
+			}
+		});
+	
+}
 
 
 

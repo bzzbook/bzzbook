@@ -1810,7 +1810,7 @@ function create_album(album_name,user_id)
 			$('#album_id').val(data);
 			//$('#album_name').html('');
 			$('#album_name').show();
-			$('#album_name').append(album_name+'Album');
+			$('#album_name').append(decodeURI(album_name)+'Album  ');
 	  
 		}
 		},
