@@ -786,9 +786,16 @@ public function ajax_image_upload($file_name){
 	
 		 }
 public function make_jpg($input, $output, $imgoutput) { 
-$ffmpegpath = $_SERVER['DOCUMENT_ROOT'].'/bzzbook/ffmpeg.exe';
-if(!file_exists($input)){ echo 'file not exists'; return false;}
+//$ffmpegpath = $_SERVER['DOCUMENT_ROOT'].'/bzzbook/ffmpeg.exe';
+
+$ffmpegpath = '/usr/bin/avconv';
+if(!file_exists($input)){ echo 'file not exists'; return false; }
 $command = "$ffmpegpath -i $input $output";
+//$command = "$ffmpegpath -i $input -vcodec libx264 $output";
+
+//$imgcommand = "$ffmpegpath -i $input -vsync 1 -r 25 -an -y -qscale 1 $imgoutput";
+
+//$command = "$ffmpegpath -i $input $output";
 $imgcommand = "$ffmpegpath -i $input -ss 00:00:02 -vframes 1 $imgoutput";
 
 @exec( $command, $ret );

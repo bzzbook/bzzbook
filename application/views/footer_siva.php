@@ -1633,7 +1633,10 @@ $('.carousel').on('slid.bs.carousel', function () {
 
 callcommonAjaxCall();
 function callcommonAjaxCall(){
-$('#posts_content_div').find('#loading_img').remove();
+var first_element = $('#posts_content_div > :first-child').attr("id");
+if(first_element=='loading_img')
+var post_id = $('#posts_content_div > :nth-child(2)').attr("id").substr(4);
+else
 var post_id = $('#posts_content_div > :first-child').attr("id").substr(4);
 commonAjaxCall(post_id);
 window.setTimeout(callcommonAjaxCall,15000);
@@ -1820,6 +1823,14 @@ $('#album_name').show();
 $('#album_name').append(' '+album_name+'  Album');
 
 }
-
+/*function toggleVideoControles(){
+	alert(this);
+    if (this.hasAttribute("controls")) {
+        this.removeAttribute("controls")
+    } else {
+		
+        this.setAttribute("controls", "controls")
+    }
+}*/
 
     </script>
