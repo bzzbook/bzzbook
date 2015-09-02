@@ -192,7 +192,7 @@
 			 }
 			 ?>
              <?php  if(isset($file_ext) && $file_ext!='' && in_array($file_ext,$validvideoextensions)){?>  
-             <video width="100%"  poster="<?php echo base_url().'uploads/'.$file_parts[0].'.png'; ?>" onmouseover="toggleVideoControles()">
+             <video width="100%"  poster="<?php echo base_url().'uploads/'.$file_parts[0].'.png'; ?>"  >
               <source src="<?php echo base_url().'uploads/'.$row->uploaded_files; ?>" type="video/mp4">
             Your browser does not support the video tag.
             </video>  
