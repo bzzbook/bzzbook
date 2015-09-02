@@ -50,7 +50,7 @@ $result = $this->profile_set->get_userinfo($user_id = '');
       <div class="curentUser">
          <?php  $image = $this->profile_set->get_profile_pic();	?>
         <div class="userImg"> <img src="<?php echo base_url();?>uploads/<?php if(!empty($image[0]->user_img_thumb)) echo $image[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" alt="<?php echo base_url();?>uploads/<?php if(!empty($image[0]->user_img_thumb)) echo $image[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>"> </div>
-        <a href="#" role="button"  class="dropdown-toggle userName" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Logged in as:<span><?php echo  $session_data['email']; ?></span></a>
+        <a href="#" role="button"  class="dropdown-toggle userName" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><span><?php echo $name; ?></span></a>
         <ul  role="menu" class="dropdown-menu">
         <li><a href="<?php echo base_url(); ?>profile" tabindex="-1" role="menuitem" title="user profile"><i class="fa fa-user"> </i> 
 <?php echo $name ?></a></li>
