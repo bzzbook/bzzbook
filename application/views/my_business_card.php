@@ -326,6 +326,619 @@
          
           </div>
          <?php if(empty($user_id)){ ?> <div class="btn2 btn-black" data-toggle="modal" data-target="#send_bc_to_friends">Send My Friends</div>
-          <div class="btn2 btn-green" data-toggle="modal" data-target="#share_business_card">Share</div> <?php } ?>
+          <div class="btn2 btn-green" data-toggle="modal" data-target="#share_business_card" style="float:right!important;">Share</div> <?php } ?>
             </section>
       </section>
+      
+      
+      
+      
+      
+      
+      <!----------------  business card share Start--------------->
+<div class="modal fade bs-example-modal-lg" id="share_business_card" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+          <?php $attr = array('name' => 'business_card', 'id' =>'business_card', 'enctype'=>"multipart/form-data"); ?>
+        <?php echo form_open('profile/send_business_card',$attr) ?>
+      <div class="modal-header">
+ 
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Share Busines card</h4>
+    
+       <div id="selected_emails"></div><input type="text" name="share_business_card_frnds" id="share_business_card_frnds" /><input type="hidden" id="addedmails" name="addedmails" />
+     
+       </div>
+      
+      <div class="modal-body">
+    <section class="about-user-details business_card">
+        <h4><span><img src="<?php echo base_url(); ?>images/business_card.png" alt=""></span>My Business Card</h4>
+          <section class="col-lg-12 col-md-12 col-sm-5 col-xs-12 coloumn2 business_card_inner">
+           <div class="col-md-10 card_box">
+           <h3><?php 
+		   
+		    $data = $this->profile_set->get_userinfo($id);
+		   
+		   echo $profile_info[0]['user_firstname'] ." ".$profile_info[0]['user_lastname']; ?></h3>
+             <?php if(!empty($data[0]['user_industry'])) { ?><p class="buss_card_data">Industry: <?php echo $data[0]['user_industry']; ?></p> <?php } ?>
+           <?php if(!empty($data[0]['profession'])) { ?> <p class="buss_card_data">Job Position: <?php echo $data[0]['profession']; ?></p> <?php } ?>
+           <?php if(!empty($data[0]['aboutme'])) { ?> <p class="buss_card_data">About Me: <?php echo $data[0]['aboutme']; ?></p> <?php } ?>
+          
+           </div>
+            <div class="col-md-2 photos"><img src="<?php echo base_url();?>uploads/<?php if(!empty($profile_info[0]['user_img_thumb'])) echo $profile_info[0]['user_img_thumb']; else echo 'default_profile_pic.png'; ?>" alt=""></div>
+          </section>
+          
+          
+          <div class="card_icons col-md-12">
+          
+          <div class="card_iconsbox">
+          <div class="card_left"><i class="fa fa-fw"></i></div>
+          <div class="card_right">
+          <h5>Website:</h5>
+          <h6> <?php 		  
+		  if(!empty($profile_info[0]['user_cmpname']))
+		  {
+		  echo $profile_info[0]['user_cmpname'];
+		  }else
+		  echo "Not Available";
+		  ?></h6>
+          </div>
+          <div class="clear"></div>
+          </div>
+          
+          <div class="card_box_right">
+          <div class="right_cards"><i class="fa fa-mobile"></i></div>
+          <div class="card_right">
+          <h5>Phone number:</h5>
+          <h6><?php 		  
+		  if(!empty($profile_info[0]['user_phoneno']))
+		  {
+		  echo $profile_info[0]['user_phoneno'];
+		  }else
+		  echo "Not Available";
+		  ?></h6>
+          </div>
+          <div class="clear"></div>
+          </div>
+          
+          
+          
+          <div class="card_iconsbox2">
+          <div class="card_left2"><i class="fa fa-map-marker" ></i></div>
+          <div class="card_right">
+          <h5>Location:</h5>
+          <h6><?php 		  
+		  if(!empty($profile_info[0]['user_country']) && !empty($profile_info[0]['user_state']))
+		  {
+		  echo  $profile_info[0]['user_state'].", ".$profile_info[0]['user_country'];
+		  }else
+		  echo "Not Available";
+		  ?></h6>
+          </div>
+          <div class="clear"></div>
+          </div>
+          
+          <div class="card_box_right2">
+          <div class="right_cards2"><i class="fa fa-envelope-o"></i></div>
+          <div class="card_right">
+          <h5>Email:</h5>
+          <h6><?php 
+		  
+		  if(!empty($profile_info[0]['user_email']))
+		  {
+		  echo $profile_info[0]['user_email'];
+		  }else
+		  echo "Not Available";
+		  ?></h6>
+          </div>
+          <div class="clear"></div>
+          </div>
+          
+          <div class="card_iconsbox3">
+          <div class="card_left3"><i class="fa fa-twitter"></i></div>
+          <div class="card_right">
+          <h5>Twitter:</h5>
+         <?php if($accounts_data){
+					 $i = 0 ;
+					$accounts = array();
+			  foreach ($accounts_data as $data)
+			  {
+				 
+				  
+				  if($data['account_type'] == 'twitter')
+				  {
+					  $accounts[] = $data['account_name'];
+					  $i++; 
+				  }
+			  }?> <h6><?php if(!empty($accounts))
+				   
+				   {
+					  // print_r($accounts);
+					  $j = 1;
+					   foreach($accounts as $acc)
+					   {
+						   
+						    echo $acc;
+						
+							if(count($accounts) == 1)
+							{
+								echo ".";
+							}else if($j >= count($accounts))
+					   {
+						   echo ".";
+					   }else
+							
+							echo ",";
+							$j++;
+					   }
+				   }else
+				   echo "Not Available";
+				   
+				  ?></h6>
+			<?php } else echo "Not Available"; ?>
+          </div>
+          <div class="clear"></div>
+          </div>
+          
+          <div class="card_box_right3">
+          <div class="right_cards3"><i class="fa fa-facebook"></i></div>
+          <div class="card_right">
+          <h5>Facebook:</h5>
+           <?php if($accounts_data){
+					 $i = 0 ;
+					$accounts = array();
+			  foreach ($accounts_data as $data)
+			  {
+				 
+				  
+				  if($data['account_type'] == 'facebook')
+				  {
+					  $accounts[] = $data['account_name'];
+					  $i++; 
+				  }
+			  }?>
+                   <h6><?php if(!empty($accounts))
+				   
+				   {
+					  // print_r($accounts);
+					  $j = 1;
+					   foreach($accounts as $acc)
+					   {
+						   
+						    echo $acc;
+						
+							if(count($accounts) == 1)
+							{
+								echo ".";
+							}else if($j >= count($accounts))
+					   {
+						   echo ".";
+					   }else
+							
+							echo ",";
+							$j++;
+					   }
+				   }else
+				   echo "Not Available";
+				   
+				  ?></h6>
+			<?php }else echo "Not Available"; ?>
+          </div>
+          <div class="clear"></div>
+          </div>
+          
+          <div class="card_iconsbox4" id="one">
+          <div class="card_left4"><i class="fa fa-pinterest-p"></i></div>
+          <div class="card_right">
+          <h5>Pinterest:</h5>
+            <?php if($accounts_data){
+					 $i = 0 ;
+					$accounts = array();
+			  foreach ($accounts_data as $data)
+			  {
+				 
+				  
+				  if($data['account_type'] == 'pinterest')
+				  {
+					  $accounts[] = $data['account_name'];
+					  $i++; 
+				  }
+			  }?>
+                   <h6><?php if(!empty($accounts))
+				   
+				   {
+					  // print_r($accounts);
+					  $j = 1;
+					   foreach($accounts as $acc)
+					   {
+						   
+						    echo $acc;
+						
+							if(count($accounts) == 1)
+							{
+								echo ".";
+							}else if($j >= count($accounts))
+					   {
+						   echo ".";
+					   }else
+							
+							echo ",";
+							$j++;
+					   }
+				   }else
+				   echo "Not Available";
+				   
+				  ?></h6>
+			<?php } else echo "Not Available"; ?>
+          </div>
+          <div class="clear"></div>
+          </div>
+          
+          <div class="card_box_right4">
+          <div class="right_cards4"><i class="fa fa-linkedin"></i></div>
+          <div class="card_right">
+          <h5>linkedin:</h5>
+            <?php if($accounts_data){
+					 $i = 0 ;
+					$accounts = array();
+			  foreach ($accounts_data as $data)
+			  {
+				 
+				  
+				  if($data['account_type'] == 'linked_in')
+				  {
+					  $accounts[] = $data['account_name'];
+					  $i++; 
+				  }
+			  }?>
+                   <h6><?php if(!empty($accounts))
+				   
+				   {
+					  // print_r($accounts);
+					  $j = 1;
+					   foreach($accounts as $acc)
+					   {
+						   
+						    echo $acc;
+						
+							if(count($accounts) == 1)
+							{
+								echo ".";
+							}else if($j >= count($accounts))
+					   {
+						   echo ".";
+					   }else
+							
+							echo ",";
+							$j++;
+					   }
+				   }else
+				   echo "Not Available";
+				   
+				  ?></h6>
+			<?php } else echo "Not Available"; ?>
+          </div>
+          <div class="clear"></div>
+          </div>
+         
+          </div>
+        
+            </section>
+      </div>
+      <div class="clearfix"></div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Send</button>
+      </div>
+           </form>
+    </div>
+  </div>
+</div>
+
+<!----------------  business card share end ---------------->
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="modal fade bs-example-modal-lg" id="send_bc_to_friends" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+          <?php $attr = array('name' => 'business_card', 'id' =>'business_card', 'enctype'=>"multipart/form-data"); ?>
+        <?php 
+		echo form_open('profile/send_business_card',$attr) ?>
+      <div class="modal-header">
+ 
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Send Busines card</h4>
+       <div id="selected_bc_friends"><div id="search_bc_frnd_wrapper"><input type="text" name="txtsearch" id="search_bc_friends" onkeyup="keyupevent_bc();" autocomplete="off" /><input type="hidden" id="added_bc_users_test" name="added_bc_users_test" value=""/><div id="auto_bc_suggest"></div></div></div>
+      </div>
+     <div class="modal-body">
+    <section class="about-user-details business_card">
+        <h4><span><img src="<?php echo base_url(); ?>images/business_card.png" alt=""></span>My Business Card</h4>
+          <section class="col-lg-12 col-md-12 col-sm-5 col-xs-12 coloumn2 business_card_inner">
+           <div class="col-md-10 card_box">
+           <h3><?php 
+		   
+		    $data = $this->profile_set->get_userinfo($id);
+		   
+		   echo $profile_info[0]['user_firstname'] ." ".$profile_info[0]['user_lastname']; ?></h3>
+             <?php if(!empty($data[0]['user_industry'])) { ?><p class="buss_card_data">Industry: <?php echo $data[0]['user_industry']; ?></p> <?php } ?>
+           <?php if(!empty($data[0]['profession'])) { ?> <p class="buss_card_data">Job Position: <?php echo $data[0]['profession']; ?></p> <?php } ?>
+           <?php if(!empty($data[0]['aboutme'])) { ?> <p class="buss_card_data">About Me: <?php echo $data[0]['aboutme']; ?></p> <?php } ?>
+          
+           </div>
+            <div class="col-md-2 photos"><img src="<?php echo base_url();?>uploads/<?php if(!empty($profile_info[0]['user_img_thumb'])) echo $profile_info[0]['user_img_thumb']; else echo 'default_profile_pic.png'; ?>" alt=""></div>
+          </section>
+          
+          
+          <div class="card_icons col-md-12">
+          
+          <div class="card_iconsbox">
+          <div class="card_left"><i class="fa fa-fw"></i></div>
+          <div class="card_right">
+          <h5>Website:</h5>
+          <h6> <?php 		  
+		  if(!empty($profile_info[0]['user_cmpname']))
+		  {
+		  echo $profile_info[0]['user_cmpname'];
+		  }else
+		  echo "Not Available";
+		  ?></h6>
+          </div>
+          <div class="clear"></div>
+          </div>
+          
+          <div class="card_box_right">
+          <div class="right_cards"><i class="fa fa-mobile"></i></div>
+          <div class="card_right">
+          <h5>Phone number:</h5>
+          <h6><?php 		  
+		  if(!empty($profile_info[0]['user_phoneno']))
+		  {
+		  echo $profile_info[0]['user_phoneno'];
+		  }else
+		  echo "Not Available";
+		  ?></h6>
+          </div>
+          <div class="clear"></div>
+          </div>
+          
+          
+          
+          <div class="card_iconsbox2">
+          <div class="card_left2"><i class="fa fa-map-marker" ></i></div>
+          <div class="card_right">
+          <h5>Location:</h5>
+          <h6><?php 		  
+		  if(!empty($profile_info[0]['user_country']) && !empty($profile_info[0]['user_state']))
+		  {
+		  echo  $profile_info[0]['user_state'].", ".$profile_info[0]['user_country'];
+		  }else
+		  echo "Not Available";
+		  ?></h6>
+          </div>
+          <div class="clear"></div>
+          </div>
+          
+          <div class="card_box_right2">
+          <div class="right_cards2"><i class="fa fa-envelope-o"></i></div>
+          <div class="card_right">
+          <h5>Email:</h5>
+          <h6><?php 
+		  
+		  if(!empty($profile_info[0]['user_email']))
+		  {
+		  echo $profile_info[0]['user_email'];
+		  }else
+		  echo "Not Available";
+		  ?></h6>
+          </div>
+          <div class="clear"></div>
+          </div>
+          
+          <div class="card_iconsbox3">
+          <div class="card_left3"><i class="fa fa-twitter"></i></div>
+          <div class="card_right">
+          <h5>Twitter:</h5>
+         <?php if($accounts_data){
+					 $i = 0 ;
+					$accounts = array();
+			  foreach ($accounts_data as $data)
+			  {
+				 
+				  
+				  if($data['account_type'] == 'twitter')
+				  {
+					  $accounts[] = $data['account_name'];
+					  $i++; 
+				  }
+			  }?> <h6><?php if(!empty($accounts))
+				   
+				   {
+					  // print_r($accounts);
+					  $j = 1;
+					   foreach($accounts as $acc)
+					   {
+						   
+						    echo $acc;
+						
+							if(count($accounts) == 1)
+							{
+								echo ".";
+							}else if($j >= count($accounts))
+					   {
+						   echo ".";
+					   }else
+							
+							echo ",";
+							$j++;
+					   }
+				   }else
+				   echo "Not Available";
+				   
+				  ?></h6>
+			<?php } else echo "Not Available"; ?>
+          </div>
+          <div class="clear"></div>
+          </div>
+          
+          <div class="card_box_right3">
+          <div class="right_cards3"><i class="fa fa-facebook"></i></div>
+          <div class="card_right">
+          <h5>Facebook:</h5>
+           <?php if($accounts_data){
+					 $i = 0 ;
+					$accounts = array();
+			  foreach ($accounts_data as $data)
+			  {
+				 
+				  
+				  if($data['account_type'] == 'facebook')
+				  {
+					  $accounts[] = $data['account_name'];
+					  $i++; 
+				  }
+			  }?>
+                   <h6><?php if(!empty($accounts))
+				   
+				   {
+					  // print_r($accounts);
+					  $j = 1;
+					   foreach($accounts as $acc)
+					   {
+						   
+						    echo $acc;
+						
+							if(count($accounts) == 1)
+							{
+								echo ".";
+							}else if($j >= count($accounts))
+					   {
+						   echo ".";
+					   }else
+							
+							echo ",";
+							$j++;
+					   }
+				   }else
+				   echo "Not Available";
+				   
+				  ?></h6>
+			<?php }else echo "Not Available"; ?>
+          </div>
+          <div class="clear"></div>
+          </div>
+          
+          <div class="card_iconsbox4" id="one">
+          <div class="card_left4"><i class="fa fa-pinterest-p"></i></div>
+          <div class="card_right">
+          <h5>Pinterest:</h5>
+            <?php if($accounts_data){
+					 $i = 0 ;
+					$accounts = array();
+			  foreach ($accounts_data as $data)
+			  {
+				 
+				  
+				  if($data['account_type'] == 'pinterest')
+				  {
+					  $accounts[] = $data['account_name'];
+					  $i++; 
+				  }
+			  }?>
+                   <h6><?php if(!empty($accounts))
+				   
+				   {
+					  // print_r($accounts);
+					  $j = 1;
+					   foreach($accounts as $acc)
+					   {
+						   
+						    echo $acc;
+						
+							if(count($accounts) == 1)
+							{
+								echo ".";
+							}else if($j >= count($accounts))
+					   {
+						   echo ".";
+					   }else
+							
+							echo ",";
+							$j++;
+					   }
+				   }else
+				   echo "Not Available";
+				   
+				  ?></h6>
+			<?php } else echo "Not Available"; ?>
+          </div>
+          <div class="clear"></div>
+          </div>
+          
+          <div class="card_box_right4">
+          <div class="right_cards4"><i class="fa fa-linkedin"></i></div>
+          <div class="card_right">
+          <h5>linkedin:</h5>
+            <?php if($accounts_data){
+					 $i = 0 ;
+					$accounts = array();
+			  foreach ($accounts_data as $data)
+			  {
+				 
+				  
+				  if($data['account_type'] == 'linked_in')
+				  {
+					  $accounts[] = $data['account_name'];
+					  $i++; 
+				  }
+			  }?>
+                   <h6><?php if(!empty($accounts))
+				   
+				   {
+					  // print_r($accounts);
+					  $j = 1;
+					   foreach($accounts as $acc)
+					   {
+						   
+						    echo $acc;
+						
+							if(count($accounts) == 1)
+							{
+								echo ".";
+							}else if($j >= count($accounts))
+					   {
+						   echo ".";
+					   }else
+							
+							echo ",";
+							$j++;
+					   }
+				   }else
+				   echo "Not Available";
+				   
+				  ?></h6>
+			<?php } else echo "Not Available"; ?>
+          </div>
+          <div class="clear"></div>
+          </div>
+         
+          </div>
+        
+            </section>
+      </div>
+      <div class="clearfix"></div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Send</button>
+      </div>
+           </form>
+    </div>
+  </div>
+</div>

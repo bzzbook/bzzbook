@@ -6,9 +6,10 @@
 	 // $curr_user_data= $this->customermodel->profiledata($curr_user_id);
 	  //$_SESSION['username'] = $curr_user_data[0]->username; // Must be already set
 	 // echo $curr_user_data[0]->username;
-	  ?>
-
-   <?php $image = $this->profile_set->get_profile_pic($user_id);	?>
+	 $image = $this->profile_set->get_profile_pic($user_id);
+	 $current_user_id_for_post_comment_box = $this->session->userdata('logged_in')['account_id'];
+    $user_imge_pbox = $this->profile_set->get_profile_pic($current_user_id_for_post_comment_box);
+   ?>
     <section class="col-lg-6 col-md-6 col-sm-5 col-xs-12 coloumn2">
       <div class="updateStatus" id="updateStatus">
         <ul>
@@ -24,7 +25,7 @@
         <input type="hidden" id="skipfiles" name="skipfiles" /><div id="tempdivholder" style="display:none;" ></div><div id="tempfilename"></div>
 <!--        <textarea cols="" rows="" name="posts" id="posts" class="form-control" placeholder="What's Buzzing?"></textarea>
 -->       
-		<div class="post-content" style="width:100%; min-height:75px;" onclick="document.getElementById('dummypost').focus();"><div contenteditable="true" style="min-height:20px; min-width:10px; padding:8px; float:left;" id="dummypost" onkeyup="takeInputToPost()"></div><div id="withTokens" style="display:none; padding:8px; float:left">--With </div><div style="clear:both;"></div></div>
+		<div class="post-content" style="width:100%; min-height:75px;" onclick="document.getElementById('dummypost').focus();"><div contenteditable="true" data-text="What's Buzzing?" style="min-height:20px; min-width:10px; padding:8px; float:left;" id="dummypost" onkeyup="takeInputToPost()"></div><div id="withTokens" style="display:none; padding:8px; float:left">--With </div><div style="clear:both;"></div></div>
         <input type="hidden" id="posts" name="posts" />
         <input type="reset" style="display:none;"/>
 		<div id="hiddentokens" style="display:none;"></div>
@@ -140,6 +141,11 @@ $("#posts").val($("#dummypost").text());
 function showghostpost(post_id,current_id,posted_to,posted_by){
 $('#post'+post_id).addClass('ghostpostside');
 var viewers = posted_to.split(',');
+alert(current_id);
+alert(posted_to);
+
+alert(viewers);
+alert(viewers.indexOf(current_id));
 if(viewers.indexOf(current_id) > -1 || viewers==current_id || posted_by==current_id)
 {
 	$("#ghostpostBtn"+post_id).hide(200);

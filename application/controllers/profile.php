@@ -448,6 +448,42 @@ public function showfavs()
 			$this->image_lib->initialize($config);
 			$this->image_lib->resize();
 			$img_thumb = $data['raw_name'].'_thumb'.$data['file_ext'];
+			
+		
+			
+			list($imagewidth, $imageheight, $imageType) = getimagesize($path);
+			if($imagewidth>523){
+				$default_width = 523;
+				$entended_width = 900;
+				$thumb_width = 170;
+			}else{
+				$default_width = $imagewidth;
+				$entended_width = $imagewidth;
+				$thumb_width = 170;
+			}
+			
+			
+			
+			$config['maintain_ratio'] = TRUE;
+			$config['thumb_marker'] = '_default';
+			$config['width'] = $default_width;
+			$config['height'] = 1;
+			$config['create_thumb'] = TRUE;
+			$config['master_dim'] = 'width';
+			$this->load->library('image_lib', $config);
+			$this->image_lib->initialize($config);
+			$this->image_lib->resize();
+			
+			$config['thumb_marker'] = '_extended';
+			$config['width'] = $entended_width;
+			$config['height'] = 1;
+			$config['create_thumb'] = TRUE;
+			$config['maintain_ratio'] = TRUE;
+			$config['master_dim'] = 'width';
+			$this->load->library('image_lib', $config);
+			$this->image_lib->initialize($config);
+			$this->image_lib->resize();
+
 
 			//creating new image
 			$path = $data['full_path'];
@@ -469,6 +505,16 @@ public function showfavs()
 		
 			// image insertion into db
             $file_id = $this->profile_set->insert_profile_pic($cropped,$img_thumb,$img_fav);
+			
+			
+			// $data['post_content'] = $_POST['posts'];
+			 $session_data = $this->session->userdata('logged_in');
+	 		 $profile_post_data['posted_by'] = $session_data['account_id'];
+			 $profile_post_data['profile_pic'] = 'Y';
+	         $profile_post_data['uploaded_files'] = $cropped;
+		    	$profile_posted =  $this->customermodel->post_buzz($profile_post_data); 
+			
+			
 			if(isset($_SERVER['HTTP_REFERER']))
                 {
                     $redirect_to = str_replace(base_url(),'',$_SERVER['HTTP_REFERER']);
@@ -846,8 +892,10 @@ public function showfavs()
 		
 		
 		  $content = '';
-		
-				$content .= "<span class='content'>".character_limiter($row->post_content,200)."</span><input type='hidden' name='post_content' id='post_content' value='".$row->post_content."'>";			
+		if(!empty($row->favorite_post_content))
+		{
+				$content .= "<span class='content'>".character_limiter($row->post_content,200)."</span><input type='hidden' name='post_content' id='post_content' value='".$row->post_content."'>";	
+		}
 			$content .='<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-wrap="false">';
 			 
 			 $content .= '<div class="carousel-inner" role="listbox">';
@@ -914,8 +962,10 @@ public function showfavs()
 
     
      $content = '';
-		
-				$content .= "<span class='content'>".character_limiter($row->favorite_post_content,200)."</span><input type='hidden' name='post_content' id='post_content' value='".$row->favorite_post_content."'>";			
+		if(!empty($row->favorite_post_content))
+		{
+				$content .= "<span class='content'>".character_limiter($row->favorite_post_content,200)."</span><input type='hidden' name='post_content' id='post_content' value='".$row->favorite_post_content."'>";	
+		}
 			$content .='<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-wrap="false">';
 			 
 			 $content .= '<div class="carousel-inner" role="listbox">';

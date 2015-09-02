@@ -1565,26 +1565,16 @@ function  onchangeMore(){
     }
 	// image croping function for profile settings page--> End
 	
-   // $(document).ready(function() {
-     /*   $('#myphotos_submitbtn').click(function() {
-           // $("#viewimage").html('');
-           // $("#loadingimage").html('<img src="<?php //echo base_url(); ?>cropimage/images/loading.gif" />');
-          //  $(".uploadform").ajaxForm({
-			
-    
-	url="<?php // echo base_url(); ?>signg_in/save_albums",
-		$(".uploadform").ajaxForm({
-        url: url,
-		type:"POST",
-		success: function()  
-        {  
-		//location.reload();
-		},
-		cache: false
-		});
-	
-		});
-		});*/
+    $(document).ready(function() {
+        $('#submitbtn').click(function() {
+            $("#viewimage").html('');
+            $("#loadingimage").html('<img src="<?php echo base_url(); ?>cropimage/images/loading.gif" />');
+            $(".uploadform").ajaxForm({
+            	url: '<?php echo base_url(); ?>profile/upload_thumb',
+                success:    showResponse 
+            });
+        });
+    });
   
     function showResponse(responseText, statusText, xhr, $form){
 		
@@ -1715,7 +1705,7 @@ function  onchangeMore(){
 		if(responsetxt)
 		{
 		    alert(responsetxt);
-		    var redirect_url = "<?php echo base_url(); ?>"+'profile/my_albums';
+		    var redirect_url = "<?php echo base_url(); ?>"+'profile/my_photos';
 			window.location.replace(redirect_url);
 		}
 	}

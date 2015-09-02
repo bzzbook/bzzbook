@@ -8,12 +8,13 @@ if($result)
           <ul>
            <?php if($result) { foreach($result as $company): ?>
             <li>
-              <figure><img src="<?php echo base_url(); ?>uploads/<?php echo $company['company_image']  ?>" alt=""></figure>
+              <figure><a href="<?php echo base_url("company/company_disp/".$company['companyinfo_id']); ?>"><img src="<?php echo base_url(); ?>uploads/<?php echo $company['company_image']  ?>" alt=""></a></figure>
               <div class="content">
-                <h4><?php echo character_limiter($company['cmp_name'], 15); ?></h4>
+                <h4><a href="<?php echo base_url("company/company_disp/".$company['companyinfo_id']); ?>"><?php echo character_limiter($company['cmp_name'], 15); ?></a></h4>
                 <p><span><?php echo $company['cmp_industry'] ?></span> <span>Established in: <?php echo $company['cmp_estb'] ?></span> 
                 <span>Employees: <?php echo $company['cmp_colleagues'] ?></span> </p>
-                <a href="#">Like <span>(2)</span></a> <a href="#">Follow <span>(20)</span></a> </div>
+              <!--  <a href="#">Like <span>(2)</span></a> <a href="#">Follow <span>(20)</span></a> -->
+              </div>
             </li>
                <?php endforeach; } else echo "No Details Found";?>      
           </ul>

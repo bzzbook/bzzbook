@@ -1314,25 +1314,39 @@ public function save_fav_user_categories()
 public function insert_save_as_fav()
 {
 	$user_id = $this->session->userdata('logged_in')['account_id'];
-	if($this->db->select('*')->from('bzz_save_as_favorites')->where('category_id',$_POST['category_id'])->where('favorite_image',$_POST['uploaded_file'])->where('favorite_post_content',$_POST['post_content'])->get()->num_rows() > 0)
+	$this->db->select('*');
+	$this->db->from('bzz_save_as_favorites');
+	$this->db->where('category_id',$_POST['category_id']);
+	$this->db->where('favorite_image',$_POST['uploaded_file']);
+	if(isset($_POST['post_content']))
 	{
-		$update_data = array(
-	'category_id' => $_POST['category_id'],
-	'favorite_image' => $_POST['uploaded_file'],
-	'favorite_post_content' => $_POST['post_content'],
-	'favorite_by_user_id' =>$user_id,
-	'created_time' =>  date("Y-m-d H:i:s")
-	);
+		$this->db->where('favorite_post_content',$_POST['post_content']);
+	}
+	$query = $this->db->get();
+	
+	if($query->num_rows() > 0)
+	{
+		
+	$update_data['category_id'] = $_POST['category_id'];
+	$update_data['favorite_image'] = $_POST['uploaded_file'];
+	if(isset($_POST['post_content']))
+	{
+	$update_data['favorite_post_content'] = $_POST['post_content'];
+	}
+	$update_data['favorite_by_user_id'] = $user_id;
+	$update_data['created_time'] = date("Y-m-d H:i:s");
+	
 	$this->db->where('category_id',$_POST['category_id'])->where('favorite_image',$_POST['uploaded_file'])->where('favorite_post_content',$_POST['post_content'])->where('favorite_by_user_id',$user_id);
 	$this->db->update('bzz_save_as_favorites',$update_data);
 	}else
 	{
-	$data = array(
-	'category_id' => $_POST['category_id'],
-	'favorite_image' => $_POST['uploaded_file'],
-	'favorite_post_content' => $_POST['post_content'],
-	'favorite_by_user_id' =>$user_id
-	);
+	$data['category_id'] = $_POST['category_id'];
+	$data['favorite_image'] = $_POST['uploaded_file'];
+	if(isset($_POST['post_content']))
+	{
+	$data['favorite_post_content'] = $_POST['post_content'];
+	}
+	$data['favorite_by_user_id'] = $user_id;
 	$this->db->insert('bzz_save_as_favorites',$data);
 	
 }

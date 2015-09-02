@@ -19,13 +19,13 @@
 		  {
 			  $cmp[] = $cmps['companyinfo_id'];
 		  }
-		print_r($cmp);
+	//	print_r($cmp);
 		  
 		$currentcmp = $cmp_info[0]['companyinfo_id'];
 		  
 		  $data = in_array($currentcmp,$cmp);
 		  
-		  print_r($data);
+		//  print_r($data);
 		  ?>
            
             <div role="tabpanel" class="tab-pane active" id="post_board">

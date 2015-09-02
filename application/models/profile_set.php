@@ -1745,8 +1745,8 @@ public function get_time_line_images()
 	
 	
 	$id = $this->session->userdata('logged_in')['account_id'];
-	$condition = "posted_by =". $id . " and bzz_posts.uploaded_files !='' and album_id is NULL";
-	$this->db->select('uploaded_files');
+	$condition = "posted_by =". $id . " and bzz_posts.uploaded_files !='' and album_id is NULL and profile_pic != 'Y' ";
+	$this->db->select('*');
 	$this->db->from('bzz_posts');
 	
 	$this->db->where($condition);
@@ -1766,20 +1766,43 @@ public function get_time_line_images()
 
 public function get_profile_images()
 {
-		
 	$id = $this->session->userdata('logged_in')['account_id'];
+	$condition = "posted_by =". $id . " and bzz_posts.uploaded_files !='' and profile_pic = 'Y' ";
+	$this->db->select('*');
+	$this->db->from('bzz_posts');
 	
-	$this->db->select('user_img_name');
-	$this->db->from('bzz_user_images');
-	
-	$this->db->where('user_id',$id);
-	$this->db->order_by("user_imageinfo_id", "desc");
+	$this->db->where($condition);
+	$this->db->order_by("post_id", "desc");
 	$query = $this->db->get();
 	if ($query->num_rows() > 0) {
-		//$uploaded_files = array();
-	$data  = $query->result_array();
-		
-	return $data;
+			$result = $query->result();
+			$pictures = array();
+			foreach($result as $post)
+			{
+				$condition = "like_on =" . "'" . $post->post_id . "' and like_status='Y'";
+				$this->db->select('*');
+				$this->db->where($condition);
+				$query = $this->db->get('bzz_likes');
+				$like_count = count($query->result());
+				
+				$condition = "commented_on =" . "'" . $post->post_id . "'";
+				$this->db->select('*');
+				$this->db->where($condition);
+				$query = $this->db->get('bzz_postcomments');
+				$comment_count = count($query->result());
+				
+				$picture = array();
+				$pics = explode(',',$post->uploaded_files);
+				foreach($pics as $pic)
+				{
+					$picture['post_id'] = $post->post_id;
+					$picture['image_thumb'] = $pic;
+					$picture['like_count'] = $like_count;
+					$picture['comment_count'] = $comment_count;
+					$pictures[] = $picture;
+				}
+			}
+			return $pictures;
 	} else {
 	return false;
 	}
@@ -1787,7 +1810,7 @@ public function get_profile_images()
 public function get_all_time_line_photos()
 {
 	$id = $this->session->userdata('logged_in')['account_id'];
-	$condition = "posted_by =". $id . " and bzz_posts.uploaded_files !='' and album_id is NULL";
+	$condition = "posted_by =". $id . " and bzz_posts.uploaded_files !='' and album_id is NULL and profile_pic != 'Y'";
 	$this->db->select('*');
 	$this->db->where($condition);
 	$this->db->order_by("post_id", "desc");

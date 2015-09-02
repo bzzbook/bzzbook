@@ -63,7 +63,7 @@ $profiledata = $this->customermodel->profiledata($id);
 		<div class="crop_select_image"><input type="submit" value="Upload" class="upload_button" name="submitbtn" id="myphotos_submitbtn" /></div><div id="loadingimage" style="padding-top:15px;"></div>
 	</div>
 		<input type="hidden" id="album_id" value="" name="album_id" style="border:none;"/>
-		<div class="crop_set_preview" style="display:block;">
+		<div class="crop_set_preview get_albums_box" style="display:block;">
 				
                    
             <div class="pin-categories-pinit">
@@ -79,10 +79,12 @@ $profiledata = $this->customermodel->profiledata($id);
            </div>
             <div class="clearfix"></div>
 		</div>
-          <span id="album_name" style="display:none;"> The Image Will be Saved In  </span>
+        
         </form>	
-        <div class="clearfix"></div>
+       <div class="clearfix"></div>
+        <div class="container-fluid" id="album_name" style="display:none;"> The Image Will be Saved In  </div>
 	</div>
+     
 	<?php } ?>
 </div>
 </section>
@@ -97,6 +99,8 @@ $profiledata = $this->customermodel->profiledata($id);
 			$timeline_photos = $this->profile_set->get_time_line_images();
 		
 			$complete_timeline_pics =  array();
+			if($timeline_photos)
+			{
 		//	print_r($timeline_photos);
 			foreach($timeline_photos as $timeline)
 			{
@@ -107,9 +111,9 @@ $profiledata = $this->customermodel->profiledata($id);
 					$complete_timeline_pics[] = $d;
 				}
 			}
-			
+			}
 			//print_r($complete_timeline_pics);
-			if($complete_timeline_pics)
+			if(!empty($complete_timeline_pics))
 			{ ?>
 			
                    <div class="main col-md-3">
@@ -133,14 +137,15 @@ $profiledata = $this->customermodel->profiledata($id);
 			$profile_images = $this->profile_set->get_profile_images();
 				$complete_profile_pics = array();
 				
-				
+				if($profile_images)
+				{
 				foreach($profile_images as $pf_img)
 				{
-					$complete_profile_pics[] = $pf_img['user_img_name'];
+					$complete_profile_pics[] = $pf_img['image_thumb'];
 				}
-				
+				}
 				//print_r($complete_profile_pics);	
-				if($complete_profile_pics)
+				if(!empty($complete_profile_pics))
 			{ ?>
 			
                    <div class="main col-md-3">
@@ -195,7 +200,11 @@ $profiledata = $this->customermodel->profiledata($id);
 			 ?>
              <?php // if($data){  foreach($data as $image){ $fileimage = $image['image_thumb'];  ?>
             	 <!-- <div class="fbphotobox photoThumb col-md-3" id="fbphotobox-all">-->
-                 <?php foreach($album_imgs as $name => $a){ ?>
+                 <?php 
+				 if($album_imgs)
+			 {
+				 
+				 foreach($album_imgs as $name => $a){ ?>
                    <div class="main col-md-3">
                 	<figure>
                     
@@ -208,7 +217,7 @@ $profiledata = $this->customermodel->profiledata($id);
                     <h2><?php echo $a['album_name']; ?></h2>
                     </div>
                 <!-- </div> -->
-                 <?php  } } } ?>
+                 <?php } } } } ?>
                 <div class="clear"></div>  
             </div>
       </section>
