@@ -12,7 +12,7 @@ if($result){
               
                   <div class="clear"></div>
                 <h4><a href="<?php echo base_url("company/company_disp/".$company->companyinfo_id); ?>"><?php echo $company->cmp_name;?></a></h4>
-                <p><span><?php echo $company->cmp_industry; ?></span> <span>Established in: <?php echo substr($company->cmp_estb,'0','-6') ?></span> <span>Employees: <?php echo $company->cmp_colleagues; ?></span> </p>
+                <p><span><?php echo $company->cmp_industry; ?></span> <span>Established in: <?php echo $company->cmp_estb; ?></span> <span>Employees: <?php echo $company->cmp_colleagues; ?></span> </p>
                <!-- <a href="#">Like <span>(2)</span></a> <a href="#">Follow <span>(20)</span></a>-->
                  </div>
             </li>

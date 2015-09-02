@@ -3953,11 +3953,15 @@ JobsSearchLayout .jobSearchListing .applicant_job_search .optionBox {
     margin-bottom: 29px;}
 .midbody .coloumn1 .pendingRequest{ background: #f3f3f3 none repeat scroll 0 0; border: 1px solid #ececec; margin-top: 15px; padding: 10px 12px;}
 .midbody .coloumn1 .pendingRequest h3{ font-size:15px; color:#737373; padding-bottom:15px;}
-.midbody .coloumn1 .pendingRequest ul li{ list-style:none; display:flex; padding-bottom:15px;}
+.midbody .coloumn1 .pendingRequest ul li{ float: left;
+    list-style: outside none none;
+    margin-left: 9px;
+    margin-right: 9px;
+    padding-bottom: 15px;}
 .midbody .coloumn1 .pendingRequest figure{ width:60px; height:60px; overflow:hidden;}
 .midbody .coloumn1 .pendingRequest figure img{width:60px; height:60px;}
 .midbody .coloumn1 .pendingRequest .disc{ padding-left:8px;}
-.midbody .coloumn1 .pendingRequest .disc h4{ color:#737373; font-size:15px; padding-bottom:15px; position:absolute; font-weight:400 !important}
+.midbody .coloumn1 .pendingRequest .disc h4{ color:#737373; font-size:15px; padding-bottom:15px; position:absolute; font-weight:400 !important; margin-left:-6px;}
 .midbody .coloumn1 .pendingRequest .disc a{ display:inline-block; font-size:15px; color:#fff; background:/*#609b34*/#fbc436; height:30px; line-height:30px; padding:0 10px; -webkit-border-radius:2px; border-radius:2px;}
 .midbody .coloumn1 .pendingRequest .disc a+a{ background:#609b34; margin-left:3px;}
 .midbody .coloumn1 .pendingRequest .disc a+a+a{ background:#2f2f2f; margin-left:3px;}

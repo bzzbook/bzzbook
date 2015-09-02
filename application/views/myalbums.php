@@ -97,7 +97,7 @@ $profiledata = $this->customermodel->profiledata($id);
             
             <?php 
 			$timeline_photos = $this->profile_set->get_time_line_images();
-		
+		//print_r($timeline_photos);
 			$complete_timeline_pics =  array();
 			if($timeline_photos)
 			{
