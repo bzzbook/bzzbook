@@ -192,7 +192,8 @@
 			 }
 			 ?>
              <?php  if(isset($file_ext) && $file_ext!='' && in_array($file_ext,$validvideoextensions)){?>  
-             <video width="100%"  poster="<?php echo base_url().'uploads/'.$file_parts[0].'.png'; ?>" controls="controls">
+             <div class="videoImage" id="videoImage<?php echo $row->post_id; ?>"><img width="100%" src="<?php echo base_url().'uploads/'.$file_parts[0].'.png'; ?>" /><div onclick="playVideo(<?php echo $row->post_id; ?>)"></div></div>
+             <video id="videotag<?php echo $row->post_id; ?>" width="100%" controls="controls" style="display:none">
               <source src="<?php echo base_url().'uploads/'.$row->uploaded_files; ?>" type="video/mp4">
             Your browser does not support the video tag.
             </video>  
