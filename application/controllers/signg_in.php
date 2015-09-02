@@ -793,6 +793,17 @@ if(!file_exists($input)){ echo 'file not exists'; return false; }
 $command = "$ffmpegpath -i $input $output";
 //$command = "$ffmpegpath -i $input -vcodec libx264 $output";
 
+/*$ext_array = explode('.',$input);
+$ext = end($ext_array);
+$exts = array('avi','wmv');
+if(in_array($ext,$exts)){
+$command = "$ffmpegpath -i $input -vcodec libx264 $output";
+echo 'ext is avi or wmv'; exit;
+}
+else{ 
+echo 'else'; exit;*/
+
+
 //$imgcommand = "$ffmpegpath -i $input -vsync 1 -r 25 -an -y -qscale 1 $imgoutput";
 
 //$command = "$ffmpegpath -i $input $output";

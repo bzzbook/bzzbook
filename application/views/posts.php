@@ -141,11 +141,11 @@ $("#posts").val($("#dummypost").text());
 function showghostpost(post_id,current_id,posted_to,posted_by){
 $('#post'+post_id).addClass('ghostpostside');
 var viewers = posted_to.split(',');
-alert(current_id);
+/*alert(current_id);
 alert(posted_to);
 
 alert(viewers);
-alert(viewers.indexOf(current_id));
+alert(viewers.indexOf(current_id));*/
 if(viewers.indexOf(current_id) > -1 || viewers==current_id || posted_by==current_id)
 {
 	$("#ghostpostBtn"+post_id).hide(200);

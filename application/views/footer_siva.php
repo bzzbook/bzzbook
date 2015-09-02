@@ -1832,8 +1832,8 @@ $('#album_name').append(' '+album_name+'  Album');
 }
 function playVideo(postid){
 $('#videoImage'+postid).hide();
-$('#videotag'+postid).show();
 $('#videotag'+postid).attr('autoplay','autoplay');
+$('#videotag'+postid).show();
 }
 
     </script>
