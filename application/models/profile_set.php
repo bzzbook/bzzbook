@@ -1745,7 +1745,7 @@ public function get_time_line_images()
 	
 	
 	$id = $this->session->userdata('logged_in')['account_id'];
-	$condition = "posted_by =". $id . " and bzz_posts.uploaded_files !='' and album_id is NULL and profile_pic != 'Y' ";
+	$condition = "posted_by =". $id . " and uploaded_files !='' and album_id is NULL and profile_pic = 'N' and video = 'N' ";
 	$this->db->select('*');
 	$this->db->from('bzz_posts');
 	
@@ -1753,8 +1753,9 @@ public function get_time_line_images()
 	$this->db->order_by("post_id", "desc");
 	$query = $this->db->get();
 	if ($query->num_rows() > 0) {
-		$uploaded_files = array();
+		//$uploaded_files = array();
 	$data  = $query->result_array();
+	//echo $this->db->last_query();
 		
 	return $data;
 	} else {
@@ -1767,7 +1768,7 @@ public function get_time_line_images()
 public function get_profile_images()
 {
 	$id = $this->session->userdata('logged_in')['account_id'];
-	$condition = "posted_by =". $id . " and bzz_posts.uploaded_files !='' and profile_pic = 'Y' ";
+	$condition = "posted_by =". $id . " and uploaded_files !='' and profile_pic = 'Y' ";
 	$this->db->select('*');
 	$this->db->from('bzz_posts');
 	
@@ -1810,7 +1811,7 @@ public function get_profile_images()
 public function get_all_time_line_photos()
 {
 	$id = $this->session->userdata('logged_in')['account_id'];
-	$condition = "posted_by =". $id . " and bzz_posts.uploaded_files !='' and album_id is NULL and profile_pic != 'Y'";
+	$condition = "posted_by =". $id . " and uploaded_files !='' and album_id is NULL and profile_pic != 'Y' and video = 'N'";
 	$this->db->select('*');
 	$this->db->where($condition);
 	$this->db->order_by("post_id", "desc");

@@ -79,7 +79,7 @@
 					  if(isset($file_ext) && $file_ext!='' && in_array($file_ext,$validvideoextensions))
 					  {
 						
-						    echo "<span style='text-transform: lowercase; font-size:13px; font-weight:400;'> posted a video to his timeline.</span>";
+						    echo "<span style='text-transform: lowercase; font-size:13px; font-weight:400;'> posted a video to ".$gender." timeline.</span>";
 					  }else
 					 
 					 
@@ -132,7 +132,7 @@
 					  if(isset($file_ext) && $file_ext!='' && in_array($file_ext,$validvideoextensions))
 					  {
 						
-						    echo "<span style='text-transform: lowercase; font-size:13px; font-weight:400;'> posted a video to his timeline.</span>";
+						    echo "<span style='text-transform: lowercase; font-size:13px; font-weight:400;'> posted a video to ".$gender." timeline.</span>";
 						  
 					  }else
 					 

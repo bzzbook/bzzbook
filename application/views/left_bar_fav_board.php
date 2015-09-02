@@ -9,7 +9,7 @@ if($favorite_boards)
           <h3>Favourites Board</h3>
           <ul id="add_friends">
 <?php foreach($favorite_boards as $board) { 
-if($i == 2)
+if($i == 3)
 break;
 $data = $this->save_as_favorites_m->get_category_image($board['category_id']);
 
@@ -22,7 +22,8 @@ $imp_parts = explode('.',$data[0]['favorite_image']);
           <li>
               <figure><a href="<?php echo base_url('signg_in/get_all_favorites_by_cat_id/'.$board['category_id']); ?>"><span style="background:url(<?php echo base_url(); ?>uploads/<?php echo $image; ?>) center center no-repeat; width:70px; height:70px; overflow:hidden; display:block;"></span></a></figure>
               <div class="disc">
-                <h4><!--<a class="override_exist_styles" href="<?php // echo base_url('profile/user/'.$req[0]['user_id']); ?>" >--><?php  echo character_limiter($board['category_name'], 10); ?><!--</a>--></h4>
+                <h4><!--<a class="override_exist_styles" href="<?php // echo base_url('profile/user/'.$req[0]['user_id']); ?>" >--><?php  echo   $str_des=substr($board['category_name'],0,8);
+				// character_limiter($board['category_name'], 2); ?><!--</a>--></h4>
          
           </div>
           </li>
