@@ -1830,14 +1830,5 @@ $('#album_name').show();
 $('#album_name').append(' '+album_name+'  Album');
 
 }
-/*function toggleVideoControles(){
-	alert(this);
-    if (this.hasAttribute("controls")) {
-        this.removeAttribute("controls")
-    } else {
-		
-        this.setAttribute("controls", "controls")
-    }
-}*/
 
     </script>

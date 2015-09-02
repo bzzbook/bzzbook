@@ -81,7 +81,7 @@
 					  if(isset($file_ext) && $file_ext!='' && in_array($file_ext,$validvideoextensions))
 					  {
 						
-						    echo "<span style='text-transform: lowercase; font-size:13px; font-weight:400;'> posted a video to ".$gender." timeline.</span>";
+						    echo "<span style='text-transform: lowercase; font-size:13px; font-weight:400;'> posted a video to his timeline.</span>";
 					  }else
 					 
 					 
@@ -132,7 +132,7 @@
 					  if(isset($file_ext) && $file_ext!='' && in_array($file_ext,$validvideoextensions))
 					  {
 						
-						    echo "<span style='text-transform: lowercase; font-size:13px; font-weight:400;'> posted a video to ".$gender." timeline.</span>";
+						    echo "<span style='text-transform: lowercase; font-size:13px; font-weight:400;'> posted a video to his timeline.</span>";
 					  }else
 					 
 					 
@@ -192,7 +192,7 @@
 			 }
 			 ?>
              <?php  if(isset($file_ext) && $file_ext!='' && in_array($file_ext,$validvideoextensions)){?>  
-             <video width="100%"  poster="<?php echo base_url().'uploads/'.$file_parts[0].'.png'; ?>" controls>
+             <video width="100%"  poster="<?php echo base_url().'uploads/'.$file_parts[0].'.png'; ?>" controls="controls">
               <source src="<?php echo base_url().'uploads/'.$row->uploaded_files; ?>" type="video/mp4">
             Your browser does not support the video tag.
             </video>  
