@@ -61,12 +61,17 @@ $profiledata = $this->customermodel->profiledata($id);
          	<div class="userPhotos">
              <?php if(isset($photos)){  foreach($photos as $image){ $fileimage = $image['image_thumb']; 
 			 	
-			
+			 
+					$image_file = explode('.',$fileimage);
+					
+				
 
 			 ?>
             	  <div class="fbphotobox photoThumb col-md-3" id="fbphotobox-all">
                 	<?php /*?><a href="<?php  echo base_url();?>uploads/<?php echo $image['image_thumb']; ?>" class="mpView" data-lightbox="example-1" data-lightbox="my_photos"><img src="<?php echo base_url(); ?>images/mp_view.png" alt=""></a><?php */?>
-                	<figure><img id="<?php echo $image['post_id'] ?>" class="photo" fbphotobox-src="<?php echo base_url();?>uploads/<?php echo $fileimage; ?>" src="<?php echo base_url();?>uploads/<?php echo $fileimage; ?>" width="100%" height="100%" alt=""></figure>
+                    <a onclick="getPostComments(<?php echo $image['post_id']; ?>,'<?php echo $fileimage; ?>')">
+                		<figure><img id="<?php echo $image['post_id']; ?>" class="photo" fbphotobox-src="<?php echo base_url();?>uploads/<?php echo $image_file[0]."_default.".$image_file[1]; ?>" src="<?php echo base_url();?>uploads/<?php echo $image_file[0]."_extended.".$image_file[1]; ?>" width="100%" height="100%" alt=""></figure>
+                    </a>
                     <div class="phOptions">
                    <?php /*?> <span class="mpImg"><a href="#"><img src="<?php echo base_url(); ?>images/bzz_icon.png" alt=""></a></span><?php */?>
                     <span class="mpLike"><a href="javascript:void(0)"><img src="<?php echo base_url(); ?>images/like_myphotos.png" alt=""><em><?php echo $image['like_count'];?></em></a></span>
@@ -74,21 +79,33 @@ $profiledata = $this->customermodel->profiledata($id);
                    
                     </div>
                 </div>
-                 <?php  } } else if(isset($profile_pics)){  foreach($profile_pics as $image){ $fileimage = $image['user_img_name'];  ?>
+                 <?php  } } else if(isset($profile_pics)){  foreach($profile_pics as $image){ $fileimage = $image['image_thumb']; 
+				 	$image_file = explode('.',$fileimage);
+				  ?>
                  <div class="fbphotobox photoThumb col-md-3" id="fbphotobox-all">
                 	<?php /*?><a href="<?php  echo base_url();?>uploads/<?php echo $image['image_thumb']; ?>" class="mpView" data-lightbox="example-1" data-lightbox="my_photos"><img src="<?php echo base_url(); ?>images/mp_view.png" alt=""></a><?php */?>
-                	<figure><img id="" class="photo" fbphotobox-src="<?php echo base_url();?>uploads/<?php echo $fileimage; ?>" src="<?php echo base_url();?>uploads/<?php echo $fileimage; ?>" width="100%" height="100%" alt=""></figure>
+                	  <a onclick="getPostComments(<?php echo $image['post_id']; ?>,'<?php echo $fileimage; ?>')">
+                   <figure><img id="<?php echo $image['post_id']; ?>" class="photo" fbphotobox-src="<?php echo base_url();?>uploads/<?php echo $image_file[0]."_default.".$image_file[1]; ?>" src="<?php echo base_url();?>uploads/<?php echo $image_file[0]."_extended.".$image_file[1]; ?>" width="100%" height="100%" alt=""></figure>
+                    </a>
                     <div class="phOptions">
                    <?php /*?> <span class="mpImg"><a href="#"><img src="<?php echo base_url(); ?>images/bzz_icon.png" alt=""></a></span><?php */?>
-                    <?php /*?><span class="mpLike"><a href="javascript:void(0)"><img src="<?php echo base_url(); ?>images/like_myphotos.png" alt=""><em><?php echo $image['like_count'];?></em></a></span>
-                    <span class="mpComment"><a href="javascript:void(0)"><img src="<?php echo base_url(); ?>images/comments_myphotos.png" alt=""><em><?php echo $image['comment_count'];?></em></a></span><?php */?>
+                    <span class="mpLike"><a href="javascript:void(0)"><img src="<?php echo base_url(); ?>images/like_myphotos.png" alt=""><em><?php echo $image['like_count'];?></em></a></span>
+                    <span class="mpComment"><a href="javascript:void(0)"><img src="<?php echo base_url(); ?>images/comments_myphotos.png" alt=""><em><?php echo $image['comment_count'];?></em></a></span>
                    
                     </div>
                 </div>
                 <?php } }  else if(isset($timeline_pics)){  foreach($timeline_pics as $image){ $fileimage = $image['image_thumb']; ?>
                 <div class="fbphotobox photoThumb col-md-3" id="fbphotobox-all">
                 	<?php /*?><a href="<?php  echo base_url();?>uploads/<?php echo $image['image_thumb']; ?>" class="mpView" data-lightbox="example-1" data-lightbox="my_photos"><img src="<?php echo base_url(); ?>images/mp_view.png" alt=""></a><?php */?>
-                	<figure><img id="" class="photo" fbphotobox-src="<?php echo base_url();?>uploads/<?php echo $fileimage; ?>" src="<?php echo base_url();?>uploads/<?php echo $fileimage; ?>" width="100%" height="100%" alt=""></figure>
+                    <?php 
+					$image_file = explode('.',$fileimage);
+					
+					
+					?>
+                    
+                    <a onclick="getPostComments(<?php echo $image['post_id']; ?>,'<?php echo $fileimage; ?>')">
+                	<figure><img id="<?php echo $image['post_id']; ?>" class="photo" fbphotobox-src="<?php echo base_url();?>uploads/<?php echo $image_file[0]."_default.".$image_file[1]; ?>" src="<?php echo base_url();?>uploads/<?php echo $image_file[0]."_extended.".$image_file[1]; ?>" width="100%" height="100%" alt=""></figure>
+                    </a>
                     <div class="phOptions">
                    <?php /*?> <span class="mpImg"><a href="#"><img src="<?php echo base_url(); ?>images/bzz_icon.png" alt=""></a></span><?php */?>
                     <span class="mpLike"><a href="javascript:void(0)"><img src="<?php echo base_url(); ?>images/like_myphotos.png" alt=""><em><?php echo $image['like_count'];?></em></a></span>

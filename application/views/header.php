@@ -15,13 +15,14 @@ $companies = $this->companies->get_mn_cmp_list();
 
 <link href="<?php echo base_url(); ?>css/bootstrap.min.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>css/animate.min.css" rel="stylesheet">
+<link href="<?php echo base_url(); ?>css/load_albums.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>css/style.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>css/responsive.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>css/lightbox.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>css/uploadfile.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>css/datepicker.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>css/nanoscroller.css" rel="stylesheet">
-<link href="<?php echo base_url(); ?>css/load_albums.css" rel="stylesheet">
+
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/jqtransform.css" type="text/css" media="all"/>
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/fbphotobox.css" type="text/css"/>
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css" />
@@ -101,7 +102,7 @@ a.previous { display: none; }
         <div class="userImg">
          <img class="headeruserimg" src="<?php echo base_url();?>uploads/<?php if(!empty($image[0]->user_img_thumb)) echo $image[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" alt=""> 
         </div>
-        <a href="#" class="userName" id="drop_down_list_user" >Logged in as:<span><?php echo $name; ?></span></a>
+        <a href="#" class="userName" id="drop_down_list_user" ><span><?php echo $name; ?></span></a>
            <div class="drop_down_list_user_and_cmp" id="drop_down_list_user_and_cmp">
         <ul>
         

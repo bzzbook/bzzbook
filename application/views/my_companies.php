@@ -81,7 +81,7 @@ $result1 = $this->companies->following_companies_list(0,$uid);
                   <p>Established in: <?php $unixTimestamp = strtotime($company['cmp_estb']); echo date('F',$unixTimestamp).", ".date('Y',$unixTimestamp); ?></p>
                   <p>No of Employees: <?php echo $company['cmp_colleagues'] ?></p>
                <div class="btn3 btn-black"><a href="<?php echo base_url("company/cmp_unfollow/".$company['companyinfo_id']) ?>">Unfollow</a></div>
-           <div class="btn3 btn-green"><a href="<?php echo  base_url("company/company_disp/".$company['companyinfo_id']) ?>">View Profile</a></div>
+           <div class="btn3 btn-green" style="float:right !important;"><a href="<?php echo  base_url("company/company_disp/".$company['companyinfo_id']) ?>">View Profile</a></div>
                 </div>
                 
                 <div class="clearfix"></div>

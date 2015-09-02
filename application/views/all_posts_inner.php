@@ -5,6 +5,8 @@
 	  $curr_user_id = $user_id; 
 	  
 	  
+	 
+	  
 	  $posts_count = count($products);
 	
 	
@@ -41,22 +43,67 @@
 	  $user_id=$this->session->userdata('logged_in')['account_id'];
 	  else
 	  $user_id = $user_id;
+	  
+	  
+	$current_user_id_for_post_comment_box = $this->session->userdata('logged_in')['account_id'];
+    $user_imge_pbox = $this->profile_set->get_profile_pic($current_user_id_for_post_comment_box);
+	  
 	  ?>
      
     <article id="post<?php echo $row->post_id; ?>" <?php if($row->isGhostpost==1) echo 'class="ghostpost"' ?> >
           <div class="pfInfo"> <a href="<?php echo base_url().'profile/user/'.$get_profiledata[0]->user_id; ?>" class="pfImg"><img src="<?php echo base_url(); ?>uploads/<?php if(!empty($get_profiledata[0]->user_img_thumb)) echo $get_profiledata[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" alt=""></a>
             <div class="pfInfoDetails">
               <h5><span class="pfname"><a href="<?php echo base_url().'profile/user/'.$get_profiledata[0]->user_id; ?>"><?php echo ucfirst($get_profiledata[0]->user_firstname)."&nbsp;".ucfirst($get_profiledata[0]->user_lastname);?></a>
-			  
+              
+              <?php
+              $get_profiledata = $this->customermodel->profiledata($row->posted_by);
+			  if($get_profiledata[0]->user_gender == 'm')
+				$gender = 'his';
+										else
+				$gender = 'her';
+			 ?> 
 			  <?php if($row->tagged_friends!='') { 
-			  echo ' with '; $tagcount=1; $totTags = count($tags);
+			  
+			  
+			  if(!empty($row->uploaded_files)) 
+			  {
+				  
+				 $uploded_img_files = explode(',',$row->uploaded_files);
+				
+				 $tot_images_count = count($uploded_img_files);
+				
+				 if($tot_images_count == 1)
+				 {
+					 
+					 $file_parts = explode('.',$row->uploaded_files);
+					 $file_ext = $file_parts[1];
+					 $validvideoextensions = array('webm','mp4','ogg','ogv','wmv','3gp','3g2','3gpp','avi','mov','flv'); 
+					  if(isset($file_ext) && $file_ext!='' && in_array($file_ext,$validvideoextensions))
+					  {
+						
+						    echo "<span style='text-transform: lowercase; font-size:13px; font-weight:400;'> posted a video to his timeline.</span>";
+					  }else
+					 
+					 
+					 echo "<span style='text-transform: lowercase; font-size:13px; font-weight:400;'> added a new photo. </span>";
+				 }else
+				 {
+					 echo "<span style='text-transform: lowercase; font-size:13px; font-weight:400;'> added ".$tot_images_count." new photos. </span>";
+				 }
+				  
+			  
+			  }
+			  
+			  
+			  
+			  echo '<span style="font-weight:400;"> -- with </span>'; $tagcount=1; $totTags = count($tags);
 			  foreach($tags as $tag){ 
 			  if($totTags==$tagcount && $totTags!=1)
 			  { ?>
 				  <span class="taggednames"> and <a href="<?php echo base_url().'profile/user/'.$tag->user_id; ?>"><?php echo ucfirst($tag->user_firstname)."&nbsp;".ucfirst($tag->user_lastname);?></a> </span>
 			  <?php break; }
 			  if($tagcount>2){ 
-			  echo ' and '.(count($tags)-2).' <div id="links"><a href="#" class="taggednames">others<span>'.$tagslist.'</span></a></div>';
+			  echo ' <span style="font-weight:400;">and</span> '.(count($tags)-2).' <div id="links"><a href="#" class="taggednames">others<span>'.$tagslist.'</span></a></div>';
 			  break;
 			  }
 			  ?>
@@ -66,6 +113,45 @@
 			  $tagcount++; 
 			  } 
 			  }?> 
+              
+              
+              <?php 
+			  
+			  if(!empty($row->uploaded_files) && empty($row->tagged_friends) && $row->profile_pic != "Y")
+			  {
+				 $uploded_img_files = explode(',',$row->uploaded_files);
+				
+				 $tot_images_count = count($uploded_img_files);
+				
+				 if($tot_images_count == 1)
+				 {
+					 
+					 $file_parts = explode('.',$row->uploaded_files);
+					 $file_ext = $file_parts[1];
+					 $validvideoextensions = array('webm','mp4','ogg','ogv','wmv','3gp','3g2','3gpp','avi','mov','flv'); 
+					  if(isset($file_ext) && $file_ext!='' && in_array($file_ext,$validvideoextensions))
+					  {
+						
+						    echo "<span style='text-transform: lowercase; font-size:13px; font-weight:400;'> posted a video to his timeline.</span>";
+					  }else
+					 
+					 
+					 echo "<span style='text-transform: lowercase; font-size:13px; font-weight:400;'> added a new photo. </span>";
+				 }else
+				 {
+					 echo "<span style='text-transform: lowercase; font-size:13px; font-weight:400;'> added ".$tot_images_count." new photos. </span>";
+				 }
+				  
+			  }
+			  
+			  ?>
+              <?php if(!empty($row->uploaded_files) && $row->profile_pic == 'Y')
+			  {
+				   echo "<span style='text-transform: lowercase; font-size:13px; font-weight:400;'> updated ".$gender." profile picture. </span>";
+			  }
+              ?>
+                           
+              
 			  <?php if($row->shared==1) echo " shared a post "; ?> </span></h5>
               <a href="#" class="date"><?php  echo $hrsago; ?></a> </div>
               
@@ -217,13 +303,13 @@
             <?php } ?>
           </div>
           <div class="commentBox <?php if($row->isGhostpost==1) echo ' hidethis'; ?>" id="commentBox<?php echo $row->post_id;?>">
-            <figure><img src="<?php echo base_url();?>uploads/<?php if(!empty($get_profiledata[0]->user_img_thumb)) echo $get_profiledata[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" alt=""></figure>
+            <figure><img src="<?php echo base_url();?>uploads/<?php if(!empty($user_imge_pbox[0]->user_img_thumb)) echo $user_imge_pbox[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" alt=""></figure>
             <div class="postAComment"> 
             	<div class="postACommentInner">
                            <form method="post" style="width:100% !important;" enctype="multipart/form-data" autocomplete="off" class="send_comment_ajax" id="send_comment_ajax<?php echo $row->post_id;?>" >
             <a href="javascript:document.getElementById('uploadCommentPhotos<?php echo $row->post_id;?>').click();javascript:document.getElementById('write_comment<?php echo $row->post_id;?>').focus(); " class="upload"><span aria-hidden="true" class="glyphicon glyphicon-camera"></span></a>
  <input type="text" class="form-control comment xyzzyx" placeholder="Write a Comment..." name="write_comment" post_id="<?php echo $row->post_id;?>"  id="write_comment<?php echo $row->post_id; ?>" >                             <input type="hidden" name="post_id" value="<?php echo $row->post_id;?>" >
-               <input type="hidden" name="posted_by" value="<?php echo $curr_user_id;?>">
+               <input type="hidden" name="posted_by" value="<?php echo $current_user_id_for_post_comment_box; ?>">
                <input type="file" class="abccba" name="uploadCommentPhotos<?php echo $row->post_id;?>[]" id="uploadCommentPhotos<?php echo $row->post_id;?>" style="display:none;" />
 </form>
               <em>Press Enter to post.</em> </div>

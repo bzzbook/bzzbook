@@ -1381,7 +1381,14 @@ function insert_save_as_favorite(category_id)
 //else
 //alert('prasad'+category_id+'siva');
 var category_id = category_id;
+
+//if($('#post_content').val() != '')
+//{
 var post_content = $('#post_content').val();
+//}else
+//{
+//var post_content = '';
+//}
 var uploaded_file = $('.active #uploaded_files').val();
 //alert(category_id);
 //alert(post_content);
