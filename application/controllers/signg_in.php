@@ -630,7 +630,7 @@ public function ajax_image_upload($file_name){
 	
 	$n =  count($_FILES[$file_name]['name']);
 	$validextensions = array("jpeg", "jpg", "png");
-	$validvideoextensions = array('webm','mp4','ogg','ogv','wmv','3gp','3g2','3gpp','avi','mov','flv');
+	$validvideoextensions = array('webm','mp4','ogg','ogv','wmv','3gp','3g2','3gpp','avi','mov','flv','MOV');
 	//print_r($_FILES[$file_name]);
 	for($i=0;$i<$n;$i++){
 		if(isset($_POST['skipfiles']))
@@ -667,7 +667,7 @@ public function ajax_image_upload($file_name){
             $date = date("ymd");
             $configVideo['upload_path'] = 'uploads/';
             $configVideo['max_size'] = '41943040';
-            $configVideo['allowed_types'] = 'webm|mp4|ogg|ogv|wmv|3gp|3g2|3gpp|avi|flv|mov';
+            $configVideo['allowed_types'] = 'webm|mp4|ogg|ogv|wmv|3gp|3g2|3gpp|avi|flv|mov|MOV';
             $configVideo['overwrite'] = FALSE;
             $configVideo['remove_spaces'] = TRUE;
             $video_name = $date.$filename;
