@@ -21,7 +21,7 @@
 					// The images have not been loaded yet
 					
 					$.each(sources,function(){
-						images = images.add('<img src=http://localhost/bzzbook/uploads/' + this + '>');
+						images = images.add('<img src=http://bzzbook.com/dev/uploads/' + this + '>');
 					});
 
 					// Start the animation after the first photo is loaded

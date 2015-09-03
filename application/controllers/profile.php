@@ -745,12 +745,34 @@ public function showfavs()
                 echo $this->upload->display_errors();
             } else {
                 $videoDetails = $this->upload->data();
+				$input = DIR_FILE_PATH.$video_name;
+				$videoname = explode('.',$video_name);
+				$output = DIR_FILE_PATH.$videoname[0].'.mp4';
+				$imgoupt = DIR_FILE_PATH.$videoname[0].'.png';
+				
+				if(!$this->make_jpg($input, $output,$imgoupt))
+				return false;
+				
 				if($this->profile_set->add_user_videos($video_name))
                 echo "Successfully Uploaded";
 				else
 				return false;
             }
         }
+}
+public function make_jpg($input, $output, $imgoutput) { 
+//$ffmpegpath = $_SERVER['DOCUMENT_ROOT'].'/bzzbook/ffmpeg.exe';
+
+$ffmpegpath = '/usr/bin/avconv';
+if(!file_exists($input)){ echo 'file not exists'; return false; }
+$command = "$ffmpegpath -i $input $output";
+$imgcommand = "$ffmpegpath -i $input -ss 00:00:02 -vframes 1 $imgoutput";
+
+@exec( $command, $ret );
+@exec( $imgcommand, $ret );
+if(!file_exists($output)){ echo 'file output not exist'; return false;}
+if(filesize($output)==0) {echo 'file size 0'; return false; }
+return true;
 }
 	public function profile_pic_thumb()
 	{

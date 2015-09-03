@@ -231,20 +231,21 @@ $profiledata = $this->customermodel->profiledata($id);
              </form>    
                 </div><?php } ?></h4>
          	<div class="userPhotos">
-                <?php  if($videos){ foreach($videos as $video){ ?>
+                <?php  if($videos){ foreach($videos as $video){ $file_parts = explode('.',$video['video_name']);
+			 $file_nam = $file_parts[0]; ?>
 
             	<div class="photoThumb col-md-3">
-                <a class="mpViewvid video_play" data-toggle="modal" data-target="#videoModal" data-theVideo="<?php  echo base_url();?>uploads/<?php  echo $video['video_name']; ?>">
+                <a class="mpViewvid video_play" data-toggle="modal" data-target="#videoModal" data-theVideo="<?php  echo base_url(); ?>uploads/<?php  echo $file_nam.'.mp4'; ?>">
 <img alt="" src="<?php echo base_url(); ?>images/play_myphotos.png">
 </a>
 <?php /*?>                	<a href="#" class="mpViewvid"><img src="<?php echo base_url(); ?>images/play_myphotos.png" alt=""></a>
-<?php */?>               <a href="#" class="video_play" data-toggle="modal" data-target="#videoModal" data-theVideo="<?php  echo base_url();?>uploads/<?php  echo $video['video_name']; ?>">
-<figure style="height:105px !important;"><video width="185" class="remove_video_controls">
+<?php */?>               <a href="#" class="video_play" data-toggle="modal" data-target="#videoModal" data-theVideo="<?php  echo base_url();?>uploads/<?php echo $file_nam.'.mp4'; ?>">
+<figure style="height:105px !important;">
 
-  <source src="<?php  echo base_url();?>uploads/<?php  echo $video['video_name']; ?>" type="video/mp4" >
+  <img width="185" class="remove_video_controls" src="<?php  echo base_url();?>uploads/<?php echo $file_nam.'.png'; ?>" >
    <!-- <source type="video/mp4" src="http://bzzbook.com/videos/intro.mp4"></source>
 <source type="video/ogg" src="http://bzzbook.com/videos/intro.ogv"></source> -->
-</video></figure></a>
+</figure></a>
                     <!--<div class="phOptions">
                     <span class="mpImg"><a href="#"><img src="<?php echo base_url(); ?>images/bzz_icon.png" alt=""></a></span>
                     <span class="mpLike"><a href="#"><img src="<?php echo base_url(); ?>images/like_myphotos.png" alt=""><em>67</em></a></span>
