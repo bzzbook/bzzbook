@@ -357,6 +357,40 @@ class Customermodel extends CI_Model {
 		}
 		
    }
+   public function apiinsertlinks($data)
+   {
+	    $pid=$data['like_on'];
+	    $aid=$data['liked_by'];
+	   // $like=$data['like'];
+	    $condition = "like_on =" . $pid . " AND liked_by =".$aid;
+	    $this->db->select('*');
+		$this->db->from('bzz_likes');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		$like_count = count($this->customermodel->likedata($pid));
+		if($query->num_rows()>0){
+			$res=$query->result();
+			$res_like=$res[0]->like_status;			
+			if($res_like == 'Y' ){
+				$slike="N";
+			}
+			else if($res_like == 'N'){
+				$slike="Y";
+			}
+			
+		$data1 = array('like_status' => $slike);
+        $this->db->where($condition);
+  		$this->db->update('bzz_likes',$data1);	
+	    $data1 = array('like_status' => $slike,'like_count' => $like_count);
+			
+		}
+		else{
+	    $this->db->insert('bzz_likes',$data);
+			$data1 = array('like_status' => 'Y','like_count' => $like_count);
+		
+		}
+		return $data1;
+   }
     public function commentinsertlinks($data)
    {
 	    $pid=$data['like_on'];

@@ -59,6 +59,8 @@ header .search .input-group .input-group-btn ul li a:hover{ background:url(../im
 .mainNav nav ul li a:hover, .mainNav nav ul li a:focus{ background:none; color:#fcc434;}
 .mainNav nav .viewAs p{ float:left; height:34px; line-height:34px; padding-right:5px; color:#d1d1d1;}
 .mainNav nav .viewAs{ padding:7px 0;}
+.mainNav nav .viewAs .count-wrap{ position:relative; top:-46px;}
+.mainNav nav .viewAs .count-wrap #ntfc_count:empty{display: none;}
 .mainNav nav .viewAs select{ float:left; background:#e3e3e3; border:none;  -webkit-border-radius:2px; border-radius:2px; width:auto; }
 .mainNav nav .viewAs select option{font-size:13px; color:#6e6e6e; font-weight:300;}
 
@@ -2389,12 +2391,19 @@ left: 75%; margin-top:5% !important; height:25px; width:20% !important;}
 .ntfc-list ul li .member-search-name .ntf_msg{ color:#999; font-weight:100;}
 .ntfc-list ul li .member-search-name .ntf_msg a{ height:auto !important; line-height:normal !important; font-weight:100; color:#999; text-decoration:underline; font-size:12px; padding:0 !important;}
 #ntfc_count { position: absolute;
-background: #FFF none repeat scroll 0% 0%;
-border-radius: 2px;
-top: 5px;
-right: -9px;
-font-size: 12px;
-padding: 0 4px; }
+background: #d12424 none repeat scroll 0% 0%;
+border-radius: 20px;
+top: 3px;
+left: 33px;
+color:#fff;
+font-size: 10px;
+min-width:22px;
+min-height:22px;
+text-align:center;
+line-height:20px;
+padding: 0 4px;
+border:2px solid #000;
+ }
 
 div.mousescroll {
     overflow: hidden;
@@ -2420,7 +2429,7 @@ ul {
 
 .thisweek_sug_right a{ margin-left: 40px; }
 .thisweek_sug_right > span{ margin-left: 40px;  }
-.buzzerhorn { height:30px; }
+.buzzerhorn {   height: 37px; margin-top: -3px; }
 
 
 

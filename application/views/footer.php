@@ -659,6 +659,7 @@ function likefun(pid,uid,count){
         data: { liked_by: pid, like_on : uid} ,
         success: function(html)
         {   
+			alert(html);
 			info = JSON.parse(html);
          if(info.like_status == 'N'){
 		 	//$("#like_ajax"+pid).html("Unlike");
