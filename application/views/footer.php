@@ -1693,6 +1693,9 @@ function  onchangeMore(){
     }
       $(document).ready(function() {
         $('#userfile').change(function() {
+			$("#uploadBtnForm").hide();
+			$("#videoloading").css("background","url(<?php  echo base_url(); ?>images/block_loader.gif) no-repeat 5px 7px");
+			$("#cancelBtn").show();
 			$(".uploadvideoform").ajaxForm({
             	url: '<?php echo base_url(); ?>profile/add_video',
 			    success:    showVideoResponse 

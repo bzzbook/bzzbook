@@ -224,12 +224,12 @@ $profiledata = $this->customermodel->profiledata($id);
       
       <section class="about-user-details">
         <h4><span aria-hidden="true" class="glyphicon glyphicon-facetime-video"></span>My Videos ( <?php if($videos) echo count($videos); else echo " Videos not uploaded "; ?> )<?php if(isset($user_id) && $user_id==$current_user || !isset($user_id)){ ?>
-<div class="myphotos-uploadbtn1 btn-black fileinput-button"> <span>Upload Video</span> 
+<div class="myphotos-uploadbtn1 btn-black fileinput-button"><div id="uploadBtnForm" > <span>Upload Video</span> 
                 <!-- The file input field used as target for the file upload widget -->
               <form action="" class="uploadvideoform" method="post" enctype="multipart/form-data">
              <input name="userfile" id="userfile" size="20" required="" type="file" >
              </form>    
-                </div><?php } ?></h4>
+                </div><div id="cancelBtn" style="padding:0 9px 0 0; display:none" class="btn-black"><a style="color:#FFF" href="<?php echo base_url().'profile/my_albums'; ?>">Cancle</a></div></div><div id="videoloading" style="float: right; height: 27px; margin: 4px; width: 40px;"></div><?php } ?></h4>
          	<div class="userPhotos">
                 <?php  if($videos){ foreach($videos as $video){ $file_parts = explode('.',$video['video_name']);
 			 $file_nam = $file_parts[0]; ?>

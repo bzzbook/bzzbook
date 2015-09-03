@@ -855,30 +855,62 @@ return true;
 		$attr = array('name' => 'share_form', 'id' =>'share_form', 'enctype'=>"multipart/form-data");
       	
 		$content = form_open('signg_in/share_post',$attr)."<input type='file' name='uploadPhotos[]' id='uploadPhotos' multiple='multiple' style='display:none;' />
-        <textarea cols='' rows='' name='share_post_content' id='posts' class='form-control' placeholder='say something...'></textarea><div class='posts'><article>
-
-          <div class='userContent'>";
+        <textarea style='float:left' cols='' rows='' name='share_post_content' id='posts' class='form-control' placeholder='say something...'></textarea><div class='posts'><article>";
+		    $morePics = '';  $file_ext ='';		
+		  	if(!empty($row->uploaded_files))
+			 {
+			 $up_files = explode(',',$row->uploaded_files);
+			 $i = 0;
+			 $tot_images = count($up_files);
+				
+			 if($tot_images==1){
+				
+			 $file_parts = explode('.',$row->uploaded_files);
+			 $file_ext = $file_parts[1];
+			 $validvideoextensions = array('webm','mp4','ogg','ogv','wmv','3gp','3g2','3gpp','avi','mov','flv'); 
+			 }
+			 if($tot_images>5)
+			 $morePics = 'morePics';
+			 }
+			 ?>
+             <?php  if(isset($file_ext) && $file_ext!='' && in_array($file_ext,$validvideoextensions)){?>  
+             <div class="videoImage" id="videoImage<?php echo $row->post_id; ?>"><img width="100%" src="<?php echo base_url().'uploads/'.$file_parts[0].'.png'; ?>" /><div ></div></div>
+             <video id="videotag<?php echo $row->post_id; ?>" width="100%" controls="controls" style="display:none">
+              <source src="<?php echo base_url().'uploads/'.$row->uploaded_files; ?>" type="video/mp4">
+            Your browser does not support the video tag.
+            </video>  
+<?php  }else{ 
+          $content .="<div class='userContent'>";
 		  
 		  if(!empty($row->uploaded_files))
 			 {
 			 $up_files = explode(',',$row->uploaded_files);
 			 $i = 0;
+			 $tot_images = count($up_files);
+			 if($tot_images>5)
+			 $tot_images = 5;
+			 echo "<div class='fbphotobox postImages post-data-".$tot_images."' id='fbphotobox".$row->post_id."'>";
 			 foreach($up_files as $file)
 			 {
-				 if($i==0)
+				 $file1 = explode('.',$file);
+				  echo " 
+    <a onclick='getPostComments(".$row->post_id.",&#39;".$file."&#39;)'><span class='photo' style='background:url(".base_url()."uploads/".$file1[0].'_default.'.$file1[1].") center center no-repeat' fbphotobox-src='".base_url()."uploads/".$file1[0].'_extended.'.$file1[1]."' ><i>+ ".(count($up_files)-5)."</i></span</a>";
+				/* if($i==0)
 				 {
-					 $content .= "<img src='".base_url()."uploads/".$file."' style='width:100%'/>";
+					 echo " 
+    <a onclick='getPostComments(".$row->post_id.",&#39;".$file."&#39;)'><img class='photo' fbphotobox-src='".base_url()."uploads/".$file1[0].'_extended.'.$file1[1]."' src='".base_url()."uploads/".$file1[0].'_default.'.$file1[1]."' /></a>";
 				 }
 				 else
-				 	 $content .= "<img src='".base_url()."uploads/".$file."' style='width:24%;float:left;margin:.5%; height:83px'/>";
-				 $i++;
+				 	 echo "<a onclick='getPostComments(".$row->post_id.",&#39;".$file."&#39;)'><img class='photo' fbphotobox-src='".base_url()."uploads/".$file1[0].'_extended.'.$file1[1]."' src='".base_url()."uploads/".$file1[0].'_default.'.$file1[1]."' style='width:24%;float:left;margin:.5%; height:83px'/></a>";
+				 $i++;*/
 			 }
+			 echo '<div class="clearfix"></div>';
+			 echo "</div>";
 			 $content .= "<div style='clear:both'></div>";
 			 } 
              
-             $content .="</figure>
-            ";
-			
+            $content .= "</div>";
+}
 			$str_leng=strlen($row->post_content);
 			  if($str_leng>50){
 				$content .= "<div id='popmsg".$row->post_id."'>".substr($row->post_content,0,50)."...<a href='#' onclick='popmyfunc(".$row->post_id.")'>more</a>"."</div><div id='popdes".$row->post_id."' style='display:none'>".$row->post_content."<a href='#' onclick='popmyfunc(".$row->post_id.")'>less</a></div>
