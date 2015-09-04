@@ -1311,7 +1311,7 @@ function get_save_fav_categories(cat_search)
 {
 	//alert(user_id);
 	//var cat_search = $('#category_search').val();
-//	alert(cat_search);  
+	//alert(cat_search);  
 	if(cat_search.length > 0 )
 	{
 		url = "<?php echo base_url(); ?>signg_in/save_fav_category_search/"+cat_search;
@@ -1321,9 +1321,9 @@ function get_save_fav_categories(cat_search)
         {  
 		if(data)
 		{
-		$('#create_new_category').remove();
-		$('.user-option-block').find('.search_result').remove();
-		$('#categories').find('.CreateBoard').remove();
+		//$('#create_new_category').remove();
+		$('.user-option-block #categories').find('.search_result').remove();
+		$('.user-option-block #categories').find('.CreateBoard').remove();
         $('.user-option-block #categories').prepend(data);
 		}
 		},
@@ -1335,24 +1335,7 @@ function get_save_fav_categories(cat_search)
 	$('.user-option-block').find('.search_result').remove();
 }
 }
-function get_save_fav_user_categories()
-{
-	
-		url = "<?php echo base_url(); ?>signg_in/save_fav_user_categories/";
-		$.ajax({
-        url: url,
-		success: function(data)
-        {  
-		if(data)
-		{
-		$('#categories').html('');
-        $('.user-option-block #categories').append(data);
-		}
-		},
-		cache: false
-		});
-	
-}
+
 
 function create_save_fav_category(search_key_word,user_id)
 {
@@ -1365,9 +1348,13 @@ function create_save_fav_category(search_key_word,user_id)
 		//alert("hai"); 
 		if(data)
 		{
-			var data = data.trim();
-			insert_save_as_favorite(data);
-	  
+		//	var data = data.trim();
+		//	insert_save_as_favorite(data);
+		$('.fav_add_success').html('');
+		$('.fav_add_success').append('<span> Created '+ decodeURI(search_key_word) +' Successfully... </span>');
+		
+		$('.fav_add_success').fadeOut(8000);
+	  get_user_categories();
 		}
 		},
 		cache: false
@@ -1376,20 +1363,17 @@ function create_save_fav_category(search_key_word,user_id)
 
 function insert_save_as_favorite(category_id)
 {
-//if(category_id != '')	
-//var category_id = $('#category_id').val();
-//else
-//alert('prasad'+category_id+'siva');
-var category_id = category_id;
 
-//if($('#post_content').val() != '')
-//{
-var post_content = $('#post_content').val();
-//}else
-//{
-//var post_content = '';
-//}
-var uploaded_file = $('.active #uploaded_files').val();
+var category_id = category_id;
+//alert(category_id);
+
+var post_content = $('.fbfavphotobox-container-left-footer .userContent p').text();
+//alert(post_content);
+
+
+var uploaded_file = $('.tag-container #imgdetect').attr('src');
+
+//alert(uploaded_file);
 //alert(category_id);
 //alert(post_content);
 //alert(uploaded_file);
@@ -1406,11 +1390,7 @@ var uploaded_file = $('.active #uploaded_files').val();
 		$('.fav_add_success').append('<span> Added To Favorites Successfully... </span>');
 		
 		$('.fav_add_success').fadeOut(5000);
-		//$('.fav_add_success').find('span').remove();
 		
-		//$('#save_as_fav_modal').modal('toggle');
-	   // url="<?php //echo base_url(); ?>signg_in/get_all_favorites_by_cat_id/"+category_id;
-	  // window.location.replace(url);
 		},
 		cache: false
 		});
@@ -1810,7 +1790,8 @@ function create_album(album_name,user_id)
 			$('#album_id').val(data);
 			//$('#album_name').html('');
 			$('#album_name').show();
-$('#album_name').append(decodeURI(album_name+ ' Album '));	  
+			$('#album_name').append(decodeURI(album_name+ ' Album '));
+	  
 		}
 		},
 		cache: false
