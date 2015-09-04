@@ -361,6 +361,7 @@ class posts extends CI_Controller {
 		$file_upload['files'][] =  $filename;
 		
 		    $path = DIR_FILE_PATH.$filename;
+			$this->load->library('image_autorotate', array('filepath' => $path));
 		    $config['allowed_types'] = 'gif|jpg|png';
 			$config['create_thumb'] = TRUE;
 			$config['max_size']	= '';
@@ -376,11 +377,11 @@ class posts extends CI_Controller {
 			if($imagewidth>523){
 				$default_width = 523;
 				$entended_width = 900;
-				$thumb_width = 170;
+				$thumb_width = 182;
 			}else{
 				$default_width = $imagewidth;
 				$entended_width = $imagewidth;
-				$thumb_width = 170;
+				$thumb_width = $imagewidth;
 			}
 			$config['thumb_marker'] = '_default';
 			$config['width'] = $default_width;
