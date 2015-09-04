@@ -15,36 +15,19 @@ Back to boards</a></span>
                     <span><?php echo $category_name; ?>(<?php echo count($favorites) ?>)</span>                   
                 </div>
                 <div class="imageHolder" id="imgWaterfall">
-                    <?php /*?><script type="text/x-handlebars-template" id="waterfall-tpl">
-                        {{#each result}}
-                        <div class="item">
-                            <div class="innerItem">
-                                <a href="#">
-                                    <img src="<?php echo base_url().'uploads/'; ?>{{favorite_image}}"/>
-                                    <span>{{favorite_post_content}}</span>
-                                </a>
-                            </div>
-                        </div>
-                        {{/result}}
-                    </script><?php */?>
-                        <?php $tot_imagesone = count($favorites); foreach($favorites as $fav):  ?>
+                 
+                      <?php $tot_imagesone = count($favorites); ?>
+                   
+                      <?php foreach($favorites as $fav):  ?>
                         <div class="item">
                             <div class="innerItem <?php if($fav['favorite_post_content']=='') echo 'noBorder'; ?>">
                             <?php $file1 = explode('.',$fav['favorite_image']); ?>
                             
                             
-                             <div class="fbfavphotobox post-data-<?php echo $tot_imagesone; ?> " id="fbfavphotobox<?php echo $fav['favorite_id']; ?>" >
-             <a href="javascript:void(0)" onclick="saveFavAsFav(<?php echo  $fav['favorite_id']; ?>)"><img class="photo <?php if($fav['favorite_post_content']=='') echo 'bottomRadius'; ?>" fbfavphotobox-src="<?php echo base_url('uploads/'.$file1[0].'_extended.'.$file1[1]); ?>" src="<?php echo base_url('uploads/'.$file1[0].'_default.'.$file1[1]); ?>" />   <?php if($fav['favorite_post_content']!=''): ?><span><?php echo $fav['favorite_post_content']; ?></span><?php endif; ?></a>
-			</div>
-                            
-                            
-                            
-                            
-                             <?php /*?> <a  href="javascript:void(0)" onclick="saveAsFav(<?php echo $fav['favorite_id']; ?>);">
-                                    <img <?php if($fav['favorite_post_content']=='') echo 'class="bottomRadius"'; ?> src="<?php echo base_url().'uploads/'.$fav['favorite_image']; ?>"/>
-                                    <?php if($fav['favorite_post_content']!=''): ?><span><?php echo $fav['favorite_post_content']; ?></span><?php endif; ?>
-                                </a>
-                                <?php */?>
+                           <div class="fbfavphotobox post-data-<?php echo $tot_imagesone; ?> " id="fbphotobox-all">   
+             <a href="javascript:void(0)" onclick="saveFavAsFav(<?php echo $fav['favorite_id']; ?>)"><img class="photo <?php if($fav['favorite_post_content']=='') echo 'bottomRadius'; ?>" fbfavphotobox-src="<?php echo base_url('uploads/'.$file1[0].'_extended.'.$file1[1]); ?>" src="<?php echo base_url('uploads/'.$file1[0].'_default.'.$file1[1]); ?>" />   <?php if($fav['favorite_post_content']!=''): ?><span><?php echo $fav['favorite_post_content']; ?></span><?php endif; ?></a>
+		
+                     </div>
                                 
                             </div>
                         </div>

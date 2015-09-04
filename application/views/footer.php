@@ -2054,7 +2054,9 @@ get_user_categories();
 }
 function saveFavAsFav(fav_id){
 	
+	//alert('hai');
 	call_fav_fbphotobox();
+	//alert("sdsds");
 	image = "<img width='80px' style='margin-left:150px;' src='<?php echo base_url(); ?>images/loading.gif' />";
  $(".fbfavphotobox-image-content").html(image);
  
