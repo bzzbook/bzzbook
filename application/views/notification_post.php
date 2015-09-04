@@ -305,7 +305,7 @@ $("#posts").val($("#dummypost").text());
 function showghostpost(post_id,current_id,posted_to,posted_by){
 $('#post'+post_id).addClass('ghostpostside');
 var viewers = posted_to.split(',');
-if(viewers.indexOf(current_id) > -1 || viewers==current_id || posted_by==current_id)
+if(in_array(viewers, current_id) || viewers==current_id || posted_by==current_id)
 {
 	$("#ghostpostBtn"+post_id).hide(200);
 	$("#post"+post_id+" .hidethis").show(500);
@@ -315,4 +315,10 @@ else{
 }
 
 }
-</script>
+function in_array(array, id) {
+    for(var i=0;i<array.length;i++) {
+        if(array[i] == id)
+		return true;
+    }
+    return false;
+}</script>
