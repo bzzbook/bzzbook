@@ -210,7 +210,7 @@
 			 {
 				 $file1 = explode('.',$file);
 				  echo " 
-    <a onclick='getPostComments(".$row->post_id.",&#39;".$file."&#39;)'><span class='photo' style='background:url(".base_url()."uploads/".$file1[0].'_default.'.$file1[1].") center center no-repeat' fbphotobox-src='".base_url()."uploads/".$file1[0].'_extended.'.$file1[1]."' ><i>+ ".(count($up_files)-5)."</i></span</a>";
+    <a onclick='getPostComments(".$row->post_id.",&#39;".$file."&#39;)'><span class='photo' style='background:url(".base_url()."uploads/".$file1[0].'_default.'.$file1[1].") center center no-repeat' fbphotobox-src='".base_url()."uploads/".$file1[0].'_extended.'.$file1[1]."' ><i>+ ".(count($up_files)-5)."</i></span></a>";
 				/* if($i==0)
 				 {
 					 echo " 
@@ -254,7 +254,29 @@
             <?php    
 			}else{?>
 				<a href="javascript:void(0);" onclick="likefun('<?php echo $row->post_id;?>','<?php echo $curr_user_id;?>',<?php echo count($get_likedetails); ?>)"  id="link_like<?php echo $row->post_id;?>" style="padding-right:0px;">Like
-			<?php }?></a><span id="like_count<?php echo $row->post_id;?>"><?php  $like_count = count($get_likedetails); if($like_count>0) echo '<img src="'.base_url().'images/like_myphotos.png" alt="">'.$like_count.'&nbsp;&nbsp;'; ?></span><a href="javascript:document.getElementById('write_comment<?php echo $row->post_id; ?>').focus()" id="link_comment<?php echo $row->post_id;?>">Comment</a><span class="comment_count" id="post_comment_count<?php echo $row->post_id;?>"><?php  $comment_count = count($get_comment_details); if($comment_count>0) echo "(".$comment_count.")" ; ?></span><a href="javascript:void(0)" onclick="sharePost(<?php echo $row->post_id; ?>)" data-toggle="modal" data-target="#myModal">Share</a> <?php if(!empty($row->uploaded_files)) { ?><a href="javascript:void(0)" onclick="saveAsFav('<?php echo $row->post_id;?>')" data-toggle="modal" data-target="#save_as_fav_modal"><span>Save As Favorite</span></a><?php } ?></div>
+			<?php }?></a><span id="like_count<?php echo $row->post_id;?>"><?php  $like_count = count($get_likedetails); if($like_count>0) echo '<img src="'.base_url().'images/like_myphotos.png" alt="">'.$like_count.'&nbsp;&nbsp;'; ?></span><a href="javascript:document.getElementById('write_comment<?php echo $row->post_id; ?>').focus()" id="link_comment<?php echo $row->post_id;?>">Comment</a><span class="comment_count" id="post_comment_count<?php echo $row->post_id;?>"><?php  $comment_count = count($get_comment_details); if($comment_count>0) echo "(".$comment_count.")" ; ?></span><a href="javascript:void(0)" onclick="sharePost(<?php echo $row->post_id; ?>)" data-toggle="modal" data-target="#myModal">Share</a> 
+			<?php
+			
+			
+				if(!empty($row->uploaded_files))
+			 {
+			 $up_files = explode(',',$row->uploaded_files);
+			
+			$tot_imagesone = count($up_files);
+		
+			$i = 1;
+			 foreach($up_files as $up_file)
+			 {
+			
+	 $file1 = explode('.',$up_file);
+	 ?>
+     <?php
+			
+			 if(!empty($row->uploaded_files)) { ?>
+             <div class="fbfavphotobox post-data-<?php echo $tot_imagesone; ?>  <?php if($i > 1) echo "hide"; ?>" id="fbfavphotobox<?php echo $row->post_id; ?>" >
+             <a href="javascript:void(0)" onclick="saveAsFav(<?php echo $row->post_id;?>,'<?php echo $up_files[0]; ?>')"><span class="photo" fbfavphotobox-src="<?php echo base_url('uploads/'.$file1[0].'_extended.'.$file1[1]); ?>">Save As Favorite </span></a></div>
+			 <?php } $i++; } } ?>
+            </div>
             <div id="res_comments<?php echo $row->post_id;?>">
             <?php   
 			       $comments_details = $this->customermodel->comments_data($row->post_id);

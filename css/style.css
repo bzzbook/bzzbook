@@ -2391,19 +2391,12 @@ left: 75%; margin-top:5% !important; height:25px; width:20% !important;}
 .ntfc-list ul li .member-search-name .ntf_msg{ color:#999; font-weight:100;}
 .ntfc-list ul li .member-search-name .ntf_msg a{ height:auto !important; line-height:normal !important; font-weight:100; color:#999; text-decoration:underline; font-size:12px; padding:0 !important;}
 #ntfc_count { position: absolute;
-background: #d12424 none repeat scroll 0% 0%;
-border-radius: 20px;
-top: 3px;
-left: 33px;
-color:#fff;
-font-size: 10px;
-min-width:22px;
-min-height:22px;
-text-align:center;
-line-height:20px;
-padding: 0 4px;
-border:2px solid #000;
- }
+background: #FFF none repeat scroll 0% 0%;
+border-radius: 2px;
+top: 5px;
+right: -9px;
+font-size: 12px;
+padding: 0 4px; }
 
 div.mousescroll {
     overflow: hidden;
@@ -2429,7 +2422,7 @@ ul {
 
 .thisweek_sug_right a{ margin-left: 40px; }
 .thisweek_sug_right > span{ margin-left: 40px;  }
-.buzzerhorn {   height: 37px; margin-top: -3px; }
+.buzzerhorn { height:30px; }
 
 
 
@@ -2470,27 +2463,27 @@ ul {
 /* favorites new styles designs*/
 
 /* line 1, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
-.pin-it-column {
+.fbfavphotobox-image-content .pin-it-column {
   font-family: 'Roboto', sans-serif; }
   /* line 2, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
-  .pin-it-column .modal-dialog {
+ .fbfavphotobox-image-content .pin-it-column .modal-dialog {
     margin: 30px auto;
     min-width: 980px; }
   /* line 5, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
-  .pin-it-column .pin-categories-pinit {
-    width: 290px;
+ .fbfavphotobox-image-content .pin-it-column .pin-categories-pinit {
+    width: 335px;
     float: left;
     padding-left: 20px;
     min-height: 100%; }
     /* line 6, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
-    .pin-it-column .pin-categories-pinit .pinBoard {
+   .fbfavphotobox-image-content .pin-it-column .pin-categories-pinit .pinBoard {
       height: 100px; }
       /* line 8, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
-      .pin-it-column .pin-categories-pinit .pinBoard h3 {
+     .fbfavphotobox-image-content .pin-it-column .pin-categories-pinit .pinBoard h3 {
         margin: 0px;
         padding-bottom: 15px; }
       /* line 9, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
-      .pin-it-column .pin-categories-pinit .pinBoard label {
+     .fbfavphotobox-image-content .pin-it-column .pin-categories-pinit .pinBoard label {
         font-family: 'Roboto', sans-serif;
         font-weight: 400;
         padding: 5px;
@@ -2498,44 +2491,44 @@ ul {
         border: 1px solid #c2c2c2;
         display: block; }
         /* line 15, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
-        .pin-it-column .pin-categories-pinit .pinBoard label i {
+      .fbfavphotobox-image-content  .pin-it-column .pin-categories-pinit .pinBoard label i {
           width: 25px;
           text-align: center;
           color: #c2c2c2;
           font-size: 18px; }
         /* line 16, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
-        .pin-it-column .pin-categories-pinit .pinBoard label input {
+       .fbfavphotobox-image-content .pin-it-column .pin-categories-pinit .pinBoard label input {
           border: none;
           width: calc(100% - 25px); }
     /* line 20, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
-    .pin-it-column .pin-categories-pinit .CreateBoard a {
+   .fbfavphotobox-image-content .pin-it-column .pin-categories-pinit .CreateBoard a {
       display: block;
       line-height: 45px; }
     /* line 21, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
-    .pin-it-column .pin-categories-pinit .CreateBoard p {
+   .fbfavphotobox-image-content .pin-it-column .pin-categories-pinit .CreateBoard p {
       color: #5b5b5b;
       font-weight: 500; }
     /* line 23, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
-    .pin-it-column .pin-categories-pinit .user-option-block {
+   .fbfavphotobox-image-content .pin-it-column .pin-categories-pinit .user-option-block {
       height: 400px; }
       /* line 25, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
-      .pin-it-column .pin-categories-pinit .user-option-block h2 {
+     .fbfavphotobox-image-content .pin-it-column .pin-categories-pinit .user-option-block h2 {
         font-size: 15px;
         font-weight: 400;
         color: #acacac; }
       /* line 26, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
-      .pin-it-column .pin-categories-pinit .user-option-block .board-option-pin:after {
+     .fbfavphotobox-image-content .pin-it-column .pin-categories-pinit .user-option-block .board-option-pin:after {
         content: "";
         display: block;
         clear: both;
         height: 1px; }
       /* line 27, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
-      .pin-it-column .pin-categories-pinit .user-option-block .board-option-pin {
+    .fbfavphotobox-image-content  .pin-it-column .pin-categories-pinit .user-option-block .board-option-pin {
         position: relative;
         border: 1px solid #fff;
         padding: 5px; }
         /* line 30, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
-        .pin-it-column .pin-categories-pinit .user-option-block .board-option-pin a.pinIcon {
+       .fbfavphotobox-image-content .pin-it-column .pin-categories-pinit .user-option-block .board-option-pin a.pinIcon {
           position: absolute;
           top: 50%;
           line-height: 30px;
@@ -2549,17 +2542,17 @@ ul {
           padding: 0 10px;
           display: none; }
         /* line 31, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
-        .pin-it-column .pin-categories-pinit .user-option-block .board-option-pin a.pinIcon:hover {
+       .fbfavphotobox-image-content .pin-it-column .pin-categories-pinit .user-option-block .board-option-pin a.pinIcon:hover {
           text-decoration: none; }
         /* line 32, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
-        .pin-it-column .pin-categories-pinit .user-option-block .board-option-pin span.icon-create {
+       .fbfavphotobox-image-content .pin-it-column .pin-categories-pinit .user-option-block .board-option-pin span.icon-create {
           text-align: center;
           line-height: 37px;
           font-size: 16px;
           border: 1px solid #619b35 !important;
           color: #619b35; }
         /* line 33, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
-        .pin-it-column .pin-categories-pinit .user-option-block .board-option-pin span.icon-create, .pin-it-column .pin-categories-pinit .user-option-block .board-option-pin span.icon-img {
+      .fbfavphotobox-image-content  .pin-it-column .pin-categories-pinit .user-option-block .board-option-pin span.icon-create, .pin-it-column .pin-categories-pinit .user-option-block .board-option-pin span.icon-img {
           background-size: cover !important;
           background-position: center center !important;
           display: block;
@@ -2570,7 +2563,7 @@ ul {
           border: 1px solid #e9e9e9; 
 		  }
         /* line 34, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
-        .pin-it-column .pin-categories-pinit .user-option-block .board-option-pin p {
+      .fbfavphotobox-image-content  .pin-it-column .pin-categories-pinit .user-option-block .board-option-pin p {
           padding: 0px;
           margin: 0px;
           line-height: 35px;
@@ -2578,50 +2571,50 @@ ul {
           float: left;
           font-size: 14px; }
         /* line 35, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
-        .pin-it-column .pin-categories-pinit .user-option-block .board-option-pin + .board-option-pin {
+       .fbfavphotobox-image-content .pin-it-column .pin-categories-pinit .user-option-block .board-option-pin + .board-option-pin {
           border-top: 1px solid #e9e9e9; }
       /* line 37, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
-      .pin-it-column .pin-categories-pinit .user-option-block .board-option-pin:hover {
+    .fbfavphotobox-image-content  .pin-it-column .pin-categories-pinit .user-option-block .board-option-pin:hover {
         border: 1px solid #e9e9e9;
         background: #efefef; }
         /* line 40, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
-        .pin-it-column .pin-categories-pinit .user-option-block .board-option-pin:hover a.pinIcon {
+      .fbfavphotobox-image-content  .pin-it-column .pin-categories-pinit .user-option-block .board-option-pin:hover a.pinIcon {
           display: block; }
       /* line 43, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
-      .pin-it-column .pin-categories-pinit .user-option-block .board-option-pin.active a.pinIcon {
+    .fbfavphotobox-image-content  .pin-it-column .pin-categories-pinit .user-option-block .board-option-pin.active a.pinIcon {
         display: block; }
       /* line 45, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
-      .pin-it-column .pin-categories-pinit .user-option-block .board-option-pin:hover + .board-option-pin {
+    .fbfavphotobox-image-content  .pin-it-column .pin-categories-pinit .user-option-block .board-option-pin:hover + .board-option-pin {
         border-top: 1px solid #fff; }
       /* line 48, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
-      .pin-it-column .pin-categories-pinit .user-option-block .board-option-pin:hover + .board-option-pin + .board-option-pin {
+    .fbfavphotobox-image-content  .pin-it-column .pin-categories-pinit .user-option-block .board-option-pin:hover + .board-option-pin + .board-option-pin {
         border-top: 1px solid #e9e9e9; }
   /* line 53, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
-  .pin-it-column .scroll-pane {
+.fbfavphotobox-image-content  .pin-it-column .scroll-pane {
     width: 100%;
     height: calc(100%);
     overflow: auto; }
   /* line 58, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
-  .pin-it-column
+ .fbfavphotobox-image-content .pin-it-column
 .horizontal-only {
     height: auto;
     max-height: 200px; }
   /* line 63, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
-  .pin-it-column .imgHolder-pinit {
+ .fbfavphotobox-image-content .pin-it-column .imgHolder-pinit {
     width: calc(100% - 300px);
     float: left;
   background: #d9d9d9;
     height: 500px;
     display: table; }
     /* line 64, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
-    .pin-it-column .imgHolder-pinit .img-content-block {
+   .fbfavphotobox-image-content .pin-it-column .imgHolder-pinit .img-content-block {
       display: table-cell;
       vertical-align: middle;
       align-content: center;
       position: relative;
       width: 300px; max-width:600px; }
       /* line 69, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
-      .pin-it-column .imgHolder-pinit .img-content-block span.content {
+    .fbfavphotobox-image-content  .pin-it-column .imgHolder-pinit .img-content-block span.content {
         border-radius: 0px;
         position: absolute;
         width: 100%;
@@ -2633,11 +2626,11 @@ ul {
         padding: 10px 5px;
         z-index: 99; }
       /* line 77, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
-      .pin-it-column .imgHolder-pinit .img-content-block .carousel.slide {
+    .fbfavphotobox-image-content  .pin-it-column .imgHolder-pinit .img-content-block .carousel.slide {
         width: 90%;
         margin: 0 auto; }
         /* line 80, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
-        .pin-it-column .imgHolder-pinit .img-content-block .carousel.slide img {
+       .fbfavphotobox-image-content .pin-it-column .imgHolder-pinit .img-content-block .carousel.slide img {
           border-radius: 5px;
           display: block;
           width: auto;
@@ -2646,14 +2639,14 @@ ul {
 		  max-height:400px;	  		  
           margin: 0 auto; }
       /* line 83, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
-      .pin-it-column .imgHolder-pinit .img-content-block .carousel-control.right, .pin-it-column .imgHolder-pinit .img-content-block .carousel-control.left {
+    .fbfavphotobox-image-content  .pin-it-column .imgHolder-pinit .img-content-block .carousel-control.right, .pin-it-column .imgHolder-pinit .img-content-block .carousel-control.left {
         background: none; }
       /* line 87, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
-      .pin-it-column .imgHolder-pinit .img-content-block .imageThumb {
+   .fbfavphotobox-image-content   .pin-it-column .imgHolder-pinit .img-content-block .imageThumb {
         vertical-align: middle;
         border-radius: 5px; }
         /* line 91, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
-        .pin-it-column .imgHolder-pinit .img-content-block .imageThumb span {
+      .fbfavphotobox-image-content  .pin-it-column .imgHolder-pinit .img-content-block .imageThumb span {
           height: 400px;
           position: relative;
           border-radius: 5px;
@@ -2662,7 +2655,7 @@ ul {
           background-position: center center !important;
           background-size: cover !important; }
   /* line 109, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
-  .pin-it-column .modal-content {
+ .fbfavphotobox-image-content .pin-it-column .modal-content {
     border-radius: 0px;
     padding: 10px; }
 
