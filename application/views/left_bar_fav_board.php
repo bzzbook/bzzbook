@@ -20,7 +20,7 @@ $imp_parts = explode('.',$data[0]['favorite_image']);
 ?>
         
           <li>
-              <figure><a href="<?php echo base_url('signg_in/get_all_favorites_by_cat_id/'.$board['category_id']); ?>"><span style="background:url(<?php echo base_url(); ?>uploads/<?php echo $image; ?>) center center no-repeat; width:90px; height:90px; overflow:hidden; display:block;"></span></a></figure>
+              <figure><a href="<?php echo base_url('signg_in/get_all_favorites_by_cat_id/'.$board['category_id']); ?>"><span style="background:url(<?php echo base_url(); ?>uploads/<?php echo $image; ?>) center center no-repeat; width:100px; height:95px; overflow:hidden; display:block;"></span></a></figure>
               <div class="disc">
                 <h4><!--<a class="override_exist_styles" href="<?php // echo base_url('profile/user/'.$req[0]['user_id']); ?>" >--><?php  echo   $str_des=substr($board['category_name'],0,12);
 				// character_limiter($board['category_name'], 2); ?><!--</a>--></h4>

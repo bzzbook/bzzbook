@@ -3967,7 +3967,7 @@ JobsSearchLayout .jobSearchListing .applicant_job_search .optionBox {
 .midbody .coloumn1 .pendingRequest .disc h4{ color: #737373;
     font-size: 13px;
     font-weight: 300 !important;
-    margin-left: -6px;}
+    margin-left: -6px; text-align:center;}
 .midbody .coloumn1 .pendingRequest .disc a{ display:inline-block; font-size:15px; color:#fff; background:/*#609b34*/#fbc436; height:30px; line-height:30px; padding:0 10px; -webkit-border-radius:2px; border-radius:2px;}
 .midbody .coloumn1 .pendingRequest .disc a+a{ background:#609b34; margin-left:3px;}
 .midbody .coloumn1 .pendingRequest .disc a+a+a{ background:#2f2f2f; margin-left:3px;}
