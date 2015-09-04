@@ -2391,12 +2391,19 @@ left: 75%; margin-top:5% !important; height:25px; width:20% !important;}
 .ntfc-list ul li .member-search-name .ntf_msg{ color:#999; font-weight:100;}
 .ntfc-list ul li .member-search-name .ntf_msg a{ height:auto !important; line-height:normal !important; font-weight:100; color:#999; text-decoration:underline; font-size:12px; padding:0 !important;}
 #ntfc_count { position: absolute;
-background: #FFF none repeat scroll 0% 0%;
-border-radius: 2px;
-top: 5px;
-right: -9px;
-font-size: 12px;
-padding: 0 4px; }
+background: #d12424 none repeat scroll 0% 0%;
+border-radius: 20px;
+top: 3px;
+left: 33px;
+color:#fff;
+font-size: 10px;
+min-width:22px;
+min-height:22px;
+text-align:center;
+line-height:20px;
+padding: 0 4px;
+border:2px solid #000;
+ }
 
 div.mousescroll {
     overflow: hidden;
@@ -2422,7 +2429,7 @@ ul {
 
 .thisweek_sug_right a{ margin-left: 40px; }
 .thisweek_sug_right > span{ margin-left: 40px;  }
-.buzzerhorn { height:30px; }
+.buzzerhorn {   height: 37px; margin-top: -3px; }
 
 
 
