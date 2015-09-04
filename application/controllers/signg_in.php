@@ -164,8 +164,12 @@ class Signg_in extends CI_Controller {
 	 $session_data = $this->session->userdata('logged_in');
 	 $data['posted_by'] = $session_data['account_id'];
 	   $up_res = $this->ajax_image_upload('uploadPhotos');
+	    if(!isset($up_res['video']))
+	 {
+		 $up_res['video'] ="N";
+	 }
 	 //print_r($up_res); exit;
-	   if($up_res['status'])
+	   if(isset($up_res['status']))
 	   $file_name = implode(',',$up_res['files']);
 	   else
 	   $file_name = '';
@@ -1303,10 +1307,22 @@ public function save_fav_user_categories()
 	$user_id = $this->session->userdata('logged_in')['account_id'];
 	$query = $this->db->select('*')->from('bzz_save_fav_categories')->where('created_by',$user_id)->get();
 	$list= '';
+	
+	 
+	
+	$list .='
+	<div class="pin-it-column"> <div class="pin-categories-pinit">
+                        <div class="pinBoard">
+						<div class="fav_add_success" style="font-size:13px;"></div>
+                            <h3>Pick a board</h3>
+       <label><i class="fa fa-search"></i><input type="text" placeholder="Search" onkeyup="get_save_fav_categories(this.value);" id="save_fav_category_search"/></label>                            
+                        </div><div class="user-option-block"><div class="nano has-scrollbar" style="height:410px;"><div class="nano-content" style="height:410px;">
+						<div id="categories" >
+						 <h2>All Boards</h2>';
 
 	if( $query->num_rows > 0)
 	{
-		$list .= '<h2>All Boards</h2>';
+		//$list .= '<h2>All Boards</h2><div class="user-option-block">';
 		$categories = $query->result_array();
 		foreach($categories as $category)
 		{
@@ -1317,7 +1333,9 @@ public function save_fav_user_categories()
 		}else{
 			$data = 'default_profile_pic.png';
 		}
-		$list .='<div class="board-option-pin">
+		$list .='
+		
+		<div class="board-option-pin">
                                     <span class="icon-img" style="background:url( '.base_url().'uploads/'.$data.')"></span>
 									<p>'.$category['category_name'].'</p>
                                     <a onclick="insert_save_as_favorite('.$category['category_id'].')" class="pinIcon">Add</a>
@@ -1333,16 +1351,27 @@ public function save_fav_user_categories()
                                     </a>                                  
                                 </div>';
 	}
+	
+	$list .= '</div></div></div></div></div></div>';
 	echo $list;
 }
 
 public function insert_save_as_fav()
 {
+	$uploaded_file = explode('/',$_POST['uploaded_file']);
+	$image_file_name = explode('.',end($uploaded_file));
+	//$image_file_full_name = implode('.',$image_file_name);
+	//print_r($image_file_name);
+	$image = substr($image_file_name[0], 0, -9);  
+	$uploded_img_file = $image.'.'.$image_file_name[1]; 
+	
+	
+	
 	$user_id = $this->session->userdata('logged_in')['account_id'];
 	$this->db->select('*');
 	$this->db->from('bzz_save_as_favorites');
 	$this->db->where('category_id',$_POST['category_id']);
-	$this->db->where('favorite_image',$_POST['uploaded_file']);
+	$this->db->where('favorite_image',$uploded_img_file);
 	if(isset($_POST['post_content']))
 	{
 		$this->db->where('favorite_post_content',$_POST['post_content']);
@@ -1353,7 +1382,7 @@ public function insert_save_as_fav()
 	{
 		
 	$update_data['category_id'] = $_POST['category_id'];
-	$update_data['favorite_image'] = $_POST['uploaded_file'];
+	$update_data['favorite_image'] = $uploded_img_file;
 	if(isset($_POST['post_content']))
 	{
 	$update_data['favorite_post_content'] = $_POST['post_content'];
@@ -1361,12 +1390,12 @@ public function insert_save_as_fav()
 	$update_data['favorite_by_user_id'] = $user_id;
 	$update_data['created_time'] = date("Y-m-d H:i:s");
 	
-	$this->db->where('category_id',$_POST['category_id'])->where('favorite_image',$_POST['uploaded_file'])->where('favorite_post_content',$_POST['post_content'])->where('favorite_by_user_id',$user_id);
+	$this->db->where('category_id',$_POST['category_id'])->where('favorite_image',$uploded_img_file)->where('favorite_post_content',$_POST['post_content'])->where('favorite_by_user_id',$user_id);
 	$this->db->update('bzz_save_as_favorites',$update_data);
 	}else
 	{
 	$data['category_id'] = $_POST['category_id'];
-	$data['favorite_image'] = $_POST['uploaded_file'];
+	$data['favorite_image'] = $uploded_img_file;
 	if(isset($_POST['post_content']))
 	{
 	$data['favorite_post_content'] = $_POST['post_content'];

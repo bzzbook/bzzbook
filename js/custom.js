@@ -83,20 +83,20 @@ $(document).on('click', function (e) {
 
 function call_fav_fbphotobox(){
 	
-	alert("haiii");
-		$(".fbphotobox span").fbPhotoBox({
+	//alert("haiii");
+		$(".fbfavphotobox span").fbfavphotobox({
 			rightWidth: 360,
 			leftBgColor: "black",
 			rightBgColor: "white",
 			footerBgColor: "black",
 			overlayBgColor: "#222",
-			containerClassName: 'fbphotobox',
+			containerClassName: 'fbfavphotobox',
 			imageClassName: 'photo',
 			onImageShow: function() {
-				$(".fbphotobox span").fbPhotoBox("addTags",
+				$(".fbfavphotobox span").fbfavphotobox("addTags",
 						[{x:0.3,y:0.3,w:0.3,h:0.3}]
 				);
-				$(".fbphotobox-image-content").html();
+				$(".fbfavphotobox-image-content").html();
 			}
 		});
 	

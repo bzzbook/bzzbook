@@ -586,7 +586,29 @@ public function get_posts()
 </div>";
 	}
 	
+public function getfavcontent($fav_id)
+{
+	
+		$fav_data = $this->customermodel->getFavById($fav_id);
+		$fav_user_id = $fav_data[0]->favorite_by_user_id;
+		$image = $this->profile_set->get_profile_pic($fav_user_id);
+		$com_user_data = $this->customermodel->profiledata($fav_user_id);
+		if($image)
+		$image = $image[0]->user_img_thumb;
+		else
+		$image = 'default_profile_pic.png';
+		echo "<div class='userImg'>
+<figure>
+<img src='".base_url().'uploads/'.$image."'>
+</figure>
+<span class='userDetails'>".$com_user_data[0]->user_firstname.' '.$com_user_data[0]->user_lastname."<em>".date('j-M-Y', strtotime($fav_data[0]->created_time))."</em></span>
+</div>
+<div class='userContent'>
+<p>".$fav_data[0]->favorite_post_content."</p>
+</div>";
+	
 
+}
 }
 
 ?>

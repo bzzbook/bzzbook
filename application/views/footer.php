@@ -130,6 +130,7 @@ $(function () {
 <script src="<?php echo base_url(); ?>js/jquery.blImageCenter.js"></script> 
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script> 
 <script src="<?php echo base_url(); ?>js/fbphotobox.js"></script>
+<script src="<?php echo base_url(); ?>js/fbfavbox.js"></script>
 <script src="<?php echo base_url(); ?>js/custom.js"></script> 
 <script src="<?php echo base_url(); ?>js/jquery.nanoscroller.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>js/chat.js"></script>
@@ -659,7 +660,7 @@ function likefun(pid,uid,count){
         data: { liked_by: pid, like_on : uid} ,
         success: function(html)
         {   
-			alert(html);
+			//alert(html);
 			info = JSON.parse(html);
          if(info.like_status == 'N'){
 		 	//$("#like_ajax"+pid).html("Unlike");
@@ -1953,8 +1954,53 @@ function sharePost(post_id){
 }
 
 
+function get_user_categories()
+{
+	url = "<?php echo base_url(); ?>signg_in/save_fav_user_categories/";
+		$.ajax({
+        url: url,
+		success: function(data)
+        {  
+		if(data)
+		{
+			//.pin-it-column .pin-categories-pinit .pinBoard
+		//$('#categories').html('');
+        //$('.img-content-block').append(data);
+		  $(".fbfavphotobox-image-content").html(data);
+          $(".nano").nanoScroller();
+		  $('.nano .nano-pane').css('dispaly','block');
+		}
+		},
+		cache: false
+		});
+
+}
+
 function saveAsFav(post_id){
-	url="<?php echo base_url(); ?>profile/get_post_byid_for_save_fav/"+post_id;
+	
+	call_fav_fbphotobox();
+	image = "<img width='80px' style='margin-left:150px;' src='<?php echo base_url(); ?>images/loading.gif' />";
+ $(".fbfavphotobox-image-content").html(image);
+ 
+ 
+get_user_categories();
+
+  url="<?php echo base_url(); ?>customer/getpostcontent/"+post_id;
+  $.ajax({
+        type: "POST",
+        url: url,
+        success: function(data)
+        {   
+		
+   $(".fbfavphotobox-container-left-footer").html(data);
+  
+  },
+  cache: false
+  });
+ 
+ 
+	/*
+	url="<?php // echo base_url(); ?>profile/get_post_byid_for_save_fav/"+post_id;
 					$.post( url )
 					.done(function( data ) {
 						//alert(data);
@@ -1966,9 +2012,71 @@ function saveAsFav(post_id){
 						get_save_fav_user_categories();
 						//alert(user_categories);
 					});
+*/
+
+
+/*
+
+
+ call_fbphotobox();
+ image = "<img width='80px' style='margin-left:150px;' src='<?php echo base_url(); ?>images/loading.gif' />";
+ $(".fbphotobox-image-content").html(image);
+ url="<?php echo base_url(); ?>customer/getpostcomments/"+post_id+"/"+photo_name;
+  $.ajax({
+        type: "POST",
+        url: url,
+        success: function(data)
+        {   
+		
+   $(".fbphotobox-image-content").html(data);
+   $(".nano").nanoScroller();
+  },
+  cache: false
+  });
+  url="<?php echo base_url(); ?>customer/getpostcontent/"+post_id;
+  $.ajax({
+        type: "POST",
+        url: url,
+        success: function(data)
+        {   
+		
+   $(".fbphotobox-container-left-footer").html(data);
+  
+  },
+  cache: false
+  });
+
+
+*/
+
+
+
 }
 function saveFavAsFav(fav_id){
-	url="<?php echo base_url(); ?>profile/get_favs_byid_for_save_fav/"+fav_id;
+	
+	call_fav_fbphotobox();
+	image = "<img width='80px' style='margin-left:150px;' src='<?php echo base_url(); ?>images/loading.gif' />";
+ $(".fbfavphotobox-image-content").html(image);
+ 
+ 
+get_user_categories();
+
+  url="<?php echo base_url(); ?>customer/getfavcontent/"+fav_id;
+  $.ajax({
+        type: "POST",
+        url: url,
+        success: function(data)
+        {   
+		
+   $(".fbfavphotobox-container-left-footer").html(data);
+  
+  },
+  cache: false
+  });
+	
+	
+	
+/*	url="<?php echo base_url(); ?>profile/get_favs_byid_for_save_fav/"+fav_id;
 					$.post( url )
 					.done(function( data ) {
 						//alert(data);
@@ -1979,7 +2087,7 @@ function saveFavAsFav(fav_id){
 					
 						 get_save_fav_user_categories();
 						//alert(user_categories);
-					});
+					});*/
 }
 
 function user_categories()
