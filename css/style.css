@@ -3976,3 +3976,6 @@ JobsSearchLayout .jobSearchListing .applicant_job_search .optionBox {
 
 .videoImage{ position:relative; }
 .videoImage div{ position:absolute; width:13%; height:23%; top:39%; left:43%; bottom:0px; background:url(../images/playVideo.png) no-repeat center center; cursor:pointer;  }
+.fbfavphotobox {
+    display: inline;
+}
