@@ -139,13 +139,14 @@ function takeInputToPost(){
 $("#posts").val($("#dummypost").text());
 }
 function showghostpost(post_id,current_id,posted_to,posted_by){
-$('#post'+post_id).addClass('ghostpostside');
+
 var viewers = posted_to.split(',');
 
 if(in_array(viewers, current_id) || viewers==current_id || posted_by==current_id)
 {
 	$("#ghostpostBtn"+post_id).hide(200);
 	$("#post"+post_id+" .hidethis").show(500);
+	$('#post'+post_id).addClass('ghostpostside');
 }
 else{
 	alert('This is a ghost post.you are not authorized to view');
