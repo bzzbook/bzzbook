@@ -22,6 +22,15 @@ a:hover, a:active, a:focus, input:focus, button:focus { outline: 0;  text-decora
 
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900);
 
+
+/*========== Overrides =========*/
+.modal-header{ background:#fbc436; -webkit-border-top-left-radius: 5px;
+-webkit-border-top-right-radius: 5px;
+-moz-border-radius-topleft: 5px;
+-moz-border-radius-topright: 5px;
+border-top-left-radius: 5px;
+border-top-right-radius: 5px; }
+
 /* ============ Main Styles ============ */
 header{ border-top:6px solid #fbc436;}
 header .container{ padding:15px 0 18px 0;}
@@ -2821,7 +2830,17 @@ a.pinIcon:hover, a.pinIcon:focus, a.pinIcon:active {
     margin-left: -10px; }
     /* line 14, D:/Abid/Works/Plugins/bizbook/HTML/pin/style.scss */
     .pin-images-grp .imageHolder .item {
-      width: 210px; }
+		position:relative;
+      	width: 210px;
+	  }
+	  .pin-images-grp .imageHolder .item button.close_item{
+		  position:absolute;
+		  top:15px; right:22px; 
+		  border:0px;
+		  z-index:99;
+		  background:none;
+		  }
+		  .editName_Favorites .input-group-btn .btn{ padding:6px 12px !important; }
       /* line 15, D:/Abid/Works/Plugins/bizbook/HTML/pin/style.scss */
       .pin-images-grp .imageHolder .item a {
         text-decoration: none; }
@@ -2880,6 +2899,7 @@ a.pinIcon:hover, a.pinIcon:focus, a.pinIcon:active {
       background-size: cover !important;
       border: 1px solid #696969;
       float: left; }
+	  
     /* line 41, D:/Abid/Works/Plugins/bizbook/HTML/pin/style.scss */
     .pin-images-grp .info-bar p {
       float: left;
@@ -3986,3 +4006,7 @@ JobsSearchLayout .jobSearchListing .applicant_job_search .optionBox {
 .fbfavphotobox {
     display: inline;
 }
+.pin-groupBottom .pin-group-detail h3 a, .pin-groupBottom .pin-group-detail h3 a:hover{ text-decoration:none;}
+.pin-groupBottom .pin-group-detail h3 a{ color:#848383; }
+.pin-groupBottom .pin-group-detail h3 a:hover{color:#696969; }
+

@@ -609,6 +609,56 @@ public function getfavcontent($fav_id)
 	
 
 }
+
+
+public function delete_favorite_pic($fav_id)
+{
+	   $this->db->where('favorite_id',$fav_id);
+       if($this->db->delete('bzz_save_as_favorites'))
+	   {
+	   echo true;
+	   }else{
+	   echo false;
+}}
+
+public function edit_cat_name($cat_id)
+{
+	$category_data = $this->profile_set->get_sav_fav_cat_data($cat_id);
+	$list = '';
+	if($category_data)
+	{
+		$list = '
+		<form method="POST" action="'.base_url().'customer/change_cat_name">
+		<div class="input-group">
+      <input type="text" class="form-control" placeholder="" value="'.$category_data[0]['category_name'].'" name="category_name">
+	  <input type="hidden" class="form-control" placeholder="" value="'.$category_data[0]['category_id'].'" name="category_id">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="submit">Change</button>
+      </span></div></form>';
+		
+	}
+	echo $list;
+}
+
+public function change_cat_name()
+{
+	$data['category_name'] = $this->input->post('category_name');
+	$category_id = $this->input->post('category_id');
+	$this->profile_set->change_category_name_byid($data,$category_id);
+	redirect('profile/showfavs');
+
+}
+public function delete_category($cat_id)
+{
+	if($this->db->select('*')->from('bzz_save_as_favorites')->where('category_id',$cat_id)->get()->num_rows() > 0)
+	{
+		echo false;
+	}else
+	{
+		echo true;
+	}
+}
+
 }
 
 ?>

@@ -44,7 +44,7 @@ $favorites = $this->save_as_favorites_m->get_all_favorites();
                         
                         <div class="col-md-3">
                         <div class="pin-group-detail">
-                            <h3><?php echo $category['category_name']; ?></h3>
+                            <h3><?php echo $category['category_name']; ?> <span class="pull-right"><a href=""  data-toggle="modal" data-target="#edit_cat_name" onclick="edit_category_name(<?php echo $category['category_id']; ?>)" class="fa fa-pencil"></a> <a href="#" class="fa  fa-times" onclick="delete_savfav_category(<?php echo $category['category_id']; ?>)"></a></span></h3>
 					 <a href="<?php echo base_url();?>signg_in/get_all_favorites_by_cat_id/<?php echo $category['category_id']; ?>">
                    <!--  <a href="javascript:void(0)" onclick="get_favorite_images()" -->
                         <?php
@@ -108,3 +108,17 @@ $favorites = $this->save_as_favorites_m->get_all_favorites();
                 </div>
             </div>
         </div>
+<div class="modal fade editName_Favorites" id="edit_cat_name" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Edit Title</h4>
+      </div>
+      <div class="modal-body" id="edit_cat_disp">
+
+      </div>
+      
+    </div>
+  </div>
+</div>
