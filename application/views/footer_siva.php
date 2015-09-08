@@ -1865,7 +1865,7 @@ function delete_savfav_category(cat_id)
         {  
 		if(data == false)
 		{
-		alert('You cannot delete an Favourites unless that category had images ');
+		alert('You cannot delete A Faourite Board if it consisits Favourite photos');
 		}
 		},
 		cache: false

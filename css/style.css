@@ -206,7 +206,7 @@ header .userLogin .field input{ background:#f7f5f5; border:1px solid #f0f0f0; bo
 header .userLogin .submit{ float:left;}
 header .userLogin .submit input{ width:66px; height:34px; background:#313131; line-height:30px; border:none; color:#fcc434; -webkit-border-radius:3px; border-radius:3px; margin-top:25px;}
 
-.banner{ background:#424242 url(../images/banner_img.png) no-repeat center 0; min-height:692px; overflow:hidden; background-size:cover;}
+.banner{ background:#424242 url(../images/banner_img.png) no-repeat center 0; min-height:692px; /*overflow:hidden;*/ background-size:cover;}
 .banner .title{ text-align:center; padding:64px 0 30px 0;}
 .banner .title h2, .banner .title h3, .banner .title h4{text-shadow: 0 3px 5px #2E2E2E;}
 .banner .title h2{ font-size:66px; color:#fff; text-transform:uppercase; font-weight:700;}
@@ -1283,8 +1283,8 @@ width:100%; }
 .right_cards2 .fa-envelope-o{padding-left:10px;}
 
 
-.rightCol .custsignupToday{ background:#fff url(../images/shadow.png) no-repeat center bottom; padding:24px 20px; position:relative; overflow:hidden;}
-.rightCol .custsignupToday:before{ width:40px; height:40px; content:""; background:#000; position:absolute; top:-20px; left:-20px; 
+.rightCol .custsignupToday{ background:#fff url(../images/shadow.png) no-repeat center bottom; padding:24px 20px; position:relative; /*overflow:hidden;*/ }
+/*.rightCol .custsignupToday:before{ width:40px; height:40px; content:""; background:#000; position:absolute; top:-20px; left:-20px; 
     transform: rotate(45deg) ;
     -webkit-transform: rotate(45deg) ;
     -moz-transform: rotate(45deg) ;
@@ -1297,6 +1297,30 @@ width:100%; }
     -moz-transform: rotate(45deg) ;
     -o-transform: rotate(45deg) ;
     -ms-transform: rotate(45deg) ;
+}*/
+.rightCol .custsignupToday:before{
+	border-color: #000 transparent transparent #000 ;
+    border-style: solid;
+    border-width: 20px;
+    content: "";
+    font-size: 0;
+    height: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+}
+.rightCol .custsignupToday:after{
+	border-color: #000 #000 transparent transparent;
+    border-style: solid;
+    border-width: 20px;
+    content: "";
+    font-size: 0;
+    height: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 0;
 }
 .rightCol{ z-index:1;}
 .rightCol:after{ background:url(../images/lp_form_shadow.png) no-repeat center 0; content:""; width:645px; height:50px; position:absolute; bottom:-10px; z-index:-2; left:-46px;}
@@ -2834,11 +2858,19 @@ a.pinIcon:hover, a.pinIcon:focus, a.pinIcon:active {
       	width: 210px;
 	  }
 	  .pin-images-grp .imageHolder .item button.close_item{
-		  position:absolute;
-		  top:15px; right:22px; 
-		  border:0px;
-		  z-index:99;
-		  background:none;
+	background: rgba(255, 255, 255, 0.5);
+    border: 0 none;
+    border-radius: 25px;
+	-moz-border-radius: 25px;
+	-webkit-border-radius: 25px;
+    height: 25px;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    width: 25px;
+    z-index: 99;
+	color:#000;
+	font-size:12px;
 		  }
 		  .editName_Favorites .input-group-btn .btn{ padding:6px 12px !important; }
       /* line 15, D:/Abid/Works/Plugins/bizbook/HTML/pin/style.scss */
