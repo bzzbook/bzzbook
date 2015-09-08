@@ -721,7 +721,7 @@ $all_ids = array_unique($all_ids);
 					$userdata = array();
 					foreach($all_ids as $each_id)
 					{
-					 $test_condition ="(user_id ='" .$each_id. "' or friend_id ='".$each_id."') AND (user_id = '".$id."' or friend_id ='".$id."')  AND request_status!='Y' OR request_status!='W'" ;
+					 $test_condition ="(user_id ='" .$each_id. "' or friend_id ='".$each_id."') AND (user_id = '".$id."' or friend_id ='".$id."')  AND request_status ='Y' OR request_status = 'W'" ;
 						if($this->db->select('*')->from('bzz_userfriends')->where($test_condition)->get()->num_rows()>0)
 						{					
 						
