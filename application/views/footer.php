@@ -135,9 +135,16 @@ $(function () {
 <script src="<?php echo base_url(); ?>js/jquery.nanoscroller.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>js/chat.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>js/albumPreviews.js"></script>
+<script src="<?php echo base_url(); ?>js/slideUserOption.jquery.js" type="text/javascript"></script>
 <?php $this->load->view('footer_siva'); ?>
 <script>
-
+$(document).ready(function() {
+        $("#nextItemAnim").sliderUserOption({
+   itemWidth :200, 
+   mainWidth : '100%',
+   effect    : 'fadeRemove'
+   });
+    });
 $(function() {
 
 	// Initialize the plugin
@@ -913,6 +920,21 @@ function addFrnd(id)
         success: function(data)
         {   
 			$("#add_friends").html(data);
+		},
+		cache: false
+		});
+		
+}
+function addFrnd_two(id)
+{
+	$("#sidebar_addfrnd"+id).html('<img src="<?php echo base_url(); ?>images/addfrnd_loader.gif" />');
+		url="<?php echo base_url(); ?>friends/addFriend/"+id;
+		$.ajax({
+        type: "POST",
+        url: url,
+        success: function(data)
+        {   
+			$("#add_friends_two").html(data);
 		},
 		cache: false
 		});
@@ -6632,7 +6654,7 @@ function showOnlineFriends(){
   cache: false
   });
 }
-
+ 
 /*window.setInterval(function(){
   showOnlineFriends();
   get_unread_messages();

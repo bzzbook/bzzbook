@@ -846,7 +846,7 @@ $file_extension = end($temporary);
 
 
 if((($_FILES[$file_name]["type"][0] == "image/png") || ($_FILES[$file_name]["type"][0] == "image/jpg") || ($_FILES[$file_name]["type"][0] == "image/jpeg")
-) && ($_FILES[$file_name]["size"][0] < 1000000)//Approx. 100kb files can be uploaded.
+) && ($_FILES[$file_name]["size"][0] < 100000)//Approx. 100kb files can be uploaded.
 && in_array($file_extension, $validextensions)) {
 	
 if ($_FILES[$file_name]["error"][0] > 0)

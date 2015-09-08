@@ -154,6 +154,9 @@ header .search .input-group .input-group-btn ul li a:hover{ background:url(../im
 .midbody .coloumn3 aside .pendingRequest{ background: #f3f3f3 none repeat scroll 0 0; border: 1px solid #ececec; margin-top: 15px; padding: 10px 12px;}
 .midbody .coloumn3 aside h3{ font-size:15px; color:#737373; padding-bottom:15px;}
 .midbody .coloumn3 aside .pendingRequest ul li{ list-style:none; display:flex; padding-bottom:15px;}
+.midbody .coloumn3 aside .pendingRequest ul#add_friends li{ list-style:none; display:flex; padding-bottom:15px; float:left;}
+.midbody .coloumn3 aside .pendingRequest ul#add_friends li{ width:200px;}
+.midbody .coloumn3 aside .pendingRequest ul#add_friends li+li{ opacity:.5;}
 .midbody .coloumn3 aside .pendingRequest figure{ width:60px; height:60px; overflow:hidden;}
 .midbody .coloumn3 aside .pendingRequest figure img{width:60px; height:60px;}
 .midbody .coloumn3 aside .pendingRequest .disc{ padding-left:8px;}
@@ -3986,3 +3989,13 @@ JobsSearchLayout .jobSearchListing .applicant_job_search .optionBox {
 .fbfavphotobox {
     display: inline;
 }
+#nextItemAnim{ overflow:hidden; padding:10px; height:130px; height:200px; }
+.item{ border:1px solid #ccc; padding:10px; float:left; margin-right:10px; }
+.item+.item{ opacity:0.5; position:relative; }
+.item:after{ content:""; display:block; clear:both; }
+.item a.img{ width:60px; float:left; }
+.item .content{ width:140px; float:left; margin-left:10px; }
+.item .content a{ display:block; float:left; padding:0 4px; margin-right:2px; text-decoration:none; line-height:20px; border:1px solid #ccc; color:#696969; }
+.item .content a:hover{ text-decoration:none; }
+
+

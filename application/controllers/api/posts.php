@@ -475,7 +475,68 @@ function updatelikes($access_token,$pid,$uid){
 	$data = array('success'=> false,'result'=>'No likes data found');
 	echo json_encode($data);
 	exit(0);
-   }
 }
+
+public function post_comment_by_ajax($access_token)
+{
+	$user_res = $this->customermodel->get_user_id($access_token);	
+	$file_name = "uploadCommentPhotos".$_POST['post_id']; 
+	if(isset($_FILES[$file_name]["type"]) && !empty($_FILES[$file_name]["type"][0]))	
+	{	
+			$validextensions = array("jpeg", "jpg", "png");	
+			$filename = implode("",$_FILES[$file_name]["name"]);	
+			$temporary = explode(".",$filename);	
+			$file_extension = end($temporary);	
+			if((($_FILES[$file_name]["type"][0] == "image/png") || ($_FILES[$file_name]["type"][0] == "image/jpg") || ($_FILES[$file_name]["type"][0] == "image/jpeg")
+			) && ($_FILES[$file_name]["size"][0] < 100000)//Approx. 100kb files can be uploaded.
+				&& in_array($file_extension, $validextensions))
+			{	
+				if ($_FILES[$file_name]["error"][0] > 0)
+				{	
+				$output = array('success'=> false,'result'=>'Return Code: ' . $_FILES[$file_name]["error"][0] . '<br/><br/>');	
+				}
+				else
+				{	
+				$config['upload_path'] = DIR_FILE_PATH;
+				$sourcePath = $_FILES[$file_name]['tmp_name'][0]; // Storing source path of the file in a variable
+				//$targetPath = "F:\/xampp\/htdocs\/bzzbook\/uploads\/".$_FILES[$file_name]['name'][0];
+				$targetPath = $config['upload_path'].$_FILES[$file_name]['name'][0]; // Target path where file is to be stored
+				move_uploaded_file($sourcePath,$targetPath) ;	
+				$data=array(
+				'comment_content'=> $_POST['write_comment'],
+				'commented_on'=> $_POST['post_id'],
+				'commented_by'=> $_POST['posted_by'],
+				'uploadedfiles' => $filename
+				);	
+				//print_r($data);	
+				$res=$this->customermodel->write_comments($data);
+				$data['post_id'] = $_POST['post_id'];	
+				$output = array('success'=> true,'result'=>$data);
+				}
+			}
+			else
+			{
+				$output = array('success'=> false,'result'=>'Invalid file Size or Type');
+			}	
+	}
+	else if($_POST['write_comment'] != '')
+	{
+		$data_a=array(
+		'comment_content'=> $_POST['write_comment'],
+		'commented_on'=> $_POST['post_id'],
+		'commented_by'=> $_POST['posted_by'],
+		'uploadedfiles' => ''
+		);
+		$res=$this->customermodel->write_comments($data_a);	
+		$data_a['post_id'] = $_POST['post_id']; 
+		$output = array('success'=> true,'result'=>$data_a); 
+	}
+	echo json_encode($output);
+	exit(0); 
+}
+
+}
+
+
 
 ?>
