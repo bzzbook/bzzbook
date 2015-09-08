@@ -144,6 +144,8 @@ $(document).ready(function() {
    mainWidth : '100%',
    effect    : 'fadeRemove'
    });
+   
+  
     });
 $(function() {
 
@@ -921,27 +923,32 @@ function addFrnd(id)
         url: url,
         success: function(data)
         {   
-			$("#add_friends").html(data);
+			//$("#add_friends").html(data);
 		},
 		cache: false
 		});
 		
 }
-function addFrnd_two(id)
+function skipFrnd(id)
 {
+	/*alert('ssssss');
+	alert(id);*/
 	$("#sidebar_addfrnd"+id).html('<img src="<?php echo base_url(); ?>images/addfrnd_loader.gif" />');
-		url="<?php echo base_url(); ?>friends/addFriend/"+id;
+		url="<?php echo base_url(); ?>friends/skipFriend/"+id;
 		$.ajax({
         type: "POST",
         url: url,
         success: function(data)
         {   
-			$("#add_friends_two").html(data);
+		
+			//$("#add_friends").html(data);
+			
 		},
 		cache: false
 		});
 		
 }
+
 
 function addSearchFrnd(id)
 {

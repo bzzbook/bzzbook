@@ -166,11 +166,16 @@ header .search .input-group .input-group-btn ul li a:hover{ background:url(../im
 .midbody .coloumn3 aside .pendingRequest ul#add_friends li{ list-style:none; display:flex; padding-bottom:15px; float:left;}
 .midbody .coloumn3 aside .pendingRequest ul#add_friends li{ width:200px;}
 .midbody .coloumn3 aside .pendingRequest ul#add_friends li+li{ opacity:.5;}
+
+.midbody .coloumn3 aside .pendingRequest ul#add_friends_two li{ list-style:none; display:flex; padding-bottom:15px; float:left;}
+.midbody .coloumn3 aside .pendingRequest ul#add_friends_two li{ width:200px;}
+.midbody .coloumn3 aside .pendingRequest ul#add_friends_two li+li{ opacity:.5;}
+
 .midbody .coloumn3 aside .pendingRequest figure{ width:60px; height:60px; overflow:hidden;}
 .midbody .coloumn3 aside .pendingRequest figure img{width:60px; height:60px;}
 .midbody .coloumn3 aside .pendingRequest .disc{ padding-left:8px;}
 .midbody .coloumn3 aside .pendingRequest .disc h4{ color:#737373; font-size:15px; padding-bottom:15px;}
-.midbody .coloumn3 aside .pendingRequest .disc a{ display:inline-block; font-size:12px; color:#fff; background:/*#609b34*/#fbc436; height:30px; line-height:30px; padding:0 10px; -webkit-border-radius:2px; border-radius:2px;}
+.midbody .coloumn3 aside .pendingRequest .disc a{ display:inline-block; font-size:12px; color:#fff; background:#fbc436; height:30px; line-height:30px; padding:0 10px; -webkit-border-radius:2px; border-radius:2px;}
 .midbody .coloumn3 aside .pendingRequest .disc a+a{ background:#609b34; margin-left:3px;}
 .midbody .coloumn3 aside .pendingRequest .disc a+a+a{ background:#2f2f2f; margin-left:3px;}
 .midbody .coloumn3 aside .link{ color:#a7a7a7; font-size:14px; font-weight:400;}
@@ -4007,7 +4012,7 @@ JobsSearchLayout .jobSearchListing .applicant_job_search .optionBox {
 .midbody .coloumn3 aside .pendingRequest .disc .override_exist_styles{
   background: #f3f3f3 none repeat scroll 0 0;
     color: #737373;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 400;
     margin-bottom: -29px;
     margin-top: -10px;
@@ -4059,4 +4064,5 @@ JobsSearchLayout .jobSearchListing .applicant_job_search .optionBox {
 .pin-groupBlock .pin-groupBottom .pin-group-detail span.fav_board_controls{display:none;}
 .pin-groupBlock .pin-groupBottom .pin-group-detail:hover span.fav_board_controls{display:block;}
 
-
+.addfrd_accept{ color:#339; cursor:pointer; font-size:13px; text-decoration:underline; }
+.addfrd_skip{ color:#666; cursor:pointer; font-size:12px; text-decoration:underline; }

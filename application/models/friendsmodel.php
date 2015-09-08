@@ -253,7 +253,7 @@ class Friendsmodel extends CI_Model {
 	public function addFriend_Request($frnd_id)
 	{
 		$id = $this->session->userdata('logged_in')['account_id'];
-		$frndcondition =  "user_id =" . "'" . $id . "' AND (request_status!='Y' OR request_status!='W') AND friend_id =" . "'" . $frnd_id . "'" ;
+		$frndcondition =  "user_id =" . "'" . $id . "' AND (request_status!='Y' OR request_status!='W' ) AND friend_id =" . "'" . $frnd_id . "'" ;
 		$this->db->select('*');
 		$this->db->from('bzz_userfriends');
 		$this->db->where($frndcondition);
@@ -304,15 +304,30 @@ class Friendsmodel extends CI_Model {
               <figure><img src='".base_url()."uploads/".$image."' alt='".$req[0]['user_firstname']. " ".$req[0]['user_lastname']."'></figure>
               <div class='disc'>
                 <h4>".$req[0]['user_firstname']. " ".$req[0]['user_lastname']."</h4>
-                <div class='dcBtn'><a href='javascript:void(0);' onclick='addFrnd(".$req[0]['user_id'].")'>Add Friend</a> </div>
+                <span class='skip addfrd_accept' href='javascript:void(0);' onclick='addFrnd(".$req[0]['user_id'].")'>Add Friend</span> | <span class='skip addfrd_skip' onclick='skipFrnd(".$req[0]['user_id'].");'>Skip</span>
                 </div>
             </li>";
              
 			 
 			  } }else $list = "No Friends Found!..";
 			 
-			 echo $list;
+			// echo $list;
 		
+	}
+	public function skipFriend_Request($frnd_id)
+	{
+		$id = $this->session->userdata('logged_in')['account_id'];
+		
+			$condition = "user_id =" . "'" . $id . "' AND friend_id =".$frnd_id;		
+			$data = array(
+				'user_id' => $id,
+				'friend_id' => $frnd_id,
+               'request_status' => 'S',
+            );
+			$this->db->where($condition);
+			$this->db->insert('bzz_userfriends', $data); 
+	
+			
 	}
 	
 	// add friend functionality from search friends
@@ -713,17 +728,35 @@ if($key!==false){
   
   
 }
-
 $all_ids = array_unique($all_ids);
 
+$condition = "(user_id ='" .$id. "' or friend_id ='".$id."') AND (request_status='Y' OR request_status='W'  OR request_status='S'  OR request_status='B') ";
+	$this->db->select('friend_id,user_id');
+	$this->db->from('bzz_userfriends');
+	$this->db->where($condition);
+	$query = $this->db->get();
+	$friends = $query->result_array();
+	
+	$req_ids = array();
+	foreach($friends as $frd){		
+			$req_ids[] = $frd['user_id'];
+			$req_ids[] = $frd['friend_id'];		
+	}
+	$req_ids = array_unique($req_ids);
+	$real_ids = array();
+	foreach($all_ids as $fr_id){
+	if(!in_array($fr_id,$req_ids))
+	$real_ids[] = $fr_id;	
+	}
+	$all_ids = $real_ids;
+	
 	if($all_ids)
 				{
+
 					$userdata = array();
 					foreach($all_ids as $each_id)
 					{
-					 $test_condition ="(user_id ='" .$each_id. "' or friend_id ='".$each_id."') AND (user_id = '".$id."' or friend_id ='".$id."')  AND request_status ='Y' OR request_status = 'W'" ;
-						if($this->db->select('*')->from('bzz_userfriends')->where($test_condition)->get()->num_rows()>0)
-						{					
+									
 						
 									
 						 
@@ -753,9 +786,6 @@ $all_ids = array_unique($all_ids);
 						 }
 						  $userdata[] = $user_data;
 			
-					}
-					
-					
 					}
 					
 					

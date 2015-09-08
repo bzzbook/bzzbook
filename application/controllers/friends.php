@@ -43,7 +43,10 @@ public function addFriend($id)
 {
 	$data['result'] = $this->friendsmodel->addFriend_Request($id);	
 }
-
+public function skipFriend($id)
+{
+	$data['result'] = $this->friendsmodel->skipFriend_Request($id);	
+}
 
 public function addFriendFromSearch($id)
 {
