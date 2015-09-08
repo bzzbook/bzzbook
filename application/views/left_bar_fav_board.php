@@ -7,7 +7,7 @@ if($favorite_boards)
 	?>
  <div class="pendingRequest">
           <h3>Favourites Board</h3>
-          <ul id="add_friends">
+          <ul>
 <?php foreach($favorite_boards as $board) { 
 if($i == 4)
 break;

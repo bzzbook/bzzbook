@@ -905,6 +905,8 @@ function blockFrnd(id)
 
 function addFrnd(id)
 {
+	alert('ssssss');
+	alert(id);
 	$("#sidebar_addfrnd"+id).html('<img src="<?php echo base_url(); ?>images/addfrnd_loader.gif" />');
 		url="<?php echo base_url(); ?>friends/addFriend/"+id;
 		$.ajax({
