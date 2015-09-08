@@ -1281,9 +1281,9 @@ function view_more_comments(post_id){
 	
 	var last_comment_id = $('#res_comments'+post_id).children('div').last().attr('id').substr(16);
 	
+	//alert(last_comment_id);
 	//$comments_details = $this->customermodel->comments_data($row->post_id);
-	
-//alert(post_id);
+	//alert(post_id);
 	//alert(last_comment_id);
 	
 	url = "<?php echo base_url(); ?>signg_in/comments_data_viewmore/"+post_id+"/"+last_comment_id;
@@ -1814,6 +1814,62 @@ function playVideo(postid){
 $('#videoImage'+postid).hide();
 $('#videotag'+postid).attr('autoplay','autoplay');
 $('#videotag'+postid).show();
+}
+
+function del_fav_image(fav_id)
+{
+	
+	   if (confirm("Delete This photo from Favourites") == true) {
+	url="<?php echo base_url();?>customer/delete_favorite_pic/"+fav_id;
+	 $.ajax({
+		url: url,
+		success: function(html)
+		{   					
+			location.reload();
+		}
+		
+	   });
+       
+    } 
+	
+	
+
+}
+
+function edit_category_name(cat_id)
+{
+	
+	url="<?php echo base_url(); ?>customer/edit_cat_name/"+cat_id;
+		$.ajax({
+        url: url,
+		success: function(data)  
+        {  
+		if(data)
+		{
+		$('#edit_cat_disp').html('');
+		$('#edit_cat_disp').append(data);
+		}
+		},
+		cache: false
+		});
+	
+}
+
+function delete_savfav_category(cat_id)
+{
+	
+		url="<?php echo base_url(); ?>customer/delete_category/"+cat_id;
+		$.ajax({
+        url: url,
+		success: function(data)  
+        {  
+		if(data == false)
+		{
+		alert('You cannot delete A Faourite Board if it consisits Favourite photos');
+		}
+		},
+		cache: false
+		});
 }
 
     </script>

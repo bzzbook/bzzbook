@@ -12,14 +12,24 @@ $image = $this->profile_set->get_profile_pic();  ?>
 Back to boards</a></span>
                 </div>
                 <div class="pin-images-grp-inner">
-                    <span><?php echo $category_name; ?>(<?php echo count($favorites) ?>)</span>                   
+                
+                    <span><?php echo $category_name; ?> <?php if($favorites){ echo "(".count($favorites).")"; } ?></span>  
+                    <?php  if(!$favorites)
+					  
+							{
+							echo "<div>No Favourite photos Available!...</div>"; 
+							} ?>               
                 </div>
                 <div class="imageHolder" id="imgWaterfall">
                  
                       <?php $tot_imagesone = count($favorites); ?>
                    
-                      <?php foreach($favorites as $fav):  ?>
+                      <?php
+					  if($favorites)
+					   {
+						   foreach($favorites as $fav):  ?>
                         <div class="item">
+                        <button class="close_item" onclick="del_fav_image(<?php echo $fav['favorite_id']; ?>)"><i class="fa  fa-times"></i></button>
                             <div class="innerItem <?php if($fav['favorite_post_content']=='') echo 'noBorder'; ?>">
                             <?php $file1 = explode('.',$fav['favorite_image']); ?>
                             
@@ -31,7 +41,9 @@ Back to boards</a></span>
                                 
                             </div>
                         </div>
-                        <?php endforeach; ?>
+                        <?php endforeach; 
+					   }
+							?>
                      
                 </div>
             </div>

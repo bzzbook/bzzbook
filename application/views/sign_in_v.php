@@ -172,9 +172,9 @@ echo "</div>";
             name="password" id="password" placeholder="Password" >
           </div>
           <div class="field col-md-6 dob">
-            <div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2012-02-12" id="dateYears" 
+            <div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="2000-02-12" id="dateYears" 
             class="input-group-bt date">
-              <input type="text" name="dob" placeholder="dd-mm-yyyy" size="16" class="form-control" data-rule-required="true" data-msg-required="please enter your Birth date" >
+              <input type="text" name="dob" placeholder="" size="16" class="form-control" data-rule-required="true" data-msg-required="please enter your Birth date" >
               <span aria-hidden="true" class="add-on glyphicon glyphicon-calendar"></span> </div>
           </div>
           <!--<p>Why do I need to provide my birthday?</p> -->
@@ -294,15 +294,17 @@ echo "</div>";
 <!-- Include all compiled plugins (below), or include individual files as needed --> 
 <script src="<?php echo base_url(); ?>js/bootstrap.min.js"></script> 
 <script src="<?php echo base_url(); ?>js/animate-plus.min.js"></script> 
-<script src="<?php echo base_url(); ?>js/custom.js"></script>
+
 <script src="<?php echo base_url(); ?>js/jquery.validate.min.js"></script>
 <script src="<?php echo base_url(); ?>js/additional-methods.js"></script>
 <script src="<?php echo base_url(); ?>js/bootstrap-datepicker.js"></script>
+
 <script type="text/javascript">
 		$( document ).ready(function() {
 			$('#dateYears').datepicker();
 		});
 	</script>
+  <script src="<?php echo base_url(); ?>js/custom.js"></script>
 <script type="text/javascript">
 
 $('#sign_up').validate();

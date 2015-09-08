@@ -1852,7 +1852,30 @@ public function get_all_time_line_photos()
 	}
 
 }
+public function get_sav_fav_cat_data($cat_id)
+{
+	$this->db->select('*');
+	$this->db->where('category_id',$cat_id);
+	$query = $this->db->get('bzz_save_fav_categories');
+	if($query->num_rows() == 1)
+	{
+		return $query->result_array();
+	}else{
+		return false;
+	}
 
+}
 
+public function change_category_name_byid($data,$category_id)
+{
+	$this->db->where('category_id',$category_id);
+	if($this->db->update('bzz_save_fav_categories',$data))
+	{
+		return true;
+	}
+	return false;
+	
+	
+}
 }
 ?>

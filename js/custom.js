@@ -1,17 +1,12 @@
-
 $('.about-user-details .userPhotos .photoThumb figure img').centerImage(); 	
 $('.ProfileView .visitorBox .visitiBoxInner .profileLogo .cmplogo img').centerImage(); 	
 $('.myfriends .groupEditBlock figure img').centerImage(); 	
 $('.about-user-details .commentboxes .comment_imgbox img').centerImage(); 
 $('.curentUser .userImg img').centerImage();
 $('.fdblock .friendInfo .disc .dcBtn a').centerImage();
-
 // For comments pop
-function call_fbphotobox(){
-	
-	
-	//alert($(".fbphotobox img").html());
-	
+function call_fbphotobox(){	
+	//alert($(".fbphotobox img").html());	
 		$(".fbphotobox img").fbPhotoBox({
 			rightWidth: 360,
 			leftBgColor: "black",
@@ -26,8 +21,7 @@ function call_fbphotobox(){
 				);
 				$(".fbphotobox-image-content").html();
 			}
-		});
-	
+	});	
 }
 /*$(document).ready(function() {
 	

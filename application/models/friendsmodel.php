@@ -281,17 +281,35 @@ class Friendsmodel extends CI_Model {
 			
 			$frnd_req = $this->related_friends($limit = 2);
 			if(!$frnd_req)
-			$frnd_req = $this->friendsmodel->finding_friends($limit = 2);
+			$frnd_req = $this->finding_friends($limit = 2);
 			$list = "";
-		    if($frnd_req) { foreach($frnd_req as $req){
+		//	print_r($frnd_req);
+			//	print_r(count($frnd_req));
+		    if($frnd_req)
+			{
+				
+			
+			  foreach($frnd_req as $req){
+				 
+				if(!empty($req[0]['user_img_thumb']))
+				{
+					$image = $req[0]['user_img_thumb'];
+				}else
+				{
+						$image = 'default_profile_pic.png';
+				}
+				
+				 
            $list .= " <li>
-              <figure><img src='".base_url()."uploads/".$req[0]['user_img_thumb']."' alt='".$req[0]['user_firstname']. " ".$req[0]['user_lastname']."'></figure>
+              <figure><img src='".base_url()."uploads/".$image."' alt='".$req[0]['user_firstname']. " ".$req[0]['user_lastname']."'></figure>
               <div class='disc'>
                 <h4>".$req[0]['user_firstname']. " ".$req[0]['user_lastname']."</h4>
                 <div class='dcBtn'><a href='javascript:void(0);' onclick='addFrnd(".$req[0]['user_id'].")'>Add Friend</a> </div>
                 </div>
             </li>";
-             } }else $list = "No Friends Found!..";
+             
+			 
+			  } }else $list = "No Friends Found!..";
 			 
 			 echo $list;
 		
@@ -578,7 +596,9 @@ public function related_friends($limit)
 	$query = $this->db->get();
 	$friends = $query->result_array();
 	$elements = array();
-	// print_r($friends);
+	//$friends = array_unique($friends);
+
+	
 	$frnd_frnds = array();
 	 foreach($friends as $frnds)
 	 {
@@ -590,6 +610,10 @@ public function related_friends($limit)
 	    $frnd_frnds[] = $frnds['user_id'];
 		$frnd_frnds[] = $frnds['friend_id'];
 	 }
+	
+	 $frnd_frnds = array_unique($frnd_frnds);
+	//print_r($frnd_frnds);
+	//exit;
 	foreach($frnd_frnds as $frnd_frnd_id)
 	{
 	$condition = "(user_id ='" .$frnd_frnd_id. "' or friend_id ='".$frnd_frnd_id."') AND request_status='Y'";
@@ -605,6 +629,7 @@ public function related_friends($limit)
 		}
 	}
 
+//print_r($elements);
 //	
 	//my company followers
 	$companies = array();
@@ -665,21 +690,42 @@ foreach($usr_similar as $user)
 {
 	$elements[] = $user['user_id'];
 }
-}
-if(!empty($all_ids))
-{
-	$all_ids = array_unique($elements);
 
+if($elements)
+{
+/*	$all_ids = array_unique($elements);
+print_r($all_ids);
 $key = array_search($id,$all_ids);
 if($key!==false){
-  unset($all_ids[$key]);
+  unset($all_ids[$key]);*/
+  
+  
+  
+  	foreach($elements as $user)
+				{
+					if(!in_array($user,$frnd_frnds))
+					{
+						$all_ids[] = $user;
+					}
+					
+				}
+  
+  
+  
 }
+
+$all_ids = array_unique($all_ids);
+
 	if($all_ids)
 				{
 					$userdata = array();
 					foreach($all_ids as $each_id)
 					{
-										
+					 $test_condition ="(user_id ='" .$each_id. "' or friend_id ='".$each_id."') AND (user_id = '".$id."' or friend_id ='".$id."')  AND request_status ='Y' OR request_status = 'W'" ;
+						if($this->db->select('*')->from('bzz_userfriends')->where($test_condition)->get()->num_rows()>0)
+						{					
+						
+									
 						 
 						 $followercondition = "user_id ="."'".$each_id."'";
 						 $this->db->select('*');
@@ -708,6 +754,12 @@ if($key!==false){
 						  $userdata[] = $user_data;
 			
 					}
+					
+					
+					}
+					
+					
+					
 			return $userdata;
 				
 				}

@@ -846,7 +846,7 @@ $file_extension = end($temporary);
 
 
 if((($_FILES[$file_name]["type"][0] == "image/png") || ($_FILES[$file_name]["type"][0] == "image/jpg") || ($_FILES[$file_name]["type"][0] == "image/jpeg")
-) && ($_FILES[$file_name]["size"][0] < 100000)//Approx. 100kb files can be uploaded.
+) && ($_FILES[$file_name]["size"][0] < 1000000)//Approx. 100kb files can be uploaded.
 && in_array($file_extension, $validextensions)) {
 	
 if ($_FILES[$file_name]["error"][0] > 0)
@@ -1427,6 +1427,7 @@ public function get_all_favorites_by_cat_id($category_id)
 	$cat_result = $this->save_as_favorites_m->get_category_name($category_id);
  
 	  $favorites = array();
+	  if($data){
 		foreach($data as $result):
 		
 		$favorites_data['favorite_id'] = $result['favorite_id'];
@@ -1439,6 +1440,7 @@ public function get_all_favorites_by_cat_id($category_id)
 		$favorites[] = $favorites_data;
 		
 	endforeach;
+	  }
 	$data['category_name'] = $cat_result[0]['category_name'];
 	$data['content']='my_favorites_display';
 	//$data['favorites'] = json_encode($favorites);
@@ -1448,14 +1450,7 @@ public function get_all_favorites_by_cat_id($category_id)
 	
 	
 	$this->load->view('full_content_view',$data);
-//if( ! write_file('./data/favorites.json', $data['favorites']))
-//{
-//     echo 'Unable to write the file';
-//}
-//else
-//{
-//     echo 'File written!';
-//}
+
 	
 }
 	
