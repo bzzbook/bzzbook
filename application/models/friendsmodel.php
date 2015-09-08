@@ -578,7 +578,9 @@ public function related_friends($limit)
 	$query = $this->db->get();
 	$friends = $query->result_array();
 	$elements = array();
-	// print_r($friends);
+	//$friends = array_unique($friends);
+
+	
 	$frnd_frnds = array();
 	 foreach($friends as $frnds)
 	 {
@@ -590,6 +592,10 @@ public function related_friends($limit)
 	    $frnd_frnds[] = $frnds['user_id'];
 		$frnd_frnds[] = $frnds['friend_id'];
 	 }
+	
+	 $frnd_frnds = array_unique($frnd_frnds);
+	//print_r($frnd_frnds);
+	//exit;
 	foreach($frnd_frnds as $frnd_frnd_id)
 	{
 	$condition = "(user_id ='" .$frnd_frnd_id. "' or friend_id ='".$frnd_frnd_id."') AND request_status='Y'";
@@ -605,6 +611,7 @@ public function related_friends($limit)
 		}
 	}
 
+//print_r($elements);
 //	
 	//my company followers
 	$companies = array();
@@ -665,15 +672,32 @@ foreach($usr_similar as $user)
 {
 	$elements[] = $user['user_id'];
 }
-}
-if(!empty($all_ids))
-{
-	$all_ids = array_unique($elements);
 
+if($elements)
+{
+/*	$all_ids = array_unique($elements);
+print_r($all_ids);
 $key = array_search($id,$all_ids);
 if($key!==false){
-  unset($all_ids[$key]);
+  unset($all_ids[$key]);*/
+  
+  
+  
+  	foreach($elements as $user)
+				{
+					if(!in_array($user,$frnd_frnds))
+					{
+						$all_ids[] = $user;
+					}
+					
+				}
+  
+  
+  
 }
+
+$all_ids = array_unique($all_ids);
+
 	if($all_ids)
 				{
 					$userdata = array();
