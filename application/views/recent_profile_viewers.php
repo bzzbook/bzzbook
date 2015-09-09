@@ -8,7 +8,7 @@ if($visited_users)
  
  <div class="pendingRequest">
           <h3>Recent Viewers</h3>
-          <ul id="add_friends">
+          <ul>
           <?php if($visited_users) { foreach($visited_users as $req){ 
 		  if($req[0]['user_id'] != $this->session->userdata('logged_in')['account_id'])
 		  {

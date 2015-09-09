@@ -767,19 +767,20 @@ $condition = "(user_id ='" .$id. "' or friend_id ='".$id."') AND (request_status
 						 $query = $this->db->get();
 						 if($query->num_rows > 0)
 						 {
-								$this->db->select('*');
+								$this->db->select('*,bzz_users.user_id');
 								$this->db->from('bzz_users');
-								$this->db->join('bzz_user_images','bzz_users.user_id=bzz_user_images.user_id AND bzz_users.user_id='.$each_id);								$this->db->join('bzz_userinfo','bzz_users.user_id=bzz_userinfo.user_id');
+								$this->db->join('bzz_user_images','bzz_users.user_id=bzz_user_images.user_id AND bzz_users.user_id='.$each_id);						$this->db->join('bzz_userinfo','bzz_users.user_id=bzz_userinfo.user_id');
+								$this->db->join('bzz_organizationinfo',"bzz_users.user_id=bzz_organizationinfo.user_id AND emp_status='wor'",'left');
 								$this->db->order_by('bzz_user_images.user_imageinfo_id','desc');
 								
 								$query = $this->db->get();
 								 $user_data =  $query->result_array();
 								
 						 }else{
-							  $this->db->select('*');
+							  $this->db->select('*,bzz_users.user_id');
 							  
 							  $this->db->from('bzz_users');
-							  $this->db->join('bzz_userinfo','bzz_users.user_id=bzz_userinfo.user_id AND bzz_users.user_id='.$each_id);
+							  $this->db->join('bzz_userinfo','bzz_users.user_id=bzz_userinfo.user_id AND bzz_users.user_id='.$each_id);							 $this->db->join('bzz_organizationinfo',"bzz_users.user_id=bzz_organizationinfo.user_id AND emp_status='wor'",'left');
 							 // $this->db->where($followercondition);
 							  $query = $this->db->get(); 
 							   $user_data =  $query->result_array();
