@@ -144,7 +144,7 @@ $(document).ready(function() {
    mainWidth : '100%',
    effect    : 'fadeRemove'
    });
-   
+  
   
     });
 $(function() {
@@ -870,8 +870,8 @@ function acceptFrnd(id)
         url: url,
         success: function(data)
         {   
-			$("#pendingReqUl").html(data);
-			location.reload();
+			//$("#pendingReqUl").html(data);
+			//location.reload();
 		},
 		cache: false
 		});
@@ -887,8 +887,8 @@ function denyFrnd(id)
         url: url,
         success: function(data)
         {   
-			$("#pendingReqUl").html(data);
-			location.reload();
+			//$("#pendingReqUl").html(data);
+			//location.reload();
 		},
 		cache: false
 		});
@@ -904,8 +904,8 @@ function blockFrnd(id)
         url: url,
         success: function(data)
         {   
-			$("#pendingReqUl").html(data);
-			location.reload();
+			//$("#pendingReqUl").html(data);
+			//location.reload();
 		},
 		cache: false
 		});
@@ -924,6 +924,9 @@ function addFrnd(id)
         success: function(data)
         {   
 			//$("#add_friends").html(data);
+			
+			if(data==0)
+			$('#friendSugBox').hide();
 		},
 		cache: false
 		});
@@ -940,13 +943,13 @@ function skipFrnd(id)
         url: url,
         success: function(data)
         {   
-		
-			//$("#add_friends").html(data);
+			
+			if(data==0)
+			$('#friendSugBox').hide();
 			
 		},
 		cache: false
 		});
-		
 }
 
 
@@ -6506,7 +6509,7 @@ function updateGoingStatus(event_id,status)
 
 <?php $this->load->view('profile_models'); ?>
 
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+<script src="<?php echo base_url(); ?>js/googlemapsapiv3.js"></script>
 
 <script>
  

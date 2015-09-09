@@ -312,6 +312,8 @@ class Friendsmodel extends CI_Model {
 			  } }else $list = "No Friends Found!..";
 			 
 			// echo $list;
+			if(empty($frnd_req))
+			echo '0';
 		
 	}
 	public function skipFriend_Request($frnd_id)
@@ -326,7 +328,9 @@ class Friendsmodel extends CI_Model {
             );
 			$this->db->where($condition);
 			$this->db->insert('bzz_userfriends', $data); 
-	
+			$rel_res = $this->related_friends('');
+			if(empty($rel_res))
+			echo '0';
 			
 	}
 	

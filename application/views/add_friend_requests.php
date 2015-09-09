@@ -17,7 +17,7 @@ if(count($add_frnd_reqs)>0){
  
  <div id="friendSugBox" class="pendingRequest">
           <h3>Add Friends </h3>
-          <div class="" id="nextItemAnim">
+          <div class="addFriend-ul-container" id="nextItemAnim">
           <ul id="add_friends" class="itemControl">
           <?php if(isset($first_list) && $first_list) {
 			 
@@ -27,8 +27,8 @@ if(count($add_frnd_reqs)>0){
             <li>
               <figure><a href="<?php echo base_url('profile/user/'.$req[0]['user_id']); ?>" ><img src="<?php if(!empty($req[0]['user_img_thumb'])) { echo base_url().'uploads/'.$req[0]['user_img_thumb']; }else echo base_url().'uploads/default_profile_pic.png'; ?>" alt="<?php echo $req[0]['user_firstname'] . " " .$req[0]['user_lastname']; ?>"></a></figure>
               <div class="disc">
-                <h4><a  class="override_exist_styles" href="<?php echo base_url('profile/user/'.$req[0]['user_id']); ?>" ><?php  $name = $req[0]['user_firstname'] . " " .$req[0]['user_lastname']; echo character_limiter($name, 10); ?></a></h4>
-                <h4><?php if($req[0]['org_name']!='' && $req[0]['position']!=''){ echo character_limiter($req[0]['position'].' at '.$req[0]['org_name'],20);}else{ echo '--'; }  ?></h4>
+                <h4><a  class="override_exist_styles" href="<?php echo base_url('profile/user/'.$req[0]['user_id']); ?>" ><?php  $name = $req[0]['user_firstname'] . " " .$req[0]['user_lastname']; echo substr($name,0,12);if(strlen($name)>12) echo '...'; ?></a></h4>
+                <h4><?php if(isset($req[0]['org_name']) && isset($req[0]['position']) && $req[0]['org_name']!='' && $req[0]['position']!=''){ echo substr($req[0]['position'].' at '.$req[0]['org_name'],0,20); if(strlen($req[0]['position'].' at '.$req[0]['org_name'])>20) echo '...';}else{ echo '--'; }  ?></h4>
                 <div class="dcBtn"><a  class='skip addfrd_accept' id="sidebar_addfrnd<?php echo $req[0]['user_id']; ?>" href="javascript:void(0);" onclick="addFrnd(<?php echo $req[0]['user_id']; ?>);">Add</a>
                 <a class="skip addfrd_skip" onclick="skipFrnd(<?php echo $req[0]['user_id']; ?>);">Skip</a></div>
                 </div>
@@ -55,8 +55,8 @@ if(count($add_frnd_reqs)>0){
             <li>
               <figure><a href="<?php echo base_url('profile/user/'.$req[0]['user_id']); ?>" ><img src="<?php if(!empty($req[0]['user_img_thumb'])) { echo base_url().'uploads/'.$req[0]['user_img_thumb']; }else echo base_url().'uploads/default_profile_pic.png'; ?>" alt="<?php echo $req[0]['user_firstname'] . " " .$req[0]['user_lastname']; ?>"></a></figure>
               <div class="disc">
-                <h4><a  class="override_exist_styles" href="<?php echo base_url('profile/user/'.$req[0]['user_id']); ?>" ><?php  $name = $req[0]['user_firstname'] . " " .$req[0]['user_lastname']; echo character_limiter($name, 10); ?></a></h4>
-                 <h4><?php if($req[0]['org_name']!='' && $req[0]['position']!=''){ echo character_limiter($req[0]['position'].' at '.$req[0]['org_name'],20);}else{ echo '--'; }  ?></h4>
+                <h4><a  class="override_exist_styles" href="<?php echo base_url('profile/user/'.$req[0]['user_id']); ?>" ><?php  $name = $req[0]['user_firstname'] . " " .$req[0]['user_lastname']; echo substr($name,0,12); if(strlen($name)>12) echo '...'; ?></a></h4>
+                 <h4><?php if($req[0]['org_name']!='' && $req[0]['position']!=''){ echo substr($req[0]['position'].' at '.$req[0]['org_name'],0,20); if(strlen($req[0]['position'].' at '.$req[0]['org_name'])>20) echo '...';}else{ echo '--'; }  ?></h4>
                 <div class="dcBtn"><a class='skip addfrd_accept' id="sidebar_addfrnd<?php echo $req[0]['user_id']; ?>" href="javascript:void(0);" onclick="addFrnd(<?php echo $req[0]['user_id']; ?>);">Add</a><a class="skip addfrd_skip" onclick="skipFrnd(<?php echo $req[0]['user_id']; ?>);">Skip</a></div>
                 </div>
             </li>
