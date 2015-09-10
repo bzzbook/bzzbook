@@ -155,7 +155,11 @@ public function hide_a_job()
 		$this->db->insert('bzz_hidden_jobs',$insert_data);
 		
 	}
-	
+	$jobs = $this->jobmodel->get_jobs_by_industries();
+	if($jobs)
+	echo count($jobs);
+	else
+	echo 0;
 	
 }
   

@@ -1,3 +1,7 @@
+<?php 
+$industry= $this->lookup->get_lookup_industry();
+$jobtype  = $this->lookup->get_lookup_jobtype();
+?>
 <div class="col-md-9">
             <div class="JobsSearchLayout">
                 <h2 class="mainHead"><span class="pull-left" style="margin-top:7px;">Jobs</span> 

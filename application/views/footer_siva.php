@@ -1540,6 +1540,24 @@ var job_id = $(this).attr('id').substr(8);
 	   	
 
 });
+function hideJobSug(job_id) {
+
+  url="<?php echo base_url();?>jobs/hide_a_job/";
+	 $.ajax({
+		data : { job_id :  job_id},
+		url: url,
+		type: "POST",
+		success: function(data)
+		{   
+		$('#jobsInner'+job_id).remove();
+		if(data==0)
+		$('#notFoundSug').html('No suggestion found..');
+		}
+		
+	   });
+}
+	   	
+
 
 $('.searchBlock .overlayBlock a').click(function () {
 

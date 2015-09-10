@@ -42,6 +42,9 @@
         <?php echo form_close(); ?>
         <div class="clear"></div>
       </div>
+      
+      <?php $this->load->view('auto_job_suggestions'); ?>
+      
      <div class="posts" id="posts_content_div">
 	<?php  $data['products'] = $this->customermodel->All_Posts($user_id);
 		   $data['image'] = $image;
