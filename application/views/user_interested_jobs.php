@@ -91,8 +91,42 @@ $jobs = $this->jobmodel->get_jobs_by_industries();
 
                 <div class="advancedSearchControl"><span>Advanced Search <i class="fa fa-angle-double-down"></i></span></div>
             </div>
+            <?php 
+
+$jobs = $this->jobmodel->get_jobs_by_industries();
+//print_r($jobs);
+if($jobs):
+?>
+        <div class="col-md-12 jobUrIntrested">   
+        	<h3>Jobs you may be interested in</h3>
+            <span id="notFoundSug"></span>
+             <?php 
+			 	
+                foreach($jobs as $job)
+                { 
+				
+				?>
+        	<div id="jobsInner<?php echo $job['job_id'];?>" class="col-md-3">
+            	<div class="jobsInner" >
+                <a href="javascript:void(0);" onclick="hideJobSug(<?php echo $job['job_id'];?>);" id="job_list<?php echo $job['job_id'];?>"  class="fa fa-close"></a>
+                	<figure>
+                    	<img src="<?php echo base_url();?>uploads/<?php if(!empty($job['company_image'])) echo $job['company_image']; else echo 'default_profile_pic.png'?>" width="67" height="87"  alt=""/>
+                    </figure>
+                    <h3><?php if(strlen($job['job_title'])>15) echo substr($job['job_title'],0,15).'..'; else echo $job['job_title']; ?></h3>
+                    <p><?php if(strlen($job['cmp_name'])>15) echo substr($job['cmp_name'],0,15).'..'; else echo $job['cmp_name']; ?></p>
+					<a href="<?php echo base_url().'jobs/job_description/'.$job['job_id'].'/'.$job['companyinfo_id']; ?>" class="btns btns-green">View Job</a>
+                </div>
+          </div>
+          <?php  } ?>
+         
+                     <div class="clearfix"></div>
+             <a href="<?php echo base_url().'profile/jobs';?>" class="pull-right seeMore">See More jobs  <i class="fa fa-caret-right"></i></a> 
+                          <div class="clearfix"></div>
         </div>
-        <?php 
+        <?php endif; ?>
+<div class="clearfix"></div>
+        </div>
+       <?php /*?> <?php 
 		$jobs = $this->jobmodel->get_jobs_by_industries();
 		//print_r($jobs);
 		if(!empty($jobs)) { ?>
@@ -133,4 +167,5 @@ $jobs = $this->jobmodel->get_jobs_by_industries();
                 <div class="clearfix"></div>
             </div>
         </div>
-        <?php } ?>
+        <?php } ?><?php */?>
+		
