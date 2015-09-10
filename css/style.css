@@ -164,7 +164,7 @@ header .search .input-group .input-group-btn ul li a:hover{ background:url(../im
 .midbody .coloumn3 aside h3{ font-size:15px; color:#737373; padding-bottom:15px;}
 .midbody .coloumn3 aside .pendingRequest ul li{ list-style:none; display:flex; padding-bottom:15px;}
 .midbody .coloumn3 aside .pendingRequest ul#pendingReqUl li{ list-style:none; display:flex; padding-bottom:15px; float:left;}
-.midbody .coloumn3 aside .pendingRequest ul#pendingReqUl li{ width:233px;}
+.midbody .coloumn3 aside .pendingRequest ul#pendingReqUl li{ width:240px;}
 .midbody .coloumn3 aside .pendingRequest ul#pendingReqUl li+li{ opacity:.5;}
 
 .midbody .coloumn3 aside .pendingRequest ul#add_friends li{ list-style:none; display:flex; padding-bottom:15px; float:left;}
@@ -4055,7 +4055,7 @@ JobsSearchLayout .jobSearchListing .applicant_job_search .optionBox {
 
 #nextItemAnim{ overflow:hidden; padding:10px; }
 .addFriend-ul-container{ height:175px; }
-.pendFrnd-ul-container{ height:90px; }
+.pendFrnd-ul-container{ height:75px; }
 .item{ border:1px solid #ccc; padding:10px; float:left; margin-right:10px; }
 .item+.item{ opacity:0.5; position:relative; }
 .item:after{ content:""; display:block; clear:both; }

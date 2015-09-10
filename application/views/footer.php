@@ -144,7 +144,11 @@ $(document).ready(function() {
    mainWidth : '100%',
    effect    : 'fadeRemove'
    });
-  
+  $("#pendFrnd-nextItemAnim").sliderUserOption({
+   itemWidth :200, 
+   mainWidth : '100%',
+   effect    : 'fadeRemove'
+   });
   
     });
 $(function() {

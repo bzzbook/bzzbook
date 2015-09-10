@@ -8,7 +8,7 @@ if($frnd_reqs)
  
  <div class="pendingRequest">
           <h3>Pending Friend Requests </h3>
-          <div id="nextItemAnim" class="pendFrnd-ul-container">
+          <div id="pendFrnd-nextItemAnim" class="pendFrnd-ul-container">
           <ul id="pendingReqUl"  class="itemControl">
           <?php if($frnd_reqs) { foreach($frnd_reqs as $req){ ?>
             <li>
