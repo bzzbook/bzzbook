@@ -20,6 +20,7 @@ if($cmp_reqs) {
               <figure><a href="<?php echo base_url("company/company_disp/".$req['companyinfo_id']); ?>"><img src="<?php echo base_url()?>uploads/<?php echo $req['company_image'] ?>" alt="<?php echo base_url()?>uploads/<?php echo $req['company_image'] ?>"></a></figure>
               <div class="disc">
               <h4><a class="override_exist_styles" href="<?php echo base_url("company/company_disp/".$req['companyinfo_id']); ?>"><?php echo character_limiter($req['cmp_name'], 15); ?></a></h4>
+              <h4>(<?php $followers = $this->companies->get_cmp_followers($req['companyinfo_id']); if($followers) echo count($followers); else echo 0; ?> followers)</h4>
                 <div class="dcBtn"><a href="<?php echo base_url("company/company_disp/".$req['companyinfo_id']); ?>"> View </a>
                   <a href="javascript:void(0);" id="sidebar_follow<?php echo $req['companyinfo_id']; ?>" onclick="cmpFollow(<?php echo $req['companyinfo_id']; ?>);"> Follow </a>
               <!--  <a href="javascript:void(0);"  onclick="cmpFollow(<?php //echo $req['companyinfo_id']; ?>);"> Follow </a>

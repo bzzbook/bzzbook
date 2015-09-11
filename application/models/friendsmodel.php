@@ -122,9 +122,10 @@ class Friendsmodel extends CI_Model {
 			$frnds = array();
 			foreach($friends as $friend)
 			{				
-			    $condition = "user_id =" . "'" . $friend['user_id'] . "'";
+			    $condition = "bzz_userinfo.user_id =" . "'" . $friend['user_id'] . "'";
 				$this->db->select('*');
 				$this->db->from('bzz_userinfo');
+				$this->db->join('bzz_organizationinfo',"bzz_organizationinfo.user_id=bzz_userinfo.user_id AND emp_status='wor'",'left');
 				$this->db->where($condition);
 				$query = $this->db->get();
 				$frnd = array();
@@ -132,8 +133,11 @@ class Friendsmodel extends CI_Model {
 				if ($query->num_rows() == 1) {
 					$result = $query->result_array();	
 					$frnd['name'] = $result[0]['user_firstname'].' '.$result[0]['user_lastname'];
+					if(isset($result[0]['org_name']) && isset($result[0]['position']) && $result[0]['org_name']!='' && $result[0]['position']!='')
+					$frnd['job'] = $result[0]['position'].' at '.$result[0]['org_name'];
 				
 				}
+				 $condition = "user_id =" . "'" . $friend['user_id'] . "'";
 				$this->db->select('*');
 				$this->db->from('bzz_user_images');
 				$this->db->where($condition);

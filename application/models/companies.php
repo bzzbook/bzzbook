@@ -753,6 +753,19 @@ public function all_cmp_names_search($keyword)
 	}else
 	return false;
 }
+public function get_cmp_followers($id)
+{
+	$condition = "companyinfo_id =" . "'" . $id . "' AND follow_status = 'Y'";  
+	$this->db->select('user_id');
+	$this->db->from('bzz_cmp_follow');
+	$this->db->where($condition);
+	$query = $this->db->get();
+	$cmp_followers = $query->result_array();
+	if($cmp_followers)
+	return count($cmp_followers);
+	else
+	return false;
+}
 }
 
 ?>

@@ -1,1 +1,1 @@
-      <div class="ad"><img src="<?php echo base_url(); ?>images/ad1.png"></div>
+      <div class="ad"><img src="<?php echo base_url(); ?>images/ad3.jpg"></div>
