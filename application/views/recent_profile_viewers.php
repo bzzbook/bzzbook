@@ -16,8 +16,10 @@ if($visited_users)
 		  ?>
             <li>
               <figure><a href="<?php echo base_url('profile/user/'.$req[0]['user_id']); ?>" ><img src="<?php if(!empty($req[0]['user_img_thumb'])) { echo base_url().'uploads/'.$req[0]['user_img_thumb']; }else echo base_url().'uploads/default_profile_pic.png'; ?>" alt="<?php echo $req[0]['user_firstname'] . " " .$req[0]['user_lastname']; ?>"></a></figure>
+              
               <div class="disc">
                 <h4 style="font-size:13px !important; font-weight:400 !important"><a class="override_exist_styles" href="<?php echo base_url('profile/user/'.$req[0]['user_id']); ?>" ><?php  $name = $req[0]['user_firstname'] . " " .$req[0]['user_lastname']; echo character_limiter($name, 10); ?></a></h4>
+                 <h4><?php if(isset($req[0]['org_name']) && isset($req[0]['position']) && $req[0]['org_name']!='' && $req[0]['position']!=''){ echo substr($req[0]['position'].' at '.$req[0]['org_name'],0,20); if(strlen($req[0]['position'].' at '.$req[0]['org_name'])>20) echo '...';}else{ ?> ( <?php $friendscount = $this->friendsmodel->get_frnds_frnds($req[0]['user_id']); if($friendscount) echo count($friendscount); else echo '0' ;?> friends)<?php }  ?></h4>
                 
                 
                    <?php 

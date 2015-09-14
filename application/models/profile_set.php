@@ -1654,6 +1654,7 @@ public function visited_users($user_id='')
 							$this->db->from('bzz_users');
 							$this->db->join('bzz_user_images','bzz_users.user_id=bzz_user_images.user_id AND bzz_users.user_id='.$user_id['visited_user_id']);
 							$this->db->join('bzz_userinfo','bzz_users.user_id=bzz_userinfo.user_id');
+							$this->db->join('bzz_organizationinfo',"bzz_organizationinfo.user_id=bzz_userinfo.user_id AND emp_status='wor'",'left');
 							$this->db->order_by('bzz_user_images.user_imageinfo_id','desc');
 							$query = $this->db->get();
 							$user_data =  $query->result_array();
@@ -1662,7 +1663,8 @@ public function visited_users($user_id='')
 							  $this->db->select('*');
 							// $this->db->limit(2);
 							  $this->db->from('bzz_users');
-							  $this->db->join('bzz_userinfo','bzz_users.user_id=bzz_userinfo.user_id AND bzz_users.user_id='.$user_id['visited_user_id']);
+							  $this->db->join('bzz_userinfo','bzz_users.user_id=bzz_userinfo.user_id AND bzz_users.user_id='.$user_id['visited_user_id']);	
+							  $this->db->join('bzz_organizationinfo',"bzz_organizationinfo.user_id=bzz_userinfo.user_id AND emp_status='wor'",'left');
 							 // $this->db->where($followercondition);
 							  $query = $this->db->get(); 
 							   $user_data =  $query->result_array();
