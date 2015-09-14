@@ -94,7 +94,7 @@ $profiledata = $this->customermodel->profiledata($id);
                    
                     </div>
                 </div>
-                <?php } }  else if(isset($timeline_pics)){  foreach($timeline_pics as $image){ $fileimage = $image['image_thumb']; ?>
+                <?php } }  else if(isset($timeline_pics)){   foreach($timeline_pics as $image){ $fileimage = $image['image_thumb']; ?>
                 <div class="fbphotobox photoThumb col-md-3" id="fbphotobox-all">
                 	<?php /*?><a href="<?php  echo base_url();?>uploads/<?php echo $image['image_thumb']; ?>" class="mpView" data-lightbox="example-1" data-lightbox="my_photos"><img src="<?php echo base_url(); ?>images/mp_view.png" alt=""></a><?php */?>
                     <?php 

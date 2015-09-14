@@ -3864,7 +3864,7 @@ a.pinIcon:hover, a.pinIcon:focus, a.pinIcon:active {
     width: 100%;
     z-index: 99;
 }    /* line 6, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
-    .crop_set_preview .pin-categories-pinit .pinBoard {
+    .crop_set_preview .pin-categories-pinit .pinBoard { margin-top:3px;
     /*  height: 100px; */ }
       /* line 8, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
       .crop_set_preview .pin-categories-pinit .pinBoard h3 {
@@ -3874,7 +3874,7 @@ a.pinIcon:hover, a.pinIcon:focus, a.pinIcon:active {
       .crop_set_preview .pin-categories-pinit .pinBoard label {
         font-family: 'Roboto', sans-serif;
         font-weight: 400;
-        padding: 5px;
+        
        /* line-height: 35px; */
         border: 1px solid #c2c2c2;
         display: block; }
@@ -3882,12 +3882,13 @@ a.pinIcon:hover, a.pinIcon:focus, a.pinIcon:active {
         .crop_set_preview .pin-categories-pinit .pinBoard label i {
           width: 25px;
           text-align: center;
-          color: #c2c2c2;
+          color: #7BB0DC;padding-bottom: 5px;
+    padding-top: 4.5px; background:#fff;
           font-size: 18px; }
         /* line 16, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
         .crop_set_preview .pin-categories-pinit .pinBoard label input {
           border: none;
-          width: calc(100% - 25px); }
+          width: calc(100% - 25px); line-height:28px; }
     /* line 20, D:/Abid/Works/Plugins/bizbook/HTML/popover/style.scss */
     .crop_set_preview .pin-categories-pinit .CreateBoard a {
       display: block;
@@ -4012,8 +4013,9 @@ JobsSearchLayout .jobSearchListing .applicant_job_search .optionBox {
     margin-right: 5px;
 }
 .get_albums_box {
-    margin-top: -25px;
-    width: 0 !important;
+    margin-top: -10px;
+	width:335px;
+   
 }
 [contentEditable=true]:empty:not(:focus):before{
         content:attr(data-text)

@@ -59,16 +59,12 @@ $profiledata = $this->customermodel->profiledata($id);
 <form class="uploadform" method="post" enctype="multipart/form-data" action="<?php echo base_url(); ?>signg_in/save_albums" name="photo">	
 	<div class="crop_set_upload">
 		<div class="crop_upload_label">Upload files: </div>
-		<div class="crop_select_image"><div class="file_browser"><input type="file" name="imagefile[]" id="imagefile" class="hide_broswe" multiple="multiple" /></div></div>
-		<div class="crop_select_image"><input type="submit" value="Upload" class="upload_button" name="submitbtn" id="myphotos_submitbtn" /></div><div id="loadingimage" style="padding-top:15px;"></div>
-	</div>
-		<input type="hidden" id="album_id" value="" name="album_id" style="border:none;"/>
-		<div class="crop_set_preview get_albums_box" style="display:block;">
+        <div class="get_albums_box crop_set_preview" style="display:block;">
 				
                    
             <div class="pin-categories-pinit">
                         <div class="pinBoard">
-           <label for"search"><i class="fa fa-search"></i><input type="text" id="album_search"  onkeyup="existed_album_search(this.value);" placeholder="Search Albums" /></label> 
+           <label for"search"><input type="text" id="album_search"  onkeyup="existed_album_search(this.value);" placeholder="  Create or Search Albums" /><i class="fa fa-search"></i></label> 
            </div>
              <div class="clearfix"></div>
                 <div class="user-option-block" id="albums">
@@ -79,6 +75,11 @@ $profiledata = $this->customermodel->profiledata($id);
            </div>
             <div class="clearfix"></div>
 		</div>
+		<div class="crop_select_image"><div class="file_browser"><input type="file" name="imagefile[]" id="imagefile" class="hide_broswe" multiple="multiple" onchange="this.form.submit();" /></div></div>
+		<!--<div class="crop_select_image"><input type="submit" value="Upload" class="upload_button" name="submitbtn" id="myphotos_submitbtn" /></div>--><div id="loadingimage" style="padding-top:15px;"></div>
+	</div>
+		<input type="hidden" id="album_id" value="" name="album_id" style="border:none;"/>
+		
         
         </form>	
        <div class="clearfix"></div>

@@ -2,7 +2,7 @@
 
 class posts extends CI_Controller {
 	 
-	  public function __construct() {
+	public function __construct() {
 		header("Access-Control-Allow-Origin: *");
 		header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Access-Control-Allow-Origin");
 		header("Access-Control-Allow-Methods: PUT, GET, POST, DELETE, OPTIONS");
