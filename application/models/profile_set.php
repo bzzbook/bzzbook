@@ -1650,7 +1650,7 @@ public function visited_users($user_id='')
 						 $query = $this->db->get();
 						 if($query->num_rows > 0)
 						 {
-							$this->db->select('*');
+							$this->db->select('*,bzz_users.user_id');
 							$this->db->from('bzz_users');
 							$this->db->join('bzz_user_images','bzz_users.user_id=bzz_user_images.user_id AND bzz_users.user_id='.$user_id['visited_user_id']);
 							$this->db->join('bzz_userinfo','bzz_users.user_id=bzz_userinfo.user_id');
@@ -1660,7 +1660,7 @@ public function visited_users($user_id='')
 							$user_data =  $query->result_array();
 							
 						 }else{
-							  $this->db->select('*');
+							  $this->db->select('*,bzz_users.user_id');
 							// $this->db->limit(2);
 							  $this->db->from('bzz_users');
 							  $this->db->join('bzz_userinfo','bzz_users.user_id=bzz_userinfo.user_id AND bzz_users.user_id='.$user_id['visited_user_id']);	
