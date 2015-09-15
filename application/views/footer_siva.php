@@ -1590,7 +1590,7 @@ $('#advanced_job_search').click(function()
 
 </script>
  <script type="text/javascript">
-$(function() {
+/*$(function() {
     // init carousel
     $('.carousel').carousel({
         pause: true,        // init without autoplay (optional)
@@ -1599,7 +1599,7 @@ $(function() {
     });
     // init carousels with hidden left control:
     $('.carousel').children('.left.carousel-control').hide();
-});
+});*/
 
 // execute function after sliding:
 $('.carousel').on('slid.bs.carousel', function () {

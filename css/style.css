@@ -108,7 +108,7 @@ header .search .input-group .input-group-btn ul li a:hover{ background:url(../im
 .midbody .coloumn1 .joinMailList p{ font-size:12px; font-weight:300; padding-bottom:8px; position:relative; }
 .midbody .coloumn1 .joinMailList p:after{background:url(../images/jml_icon.png) no-repeat 0 0; content:""; width:48px; height:43px; top:-28px; position:absolute;}
 .midbody .coloumn1 .joinMailList .form-control{-webkit-border-radius:2px; border-radius:2px; font-size:12px; font-weight:300;}
-.midbody .coloumn1 .joinMailList .submit{ background:#fcc434; border:none; height:35px; line-height:35px; padding:0 20px; -webkit-border-radius:2px; border-radius:2px; color:#fff; margin-top:10px;}
+.midbody .coloumn1 .joinMailList .submit{ background:#fcc434; border:none; height:30px; line-height:30px; padding:0 14px; margin-left:72%; -webkit-border-radius:2px; border-radius:2px; color:#fff; margin-top:10px;}
 .midbody ad{ padding-bottom:24px;}
 .midbody ad img{ width:100%;}
 
@@ -122,7 +122,7 @@ header .search .input-group .input-group-btn ul li a:hover{ background:url(../im
 .midbody .coloumn2 .updateStatus ul li:nth-child(4) a{ background:url(../images/update_status_icon3.png) no-repeat 25px center;}
 .midbody .coloumn2 .updateStatus textarea{ border:none; box-shadow:none; background:#f9f8f8; font-size:12px; font-weight:300; resize:none;}
 .midbody .coloumn2 .updateStatus .updateControls{ background:#e8e8e8; padding:5px; display:none;}
-.midbody .coloumn2 .updateStatus .updateControls a{ background:#609b34; /*height:30px;*/ font-size:14px; /*line-height:30px;*/ padding:0 15px; display:inline-block; -webkit-border-radius:2px; border-radius:2px; color:#fff; font-weight:300;}
+.midbody .coloumn2 .updateStatus .updateControls a{ background:#FBC436; /*height:30px;*/ font-size:14px; /*line-height:30px;*/ padding:0 15px; display:inline-block; -webkit-border-radius:2px; border-radius:2px; color:#fff; font-weight:300;}
 .midbody .coloumn2 .updateStatus .updateControls a+a{ background:#2f2f2f;}
 .midbody .coloumn2 .posts{ margin-bottom:15px; }
 .midbody .coloumn2 .posts article{background: #fff; border: 1px solid; border-color: #e5e6e9 #dfe0e4 #d0d1d5; border-radius: 2px; margin-bottom:15px; padding:15px 15px 0 15px;}
@@ -760,7 +760,7 @@ float:right; margin-top:10px;
 	overflow:hidden;
 }
 .btn-green {
-     background-color: #609b34;
+     background-color: #FBC436;
     color: #fff;
     float: left; 
     margin-left: 15px;

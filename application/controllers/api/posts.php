@@ -534,6 +534,32 @@ public function post_comment_by_ajax($access_token)
 	echo json_encode($output);
 	exit(0); 
 }
+ public function share_post($access_token)
+  {
+	$user_res = $this->customermodel->get_user_id($access_token);	
+	 $this->load->model('customermodel');
+	 $session_data = $this->session->userdata('logged_in');
+	 $data['posted_by'] = $session_data['account_id'];
+	 $data['share_post_content'] = $this->input->post('share_post_content');
+	 $data['uploaded_files'] = $this->input->post('uploaded_files');
+	 $data['post_content'] = $this->input->post('post_content');
+	 $data['shared'] = 1;
+	 if($this->input->post('post_group')==0)
+	 {
+		  $data['posted_to']='';
+		  if($this->customermodel->share_buzz($data))
+		  $output = array('success'=> true,'result'=>'Post shared successfully');
+	 }
+	 else
+	 {
+		 $result = $this->profile_set->get_groupmembers($this->input->post('post_group'));
+		 $data['posted_to'] = $result[0]['group_members'];
+		 if($this->customermodel->share_buzz($data))
+		 $output = array('success'=> true,'result'=>'Post shared successfully');
+	 }
+	 // redirect(site_url('customer_controller/view_post'));
+	 // redirect(site_url('customer/view_post'));
+   }
 
 }
 
