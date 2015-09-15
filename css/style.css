@@ -175,9 +175,9 @@ header .search .input-group .input-group-btn ul li a:hover{ background:url(../im
 .midbody .coloumn3 aside .pendingRequest ul#add_friends_two li{ width:200px;}
 .midbody .coloumn3 aside .pendingRequest ul#add_friends_two li+li{ opacity:.5;}
 
-.midbody .coloumn3 aside .pendingRequest figure{ width:60px; height:60px; overflow:hidden;}
+.midbody .coloumn3 aside .pendingRequest figure{ width:60px; height:60px; overflow:hidden; float:left;}
 .midbody .coloumn3 aside .pendingRequest figure img{width:60px; height:60px;}
-.midbody .coloumn3 aside .pendingRequest .disc{ padding-left:8px;}
+.midbody .coloumn3 aside .pendingRequest .disc{ padding-left:8px; float:left;}
 .midbody .coloumn3 aside .pendingRequest .disc h4{ color:#737373; font-size:11px; padding-bottom:5px;}
 .midbody .coloumn3 aside .pendingRequest .disc h4 a{ border:none; }
 .midbody .coloumn3 aside .pendingRequest .disc a{ display:inline-block; font-size:12px; color:#008CC9; background:#F3F3F3; height:22px; line-height:19px; padding:0 9px; -webkit-border-radius:2px; border-radius:2px; border:1px solid #008CC9;}
@@ -4072,6 +4072,11 @@ JobsSearchLayout .jobSearchListing .applicant_job_search .optionBox {
 .item .content a{ display:block; float:left; padding:0 4px; margin-right:2px; text-decoration:none; line-height:20px; border:1px solid #ccc; color:#696969; }
 .item .content a:hover{ text-decoration:none; }
 
+.animateDiv{ position:relative; }
+.animateDiv .OutItem{ position:absolute; top:-10px; list-style:none; display:block; width:100%;}
+
+
+
 .pin-groupBottom .pin-group-detail h3 a, .pin-groupBottom .pin-group-detail h3 a:hover{ text-decoration:none;}
 .pin-groupBottom .pin-group-detail h3 a{ color:#848383; }
 .pin-groupBottom .pin-group-detail h3 a:hover{color:#696969; }
@@ -4084,7 +4089,7 @@ JobsSearchLayout .jobSearchListing .applicant_job_search .optionBox {
 
 .jobUrIntrested{ border:1px solid #e5e6e9; margin-bottom:15px; background:#fff; }
 .jobUrIntrested h3{ font-size:16px; padding:0 0px; margin:10px 0px; color:#676767; font-weight:400; }
-.jobUrIntrested .jobsInner{ margin:0 -10px; padding:10px; border:1px solid #e5e6e9; text-align:center; background:#f3f3f3;  }
+.jobUrIntrested .jobsInner{ /*margin:0 -10px;*/ margin-right:10px; padding:10px; border:1px solid #e5e6e9; text-align:center; background:#f3f3f3;  }
 .jobUrIntrested .jobsInner img{ min-height:60px; width:auto; }
 .jobUrIntrested .jobsInner h3{ font-size:16px; color:#337ab7; line-height:5px; font-weight:400; font-family:Roboto, "sanserif"; }
 .jobUrIntrested .jobsInner p{ color:#737373; min-height: 30px; font-size:12px; }
@@ -4102,3 +4107,5 @@ JobsSearchLayout .jobSearchListing .applicant_job_search .optionBox {
 .jobUrIntrested .jobsInner{ position:relative;}
 .jobUrIntrested .jobsInner a.fa{ background:none; color:#6d6d6d; text-align:center; line-height:25px; width:25px; height:25px; top:5px; right:5px;   position:absolute; border:none; opacity:0; transition:opacity 0.15s ease; }
 .jobUrIntrested .jobsInner:hover a.fa{ opacity:1;}
+.floatleft{ float:left; width:178px; }
+#autoSugJobContainer{ display:none; }

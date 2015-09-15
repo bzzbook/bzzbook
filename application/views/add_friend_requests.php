@@ -1,12 +1,12 @@
 <?php 
 //$this->load->model('friendsmodel'); 
-$frnds = $this->friendsmodel->related_friends($limit = 2);
-if(empty($frnds))
+$add_frnd_reqs = $this->friendsmodel->related_friends($limit = 2);
+/*if(empty($frnds))
 {
 $add_frnd_reqs = $this->friendsmodel->finding_friends($limit = 2);
 }else{
 $add_frnd_reqs = $frnds;
-}
+}*/
 if(count($add_frnd_reqs)>2){
 list($first_list,$second_list) = array_chunk( $add_frnd_reqs, ceil(count($add_frnd_reqs) / 2) );
 }

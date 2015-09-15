@@ -66,7 +66,11 @@ public function find_frnds()
 
 public function find_related_frnds()
 {
-	$data['result'] = $this->friendsmodel->related_friends();
+	$data['result'] = $this->friendsmodel->related_friends('');
+	if($data['result'])
+	echo count($data['result']);
+	else
+	echo 0;
 }
 
 public function search_frnds($value)

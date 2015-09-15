@@ -1556,7 +1556,49 @@ function hideJobSug(job_id) {
 		
 	   });
 }
-	   	
+function autoSughideJob(job_id) {
+
+  url="<?php echo base_url();?>jobs/hide_a_job/";
+	 $.ajax({
+		data : { job_id :  job_id},
+		url: url,
+		type: "POST",
+		success: function(data)
+		{   
+			 url="<?php echo base_url();?>jobs/job_sug_count/";
+			 $.ajax({
+				url: url,
+				type: "POST",
+				success: function(data)
+				{   
+					if(data==0)
+					$('#autoSugJobContainer').hide();
+				}
+				
+			   });
+		}
+		
+	   });
+}
+function autoSughideJobSug(job_id,com_id) {
+
+  url="<?php echo base_url();?>jobs/hide_a_job/";
+	 $.ajax({
+		data : { job_id :  job_id},
+		url: url,
+		type: "POST",
+		success: function(data)
+		{   
+		/*$('#jobsInner'+job_id).remove();
+		if(data==0)
+		$('#notFoundSug').html('No suggestion found..');*/
+		var redirecturl = "<?php echo base_url();?>jobs/job_description/"+job_id+'/'+com_id;
+ 		location.replace(redirecturl);
+		}
+		
+	   });
+  
+}   	
 
 
 $('.searchBlock .overlayBlock a').click(function () {

@@ -147,10 +147,37 @@ $(document).ready(function() {
   $("#pendFrnd-nextItemAnim").sliderUserOption({
    itemWidth :200, 
    mainWidth : '100%',
+   effect    : 'Ghost'
+   });
+    $("#auto-suggest-friends").sliderUserOption({
+   itemWidth :200, 
+   mainWidth : '100%',
    effect    : 'fadeRemove'
    });
-  
+   $("#auto-suggest-jobs").sliderUserOption({
+   itemWidth :200, 
+   mainWidth : '100%',
+   effect    : 'fadeRemove'
+   });
+   
+  	if(!$('#autoSugfrdContainer').length){
+		$('#autoSugJobContainer').show();
+	}
     });
+	function autoSugAddFrd(){
+		  url="<?php echo base_url(); ?>friends/find_related_frnds";
+		$.ajax({
+        url: url,
+		success: function(data)
+        {   
+			if(data==0){
+			$('#autoSugfrdContainer').hide(1000);
+			$('#autoSugJobContainer').show(1000);
+			}
+		},
+		cache: false
+		});
+	}
 $(function() {
 
 	// Initialize the plugin

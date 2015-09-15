@@ -236,6 +236,14 @@ public function get_jobs_by_search_bar()
 	}
 	
 }
+public function job_sug_count(){
+$jobs = $this->jobmodel->get_jobs_by_industries();
+if($jobs)
+echo count($jobs);
+else
+echo 0;
+	
+}
 }
 
 
