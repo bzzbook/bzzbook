@@ -59,7 +59,7 @@ $profiledata = $this->customermodel->profiledata($id);
 		else if(isset($profile_pics) && $profile_pics) echo "Profile Photos ( ".count($profile_pics)." )"; else if(isset($timeline_pics) && $timeline_pics) echo "Time Line Photos ( ".count($timeline_pics)." )"; else
 		echo " Photos not uploaded ";  ?></h4>
          	<div class="userPhotos">
-             <?php if(isset($photos) && $photos){  foreach($photos as $image){$i=1; $fileimage = $image['image_thumb']; 
+             <?php if(isset($photos) && $photos){ $i=1;  foreach($photos as $image){ $fileimage = $image['image_thumb']; 
 			 	
 			 
 					$image_file = explode('.',$fileimage);
@@ -80,7 +80,7 @@ $profiledata = $this->customermodel->profiledata($id);
                     </div>
                 </div>
                 </div>
-                 <?php $i++;  } } else if(isset($profile_pics) && $profile_pics){  foreach($profile_pics as $image){ $i=1; $fileimage = $image['image_thumb']; 
+                 <?php $i++;  } } else if(isset($profile_pics) && $profile_pics){ $i=1; foreach($profile_pics as $image){  $fileimage = $image['image_thumb']; 
 				 	$image_file = explode('.',$fileimage);
 				  ?>
                    <div id="containerid<?php echo $i; ?>">
@@ -98,7 +98,7 @@ $profiledata = $this->customermodel->profiledata($id);
                     </div>
                 </div>
                 </div>
-                <?php $i++; } }  else if(isset($timeline_pics) && $timeline_pics){  foreach($timeline_pics as $image){$i =1; $fileimage = $image['image_thumb']; ?>
+                <?php $i++; } }  else if(isset($timeline_pics) && $timeline_pics){ $i =1; foreach($timeline_pics as $image){ $fileimage = $image['image_thumb']; ?>
                 <div id="containerid<?php echo $i; ?>">
                 <div class="fbphotobox photoThumb col-md-3 hover_close" id="fbphotobox-all">
                 <button class="close_item" onclick="del_timeline_image(<?php echo '&#39;'.$fileimage.'&#39;,'.$i; ?>)"><i class="fa  fa-times"></i></button>
