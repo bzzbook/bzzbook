@@ -1879,7 +1879,7 @@ $('#videotag'+postid).show();
 function del_fav_image(fav_id)
 {
 	
-	   if (confirm("Delete This photo from Favourites") == true) {
+	   if (confirm("Delete this photo from favourites") == true) {
 	url="<?php echo base_url();?>customer/delete_favorite_pic/"+fav_id;
 	 $.ajax({
 		url: url,
@@ -1891,10 +1891,55 @@ function del_fav_image(fav_id)
 	   });
        
     } 
-	
-	
-
 }
+function del_album_image(album_id,pic_name,con_id)
+{
+	
+	   if (confirm("Delete this photo from albums") == true) {
+		url="<?php echo base_url();?>customer/delete_album_pic/"+album_id+"/"+pic_name;
+		 $.ajax({
+			url: url,
+			success: function(html)
+			{   					
+				$('#containerid'+con_id).remove();
+			}
+			
+		   });
+       
+       } 
+}
+function del_timeline_image(pic_name,con_id)
+{	
+	   if (confirm("Delete this photo from albums") == true) {
+		url="<?php echo base_url();?>customer/delete_timeline_pic/"+pic_name;
+		 $.ajax({
+			url: url,
+			success: function(html)
+			{   					
+				$('#containerid'+con_id).remove();
+			}
+			
+		   });
+       
+       } 
+}
+function del_profile_image(pic_name,con_id)
+{
+	
+	   if (confirm("Delete this photo from profile images") == true) {
+		url="<?php echo base_url();?>customer/delete_profile_pic/"+pic_name;
+		 $.ajax({
+			url: url,
+			success: function(html)
+			{   					
+				$('#containerid'+con_id).remove();
+			}
+			
+		   });
+       
+       } 
+}
+
 
 function edit_category_name(cat_id)
 {

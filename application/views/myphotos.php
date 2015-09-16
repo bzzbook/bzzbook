@@ -55,22 +55,22 @@ $profiledata = $this->customermodel->profiledata($id);
       </div>
       
       <section class="about-user-details">
-        <h4><span aria-hidden="true" class="glyphicon glyphicon-picture"></span><?php if(isset($photos)) echo "My Photos ( ".count($photos)." )";
-		else if(isset($profile_pics)) echo "Profile Photos ( ".count($profile_pics)." )"; else if(isset($timeline_pics)) echo "Time Line Photos ( ".count($timeline_pics)." )"; else
+        <h4><span aria-hidden="true" class="glyphicon glyphicon-picture"></span><?php if(isset($photos) && $photos){ echo "My Photos ( ".count($photos)." )"; }
+		else if(isset($profile_pics) && $profile_pics) echo "Profile Photos ( ".count($profile_pics)." )"; else if(isset($timeline_pics) && $timeline_pics) echo "Time Line Photos ( ".count($timeline_pics)." )"; else
 		echo " Photos not uploaded ";  ?></h4>
          	<div class="userPhotos">
-             <?php if(isset($photos)){  foreach($photos as $image){ $fileimage = $image['image_thumb']; 
+             <?php if(isset($photos) && $photos){  foreach($photos as $image){$i=1; $fileimage = $image['image_thumb']; 
 			 	
 			 
 					$image_file = explode('.',$fileimage);
 					
 				
 
-			 ?>
-            	  <div class="fbphotobox photoThumb col-md-3" id="fbphotobox-all">
+			 ?> <div id="containerid<?php echo $i; ?>">
+            	  <div class="fbphotobox photoThumb col-md-3 hover_close" id="fbphotobox-all" ><button class="close_item" onclick="del_album_image(<?php echo $album_id.',&#39;'.$fileimage.'&#39;,'.$i; ?>);"><i class="fa  fa-times"></i></button>
                 	<?php /*?><a href="<?php  echo base_url();?>uploads/<?php echo $image['image_thumb']; ?>" class="mpView" data-lightbox="example-1" data-lightbox="my_photos"><img src="<?php echo base_url(); ?>images/mp_view.png" alt=""></a><?php */?>
                     <a onclick="getPostComments(<?php echo $image['post_id']; ?>,'<?php echo $fileimage; ?>')">
-                		<figure><img id="<?php echo $image['post_id']; ?>" class="photo" fbphotobox-src="<?php echo base_url();?>uploads/<?php echo $image_file[0]."_default.".$image_file[1]; ?>" src="<?php echo base_url();?>uploads/<?php echo $image_file[0]."_extended.".$image_file[1]; ?>" width="100%" height="100%" alt=""></figure>
+                		<figure ><img id="<?php echo $image['post_id']; ?>" class="photo" fbphotobox-src="<?php echo base_url();?>uploads/<?php echo $image_file[0]."_default.".$image_file[1]; ?>" src="<?php echo base_url();?>uploads/<?php echo $image_file[0]."_extended.".$image_file[1]; ?>" width="100%" height="100%" alt=""></figure>
                     </a>
                     <div class="phOptions">
                    <?php /*?> <span class="mpImg"><a href="#"><img src="<?php echo base_url(); ?>images/bzz_icon.png" alt=""></a></span><?php */?>
@@ -79,10 +79,13 @@ $profiledata = $this->customermodel->profiledata($id);
                    
                     </div>
                 </div>
-                 <?php  } } else if(isset($profile_pics)){  foreach($profile_pics as $image){ $fileimage = $image['image_thumb']; 
+                </div>
+                 <?php $i++;  } } else if(isset($profile_pics) && $profile_pics){  foreach($profile_pics as $image){ $i=1; $fileimage = $image['image_thumb']; 
 				 	$image_file = explode('.',$fileimage);
 				  ?>
-                 <div class="fbphotobox photoThumb col-md-3" id="fbphotobox-all">
+                   <div id="containerid<?php echo $i; ?>">
+                 <div class="fbphotobox photoThumb col-md-3 hover_close" id="fbphotobox-all">
+                 <button class="close_item" onclick="del_profile_image(<?php echo '&#39;'.$fileimage.'&#39;,'.$i; ?>)"><i class="fa  fa-times"></i></button>
                 	<?php /*?><a href="<?php  echo base_url();?>uploads/<?php echo $image['image_thumb']; ?>" class="mpView" data-lightbox="example-1" data-lightbox="my_photos"><img src="<?php echo base_url(); ?>images/mp_view.png" alt=""></a><?php */?>
                 	  <a onclick="getPostComments(<?php echo $image['post_id']; ?>,'<?php echo $fileimage; ?>')">
                    <figure><img id="<?php echo $image['post_id']; ?>" class="photo" fbphotobox-src="<?php echo base_url();?>uploads/<?php echo $image_file[0]."_default.".$image_file[1]; ?>" src="<?php echo base_url();?>uploads/<?php echo $image_file[0]."_extended.".$image_file[1]; ?>" width="100%" height="100%" alt=""></figure>
@@ -94,8 +97,11 @@ $profiledata = $this->customermodel->profiledata($id);
                    
                     </div>
                 </div>
-                <?php } }  else if(isset($timeline_pics)){   foreach($timeline_pics as $image){ $fileimage = $image['image_thumb']; ?>
-                <div class="fbphotobox photoThumb col-md-3" id="fbphotobox-all">
+                </div>
+                <?php $i++; } }  else if(isset($timeline_pics) && $timeline_pics){  foreach($timeline_pics as $image){$i =1; $fileimage = $image['image_thumb']; ?>
+                <div id="containerid<?php echo $i; ?>">
+                <div class="fbphotobox photoThumb col-md-3 hover_close" id="fbphotobox-all">
+                <button class="close_item" onclick="del_timeline_image(<?php echo '&#39;'.$fileimage.'&#39;,'.$i; ?>)"><i class="fa  fa-times"></i></button>
                 	<?php /*?><a href="<?php  echo base_url();?>uploads/<?php echo $image['image_thumb']; ?>" class="mpView" data-lightbox="example-1" data-lightbox="my_photos"><img src="<?php echo base_url(); ?>images/mp_view.png" alt=""></a><?php */?>
                     <?php 
 					$image_file = explode('.',$fileimage);
@@ -113,8 +119,8 @@ $profiledata = $this->customermodel->profiledata($id);
                    
                     </div>
                 </div>
-                
-                <?php } } ?>
+                </div>
+                <?php $i++;} } ?>
                 <div class="clear"></div>
             </div>
       </section>

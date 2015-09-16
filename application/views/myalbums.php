@@ -206,7 +206,7 @@ $profiledata = $this->customermodel->profiledata($id);
 			 {
 				 
 				 foreach($album_imgs as $name => $a){ ?>
-                   <div class="main col-md-3">
+                   <div class="main col-md-3 <?php /*?>editDeleteParent<?php */?>">
                 	<figure>
                     
                     	<a href="<?php echo base_url('profile/my_photos/'.$album->album_id);?>" data-images="<?php echo implode('|', array_slice($a['album_images'],1))?>" class="album">
@@ -215,7 +215,7 @@ $profiledata = $this->customermodel->profiledata($id);
                     <span class="preloader"></span>
                     
                     </figure>
-                    <h2><?php echo $a['album_name']; ?></h2>
+                    <h2><?php echo $a['album_name']; ?> <!--<span class="pull-right editDelete"><a href=""  data-toggle="modal" data-target="#edit_cat_name" class="fa fa-pencil"></a> <a href="#" class="fa  fa-times" ></a></span>--></h2>
                     </div>
                 <!-- </div> -->
                  <?php } } } } ?>

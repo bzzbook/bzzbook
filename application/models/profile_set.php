@@ -1813,7 +1813,7 @@ public function get_profile_images()
 public function get_all_time_line_photos()
 {
 	$id = $this->session->userdata('logged_in')['account_id'];
-	$condition = "posted_by =". $id . " and uploaded_files !='' and profile_pic != 'Y' and video = 'N' and album_id is NULL OR album_id = ''";
+	$condition = "posted_by =". $id . " and uploaded_files !='' and profile_pic != 'Y' and video = 'N' and (album_id is NULL OR album_id = '')";
 	$this->db->select('*');
 	$this->db->where($condition);
 	$this->db->order_by("post_id", "desc");

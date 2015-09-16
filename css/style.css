@@ -2883,8 +2883,8 @@ a.pinIcon:hover, a.pinIcon:focus, a.pinIcon:active {
 	-webkit-border-radius: 25px;
     height: 25px;
     position: absolute;
-    right: 15px;
-    top: 15px;
+    right: 25px;
+    top: 25px;
     width: 25px;
     z-index: 99;
 	color:#000;
@@ -4064,7 +4064,7 @@ JobsSearchLayout .jobSearchListing .applicant_job_search .optionBox {
 #nextItemAnim{ overflow:hidden; padding:10px; }
 .addFriend-ul-container{ height:175px; }
 .pendFrnd-ul-container{ height:70px; }
-.item{ border:1px solid #ccc; padding:10px; float:left; margin-right:10px; }
+.item{ /*border:1px solid #ccc;*/ padding:10px; float:left; margin-right:10px; }
 .item+.item{ opacity:0.5; position:relative; }
 .item:after{ content:""; display:block; clear:both; }
 .item a.img{ width:60px; float:left; }
@@ -4109,3 +4109,29 @@ JobsSearchLayout .jobSearchListing .applicant_job_search .optionBox {
 .jobUrIntrested .jobsInner:hover a.fa{ opacity:1;}
 .floatleft{ float:left; width:178px; }
 #autoSugJobContainer{ display:none; }
+
+	  .hover_close button.close_item{
+	background: rgba(255, 255, 255, 0.5);
+    border: 0 none;
+    border-radius: 25px;
+	-moz-border-radius: 25px;
+	-webkit-border-radius: 25px;
+    height: 26px;
+	line-height:25px;
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    width: 25px;
+    z-index: 99;
+	color:#000;
+	font-size:12px;
+	display:none;
+		  }
+	.hover_close:hover button.close_item { display:block; }
+.fbphotobox.hover_close button.close_item{ right: 25px;}
+
+.editDelete a, .editDelete a:hover{ text-decoration:none;}
+.editDelete a{ color:#848383; }
+.editDelete a:hover{color:#696969; }
+.editDeleteParent .editDelete{display:none;}
+.editDeleteParent:hover .editDelete{display:block;}

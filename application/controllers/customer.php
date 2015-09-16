@@ -619,7 +619,79 @@ public function delete_favorite_pic($fav_id)
 	   echo true;
 	   }else{
 	   echo false;
-}}
+	   }
+}
+public function delete_profile_pic($pic_name)
+{
+	  $data = array(
+               'profile_pic' => 'N',               
+            );
+	   $this->db->where('uploaded_files', $pic_name);
+	   if($this->db->update('bzz_posts', $data))
+	   {
+	   echo true;
+	   }else{
+	   echo false;
+	   }
+}
+public function delete_album_pic($album_id,$file_name)
+{
+	$this->db->select('*');
+	$this->db->from('bzz_posts');
+	$this->db->where("uploaded_files like '%".$file_name."%' AND album_id = $album_id ");
+	$query = $this->db->get();
+	if($query->num_rows() > 0)
+	{
+	  $results = $query->result();
+	  if($results){
+	
+		foreach($results as $result){
+			$req_string = $this->removeFromString($result->uploaded_files,$file_name);
+			$data = array(
+               'uploaded_files' => $req_string,
+               
+            );
+			$this->db->where('post_id', $result->post_id);
+			$this->db->update('bzz_posts', $data); 
+		}
+	  }
+       
+	}
+}
+public function delete_timeline_pic($file_name)
+{
+	$this->db->select('*');
+	$this->db->from('bzz_posts');
+	$this->db->where("uploaded_files like '%".$file_name."%' ");
+	$query = $this->db->get();
+	if($query->num_rows() > 0)
+	{
+	  $results = $query->result();
+	  if($results){
+	
+		foreach($results as $result){
+			$req_string = $this->removeFromString($result->uploaded_files,$file_name);
+			$data = array(
+               'uploaded_files' => $req_string,
+               
+            );
+			$this->db->where('post_id', $result->post_id);
+			$this->db->update('bzz_posts', $data); 
+		}
+	  }
+       
+	}
+}
+
+function removeFromString($str, $item) {
+    $parts = explode(',', $str);
+
+    while(($i = array_search($item, $parts)) !== false) {
+        unset($parts[$i]);
+    }
+
+    return implode(',', $parts);
+}
 
 public function edit_cat_name($cat_id)
 {

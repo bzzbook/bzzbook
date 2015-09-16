@@ -538,6 +538,7 @@ public function showfavs()
 		//print_r($data);
 		if(!empty($user_id))
 		$data['user_id'] = $user_id;
+		$data['album_id'] = $album_id;
 		$data['content']='myphotos';
 		$this->load->view('full_content_view',$data);
 		
