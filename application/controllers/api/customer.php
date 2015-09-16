@@ -676,6 +676,17 @@ public function search_member()
 		echo json_encode($data);
 		exit(0);
 	}
+	public function getProfileData($access_token){
+	$user_res = $this->customermodel->get_user_id($access_token);	
+	$session_data = $this->session->userdata('logged_in');
+	$get_profiledata = $this->customermodel->profiledata($session_data['account_id']);	
+	if($get_profiledata)
+	$data = array('success'=> true,'result'=>$get_profiledata);
+	else
+	$data = array('success'=> false,'result'=>'No suggestions found');	
+	echo json_encode($data);
+	exit(0);
+	}
 	
 	
 

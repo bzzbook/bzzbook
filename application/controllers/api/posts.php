@@ -560,6 +560,7 @@ public function post_comment_by_ajax($access_token)
 	 // redirect(site_url('customer_controller/view_post'));
 	 // redirect(site_url('customer/view_post'));
    }
+   
 
 }
 

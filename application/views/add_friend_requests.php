@@ -1,6 +1,7 @@
 <?php 
 //$this->load->model('friendsmodel'); 
 $add_frnd_reqs = $this->friendsmodel->related_friends($limit = 2);
+
 /*if(empty($frnds))
 {
 $add_frnd_reqs = $this->friendsmodel->finding_friends($limit = 2);
@@ -12,7 +13,7 @@ list($first_list,$second_list) = array_chunk( $add_frnd_reqs, ceil(count($add_fr
 }
 else
 $first_list = $add_frnd_reqs;
-if(count($add_frnd_reqs)>0){
+if($add_frnd_reqs && count($add_frnd_reqs)>0){
 ?> 
  
  <div id="friendSugBox" class="pendingRequest">
