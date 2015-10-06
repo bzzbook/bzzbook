@@ -151,7 +151,7 @@
                     	<h5><i class="fa fa-user"></i> PERSONAL(<?php echo count($my_pages); ?>)</h5>
                         <ul class="userlist">
                         <?php foreach($my_pages as $mpage){ ?>
-                        	<li><img src="<?php echo base_url().'uploads/'; if($mpage->page_image!='') echo $mpage->page_image; else echo 'main_cat_'.$mpage->main_category.'.png'; ?>" width="30" height="30"  alt=""/><span> <?php echo $mpage->page_name ?></span> <i class="fa fa-check pull-right"></i></li>
+                        	<li><img src="<?php echo base_url().'uploads/'; if($mpage->page_image!='') echo $mpage->page_image; else echo 'main_cat_'.$mpage->main_category.'.png'; ?>" width="30" height="30"  alt=""/><span> <?php echo substr($mpage->page_name,0,20); ?></span> <i class="fa fa-check pull-right"></i></li>
                         <?php } ?>
                             
                         </ul>
