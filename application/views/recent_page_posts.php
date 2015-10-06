@@ -29,7 +29,7 @@
 	  ?>
      
     <article id="post<?php echo $row->post_id; ?>" >
-          <div class="pfInfo"> <a href="<?php echo base_url().'profile/page/'.$get_profiledata[0]->page_id; ?>" class="pfImg"><img src="<?php echo base_url(); ?>uploads/<?php if(!empty($get_profiledata[0]->page_img_thumb)) echo $get_profiledata[0]->page_img_thumb; else echo 'main_cat_'.$get_profiledata[0]->main_category.'.png'; ?>" alt=""></a>
+          <div class="pfInfo"> <a href="<?php echo base_url().'profile/page/'.$get_profiledata[0]->page_id; ?>" class="pfImg"><img src="<?php echo base_url(); ?>uploads/<?php if(!empty($get_profiledata[0]->page_image)) echo $get_profiledata[0]->page_image; else echo 'main_cat_'.$get_profiledata[0]->main_category.'.png'; ?>" alt=""></a>
             <div class="pfInfoDetails">
               <h5><span class="pfname"><a href="<?php echo base_url().'profile/page/'.$get_profiledata[0]->page_id; ?>"><?php echo ucfirst($get_profiledata[0]->page_name);?></a>
               
@@ -150,10 +150,7 @@
 	 ?>
      <?php
 			
-			 if(!empty($row->uploaded_files)) { ?>
-             <div class="fbfavphotobox post-data-<?php echo $tot_imagesone; ?>  <?php if($i > 1) echo "hide"; ?>" id="fbfavphotobox<?php echo $row->post_id; ?>" >
-             <a href="javascript:void(0)" onclick="saveAsFav(<?php echo $row->post_id;?>,'<?php echo $up_files[0]; ?>')"><span class="photo" fbfavphotobox-src="<?php echo base_url('uploads/'.$file1[0].'_extended.'.$file1[1]); ?>">Save As Favorite </span></a></div>
-			 <?php } $i++; } } ?>
+			  $i++; } } ?>
             </div>
             <div id="res_comments<?php echo $row->post_id;?>">
             <?php   

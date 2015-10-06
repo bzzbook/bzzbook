@@ -107,6 +107,23 @@ class Customermodel extends CI_Model {
 	   return false;
    
 	}
+	public function get_none_page_posts($page_id){
+		
+	   $cur_user_id = $this->session->userdata('logged_in')['account_id'];
+	   $condition = "posted_by != ".$cur_user_id." AND page_id=".$page_id." AND hidden = 'N'";
+	   $this->db->select('*');	  
+	   $this->db->where($condition);
+	   $this->db->from('bzz_page_posts');
+	   $this->db->limit(10);
+	   $this->db->order_by("post_id","desc");
+	   $query = $this->db->get();
+   	   if ($query->num_rows() > 0) {
+	   		$result =  $query->result();			
+			return $result;
+	   } 
+	   else 
+	   return false;
+	}
 	public function All_Posts($pst_usr_id,$last_id = ''){
 	
 		if(empty($pst_usr_id))
@@ -290,6 +307,19 @@ class Customermodel extends CI_Model {
 	   		return $result =  $query->result();
 		   }
 	   }
+   }
+   public function my_pages()
+   {
+	   $id = $this->session->userdata('logged_in')['account_id'];
+	   $condition = "user_id ='".$id."'";
+	   $this->db->select('*');
+	   $this->db->from('bzz_pages');
+	   $this->db->where($condition);
+	   $query = $this->db->get();
+   	   if ($query->num_rows() > 0) {
+	   		return  $query->result();
+	   }else
+	   return false;
    }
    public function profiledata($id){
 	    $condition = "user_id =" . "'" . $id . "'";		
@@ -1426,7 +1456,7 @@ public function individual_Page_Posts($post_id)
 	   
 	   $this->db->where('post_id',$post_id);
 	 
-	   $this->db->from('bzz_Page_posts');
+	   $this->db->from('bzz_page_posts');
 	
 	   $this->db->limit(1);
 	

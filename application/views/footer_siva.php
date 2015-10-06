@@ -2039,5 +2039,8 @@ function delete_savfav_category(cat_id)
 		cache: false
 		});
 }
+function show_lb_combox(post_id){
+	$('#lb_comment_box'+post_id).show();
+}
 
     </script>

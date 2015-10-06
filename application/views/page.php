@@ -114,18 +114,98 @@
         
         
         </div>
+    <div class="col-md-12 no-padding-lr">
+    <div class="visitorPost sideBlock">
+    	<h3>Visitor Post <i class="fa fa-chevron-right"></i></h3>
+
+        <?php $none_page_posts = $this->customermodel->get_none_page_posts($page_id); foreach($none_page_posts as $np_post):  
+		$npu_profiledata = $this->customermodel->profiledata($np_post->posted_by);
+		$cur_usr_id = $this->session->userdata('logged_in')['account_id'];
+		$cur_user_data = $this->customermodel->profiledata($cur_usr_id);
+		$my_pages = $this->customermodel->my_pages();
+		$npu_hrsago = $this->customermodel->get_time_difference_php($np_post->posted_on);
+		 ?>
+        <div class="postVisitor">        	
+        	<div class="postVisitProfile">
+                <figure><img src="<?php echo base_url(); ?>uploads/<?php if(!empty($npu_profiledata[0]->user_img_thumb)) echo $npu_profiledata[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" width="37" height="36"  alt=""/></figure>
+                <h4>
+                <a href="<?php echo base_url().'profile/user/'.$npu_profiledata[0]->user_id; ?>"><?php echo ucfirst($npu_profiledata[0]->user_firstname)."&nbsp;".ucfirst($npu_profiledata[0]->user_lastname);?></a>
+                <span><?php echo $npu_hrsago; ?></span>
+                </h4>
+                <div class="clearfix"></div>
+            </div>
+            <div class="v-message">
+            	<p><?php echo $np_post->post_content; ?></p>
+            </div>
+            <div class="moreLinks"><a href="#">Like </a> <a href="javascript:void(0)" onclick="show_lb_combox(<?php echo $np_post->post_id;  ?>)"  >Comment</a>             
+            <ul class="pull-right">
+            <li><span class="loading"><img style="display:none;" src="<?php echo base_url(); ?>images/loading.gif" width="16" height="11"  alt=""/></span>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="<?php echo base_url(); ?>uploads/<?php if(!empty($cur_user_data[0]->user_img_thumb)) echo $cur_user_data[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" width="15" height="15"  alt=""/><i class="fa fa-caret-down"></i>
+            </a>
+             <ul class="dropdown-menu">
+              <li>
+              	<div class="userSelector">
+                	<h4><img src="<?php echo base_url(); ?>uploads/<?php if(!empty($cur_user_data[0]->user_img_thumb)) echo $cur_user_data[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" width="30" height="30"  alt=""/><span><?php echo ucfirst($cur_user_data[0]->user_firstname)."&nbsp;".ucfirst($cur_user_data[0]->user_lastname);?><span>(you)</span></span></h4>
+                	<div class="userList">
+                    	<h5><i class="fa fa-user"></i> PERSONAL(<?php echo count($my_pages); ?>)</h5>
+                        <ul class="userlist">
+                        <?php foreach($my_pages as $mpage){ ?>
+                        	<li><img src="<?php echo base_url().'uploads/'; if($mpage->page_image!='') echo $mpage->page_image; else echo 'main_cat_'.$mpage->main_category.'.png'; ?>" width="30" height="30"  alt=""/><span> <?php echo $mpage->page_name ?></span> <i class="fa fa-check pull-right"></i></li>
+                        <?php } ?>
+                            
+                        </ul>
+                    </div>
+                </div>
+              </li>             
+            </ul>
+            </li>
+            </ul>
+            </div>
+            
+            
+            <!--<div class="moreLinks">
+            <a href="#" class="pull-right">Most Recent <i class="fa fa-caret-down"></i></a>
+            <div class="clearfix"></div>
+            </div>-->
+            <?php 
+            $np_comments_details = $this->customermodel->page_comments_data($np_post->post_id);
+			       for($i=0;$i<count($np_comments_details);$i++){
+				   // foreach($comments_details as $row_comment):
+			       if($i<=4){ $com_user_data = $this->customermodel->profiledata($np_comments_details[$i]->cmt_by); 	  $cmt_hrsago = $this->customermodel->get_time_difference_php($np_comments_details[$i]->cmt_timestamp); ?>
+            <div class="moreLinks usercomment">
+           		<figure><img src="<?php echo base_url(); ?>uploads/<?php if(!empty($np_comments_details[$i]->user_img_thumb)) echo $np_comments_details[$i]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" width="37" height="36"  alt=""/></figure>
+                <div class="content">
+                <h5><?php echo ucfirst($np_comments_details[$i]->user_firstname)."&nbsp;".ucfirst($np_comments_details[$i]->user_lastname); ?></h5> <span><?php echo $np_comments_details[$i]->cmt_content; ?></span>
+                <p><a href="#">Like</a> . <a href="#">Reply</a> . <?php echo $cmt_hrsago; ?></p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <?php }else { echo '<div>View more</div>'; } } ?>
+           
+             <div id="lb_comment_box<?php echo $np_post->post_id; ?>" class="moreLinks usercomment hidecommentbox">
+           		<figure><img src="<?php echo base_url(); ?>uploads/<?php if(!empty($cur_user_data[0]->user_img_thumb)) echo $cur_user_data[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" width="37" height="36"  alt=""/></figure>
+                <div class="content">
+               	<div class="comment-box">
+                	<textarea class="autoExpand" rows='1' data-min-rows='1' placeholder="Write Comment">
+                    </textarea>
+                    <a href="" class="camera"><i class="fa fa-camera"></i></a>
+                    <!--<a href="" class="emoticons"><i class="fa fa-smile-o"></i></a>-->
+                    <div class="clearfix"></div>
+                </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            
+        </div>
+        <?php endforeach; ?>
+        
+       
+        
+    </div>
+    </div>
       
-        <div class="myPhotos userProfilemyPhotos">
-          <h3>Friends</h3>
-          <ul>
-          <?php if($friends)
-		  { 
-		  foreach($friends as $frnd): ?>
-            <li><a href="<?php echo base_url(); ?>profile/user/<?php echo $frnd['id']; ?>"><img src="<?php echo base_url(); ?>uploads/<?php echo $frnd['image']; ?>" alt=""><div class="name-overlap"><?php echo $frnd['name']; ?></div></a></li>
-          <?php  endforeach; } else echo "No friends Are Available"?>
-          </ul>
-          <div class="clear"></div>
-        </div></aside></section>
+        </aside></section>
+        
        <?php $image = $this->profile_set->get_profile_pic($user_id);	?>
     <section class="col-lg-8 col-md-8 col-sm-5 col-xs-12 coloumn2" style="padding-right:0;">
       <div class="updateStatus" id="updateStatus">
@@ -160,7 +240,8 @@
 	  else
 	  $curr_user_id = $user_id;
 	  $products = $this->customermodel->All_Page_Posts($page_id);
-	  //print_r($products);
+	  
+	 // print_r($none_page_posts);
 	  if($products):
 	  foreach( $products as $row):
 	  $hrsago = $this->customermodel->get_time_difference_php($row->posted_on);
