@@ -113,8 +113,12 @@ $('#posts_content_div').prepend(data);
 //alert('sivaprasad');
 }
 function page_post_submit(my_form,page_id){
+if($('#page_posts_content_div article:first-child').attr('id')){
 var first_div = $('#page_posts_content_div article:first-child').attr('id');
 var first_id = first_div.substr(4);
+}else{
+first_id = 0;	
+}
 url = "<?php echo  base_url(); ?>signg_in/send_page_post/"+page_id+'/'+first_id;
 var formObj = $('form#page_post_form')[0];
 

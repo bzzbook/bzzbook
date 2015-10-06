@@ -164,8 +164,8 @@
 	  if($products):
 	  foreach( $products as $row):
 	  $hrsago = $this->customermodel->get_time_difference_php($row->posted_on);
-      $posted_id=$row->posted_by;
-	  $get_profiledata = $this->customermodel->page_profiledata($posted_id);
+     // $posted_id=$row->posted_by;
+	  $get_profiledata = $this->customermodel->page_profiledata($page_id);
 	 
 	  if(empty($user_id))
 	  $user_id=$this->session->userdata('logged_in')['account_id'];
