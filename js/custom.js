@@ -96,6 +96,27 @@ function call_fav_fbphotobox(){
 		});
 	
 }
+function call_pagephotobox(){
+	
+	//alert("haiii");
+		$(".pagephotobox span").pagephotobox({
+			rightWidth: 360,
+			leftBgColor: "black",
+			rightBgColor: "white",
+			footerBgColor: "black",
+			overlayBgColor: "#222",
+			containerClassName: 'pagephotobox',
+			imageClassName: 'photo',
+			onImageShow: function() {
+				
+				$(".pagephotobox span").pagephotobox("addTags",
+						[{x:0.3,y:0.3,w:0.3,h:0.3}]
+				);
+				$(".pagephotobox-image-content").html();
+			}
+		});
+	
+}
 
 /*
 function call_fav_asfav_fbphotobox(){

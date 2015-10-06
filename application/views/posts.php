@@ -8,7 +8,7 @@
 	 // echo $curr_user_data[0]->username;
 	 $image = $this->profile_set->get_profile_pic($user_id);
 	 $current_user_id_for_post_comment_box = $this->session->userdata('logged_in')['account_id'];
-    $user_imge_pbox = $this->profile_set->get_profile_pic($current_user_id_for_post_comment_box);
+     $user_imge_pbox = $this->profile_set->get_profile_pic($current_user_id_for_post_comment_box);
    ?>
     <section class="col-lg-6 col-md-6 col-sm-5 col-xs-12 coloumn2">
       <div class="updateStatus" id="updateStatus">

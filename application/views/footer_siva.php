@@ -60,14 +60,6 @@ function removefrnd(user_id){
 }
 function postsubmitajax(my_form)
 {
-	//alert(my_form);
-
-//e.preventDefault();
-//$('#'+my_form).submit();
-
-	// $('#posts_content_div').find('#loader_img').remove();
-        
-
 url = "<?php echo  base_url(); ?>signg_in/send_post/";
 var formObj = $('form#my_form')[0];
 
@@ -103,6 +95,7 @@ $('#my_form').trigger("reset");
 //$('#posts_content_div').find('#last_id').remove();
 //$('#selectedfriends #addedusers').html('');
 $('#selectedfriends').find('span').remove();
+
 $('#posts_content_div').prepend(data);
 
 //window.location.reload();
@@ -118,6 +111,39 @@ $('#posts_content_div').prepend(data);
  //var formObj = $('form#imgCmtForm')[0];
 
 //alert('sivaprasad');
+}
+function page_post_submit(my_form,page_id){
+var first_div = $('#page_posts_content_div article:first-child').attr('id');
+var first_id = first_div.substr(4);
+url = "<?php echo  base_url(); ?>signg_in/send_page_post/"+page_id+'/'+first_id;
+var formObj = $('form#page_post_form')[0];
+
+$.ajax({
+	 
+url: url, // Url to which the request is send
+type: "POST",             // Type of request to be send, called as method
+data: new FormData(formObj), // Data sent to server, a set of key/value pairs (i.e. form fields and values)
+contentType: false,       // The content type used when sending data to the server.
+cache: false,             // To unable request pages to be cached
+processData:false,
+beforeSend: function(){ $('#page_posts_content_div').prepend('<article id="loading_img"><img style="margin-left:240px; margin-bottom:8px;" src="<?php echo base_url(); ?>images/block_loader.gif" /></article>'); },        // To send DOMDocument or non processed data file it is set to false
+success: function(data)   // A function to be called if request succeeds
+{
+
+if(data==404){
+	$('#page_posts_content_div').find('#loading_img').remove(); 
+alert('Post data should not be empty, please write your status or attach a file to post');
+return false;
+}
+$('#uploadPhotosdvPreview').html('');
+$('#dummypost').html('');
+$('#posts').val('');
+$('#psot_page_form').trigger("reset");
+$('#loading_img').remove();
+$('#page_posts_content_div').prepend(data);
+}
+
+});	
 }
 function myfunction(){
 	
@@ -947,6 +973,39 @@ $('#write_comment'+post_id).html('');
 });
 
 }));
+$("#send_page_comment"+post_id).on('submit',(function(d) {
+url = "<?php echo base_url(); ?>signg_in/send_page_comment/";
+d.preventDefault();
+
+//$("#message").empty();
+//$('#loading').show();
+$.ajax({
+	
+url: url, // Url to which the request is send
+type: "POST",             // Type of request to be send, called as method
+data: new FormData(this), // Data sent to server, a set of key/value pairs (i.e. form fields and values)
+contentType: false,       // The content type used when sending data to the server.
+cache: false,             // To unable request pages to be cached
+processData:false,        // To send DOMDocument or non processed data file it is set to false
+success: function(data)   // A function to be called if request succeeds
+{
+	
+var link = $('#view_more_link'+post_id);
+$('#view_more_link'+post_id).remove();
+$('#res_comments'+post_id).append(data);
+$('#res_comments'+post_id).append(link);
+$('#write_comment'+post_id).val('');
+var commentboxcont = $('#commentBox'+post_id).html();
+$('#commentBox'+post_id).html('');
+$('#uploadCommentPhotos'+post_id).val('');
+$('#commentBox'+post_id).html(commentboxcont);
+$('#write_comment'+post_id).html('');
+
+}
+});
+
+}));
+
 
 /* Function to preview image after validation
 $(function() {

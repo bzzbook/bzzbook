@@ -37,6 +37,10 @@ class Customermodel extends CI_Model {
 		 $this->db->insert('bzz_posts',$data);
 		 return $this->db->insert_id();
 	}
+	function post_page_buzz($data){
+		 $this->db->insert('bzz_page_posts',$data);
+		 return $this->db->insert_id();
+	}
 	/*function temp_upload_images($data){
 		$images = explode(',',$data);
 		if(count($images)){
@@ -57,6 +61,10 @@ class Customermodel extends CI_Model {
 		 $this->db->insert('bzz_posts',$data);
 		 return $this->db->insert_id();
 	}
+	function share_page_buzz($data){
+		 $this->db->insert('bzz_page_posts',$data);
+		 return $this->db->insert_id();
+	}
 	function post_to_wall($data){
 		 $this->db->insert('bzz_posts_postedto',$data);
 		 return true;
@@ -66,6 +74,38 @@ class Customermodel extends CI_Model {
 		 return true;
 		 else
 		 return false;
+	}
+	public function All_Page_Posts($page_id,$last_id='',$first_id=''){	
+	   $this->db->select('user_id');
+	   $this->db->where('page_id',$page_id);
+	   $this->db->from('bzz_pages');
+	    $query = $this->db->get();
+   	   if ($query->num_rows() > 0) {
+	   		$result =  $query->result();			
+			$posted_by_id = $result[0]->user_id;
+	   } 
+	   $this->db->select('*');
+	   $condition = '';
+	   if($first_id!=''){
+		$condition .= "post_id > $first_id AND ";   
+	   }
+	   $condition .= "posted_by = ".$posted_by_id." AND page_id=".$page_id." AND hidden = 'N'";
+	   if($last_id != '')
+	   {
+	   $condition = "post_id <" . "'" . $last_id . "'" ;	   
+	   }
+	   $this->db->where($condition);
+	   $this->db->from('bzz_page_posts');
+	   $this->db->limit(10);
+	   $this->db->order_by("post_id","desc");
+	   $query = $this->db->get();
+   	   if ($query->num_rows() > 0) {
+	   		$result =  $query->result();			
+			return $result;
+	   } 
+	   else 
+	   return false;
+   
 	}
 	public function All_Posts($pst_usr_id,$last_id = ''){
 	
@@ -286,6 +326,41 @@ class Customermodel extends CI_Model {
 			}
 		}
    }
+   public function page_profiledata($page_id){	   
+	    $condition = "page_id =" . "'" . $page_id . "'";		
+		$this->db->select('*');
+		$this->db->from('bzz_page_images');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		if($query->num_rows() > 0)
+		{
+			$this->db->select('*');
+			$this->db->from('bzz_pages');
+			$this->db->join('bzz_page_images','bzz_pages.page_id=bzz_page_images.page_id AND bzz_pages.page_id='.$page_id);
+			$this->db->order_by('bzz_page_images.user_image_id','desc');
+			$this->db->limit(1);
+			$query = $this->db->get();
+			if ($query->num_rows() == 1) {
+				return $query->result();
+			} else {
+			return false;
+			}
+		}
+		else{
+			$this->db->select('*');
+			$this->db->from('bzz_pages');
+			$this->db->where($condition);
+			//$this->db->join('bzz_user_images','bzz_userinfo.user_id=bzz_user_images.user_id AND bzz_userinfo.user_id='.$id);
+			//$this->db->order_by('user_id','desc');
+			//$this->db->limit(1);
+			$query = $this->db->get();
+			if ($query->num_rows() == 1) {
+				return $query->result();
+			} else {
+			return false;
+			}
+		}	   
+   }
  public function  eventinsertlinks($data)
 {
 	
@@ -352,6 +427,40 @@ class Customermodel extends CI_Model {
 		}
 		else{
 	    $this->db->insert('bzz_likes',$data);
+			$data1 = array('like_status' => 'Y','like_count' => $like_count);
+			echo json_encode($data1);
+		}
+		
+   }
+   public function insert_page_like($data)
+   {
+	    $pid=$data['like_on'];
+	    $aid=$data['liked_by'];
+	   // $like=$data['like'];
+	    $condition = "like_on =" . $pid . " AND liked_by =".$aid;
+	    $this->db->select('*');
+		$this->db->from('bzz_page_likes');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		$like_count = count($this->customermodel->page_likedata($pid));
+		if($query->num_rows()>0){
+			$res=$query->result();
+			$res_like=$res[0]->like_status;			
+			if($res_like == 'Y' ){
+				$slike="N";
+			}
+			else if($res_like == 'N'){
+				$slike="Y";
+			}
+			
+		$data1 = array('like_status' => $slike);
+        $this->db->where($condition);
+  		$this->db->update('bzz_page_likes',$data1);	
+	    $data1 = array('like_status' => $slike,'like_count' => $like_count);
+			echo json_encode($data1);
+		}
+		else{
+	    $this->db->insert('bzz_page_likes',$data);
 			$data1 = array('like_status' => 'Y','like_count' => $like_count);
 			echo json_encode($data1);
 		}
@@ -425,6 +534,76 @@ class Customermodel extends CI_Model {
 		}
 		
    }
+    public function page_commentinsertlikes($data)
+   {
+	    $pid=$data['like_on'];
+	    $aid=$data['liked_by'];
+	   // $like=$data['like'];
+	    $condition = "like_on =" . $pid . " AND liked_by =".$aid;
+	    $this->db->select('*');
+		$this->db->from('bzz_page_comment_likes');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		$like_count = count($this->customermodel->page_comment_likes($pid));
+		if($query->num_rows()>0){
+			$res=$query->result();
+			$res_like=$res[0]->like_status;			
+			if($res_like == 'Y' ){
+				$slike="N";
+			}
+			else if($res_like == 'N'){
+				$slike="Y";
+			}
+			
+		$data1 = array('like_status' => $slike);
+        $this->db->where($condition);
+  		$this->db->update('bzz_page_comment_likes',$data1);	
+	    $data1 = array('like_status' => $slike,'like_count' => $like_count);
+			echo json_encode($data1);
+		}
+		else{
+	    $this->db->insert('bzz_page_comment_likes',$data);
+			$data1 = array('like_status' => 'Y','like_count' =>$like_count);
+			echo json_encode($data1);
+		}
+		
+   }
+   public function page_photocommentinsertlinks($data)
+   {
+	   
+	    $pid=$data['like_on'];
+	    $aid=$data['liked_by'];
+		$photo = $data['photo_name'];
+	   // $like=$data['like'];
+	    $condition = "like_on =" . $pid . " AND photo_name = '".$photo."' AND liked_by =".$aid;
+	    $this->db->select('*');
+		$this->db->from('bzz_page_photo_comment_likes');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		$like_count = count($this->customermodel->page_photocommentlikedata($pid,$photo));
+		if($query->num_rows()>0){
+			$res=$query->result();
+			$res_like=$res[0]->like_status;			
+			if($res_like == 'Y' ){
+				$slike="N";
+			}
+			else if($res_like == 'N'){
+				$slike="Y";
+			}
+			
+		$data1 = array('like_status' => $slike);
+        $this->db->where($condition);
+  		$this->db->update('bzz_page_photo_comment_likes',$data1);	
+	    $data1 = array('like_status' => $slike,'like_count' => $like_count);
+			echo json_encode($data1);
+		}
+		else{
+	    $this->db->insert('bzz_page_photo_comment_likes',$data);
+			$data1 = array('like_status' => 'Y','like_count' =>$like_count);
+			echo json_encode($data1);
+		}
+		
+   }
    public function photocommentinsertlinks($data)
    {
 	    $pid=$data['like_on'];
@@ -436,12 +615,15 @@ class Customermodel extends CI_Model {
 		$this->db->from('bzz_photo_comment_likes');
 		$this->db->where($condition);
 		$query = $this->db->get();
-		$like_count = count($this->customermodel->commentlikedata($pid));
+		if($this->customermodel->photocommentlikedata($pid,$photo))
+		$like_count = count($this->customermodel->photocommentlikedata($pid,$photo));
+		else
+		$like_count = 0;
 		if($query->num_rows()>0){
 			$res=$query->result();
 			$res_like=$res[0]->like_status;			
 			if($res_like == 'Y' ){
-				$slike="N";
+				$slike="N";				
 			}
 			else if($res_like == 'N'){
 				$slike="Y";
@@ -540,6 +722,16 @@ class Customermodel extends CI_Model {
 		return $query->result();
 		
    }
+   public function page_likedata($pid){
+	    $condition = "like_on =" . "'" . $pid . "' AND like_status = 'Y'";
+		$this->db->select('*');
+		$this->db->from('bzz_page_likes');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		//return $query->num_rows();
+		return $query->result();
+		
+   }
    
    
      public function comment_count_data($pid){
@@ -547,6 +739,16 @@ class Customermodel extends CI_Model {
 		$this->db->select('*');
 		$this->db->from('bzz_postcomments');
 		$this->db->where('commented_on',$pid);
+		$query = $this->db->get();
+		//return $query->num_rows();
+		return $query->result();
+		
+   }
+    public function page_comment_count_data($pid){
+	   
+		$this->db->select('*');
+		$this->db->from('bzz_page_comments');
+		$this->db->where('cmt_on',$pid);
 		$query = $this->db->get();
 		//return $query->num_rows();
 		return $query->result();
@@ -568,6 +770,18 @@ class Customermodel extends CI_Model {
 	    $condition = "like_on =" . "'" . $pid . "' AND liked_by='".$id."' AND like_status = 'Y'";
 		$this->db->select('*');
 		$this->db->from('bzz_likes');
+		$this->db->where($condition);
+		if($query = $this->db->get())
+				return $query->result();
+		else
+				return false;
+		
+   }
+    public function cur_user_pagelikes($pid){
+	    $id = $this->session->userdata('logged_in')['account_id'];
+	    $condition = "like_on =" . "'" . $pid . "' AND liked_by='".$id."' AND like_status = 'Y'";
+		$this->db->select('*');
+		$this->db->from('bzz_page_likes');
 		$this->db->where($condition);
 		if($query = $this->db->get())
 				return $query->result();
@@ -597,10 +811,30 @@ class Customermodel extends CI_Model {
 		return $query->result();
 		
    }
+   public function page_comment_likes($cid){
+	    $condition = "like_on =" . "'" . $cid . "' AND like_status = 'Y'";
+		$this->db->select('*');
+		$this->db->from('bzz_page_comment_likes');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		//return $query->num_rows();
+		return $query->result();
+		
+   }
    public function photocommentlikedata($cid,$photo){
 	    $condition = "like_on ='" . $cid . "' AND photo_name ='".$photo."' AND like_status = 'Y'";
 		$this->db->select('*');
 		$this->db->from('bzz_photo_comment_likes');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		//return $query->num_rows();
+		return $query->result();
+		
+   }
+    public function page_photocommentlikedata($cid,$photo){
+	    $condition = "like_on ='" . $cid . "' AND photo_name ='".$photo."' AND like_status = 'Y'";
+		$this->db->select('*');
+		$this->db->from('bzz_page_photo_comment_likes');
 		$this->db->where($condition);
 		$query = $this->db->get();
 		//return $query->num_rows();
@@ -620,8 +854,6 @@ class Customermodel extends CI_Model {
 		return $query->result();
 		
    }
-   
-   
    public function currentusercommentlikedata($cid){
 	    $id = $this->session->userdata('logged_in')['account_id'];
 	    $condition = "like_on ='".$cid."' AND liked_by='".$id."'  AND like_status = 'Y'";
@@ -633,11 +865,34 @@ class Customermodel extends CI_Model {
 		return $query->result();
 		
    }
+   
+   public function currentuser_page_commentlikes($cid){
+	    $id = $this->session->userdata('logged_in')['account_id'];
+	    $condition = "like_on ='".$cid."' AND liked_by='".$id."'  AND like_status = 'Y'";
+		$this->db->select('*');
+		$this->db->from('bzz_page_comment_likes');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		//return $query->num_rows();
+		return $query->result();
+		
+   }
    public function currentuser_photo_commentlikedata($cid){
 	    $id = $this->session->userdata('logged_in')['account_id'];
 	    $condition = "like_on ='".$cid."' AND liked_by='".$id."'  AND like_status = 'Y'";
 		$this->db->select('*');
 		$this->db->from('bzz_photo_comment_likes');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		//return $query->num_rows();
+		return $query->result();
+		
+   }
+    public function currentuser_page_photo_commentlikedata($cid){
+	    $id = $this->session->userdata('logged_in')['account_id'];
+	    $condition = "like_on ='".$cid."' AND liked_by='".$id."'  AND like_status = 'Y'";
+		$this->db->select('*');
+		$this->db->from('bzz_page_photo_comment_likes');
 		$this->db->where($condition);
 		$query = $this->db->get();
 		//return $query->num_rows();
@@ -669,8 +924,14 @@ class Customermodel extends CI_Model {
    public function write_comments($data){
 	    $this->db->insert('bzz_postcomments',$data);
    }
+    public function write_page_comments($data){
+	    $this->db->insert('bzz_page_comments',$data);
+   }
    public function write_photo_comments($data){
 	  return $this->db->insert('bzz_post_image_comments',$data);
+   }
+   public function write_page_photo_comments($data){
+	  return $this->db->insert('bzz_page_post_image_comments',$data);
    }
    public function write_event_comments($data){
 	    $this->db->insert('bzz_event_postcomments',$data);
@@ -678,12 +939,33 @@ class Customermodel extends CI_Model {
    public function write_cmp_comments($data){
 	    $this->db->insert('bzz_cmp_postcomments',$data);
    }
+    public function page_comments_data($pid){
+	   $condition = "cmt_on =" . "'" . $pid . "' and (cmt_content != '' OR uploadedfiles!='')";
+		$this->db->select('*');
+		$this->db->from('bzz_page_comments');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		//return $query->num_rows();
+		return $query->result(); 
+   }
    public function comments_data($pid){
 	   $condition = "commented_on =" . "'" . $pid . "' and (comment_content != '' OR uploadedfiles!='')";
 		$this->db->select('*');
 		$this->db->from('bzz_postcomments');
 		$this->db->where($condition);
 		$query = $this->db->get();
+		//return $query->num_rows();
+		return $query->result(); 
+   }
+    public function page_comments_data_desc($pid){
+	   $condition = "cmt_on =" . "'" . $pid . "' and (cmt_content != '' OR uploadedfiles!='')";
+		$this->db->select('*');
+		$this->db->from('bzz_page_comments');
+		$this->db->limit(1);
+		$this->db->where($condition);
+		$this->db->order_by('cmt_id','desc');
+		$query = $this->db->get();
+		
 		//return $query->num_rows();
 		return $query->result(); 
    }
@@ -703,6 +985,15 @@ class Customermodel extends CI_Model {
 	   $condition = "post_id =" . "'" . $pid . "' AND  img_commented_on ='".$image."'  AND (comment != '' OR uploaded_files!='')";
 		$this->db->select('*');
 		$this->db->from('bzz_post_image_comments');
+		$this->db->where($condition);
+		$query = $this->db->get();
+		//return $query->num_rows();
+		return $query->result(); 
+   }
+    public function page_photo_comments_data($pid,$image){
+	   $condition = "post_id =" . "'" . $pid . "' AND  img_commented_on ='".$image."'  AND (comment != '' OR uploaded_files!='')";
+		$this->db->select('*');
+		$this->db->from('bzz_page_post_image_comments');
 		$this->db->where($condition);
 		$query = $this->db->get();
 		//return $query->num_rows();
@@ -1056,6 +1347,19 @@ class Customermodel extends CI_Model {
 		return false;
 		}
    }
+   public function getPagePostById($id){
+	    $condition = "post_id =" . "'" . $id . "'";
+		$this->db->select('*');
+		$this->db->from('bzz_page_posts');
+		$this->db->where($condition);
+		$this->db->limit(1);
+		$query = $this->db->get();
+		if ($query->num_rows() == 1) {
+			return $query->result();
+		} else {
+		return false;
+		}
+   }
     public function getFavById($id){
 	    $condition = "favorite_id =" . "'" . $id . "'";
 		$this->db->select('*');
@@ -1107,6 +1411,22 @@ public function individual_Posts($post_id)
 	   $this->db->where('post_id',$post_id);
 	 
 	   $this->db->from('bzz_posts');
+	
+	   $this->db->limit(1);
+	
+	   $query = $this->db->get();
+   	   if ($query->num_rows() == 1)
+	    {
+	   	return $query->result();
+       }
+}
+public function individual_Page_Posts($post_id)
+{
+	  $this->db->select('*');
+	   
+	   $this->db->where('post_id',$post_id);
+	 
+	   $this->db->from('bzz_Page_posts');
 	
 	   $this->db->limit(1);
 	

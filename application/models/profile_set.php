@@ -1879,5 +1879,11 @@ public function change_category_name_byid($data,$category_id)
 	
 	
 }
+public function insert_page($data){
+       if($this->db->insert('bzz_pages',$data))
+	   return $this->db->insert_id();
+	   else
+	   return false;	
+}
 }
 ?>

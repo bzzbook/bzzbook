@@ -131,6 +131,7 @@ $(function () {
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script> 
 <script src="<?php echo base_url(); ?>js/fbphotobox.js"></script>
 <script src="<?php echo base_url(); ?>js/fbfavbox.js"></script>
+<script src="<?php echo base_url(); ?>js/pagephotobox.js"></script>
 <script src="<?php echo base_url(); ?>js/custom.js"></script> 
 <script src="<?php echo base_url(); ?>js/jquery.nanoscroller.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>js/chat.js"></script>
@@ -138,6 +139,15 @@ $(function () {
 <script src="<?php echo base_url(); ?>js/slideUserOption.jquery.js" type="text/javascript"></script>
 <?php $this->load->view('footer_siva'); ?>
 <script>
+$(document).ready(function(e) {
+        //var hashval = window.location.href.toString().split('#')[1];
+		var hashval = $('#post_cur_tab').val();
+		if(hashval){		
+		$(".active").removeClass( "active" );
+		$("#"+hashval).addClass("active");
+		$("#"+hashval+"_tab").addClass("active");
+		}
+    });
 $(document).ready(function() {
         $("#nextItemAnim").sliderUserOption({
    itemWidth :200, 
@@ -720,10 +730,41 @@ function likefun(pid,uid,count){
        });	
 }
 
-function commentlikefun(pid,uid,count){
+function page_likefun(pid,uid,count){
 	var posted_by=pid;
 	var user_id=uid;
-	url="<?php echo base_url();?>signg_in/commentinsertlinks/"+pid+"/"+uid;
+	url="<?php echo base_url();?>signg_in/insert_page_like/"+pid+"/"+uid;
+	  $.ajax({
+        type: "POST",
+        url: url,
+        data: { liked_by: pid, like_on : uid} ,
+        success: function(html)
+        {   
+			//alert(html);
+			info = JSON.parse(html);
+         if(info.like_status == 'N'){
+		 	//$("#like_ajax"+pid).html("Unlike");
+			$("#link_like"+pid).html("Like");
+			   $("#like_count"+pid).html('');
+		    $("#like_count"+pid).html('<img src="<?php echo base_url(); ?>images/like_myphotos.png" alt="">&nbsp;'+(info.like_count-1)+'&nbsp;&nbsp;');
+
+		 }			
+		  else{
+			//$("#like_ajax"+pid).html("Like");
+			$("#link_like"+pid).html("Unlike");
+			   $("#like_count"+pid).html('');
+	        $("#like_count"+pid).html('<img src="<?php echo base_url(); ?>images/like_myphotos.png" alt="">&nbsp;'+(info.like_count+1)+'&nbsp;&nbsp;');
+
+		  }
+        }
+       });	
+}
+
+
+function page_commentlikefun(pid,uid,count){
+	var posted_by=pid;
+	var user_id=uid;
+	url="<?php echo base_url();?>signg_in/page_commentinsertlikes/"+pid+"/"+uid;
 	  $.ajax({
         type: "POST",
         url: url,
@@ -746,7 +787,42 @@ function commentlikefun(pid,uid,count){
         }
        });	
 }
+function view_comments(id){
+	$('#res_comments'+id).hide();
+	$('#res_comments_viewmore'+id).show();
+}
+function page_photocommentlikefun(pid,uid,count,photoname){
+	
+	var posted_by=pid;
+	var user_id=uid;
+	url="<?php echo base_url();?>signg_in/page_photocommentinsertlinks/"+pid+"/"+uid+"/"+photoname;
+	  $.ajax({
+        type: "POST",
+        url: url,
+        data: { liked_by: pid, like_on : uid} ,
+        success: function(html)
+        {   
+			info = JSON.parse(html);
+         if(info.like_status == 'N'){
+		 	//$("#like_ajax"+pid).html("Unlike");
+			$("#photo_cmt_link_like"+pid).html("Like");
+			var newval = info.like_count-1;
+			if(newval<=0)
+			{$("#photo_cmt_like_count"+pid).html('');}
+			else
+		    $("#photo_cmt_like_count"+pid).html('<img src="<?php echo base_url(); ?>images/like_myphotos.png" alt="">&nbsp;('+newval+')&nbsp;&nbsp;');
 
+		 }			
+		  else{
+			//$("#like_ajax"+pid).html("Like");
+			$("#photo_cmt_link_like"+pid).html("Unlike");
+	        $("#photo_cmt_like_count"+pid).html('<img src="<?php echo base_url(); ?>images/like_myphotos.png" alt="">&nbsp;'+(info.like_count+1)+'&nbsp;&nbsp;');
+
+		  }
+        }
+       });	
+
+}
 function photocommentlikefun(pid,uid,count,photoname){
 	var posted_by=pid;
 	var user_id=uid;
@@ -1397,6 +1473,68 @@ function getPostComments(post_id,photo_name)
   cache: false
   });
 }
+function getPagePostComments(post_id,photo_name)
+{
+ call_pagephotobox();
+ image = "<img width='80px' style='margin-left:150px;' src='<?php echo base_url(); ?>images/loading.gif' />";
+ $(".pagephotobox-image-content").html(image);
+ url="<?php echo base_url(); ?>customer/getpagepostcomments/"+post_id+"/"+photo_name;
+  $.ajax({
+        type: "POST",
+        url: url,
+        success: function(data)
+        {   
+		
+   $(".pagephotobox-image-content").html(data);
+   $(".nano").nanoScroller();
+  },
+  cache: false
+  });
+  url="<?php echo base_url(); ?>customer/getpagepostcontent/"+post_id;
+  $.ajax({
+        type: "POST",
+        url: url,
+        success: function(data)
+        {   
+		
+   $(".pagephotobox-container-left-footer").html(data);
+  
+  },
+  cache: false
+  });
+}
+function getPagePostComments_photospage(post_id,photo_name)
+{
+ var photo_name = photo_name.replace("_default.", ".");
+ var photo_name = photo_name.replace("_extended.", ".");
+ image = "<img width='80px' style='margin-left:150px;' src='<?php echo base_url(); ?>images/loading.gif' />";
+ $(".pagephotobox-image-content").html(image);
+ url="<?php echo base_url(); ?>customer/getpagepostcomments/"+post_id+"/"+photo_name;
+  $.ajax({
+        type: "POST",
+        url: url,
+        success: function(data)
+        {   
+		
+   $(".pagephotobox-image-content").html(data);
+   $(".nano").nanoScroller();
+  },
+  cache: false
+  });
+  url="<?php echo base_url(); ?>customer/getpagepostcontent/"+post_id;
+  $.ajax({
+        type: "POST",
+        url: url,
+        success: function(data)
+        {   
+		
+   $(".pagephotobox-container-left-footer").html(data);
+  
+  },
+  cache: false
+  });
+}
+
 function getPostComments_photospage(post_id,photo_name)
 {
  var photo_name = photo_name.replace("_default.", ".");
@@ -1467,6 +1605,42 @@ success: function(data)   // A function to be called if request succeeds
 
 
 }
+function pagepostComSub(e,post_id,photo_name){
+e.preventDefault();
+
+url = "<?php echo base_url(); ?>signg_in/write_page_photo_comment/"+post_id+"/"+photo_name;
+ var formObj = $('form#imgCmtForm')[0];
+
+//$("#message").empty();
+//$('#loading').show();
+$.ajax({
+	 
+url: url, // Url to which the request is send
+type: "POST",             // Type of request to be send, called as method
+data: new FormData(formObj), // Data sent to server, a set of key/value pairs (i.e. form fields and values)
+contentType: false,       // The content type used when sending data to the server.
+cache: false,             // To unable request pages to be cached
+processData:false,        // To send DOMDocument or non processed data file it is set to false
+success: function(data)   // A function to be called if request succeeds
+{
+	if(data==' success'){
+	getPagePostComments_photospage(post_id,photo_name);
+	}
+	else
+	$('.commentBox-error').html(data);
+//$('#res_comments'+post_id).append(data);
+//$('#write_comment'+post_id).val('');
+//var commentboxcont = $('#commentBox'+post_id).html();
+//$('#commentBox'+post_id).html('');
+//$('#uploadCommentPhotos'+post_id).val('');
+//$('#commentBox'+post_id).html(commentboxcont);
+
+}
+});
+
+
+}
+
 /* fuction to mark as read and mark un-read */
 
 function  onchangeMore(){
@@ -2011,6 +2185,14 @@ function startUpload(){
 
 function sharePost(post_id){
 	url="<?php echo base_url(); ?>profile/get_post_byid/"+post_id;
+					$.post( url )
+					.done(function( data ) {
+						$('#sharePostPopup').html(data);
+						
+					});
+}
+function sharePagePost(post_id){
+	url="<?php echo base_url(); ?>profile/get_page_post_byid/"+post_id;
 					$.post( url )
 					.done(function( data ) {
 						$('#sharePostPopup').html(data);

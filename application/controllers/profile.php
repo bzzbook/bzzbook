@@ -53,7 +53,13 @@ public function about_me($user_id='')
 	$this->load->view('full_content_view',$data);
 	//$this->load->view('about_me',$data);
 }
-
+public function create_page()
+{
+	$this->session->unset_userdata('file_error');
+	$data['content']='create_page';
+	$this->load->view('full_content_view',$data);
+	//$this->load->view('about_me',$data);
+}
 
 public function business_details($user_id='')
 {
@@ -100,6 +106,15 @@ public function user($user_id='')
 	  $this->load->view('full_content_view',$data);
 
 }
+public function page($page_id = '')
+{	  
+	  $this->load->model('pagemodel');
+	  $data['user_id'] = '';
+	  $data['page_id'] = $page_id;
+	  $data['content']='page';
+	  $this->load->view('full_content_view',$data);
+}
+
 public function message()
   { 
   	$data['content']='messages';
@@ -933,6 +948,97 @@ return true;
 			
 			 
 			 echo $content;
+	}
+	public function get_page_post_byid($post_id){
+	
+		
+		$row = $this->customermodel->getPagePostById($post_id);
+		$row = $row[0];
+		$posted_id=$row->posted_by;
+	 	$get_profiledata = $this->customermodel->profiledata($posted_id);
+	    $user_id = $this->session->userdata('logged_in')['account_id'];
+		
+		$attr = array('name' => 'share_form', 'id' =>'share_form', 'enctype'=>"multipart/form-data");
+      	
+		$content = form_open('signg_in/share_post',$attr)."<input type='file' name='uploadPhotos[]' id='uploadPhotos' multiple='multiple' style='display:none;' />
+        <textarea style='float:left' cols='' rows='' name='share_post_content' id='posts' class='form-control' placeholder='say something...'></textarea><div class='posts'><article>";
+		    $morePics = '';  $file_ext ='';		
+		  	if(!empty($row->uploaded_files))
+			 {
+			 $up_files = explode(',',$row->uploaded_files);
+			 $i = 0;
+			 $tot_images = count($up_files);
+				
+			 if($tot_images==1){
+				
+			 $file_parts = explode('.',$row->uploaded_files);
+			 $file_ext = $file_parts[1];
+			 $validvideoextensions = array('webm','mp4','ogg','ogv','wmv','3gp','3g2','3gpp','avi','mov','flv'); 
+			 }
+			 if($tot_images>5)
+			 $morePics = 'morePics';
+			 }
+			 ?>
+             <?php  if(isset($file_ext) && $file_ext!='' && in_array($file_ext,$validvideoextensions)){?>  
+             <div class="videoImage" id="videoImage<?php echo $row->post_id; ?>"><img width="100%" src="<?php echo base_url().'uploads/'.$file_parts[0].'.png'; ?>" /><div ></div></div>
+             <video id="videotag<?php echo $row->post_id; ?>" width="100%" controls="controls" style="display:none">
+              <source src="<?php echo base_url().'uploads/'.$row->uploaded_files; ?>" type="video/mp4">
+            Your browser does not support the video tag.
+            </video>  
+<?php  }else{ 
+          $content .="<div class='userContent'>";
+		  
+		  if(!empty($row->uploaded_files))
+			 {
+			 $up_files = explode(',',$row->uploaded_files);
+			 $i = 0;
+			 $tot_images = count($up_files);
+			 if($tot_images>5)
+			 $tot_images = 5;
+			 echo "<div class='fbphotobox postImages post-data-".$tot_images."' id='fbphotobox".$row->post_id."'>";
+			 foreach($up_files as $file)
+			 {
+				 $file1 = explode('.',$file);
+				  echo " 
+    <a onclick='getPostComments(".$row->post_id.",&#39;".$file."&#39;)'><span class='photo' style='background:url(".base_url()."uploads/".$file1[0].'_default.'.$file1[1].") center center no-repeat' fbphotobox-src='".base_url()."uploads/".$file1[0].'_extended.'.$file1[1]."' ><i>+ ".(count($up_files)-5)."</i></span</a>";
+				/* if($i==0)
+				 {
+					 echo " 
+    <a onclick='getPostComments(".$row->post_id.",&#39;".$file."&#39;)'><img class='photo' fbphotobox-src='".base_url()."uploads/".$file1[0].'_extended.'.$file1[1]."' src='".base_url()."uploads/".$file1[0].'_default.'.$file1[1]."' /></a>";
+				 }
+				 else
+				 	 echo "<a onclick='getPostComments(".$row->post_id.",&#39;".$file."&#39;)'><img class='photo' fbphotobox-src='".base_url()."uploads/".$file1[0].'_extended.'.$file1[1]."' src='".base_url()."uploads/".$file1[0].'_default.'.$file1[1]."' style='width:24%;float:left;margin:.5%; height:83px'/></a>";
+				 $i++;*/
+			 }
+			 echo '<div class="clearfix"></div>';
+			 echo "</div>";
+			 $content .= "<div style='clear:both'></div>";
+			 } 
+             
+            $content .= "</div>";
+}
+			$str_leng=strlen($row->post_content);
+			  if($str_leng>50){
+				$content .= "<div id='popmsg".$row->post_id."'>".substr($row->post_content,0,50)."...<a href='#' onclick='popmyfunc(".$row->post_id.")'>more</a>"."</div><div id='popdes".$row->post_id."' style='display:none'>".$row->post_content."<a href='#' onclick='popmyfunc(".$row->post_id.")'>less</a></div>
+          </div></article></div><div class='updateControls'> <button id='sharePostBtn'>Post</button> <select name='post_group' id='post_group'><option value='0'>Public</option>"; 
+			 }else{
+				$content .= substr($row->post_content,0,50)."</p>
+          </div></article></div><div class='updateControls'> <button id='sharePostBtn'>Post</button> <select name='post_group' id='post_group'><option value='0'>Public</option>";
+		  
+			 }
+		$groups = $this->profile_set->get_user_groups(); if($groups) { 
+		foreach($groups as $group)
+		{
+			$content.="<option value='".$group['group_id']."'>".$group['group_name']."</option>";
+		}
+		
+		
+		} 
+		$content.="</select> </div><input type='hidden' id='uploaded_files' name='uploaded_files' value='".$row->uploaded_files."'><input type='hidden' id='uploaded_files' name='post_content' id='post_content' value='".$row->post_content."'>".form_close();
+			
+			 
+			 echo $content;
+		
 	}
 	
 	public function get_post_byid_for_save_fav($post_id)
@@ -1942,5 +2048,532 @@ public function get_my_timeline_pics()
 		$data['content']='myphotos';
 		$this->load->view('full_content_view',$data);
 }
+public function add_bus_page(){
+		//print_r($_POST); exit;
+		//print_r($_FILES); exit;
+		$this->form_validation->set_rules('bus_sub_category', 'Sub Category', 'required|greater_than[0]');		
+		$this->form_validation->set_rules('bus_page_name', 'Local Bussiness or Place Name','required|is_unique[bzz_pages.page_name]');		
+		$this->form_validation->set_rules('bus_address', 'Address', 'required');	
+		$this->form_validation->set_rules('bus_city_state', 'City/State', 'required');
+		$this->form_validation->set_rules('bus_zip_code', 'Zipcode', 'required');	
+		$this->form_validation->set_rules('bus_phone', 'Phone', 'required|numeric');		
+		$this->form_validation->set_rules('bus_description', 'Description', '');
+		$this->form_validation->set_rules('bus_website_url', 'Website', '');
+		$this->form_validation->set_rules('bus_places_can_connect', 'Places', '');
+		$this->form_validation->set_rules('bus_aud_interests', 'Interests', '');
+		$this->form_validation->set_rules('bus_aud_min_age', 'Min Age', '');
+		$this->form_validation->set_rules('bus_aud_max_age', 'Max Age', '');
+		$this->form_validation->set_rules('bus_aud_gender', 'Gender', '');
+		
+		if($this->form_validation->run() == FALSE)
+		{
+			//echo 'here'; exit;
+			$data['content']='create_page';
+			$data['current_tab'] = 'overview';
+			$this->load->view('full_content_view',$data);
+			//header('Location: '.base_url().'profile/create_page#'.$_POST['current_tab']);  
+		}else{
+			   if($_FILES['bus_page_image']['name']!=''){	
+					$up_res = $this->ajax_image_upload('bus_page_image');
+					//print_r($up_res); exit;	  
+					if($up_res['status']){
+					$file_name = implode(',',$up_res['files']);
+					$insertdata['page_image'] = $file_name;
+					
+				}
+				else{					
+					$newdata = array(
+					   'file_error'  => $up_res['message'],                  
+					);
+					$this->session->set_userdata($newdata);
+					$data['content']='create_page';
+					$data['current_tab'] = 'overview';
+					$this->load->view('full_content_view',$data);
+				}
+	    }
+		$insertdata['page_name'] = $this->input->post('bus_page_name');
+		$insertdata['address'] = $this->input->post('bus_address');
+		$insertdata['city_state'] = $this->input->post('bus_city_state');
+		$insertdata['zip_code'] = $this->input->post('bus_zip_code');
+		$insertdata['phone'] = $this->input->post('bus_phone');
+		$insertdata['description'] = $this->input->post('bus_description');
+		$insertdata['website_url'] = $this->input->post('bus_website_url');
+		$insertdata['places_can_connect'] = $this->input->post('bus_places_can_connect');
+		$insertdata['aud_interests'] = $this->input->post('bus_aud_interests');
+		$insertdata['aud_min_age'] = $this->input->post('bus_aud_min_age');
+		$insertdata['aud_max_age'] = $this->input->post('bus_aud_max_age');
+		$insertdata['aud_gender'] = $this->input->post('bus_aud_gender');
+		$insertdata['main_category'] = 1;
+		$insertdata['sub_category'] = $this->input->post('bus_sub_category');
+		$insertdata['user_id']= $this->session->userdata('logged_in')['account_id'];	
+		$insertdata['view_as'] = 'user';	
+		$page_id = $this->profile_set->insert_page($insertdata);
+		 
+		/*$settings['profile_visible'] = 'Y';
+		$settings['comments_visible'] = 'Y';
+		$settings['email_notification'] = 'Y';
+		$settings['user_id'] = $this->session->userdata('logged_in')['account_id'];
+		$settings['companyinfo_id'] = $companyinfo_id;		 
+		$resut = $this->companies->managecmp_settings($settings);*/	
+		
+		redirect('/profile/page/'.$page_id);
+		}
+		
+}
+public function add_cmp_page(){
+		//print_r($_POST); exit;
+		
+		$this->form_validation->set_rules('cmp_sub_category', 'Sub Category', 'required|greater_than[0]');		
+		$this->form_validation->set_rules('cmp_page_name', 'Local Bussiness or Place Name','required|is_unique[bzz_pages.page_name]');		
+		
+		$this->form_validation->set_rules('cmp_description', 'Description', '');		
+		$this->form_validation->set_rules('cmp_website_url', 'Website', '');
+		$this->form_validation->set_rules('cmp_places_can_connect', 'Places', '');
+		$this->form_validation->set_rules('cmp_aud_interests', 'Interests', '');
+		$this->form_validation->set_rules('cmp_aud_min_age', 'Min Age', '');
+		$this->form_validation->set_rules('cmp_aud_max_age', 'Max Age', '');
+		$this->form_validation->set_rules('cmp_aud_gender', 'Gender', '');
+
+		if($this->form_validation->run() == FALSE)
+		{
+			//echo validation_errors();
+			$data['content']='create_page';
+			$data['current_tab'] = 'education';
+			$this->load->view('full_content_view',$data);
+			//header('Location: '.base_url().'profile/create_page#'.$_POST['current_tab']);  
+		}else{
+			if($_FILES['cmp_page_image']['name']!=''){				
+				$up_res = $this->ajax_image_upload('cmp_page_image');
+				//print_r($up_res); exit;	  
+				if($up_res['status']){
+				$file_name = implode(',',$up_res['files']);
+				$insertdata['page_image'] = $file_name;
+					
+				}
+				else{
+					
+				$newdata = array(
+				   'file_error'  => $up_res['message'],                  
+				);
+				$this->session->set_userdata($newdata);
+				$data['content']='create_page';
+				$data['current_tab'] = 'education';
+				$this->load->view('full_content_view',$data);
+				}
+			}
+		        $insertdata['page_name'] = $this->input->post('cmp_page_name');
+				$insertdata['description'] = $this->input->post('cmp_description');
+				$insertdata['website_url'] = $this->input->post('cmp_website_url');
+				$insertdata['places_can_connect'] = $this->input->post('cmp_places_can_connect');
+				$insertdata['aud_interests'] = $this->input->post('cmp_aud_interests');
+				$insertdata['aud_min_age'] = $this->input->post('cmp_aud_min_age');
+				$insertdata['aud_max_age'] = $this->input->post('cmp_aud_max_age');
+				$insertdata['aud_gender'] = $this->input->post('cmp_aud_gender');
+				$insertdata['main_category'] = 2;
+				$insertdata['sub_category'] = $this->input->post('cmp_sub_category');
+				$insertdata['user_id']= $this->session->userdata('logged_in')['account_id'];	
+				$insertdata['view_as'] = 'user';	
+				$page_id = $this->profile_set->insert_page($insertdata);
+				 
+				/*$settings['profile_visible'] = 'Y';
+				$settings['comments_visible'] = 'Y';
+				$settings['email_notification'] = 'Y';
+				$settings['user_id'] = $this->session->userdata('logged_in')['account_id'];
+				$settings['companyinfo_id'] = $companyinfo_id;		 
+				$resut = $this->companies->managecmp_settings($settings);*/	
+				
+				redirect('/profile/page/'.$page_id);
+			
+		}
+		
+}
+public function add_brand_page(){
+		//print_r($_POST); exit;
+		
+		$this->form_validation->set_rules('brand_sub_category', 'Sub Category', 'required|greater_than[0]');		
+		$this->form_validation->set_rules('brand_page_name', 'Local Bussiness or Place Name','required|is_unique[bzz_pages.page_name]');		
+		
+		$this->form_validation->set_rules('brand_description', 'Description', '');	
+		$this->form_validation->set_rules('brand_website_url', 'Website', '');
+		$this->form_validation->set_rules('brand_places_can_connect', 'Places', '');
+		$this->form_validation->set_rules('brand_aud_interests', 'Interests', '');
+		$this->form_validation->set_rules('brand_aud_min_age', 'Min Age', '');
+		$this->form_validation->set_rules('brand_aud_max_age', 'Max Age', '');
+		$this->form_validation->set_rules('brand_aud_gender', 'Gender', '');
+			
+
+
+		if($this->form_validation->run() == FALSE)
+		{
+			//echo 'here'; exit;
+			$data['content']='create_page';
+			$data['current_tab'] = 'place';
+			$this->load->view('full_content_view',$data);
+			//header('Location: '.base_url().'profile/create_page#'.$_POST['current_tab']);  
+		}else{
+			if($_FILES['brand_page_image']['name']!=''){				
+				$up_res = $this->ajax_image_upload('brand_page_image');
+				//print_r($up_res); exit;	  
+				if($up_res['status']){
+				$file_name = implode(',',$up_res['files']);
+				$insertdata['page_image'] = $file_name;
+					
+				}
+				else{
+					
+				$newdata = array(
+				   'file_error'  => $up_res['message'],                  
+				);
+				$this->session->set_userdata($newdata);
+				$data['content']='create_page';
+				$data['current_tab'] = 'place';
+				$this->load->view('full_content_view',$data);
+				}
+			}
+		       $insertdata['page_name'] = $this->input->post('brand_page_name');
+$insertdata['description'] = $this->input->post('brand_description');
+$insertdata['website_url'] = $this->input->post('brand_website_url');
+$insertdata['places_can_connect'] = $this->input->post('brand_places_can_connect');
+$insertdata['aud_interests'] = $this->input->post('brand_aud_interests');
+$insertdata['aud_min_age'] = $this->input->post('brand_aud_min_age');
+$insertdata['aud_max_age'] = $this->input->post('brand_aud_max_age');
+$insertdata['aud_gender'] = $this->input->post('brand_aud_gender');
+$insertdata['main_category'] = 3;
+$insertdata['sub_category'] = $this->input->post('brand_sub_category');
+				$insertdata['user_id']= $this->session->userdata('logged_in')['account_id'];	
+				$insertdata['view_as'] = 'user';	
+				$page_id = $this->profile_set->insert_page($insertdata);
+				 
+				/*$settings['profile_visible'] = 'Y';
+				$settings['comments_visible'] = 'Y';
+				$settings['email_notification'] = 'Y';
+				$settings['user_id'] = $this->session->userdata('logged_in')['account_id'];
+				$settings['companyinfo_id'] = $companyinfo_id;		 
+				$resut = $this->companies->managebrand_settings($settings);*/	
+				
+				redirect('/profile/page/'.$page_id);
+			
+		}
+		
+}
+public function add_art_page(){
+		//print_r($_POST); exit;
+		
+		$this->form_validation->set_rules('art_sub_category', 'Sub Category', 'required|greater_than[0]');		
+		$this->form_validation->set_rules('art_page_name', 'Local Bussiness or Place Name','required|is_unique[bzz_pages.page_name]');		
+		
+		$this->form_validation->set_rules('art_description', 'Description', '');
+		$this->form_validation->set_rules('art_website_url', 'Website', '');
+		$this->form_validation->set_rules('art_places_can_connect', 'Places', '');
+		$this->form_validation->set_rules('art_aud_interests', 'Interests', '');
+		$this->form_validation->set_rules('art_aud_min_age', 'Min Age', '');
+		$this->form_validation->set_rules('art_aud_max_age', 'Max Age', '');
+		$this->form_validation->set_rules('art_aud_gender', 'Gender', '');		
+
+
+		if($this->form_validation->run() == FALSE)
+		{
+			//echo 'here'; exit;
+			$data['content']='create_page';
+			$data['current_tab'] = 'contact';
+			$this->load->view('full_content_view',$data);
+			//header('Location: '.base_url().'profile/create_page#'.$_POST['current_tab']);  
+		}else{
+			if($_FILES['art_page_image']['name']!=''){				
+				$up_res = $this->ajax_image_upload('art_page_image');
+				//print_r($up_res); exit;	  
+				if($up_res['status']){
+				$file_name = implode(',',$up_res['files']);
+				$insertdata['page_image'] = $file_name;
+					
+				}
+				else{
+					
+				$newdata = array(
+				   'file_error'  => $up_res['message'],                  
+				);
+				$this->session->set_userdata($newdata);
+				$data['content']='create_page';
+				$data['current_tab'] = 'contact';
+				$this->load->view('full_content_view',$data);
+				}
+			}
+		        $insertdata['page_name'] = $this->input->post('art_page_name');
+				$insertdata['description'] = $this->input->post('art_description');
+				$insertdata['website_url'] = $this->input->post('art_website_url');
+				$insertdata['places_can_connect'] = $this->input->post('art_places_can_connect');
+				$insertdata['aud_interests'] = $this->input->post('art_aud_interests');
+				$insertdata['aud_min_age'] = $this->input->post('art_aud_min_age');
+				$insertdata['aud_max_age'] = $this->input->post('art_aud_max_age');
+				$insertdata['aud_gender'] = $this->input->post('art_aud_gender');
+				$insertdata['main_category'] = 4;
+				$insertdata['sub_category'] = $this->input->post('art_sub_category');
+				$insertdata['user_id']= $this->session->userdata('logged_in')['account_id'];	
+				$insertdata['view_as'] = 'user';	
+				$page_id = $this->profile_set->insert_page($insertdata);
+				 
+				/*$settings['profile_visible'] = 'Y';
+				$settings['comments_visible'] = 'Y';
+				$settings['email_notification'] = 'Y';
+				$settings['user_id'] = $this->session->userdata('logged_in')['account_id'];
+				$settings['companyinfo_id'] = $companyinfo_id;		 
+				$resut = $this->companies->manageart_settings($settings);*/	
+				
+				redirect('/profile/page/'.$page_id);
+			
+		}
+		
+}
+public function add_ent_page(){
+		//print_r($_POST); exit;
+		
+		$this->form_validation->set_rules('ent_sub_category', 'Sub Category', 'required|greater_than[0]');		
+		$this->form_validation->set_rules('ent_page_name', 'Local Bussiness or Place Name','required|is_unique[bzz_pages.page_name]');		
+		
+		$this->form_validation->set_rules('ent_description', 'Description', '');		
+		$this->form_validation->set_rules('ent_website_url', 'Website', '');
+		$this->form_validation->set_rules('ent_places_can_connect', 'Places', '');
+		$this->form_validation->set_rules('ent_aud_interests', 'Interests', '');
+		$this->form_validation->set_rules('ent_aud_min_age', 'Min Age', '');
+		$this->form_validation->set_rules('ent_aud_max_age', 'Max Age', '');
+		$this->form_validation->set_rules('ent_aud_gender', 'Gender', '');
+
+		if($this->form_validation->run() == FALSE)
+		{
+			//echo 'here'; exit;
+			$data['content']='create_page';
+			$data['current_tab'] = 'family';
+			$this->load->view('full_content_view',$data);
+			//header('Location: '.base_url().'profile/create_page#'.$_POST['current_tab']);  
+		}else{
+			if($_FILES['ent_page_image']['name']!=''){				
+				$up_res = $this->ajax_image_upload('ent_page_image');
+				//print_r($up_res); exit;	  
+				if($up_res['status']){
+				$file_name = implode(',',$up_res['files']);
+				$insertdata['page_image'] = $file_name;
+					
+				}
+				else{
+					
+				$newdata = array(
+				   'file_error'  => $up_res['message'],                  
+				);
+				$this->session->set_userdata($newdata);
+				$data['content']='create_page';
+				$data['current_tab'] = 'family';
+				$this->load->view('full_content_view',$data);
+				}
+			}
+		       $insertdata['page_name'] = $this->input->post('ent_page_name');
+$insertdata['description'] = $this->input->post('ent_description');
+$insertdata['website_url'] = $this->input->post('ent_website_url');
+$insertdata['places_can_connect'] = $this->input->post('ent_places_can_connect');
+$insertdata['aud_interests'] = $this->input->post('ent_aud_interests');
+$insertdata['aud_min_age'] = $this->input->post('ent_aud_min_age');
+$insertdata['aud_max_age'] = $this->input->post('ent_aud_max_age');
+$insertdata['aud_gender'] = $this->input->post('ent_aud_gender');
+$insertdata['main_category'] = 5;
+$insertdata['sub_category'] = $this->input->post('ent_sub_category');
+				$insertdata['user_id']= $this->session->userdata('logged_in')['account_id'];	
+				$insertdata['view_as'] = 'user';	
+				$page_id = $this->profile_set->insert_page($insertdata);
+				 
+				/*$settings['profile_visible'] = 'Y';
+				$settings['comments_visible'] = 'Y';
+				$settings['email_notification'] = 'Y';
+				$settings['user_id'] = $this->session->userdata('logged_in')['account_id'];
+				$settings['companyinfo_id'] = $companyinfo_id;		 
+				$resut = $this->companies->manageent_settings($settings);*/	
+				
+				redirect('/profile/page/'.$page_id);
+			
+		}
+		
+}
+public function add_cause_page(){
+		//print_r($_POST); exit;
+		
+				
+		$this->form_validation->set_rules('cause_page_name', 'Local Bussiness or Place Name','required|is_unique[bzz_pages.page_name]');		
+		
+		$this->form_validation->set_rules('cause_description', 'Description', '');	
+		$this->form_validation->set_rules('cause_website_url', 'Website', '');
+		$this->form_validation->set_rules('cause_places_can_connect', 'Places', '');
+		$this->form_validation->set_rules('cause_aud_interests', 'Interests', '');
+		$this->form_validation->set_rules('cause_aud_min_age', 'Min Age', '');
+		$this->form_validation->set_rules('cause_aud_max_age', 'Max Age', '');
+		$this->form_validation->set_rules('cause_aud_gender', 'Gender', '');
+
+		if($this->form_validation->run() == FALSE)
+		{
+			//echo 'here'; exit;
+			
+			$data['content']='create_page';
+			$data['current_tab'] = 'details';
+			$this->load->view('full_content_view',$data);
+			//header('Location: '.base_url().'profile/create_page#'.$_POST['currcause_tab']);  
+		}else{
+			if($_FILES['cause_page_image']['name']!=''){				
+				$up_res = $this->ajax_image_upload('cause_page_image');
+				//print_r($up_res); exit;	  
+				if($up_res['status']){
+				$file_name = implode(',',$up_res['files']);
+				$insertdata['page_image'] = $file_name;
+					
+				}
+				else{
+					
+				$newdata = array(
+				   'file_error'  => $up_res['message'],                  
+				);
+				$this->session->set_userdata($newdata);
+				$data['content']='create_page';
+				$data['current_tab'] = 'details';
+				$this->load->view('full_content_view',$data);
+				}
+			}
+		        $insertdata['page_name'] = $this->input->post('cause_page_name');
+				$insertdata['description'] = $this->input->post('cause_description');
+				$insertdata['website_url'] = $this->input->post('cause_website_url');
+				$insertdata['places_can_connect'] = $this->input->post('cause_places_can_connect');
+				$insertdata['aud_interests'] = $this->input->post('cause_aud_interests');
+				$insertdata['aud_min_age'] = $this->input->post('cause_aud_min_age');
+				$insertdata['aud_max_age'] = $this->input->post('cause_aud_max_age');
+				$insertdata['aud_gender'] = $this->input->post('cause_aud_gender');
+				$insertdata['main_category'] = 6;
+				$insertdata['sub_category'] = $this->input->post('cause_sub_category');
+				$insertdata['user_id']= $this->session->userdata('logged_in')['account_id'];	
+				$insertdata['view_as'] = 'user';	
+				$page_id = $this->profile_set->insert_page($insertdata);
+				 
+				/*$settings['profile_visible'] = 'Y';
+				$settings['comments_visible'] = 'Y';
+				$settings['email_notification'] = 'Y';
+				$settings['user_id'] = $this->session->userdata('logged_in')['account_id'];
+				$settings['companyinfo_id'] = $companyinfo_id;		 
+				$resut = $this->companies->managecause_settings($settings);*/	
+				
+				redirect('/profile/page/'.$page_id);
+			
+		}
+		
+}
+public function ajax_image_upload($file_name){
+	//print_r($_FILES); exit(0);
+	
+	$n =  count($_FILES[$file_name]['name']);
+	$validextensions = array("jpeg", "jpg", "png");
+	$validvideoextensions = array('webm','mp4','ogg','ogv','wmv','3gp','3g2','3gpp','avi','mov','flv','MOV');
+	//print_r($_FILES[$file_name]);
+	
+		$filetype = $_FILES[$file_name]["type"];
+		$filename = str_replace(' ', '', time().'_'.$_FILES[$file_name]["name"]);
+		$filesize = $_FILES[$file_name]["size"];
+		$fileerror = $_FILES[$file_name]["error"];
+		$tempname = $_FILES[$file_name]['tmp_name'];
+		
+	
+	if(isset($filetype) && !empty($filetype))	
+	{		
+		$temporary = explode(".",$filename);
+		
+		$file_extension = end($temporary);
+		
+		if((($filetype == "image/png") || ($filetype == "image/jpg") || ($filetype == "image/jpeg")
+		) && ($filesize < 4194000)//Approx. 100kb files can be uploaded.
+		&& in_array($file_extension, $validextensions)) {
+			
+		if ($fileerror > 0)
+		{
+		$file_upload['status'] = false;
+		$file_upload['error_code'] = 2;
+		$file_upload['message'] =  "Return Code: " . $fileerror . "<br/><br/>";
+		}
+		else
+		{
+		
+		$config['upload_path'] = DIR_FILE_PATH; 
+		//$config['upload_path'] = './uploads/';
+		$sourcePath = $tempname; // Storing source path of the file in a variable
+		//$targetPath = "F:\/xampp\/htdocs\/bzzbook\/uploads\/".$_FILES[$file_name]['name'][0];
+		$targetPath = $config['upload_path'].$filename; // Target path where file is to be stored
+		move_uploaded_file($sourcePath,$targetPath) ; 
+		$file_upload['status'] = true;
+		$file_upload['video'] = "N";
+		$file_upload['files'][] =  $filename;
+		
+		    $path = DIR_FILE_PATH.$filename;
+			$this->load->library('image_autorotate', array('filepath' => $path));
+		    $config['allowed_types'] = 'gif|jpg|png';
+			$config['create_thumb'] = TRUE;
+			$config['max_size']	= '';
+			$config['max_width']  = '';
+			$config['max_height']  = '';
+		    $config['image_library'] = 'gd2';
+			$config['remove_spaces'] = TRUE;
+			$config['create_thumb'] = TRUE;
+			$config['maintain_ratio'] = TRUE;
+			$config['source_image'] = $path;
+			
+			list($imagewidth, $imageheight, $imageType) = getimagesize($path);
+			if($imagewidth>523){
+				$default_width = 523;
+				$entended_width = 900;
+				$thumb_width = 182;
+			}else{
+				$default_width = $imagewidth;
+				$entended_width = $imagewidth;
+				$thumb_width = $imagewidth;
+			}
+			$config['thumb_marker'] = '_default';
+			$config['width'] = $default_width;
+			$config['height'] = 1;
+			$config['master_dim'] = 'width';
+			$this->load->library('image_lib', $config);
+			$this->image_lib->initialize($config);
+			$this->image_lib->resize();
+			
+			$config['thumb_marker'] = '_extended';
+			$config['width'] = $entended_width;
+			$config['height'] = 1;
+			$config['master_dim'] = 'width';
+			$this->load->library('image_lib', $config);
+			$this->image_lib->initialize($config);
+			$this->image_lib->resize();
+			
+			$config['thumb_marker'] = '_thumb';
+			$config['width'] = $thumb_width;
+			$config['height'] = 1;
+			$config['master_dim'] = 'width';
+			$this->load->library('image_lib', $config);
+			$this->image_lib->initialize($config);
+			$this->image_lib->resize();
+		
+		}
+		 }
+		else
+		{
+		$file_upload['status'] = false;
+		$file_upload['error_code'] = 3;
+		$file_upload['message'] =  "<p>Image size should be less than 4mb and image should be in jpg,png,gif format</p>";
+		}
+		
+	}else{
+		$file_upload['status'] = false;
+		$file_upload['error_code'] = 1;
+		$file_upload['message'] =  "File not uploaded";
+	}
+	
+	
+	//echo json_encode($file_upload); exit(0);
+	if(isset($file_upload) && $file_upload)
+	return $file_upload;
+	else
+	return false;
+	 
+	
+}
+
 }
 ?>

@@ -26,6 +26,7 @@ $companies = $this->companies->get_mn_cmp_list();
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/jqtransform.css" type="text/css" media="all"/>
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/fbphotobox.css" type="text/css"/>
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/fbfavphotobox.css" type="text/css"/>
+<link rel="stylesheet" href="<?php echo base_url(); ?>css/pagephotobox.css" type="text/css"/>
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css" />
 <link href="<?php echo base_url(); ?>css/font-awesome.min.css" rel="stylesheet">
 <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
@@ -114,7 +115,8 @@ a.previous { display: none; }
                   <li>
 <a href="<?php echo base_url(); ?>company/company_disp/<?php echo $cmp->companyinfo_id ?>" tabindex="-1" role="menuitem" title="company profile"><i class="fa fa-building-o"> </i> <?php echo $cmp->cmp_name ?></a></li>
                  <?php endforeach; endif;?> 
-          
+           <li><a href="<?php echo base_url(); ?>profile/create_page" tabindex="-1" role="menuitem"><i class="fa fa-plus"> </i> 
+Create Page</a></li>
           <li><a href="<?php echo base_url(); ?>signg_in/sign_out" tabindex="-1" role="menuitem"><i class="fa fa-sign-out"> </i> 
 Logout</a></li>
         </ul>

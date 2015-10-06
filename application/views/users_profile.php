@@ -64,7 +64,7 @@
           <div class="clearfix"></div>
         </div>
       </section>-->
-        <section class="col-lg-4 col-md-4 col-sm-4 col-xs-12 coloumn1" style="padding-right:0; padding-top:0;margin-top:-15px; "><aside>
+        <section class="col-lg-4 col-md-4 col-sm-4 col-xs-12 coloumn1" style="padding-right:0; padding-top:0;"><aside>
        <?php if($organization_details && $college_details && $result ){ ?>
         <div class="myPhotos basicInfo"> <?php if(!empty($organization_details)){ ?>
         				<div class="specific_block">

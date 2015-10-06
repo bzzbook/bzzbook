@@ -163,12 +163,13 @@ class Signg_in extends CI_Controller {
 	 $this->load->model('customermodel');
 	 $session_data = $this->session->userdata('logged_in');
 	 $data['posted_by'] = $session_data['account_id'];
-	   $up_res = $this->ajax_image_upload('uploadPhotos');
-	    if(!isset($up_res['video']))
+	 $up_res = $this->ajax_image_upload('uploadPhotos');
+	 // print_r($up_res); exit;
+	 if(!isset($up_res['video']))
 	 {
 		 $up_res['video'] ="N";
 	 }
-	 //print_r($up_res); exit;
+	
 	   if(isset($up_res['status']))
 	   $file_name = implode(',',$up_res['files']);
 	   else
@@ -236,7 +237,42 @@ class Signg_in extends CI_Controller {
 	 // redirect(site_url('customer_controller/view_post'));
 	 // redirect(site_url('customer/view_post'));
    }
-   
+   public function send_page_post($page_id,$first_id){
+	 $this->load->model('customermodel');
+	 $session_data = $this->session->userdata('logged_in');
+	 $data['posted_by'] = $session_data['account_id'];
+	 $data['page_id'] = $page_id;
+	 $up_res = $this->ajax_image_upload('uploadPhotos');
+	 
+	 if(!isset($up_res['video']))
+	 {
+		 $up_res['video'] ="N";
+	 }
+	 //print_r($up_res); exit;
+	 if(isset($up_res['status']) && $up_res['status'])
+	 $file_name = implode(',',$up_res['files']);
+	 else
+	 $file_name = '';	   
+	 $data['post_content'] = $_POST['posts'];
+	 $data['uploaded_files'] = $file_name;
+	  $data['video'] = $up_res['video'];
+	 if($data['post_content']=='' && $data['uploaded_files']==''){
+		echo 404; exit;
+	 }
+	$data['video'] = $up_res['video'];
+	$insert_res = $this->customermodel->post_page_buzz($data);	
+	 
+	$user_id = $this->session->userdata('logged_in')['account_id'];
+	$data['products'] = $this->customermodel->All_Page_Posts($page_id,'',$first_id);
+	
+	if($data['products'] && $insert_res)
+	{
+	echo $this->load->view('recent_page_posts',$data);
+	}
+	elseif($insert_res){
+		echo "<div class='user_message'>you have posted on this page.</div>";
+	}
+   }
 
    
     public function send_cmp_post($cmp_id)
@@ -284,6 +320,7 @@ class Signg_in extends CI_Controller {
 	 // redirect(site_url('customer_controller/view_post'));
 	 // redirect(site_url('customer/view_post'));
    }
+  
    function doupload($filename='') {
 					$name_array = array();
 					if($filename=='')
@@ -300,27 +337,7 @@ class Signg_in extends CI_Controller {
 						$config['upload_path'] = DIR_FILE_PATH;
 						$type = $_FILES['userfile']['type'];
 						$config['allowed_types'] = 'gif|jpg|png';
-						
-						//switch ($type) {
-//						   case 'gif':
-//						   case 'jpg':
-//						   case 'png':
-//						     // do img config setup
-//							  					$config['allowed_types'] = 'gif|jpg|png';
-//
-//							  break;
-//						   case 'avi':
-//						   case 'flv':
-//						   case 'wmv':
-//						   case 'mp3':
-//						   case 'wma':
-//							  // do video config
-//							  					$config['allowed_types'] = 'mp4';
-//
-//							  break;
-//						}
-						
-						
+									
 					$config['max_size']	= '';
 					$config['max_width']  = '';
 					$config['max_height']  = '';
@@ -431,6 +448,17 @@ class Signg_in extends CI_Controller {
 		 echo "success";
 	 }	   
    }
+   function insert_page_like($pid,$uid){
+	   $data=array(
+	       'like_on'=>$pid,
+	       'liked_by'=>$uid,
+		   
+	   );
+	 $res=$this->customermodel->insert_page_like($data);
+	 if($res){		 
+		 echo "success";
+	 }	   
+   }
    
      function eventinsertlinks($pid,$uid){
 	   $data=array(
@@ -456,6 +484,18 @@ class Signg_in extends CI_Controller {
 		 echo "success";
 	 }	   
    }
+   function page_commentinsertlikes($pid,$uid){
+	   $data=array(
+	       'like_on'=>$pid,
+	       'liked_by'=>$uid,
+		   
+	   );
+	 $res=$this->customermodel->page_commentinsertlikes($data);
+	 if($res){
+		 
+		 echo "success";
+	 }	   
+   }
    function photocommentinsertlinks($pid,$uid,$photoname){
 	   $data=array(
 	       'like_on'=>$pid,
@@ -463,6 +503,18 @@ class Signg_in extends CI_Controller {
 		   'photo_name'=>$photoname
 	   );
 	 $res=$this->customermodel->photocommentinsertlinks($data);
+	 if($res){
+		 
+		 echo "success";
+	 }	   
+   }
+   function page_photocommentinsertlinks($pid,$uid,$photoname){
+	   $data=array(
+	       'like_on'=>$pid,
+	       'liked_by'=>$uid,
+		   'photo_name'=>$photoname
+	   );
+	 $res=$this->customermodel->page_photocommentinsertlinks($data);
 	 if($res){
 		 
 		 echo "success";
@@ -549,6 +601,36 @@ class Signg_in extends CI_Controller {
 	  // $res=$this->customer->write_comments($data);
 	   //redirect('profiles');
 	   if($this->customermodel->write_photo_comments($data)){
+		echo 'success';   
+	   }
+	   }
+	   else{
+		   echo $up_res['message'];
+	   }
+	   
+   }
+   public function write_page_photo_comment($id,$image){
+	  
+	   $up_res = $this->ajax_image_upload('uploadImgCommentPhotos'.$id);
+	   if($up_res['status'] || $_POST['write_comment']!=''){
+	   if($up_res['status'])
+	   $file_name = $up_res['message'];
+	   else
+	   $file_name = '';
+	   $data=array(
+	   'comment'=>$_POST['write_comment'],
+	   'post_id'=>$_POST['post_id'],
+	   'user_id'=>$_POST['posted_by'],
+	   'img_commented_on'=>$image,
+	   'uploaded_files' => $file_name
+	   );
+	 
+	  //$data['uploadedfiles'] = $this->doupload('uploadCommentPhotos');
+	 //$this->customermodel->write_photo_comments($data);
+	   
+	  // $res=$this->customer->write_comments($data);
+	   //redirect('profiles');
+	   if($this->customermodel->write_page_photo_comments($data)){
 		echo 'success';   
 	   }
 	   }
@@ -826,6 +908,8 @@ if(!file_exists($output)){ echo 'file output not exist'; return false;}
 if(filesize($output)==0) {echo 'file size 0'; return false; }
 return true;
 }
+
+
  public function post_comment_by_ajax()
    {
 	
@@ -902,6 +986,86 @@ $data_a=array(
 }else{
 	return false;
 }
+   }
+   
+   
+   public function send_page_comment(){
+   
+	
+	 $file_name = "uploadCommentPhotos".$_POST['post_id'];
+	
+	   if(isset($_FILES[$file_name]["type"]) && !empty($_FILES[$file_name]["type"][0]))
+	
+{
+	
+	
+$validextensions = array("jpeg", "jpg", "png");
+
+$filename = implode("",$_FILES[$file_name]["name"]);
+
+$temporary = explode(".",$filename);
+
+$file_extension = end($temporary);
+
+
+if((($_FILES[$file_name]["type"][0] == "image/png") || ($_FILES[$file_name]["type"][0] == "image/jpg") || ($_FILES[$file_name]["type"][0] == "image/jpeg")
+) && ($_FILES[$file_name]["size"][0] < 1000000)//Approx. 100kb files can be uploaded.
+&& in_array($file_extension, $validextensions)) {
+	
+if ($_FILES[$file_name]["error"][0] > 0)
+{
+echo "Return Code: " . $_FILES[$file_name]["error"][0] . "<br/><br/>";
+}
+else
+{
+
+
+$config['upload_path'] = DIR_FILE_PATH;
+$sourcePath = $_FILES[$file_name]['tmp_name'][0]; // Storing source path of the file in a variable
+//$targetPath = "F:\/xampp\/htdocs\/bzzbook\/uploads\/".$_FILES[$file_name]['name'][0];
+$targetPath = $config['upload_path'].$_FILES[$file_name]['name'][0]; // Target path where file is to be stored
+move_uploaded_file($sourcePath,$targetPath) ; 
+
+
+$data=array(
+	   'cmt_content'=> $_POST['write_comment'],
+	   'cmt_on'=> $_POST['post_id'],
+	   'cmt_by'=> $_POST['posted_by'],
+	   'uploadedfiles' => $filename
+	   );
+	   
+//print_r($data);
+
+  $res=$this->customermodel->write_page_comments($data);
+  $data['post_id'] = $_POST['post_id'];
+  echo $this->load->view('page_comment',$data);  
+
+}
+ }
+else
+{
+echo "<span id='invalid'>***Invalid file Size or Type***<span>";
+}
+	
+}else if($_POST['write_comment'] != '')
+{
+$data_a=array(
+	   'cmt_content'=> $_POST['write_comment'],
+	   'cmt_on'=> $_POST['post_id'],
+	   'cmt_by'=> $_POST['posted_by'],
+	   'uploadedfiles' => ''
+	   );
+	   
+//print_r($data);
+
+  $res=$this->customermodel->write_page_comments($data_a);
+            
+  $data['post_id'] = $_POST['post_id'];
+  echo $this->load->view('page_comment',$data);  
+}else{
+	return false;
+}
+   
    }
 
  public function write_event_comment($id){
