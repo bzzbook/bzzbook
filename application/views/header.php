@@ -115,6 +115,12 @@ a.previous { display: none; }
                   <li>
 <a href="<?php echo base_url(); ?>company/company_disp/<?php echo $cmp->companyinfo_id ?>" tabindex="-1" role="menuitem" title="company profile"><i class="fa fa-building-o"> </i> <?php echo $cmp->cmp_name ?></a></li>
                  <?php endforeach; endif;?> 
+                 <?php $my_pages = $this->customermodel->my_pages(); 
+				 foreach($my_pages as $mypage){
+				  ?>
+                  <li><a href="<?php echo base_url(); ?>profile/page/<?php echo $mypage->page_id ?>" tabindex="-1" role="menuitem"><i class="fa fa-file-text-o"> </i> 
+<?php echo $mypage->page_name; ?></a></li>
+                  <?php } ?>
            <li><a href="<?php echo base_url(); ?>profile/create_page" tabindex="-1" role="menuitem"><i class="fa fa-plus"> </i> 
 Create Page</a></li>
           <li><a href="<?php echo base_url(); ?>signg_in/sign_out" tabindex="-1" role="menuitem"><i class="fa fa-sign-out"> </i> 

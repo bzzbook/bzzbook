@@ -10,6 +10,7 @@
 	   $college_details = $this->profile_set->get_clg_details_all($user_id);
 	   $result = $this->profile_set->save_settings($user_id);
 	   $current_user_id_for_post_comment_box = $this->session->userdata('logged_in')['account_id'];
+	   $get_profiledata = $this->customermodel->page_profiledata($page_id);
 	      ?>
           
 <section class="col-lg-9 col-md-9 nopad">
@@ -20,8 +21,8 @@
         <div class="callToAction"><a href="#" class="call-new">New Action</a> <a href="#" class="createCall">Create Call to Action</a></div>
         <div class="profileDetails"> <a href="#" class="userImage"><img src="<?php echo base_url(); ?>images/coverLogo.png" width="87" height="77"  alt=""/></a>
           <div class="details">
-            <h3><a href="#">User Name</a></h3>
-            <p>Lorem Ipsum is simply dummy text</p>
+            <h3><a href="#"><?php echo $get_profiledata[0]->page_name ?></a></h3>
+            <p>Add Category</p>
           </div>
         </div>
       </div>
