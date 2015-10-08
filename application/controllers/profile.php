@@ -2574,6 +2574,133 @@ public function ajax_image_upload($file_name){
 	 
 	
 }
+public function coverfileupload($file_name){
+	
+	//print_r($_FILES); exit(0);
+	
+	$n =  count($_FILES[$file_name]['name']);
+	$validextensions = array("jpeg", "jpg", "png");
+	$validvideoextensions = array('webm','mp4','ogg','ogv','wmv','3gp','3g2','3gpp','avi','mov','flv','MOV');
+	//print_r($_FILES[$file_name]);
+	
+		$filetype = $_FILES[$file_name]["type"];
+		$filename = str_replace(' ', '', time().'_'.$_FILES[$file_name]["name"]);
+		$filesize = $_FILES[$file_name]["size"];
+		$fileerror = $_FILES[$file_name]["error"];
+		$tempname = $_FILES[$file_name]['tmp_name'];
+		
+	
+	if(isset($filetype) && !empty($filetype))	
+	{		
+		$temporary = explode(".",$filename);
+		
+		$file_extension = end($temporary);
+		
+		if((($filetype == "image/png") || ($filetype == "image/jpg") || ($filetype == "image/jpeg")
+		) && ($filesize < 4194000)	&& in_array($file_extension, $validextensions)) {
+		
+		list($imagewidth, $imageheight, $imageType) = getimagesize(DIR_FILE_PATH.$filename);
+		
+		if($imagewidth<400 || $imageheight <150){
+			$file_upload['status'] = false;
+			$file_upload['error_code'] = 4;
+			$file_upload['message'] =  "<p>Image dimensions should be atleast 400x150</p>";
+		}
+		elseif ($fileerror > 0)
+		{
+		$file_upload['status'] = false;
+		$file_upload['error_code'] = 2;
+		$file_upload['message'] =  "Return Code: " . $fileerror . "<br/><br/>";
+		}
+		else
+		{
+		
+		$config['upload_path'] = DIR_FILE_PATH; 
+		//$config['upload_path'] = './uploads/';
+		$sourcePath = $tempname; // Storing source path of the file in a variable
+		//$targetPath = "F:\/xampp\/htdocs\/bzzbook\/uploads\/".$_FILES[$file_name]['name'][0];
+		$targetPath = $config['upload_path'].$filename; // Target path where file is to be stored
+		move_uploaded_file($sourcePath,$targetPath) ; 
+		$file_upload['status'] = true;
+		$file_upload['files'][] =  $filename;
+		}
+		 }
+		else
+		{
+		$file_upload['status'] = false;
+		$file_upload['error_code'] = 3;
+		$file_upload['message'] =  "<p>Image size should be less than 4mb and image should be in jpg,png,gif format</p>";
+		}
+		
+	}else{
+		$file_upload['status'] = false;
+		$file_upload['error_code'] = 1;
+		$file_upload['message'] =  "File not uploaded";
+	}
+	
+	
+	//echo json_encode($file_upload); exit(0);
+	if(isset($file_upload) && $file_upload)
+	return $file_upload;
+	else
+	return false;
+}
+public function reposition_cover(){
+if(isset($_POST['pos']) && isset($_POST['cover_image']))
+{
+$from_top = abs($_POST['pos']);
+$default_cover_width = 861;
+$default_cover_height = 216;
+	// includo la classe
+	require_once("thumbncrop.inc.php"); //php class for image resizing & cropping
+	
+	// valorizzo la variabile
+	$tb = new ThumbAndCrop();
+	
+	// apro l'immagine
+	$tb->openImg(DIR_FILE_PATH.$_POST['cover_image']); //original cover image
+	
+	$newHeight = $tb->getRightHeight($default_cover_width);
+	
+	$tb->creaThumb($default_cover_width, $newHeight);
+
+	$tb->setThumbAsOriginal();
+	
+	$tb->cropThumb($default_cover_width, 216, 0, $from_top);
+	
+	$split_image = explode('.',$_POST['cover_image']);
+	$repositioned_image = $split_image[0].'_reposition.'.$split_image[1];
+	$tb->saveThumb(DIR_FILE_PATH.$repositioned_image); //save cropped cover image
+	
+	$tb->resetOriginal();
+	
+	$tb->closeImg();
+
+$data['status'] = 200;
+$data['url'] = base_url().'uploads/'.$repositioned_image;
+echo json_encode($data);
+}	
+}
+
+public function upload_cover_photo($page_id){
+	$this->load->model('pagemodel');
+	if($_FILES['cover_photo']['name']!=''){				
+				$up_res = $this->ajax_image_upload('cover_photo');
+				//print_r($up_res); exit;	  
+				if($up_res['status']){
+				$file_name = implode(',',$up_res['files']);
+				$cover_image = $file_name;
+				$page_id = $this->pagemodel->insert_cover_image($page_id,$cover_image);	
+				if($page_id){
+					$up_res['status'] = true;
+					$up_res['cover_image'] = $cover_image;
+				}
+				}
+				echo json_encode($up_res);
+				exit;	
+				
+			}
+}
 
 }
 ?>

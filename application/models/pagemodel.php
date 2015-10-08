@@ -19,5 +19,21 @@ class Pagemodel extends CI_Model {
 		return false;
 		}
    }
+   public function insert_cover_image($page_id, $cover_image){
+	   
+	   $data = array(
+              'cover_image' => $cover_image,
+            );
+
+	   $this->db->where('page_id', $page_id);
+	   $this->db->update('bzz_pages', $data); 
+	   
+	   $data = array(
+            'cover_image' => $cover_image,
+			'page_id' => $page_id
+        );
+        $this->db->insert('bzz_cover_images', $data);	
+		return $this->db->insert_id();   
+   }
 }
 ?>

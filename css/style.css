@@ -4139,11 +4139,7 @@ JobsSearchLayout .jobSearchListing .applicant_job_search .optionBox {
 .small_width{ width:55px !important;}
 .create_page label{ font-size:12px; font-weight:300; }
 .create_page label>a{ color:#0273B2;}
-.get_started_btn{background-color: #fbc436;
-    color: #fff;
-    float: left;
-    
-    margin-right: 10px;}
+.get_started_btn{background-color: #fbc436; color: #fff; float: left; float:right; width:100px !important; }
 .top-margin-50{ margin-top:50px; }
 .error_msg p{ color:#090 !important;}
 .fa{ color:#c2c2c2; }
@@ -4179,17 +4175,33 @@ JobsSearchLayout .jobSearchListing .applicant_job_search .optionBox {
 .menuBarCover{ background:#eeeeee; }
 
 .menuBarCover li a.active{ color:#969696; }
-.menuBarCover .extraBtns li a{ background:#fcfcfc; line-height:28px; margin-top:5px; padding:0 10px; border:1px solid #b3b3b3; border-radius:3px; font-size:12px;    }
+.menuBarCover .extraBtns li a{ background:#fcfcfc; line-height:28px; margin-top:5px; padding:0 10px;  font-size:12px; float:left; }
+.menuBarCover .extraBtns li a.like{border:1px solid #b3b3b3; border-radius: 3px; }
+.menuBarCover .extraBtns li a.message{border-top:1px solid #b3b3b3; border-bottom:1px solid #b3b3b3; border-left:1px solid #b3b3b3; -webkit-border-top-left-radius: 3px;
+-webkit-border-bottom-left-radius: 3px;
+-moz-border-radius-topleft: 3px;
+-moz-border-radius-bottomleft: 3px;
+border-top-left-radius: 3px;
+border-bottom-left-radius: 3px; }
+.menuBarCover .extraBtns li a.message_sub{ border-top:1px solid #b3b3b3; border-bottom:1px solid #b3b3b3; border-right:1px solid #b3b3b3; -webkit-border-top-right-radius: 3px;
+-webkit-border-bottom-right-radius: 3px;
+-moz-border-radius-topright: 3px;
+-moz-border-radius-bottomright: 3px;
+border-top-right-radius: 3px;
+border-bottom-right-radius: 3px; padding:0px 5px 0 0;}
+
 .menuBarCover .extraBtns li li a{ margin-top:0px; padding:0 0px; border:0px solid #b3b3b3; border-radius:0px; }
 .menuBarCover .extraBtns a i{ padding-right:5px; }
 .menuBarCover .extraBtns a span{    border-left: 1px solid #ccc;
     display: block;
     float: right;
     font-size: 6px;
-    line-height: 25px;
-    margin: 2px 0 5px 5px;
+    line-height: 28px;
+   
     padding-left: 5px;  }
+
 .menuBarCover .extraBtns a span i{ padding-right:1px; }
+
 
 .sideBlock{ border:1px solid #cfcfcf; background:#f2f2f2; margin-top:15px; font-family: 'Roboto'; }
 .sideBlock h3{ padding:0px 10px; margin:0px; font-size:12px; line-height:35px; background:#fff;  border-bottom:1px solid #cfcfcf; text-transform:uppercase;  }
@@ -4227,3 +4239,98 @@ JobsSearchLayout .jobSearchListing .applicant_job_search .optionBox {
 .no-padding-lr{ padding-left:0px; padding-right:0px; }
 .hidecommentbox{ display:none; }
 .v-message p{ font-size:12px; }
+.coverfloat{ }
+.coverwrap{ position:relative; }
+
+.cover-container {
+position: relative;
+}
+.cover-wrapper {
+position: relative;
+width: 100%;
+height: 216px;
+overflow: hidden;
+}
+.cover-wrapper img {
+position: absolute;
+width: 100%;
+box-shadow: 0 0 0 1px rgba(0, 0, 0, .3);
+}
+.cover-resize-wrapper {
+position: relative;
+width: 100%;
+height: 216px !important;
+overflow: hidden;
+display: none;
+}
+.cover-resize-wrapper img {
+position: absolute;
+width: 100%;
+box-shadow: 0 0 0 1px rgba(0, 0, 0, .3);
+}
+.cover-resize-wrapper .drag-div {
+position: absolute;
+top: 0;
+width: 100%;
+background: rgba(0,0,0,0.15);
+color: white;
+font-weight: 500;
+padding: 7px;
+border: 1px solid rgba(0,0,0,0.1);
+border-radius: 3px;
+}
+.cover-progress {
+position: absolute;
+top: 0;
+right: 0;
+bottom: 0;
+left: 0;
+display: none;
+background: rgba(0,0,0,0.6);
+color: white;
+text-align: center;
+}
+.hidden {
+display: none;
+}
+.cursor-hand {
+cursor: pointer;
+}
+.float-left {
+float: left;
+}
+.float-right {
+float: right;
+}
+.span35 {
+width: 35%;
+}
+.timeline-buttons {
+margin-bottom: 5px;
+}
+.timeline-buttons a {
+display: block;
+width: 96%;
+background: #f9fafb;
+background: linear-gradient(#f5f6f7 1%, #ffffff 2%, #ffffff 70%, #f5f6f7 100%);
+color: #4e5665;
+text-align: center;
+font-weight: 400;
+margin: 0 0 5px 0;
+padding: 4px 0;
+border: 1px solid #d4d5d6;
+border-radius: 3px;
+cursor: pointer;
+}
+.timeline-buttons a i {
+margin-right: 3px;
+}
+.timeline-buttons .active {
+background: #527dbb;
+background: linear-gradient(#5791d4,#5571ac);
+color: white;
+border-color: #3a558e;
+}
+.cover-resize-buttons {
+display: none;
+}

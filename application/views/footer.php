@@ -137,8 +137,177 @@ $(function () {
 <script type="text/javascript" src="<?php echo base_url(); ?>js/chat.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>js/albumPreviews.js"></script>
 <script src="<?php echo base_url(); ?>js/slideUserOption.jquery.js" type="text/javascript"></script>
+<?php /*?><script src="<?php echo base_url(); ?>js/jquery.form.min.js"></script>
+<?php */?>
 <?php $this->load->view('footer_siva'); ?>
+<script type="text/javascript">
+jQuery.uaMatch = function( ua ) {
+    ua = ua.toLowerCase();
+
+    var match = /(chrome)[ \/]([\w.]+)/.exec( ua ) ||
+        /(webkit)[ \/]([\w.]+)/.exec( ua ) ||
+        /(opera)(?:.*version|)[ \/]([\w.]+)/.exec( ua ) ||
+        /(msie) ([\w.]+)/.exec( ua ) ||
+        ua.indexOf("compatible") < 0 && /(mozilla)(?:.*? rv:([\w.]+)|)/.exec( ua ) ||
+        [];
+
+    return {
+        browser: match[ 1 ] || "",
+        version: match[ 2 ] || "0"
+    };
+};
+
+matched = jQuery.uaMatch( navigator.userAgent );
+browser = {};
+
+if ( matched.browser ) {
+    browser[ matched.browser ] = true;
+    browser.version = matched.version;
+}
+
+// Chrome is Webkit, but Webkit is also Safari.
+if ( browser.chrome ) {
+    browser.webkit = true;
+} else if ( browser.webkit ) {
+    browser.safari = true;
+}
+
+jQuery.browser = browser;
+function repositionCover() {
+    $('.cover-wrapper').hide();
+    $('.cover-resize-wrapper').show();
+    $('.cover-resize-buttons').show();
+    $('.default-buttons').hide();
+    $('.screen-width').val($('.cover-resize-wrapper').width());
+    $('.cover-resize-wrapper img')
+    .css('cursor', 's-resize')
+    .draggable({
+        scroll: false,
+        
+        axis: "y",
+        
+        cursor: "s-resize",
+        
+        drag: function (event, ui) {
+            y1 = $('.cover-container').height();
+            y2 = $('.cover-resize-wrapper').find('img').height();
+            
+            if (ui.position.top >= 0) {
+                ui.position.top = 0;
+            }
+            else
+            if (ui.position.top <= (y1-y2)) {
+                ui.position.top = y1-y2;
+            }
+        },
+        
+        stop: function(event, ui) {
+            $('input.cover-position').val(ui.position.top);
+        }
+    });
+}
+
+function saveReposition() {
+    
+    if ($('input.cover-position').length == 1) {
+        posY = $('input.cover-position').val();
+        $('form.cover-position-form').submit();
+    }
+}
+
+function cancelReposition() {
+    $('.cover-wrapper').show();
+    $('.cover-resize-wrapper').hide();
+    $('.cover-resize-buttons').hide();
+    $('.default-buttons').show();
+    $('input.cover-position').val(0);
+    $('.cover-resize-wrapper img').draggable('destroy').css('cursor','default');
+}
+function uploadCoverPhoto(e,page_id){
+e.preventDefault();
+
+url = "<?php echo base_url(); ?>profile/upload_cover_photo/"+page_id;
+ var formObj = $('form#uploadcoverform')[0];
+
+$.ajax({
+	 
+url: url, // Url to which the request is send
+type: "POST",             // Type of request to be send, called as method
+data: new FormData(formObj), // Data sent to server, a set of key/value pairs (i.e. form fields and values)
+contentType: false,       // The content type used when sending data to the server.
+cache: false,             // To unable request pages to be cached
+processData:false,        // To send DOMDocument or non processed data file it is set to false
+success: function(data)   // A function to be called if request succeeds
+{
+	var obj = jQuery.parseJSON( data );
+	if(obj.status)
+	{
+		$('#cover_image').val(obj.cover_image);
+		$('.cover-wrapper img').attr('src', "<?php echo base_url().'uploads/'; ?>"+obj.cover_image );
+		$('.cover-resize-wrapper img').attr('src', "<?php echo base_url().'uploads/'; ?>"+obj.cover_image );
+		repositionCover();
+	}
+	else
+	alert(obj.message);
+}
+});
+
+}
+
+
+ $(function(){
+    $('.cover-resize-wrapper').height($('.cover-resize-wrapper').width()*0.3);
+
+    $('form.cover-position-form').ajaxForm({
+        url:  '<?php echo base_url().'profile/reposition_cover'; ?>',
+        dataType:  'json', 
+        beforeSend: function() {
+            $('.cover-progress').html('Repositioning...').fadeIn('fast').removeClass('hidden');
+        },
+        
+        success: function(responseText) {
+            if ((responseText.status) == 200) {
+                $('.cover-wrapper img')
+                    .attr('src', responseText.url + '?' + new Date().getTime())
+                    .load(function () {
+                        $('.cover-progress').fadeOut('fast').addClass('hidden').html('');
+                        $('.cover-wrapper').show();
+                        $('.cover-resize-wrapper')
+                            .hide()
+                            .find('img').css('top', 0);
+                        $('.cover-resize-buttons').hide();
+                        $('.default-buttons').show();
+                        $('input.cover-position').val(0);
+                        $('.cover-resize-wrapper img').draggable('destroy').css('cursor','default');
+                    });
+            }
+        }
+    });
+});  
+
+
+</script>
+<script type="text/javascript">
+$(document).ready(function(e) {
+    $(document)
+       .one('focus.textarea', '.autoExpand', function(){
+			var savedValue = this.value;
+			this.value = '';
+			this.baseScrollHeight = this.scrollHeight;
+			this.value = savedValue;
+		})
+		.on('input.textarea', '.autoExpand', function(){
+			var minRows = this.getAttribute('data-min-rows')|0,
+				 rows;
+			this.rows = minRows;
+        console.log(this.scrollHeight , this.baseScrollHeight);
+			rows = Math.ceil((this.scrollHeight - this.baseScrollHeight) / 17);
+			this.rows = minRows + rows;
+		});
+});
+</script>
 <script>
+
 $(document).ready(function(e) {
         //var hashval = window.location.href.toString().split('#')[1];
 		var hashval = $('#post_cur_tab').val();
@@ -1574,7 +1743,7 @@ function postComSub(e,post_id,photo_name){
 e.preventDefault();
 
 url = "<?php echo base_url(); ?>signg_in/write_photo_comment/"+post_id+"/"+photo_name;
- var formObj = $('form#imgCmtForm')[0];
+var formObj = $('form#imgCmtForm')[0];
 
 //$("#message").empty();
 //$('#loading').show();
@@ -1611,8 +1780,6 @@ e.preventDefault();
 url = "<?php echo base_url(); ?>signg_in/write_page_photo_comment/"+post_id+"/"+photo_name;
  var formObj = $('form#imgCmtForm')[0];
 
-//$("#message").empty();
-//$('#loading').show();
 $.ajax({
 	 
 url: url, // Url to which the request is send
@@ -1628,16 +1795,8 @@ success: function(data)   // A function to be called if request succeeds
 	}
 	else
 	$('.commentBox-error').html(data);
-//$('#res_comments'+post_id).append(data);
-//$('#write_comment'+post_id).val('');
-//var commentboxcont = $('#commentBox'+post_id).html();
-//$('#commentBox'+post_id).html('');
-//$('#uploadCommentPhotos'+post_id).val('');
-//$('#commentBox'+post_id).html(commentboxcont);
-
 }
 });
-
 
 }
 

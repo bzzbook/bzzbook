@@ -17,7 +17,33 @@
    		<div class="col-md-12 ProfileView">
    <div class="row"> 
     <div class="pageBlock col-md-12">
-      <div class="coverPage"> <img src="<?php echo base_url(); ?>images/coverimage.png" class="cover" width="895" height="216"  alt=""/> <a href="#" class="add-cover"><i class="fa  fa-camera"></i>Add Cover</a>
+      <div class="coverPage cover-container"> 
+      <div class="cover-wrapper">
+      <img src="<?php $cov_img = $get_profiledata[0]->cover_image; $img_parts = explode('.',$cov_img); 
+	  
+	  $repo_img = $img_parts[0].'_reposition.'.$img_parts[1];
+	  if(file_exists(DIR_FILE_PATH.$repo_img))  
+	  echo base_url().'uploads/'.$repo_img;
+	  else
+	  echo base_url().'uploads/'.$cov_img;
+	   ?>"  alt=""/>
+       <div class="cover-progress"></div>
+        </div>
+       <div class="cover-resize-wrapper">
+       <img src="<?php echo base_url().'uploads/'.$get_profiledata[0]->cover_image; ?>" alt="w3lessons.info">
+       <div class="drag-div" align="center">Drag to reposition</div>
+            <div class="cover-progress"></div>
+        </div>
+      <div class=" add-cover"><div class='coverwrap'> <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa  fa-camera"></i>Add Cover</a><ul class="dropdown-menu">
+              <li><a href="#">Choose from photos</a></li>
+              <li><a href="javascript:void(0);" onclick="document.getElementById('cover_photo').click();">Upload</a></li>
+              <li><a href="javascript:void(0);" onclick="repositionCover();">Reposition</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul></div></div>
+            <form class="hidden" method="post" enctype="multipart/form-data" id="uploadcoverform">
+            <input id="cover_photo" name="cover_photo" type="file" onchange="uploadCoverPhoto(event,<?php echo $page_id; ?>);">            
+       		</form>
         <div class="callToAction"><a href="#" class="call-new">New Action</a> <a href="#" class="createCall">Create Call to Action</a></div>
         <div class="profileDetails"> <a href="#" class="userImage"><img src="<?php echo base_url(); ?>images/coverLogo.png" width="87" height="77"  alt=""/></a>
           <div class="details">
@@ -43,19 +69,52 @@
           </li>
         </ul>
         <ul class="pull-right extraBtns">
-        	<li><a href="#"><i class="fa fa-thumbs-up"></i>Like</a></li>
-            <li><a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa  fa-comment"></i>Message <span><i class="fa  fa-circle-thin"></i><i class="fa  fa-circle-thin"></i><i class="fa  fa-circle-thin"></i></span></a>
+        	<li><a href="#" class="like"><i class="fa fa-thumbs-up"></i>Like</a></li>
+            <li>
+            <a href="#" class="message"><i class="fa  fa-comment"></i>Message</a>
+            <a href="#" class="dropdown-toggle message_sub" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><i class="fa  fa-circle-thin"></i><i class="fa  fa-circle-thin"></i><i class="fa  fa-circle-thin"></i></span></a>
             <ul class="dropdown-menu">
               <li><a href="#">Action</a></li>
               <li><a href="#">Another action</a></li>
               <li><a href="#">Something else here</a></li>
-              <li role="separator" class="divider"></li>
+              
               <li><a href="#">Separated link</a></li>
             </ul>
             </li>
         </ul>
         <div class="clearfix"></div>
       </div>
+      
+      <div class="float-right span35">
+        <div class="timeline-buttons cover-resize-buttons">
+<br>
+        <table border="0" width="100%" cellspacing="0" cellpadding="0">
+        <tr>
+            <td align="center" valign="middle">
+                <a onclick="saveReposition();">Save Position</a>
+            </td>
+            <td align="center" valign="middle">
+                <a onclick="cancelReposition();">Cancel</a>
+            </td>
+        </tr>
+        </table>
+        <form class="cover-position-form hidden" method="post">
+            <input class="cover-position" name="pos" value="0" type="hidden">            
+			<input name="cover_image" value="<?php echo $get_profiledata[0]->cover_image; ?>" id="cover_image" type="hidden">
+        </form>
+    </div>
+
+<!--<div class="timeline-buttons default-buttons">
+<br><br>
+        <table border="0" width="150" cellspacing="0" cellpadding="0">
+        <tr>
+            <td align="center" valign="middle">
+                <a onclick="repositionCover();">Reposition cover</a>
+            </td>
+        </tr>
+        </table>
+    </div>-->
+</div>
     </div>
     
     
@@ -187,8 +246,7 @@
            		<figure><img src="<?php echo base_url(); ?>uploads/<?php if(!empty($cur_user_data[0]->user_img_thumb)) echo $cur_user_data[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" width="37" height="36"  alt=""/></figure>
                 <div class="content">
                	<div class="comment-box">
-                	<textarea class="autoExpand" rows='1' data-min-rows='1' placeholder="Write Comment">
-                    </textarea>
+                	<textarea class="autoExpand" rows='1' data-min-rows='1' placeholder="Write Comment"></textarea>
                     <a href="" class="camera"><i class="fa fa-camera"></i></a>
                     <!--<a href="" class="emoticons"><i class="fa fa-smile-o"></i></a>-->
                     <div class="clearfix"></div>
