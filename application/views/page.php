@@ -36,7 +36,7 @@
         </div>
       <div class=" add-cover"><div class='coverwrap'> <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa  fa-camera"></i>Add Cover</a><ul class="dropdown-menu">
               <li><a href="#">Choose from photos</a></li>
-              <li><a href="javascript:void(0);" onclick="document.getElementById('cover_photo').click();">Upload</a></li>
+              <li><a href="javascript:void(0);" onclick="document.getElementById('cover_photo').click();cancelReposition();">Upload</a></li>
               <li><a href="javascript:void(0);" onclick="repositionCover();">Reposition</a></li>
               <li role="separator" class="divider"></li>
               <li><a href="#">Separated link</a></li>

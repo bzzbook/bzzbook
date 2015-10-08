@@ -237,6 +237,11 @@ data: new FormData(formObj), // Data sent to server, a set of key/value pairs (i
 contentType: false,       // The content type used when sending data to the server.
 cache: false,             // To unable request pages to be cached
 processData:false,        // To send DOMDocument or non processed data file it is set to false
+beforeSend: function(){
+			
+	$('.cover-wrapper img').attr('src', "<?php echo base_url().'images/cover_photo_loading.gif'; ?>" );
+
+		},
 success: function(data)   // A function to be called if request succeeds
 {
 	var obj = jQuery.parseJSON( data );
@@ -245,10 +250,15 @@ success: function(data)   // A function to be called if request succeeds
 		$('#cover_image').val(obj.cover_image);
 		$('.cover-wrapper img').attr('src', "<?php echo base_url().'uploads/'; ?>"+obj.cover_image );
 		$('.cover-resize-wrapper img').attr('src', "<?php echo base_url().'uploads/'; ?>"+obj.cover_image );
-		repositionCover();
+		$('.cover-resize-wrapper img').on('load',function(){
+     	  repositionCover();
+		});
+		
 	}
-	else
+	else{
 	alert(obj.message);
+	location.reload();
+	}
 }
 });
 

@@ -2579,7 +2579,7 @@ public function coverfileupload($file_name){
 	//print_r($_FILES); exit(0);
 	
 	$n =  count($_FILES[$file_name]['name']);
-	$validextensions = array("jpeg", "jpg", "png");
+	$validextensions = array("jpeg", "jpg", "png", "JPG", "PNG", "JPEG");
 	$validvideoextensions = array('webm','mp4','ogg','ogv','wmv','3gp','3g2','3gpp','avi','mov','flv','MOV');
 	//print_r($_FILES[$file_name]);
 	
@@ -2599,14 +2599,15 @@ public function coverfileupload($file_name){
 		if((($filetype == "image/png") || ($filetype == "image/jpg") || ($filetype == "image/jpeg")
 		) && ($filesize < 4194000)	&& in_array($file_extension, $validextensions)) {
 		
-		list($imagewidth, $imageheight, $imageType) = getimagesize(DIR_FILE_PATH.$filename);
-		
+		/*list($imagewidth, $imageheight, $imageType) = getimagesize(DIR_FILE_PATH.$filename);
+		echo $imagewidth.' '.$imageheight; exit;
 		if($imagewidth<400 || $imageheight <150){
 			$file_upload['status'] = false;
 			$file_upload['error_code'] = 4;
 			$file_upload['message'] =  "<p>Image dimensions should be atleast 400x150</p>";
 		}
-		elseif ($fileerror > 0)
+		*/
+		if ($fileerror > 0)
 		{
 		$file_upload['status'] = false;
 		$file_upload['error_code'] = 2;
@@ -2685,7 +2686,7 @@ echo json_encode($data);
 public function upload_cover_photo($page_id){
 	$this->load->model('pagemodel');
 	if($_FILES['cover_photo']['name']!=''){				
-				$up_res = $this->ajax_image_upload('cover_photo');
+				$up_res = $this->coverfileupload('cover_photo');
 				//print_r($up_res); exit;	  
 				if($up_res['status']){
 				$file_name = implode(',',$up_res['files']);
