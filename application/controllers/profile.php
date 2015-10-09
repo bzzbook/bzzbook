@@ -2702,6 +2702,31 @@ public function upload_cover_photo($page_id){
 				
 			}
 }
+public function delete_cover_photo($page_id,$cover_image)
+{
+	$condition = "page_id = $page_id AND cover_image = '".$cover_image."'";
+	$this->db->where($condition);
+	$this->db->delete('bzz_cover_images');
+	$data = array(
+               'cover_image' => '',
+            );
+	$this->db->where('page_id', $page_id);
+	$this->db->update('bzz_pages', $data); 
+	redirect("profile/page/".$page_id);
+}
+public function update_cover_photo($page_id,$cover_image)
+{
+	$data = array(
+               'cover_image' => $cover_image,
+            );
+	
+	$this->db->where('page_id', $page_id);
+	$this->db->update('bzz_pages', $data); 
+	$up_res['status'] = true;
+	$up_res['cover_image'] = $cover_image;
+	echo json_encode($up_res);
+	exit;	
+}
 
 }
 ?>

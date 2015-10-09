@@ -19,6 +19,20 @@ class Pagemodel extends CI_Model {
 		return false;
 		}
    }
+   public function get_cover_images($page_id)
+   {
+	 	$condition = "page_id =" . "'" . $page_id . "'";
+		$this->db->select('*');
+		$this->db->from('bzz_cover_images');
+		$this->db->where($condition);
+		$this->db->order_by('id','desc');
+		$query = $this->db->get();
+		if ($query->num_rows() > 0) {
+			return $query->result();
+		} else {
+		return false;
+		}
+   }
    public function insert_cover_image($page_id, $cover_image){
 	   
 	   $data = array(

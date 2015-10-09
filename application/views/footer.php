@@ -212,6 +212,7 @@ function saveReposition() {
     if ($('input.cover-position').length == 1) {
         posY = $('input.cover-position').val();
         $('form.cover-position-form').submit();
+		
     }
 }
 
@@ -263,6 +264,32 @@ success: function(data)   // A function to be called if request succeeds
 });
 
 }
+function updateCoverPhoto(page_id,cover_image){
+$('#choose_cover_photos').modal('toggle');
+$('#choose_from_photos').modal('toggle');
+//  if(name)
+ // url="<?php// echo base_url(); ?>friends/get_online_frnds/"+name;
+ // else
+  url="<?php echo base_url(); ?>profile/update_cover_photo/"+page_id+'/'+cover_image;
+ 
+  $.ajax({
+        url: url,
+  success: function(data)
+        {
+			var obj = jQuery.parseJSON( data );
+			if(obj.status)
+			{
+				$('#cover_image').val(obj.cover_image);
+				$('.cover-wrapper img').attr('src', "<?php echo base_url().'uploads/'; ?>"+obj.cover_image );
+				$('.cover-resize-wrapper img').attr('src', "<?php echo base_url().'uploads/'; ?>"+obj.cover_image );
+				$('.cover-resize-wrapper img').on('load',function(){
+				  repositionCover();
+				});				
+			}
+		},
+  cache: false
+  });
+}
 
 
  $(function(){
@@ -289,6 +316,7 @@ success: function(data)   // A function to be called if request succeeds
                         $('.default-buttons').show();
                         $('input.cover-position').val(0);
                         $('.cover-resize-wrapper img').draggable('destroy').css('cursor','default');
+						location.reload();
                     });
             }
         }
