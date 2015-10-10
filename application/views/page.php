@@ -39,7 +39,7 @@
                 <li><a href="javascript:void(0);" onclick="document.getElementById('cover_photo').click();cancelReposition();">Upload</a></li>
                 <?php if($get_profiledata[0]->cover_image!=''){ ?>
                 <li><a href="javascript:void(0);" onclick="repositionCover();">Reposition</a></li>
-                <li role="separator" class="divider"></li>
+                
                 <li><a href="<?php echo base_url()."profile/delete_cover_photo/".$page_id."/".$get_profiledata[0]->cover_image; ?>" onclick="return confirm('Are you sure you want to remove cover image');">Remove</a></li>
                 <?php } ?>
               </ul>
@@ -49,7 +49,22 @@
             <input id="cover_photo" name="cover_photo" type="file" onchange="uploadCoverPhoto(event,<?php echo $page_id; ?>);">
           </form>
           <div class="callToAction"><a href="#" class="call-new">New Action</a> <a href="#" class="createCall">Create Call to Action</a></div>
-          <div class="profileDetails"> <a href="#" class="userImage"><img src="<?php echo base_url(); ?>images/coverLogo.png" width="87" height="77"  alt=""/></a>
+          <div class="profileDetails">
+          <div class="userImage">      
+          <img src="<?php echo base_url(); ?>images/coverLogo.png" width="87" height="77"  alt=""/>    
+          <a aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" class="dropdown-toggle cameraIcon" href="#"><i class="fa  fa-camera"></i></a>
+    <ul class="dropdown-menu">
+    <li><a data-target="#choose_from_photos" data-toggle="modal" href="javascript:void(0);">Choose from photos</a></li>
+    <li><a onclick="document.getElementById('cover_photo').click();cancelReposition();" href="javascript:void(0);">Upload</a></li>
+    <li><a onclick="repositionCover();" href="javascript:void(0);">Reposition</a></li>
+    <li><a onclick="return confirm('Are you sure you want to remove cover image');" href="http://localhost/bzzbook/profile/delete_cover_photo/1/1444456878_ghid_secret_santa.jpg">Remove</a></li>
+    </ul>
+            </div>
+          
+          
+          
+         <!--  <a href="#" class="userImage"></a>-->
+           
             <div class="details">
               <h3><a href="#"><?php echo $get_profiledata[0]->page_name ?></a></h3>
               <p>Add Category</p>
@@ -74,7 +89,7 @@
           </ul>
           <ul class="pull-right extraBtns">
             <li><a href="#" class="like"><i class="fa fa-thumbs-up"></i>Like</a></li>
-            <li> <a href="#" class="message"><i class="fa  fa-comment"></i>Message</a> <a href="#" class="dropdown-toggle message_sub" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><i class="fa  fa-circle-thin"></i><i class="fa  fa-circle-thin"></i><i class="fa  fa-circle-thin"></i></span></a>
+            <li> <a href="#" class="messageBtn"><i class="fa  fa-comment"></i>Message</a> <a href="#" class="dropdown-toggle message_sub" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><i class="fa  fa-circle-thin"></i><i class="fa  fa-circle-thin"></i><i class="fa  fa-circle-thin"></i></span></a>
               <ul class="dropdown-menu">
                 <li><a href="#">Action</a></li>
                 <li><a href="#">Another action</a></li>
@@ -516,7 +531,9 @@ $("#posts").val($("#dummypost").text());
       </div>
       <div class="modal-body">
         <?php foreach($cover_images as $image):?>
-        <div class="life_event_lefts_img"><img data-target="#choose_from_photos" data-toggle="modal" src="<?php echo base_url()."uploads/".$image->cover_image; ?>" onclick="updateCoverPhoto(<?php echo $page_id.','."'".$image->cover_image."'"; ?>);" /> </div>
+        <div class="life_event_lefts_img">
+        <span style="width:100px; height:100px; background:url(<?php echo base_url()."uploads/".$image->cover_image; ?>) center center; background-size:cover; display:block;"></span>
+        <?php /*?><img data-target="#choose_from_photos" data-toggle="modal" src="<?php echo base_url()."uploads/".$image->cover_image; ?>" onclick="updateCoverPhoto(<?php echo $page_id.','."'".$image->cover_image."'"; ?>);" /><?php */?> </div>
         <?php endforeach; ?>
         <div class="clearfix"></div>
       </div>
