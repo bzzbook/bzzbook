@@ -264,8 +264,9 @@ success: function(data)   // A function to be called if request succeeds
 });
 
 }
-function updateCoverPhoto(page_id,cover_image){
-$('#choose_cover_photos').modal('toggle');
+function updateCoverPhoto(page_id,cover_image,model_id){
+
+$("#"+model_id).modal('toggle');
 $('#choose_from_photos').modal('toggle');
 //  if(name)
  // url="<?php// echo base_url(); ?>friends/get_online_frnds/"+name;

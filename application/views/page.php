@@ -536,7 +536,7 @@ $("#posts").val($("#dummypost").text());
       <div class="modal-body">
         <?php foreach($cover_images as $image):?>
         <div class="life_event_lefts_img">
-        <span style="width:100px; height:100px; background:url(<?php echo base_url()."uploads/".$image->cover_image; ?>) center center; background-size:cover; display:block; cursor:pointer;" onclick="updateCoverPhoto(<?php echo $page_id.','."'".$image->cover_image."'"; ?>);"></span>
+        <span style="width:100px; height:100px; background:url(<?php echo base_url()."uploads/".$image->cover_image; ?>) center center; background-size:cover; display:block; cursor:pointer;" onclick="updateCoverPhoto(<?php echo $page_id.','."'".$image->cover_image."','choose_cover_photos'"; ?>);"></span>
         <?php /*?><img data-target="#choose_from_photos" data-toggle="modal" src="<?php echo base_url()."uploads/".$image->cover_image; ?>" onclick="updateCoverPhoto(<?php echo $page_id.','."'".$image->cover_image."'"; ?>);" /><?php */?> </div>
         <?php endforeach; ?>
         <div class="clearfix"></div>
@@ -558,7 +558,7 @@ $("#posts").val($("#dummypost").text());
       <div class="modal-body">
         <?php foreach($timeline_images as $image):?>
         <div class="life_event_lefts_img">
-        <span style="width:100px; height:100px; background:url(<?php echo base_url()."uploads/".$image; ?>) center center; background-size:cover; display:block; cursor:pointer;" onclick="updateCoverPhoto(<?php echo $page_id.','."'".$image."'"; ?>);"></span>
+        <span style="width:100px; height:100px; background:url(<?php echo base_url()."uploads/".$image; ?>) center center; background-size:cover; display:block; cursor:pointer;" onclick="updateCoverPhoto(<?php echo $page_id.','."'".$image."','choose_timeline_photos'"; ?>);"></span>
         <?php /*?><img data-target="#choose_from_photos" data-toggle="modal" src="<?php echo base_url()."uploads/".$image->cover_image; ?>" onclick="updateCoverPhoto(<?php echo $page_id.','."'".$image->cover_image."'"; ?>);" /><?php */?> </div>
         <?php endforeach; ?>
         <div class="clearfix"></div>
