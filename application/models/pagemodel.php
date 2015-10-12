@@ -33,6 +33,28 @@ class Pagemodel extends CI_Model {
 		return false;
 		}
    }
+   public function get_timeline_images($page_id)
+   {
+	 	$condition = "page_id =" . "'" . $page_id . "' AND uploaded_files!=''";
+		$this->db->select('*');
+		$this->db->from('bzz_page_posts');
+		$this->db->where($condition);
+		$this->db->order_by('post_id','desc');
+		$query = $this->db->get();
+		if ($query->num_rows() > 0) {
+			$result =  $query->result();
+			$timeline_images = array();
+			foreach($result as $rec){
+				$up_files = explode(',',$rec->uploaded_files);	
+				foreach($up_files as $file_name){
+				$timeline_images[] =  $file_name;
+				}
+			}
+			return $timeline_images;
+		} else {
+		return false;
+		}
+   }
    public function insert_cover_image($page_id, $cover_image){
 	   
 	   $data = array(

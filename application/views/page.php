@@ -514,6 +514,10 @@ $("#posts").val($("#dummypost").text());
         <div class="life_event_lefts_img mg_gal">
           <h3>Cover Photos</h3>
           <div><img data-target="#choose_cover_photos" data-toggle="modal" src="<?php echo base_url()."uploads/".$cover_images[0]->cover_image; ?>" /></div> </div>
+           <?php $timeline_images = $this->pagemodel->get_timeline_images($page_id); ?>
+          <div class="life_event_lefts_img mg_gal">
+          <h3>Cover Photos</h3>
+          <div><img data-target="#choose_timeline_photos" data-toggle="modal" src="<?php echo base_url()."uploads/".$timeline_images[0]; ?>" /></div> </div>
         <div class="clearfix"></div>
       </div>
       <div class="modal-footer"> </div>
@@ -541,3 +545,26 @@ $("#posts").val($("#dummypost").text());
     </div>
   </div>
 </div>
+
+<div id="choose_timeline_photos" class="modal fade" role="dialog">
+  <div class="modal-dialog" > 
+    
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Choose cover photo</h4>
+      </div>
+      <div class="modal-body">
+        <?php foreach($timeline_images as $image):?>
+        <div class="life_event_lefts_img">
+        <span style="width:100px; height:100px; background:url(<?php echo base_url()."uploads/".$image; ?>) center center; background-size:cover; display:block; cursor:pointer;" onclick="updateCoverPhoto(<?php echo $page_id.','."'".$image."'"; ?>);"></span>
+        <?php /*?><img data-target="#choose_from_photos" data-toggle="modal" src="<?php echo base_url()."uploads/".$image->cover_image; ?>" onclick="updateCoverPhoto(<?php echo $page_id.','."'".$image->cover_image."'"; ?>);" /><?php */?> </div>
+        <?php endforeach; ?>
+        <div class="clearfix"></div>
+      </div>
+      <div class="modal-footer"> </div>
+    </div>
+  </div>
+</div>
+
