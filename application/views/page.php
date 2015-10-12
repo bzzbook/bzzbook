@@ -11,6 +11,10 @@
 	   $result = $this->profile_set->save_settings($user_id);
 	   $current_user_id_for_post_comment_box = $this->session->userdata('logged_in')['account_id'];
 	   $get_profiledata = $this->customermodel->page_profiledata($page_id);
+	     if(empty($user_id))
+	  $curr_user_id = $this->session->userdata('logged_in')['account_id'];
+	  else
+	  $curr_user_id = $user_id;
 	      ?>
 
 <section class="col-lg-9 col-md-9 nopad">
@@ -192,7 +196,25 @@
             <div class="v-message">
               <p><?php echo $np_post->post_content; ?></p>
             </div>
-            <div class="moreLinks"><a href="#">Like </a> <a href="javascript:void(0)" onclick="show_lb_combox(<?php echo $np_post->post_id;  ?>)"  >Comment</a>
+            <div class="moreLinks"><?php 
+					$get_likedetails = $this->customermodel->page_likedata($np_post->post_id);
+					$current_user_like_data = $this->customermodel->cur_user_pagelikes($np_post->post_id);
+					if($current_user_like_data){
+			       //	$user_id=$current_user_like_data[0]->liked_by;
+//					$like=$get_likedetails[0]->like_status;
+//					}
+//					else
+//					$like='';
+//					 if(@$user_id == $user_id && $like=='Y'){
+	?>
+      <a href="javascript:void(0);" onclick="page_likefun('<?php echo $np_post->post_id;?>','<?php echo $curr_user_id;?>',<?php echo count($get_likedetails); ?>)"  id="link_like<?php echo $np_post->post_id;?>" > Unlike 
+      <?php    
+			}else{?>
+      <a href="javascript:void(0);" onclick="page_likefun('<?php echo $np_post->post_id;?>','<?php echo $curr_user_id;?>',<?php echo count($get_likedetails); ?>)"  id="link_like<?php echo $np_post->post_id;?>" > Like 
+      <?php }?>
+      </a><span id="like_count<?php echo $np_post->post_id;?>">
+      <?php  $like_count = count($get_likedetails); if($like_count>0) echo '<img src="'.base_url().'images/like_myphotos.png" alt=""><span>'.$like_count.'</span>&nbsp;&nbsp;'; ?>
+      </span><a href="javascript:show_lb_combox(<?php echo $np_post->post_id;  ?>);"> Comment </a><?php /*?><a id="link_like<?php echo $np_post->post_id;?>"  href="#">Like </a> <a href="javascript:void(0)" onclick="show_lb_combox(<?php echo $np_post->post_id;  ?>)"  >Comment</a><?php */?>
               <ul class="pull-right">
                 <li><span class="loading"><img style="display:none;" src="<?php echo base_url(); ?>images/loading.gif" width="16" height="11"  alt=""/></span> <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="<?php echo base_url(); ?>uploads/<?php if(!empty($cur_user_data[0]->user_img_thumb)) echo $cur_user_data[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" width="15" height="15"  alt=""/><i class="fa fa-caret-down"></i> </a>
                   <ul class="dropdown-menu">
@@ -220,31 +242,60 @@
             </div>-->
             <?php 
             $np_comments_details = $this->customermodel->page_comments_data($np_post->post_id);
+			echo "<div id='res_comments".$np_post->post_id."'>";
 			       for($i=0;$i<count($np_comments_details);$i++){
 				   // foreach($comments_details as $row_comment):
 			       if($i<=4){ $com_user_data = $this->customermodel->profiledata($np_comments_details[$i]->cmt_by); 	  $cmt_hrsago = $this->customermodel->get_time_difference_php($np_comments_details[$i]->cmt_timestamp); ?>
             <div class="moreLinks usercomment">
-              <figure><img src="<?php echo base_url(); ?>uploads/<?php if(!empty($np_comments_details[$i]->user_img_thumb)) echo $np_comments_details[$i]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" width="37" height="36"  alt=""/></figure>
+              <figure><img src="<?php echo base_url(); ?>uploads/<?php if(!empty($com_user_data[0]->user_img_thumb)) echo $com_user_data[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" width="37" height="36"  alt=""/></figure>
               <div class="content">
-                <h5><?php echo ucfirst($np_comments_details[$i]->user_firstname)."&nbsp;".ucfirst($np_comments_details[$i]->user_lastname); ?></h5>
+                <h5><?php echo ucfirst($com_user_data[0]->user_firstname)."&nbsp;".ucfirst($com_user_data[0]->user_lastname); ?></h5>
                 <span><?php echo $np_comments_details[$i]->cmt_content; ?></span>
-                <p><a href="#">Like</a> . <a href="#">Reply</a> . <?php echo $cmt_hrsago; ?></p>
+                <p> <?php $comment_likes = $this->customermodel->page_comment_likes($np_comments_details[$i]->cmt_id);
+					$np_current_user_com_like_data = $this->customermodel->currentuser_page_commentlikes($np_comments_details[$i]->cmt_id);
+					if($np_current_user_com_like_data){
+					//if(sizeof($comment_likes)>0){
+//			       	$user_id=$comment_likes[0]->liked_by;
+//					$like=$comment_likes[0]->like_status;
+//					}
+//					else
+//					$like='';
+//					 if(@$user_id == $user_id && $like=='Y'){
+						 
+						 ?>
+            <a href="javascript:void(0);" onclick="page_commentlikefun('<?php echo $np_comments_details[$i]->cmt_id;?>','<?php echo $curr_user_id;?>',<?php echo count($comment_likes); ?>)"  id="cmt_link_like<?php echo $np_comments_details[$i]->cmt_id;?>" style="padding-right:0px;">Unlike
+            <?php    
+			}else{?>
+            <a href="javascript:void(0);" onclick="page_commentlikefun('<?php echo $np_comments_details[$i]->cmt_id;?>','<?php echo $curr_user_id;?>',<?php echo count($comment_likes); ?>)"  id="cmt_link_like<?php echo $np_comments_details[$i]->cmt_id;?>" style="padding-right:0px;">Like
+            <?php }?>
+            </a>&nbsp;<span id="cmt_like_count<?php echo $np_comments_details[$i]->cmt_id;?>">
+            <?php  $like_count = count($comment_likes); if($like_count>0) echo '<img src="'.base_url().'images/like_myphotos.png" alt="">'.$like_count.'&nbsp;&nbsp;'; ?>
+            </span> . <?php echo $cmt_hrsago; ?></p>
               </div>
               <div class="clearfix"></div>
             </div>
-            <?php }else { echo '<div>View more</div>'; } } ?>
+            <?php }else { echo '<div>View more</div>'; } } echo "</div>"; ?>
             <div id="lb_comment_box<?php echo $np_post->post_id; ?>" class="moreLinks usercomment hidecommentbox">
               <figure><img src="<?php echo base_url(); ?>uploads/<?php if(!empty($cur_user_data[0]->user_img_thumb)) echo $cur_user_data[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" width="37" height="36"  alt=""/></figure>
               <div class="content">
                 <div class="comment-box">
-                  <textarea class="autoExpand" rows='1' data-min-rows='1' placeholder="Write Comment"></textarea>
-                  <a href="" class="camera"><i class="fa fa-camera"></i></a> 
+                <form method="post" style="width:100% !important;" enctype="multipart/form-data" autocomplete="off" class="send_page_visitor_comment" id="send_page_visitor_comment<?php echo $np_post->post_id;?>" >
+                  <input type="text" class="autoExpand xyzzyx" placeholder="Write Comment" name="write_comment" post_id="<?php echo $np_post->post_id;?>"  id="write_comment<?php echo $np_post->post_id; ?>" />
+                  
+                  <a href="javascript:document.getElementById('uploadCommentPhotos<?php echo $np_post->post_id;?>').click();javascript:document.getElementById('write_comment<?php echo $np_post->post_id;?>').focus(); " class="camera"><i class="fa fa-camera"></i></a>
+                   <input type="hidden" name="post_id" value="<?php echo $np_post->post_id;?>" >
+            <input type="hidden" name="posted_by" value="<?php echo $current_user_id_for_post_comment_box;?>">
+            <input type="file" class="abccba" name="uploadCommentPhotos<?php echo $np_post->post_id;?>[]" id="uploadCommentPhotos<?php echo $np_post->post_id;?>" style="display:none;" />
+          </form> 
                   <!--<a href="" class="emoticons"><i class="fa fa-smile-o"></i></a>-->
                   <div class="clearfix"></div>
                 </div>
               </div>
               <div class="clearfix"></div>
             </div>
+            
+            
+            
           </div>
           <?php endforeach; ?>
         </div>
@@ -283,10 +334,7 @@
     </div>
     <div id="page_posts_content_div" class="posts">
       <?php 
-	  if(empty($user_id))
-	  $curr_user_id = $this->session->userdata('logged_in')['account_id'];
-	  else
-	  $curr_user_id = $user_id;
+	
 	  $products = $this->customermodel->All_Page_Posts($page_id);
 	  
 	 // print_r($none_page_posts);

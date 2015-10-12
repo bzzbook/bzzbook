@@ -1010,6 +1010,40 @@ $('#write_comment'+post_id).html('');
 
 }));
 
+$("#send_page_visitor_comment"+post_id).on('submit',(function(d) {
+url = "<?php echo base_url(); ?>signg_in/send_page_visitor_comment/";
+d.preventDefault();
+
+//$("#message").empty();
+//$('#loading').show();
+$.ajax({
+	
+url: url, // Url to which the request is send
+type: "POST",             // Type of request to be send, called as method
+data: new FormData(this), // Data sent to server, a set of key/value pairs (i.e. form fields and values)
+contentType: false,       // The content type used when sending data to the server.
+cache: false,             // To unable request pages to be cached
+processData:false,        // To send DOMDocument or non processed data file it is set to false
+success: function(data)   // A function to be called if request succeeds
+{
+	
+var link = $('#view_more_link'+post_id);
+$('#view_more_link'+post_id).remove();
+$('#res_comments'+post_id).append(data);
+$('#res_comments'+post_id).append(link);
+$('#write_comment'+post_id).val('');
+var commentboxcont = $('#commentBox'+post_id).html();
+$('#commentBox'+post_id).html('');
+$('#uploadCommentPhotos'+post_id).val('');
+$('#commentBox'+post_id).html(commentboxcont);
+$('#write_comment'+post_id).html('');
+
+}
+});
+
+}));
+
+
 
 /* Function to preview image after validation
 $(function() {

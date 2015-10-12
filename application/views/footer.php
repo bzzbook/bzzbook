@@ -327,7 +327,7 @@ $('#choose_from_photos').modal('toggle');
 
 </script>
 <script type="text/javascript">
-$(document).ready(function(e) {
+/*$(document).ready(function(e) {
     $(document)
        .one('focus.textarea', '.autoExpand', function(){
 			var savedValue = this.value;
@@ -343,7 +343,7 @@ $(document).ready(function(e) {
 			rows = Math.ceil((this.scrollHeight - this.baseScrollHeight) / 17);
 			this.rows = minRows + rows;
 		});
-});
+});*/
 </script>
 <script>
 
