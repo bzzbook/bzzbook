@@ -24,14 +24,31 @@
 			       for($i=0;$i<count($comments_details);$i++){
 				   // foreach($comments_details as $row_comment):
 			       //if($i<=1){ 
-				   $com_user_data = $this->customermodel->profiledata($comments_details[$i]->cmt_by); 	  $cmt_hrsago = $this->customermodel->get_time_difference_php($comments_details[$i]->cmt_timestamp);
+				    if($comments_details[$i]->cmt_as=='page'){
+				   $com_user_data = $this->customermodel->page_profiledata($comments_details[$i]->cmt_by); 
+				    if(!empty($com_user_data[0]->page_image)) 
+				   $u_p_pic = $com_user_data[0]->page_image; 
+				   else 
+				   $u_p_pic = 'main_cat_'.$com_user_data[0]->main_category.'.png';
+				   $u_p_name =  ucfirst($com_user_data[0]->page_name);
+				  
+				   }
+				   else{  
+				   $com_user_data = $this->customermodel->profiledata($comments_details[$i]->cmt_by); 
+				   if(!empty($com_user_data[0]->user_img_thumb)) 
+				   $u_p_pic = $com_user_data[0]->user_img_thumb; 
+				   else 
+				   $u_p_pic = 'default_profile_pic.png';
+				   $u_p_name =  ucfirst($com_user_data[0]->user_firstname)."&nbsp;".ucfirst($com_user_data[0]->user_lastname);
+				   }
+	  $cmt_hrsago = $this->customermodel->get_time_difference_php($comments_details[$i]->cmt_timestamp);
 
 
 ?>
 <div class="moreLinks usercomment">
-              <figure><img src="<?php echo base_url(); ?>uploads/<?php if(!empty($com_user_data[0]->user_img_thumb)) echo $com_user_data[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" width="37" height="36"  alt=""/></figure>
+              <figure><img src="<?php echo base_url(); ?>uploads/<?php echo $u_p_pic; ?>" width="37" height="36"  alt=""/></figure>
               <div class="content">
-                <h5><?php echo ucfirst($com_user_data[0]->user_firstname)."&nbsp;".ucfirst($com_user_data[0]->user_lastname); ?></h5>
+                <h5><?php echo $u_p_name ; ?></h5>
                 <span><?php echo $comments_details[$i]->cmt_content; ?></span>
                 <p><?php $comment_likes = $this->customermodel->page_comment_likes($comments_details[$i]->cmt_id);
 					$current_user_com_like_data = $this->customermodel->currentuser_page_commentlikes($comments_details[$i]->cmt_id);

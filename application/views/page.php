@@ -55,7 +55,7 @@
           <div class="callToAction"><a href="#" class="call-new">New Action</a> <a href="#" class="createCall">Create Call to Action</a></div>
           <div class="profileDetails">
           <div class="userImage">      
-          <img src="<?php echo base_url(); ?>images/coverLogo.png" width="87" height="77"  alt=""/>    
+          <img src="<?php echo base_url(); ?>uploads/<?php if($get_profiledata[0]->page_image!='') echo $get_profiledata[0]->page_image; else echo 'main_cat_'.$get_profiledata[0]->main_category.'.png';  ?>" width="87" height="77"  alt=""/>    
           <a aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" class="dropdown-toggle cameraIcon" href="#"><i class="fa  fa-camera"></i></a>
     <ul class="dropdown-menu">
     <li><a data-target="#choose_from_photos" data-toggle="modal" href="javascript:void(0);">Choose from photos</a></li>
@@ -218,16 +218,16 @@
       <?php  $like_count = count($get_likedetails); if($like_count>0) echo '<img src="'.base_url().'images/like_myphotos.png" alt=""><span>'.$like_count.'</span>&nbsp;&nbsp;'; ?>
       </span><a href="javascript:show_lb_combox(<?php echo $np_post->post_id;  ?>);"> Comment </a><?php /*?><a id="link_like<?php echo $np_post->post_id;?>"  href="#">Like </a> <a href="javascript:void(0)" onclick="show_lb_combox(<?php echo $np_post->post_id;  ?>)"  >Comment</a><?php */?>
               <ul class="pull-right">
-                <li><span class="loading"><img style="display:none;" src="<?php echo base_url(); ?>images/loading.gif" width="16" height="11"  alt=""/></span> <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="<?php echo base_url(); ?>uploads/<?php if(!empty($cur_user_data[0]->user_img_thumb)) echo $cur_user_data[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" width="15" height="15"  alt=""/><i class="fa fa-caret-down"></i> </a>
+                <li><span class="loading"><img style="display:none;" src="<?php echo base_url(); ?>images/loading.gif" width="16" height="11"  alt=""/></span> <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img id="dorpdown_visitor_img<?php echo $np_post->post_id;?>" src="<?php echo base_url(); ?>uploads/<?php if(!empty($cur_user_data[0]->user_img_thumb)) echo $cur_user_data[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" width="15" height="15"  alt=""/><i class="fa fa-caret-down active"></i> </a>
                   <ul class="dropdown-menu">
                     <li>
-                      <div class="userSelector">
-                        <h4><img src="<?php echo base_url(); ?>uploads/<?php if(!empty($cur_user_data[0]->user_img_thumb)) echo $cur_user_data[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" width="30" height="30"  alt=""/><span><?php echo ucfirst($cur_user_data[0]->user_firstname)."&nbsp;".ucfirst($cur_user_data[0]->user_lastname);?><span>(you)</span></span></h4>
+                      <div id="userSelector<?php echo $np_post->post_id;  ?>" class="userSelector">
+                        <h4 onclick="changeVisitorAs('user',<?php echo $cur_user_data[0]->user_id; ?>,'<?php if(!empty($cur_user_data[0]->user_img_thumb)) echo $cur_user_data[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>',<?php echo $np_post->post_id;  ?>)"><img src="<?php echo base_url(); ?>uploads/<?php if(!empty($cur_user_data[0]->user_img_thumb)) echo $cur_user_data[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" width="30" height="30"  alt=""/><span><?php echo ucfirst($cur_user_data[0]->user_firstname)."&nbsp;".ucfirst($cur_user_data[0]->user_lastname);?><span>(you)</span></span><i class="fa fa-check pull-right active"></i></h4>
                         <div class="userList">
                           <h5><i class="fa fa-user"></i> PERSONAL(<?php echo count($my_pages); ?>)</h5>
                           <ul class="userlist">
                             <?php foreach($my_pages as $mpage){ ?>
-                            <li><img src="<?php echo base_url().'uploads/'; if($mpage->page_image!='') echo $mpage->page_image; else echo 'main_cat_'.$mpage->main_category.'.png'; ?>" width="30" height="30"  alt=""/><span> <?php echo substr($mpage->page_name,0,20); ?></span> <i class="fa fa-check pull-right"></i></li>
+                            <li onclick="changeVisitorAs('page',<?php echo $mpage->page_id; ?>,'<?php if($mpage->page_image!='') echo $mpage->page_image; else echo 'main_cat_'.$mpage->main_category.'.png'; ?>',<?php echo $np_post->post_id;  ?>)"><img src="<?php echo base_url().'uploads/'; if($mpage->page_image!='') echo $mpage->page_image; else echo 'main_cat_'.$mpage->main_category.'.png'; ?>" width="30" height="30"  alt=""/><span> <?php echo substr($mpage->page_name,0,20); ?></span> <i id="visitorCheckbox<?php echo $mpage->page_id; ?>" class="fa fa-check pull-right deactive"></i></li>
                             <?php } ?>
                           </ul>
                         </div>
@@ -247,11 +247,30 @@
 			echo "<div id='res_comments".$np_post->post_id."'>";
 			       for($i=0;$i<count($np_comments_details);$i++){
 				   // foreach($comments_details as $row_comment):
-			       if($i<=4){ $com_user_data = $this->customermodel->profiledata($np_comments_details[$i]->cmt_by); 	  $cmt_hrsago = $this->customermodel->get_time_difference_php($np_comments_details[$i]->cmt_timestamp); ?>
+			       if($i<=4){ 
+				   if($np_comments_details[$i]->cmt_as=='page'){
+				   $com_user_data = $this->customermodel->page_profiledata($np_comments_details[$i]->cmt_by); 
+				    if(!empty($com_user_data[0]->page_image)) 
+				   $u_p_pic = $com_user_data[0]->page_image; 
+				   else 
+				   $u_p_pic = 'main_cat_'.$com_user_data[0]->main_category.'.png';
+				   $u_p_name =  ucfirst($com_user_data[0]->page_name);
+				  
+				   }
+				   else{  
+				   $com_user_data = $this->customermodel->profiledata($np_comments_details[$i]->cmt_by); 
+				   if(!empty($com_user_data[0]->user_img_thumb)) 
+				   $u_p_pic = $com_user_data[0]->user_img_thumb; 
+				   else 
+				   $u_p_pic = 'default_profile_pic.png';
+				   $u_p_name =  ucfirst($com_user_data[0]->user_firstname)."&nbsp;".ucfirst($com_user_data[0]->user_lastname);
+				   }
+
+				   $cmt_hrsago = $this->customermodel->get_time_difference_php($np_comments_details[$i]->cmt_timestamp); ?>
             <div class="moreLinks usercomment">
-              <figure><img src="<?php echo base_url(); ?>uploads/<?php if(!empty($com_user_data[0]->user_img_thumb)) echo $com_user_data[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" width="37" height="36"  alt=""/></figure>
+              <figure><img src="<?php echo base_url(); ?>uploads/<?php echo $u_p_pic; ?>" width="37" height="36"  alt=""/></figure>
               <div class="content">
-                <h5><?php echo ucfirst($com_user_data[0]->user_firstname)."&nbsp;".ucfirst($com_user_data[0]->user_lastname); ?></h5>
+                <h5><?php echo $u_p_name ?></h5>
                 <span><?php echo $np_comments_details[$i]->cmt_content; ?></span>
                 <p> <?php $comment_likes = $this->customermodel->page_comment_likes($np_comments_details[$i]->cmt_id);
 					$np_current_user_com_like_data = $this->customermodel->currentuser_page_commentlikes($np_comments_details[$i]->cmt_id);
@@ -278,13 +297,15 @@
             </div>
             <?php }else { echo '<div>View more</div>'; } } echo "</div>"; ?>
             <div id="lb_comment_box<?php echo $np_post->post_id; ?>" class="moreLinks usercomment hidecommentbox">
-              <figure><img src="<?php echo base_url(); ?>uploads/<?php if(!empty($cur_user_data[0]->user_img_thumb)) echo $cur_user_data[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" width="37" height="36"  alt=""/></figure>
+              <figure><img id="comment_as_img<?php echo $np_post->post_id; ?>" src="<?php echo base_url(); ?>uploads/<?php if(!empty($cur_user_data[0]->user_img_thumb)) echo $cur_user_data[0]->user_img_thumb; else echo 'default_profile_pic.png'; ?>" width="37" height="36"  alt=""/></figure>
               <div class="content">
                 <div class="comment-box">
                 <form method="post" style="width:100% !important;" enctype="multipart/form-data" autocomplete="off" class="send_page_visitor_comment" id="send_page_visitor_comment<?php echo $np_post->post_id;?>" >
                   <input type="text" class="autoExpand xyzzyx" placeholder="Write Comment" name="write_comment" post_id="<?php echo $np_post->post_id;?>"  id="write_comment<?php echo $np_post->post_id; ?>" />
                   
                   <a href="javascript:document.getElementById('uploadCommentPhotos<?php echo $np_post->post_id;?>').click();javascript:document.getElementById('write_comment<?php echo $np_post->post_id;?>').focus(); " class="camera"><i class="fa fa-camera"></i></a>
+                  <input type="hidden" id="posted_as<?php echo $np_post->post_id;?>" name="posted_as" value="user" >
+                  <input type="hidden" id="posted_as_id<?php echo $np_post->post_id;?>" name="posted_as_id" value="<?php echo $curr_user_id; ?>" >
                    <input type="hidden" name="post_id" value="<?php echo $np_post->post_id;?>" >
             <input type="hidden" name="posted_by" value="<?php echo $current_user_id_for_post_comment_box;?>">
             <input type="file" class="abccba" name="uploadCommentPhotos<?php echo $np_post->post_id;?>[]" id="uploadCommentPhotos<?php echo $np_post->post_id;?>" style="display:none;" />

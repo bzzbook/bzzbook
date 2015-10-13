@@ -4369,3 +4369,7 @@ display: none;
 .life_event_lefts_img img{ cursor:pointer; }
 .life_event_lefts_img div{ background:url(../images/mg-bg.png) no-repeat 0 0;  width:122px; height:122px; text-align:center; }
 .life_event_lefts_img div img{ margin:0; border:none; position:relative; top:10px; border:2px solid #fff; -webkit-box-shadow: 2px 2px 4px 4px #D1D1D1; box-shadow: 2px 2px 4px 4px #D1D1D1;}
+.userList .userlist .deactive{ display:none; }
+.userList .userlist .active{ display:block; }
+.userSelector .deactive{ display:none; }
+.userSelector .active{ display:block; }

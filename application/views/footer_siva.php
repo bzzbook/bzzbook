@@ -2077,4 +2077,14 @@ function show_lb_combox(post_id){
 	$('#lb_comment_box'+post_id).show();
 }
 
+function changeVisitorAs(visitor_as,id,image,post_id)
+{	
+	$('#dorpdown_visitor_img'+post_id).attr('src','<?php echo base_url().'uploads/'; ?>'+image);
+	$('#comment_as_img'+post_id).attr('src','<?php echo base_url().'uploads/'; ?>'+image);
+	$('#userSelector'+post_id+' .active').removeClass('active').addClass('deactive');
+	$('#userSelector'+post_id+' #visitorCheckbox'+id).removeClass('deactive').addClass('active');
+	$('#posted_as'+post_id).val(visitor_as);
+	$('#posted_as_id'+post_id).val(id);	
+}
+
     </script>

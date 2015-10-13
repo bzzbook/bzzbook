@@ -1029,7 +1029,8 @@ move_uploaded_file($sourcePath,$targetPath) ;
 $data=array(
 	   'cmt_content'=> $_POST['write_comment'],
 	   'cmt_on'=> $_POST['post_id'],
-	   'cmt_by'=> $_POST['posted_by'],
+	   'cmt_by'=> $_POST['posted_as_id'],
+	   'cmt_as'=> $_POST['posted_as'],
 	   'uploadedfiles' => $filename
 	   );
 	   
@@ -1051,7 +1052,8 @@ echo "<span id='invalid'>***Invalid file Size or Type***<span>";
 $data_a=array(
 	   'cmt_content'=> $_POST['write_comment'],
 	   'cmt_on'=> $_POST['post_id'],
-	   'cmt_by'=> $_POST['posted_by'],
+	   'cmt_by'=> $_POST['posted_as_id'],
+	   'cmt_as'=> $_POST['posted_as'],
 	   'uploadedfiles' => ''
 	   );
 	   
