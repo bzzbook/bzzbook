@@ -58,8 +58,8 @@ $result = $this->profile_set->get_userinfo($user_id = '');
         <li>
 <a href="<?php echo base_url(); ?>company/company_disp/<?php echo $cmp->companyinfo_id ?>" tabindex="-1" role="menuitem" title="company profile"><i class="fa fa-building-o"> </i> <?php echo $cmp->cmp_name ?></a></li>
 		<?php endforeach;?>
-        <li><a href="<?php echo base_url(); ?>company/create_page/<?php echo $cmp->companyinfo_id ?>" tabindex="-1" role="menuitem"><i class="fa fa-plus"> </i> 
-Create Page</a></li>
+       <?php /*?> <li><a href="<?php echo base_url(); ?>company/create_page/<?php echo $cmp->companyinfo_id ?>" tabindex="-1" role="menuitem"><i class="fa fa-plus"> </i> 
+Create Page</a></li><?php */?>
           <li><a href="<?php echo base_url(); ?>signg_in/sign_out" tabindex="-1" role="menuitem">Logout</a></li>
         </ul>
       </div>
