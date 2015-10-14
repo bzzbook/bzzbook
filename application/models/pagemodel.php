@@ -71,5 +71,21 @@ class Pagemodel extends CI_Model {
         $this->db->insert('bzz_cover_images', $data);	
 		return $this->db->insert_id();   
    }
+   public function insert_page_logo($page_id, $cover_image){
+	   
+	   $data = array(
+              'page_image' => $cover_image,
+            );
+
+	   $this->db->where('page_id', $page_id);
+	   $this->db->update('bzz_pages', $data); 
+	   
+	   $data = array(
+            'page_image' => $cover_image,
+			'page_id' => $page_id
+        );
+        $this->db->insert('bzz_page_profile_pics', $data);	
+		return $this->db->insert_id();   
+   }
 }
 ?>

@@ -2583,11 +2583,11 @@ public function coverfileupload($file_name){
 	$validvideoextensions = array('webm','mp4','ogg','ogv','wmv','3gp','3g2','3gpp','avi','mov','flv','MOV');
 	//print_r($_FILES[$file_name]);
 	
-		$filetype = $_FILES[$file_name]["type"];
-		$filename = str_replace(' ', '', time().'_'.$_FILES[$file_name]["name"]);
-		$filesize = $_FILES[$file_name]["size"];
-		$fileerror = $_FILES[$file_name]["error"];
-		$tempname = $_FILES[$file_name]['tmp_name'];
+	$filetype = $_FILES[$file_name]["type"];
+	$filename = str_replace(' ', '', time().'_'.$_FILES[$file_name]["name"]);
+	$filesize = $_FILES[$file_name]["size"];
+	$fileerror = $_FILES[$file_name]["error"];
+	$tempname = $_FILES[$file_name]['tmp_name'];
 		
 	
 	if(isset($filetype) && !empty($filetype))	
@@ -2702,6 +2702,26 @@ public function upload_cover_photo($page_id){
 				
 			}
 }
+public function upload_page_logo($page_id){
+	$this->load->model('pagemodel');
+	if($_FILES['page_logo']['name']!=''){				
+				$up_res = $this->coverfileupload('page_logo');
+				//print_r($up_res); exit;	  
+				if($up_res['status']){
+				$file_name = implode(',',$up_res['files']);
+				$cover_image = $file_name;
+				$page_id = $this->pagemodel->insert_page_logo($page_id,$cover_image);	
+				if($page_id){
+					$up_res['status'] = true;
+					$up_res['page_image'] = $cover_image;
+				}
+				}
+				echo json_encode($up_res);
+				exit;	
+				
+			}
+}
+
 public function delete_cover_photo($page_id,$cover_image)
 {
 	$condition = "page_id = $page_id AND cover_image = '".$cover_image."'";

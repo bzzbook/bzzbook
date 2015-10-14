@@ -224,6 +224,44 @@ function cancelReposition() {
     $('input.cover-position').val(0);
     $('.cover-resize-wrapper img').draggable('destroy').css('cursor','default');
 }
+function uploadPageLogo(e,page_id){
+
+e.preventDefault();
+
+url = "<?php echo base_url(); ?>profile/upload_page_logo/"+page_id;
+ var formObj = $('form#uploadlogoform')[0];
+
+$.ajax({
+	 
+url: url, // Url to which the request is send
+type: "POST",             // Type of request to be send, called as method
+data: new FormData(formObj), // Data sent to server, a set of key/value pairs (i.e. form fields and values)
+contentType: false,       // The content type used when sending data to the server.
+cache: false,             // To unable request pages to be cached
+processData:false,        // To send DOMDocument or non processed data file it is set to false
+beforeSend: function(){
+			
+	$('.userImage img').attr('src', "<?php echo base_url().'images/loading.gif'; ?>" );
+
+		},
+success: function(data)   // A function to be called if request succeeds
+{
+	var obj = jQuery.parseJSON( data );
+	if(obj.status)
+	{
+		
+		$('.userImage img').attr('src', "<?php echo base_url().'uploads/'; ?>"+obj.page_image );
+		
+	}
+	else{
+	alert(obj.message);
+	location.reload();
+	}
+}
+});
+
+	
+}
 function uploadCoverPhoto(e,page_id){
 e.preventDefault();
 

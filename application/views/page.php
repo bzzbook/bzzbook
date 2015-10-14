@@ -59,10 +59,13 @@
           <a aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" class="dropdown-toggle cameraIcon" href="#"><i class="fa  fa-camera"></i></a>
     <ul class="dropdown-menu">
     <li><a data-target="#choose_from_photos" data-toggle="modal" href="javascript:void(0);">Choose from photos</a></li>
-    <li><a onclick="document.getElementById('cover_photo').click();cancelReposition();" href="javascript:void(0);">Upload</a></li>
+    <li><a onclick="document.getElementById('page_logo').click();" href="javascript:void(0);">Upload</a></li>
     <li><a onclick="repositionCover();" href="javascript:void(0);">Reposition</a></li>
     <li><a onclick="return confirm('Are you sure you want to remove cover image');" href="http://localhost/bzzbook/profile/delete_cover_photo/1/1444456878_ghid_secret_santa.jpg">Remove</a></li>
     </ul>
+    <form class="hidden" method="post" enctype="multipart/form-data" id="uploadlogoform">
+            <input id="page_logo" name="page_logo" type="file" onchange="uploadPageLogo(event,<?php echo $page_id; ?>);">
+          </form>
             </div>
           
           
