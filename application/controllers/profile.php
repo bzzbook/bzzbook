@@ -111,8 +111,16 @@ public function page($page_id = '')
 	  $this->load->model('pagemodel');
 	  $data['user_id'] = '';
 	  $data['page_id'] = $page_id;
-	  $data['content']='page';
-	  $this->load->view('full_content_view',$data);
+	  $data['content']='page_timeline';
+	  $this->load->view('page_full_content_view',$data);
+}
+public function about_page($page_id = '')
+{	  
+	  $this->load->model('pagemodel');
+	  $data['user_id'] = '';
+	  $data['page_id'] = $page_id;
+	  $data['content']='about_page';
+	  $this->load->view('page_full_content_view',$data);
 }
 
 public function message()

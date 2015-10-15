@@ -136,6 +136,12 @@ $(function () {
 <script src="<?php echo base_url(); ?>js/jquery.nanoscroller.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>js/chat.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>js/albumPreviews.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>js/editables.jquery.js"></script>
+<script>
+$(document).ready(function(){
+	$('#togglerBlock').editables();
+	});
+</script>
 <script src="<?php echo base_url(); ?>js/slideUserOption.jquery.js" type="text/javascript"></script>
 <?php /*?><script src="<?php echo base_url(); ?>js/jquery.form.min.js"></script>
 <?php */?>

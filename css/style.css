@@ -4375,3 +4375,81 @@ display: none;
 .userList .userlist .active{ display:block; }
 .userSelector .deactive{ display:none; }
 .userSelector .active{ display:block; }
+
+.topBar_Page{ background:#e2e2e2; -webkit-border-bottom-right-radius: 5px; border:1px solid #cccccc; padding:0 5px; 
+-webkit-border-bottom-left-radius: 5px;
+-moz-border-radius-bottomright: 5px;
+-moz-border-radius-bottomleft: 5px;
+border-bottom-right-radius: 5px;
+border-bottom-left-radius: 5px; margin-bottom:10px; border-top:0px;   }
+.topBar_Page ul{ list-style:none; margin:0px; padding:0px;  }
+.topBar_Page ul li{ float:left; padding:5px 0px;  }
+.topBar_Page ul li:hover a{ background:#ccc; }
+.topBar_Page ul li a,.topBar_Page ul li a:hover{ line-height:30px; display:block; color:#434242; padding:0 10px 0px; text-decoration:none; }
+
+.topBar_Page ul li+li a{ border-left:1px solid #cccccc; }
+
+.page-option-container{ margin:10px 0; border:1px solid #e3e3e3; background:#fff; }
+.page-option-container .tableMain{ display:table; width:100%; }
+.page-option-container .tableMain .tableChild { display:table-cell; float:none; position:relative; padding-bottom:30px; }
+.page-option-container .tableMain .tableChild+.tableChild:before{ content:""; top:0px; height:100%; width:1px; background:#e3e3e3; position:absolute; margin-left:-10px; }
+
+.page-option-container .tableMain .tableChild ul{ margin:20px -10px; padding-left:10px;  }
+.page-option-container .tableMain .tableChild ul li a{ padding-left:15px; display:block; color:#737373; }
+.page-option-container .tableMain .tableChild ul li a.active{ font-weight:600; position:relative;   }
+.page-option-container .tableMain .tableChild ul li a.active:before{ content:""; position:absolute; width:3px; height:100%; top:0px; left:0px; background:#fbc436;  }
+
+.page-option-container h3{ font-size:16px; font-weight:400; margin:0px; padding:0px 10px; line-height:35px; border-bottom:1px solid #e3e3e3; background:#fbc436; color:#fff;  }
+.page-option-container .infoBox h4{font-size:15px; font-weight:500; margin:0px; padding:0px;  line-height:35px; color:#a09e9e;}
+.page-option-container .infoBox+.infoBox{border-top:1px solid #e3e3e3; position:relative; }
+.page-option-container li{ float:none !important;   padding:5px 0; }
+.page-option-container li a{ line-height:50px; display:block; color:#a09e9e;  }
+.page-option-container .infoBox h5.headBlock{ font-weight:300; line-height:40px; font-size:15px; font-family: 'Roboto', serif;    }
+.page-option-container .infoBox .headBlock .title{ width:200px; display:inline-block; color:#a09e9e;  }
+.page-option-container .infoBox .headBlock .value{ width:calc(100%-200px);  display:inline-block; }
+.page-option-container .infoBox .toggler{display:none; }
+.page-option-container .infoBox .editIt{ display:none; position:absolute; top:0px; right:10px; font-size:12px; color:#06C; line-height:40px; }
+.page-option-container .infoBox:hover .editIt{ display:block; cursor:pointer; }
+
+.page-option-container .infoBox .headBlock .value{font-size: 15px;
+    position: relative;
+	line-height: 20px;
+    right: 0;}
+	.page-option-container .infoBox:hover .value.editIt{ display:inline-block;  }
+	.page-option-container .infoBox .value.editIt:hover{ text-decoration:underline; }
+
+.page-option-container .infoBox .toggler .tabular{ display:table; width:100%; padding:20px 0; }
+.page-option-container .infoBox .toggler .title{  width:200px; display:table-cell; text-align:right; padding-right:20px; line-height:30px; vertical-align:top; }
+.page-option-container .infoBox .toggler .formBlock{  width:calc(100%-250px); display:table-cell; }
+
+.page-option-container .infoBox .toggler .tabular .formBlock select.form-control,.page-option-container .infoBox .toggler .tabular .formBlock input.form-control{ margin-bottom:10px; width:70%; height:30px; border:1px solid #ccc; border-radius:0px; }
+.page-option-container .infoBox .toggler .tabular .formBlock button{ border:0px; color:#fff; border-radius:3px; height:30px; padding:0  10px; }
+.page-option-container .infoBox .toggler .tabular .formBlock button.save{ background:#fbc436; }
+.page-option-container .infoBox .toggler .tabular .formBlock button.cancelEdits{ background:#2f2f2f; }
+.page-option-container .infoBox .toggler .tabular .formBlock.form-inline .form-control{ padding-left:3px;  }
+.page-option-container .infoBox .toggler .tabular .formBlock.form-inline .form-control.specific{ width:100px; }
+.page-option-container .infoBox .toggler .tabular .formBlock.form-inline .form-control.year{ width:60px; }
+
+.page-option-container .infoBox .toggler .tabular .formBlock .form-group label{ line-height:30px; font-weight:300; color:#756f6f; padding-left:0px;   }
+.page-option-container .infoBox .toggler .tabular .formBlock .form-group .form-control{ width:90%;}
+.page-option-container .infoBox .toggler .tabular .formBlock .note{ padding-bottom:20px; font-size:14px; font-weight:300; color:#756f6f;  }
+
+.page-option-container .infoBox .toggler .tabular .formBlock textarea.form-control{ margin-bottom:10px; width:70%;  border:1px solid #ccc; border-radius:0px;   }
+
+
+/*sideblock*/
+
+.extraBlocks{ text-align:center; border:1px solid #ccc;  }
+
+.extraBlocks h4{ border-bottom:1px solid #ccc; margin:0px; padding:0px; line-height:35px; font-size:14px; font-weight:300; text-transform:uppercase;   }
+.extraBlocks .tabBlock p{ padding:0px; margin:0px; font-weight:600; }
+.extraBlocks .tabBlock{ padding:10px 0; }
+.extraBlocks .tabBlock+.tabBlock{ border-top:1px solid #ccc; }
+
+.timeline{ margin-top:30px; }
+.timeline ul{ padding:0px; margin:0px; }
+.timeline li{ list-style:none; }
+.timeline li span{  line-height:25px; display:block; margin:2px 0; border-left:3px solid #ccc; padding-left:10px; cursor:pointer;  }
+.timeline li span.active{border-left:3px solid #696969;}
+
+
