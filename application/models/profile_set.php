@@ -1885,5 +1885,12 @@ public function insert_page($data){
 	   else
 	   return false;	
 }
+public function insert_page_about($data){
+       if($this->db->insert('bzz_page_about',$data))
+	   return $this->db->insert_id();
+	   else
+	   return false;	
+}
+
 }
 ?>

@@ -56,6 +56,7 @@
           <h3>Visitor Post <i class="fa fa-chevron-right"></i></h3>
           <?php $none_page_posts = $this->customermodel->get_none_page_posts($page_id); 
 		  echo "<div class='nano'><div class='nano-content' style='margin-right: -17px; max-height: 600px;'>";
+		  if($none_page_posts):
 		   foreach($none_page_posts as $np_post):  
 		$npu_profiledata = $this->customermodel->profiledata($np_post->posted_by);
 		$cur_usr_id = $this->session->userdata('logged_in')['account_id'];
@@ -194,7 +195,7 @@
             
             
           </div>
-          <?php endforeach; ?>
+          <?php endforeach; endif;?>
           </div><div class="nano-pane"><div class="nano-slider"></div></div></div>
         </div>
       </div>

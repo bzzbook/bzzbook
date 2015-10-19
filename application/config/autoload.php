@@ -109,7 +109,7 @@ $autoload['language'] = array();
 |
 */
 
-$autoload['model'] = array('sign_up','customermodel','profile_set','lookup','friendsmodel','companies','messages','jobmodel','confirmaccount','eventmodel','person','life_events_model','mdlnotifications','save_as_favorites_m');
+$autoload['model'] = array('sign_up','customermodel','profile_set','lookup','friendsmodel','companies','messages','jobmodel','confirmaccount','eventmodel','person','life_events_model','mdlnotifications','save_as_favorites_m','pagemodel');
 
 
 /* End of file autoload.php */

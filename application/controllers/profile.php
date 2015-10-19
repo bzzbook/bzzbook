@@ -116,7 +116,7 @@ public function page($page_id = '')
 }
 public function about_page($page_id = '')
 {	  
-	  $this->load->model('pagemodel');
+	 
 	  $data['user_id'] = '';
 	  $data['page_id'] = $page_id;
 	  $data['content']='about_page';
@@ -2386,6 +2386,9 @@ $insertdata['sub_category'] = $this->input->post('ent_sub_category');
 				$insertdata['user_id']= $this->session->userdata('logged_in')['account_id'];	
 				$insertdata['view_as'] = 'user';	
 				$page_id = $this->profile_set->insert_page($insertdata);
+				
+				$about_page_data['page_id'] = $page_id;
+				$page_about_id = $this->profile_set->insert_page_about($about_page_data);
 				 
 				/*$settings['profile_visible'] = 'Y';
 				$settings['comments_visible'] = 'Y';
