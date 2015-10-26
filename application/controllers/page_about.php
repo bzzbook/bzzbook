@@ -197,5 +197,97 @@ public function add_category()
 	}else
 	return false;
  }
+    public function add_page_phone()
+ {
+	 if($this->pagemodel->add_page_phone_data($_POST['page_phone'],$_POST['page_id']))
+	{
+	
+	$data = $this->pagemodel->get_page_about_details($_POST['page_id']);
+	echo $data[0]['phone'];
+	
+	}else
+	return false;
+ }
+    public function add_page_email()
+ {
+	 if($this->pagemodel->add_page_email_data($_POST['page_email'],$_POST['page_id']))
+	{
+	
+	$data = $this->pagemodel->get_page_about_details($_POST['page_id']);
+	echo $data[0]['email'];
+	
+	}else
+	return false;
+ }
+     public function add_page_address()
+ {
+	 if($this->pagemodel->add_page_address_data($_POST['address'],$_POST['city'],$_POST['zip_code'],$_POST['page_id']))
+	{
+	
+	$data = $this->pagemodel->get_page_about_details($_POST['page_id']);
+	echo $data[0]['address'].", ".$data[0]['city']." ".$data[0]['zip_code'];
+	
+	}else
+	return false;
+ }
+      public function add_page_isbn()
+ {
+	 if($this->pagemodel->add_page_isbn_data($_POST['isbn'],$_POST['page_id']))
+	{
+	
+	$data = $this->pagemodel->get_page_about_details($_POST['page_id']);
+	echo $data[0]['isbn'];
+	
+	}else
+	return false;
+ }
+ 
+   public function add_page_from_date()
+ {
+	 if($this->pagemodel->add_page_fromdate_data($_POST['strat_contnet'],$_POST['year'],$_POST['month'],$_POST['day'],$_POST['page_id']))
+	{
+	
+	$data = $this->pagemodel->get_page_about_details($_POST['page_id']);
+	
+	if($data[0]['start_content']!='' && $data[0]['frm_month']!='0' && $data[0]['frm_day']!='0' && $data[0]['frm_year']!='0')
+	{
+		echo $data[0]['start_content']." On ".$data[0]['frm_month']." ".$data[0]['frm_day'].", ".$data[0]['frm_year'];
+	
+	}else if($data[0]['start_content']!= '' && $data[0]['frm_month']!='0'  && $data[0]['frm_year']!='0' && $data[0]['frm_day'] =='0')
+	{
+		echo $data[0]['start_content']." in ".$data[0]['frm_month']." ".$data[0]['frm_year'];
+		
+	}else if($data[0]['start_content']!= '' && $data[0]['frm_month'] == '0'  && $data[0]['frm_year']!='0' && $data[0]['frm_day'] == '0')
+	{
+		echo $data[0]['start_content']." in ".$data[0]['frm_year'];
+	} 
+	
+	}else
+	return false;
+ }
+ 
+   public function add_page_to_date()
+ {
+	 if($this->pagemodel->add_page_todate_data($_POST['year'],$_POST['month'],$_POST['day'],$_POST['page_id']))
+	{
+	
+	$data = $this->pagemodel->get_page_about_details($_POST['page_id']);
+	
+	if($data[0]['to_month']!='0' && $data[0]['to_day']!='0' && $data[0]['to_year']!='0')
+	{
+		echo $data[0]['to_month']." ".$data[0]['to_day'].", ".$data[0]['to_year'];
+	
+	}else if($data[0]['to_month']!='0'  && $data[0]['to_year']!='0' && $data[0]['to_day'] =='0')
+	{
+		echo $data[0]['to_month']." ".$data[0]['to_year'];
+		
+	}else if( $data[0]['frm_month'] == '0'  && $data[0]['to_year']!='0' && $data[0]['to_day'] == '0')
+	{
+		echo $data[0]['to_year'];
+	} 
+	
+	}else
+	return false;
+ }
 }
 ?>

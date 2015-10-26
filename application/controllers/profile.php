@@ -2117,6 +2117,10 @@ public function add_bus_page(){
 		$insertdata['view_as'] = 'user';	
 		$page_id = $this->profile_set->insert_page($insertdata);
 		 
+		        $about_page_data['page_id'] = $page_id;
+				$about_page_data['page_cat_id'] = 1;
+				$about_page_data['page_sub_cat_id'] = $this->input->post('ent_sub_category');
+				$page_about_id = $this->profile_set->insert_page_about($about_page_data);
 		/*$settings['profile_visible'] = 'Y';
 		$settings['comments_visible'] = 'Y';
 		$settings['email_notification'] = 'Y';
@@ -2183,6 +2187,10 @@ public function add_cmp_page(){
 				$insertdata['view_as'] = 'user';	
 				$page_id = $this->profile_set->insert_page($insertdata);
 				 
+				 $about_page_data['page_id'] = $page_id;
+				$about_page_data['page_cat_id'] = 2;
+				$about_page_data['page_sub_cat_id'] = $this->input->post('ent_sub_category');
+				$page_about_id = $this->profile_set->insert_page_about($about_page_data);
 				/*$settings['profile_visible'] = 'Y';
 				$settings['comments_visible'] = 'Y';
 				$settings['email_notification'] = 'Y';
@@ -2251,7 +2259,10 @@ $insertdata['sub_category'] = $this->input->post('brand_sub_category');
 				$insertdata['user_id']= $this->session->userdata('logged_in')['account_id'];	
 				$insertdata['view_as'] = 'user';	
 				$page_id = $this->profile_set->insert_page($insertdata);
-				 
+				 $about_page_data['page_id'] = $page_id;
+				$about_page_data['page_cat_id'] = 3;
+				$about_page_data['page_sub_cat_id'] = $this->input->post('ent_sub_category');
+				$page_about_id = $this->profile_set->insert_page_about($about_page_data);
 				/*$settings['profile_visible'] = 'Y';
 				$settings['comments_visible'] = 'Y';
 				$settings['email_notification'] = 'Y';
@@ -2319,7 +2330,10 @@ public function add_art_page(){
 				$insertdata['user_id']= $this->session->userdata('logged_in')['account_id'];	
 				$insertdata['view_as'] = 'user';	
 				$page_id = $this->profile_set->insert_page($insertdata);
-				 
+				$about_page_data['page_id'] = $page_id;
+				$about_page_data['page_cat_id'] = 4;
+				$about_page_data['page_sub_cat_id'] = $this->input->post('ent_sub_category');
+				$page_about_id = $this->profile_set->insert_page_about($about_page_data); 
 				/*$settings['profile_visible'] = 'Y';
 				$settings['comments_visible'] = 'Y';
 				$settings['email_notification'] = 'Y';
@@ -2388,6 +2402,8 @@ $insertdata['sub_category'] = $this->input->post('ent_sub_category');
 				$page_id = $this->profile_set->insert_page($insertdata);
 				
 				$about_page_data['page_id'] = $page_id;
+				$about_page_data['page_cat_id'] = 5;
+				$about_page_data['page_sub_cat_id'] = $this->input->post('ent_sub_category');
 				$page_about_id = $this->profile_set->insert_page_about($about_page_data);
 				 
 				/*$settings['profile_visible'] = 'Y';
@@ -2457,6 +2473,10 @@ public function add_cause_page(){
 				$insertdata['user_id']= $this->session->userdata('logged_in')['account_id'];	
 				$insertdata['view_as'] = 'user';	
 				$page_id = $this->profile_set->insert_page($insertdata);
+				$about_page_data['page_id'] = $page_id;
+				$about_page_data['page_cat_id'] = 6;
+				$about_page_data['page_sub_cat_id'] = $this->input->post('ent_sub_category');
+				$page_about_id = $this->profile_set->insert_page_about($about_page_data);
 				 
 				/*$settings['profile_visible'] = 'Y';
 				$settings['comments_visible'] = 'Y';

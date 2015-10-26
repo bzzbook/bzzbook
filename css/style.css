@@ -4139,11 +4139,36 @@ JobsSearchLayout .jobSearchListing .applicant_job_search .optionBox {
 .editDelete a:hover{color:#696969; }
 .editDeleteParent .editDelete{display:none;}
 .editDeleteParent:hover .editDelete{display:block;}
-.create_page input,.create_page select,.create_page textarea{ width:315px; border:1px solid #ececec; font-size:13px; padding:5px; margin-bottom:8px; }
-.small_width{ width:55px !important;}
+.create_page input,.create_page select,.create_page textarea{ width:315px; border:1px solid #e3e3e3;   border-radius: 3px;
+    box-shadow: none;
+    color: #a8a8a8;
+    font-size: 12px;
+    font-weight: 300;
+    height: 40px;
+	margin-bottom:5px;
+	padding-left:10px;}
+.create_page input[type='file']{
+  padding:9px !important; }
+.create_page textarea{
+  padding:12px !important; }
+.create_page input[type='radio']
+  {
+	  font-size:12px !important;
+	  height: 16px !important;
+	  width:38px !important;
+  }
+/*.create_page input,.create_page select,.create_page textarea{  border: 1px solid #e3e3e3;
+    border-radius: 3px;
+    box-shadow: none;
+    color: #a8a8a8;
+    font-size: 12px;
+    font-weight: 300;
+    height: 40px;
+    margin-bottom: 26px; } */
+.small_width{ width:102px !important;}
 .create_page label{ font-size:12px; font-weight:300; }
 .create_page label>a{ color:#0273B2;}
-.get_started_btn{background-color: #fbc436; color: #fff; float: left; float:right; width:100px !important; }
+.get_started_btn{background-color: #fbc436; color: #fff; float: left; float:right; text-align:left; width:100px !important; font-size:15px !important; font-weight:400 !important; }
 .top-margin-50{ margin-top:50px; }
 .error_msg p{ color:#090 !important;}
 .fa{ color:#c2c2c2; }
@@ -4428,7 +4453,7 @@ border-bottom-left-radius: 5px; margin-bottom:10px; border-top:0px;   }
 .page-option-container .infoBox .toggler .tabular .formBlock button.cancelEdits{ background:#2f2f2f; }
 .page-option-container .infoBox .toggler .tabular .formBlock.form-inline .form-control{ padding-left:3px;  }
 .page-option-container .infoBox .toggler .tabular .formBlock.form-inline .form-control.specific{ width:100px; }
-.page-option-container .infoBox .toggler .tabular .formBlock.form-inline .form-control.year{ width:60px; }
+.page-option-container .infoBox .toggler .tabular .formBlock.form-inline .form-control.year{ width:70px; }
 
 .page-option-container .infoBox .toggler .tabular .formBlock .form-group label{ line-height:30px; font-weight:300; color:#756f6f; padding-left:0px;   }
 .page-option-container .infoBox .toggler .tabular .formBlock .form-group .form-control{ width:90%;}

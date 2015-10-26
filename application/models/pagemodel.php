@@ -329,6 +329,97 @@ class Pagemodel extends CI_Model {
 		return false;
 		
 	}
+	  public function add_page_phone_data($phone,$page_id)
+	{
+		$up_data = array(
+		'phone'=>$phone,
+		
+		);
+		$this->db->where('page_id',$page_id);
+		
+		if($this->db->update('bzz_page_about',$up_data))
+		return true;
+		else
+		return false;
+		
+	}
+	  public function add_page_email_data($email,$page_id)
+	{
+		$up_data = array(
+		'email'=>$email,
+		
+		);
+		$this->db->where('page_id',$page_id);
+		
+		if($this->db->update('bzz_page_about',$up_data))
+		return true;
+		else
+		return false;
+		
+	}
+	  public function add_page_address_data($address,$city,$zip_code,$page_id)
+	{
+		$up_data = array(
+		'address'=>$address,
+		'city'=>$city,
+		'zip_code'=>$zip_code
+		
+		);
+		$this->db->where('page_id',$page_id);
+		
+		if($this->db->update('bzz_page_about',$up_data))
+		return true;
+		else
+		return false;
+		
+	}
+	  public function add_page_isbn_data($isbn,$page_id)
+	{
+		$up_data = array(
+		'isbn'=>$isbn,
+		
+		);
+		$this->db->where('page_id',$page_id);
+		
+		if($this->db->update('bzz_page_about',$up_data))
+		return true;
+		else
+		return false;
+		
+	}
+	  public function add_page_fromdate_data($start_content,$year,$month,$day,$page_id)
+	{
+		$up_data = array(
+		'start_content'=>$start_content,
+		'frm_year'=>$year,
+		'frm_month'=>$month,
+		'frm_day'=>$day
+		
+		);
+		$this->db->where('page_id',$page_id);
+		
+		if($this->db->update('bzz_page_about',$up_data))
+		return true;
+		else
+		return false;
+		
+	}
+	  public function add_page_todate_data($year,$month,$day,$page_id)
+	{
+		$up_data = array(
+		'to_year'=>$year,
+		'to_month'=>$month,
+		'to_day'=>$day
+		
+		);
+		$this->db->where('page_id',$page_id);
+		
+		if($this->db->update('bzz_page_about',$up_data))
+		return true;
+		else
+		return false;
+		
+	}
 	
 }
 ?>
