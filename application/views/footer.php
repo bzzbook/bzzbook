@@ -4203,7 +4203,7 @@ function del_mobile()
                 $('.add_mbl_append').append('<div class="col-md-12 mobile mobile_values"><div id="individual_mbl_con'+imCnt+'" class="form-group mobile col-md-3 get_mbl_divs"><label for="exampleInputName2">Mobile Phones</label></div><div class="col-md-3"><select class="con_code" id="country_codes'+imCnt+'"><option>india(+91)</option><option>pak(+92)</option></select></div><div class="col-md-3 box-rig_box"><input type="text" class="phone_no" id="mobile' + imCnt + '" value=""></div><div class="col-md-3 inside_drop" style="display:none;"> <a aria-expanded="false" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#"> <i class="fa fa-fw"></i> <span class="fa fa-angle-down"></span></a></div></div>');
 				
 				 }else{
-				 alert('aaaaaaaaaaaaaaaaaa');
+				 //alert('aaaaaaaaaaaaaaaaaa');
 				 }
 			});
 
@@ -7104,6 +7104,8 @@ window.onbeforeunload = function(){
 		});
 }
 
+
+
 function showOnlineFriends(){
   
 //  if(name)
@@ -7133,6 +7135,143 @@ function showOnlineFriends(){
 
 
 </script>
+<script type="text/javascript">
+
+
+
+$('body').delegate('#frm_years_page','change',function()
+{
+
+	if($('#frm_years_page').val() == 0)
+	{
+		//$(this).hide();
+		//$('#frm_years_sch').show();
+		$('#frm_days_pg').hide();
+		$('#frm_months_pg').hide();
+		$('#frm_months_page').hide();
+		$('#frm_months_page').val('0');
+		$('#frm_days_page').hide();
+	}else{
+		
+		if($('#frm_months_page').is(":hidden"))
+			{
+	$('#frm_months_pg').show();
+			}
+	}
+});
+
+
+$('body').delegate('#frm_months_pg','click',function()
+{
+	$(this).hide();
+	$('#frm_months_page').show();
+	$('#frm_days_pg').show();
+});
+
+$('body').delegate('#frm_months_page','change',function()
+{
+	
+	if($('#frm_months_page').val() == 0)
+	{
+		$(this).hide();
+		$('#frm_months_pg').show();
+		$('#frm_days_pg').hide();
+		$('#frm_days_page').val('0');
+	}else{
+		
+		if($('#frm_days_page').is(":hidden"))
+			{
+	$('#frm_days_pg').show();
+			}
+	}
+});
+
+$('body').delegate('#frm_days_pg','click',function()
+{
+	$(this).hide();
+	$('#frm_days_page').show();
+	
+});
+
+
+$('body').delegate('#frm_days_page','change',function()
+{
+	
+	if($('#frm_days_page').val() == 0)
+	{
+		$(this).hide();
+		$('#frm_days_pg').show();
+	
+	}
+});
+
+	
+	$('body').delegate('#to_years_page','change',function()
+	{
+		if( $('#to_years_page').val() == 0)
+		{
+		$('#to_months_pg').hide();
+		$('#to_months_page').hide();
+		$('#to_days_pg').hide();
+		$('#to_months_page').val('0');
+		$('#to_days_page').hide();
+		//$(this).hide();
+		//$('#to_years_sch').show();
+		} else {
+			
+			if($('#to_months_page').is(":hidden"))
+			{
+	$('#to_months_pg').show();
+			}
+		
+		}
+		
+	});
+	
+	
+	
+	$('body').delegate('#to_months_pg','click',function()
+	{
+		
+		$(this).hide();
+		$('#to_months_page').show();
+		$('#to_days_pg').show();
+	});
+	
+	$('body').delegate('#to_months_page','change',function()
+	{
+		//alert($('#frm_months').val());
+		if( $('#to_months_page').val() == 0)
+		{
+		$('#to_days_pg').hide();
+		$('#to_days_page').hide();
+		$(this).hide();
+		$('#to_days_page').val('0');
+		$('#to_months_pg').show();
+		} else {
+			if($('#to_days_page').is(":hidden"))
+			{
+		$('#to_days_pg').show();
+			}}
+	});
+	
+		$('body').delegate('#to_days_pg','click',function ()
+	{
+		$(this).hide();
+		$('#to_days_page').show();
+	});
+	
+	$('body').delegate('#to_days_page','change',function()
+	{
+		if( $('#to_days_page').val() == 0)
+		{
+		$(this).hide();
+		$('#to_days_pg').show();
+		} 
+	});
+
+ 
+ </script>
 <script language="javascript">print_country("con");</script><!--  //for groups   --> 
 <script language="javascript">print_country("contries");</script> <!-- //for companies-->
 

@@ -2087,4 +2087,471 @@ function changeVisitorAs(visitor_as,id,image,post_id)
 	$('#posted_as_id'+post_id).val(id);	
 }
 
-    </script>
+
+//page about ajax functions
+
+function add_page_genre(page_id)
+{
+	var genre = $('#page_genre').val();
+
+		url = "<?php echo base_url(); ?>page_about/add_genre/";
+	$.ajax({
+		type: "POST",
+		data: { genre : genre, page_id : page_id },
+		url : url,
+		success : function(data)
+		{
+		
+		$('#genre_block .cancelEdits').click();
+		$('#genre_block .headBlock').removeClass('editIt');
+		
+		$('#genre_block .value').html(data);
+		$('#genre_block #page_genre').val(data);
+		
+
+		}
+	});
+	
+}
+
+function add_short_description(page_id)
+{
+	var short_desc = $('#short_desc').val();
+
+		url = "<?php echo base_url(); ?>page_about/add_short_desc/";
+	$.ajax({
+		type: "POST",
+		data: { short_desc : short_desc, page_id : page_id },
+		url : url,
+		success : function(data)
+		{
+		
+		$('#short_desc_block .cancelEdits').click();
+		$('#short_desc_block .headBlock').removeClass('editIt');
+		$('#short_desc_block .value').html(data);
+		$('#short_desc_block #short_desc').val(data);
+		
+
+		}
+	});
+	
+}
+
+
+function add_impressum(page_id)
+{
+	var impressum = $('#impressum').val();
+
+		url = "<?php echo base_url(); ?>page_about/add_impressum/";
+	$.ajax({
+		type: "POST",
+		data: { impressum : impressum, page_id : page_id },
+		url : url,
+		success : function(data)
+		{
+		
+		$('#impressum_block .cancelEdits').click();
+		$('#impressum_block .headBlock').removeClass('editIt');
+		$('#impressum_block .value').html(data);
+		$('#impressum_block #impressum').val(data);
+		
+
+		}
+	});
+	
+}
+function add_long_description(page_id)
+{
+	var long_desc = $('#long_desc').val();
+
+		url = "<?php echo base_url(); ?>page_about/add_long_desc/";
+	$.ajax({
+		type: "POST",
+		data: { long_desc : long_desc, page_id : page_id },
+		url : url,
+		success : function(data)
+		{
+		
+		$('#long_desc_block .cancelEdits').click();
+		$('#long_desc_block .headBlock').removeClass('editIt');
+		$('#long_desc_block .value').html(data);
+		$('#long_desc_block #long_desc').val(data);
+		
+
+		}
+	});
+	
+}
+
+function add_page_web_site(page_id)
+{
+	var page_web_site = $('#page_web_site').val();
+
+		url = "<?php echo base_url(); ?>page_about/add_web_site/";
+	$.ajax({
+		type: "POST",
+		data: { page_web_site : page_web_site, page_id : page_id },
+		url : url,
+		success : function(data)
+		{
+		
+		$('#page_web_site_block .cancelEdits').click();
+		$('#page_web_site_block .headBlock').removeClass('editIt');
+		$('#page_web_site_block .value').html(data);
+		$('#page_web_site_block #page_web_site').val(data);
+		
+
+		}
+	});
+	
+}
+function add_page_record_label(page_id)
+{
+	var record_label = $('#record_label').val();
+
+		url = "<?php echo base_url(); ?>page_about/add_record_label/";
+	$.ajax({
+		type: "POST",
+		data: { record_label : record_label, page_id : page_id },
+		url : url,
+		success : function(data)
+		{
+		
+		$('#record_label_block .cancelEdits').click();
+		$('#record_label_block .headBlock').removeClass('editIt');
+		$('#record_label_block .value').html(data);
+		$('#record_label_block #record_label').val(data);
+		
+
+		}
+	});
+	
+}
+
+function add_band_members(page_id)
+{
+	var band_members = $('#band_members').val();
+
+		url = "<?php echo base_url(); ?>page_about/add_band_members/";
+	$.ajax({
+		type: "POST",
+		data: { band_members : band_members, page_id : page_id },
+		url : url,
+		success : function(data)
+		{
+		
+		$('#band_members_block .cancelEdits').click();
+		$('#band_members_block .headBlock').removeClass('editIt');
+		$('#band_members_block .value').html(data);
+		$('#band_members_block #band_members').val(data);
+		
+
+		}
+	});
+	
+}
+function add_official_page(page_id)
+{
+	var official_page = $('#official_page').val();
+
+		url = "<?php echo base_url(); ?>page_about/add_official_page/";
+	$.ajax({
+		type: "POST",
+		data: { official_page : official_page, page_id : page_id },
+		url : url,
+		success : function(data)
+		{
+		
+		$('#official_page_block .cancelEdits').click();
+		$('#official_page_block .headBlock').removeClass('editIt');
+		$('#official_page_block .value').html(data);
+		$('#official_page_block #official_page').val(data);
+		
+
+		}
+	});
+	
+}
+function page_subcategory_change(category_id)
+{
+	
+	url = "<?php echo base_url(); ?>page_about/get_page_sub_categories/";
+	$.ajax({
+		type: "POST",
+		data: { category_id : category_id },
+		url : url,
+		success : function(data)
+		{
+		    $('#page_sub_cat_data').html('');	
+			$('#page_sub_cat_data').html(data);
+		}
+	});
+}
+function change_cat_and_scat(page_id)
+{
+	var category = $('#page_cat_data').val();
+	var sub_category = $('#page_sub_cat_data').val();
+	
+	url = "<?php echo base_url(); ?>page_about/add_category/";
+	$.ajax({
+		type: "POST",
+		data: { category : category, sub_category : sub_category,  page_id : page_id },
+		url : url,
+		success : function(data)
+		{
+		
+		$('#category_block .cancelEdits').click();
+		$('#category_block .headBlock').removeClass('editIt');
+		$('#category_block .value').html(data);
+		//$('#category_block #official_page').val(data);
+		location.reload();
+
+		}
+	});
+	
+}
+function change_page_name(page_id)
+{
+	var page_name = $('#page_name_value').val();
+	
+		url = "<?php echo base_url(); ?>page_about/change_page_name/";
+	$.ajax({
+		type: "POST",
+		data: { page_name : page_name, page_id : page_id },
+		url : url,
+		success : function(data)
+		{
+		
+		$('#page_name_block .cancelEdits').click();
+		$('#page_name_block .headBlock').removeClass('editIt');
+		$('#page_name_block .value').html(data);
+		$('#page_name_block #page_name_value').val(data);
+		
+
+		}
+	});
+}
+function add_page_found(page_id)
+{
+	var page_found = $('#page_founder').val();
+	
+		url = "<?php echo base_url(); ?>page_about/add_page_founder/";
+	$.ajax({
+		type: "POST",
+		data: { page_found : page_found, page_id : page_id },
+		url : url,
+		success : function(data)
+		{
+		
+		$('#page_found_block .cancelEdits').click();
+		$('#page_found_block .headBlock').removeClass('editIt');
+		$('#page_found_block .value').html(data);
+		$('#page_found_block #page_founder').val(data);
+		
+
+		}
+	});
+}
+function add_awards(page_id)
+{
+	var awards = $('#page_awards').val();
+	
+		url = "<?php echo base_url(); ?>page_about/add_page_awards/";
+	$.ajax({
+		type: "POST",
+		data: { awards : awards, page_id : page_id },
+		url : url,
+		success : function(data)
+		{
+		
+		$('#page_awards_block .cancelEdits').click();
+		$('#page_awards_block .headBlock').removeClass('editIt');
+		$('#page_awards_block .value').html(data);
+		$('#page_awards_block #page_awards').val(data);
+		
+
+		}
+	});
+}
+function add_products(page_id)
+{
+	var products = $('#page_products').val();
+	
+		url = "<?php echo base_url(); ?>page_about/add_page_products/";
+	$.ajax({
+		type: "POST",
+		data: { products : products, page_id : page_id },
+		url : url,
+		success : function(data)
+		{
+		
+		$('#page_products_block .cancelEdits').click();
+		$('#page_products_block .headBlock').removeClass('editIt');
+		$('#page_products_block .value').html(data);
+		$('#page_products_block #page_products').val(data);
+		
+
+		}
+	});
+}
+function add_page_mission(page_id)
+{
+	var mission = $('#page_mission').val();
+	
+		url = "<?php echo base_url(); ?>page_about/add_page_mission/";
+	$.ajax({
+		type: "POST",
+		data: { mission : mission, page_id : page_id },
+		url : url,
+		success : function(data)
+		{
+		
+		$('#page_mission_block .cancelEdits').click();
+		$('#page_mission_block .headBlock').removeClass('editIt');
+		$('#page_mission_block .value').html(data);
+		$('#page_mission_block #page_mission').val(data);
+		
+
+		}
+	});
+}
+function add_page_phone(page_id)
+{
+	var page_phone = $('#page_phone').val();
+	
+		url = "<?php echo base_url(); ?>page_about/add_page_phone/";
+	$.ajax({
+		type: "POST",
+		data: { page_phone : page_phone, page_id : page_id },
+		url : url,
+		success : function(data)
+		{
+		
+		$('#page_phone_block .cancelEdits').click();
+		$('#page_phone_block .headBlock .value').removeClass('editIt');
+		$('#page_phone_block .value').html(data);
+		$('#page_phone_block #page_phone').val(data);
+		$('#page_phone_block .headBlock').append('<span data-toggle="category" class="editIt"><i class="fa fa-pencil"></i> Edit</span>');
+		
+
+		}
+	});
+}
+function add_page_email(page_id)
+{
+	var page_email = $('#page_email').val();
+	
+		url = "<?php echo base_url(); ?>page_about/add_page_email/";
+	$.ajax({
+		type: "POST",
+		data: { page_email : page_email, page_id : page_id },
+		url : url,
+		success : function(data)
+		{
+		
+		$('#page_email_block .cancelEdits').click();
+		$('#page_email_block .headBlock').removeClass('editIt');
+		$('#page_email_block .value').html(data);
+		$('#page_email_block #page_email').val(data);
+		
+
+		}
+	});
+}
+function add_page_address(page_id)
+{
+	var address = $('#page_address').val();
+	var city = $('#page_city').val();
+	var zip_code = $('#page_zip').val();
+	
+		url = "<?php echo base_url(); ?>page_about/add_page_address/";
+	$.ajax({
+		type: "POST",
+		data: { address : address, city : city, zip_code : zip_code, page_id : page_id },
+		url : url,
+		success : function(data)
+		{
+		
+		$('#address_block .cancelEdits').click();
+		$('#address_block .headBlock').removeClass('editIt');
+		$('#address_block .value').html(data);
+		//$('#address_block #page_email').val(data);
+		
+
+		}
+	});
+}
+function add_page_isbn(page_id)
+{
+	var isbn = $('#page_isbn').val();
+	
+		url = "<?php echo base_url(); ?>page_about/add_page_isbn/";
+	$.ajax({
+		type: "POST",
+		data: { isbn : isbn, page_id : page_id },
+		url : url,
+		success : function(data)
+		{
+		
+		$('#page_isbn_block .cancelEdits').click();
+		$('#page_isbn_block .headBlock').removeClass('editIt');
+		$('#page_isbn_block .value').html(data);
+		$('#page_isbn_block #page_isbn').val(data);
+		
+
+		}
+	});
+}
+
+function add_page_frm_date(page_id)
+{
+	var strat_contnet = $('#start_content').val();
+	var year = $('#frm_years_page').val();
+	var month = $('#frm_months_page').val();
+	var day = $('#frm_days_page').val();
+	
+		url = "<?php echo base_url(); ?>page_about/add_page_from_date/";
+	$.ajax({
+		type: "POST",
+		data: { strat_contnet : strat_contnet, year : year,  month : month, day : day, page_id : page_id },
+		url : url,
+		success : function(data)
+		{
+		
+		$('#start_date_block .cancelEdits').click();
+		$('#start_date_block .headBlock').removeClass('editIt');
+		$('#start_date_block .value').html(data);
+		//$('#start_date_block #date').val(data);
+		
+
+		}
+	});
+}
+
+function add_page_to_date(page_id)
+{
+
+	var year = $('#to_years_page').val();
+	var month = $('#to_months_page').val();
+	var day = $('#to_days_page').val();
+	
+		url = "<?php echo base_url(); ?>page_about/add_page_to_date/";
+	$.ajax({
+		type: "POST",
+		data: { year : year,  month : month, day : day, page_id : page_id },
+		url : url,
+		success : function(data)
+		{
+		
+		$('#release_date_block .cancelEdits').click();
+		$('#release_date_block .headBlock').removeClass('editIt');
+		$('#release_date_block .value').html(data);
+		//$('#start_date_block #date').val(data);
+		
+
+		}
+	});
+}
+
+</script>
+
