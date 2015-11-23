@@ -1,7 +1,6 @@
 (function($) {
 	
-	function FBPhotoBox(opts) {
-		
+	function FBPhotoBox(opts) {		
 		this.settings = $.extend({}, $.fn.fbPhotoBox.defaults, opts);
 		this.bodyDimension = {width:0,height:0};
 		this.bodyDimension.width = $('body').width();
